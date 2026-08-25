@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>基础路径规划算法缺陷 Demo</title>
+    <link rel="stylesheet" href="./src/styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="topbar" aria-label="实验控制台">
+        <div>
+          <p class="eyebrow">Path Planning Lab</p>
+          <h1>基础算法缺陷可视化 Demo</h1>
+        </div>
+        <div class="run-controls" aria-label="运行控制">
+          <button id="runBtn" class="primary" type="button">运行</button>
+          <button id="pauseBtn" type="button">暂停</button>
+          <button id="stepBtn" type="button">单步</button>
+          <button id="resetBtn" type="button">重置</button>
+          <label class="speed-control">
+            <span>速度</span>
+            <input id="speedSlider" type="range" min="1" max="10" value="5" />
+          </label>
+        </div>
+      </section>
+
+      <section class="demo-tabs" aria-label="实验选择">
+        <button class="tab active" type="button" data-demo="search">Dijkstra vs A*</button>
+        <button class="tab" type="button" data-demo="dynamic">A* 动态障碍</button>
+        <button class="tab" type="button" data-demo="rrt">RRT 窄通道</button>
+        <button class="tab" type="button" data-demo="car">网格路径 vs 小车</button>
+      </section>
+
+      <section class="difficulty-tabs" aria-label="实验强度">
+        <span>实验强度</span>
+        <button class="difficulty" type="button" data-difficulty="normal">普通</button>
+        <button class="difficulty active" type="button" data-difficulty="hard">困难</button>
+        <button class="difficulty" type="button" data-difficulty="extreme">极限</button>
+      </section>
+
+      <section class="workspace">
+        <div class="canvas-wrap">
+          <canvas id="labCanvas" aria-label="路径规划实验画布"></canvas>
+        </div>
+        <aside class="side-panel">
+          <div class="panel-section">
+            <p class="eyebrow">当前实验</p>
+            <h2 id="demoTitle">Dijkstra vs A*</h2>
+            <p id="demoClaim" class="claim"></p>
+          </div>
+          <div class="panel-section">
+            <p class="eyebrow">指标</p>
+            <div id="metrics" class="metrics"></div>
+          </div>
+          <div class="panel-section">
+            <p class="eyebrow">图例</p>
+            <div id="legend" class="legend"></div>
+          </div>
+          <button id="secondaryBtn" class="secondary-action" type="button" hidden></button>
+        </aside>
+      </section>
+    </main>
+    <script src="./src/main.js"></script>
+  </body>
+</html>
