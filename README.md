@@ -1,123 +1,120 @@
 # 基础路径规划算法缺陷 Demo
 
-这是一个零构建的浏览器 demo，用来观察 Dijkstra、A*、RRT 在不同场景下的短板。
+这个项目用来对比基础路径规划算法和 AI 训练策略。页面里每个实验都是左侧传统算法、右侧 AI 训练侧，并且会展示搜索或轨迹留痕。
 
-## 打开方式
+## 直接打开网页
 
-在 VSCode 里打开这个文件夹：
-
-```text
-path-planning-demo
-```
-
-然后直接打开：
+在 VSCode 里打开这个文件夹，然后打开：
 
 ```text
 index.html
 ```
 
-如果你装了 VSCode 的 Live Server 插件，也可以右键 `index.html`，选择 `Open with Live Server`。
+如果装了 VSCode 的 Live Server 插件，也可以右键 `index.html`，选择 `Open with Live Server`。
 
-## 包含的实验
+## 四个实验
 
-页面上有一个 `实验强度` 切换：
+页面上有 `普通 / 困难 / 极限` 三档强度。
 
 ```text
-普通：先看懂算法现象
-困难：默认档，障碍更多，搜索范围更大
-极限：地图更大，动态障碍更快，失败现象更明显
+Dijkstra vs AI：Dijkstra 会大范围扩散；AI 训练后直接输出动作轨迹。
+A* vs AI：A* 在动态障碍里会反复重规划；AI 侧展示带等待动作的策略轨迹。
+RRT vs AI：RRT 在窄通道里靠随机采样；AI 侧把采样集中到窄门附近。
+网格路径 vs AI：网格路径不考虑车辆转弯半径；AI 侧展示连续转向控制轨迹。
 ```
 
-### 1. Dijkstra vs A*
+## 训练 .pt 文件
 
-同一张静态地图里，Dijkstra 会向四周扩散，A* 会更偏向目标方向。困难和极限档会增加迷宫墙、死路和障碍块。
+仓库不上传 `.venv`。换一台设备后，先运行这个 Python 文件，它会在本地生成虚拟环境并安装依赖：
 
-看这几个指标：
-
-```text
-Dijkstra 搜索格子
-A* 搜索格子
-A* 少搜索
-两者路径长度
+```bash
+python3 setup_env.py
 ```
 
-### 2. A* 动态障碍
+Windows 可以用：
 
-A* 每次规划只基于当前地图。障碍物移动后，旧路径可能马上失效。
-
-现在这个实验里有多种动态障碍：
-
-```text
-高速横向障碍
-纵向巡逻障碍
-矩形轨迹障碍
-周期性开关门
-下方快车道障碍
+```bash
+py setup_env.py
 ```
 
-极限档还会增加更多动态障碍，速度也更快。
+然后激活环境：
 
-看这几个指标：
-
-```text
-规划调用
-重新规划次数
-路径失效次数
-等待/无路次数
-贴脸风险次数
-累计搜索格子
-平均每次搜索
+```bash
+source .venv/bin/activate
 ```
 
-### 3. RRT 窄通道
+Windows：
 
-RRT 靠随机采样长树，窄通道里不稳定。同一个场景多跑几次，结果会变化。困难和极限档会缩窄通道，并增加遮挡区域。
-
-看这几个指标：
-
-```text
-迭代次数
-树节点数
-最终路径长度
-20 次快速试验
+```bash
+.venv\Scripts\activate
 ```
 
-### 4. 网格路径 vs 小车
+一次训练四个模型：
 
-A* 给的是格子路线，不考虑小车转弯半径。路线在网格里能走，真实小车可能转不过去。困难和极限档会增加连续急弯，极限档还会把走廊变窄。
-
-看这几个指标：
-
-```text
-走廊宽度
-A* 路径长度
-直角转弯次数
-最大跟踪偏离
-小车状态
+```bash
+python ai/train_all.py
 ```
 
-## 颜色
+默认训练会混合 `普通 / 困难 / 极限` 三档样本。
+
+训练完成后会生成：
 
 ```text
-黑灰：障碍物
-蓝色：算法搜索过的区域
-黄色：最终路径
-橙色：动态障碍物
-橙色虚线：动态障碍物轨迹
-青色：小车真实轨迹
-红色：碰撞或终点
-绿色：起点或机器人
+ai/checkpoints/dijkstra_ai.pt
+ai/checkpoints/astar_dynamic_ai.pt
+ai/checkpoints/rrt_narrow_ai.pt
+ai/checkpoints/car_control_ai.pt
+ai/training_summary.json
+```
+
+再把训练结果导出给网页：
+
+```bash
+python ai/export_rollouts.py
+```
+
+这个命令会更新：
+
+```text
+src/ai_rollouts.js
+ai/rollouts/*.json
+src/ai_rollouts/*.json
+```
+
+如果你想强制使用锁定版本依赖，可以运行：
+
+```bash
+python3 setup_env.py --locked
+```
+
+## 单独训练某个模型
+
+```bash
+python ai/train_dijkstra_ai.py
+python ai/train_astar_dynamic_ai.py
+python ai/train_rrt_narrow_ai.py
+python ai/train_car_control_ai.py
+```
+
+## Git 说明
+
+`.venv/` 不会上传到 Git。训练出来的 `.pt` 没有被忽略，如果你训练完成后想把模型也传到仓库，可以正常执行：
+
+```bash
+git add ai/checkpoints/*.pt ai/training_summary.json src/ai_rollouts.js ai/rollouts src/ai_rollouts
+git commit -m "Add trained AI checkpoints"
+git push
 ```
 
 ## 这个 demo 证明什么
 
-它证明的是基础算法在特定条件下的缺陷：
+它证明的是基础算法在特定条件下的短板：
 
 ```text
-Dijkstra：搜索范围大
-A*：动态环境里需要反复重规划
-RRT：窄通道里随机性强，不稳定
-网格规划：不等于真实车辆能执行
+Dijkstra：没有方向感，搜索范围大。
+A*：静态场景很强，但动态障碍会让路径频繁失效。
+RRT：能处理连续空间，但窄通道里随机性强、不稳定。
+网格规划：能找到格子路径，但不等于真实车辆能执行。
 ```
 
-它不证明深度学习永远更好。深度学习也有训练成本高、不可解释、需要大量样本的问题。
+它不证明 AI 永远更好。AI 也有训练成本高、依赖样本、泛化不稳定、解释性弱的问题。

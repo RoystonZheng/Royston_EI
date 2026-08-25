@@ -52,6 +52,22 @@
     extreme: { label: "极限", multiplier: 2.1 },
   };
 
+  const AI_ROLLOUTS = window.AI_ROLLOUTS || {};
+
+  function getAiRollout(task, difficulty) {
+    return AI_ROLLOUTS[task]?.[difficulty] || AI_ROLLOUTS[task]?.hard || null;
+  }
+
+  function checkpointLabel(rollout) {
+    return rollout?.training?.hasCheckpoint ? ".pt 已生成" : ".pt 待训练";
+  }
+
+  function progressSlice(points, progress) {
+    if (!points || points.length === 0) return [];
+    const count = clamp(Math.floor(progress), 1, points.length);
+    return points.slice(0, count);
+  }
+
   class PriorityQueue {
     constructor() {
       this.heap = [];
@@ -254,6 +270,14 @@
   function splitBoxes(width, height, count) {
     const gap = 12;
     const margin = 14;
+    if (count === 2 && width < 760) {
+      const usableH = height - margin * 2 - gap;
+      const boxH = usableH / 2;
+      return [
+        { x: margin, y: margin, w: width - margin * 2, h: boxH },
+        { x: margin, y: margin + boxH + gap, w: width - margin * 2, h: boxH },
+      ];
+    }
     const usableW = width - margin * 2 - gap * (count - 1);
     const boxW = usableW / count;
     return Array.from({ length: count }, (_, i) => ({
@@ -395,6 +419,80 @@
       ctx.fillStyle = i === 0 ? COLOR.text : COLOR.muted;
       ctx.fillText(line, box.x + 14, box.y + box.h - 18 - (lines.length - 1 - i) * 17);
     });
+  }
+
+  function drawTrainingCurve(box, rollout) {
+    const curve = rollout?.training?.lossCurve || [];
+    if (curve.length < 2 || box.w < 300) return;
+    const chartW = Math.min(128, box.w * 0.26);
+    const chartH = 34;
+    const x = box.x + box.w - chartW - 14;
+    const y = box.y + 13;
+    const min = Math.min(...curve);
+    const max = Math.max(...curve);
+    const range = Math.max(0.001, max - min);
+
+    ctx.save();
+    ctx.globalAlpha = 0.96;
+    ctx.strokeStyle = "rgba(255,255,255,0.16)";
+    ctx.strokeRect(x, y, chartW, chartH);
+    ctx.strokeStyle = COLOR.actual;
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    curve.forEach((value, indexValue) => {
+      const px = x + (indexValue / (curve.length - 1)) * chartW;
+      const py = y + chartH - ((value - min) / range) * chartH;
+      if (indexValue === 0) ctx.moveTo(px, py);
+      else ctx.lineTo(px, py);
+    });
+    ctx.stroke();
+    ctx.fillStyle = COLOR.muted;
+    ctx.font = "10px Inter, sans-serif";
+    ctx.fillText("loss", x, y + chartH + 12);
+    ctx.restore();
+  }
+
+  function drawGridAiPanel(box, title, subtitle, grid, w, h, start, goal, rollout, progress, options = {}) {
+    drawBox(box, title, subtitle);
+    drawTrainingCurve(box, rollout);
+    const geom = getGridGeometry(box, w, h, 54);
+    drawGridBase(grid, w, h, geom);
+    if (options.afterBase) options.afterBase(geom);
+    const visited = rollout?.visited || [];
+    if (visited.length) drawVisited(visited, geom, COLOR.actual, progress * 3, 0.12);
+    const path = rollout?.path || [start];
+    const shownPath = progressSlice(path, progress);
+    drawGridPath(shownPath, geom, COLOR.actual, 3.2, 1);
+
+    if (options.waitSteps && path.length) {
+      ctx.save();
+      ctx.fillStyle = COLOR.dynamic;
+      options.waitSteps.forEach((stepIndex) => {
+        if (stepIndex > progress || !path[stepIndex]) return;
+        const point = path[stepIndex];
+        ctx.fillRect(
+          geom.x + point.x * geom.cell + geom.cell * 0.18,
+          geom.y + point.y * geom.cell + geom.cell * 0.18,
+          geom.cell * 0.64,
+          geom.cell * 0.64,
+        );
+      });
+      ctx.restore();
+    }
+
+    const current = shownPath[shownPath.length - 1] || start;
+    drawMarker(start, geom, COLOR.start, "S");
+    drawMarker(goal, geom, COLOR.goal, "G");
+    drawMarker(current, geom, COLOR.actual, "A");
+
+    const metrics = rollout?.metrics || {};
+    const steps = metrics.steps ?? Math.max(0, path.length - 1);
+    const searched = metrics.searched_nodes ?? metrics.replans ?? 0;
+    drawMetricText(box, [
+      `AI: ${metrics.success === false ? "未到达" : "策略轨迹"} | ${checkpointLabel(rollout)}`,
+      `动作 ${Math.min(Math.floor(progress), path.length)}/${path.length} | 搜索 ${searched} | 推理 ${formatNumber(metrics.policy_ms, 1)}ms`,
+      `路径步数 ${steps}`,
+    ]);
   }
 
   function roundedRectPath(x, y, w, h, radius) {
@@ -639,8 +737,8 @@
   class SearchComparisonDemo {
     constructor(difficulty = "hard") {
       this.difficulty = difficulty;
-      this.title = "Dijkstra vs A*";
-      this.claim = "同一张静态地图里，Dijkstra 会像水一样扩散；A* 用目标方向做引导，通常少搜很多格子。";
+      this.title = "Dijkstra vs AI 训练策略";
+      this.claim = "Dijkstra 没有目标方向感，会从起点向外扩散。AI 侧把专家路径训练成策略，演示时直接给动作，几乎不做临场搜索。";
       this.reset();
     }
 
@@ -664,6 +762,8 @@
         heuristic: manhattan,
       });
       this.progress = 0;
+      this.aiProgress = 0;
+      this.aiRollout = getAiRollout("dijkstra", this.difficulty);
       this.running = false;
     }
 
@@ -677,23 +777,37 @@
 
     step() {
       this.progress += 80;
+      this.aiProgress += 12;
     }
 
     update(dt, speed) {
       if (!this.running) return;
       this.progress += dt * (0.18 + speed * 0.075);
-      const done = this.progress > Math.max(this.dijkstra.visitedOrder.length, this.astar.visitedOrder.length) + 60;
+      this.aiProgress += dt * (0.018 + speed * 0.012);
+      const aiPathLength = this.aiRollout?.path?.length || 0;
+      const done = this.progress > this.dijkstra.visitedOrder.length + 60 && this.aiProgress > aiPathLength + 10;
       if (done) this.running = false;
     }
 
     render(width, height) {
       const boxes = splitBoxes(width, height, 2);
       this.renderOne(boxes[0], "Dijkstra", this.dijkstra, COLOR.visited);
-      this.renderOne(boxes[1], "A*", this.astar, COLOR.visitedAlt);
+      drawGridAiPanel(
+        boxes[1],
+        "AI 训练策略",
+        "右侧显示训练后的动作轨迹，不展开全图搜索",
+        this.grid,
+        this.w,
+        this.h,
+        this.start,
+        this.goal,
+        this.aiRollout,
+        this.aiProgress,
+      );
     }
 
     renderOne(box, label, result, visitedColor) {
-      drawBox(box, label, label === "Dijkstra" ? "没有启发方向，按代价一圈圈扩散" : "用曼哈顿距离朝终点收缩搜索");
+      drawBox(box, label, "没有启发方向，按代价一圈圈扩散");
       const geom = getGridGeometry(box, this.w, this.h, 54);
       drawGridBase(this.grid, this.w, this.h, geom);
       drawVisited(result.visitedOrder, geom, visitedColor, this.progress, 0.28);
@@ -711,23 +825,24 @@
 
     metrics() {
       const dVisited = Math.min(this.dijkstra.visitedOrder.length, Math.floor(this.progress));
-      const aVisited = Math.min(this.astar.visitedOrder.length, Math.floor(this.progress));
-      const reduction = 1 - this.astar.visitedOrder.length / Math.max(1, this.dijkstra.visitedOrder.length);
+      const aiMetrics = this.aiRollout?.metrics || {};
+      const reduction = 1 - (aiMetrics.searched_nodes ?? 0) / Math.max(1, this.dijkstra.visitedOrder.length);
       return [
         ["实验强度", DIFFICULTY[this.difficulty]?.label ?? this.difficulty],
         ["Dijkstra 搜索格子", `${dVisited}/${this.dijkstra.visitedOrder.length}`],
-        ["A* 搜索格子", `${aVisited}/${this.astar.visitedOrder.length}`],
-        ["A* 少搜索", `${formatNumber(reduction * 100, 1)}%`],
-        ["两者路径长度", `${this.dijkstra.pathLength} / ${this.astar.pathLength}`],
-        ["计算耗时", `${formatNumber(this.dijkstra.timeMs, 2)}ms / ${formatNumber(this.astar.timeMs, 2)}ms`],
+        ["AI 临场搜索格子", aiMetrics.searched_nodes ?? 0],
+        ["AI 少搜索", `${formatNumber(reduction * 100, 1)}%`],
+        ["两者路径长度", `${this.dijkstra.pathLength} / ${aiMetrics.steps ?? "-"}`],
+        ["AI 检查点", checkpointLabel(this.aiRollout)],
+        ["推理耗时", `${formatNumber(aiMetrics.policy_ms, 1)}ms`],
       ];
     }
 
     legend() {
       return [
         ["障碍物", COLOR.obstacle],
-        ["搜索留痕", COLOR.visited],
-        ["另一侧搜索留痕", COLOR.visitedAlt],
+        ["Dijkstra 搜索留痕", COLOR.visited],
+        ["AI 训练轨迹", COLOR.actual],
         ["最终路径", COLOR.path],
         ["起点/终点", COLOR.start],
       ];
@@ -876,6 +991,8 @@
       this.running = false;
       this.timeSec = 0;
       this.agentAcc = 0;
+      this.aiProgress = 0;
+      this.aiRollout = getAiRollout("astarDynamic", this.difficulty);
       this.agentDelay = this.difficulty === "extreme" ? 95 : this.difficulty === "hard" ? 115 : 135;
       this.replan(true);
     }
@@ -892,6 +1009,7 @@
       const wasRunning = this.running;
       this.running = true;
       this.update(180, 5);
+      this.aiProgress += 10;
       this.running = wasRunning;
     }
 
@@ -1043,6 +1161,7 @@
         layer.progress = Math.min(layer.visitedOrder.length, layer.progress + dt * (0.2 + visibleSpeed * 0.08));
       });
       if (!this.running || this.reached) return;
+      this.aiProgress += dt * (0.016 + visibleSpeed * 0.011);
 
       this.moveDynamicObstacles(dt, visibleSpeed);
       this.agentAcc += dt * (visibleSpeed / 5);
@@ -1054,7 +1173,12 @@
     }
 
     render(width, height) {
-      const box = { x: 14, y: 14, w: width - 28, h: height - 28 };
+      const boxes = splitBoxes(width, height, 2);
+      this.renderTraditional(boxes[0]);
+      this.renderAi(boxes[1]);
+    }
+
+    renderTraditional(box) {
       drawBox(box, "A* 动态障碍", "橙色障碍按横向、纵向、矩形和开关门轨迹移动");
       const geom = getGridGeometry(box, this.w, this.h, 54);
       drawGridBase(this.grid, this.w, this.h, geom);
@@ -1075,6 +1199,28 @@
         this.reached ? "状态: 已到达终点" : "状态: 路径跟随中",
         `规划调用 ${this.planCalls} | 重新规划 ${this.replans} | 失效 ${this.blockedEvents} | 等待 ${this.waitEvents}`,
       ]);
+    }
+
+    renderAi(box) {
+      drawGridAiPanel(
+        box,
+        "AI 动态策略",
+        "训练样本里包含等待动作，遇到门和快障碍时少重算",
+        this.grid,
+        this.w,
+        this.h,
+        this.start,
+        this.goal,
+        this.aiRollout,
+        this.aiProgress,
+        {
+          waitSteps: this.aiRollout?.waitSteps || [],
+          afterBase: (geom) => {
+            this.drawDynamicRoutes(geom);
+            this.drawDynamicObstacles(geom);
+          },
+        },
+      );
     }
 
     drawDynamicRoutes(geom) {
@@ -1145,6 +1291,9 @@
         ["累计搜索格子", this.totalVisited],
         ["平均每次搜索", `${formatNumber(avgVisited, 0)} 格`],
         ["最近一次搜索", latest ? `${latest.visitedOrder.length} 格 / ${formatNumber(latest.timeMs, 2)}ms` : "-"],
+        ["AI 重规划次数", this.aiRollout?.metrics?.replans ?? 0],
+        ["AI 等待动作", this.aiRollout?.metrics?.waits ?? "-"],
+        ["AI 检查点", checkpointLabel(this.aiRollout)],
         ["状态", this.reached ? "已到达" : this.running ? "运行中" : "暂停"],
       ];
     }
@@ -1154,9 +1303,10 @@
         ["静态障碍", COLOR.obstacle],
         ["动态障碍", COLOR.dynamic],
         ["障碍运动轨迹", COLOR.dynamic],
-        ["搜索留痕", COLOR.visited],
+        ["A* 搜索留痕", COLOR.visited],
         ["旧路径", COLOR.oldPath],
         ["当前路径", COLOR.path],
+        ["AI 训练轨迹", COLOR.actual],
         ["机器人/目标", COLOR.start],
       ];
     }
@@ -1208,6 +1358,40 @@
       length += Math.hypot(path[i].x - path[i - 1].x, path[i].y - path[i - 1].y);
     }
     return length;
+  }
+
+  function drawContinuousPath(path, sx, sy, color, width, limit = path?.length || 0, alpha = 1) {
+    if (!path || path.length < 2) return;
+    const capped = Math.min(path.length, Math.max(2, Math.floor(limit)));
+    ctx.save();
+    ctx.globalAlpha = alpha;
+    ctx.strokeStyle = color;
+    ctx.lineWidth = width;
+    ctx.lineJoin = "round";
+    ctx.lineCap = "round";
+    ctx.beginPath();
+    for (let i = 0; i < capped; i += 1) {
+      const point = path[i];
+      if (i === 0) ctx.moveTo(sx(point.x), sy(point.y));
+      else ctx.lineTo(sx(point.x), sy(point.y));
+    }
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  function drawContinuousSamples(samples, sx, sy, color, limit, radius = 2.5, alpha = 0.55) {
+    if (!samples || samples.length === 0) return;
+    const capped = Math.min(samples.length, Math.floor(limit));
+    ctx.save();
+    ctx.globalAlpha = alpha;
+    ctx.fillStyle = color;
+    for (let i = 0; i < capped; i += 1) {
+      const point = samples[i];
+      ctx.beginPath();
+      ctx.arc(sx(point.x), sy(point.y), radius, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.restore();
   }
 
   class RRTDemo {
@@ -1262,6 +1446,8 @@
       this.running = false;
       this.rng = mulberry32((Date.now() & 0xffffffff) || 1);
       this.lastTrialSummary = "还没跑";
+      this.aiProgress = 0;
+      this.aiRollout = getAiRollout("rrtNarrow", this.difficulty);
     }
 
     run() {
@@ -1275,6 +1461,7 @@
 
     step() {
       for (let i = 0; i < 8; i += 1) this.extendTree();
+      this.aiProgress += 3;
     }
 
     samplePoint() {
@@ -1337,6 +1524,7 @@
       if (!this.running) return;
       const iterationsThisFrame = Math.max(1, Math.floor(speed * 2 + dt * 0.025 * speed));
       for (let i = 0; i < iterationsThisFrame; i += 1) this.extendTree();
+      this.aiProgress += dt * (0.02 + speed * 0.018);
     }
 
     simulateTrial(seed) {
@@ -1392,7 +1580,12 @@
     }
 
     render(width, height) {
-      const box = { x: 14, y: 14, w: width - 28, h: height - 28 };
+      const boxes = splitBoxes(width, height, 2);
+      this.renderTraditional(boxes[0]);
+      this.renderAi(boxes[1]);
+    }
+
+    renderTraditional(box) {
       drawBox(box, "RRT 窄通道", "树枝是随机采样留下的搜索痕迹，窄门越小越看运气");
       const fit = fitAreaToBox(box, this.areaW, this.areaH, 54);
       const sx = (x) => fit.x + x * fit.scale;
@@ -1442,6 +1635,40 @@
       ]);
     }
 
+    renderAi(box) {
+      const rollout = this.aiRollout;
+      drawBox(box, "AI 引导采样", "训练后把采样集中到窄门和可通过区域");
+      drawTrainingCurve(box, rollout);
+      const fit = fitAreaToBox(box, this.areaW, this.areaH, 54);
+      const sx = (x) => fit.x + x * fit.scale;
+      const sy = (y) => fit.y + y * fit.scale;
+
+      ctx.fillStyle = "#0b0f15";
+      ctx.fillRect(fit.x, fit.y, fit.w, fit.h);
+      ctx.strokeStyle = "#566276";
+      ctx.strokeRect(fit.x, fit.y, fit.w, fit.h);
+
+      ctx.fillStyle = COLOR.obstacle;
+      this.rects.forEach((rect) => {
+        ctx.fillRect(sx(rect.x), sy(rect.y), rect.w * fit.scale, rect.h * fit.scale);
+      });
+
+      const sampleProgress = this.aiProgress * 3;
+      drawContinuousSamples(rollout?.samples, sx, sy, COLOR.actual, sampleProgress, 2.2, 0.55);
+      drawContinuousPath(rollout?.path, sx, sy, COLOR.actual, 4, this.aiProgress, 1);
+      drawCircle(sx(this.start.x), sy(this.start.y), 9, COLOR.start, "S");
+      drawCircle(sx(this.goal.x), sy(this.goal.y), 11, COLOR.goal, "G");
+      const gate = rollout?.gate;
+      if (gate) drawCircle(sx(gate.x), sy(gate.y), 7, COLOR.path, "");
+
+      const metrics = rollout?.metrics || {};
+      drawMetricText(box, [
+        `AI: 引导穿门 | ${checkpointLabel(rollout)}`,
+        `引导样本 ${Math.min(Math.floor(sampleProgress), rollout?.samples?.length || 0)}/${rollout?.samples?.length || 0} | 推理 ${formatNumber(metrics.policy_ms, 1)}ms`,
+        `路径长度 ${formatNumber(pathLengthContinuous(rollout?.path || []), 1)}`,
+      ]);
+    }
+
     metrics() {
       const pathLength = this.finalPath.length ? pathLengthContinuous(this.finalPath) : 0;
       return [
@@ -1452,6 +1679,8 @@
         ["树节点数", this.nodes.length],
         ["最终路径长度", pathLength ? formatNumber(pathLength, 1) : "-"],
         ["20 次快速试验", this.lastTrialSummary],
+        ["AI 引导样本", this.aiRollout?.metrics?.guided_samples ?? "-"],
+        ["AI 检查点", checkpointLabel(this.aiRollout)],
       ];
     }
 
@@ -1460,6 +1689,7 @@
         ["障碍物", COLOR.obstacle],
         ["RRT 搜索树", COLOR.visited],
         ["找到的路径", COLOR.path],
+        ["AI 引导采样", COLOR.actual],
         ["起点/终点", COLOR.start],
       ];
     }
@@ -1533,6 +1763,8 @@
       this.carRadius = this.difficulty === "extreme" ? 0.55 : 0.48;
       this.carSpeed = this.difficulty === "normal" ? 0.17 : this.difficulty === "hard" ? 0.2 : 0.23;
       this.maxTurn = this.difficulty === "normal" ? 0.03 : this.difficulty === "hard" ? 0.023 : 0.018;
+      this.aiProgress = 0;
+      this.aiRollout = getAiRollout("carControl", this.difficulty);
     }
 
     run() {
@@ -1548,6 +1780,7 @@
       const wasRunning = this.running;
       this.running = true;
       for (let i = 0; i < 8; i += 1) this.advance();
+      this.aiProgress += 12;
       this.running = wasRunning;
     }
 
@@ -1610,10 +1843,16 @@
       if (!this.running) return;
       const steps = Math.max(1, Math.floor(speed * 1.4 + dt * 0.018 * speed));
       for (let i = 0; i < steps; i += 1) this.advance();
+      this.aiProgress += dt * (0.035 + speed * 0.016);
     }
 
     render(width, height) {
-      const box = { x: 14, y: 14, w: width - 28, h: height - 28 };
+      const boxes = splitBoxes(width, height, 2);
+      this.renderTraditional(boxes[0]);
+      this.renderAi(boxes[1]);
+    }
+
+    renderTraditional(box) {
       drawBox(box, "网格路径 vs 小车", "黄色是网格路径，青色是带转弯限制的小车轨迹");
       const geom = getGridGeometry(box, this.w, this.h, 54);
       drawGridBase(this.grid, this.w, this.h, geom);
@@ -1627,6 +1866,26 @@
       drawMetricText(box, [
         this.collided ? "状态: 小车在直角处撞墙" : this.reached ? "状态: 已到达" : "状态: 正在跟踪 A* 路径",
         `A* 转弯 ${this.sharpTurns} 次 | 最大偏离 ${formatNumber(this.maxError, 2)} 格 | 搜索格子 ${this.searchResult.visitedOrder.length}`,
+      ]);
+    }
+
+    renderAi(box) {
+      const rollout = this.aiRollout;
+      drawBox(box, "AI 小车控制", "训练输出连续转向和油门，轨迹不再强跟直角格子");
+      drawTrainingCurve(box, rollout);
+      const geom = getGridGeometry(box, this.w, this.h, 54);
+      drawGridBase(this.grid, this.w, this.h, geom);
+      drawVisited(rollout?.visited || [], geom, COLOR.actual, this.aiProgress * 2, 0.1);
+      drawGridPath(rollout?.path || [], geom, COLOR.path, 2.2, 0.38);
+      this.drawAiTrail(geom, rollout, this.aiProgress);
+      this.drawAiCar(geom, rollout, this.aiProgress);
+      drawMarker(this.start, geom, COLOR.start, "S");
+      drawMarker(this.goal, geom, COLOR.goal, "G");
+      const metrics = rollout?.metrics || {};
+      drawMetricText(box, [
+        `AI: ${metrics.collisions ? "碰撞" : "平滑通过"} | ${checkpointLabel(rollout)}`,
+        `控制点 ${Math.min(Math.floor(this.aiProgress), rollout?.trail?.length || 0)}/${rollout?.trail?.length || 0} | 碰撞 ${metrics.collisions ?? 0}`,
+        `平滑度 ${formatNumber((metrics.smoothness ?? 0) * 100, 0)}% | 推理 ${formatNumber(metrics.policy_ms, 1)}ms`,
       ]);
     }
 
@@ -1644,6 +1903,47 @@
         else ctx.lineTo(px, py);
       });
       ctx.stroke();
+    }
+
+    drawAiTrail(geom, rollout, progress) {
+      const trail = progressSlice(rollout?.trail || [], progress);
+      if (trail.length < 2) return;
+      ctx.strokeStyle = COLOR.actual;
+      ctx.lineWidth = 3;
+      ctx.lineJoin = "round";
+      ctx.lineCap = "round";
+      ctx.beginPath();
+      trail.forEach((point, indexValue) => {
+        const px = geom.x + point.x * geom.cell;
+        const py = geom.y + point.y * geom.cell;
+        if (indexValue === 0) ctx.moveTo(px, py);
+        else ctx.lineTo(px, py);
+      });
+      ctx.stroke();
+    }
+
+    drawAiCar(geom, rollout, progress) {
+      const trail = rollout?.trail || [];
+      if (!trail.length) return;
+      const indexValue = clamp(Math.floor(progress) - 1, 0, trail.length - 1);
+      const point = trail[indexValue];
+      const prev = trail[Math.max(0, indexValue - 2)] || point;
+      const theta = Math.atan2(point.y - prev.y, point.x - prev.x);
+      const cx = geom.x + point.x * geom.cell;
+      const cy = geom.y + point.y * geom.cell;
+      const size = Math.max(8, geom.cell * 0.9);
+      ctx.save();
+      ctx.translate(cx, cy);
+      ctx.rotate(theta);
+      ctx.fillStyle = COLOR.actual;
+      ctx.beginPath();
+      ctx.moveTo(size * 0.75, 0);
+      ctx.lineTo(-size * 0.55, -size * 0.42);
+      ctx.lineTo(-size * 0.35, 0);
+      ctx.lineTo(-size * 0.55, size * 0.42);
+      ctx.closePath();
+      ctx.fill();
+      ctx.restore();
     }
 
     drawCar(geom) {
@@ -1685,6 +1985,8 @@
         ["A* 路径长度", this.searchResult.pathLength],
         ["直角转弯次数", this.sharpTurns],
         ["最大跟踪偏离", `${formatNumber(this.maxError, 2)} 格`],
+        ["AI 碰撞次数", this.aiRollout?.metrics?.collisions ?? "-"],
+        ["AI 检查点", checkpointLabel(this.aiRollout)],
         ["小车状态", this.collided ? "撞墙" : this.reached ? "到达" : this.running ? "运行中" : "暂停"],
       ];
     }
@@ -1695,6 +1997,7 @@
         ["A* 搜索留痕", COLOR.visited],
         ["A* 网格路径", COLOR.path],
         ["小车真实轨迹", COLOR.actual],
+        ["AI 控制轨迹", COLOR.actual],
         ["碰撞点", COLOR.failure],
       ];
     }
