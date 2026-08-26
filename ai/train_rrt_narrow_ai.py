@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from train_common import train_task
+from train_common import brief_result, train_task
 
 
 if __name__ == "__main__":
-    print(train_task("rrt_narrow", difficulty="all", epochs=220))
+    print(brief_result(train_task("rrt_narrow", difficulty="all", epochs=220)))

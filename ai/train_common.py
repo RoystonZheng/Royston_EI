@@ -28,6 +28,26 @@ from models import MLPPolicy, ModelSpec, save_checkpoint
 ROOT = Path(__file__).resolve().parents[1]
 CHECKPOINT_DIR = ROOT / "ai" / "checkpoints"
 DIFFICULTIES = ["normal", "hard", "extreme"]
+TRAINING_TECHNIQUES = [
+    "Advantage Normalization",
+    "State Normalization",
+    "Reward Normalization",
+    "Reward Scaling",
+    "Policy Entropy",
+    "Learning Rate Decay",
+    "Gradient Clip",
+    "Orthogonal Initialization",
+    "Adam Optimizer Epsilon Parameter",
+    "Tanh Activation Function",
+]
+TRICK_CONFIG = {
+    "reward_scale": 0.6,
+    "advantage_weight": 0.35,
+    "entropy_coef_classifier": 0.006,
+    "entropy_coef_regressor": 0.002,
+    "max_grad_norm": 1.0,
+    "adam_eps": 1e-5,
+}
 
 
 def open_cells(grid: list[int], w: int, h: int) -> list[tuple[int, int]]:
@@ -158,34 +178,136 @@ def make_car_dataset(difficulty: str) -> tuple[list[list[float]], list[list[floa
     return xs, ys
 
 
+def tensor_normalize(values: torch.Tensor, eps: float = 1e-8) -> tuple[torch.Tensor, dict]:
+    mean = values.mean(dim=0, keepdim=True)
+    std = values.std(dim=0, keepdim=True).clamp_min(eps)
+    normalized = (values - mean) / std
+    return normalized, {
+        "mean": mean.squeeze(0).detach().cpu().tolist(),
+        "std": std.squeeze(0).detach().cpu().tolist(),
+        "eps": eps,
+    }
+
+
+def normalize_vector(values: torch.Tensor, eps: float = 1e-8) -> torch.Tensor:
+    return (values - values.mean()) / values.std().clamp_min(eps)
+
+
+def grid_sample_rewards(task: str, xs: list[list[float]], ys: list[int]) -> list[float]:
+    rewards: list[float] = []
+    for features, action in zip(xs, ys):
+        distance_score = 1.0 - features[6]
+        open_space = sum(features[7:11]) / 4
+        move_bonus = 0.12 if action != 0 else 0.0
+        wait_bonus = 0.22 if task == "astar_dynamic" and action == 0 else 0.0
+        rewards.append(0.55 + distance_score * 0.7 + open_space * 0.25 + move_bonus + wait_bonus)
+    return rewards
+
+
+def regression_sample_rewards(task: str, xs: list[list[float]], ys: list[list[float]]) -> list[float]:
+    rewards: list[float] = []
+    if task == "rrt_narrow":
+        for features in xs:
+            gate_dist = math.hypot(features[6], features[7])
+            gate_focus = 1.0 / (1.0 + gate_dist * 6.0)
+            rewards.append(0.7 + gate_focus)
+    elif task == "car_control":
+        for target in ys:
+            steer, throttle = target
+            smooth_turn = 1.0 - min(1.0, abs(steer))
+            rewards.append(0.45 + smooth_turn * 0.45 + throttle * 0.35)
+    else:
+        rewards = [1.0 for _ in ys]
+    return rewards
+
+
+def advantage_weights(raw_rewards: list[float]) -> tuple[torch.Tensor, dict]:
+    rewards = torch.tensor(raw_rewards, dtype=torch.float32)
+    scaled_rewards = rewards * TRICK_CONFIG["reward_scale"]
+    normalized_rewards = normalize_vector(scaled_rewards)
+    advantages = normalize_vector(normalized_rewards)
+    weights = 1.0 + TRICK_CONFIG["advantage_weight"] * advantages
+    weights = weights.clamp(0.25, 2.5)
+    return weights, {
+        "raw_reward_mean": float(rewards.mean()),
+        "raw_reward_std": float(rewards.std()),
+        "reward_scale": TRICK_CONFIG["reward_scale"],
+        "advantage_mean": float(advantages.mean()),
+        "advantage_std": float(advantages.std()),
+        "weight_min": float(weights.min()),
+        "weight_max": float(weights.max()),
+    }
+
+
+def training_metadata(normalizer: dict, reward_stats: dict) -> dict:
+    return {
+        "techniques": TRAINING_TECHNIQUES,
+        "config": TRICK_CONFIG,
+        "state_normalizer": normalizer,
+        "reward_and_advantage": reward_stats,
+    }
+
+
 def train_classifier(task: str, difficulty: str, epochs: int) -> dict:
     xs, ys = make_grid_dataset(task, difficulty)
     if not xs:
         raise RuntimeError(f"no training samples for {task}")
     spec = ModelSpec(task=task, input_dim=11, output_dim=5, hidden_dim=96, continuous=False)
-    model = MLPPolicy(spec.input_dim, spec.output_dim, spec.hidden_dim, spec.continuous)
-    optimizer = torch.optim.Adam(model.parameters(), lr=2e-3)
-    loss_fn = nn.CrossEntropyLoss()
-    x_tensor = torch.tensor(xs, dtype=torch.float32)
+    model = MLPPolicy(spec.input_dim, spec.output_dim, spec.hidden_dim, spec.continuous, orthogonal=True)
+    optimizer = torch.optim.Adam(model.parameters(), lr=2e-3, eps=TRICK_CONFIG["adam_eps"])
+    scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=epochs, eta_min=2e-4)
+    loss_fn = nn.CrossEntropyLoss(reduction="none")
+    x_tensor_raw = torch.tensor(xs, dtype=torch.float32)
+    x_tensor, normalizer = tensor_normalize(x_tensor_raw)
     y_tensor = torch.tensor(ys, dtype=torch.long)
+    weights, reward_stats = advantage_weights(grid_sample_rewards(task, xs, ys))
     losses: list[float] = []
+    supervised_losses: list[float] = []
+    entropies: list[float] = []
+    learning_rates: list[float] = []
 
     for _ in range(epochs):
         logits = model(x_tensor)
-        loss = loss_fn(logits, y_tensor)
+        per_sample_loss = loss_fn(logits, y_tensor)
+        entropy = model.distribution(x_tensor).entropy().mean()
+        supervised_loss = (per_sample_loss * weights).mean()
+        loss = supervised_loss - TRICK_CONFIG["entropy_coef_classifier"] * entropy
         optimizer.zero_grad()
         loss.backward()
-        torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
+        torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=TRICK_CONFIG["max_grad_norm"])
         optimizer.step()
+        scheduler.step()
         losses.append(float(loss.detach().cpu()))
+        supervised_losses.append(float(supervised_loss.detach().cpu()))
+        entropies.append(float(entropy.detach().cpu()))
+        learning_rates.append(float(scheduler.get_last_lr()[0]))
 
     with torch.no_grad():
         pred = model(x_tensor).argmax(dim=1)
         accuracy = float((pred == y_tensor).float().mean().cpu())
 
     checkpoint = CHECKPOINT_DIR / f"{task}_ai.pt"
-    save_checkpoint(checkpoint, spec, model, {"accuracy": accuracy, "loss": losses[-1], "epochs": epochs})
-    return {"checkpoint": str(checkpoint.relative_to(ROOT)), "losses": losses, "accuracy": accuracy, "samples": len(xs)}
+    metadata = training_metadata(normalizer, reward_stats)
+    metrics = {
+        "accuracy": accuracy,
+        "loss": losses[-1],
+        "supervised_loss": supervised_losses[-1],
+        "entropy": entropies[-1],
+        "final_lr": learning_rates[-1],
+        "epochs": epochs,
+        **metadata,
+    }
+    save_checkpoint(checkpoint, spec, model, metrics, normalizer=normalizer, techniques=TRAINING_TECHNIQUES)
+    return {
+        "checkpoint": str(checkpoint.relative_to(ROOT)),
+        "losses": losses,
+        "supervised_losses": supervised_losses,
+        "entropies": entropies,
+        "learning_rates": learning_rates,
+        "accuracy": accuracy,
+        "samples": len(xs),
+        **metadata,
+    }
 
 
 def train_regressor(task: str, difficulty: str, epochs: int) -> dict:
@@ -200,25 +322,59 @@ def train_regressor(task: str, difficulty: str, epochs: int) -> dict:
     if not xs:
         raise RuntimeError(f"no training samples for {task}")
 
-    model = MLPPolicy(spec.input_dim, spec.output_dim, spec.hidden_dim, spec.continuous)
-    optimizer = torch.optim.Adam(model.parameters(), lr=1.5e-3)
-    loss_fn = nn.MSELoss()
-    x_tensor = torch.tensor(xs, dtype=torch.float32)
+    model = MLPPolicy(spec.input_dim, spec.output_dim, spec.hidden_dim, spec.continuous, orthogonal=True)
+    optimizer = torch.optim.Adam(model.parameters(), lr=1.5e-3, eps=TRICK_CONFIG["adam_eps"])
+    scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=epochs, eta_min=1.5e-4)
+    x_tensor_raw = torch.tensor(xs, dtype=torch.float32)
+    x_tensor, normalizer = tensor_normalize(x_tensor_raw)
     y_tensor = torch.tensor(ys, dtype=torch.float32)
+    weights, reward_stats = advantage_weights(regression_sample_rewards(task, xs, ys))
     losses: list[float] = []
+    supervised_losses: list[float] = []
+    entropies: list[float] = []
+    learning_rates: list[float] = []
 
     for _ in range(epochs):
         pred = model(x_tensor)
-        loss = loss_fn(pred, y_tensor)
+        dist = model.distribution(x_tensor)
+        per_sample_loss = -dist.log_prob(y_tensor).sum(dim=1)
+        entropy = dist.entropy().sum(dim=1).mean()
+        supervised_loss = (per_sample_loss * weights).mean()
+        loss = supervised_loss - TRICK_CONFIG["entropy_coef_regressor"] * entropy
         optimizer.zero_grad()
         loss.backward()
-        torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
+        torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=TRICK_CONFIG["max_grad_norm"])
         optimizer.step()
+        scheduler.step()
         losses.append(float(loss.detach().cpu()))
+        supervised_losses.append(float(supervised_loss.detach().cpu()))
+        entropies.append(float(entropy.detach().cpu()))
+        learning_rates.append(float(scheduler.get_last_lr()[0]))
 
     checkpoint = CHECKPOINT_DIR / f"{task}_ai.pt"
-    save_checkpoint(checkpoint, spec, model, {"loss": losses[-1], "epochs": epochs})
-    return {"checkpoint": str(checkpoint.relative_to(ROOT)), "losses": losses, "samples": len(xs)}
+    with torch.no_grad():
+        mse = float(nn.functional.mse_loss(model(x_tensor), y_tensor).detach().cpu())
+    metadata = training_metadata(normalizer, reward_stats)
+    metrics = {
+        "loss": losses[-1],
+        "supervised_loss": supervised_losses[-1],
+        "entropy": entropies[-1],
+        "mse": mse,
+        "final_lr": learning_rates[-1],
+        "epochs": epochs,
+        **metadata,
+    }
+    save_checkpoint(checkpoint, spec, model, metrics, normalizer=normalizer, techniques=TRAINING_TECHNIQUES)
+    return {
+        "checkpoint": str(checkpoint.relative_to(ROOT)),
+        "losses": losses,
+        "supervised_losses": supervised_losses,
+        "entropies": entropies,
+        "learning_rates": learning_rates,
+        "mse": mse,
+        "samples": len(xs),
+        **metadata,
+    }
 
 
 def train_task(task: str, difficulty: str = "all", epochs: int = 220) -> dict:
@@ -235,6 +391,22 @@ def train_task(task: str, difficulty: str = "all", epochs: int = 220) -> dict:
     return result
 
 
+def brief_result(result: dict) -> dict:
+    brief = {
+        "task": result.get("task"),
+        "difficulty": result.get("difficulty"),
+        "checkpoint": result.get("checkpoint"),
+        "samples": result.get("samples"),
+        "final_loss": result.get("losses", [None])[-1],
+        "techniques": TRAINING_TECHNIQUES,
+    }
+    if "accuracy" in result:
+        brief["accuracy"] = result["accuracy"]
+    if "mse" in result:
+        brief["mse"] = result["mse"]
+    return brief
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("--task", required=True, choices=["dijkstra", "astar_dynamic", "rrt_narrow", "car_control"])
@@ -246,7 +418,7 @@ def parse_args() -> argparse.Namespace:
 def main() -> None:
     args = parse_args()
     result = train_task(args.task, args.difficulty, args.epochs)
-    print(result)
+    print(brief_result(result))
 
 
 if __name__ == "__main__":

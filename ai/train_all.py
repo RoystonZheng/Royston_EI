@@ -31,7 +31,13 @@ def main() -> int:
         print(f"\n== Training {task} ({difficulty}, {epochs} epochs) ==")
         result = train_task(task=task, difficulty=difficulty, epochs=epochs)
         losses = result.pop("losses", [])
+        supervised_losses = result.pop("supervised_losses", [])
+        entropies = result.pop("entropies", [])
+        learning_rates = result.pop("learning_rates", [])
         result["loss_curve"] = downsample(losses)
+        result["supervised_loss_curve"] = downsample(supervised_losses)
+        result["entropy_curve"] = downsample(entropies)
+        result["learning_rate_curve"] = downsample(learning_rates)
         result["final_loss"] = losses[-1] if losses else None
         summary[task] = result
         print(json.dumps(result, ensure_ascii=False, indent=2))

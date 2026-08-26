@@ -57,6 +57,12 @@ python ai/train_all.py
 
 默认训练会混合 `普通 / 困难 / 极限` 三档样本。
 
+十种训练技巧的具体用法看：
+
+```text
+TRAINING_TEN_TRICKS.md
+```
+
 训练完成后会生成：
 
 ```text
