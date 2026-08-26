@@ -6,6 +6,7 @@
   const demoTitle = document.getElementById("demoTitle");
   const demoClaim = document.getElementById("demoClaim");
   const metricsEl = document.getElementById("metrics");
+  const drawbacksEl = document.getElementById("drawbacks");
   const legendEl = document.getElementById("legend");
   const secondaryBtn = document.getElementById("secondaryBtn");
   const runBtn = document.getElementById("runBtn");
@@ -838,6 +839,14 @@
       ];
     }
 
+    drawbacks() {
+      return [
+        "Dijkstra 不知道终点方向，只能从起点一圈圈扩散，地图越大搜索越浪费。",
+        "每换一张地图都要重新搜索；AI 训练后可以直接根据状态输出下一步动作。",
+        "它只能处理明确写出来的代价规则，不能从历史样本里学到常见路线偏好。",
+      ];
+    }
+
     legend() {
       return [
         ["障碍物", COLOR.obstacle],
@@ -1298,6 +1307,14 @@
       ];
     }
 
+    drawbacks() {
+      return [
+        "A* 默认只看当前静态地图，障碍一动，刚算好的路径就可能作废。",
+        "它遇到动态变化通常靠反复重规划，速度越快、障碍越多，计算压力越明显。",
+        "AI 可以把等待、减速、绕行这些动作学进策略里，不一定每次都从头搜索。",
+      ];
+    }
+
     legend() {
       return [
         ["静态障碍", COLOR.obstacle],
@@ -1684,6 +1701,14 @@
       ];
     }
 
+    drawbacks() {
+      return [
+        "RRT 靠随机采样长树，窄门越小，越可能长时间采不到关键入口。",
+        "同一个场景多跑几次，成功时间和路径质量会明显波动。",
+        "AI 可以从样本里学到窄门位置，把采样和动作集中到更可能通过的区域。",
+      ];
+    }
+
     legend() {
       return [
         ["障碍物", COLOR.obstacle],
@@ -1991,6 +2016,14 @@
       ];
     }
 
+    drawbacks() {
+      return [
+        "网格路径只保证格子层面可走，不保证真实小车能按转弯半径执行。",
+        "直角拐弯在搜索结果里很正常，但车辆控制里可能直接撞墙或偏离车道。",
+        "AI 控制可以直接学习连续转向和油门，让轨迹更贴近真实执行能力。",
+      ];
+    }
+
     legend() {
       return [
         ["墙体", COLOR.obstacle],
@@ -2030,6 +2063,7 @@
     demoTitle.textContent = demo.title;
     demoClaim.textContent = demo.claim;
     renderMetrics(demo.metrics());
+    renderDrawbacks(demo.drawbacks ? demo.drawbacks() : []);
     renderLegend(demo.legend());
     const secondary = demo.secondary();
     if (secondary) {
@@ -2057,6 +2091,15 @@
       valueEl.textContent = String(value);
       row.append(labelEl, valueEl);
       metricsEl.append(row);
+    });
+  }
+
+  function renderDrawbacks(rows) {
+    drawbacksEl.replaceChildren();
+    rows.forEach((text) => {
+      const item = document.createElement("li");
+      item.textContent = text;
+      drawbacksEl.append(item);
     });
   }
 
