@@ -18,6 +18,7 @@
           <button id="pauseBtn" type="button">暂停</button>
           <button id="stepBtn" type="button">单步</button>
           <button id="resetBtn" type="button">重置</button>
+          <button id="trainingResetBtn" type="button">重置训练</button>
           <label class="speed-control">
             <span>速度</span>
             <input id="speedSlider" type="range" min="1" max="10" value="5" />
@@ -39,6 +40,13 @@
         <button class="difficulty" type="button" data-difficulty="extreme">极限</button>
       </section>
 
+      <section class="scenario-tabs" aria-label="环境模式">
+        <span>环境模式</span>
+        <button class="scenario active" type="button" data-scenario="baseline">训练场景</button>
+        <button class="scenario" type="button" data-scenario="perturbed">扰动场景</button>
+        <button class="scenario" type="button" data-scenario="generalization">泛化场景</button>
+      </section>
+
       <section class="workspace">
         <div class="canvas-wrap">
           <canvas id="labCanvas" aria-label="路径规划实验画布"></canvas>
@@ -56,6 +64,10 @@
           <div class="panel-section">
             <p class="eyebrow">传统算法劣势</p>
             <ul id="drawbacks" class="drawbacks"></ul>
+          </div>
+          <div class="panel-section">
+            <p class="eyebrow">鲁棒性 / 泛化性 / 可解释性</p>
+            <div id="evaluation" class="evaluation"></div>
           </div>
           <div class="panel-section">
             <p class="eyebrow">图例</p>

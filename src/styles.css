@@ -143,23 +143,34 @@ h2 {
   background: #302916;
 }
 
-.difficulty-tabs {
+.difficulty-tabs,
+.scenario-tabs {
   display: flex;
   align-items: center;
   gap: 8px;
   flex-wrap: wrap;
-  margin: -4px 0 14px;
+  margin: -4px 0 10px;
   color: var(--muted);
   font-size: 14px;
 }
 
-.difficulty {
+.scenario-tabs {
+  margin-bottom: 14px;
+}
+
+.difficulty,
+.scenario {
   min-width: 74px;
   height: 32px;
   padding: 0 12px;
 }
 
-.difficulty.active {
+.scenario {
+  min-width: 92px;
+}
+
+.difficulty.active,
+.scenario.active {
   border-color: var(--cyan);
   color: var(--cyan);
   background: #11302f;
@@ -260,6 +271,34 @@ h2 {
   border-left: 3px solid var(--orange);
   border-radius: 6px;
   background: #161b23;
+  color: #d5dde7;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.evaluation {
+  display: grid;
+  gap: 8px;
+}
+
+.evaluation-row {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 8px;
+  align-items: start;
+  padding: 8px 9px;
+  border: 1px solid #2b3340;
+  border-radius: 6px;
+  background: #161b23;
+}
+
+.evaluation-row strong {
+  color: var(--cyan);
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.evaluation-row span {
   color: #d5dde7;
   font-size: 13px;
   line-height: 1.45;

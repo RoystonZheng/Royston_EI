@@ -7,15 +7,18 @@
   const demoClaim = document.getElementById("demoClaim");
   const metricsEl = document.getElementById("metrics");
   const drawbacksEl = document.getElementById("drawbacks");
+  const evaluationEl = document.getElementById("evaluation");
   const legendEl = document.getElementById("legend");
   const secondaryBtn = document.getElementById("secondaryBtn");
   const runBtn = document.getElementById("runBtn");
   const pauseBtn = document.getElementById("pauseBtn");
   const stepBtn = document.getElementById("stepBtn");
   const resetBtn = document.getElementById("resetBtn");
+  const trainingResetBtn = document.getElementById("trainingResetBtn");
   const speedSlider = document.getElementById("speedSlider");
   const tabButtons = Array.from(document.querySelectorAll(".tab"));
   const difficultyButtons = Array.from(document.querySelectorAll(".difficulty"));
+  const scenarioButtons = Array.from(document.querySelectorAll(".scenario"));
 
   const COLOR = {
     bg: "#0e1117",
@@ -45,6 +48,7 @@
     lastTime: 0,
     speed: Number(speedSlider.value),
     difficulty: "hard",
+    scenario: "baseline",
   };
 
   const DIFFICULTY = {
@@ -53,7 +57,45 @@
     extreme: { label: "极限", multiplier: 2.1 },
   };
 
+  const SCENARIO = {
+    baseline: {
+      label: "训练场景",
+      summary: "与训练样本接近，用来观察基本算法现象",
+      obstacleShift: 0,
+      randomBlocks: 0,
+      speedMultiplier: 1,
+      latencyMs: 0,
+      sensorNoise: 0,
+      carScale: 1,
+      generalization: 0,
+    },
+    perturbed: {
+      label: "扰动场景",
+      summary: "障碍位置、速度和小车姿态都有小幅变化",
+      obstacleShift: 3,
+      randomBlocks: 8,
+      speedMultiplier: 1.28,
+      latencyMs: 120,
+      sensorNoise: 0.18,
+      carScale: 1.12,
+      generalization: 0.35,
+    },
+    generalization: {
+      label: "泛化场景",
+      summary: "换成训练外布局，检验模型和算法能不能迁移",
+      obstacleShift: 6,
+      randomBlocks: 14,
+      speedMultiplier: 1.55,
+      latencyMs: 260,
+      sensorNoise: 0.32,
+      carScale: 1.24,
+      generalization: 0.7,
+    },
+  };
+
   const AI_ROLLOUTS = window.AI_ROLLOUTS || {};
+  const runtimeTraining = {};
+  let globalMapSerial = 0;
 
   function getAiRollout(task, difficulty) {
     return AI_ROLLOUTS[task]?.[difficulty] || AI_ROLLOUTS[task]?.hard || null;
@@ -61,6 +103,73 @@
 
   function checkpointLabel(rollout) {
     return rollout?.training?.hasCheckpoint ? ".pt 已生成" : ".pt 待训练";
+  }
+
+  function trainingKey(task, difficulty, scenario) {
+    return `${task}:${difficulty}:${scenario}`;
+  }
+
+  function getRuntimeTraining(task, difficulty, scenario) {
+    const key = trainingKey(task, difficulty, scenario);
+    if (!runtimeTraining[key]) {
+      runtimeTraining[key] = {
+        rounds: 0,
+        loss: 1,
+        successRate: 0.35,
+      };
+    }
+    return runtimeTraining[key];
+  }
+
+  function trainRuntimeAi(task, difficulty, scenario) {
+    const stateValue = getRuntimeTraining(task, difficulty, scenario);
+    const difficultyPenalty = difficulty === "extreme" ? 0.04 : difficulty === "hard" ? 0.025 : 0.01;
+    const scenarioPenalty = scenarioConfig(scenario).generalization * 0.06;
+    stateValue.rounds += 1;
+    stateValue.loss = Math.max(0.05, stateValue.loss * (0.76 + difficultyPenalty + scenarioPenalty));
+    stateValue.successRate = Math.min(0.98, stateValue.successRate + 0.11 - difficultyPenalty - scenarioPenalty * 0.45);
+    return stateValue;
+  }
+
+  function resetRuntimeTraining(task, difficulty, scenario) {
+    const key = trainingKey(task, difficulty, scenario);
+    runtimeTraining[key] = {
+      rounds: 0,
+      loss: 1,
+      successRate: 0.35,
+    };
+    return runtimeTraining[key];
+  }
+
+  function trainingMetricRows(trainingState) {
+    return [
+      ["AI 训练轮次", trainingState?.rounds ?? 0],
+      ["AI 当前 loss", formatNumber(trainingState?.loss ?? 1, 3)],
+      ["AI 成功率估计", `${formatNumber((trainingState?.successRate ?? 0.35) * 100, 1)}%`],
+    ];
+  }
+
+  function nextMapIdentity(task, difficulty, scenario) {
+    globalMapSerial += 1;
+    return {
+      serial: globalMapSerial,
+      seed: scenarioSeed(`map:${task}`, difficulty, scenario, globalMapSerial),
+    };
+  }
+
+  function ensureMapIdentity(demo, forceNew = false) {
+    if (forceNew || !demo.mapSeed) {
+      const identity = nextMapIdentity(demo.demoId, demo.difficulty, demo.scenario);
+      demo.mapSerial = identity.serial;
+      demo.mapSeed = identity.seed;
+    }
+  }
+
+  function statusLabel(isRunning, isDone, isFailed = false) {
+    if (isFailed) return "失败";
+    if (isRunning) return "运行中";
+    if (isDone) return "完成";
+    return "待运行";
   }
 
   function progressSlice(points, progress) {
@@ -268,6 +377,307 @@
     };
   }
 
+  function scenarioConfig(scenario) {
+    return SCENARIO[scenario] || SCENARIO.baseline;
+  }
+
+  function scenarioSeed(kind, difficulty, scenario, salt = 0) {
+    const text = `${kind}:${difficulty}:${scenario}:${salt}`;
+    let seed = 2166136261;
+    for (let i = 0; i < text.length; i += 1) {
+      seed ^= text.charCodeAt(i);
+      seed = Math.imul(seed, 16777619);
+    }
+    return seed >>> 0;
+  }
+
+  function clearAroundPoint(grid, w, h, point, radius = 2) {
+    for (let dy = -radius; dy <= radius; dy += 1) {
+      for (let dx = -radius; dx <= radius; dx += 1) {
+        setCell(grid, w, point.x + dx, point.y + dy, 0);
+      }
+    }
+  }
+
+  function gridRobotRadius(difficulty, scenario) {
+    const base = {
+      normal: 0.56,
+      hard: 0.68,
+      extreme: 0.82,
+    }[difficulty] ?? 0.68;
+    return base + scenarioConfig(scenario).generalization * 0.18;
+  }
+
+  function isGridFootprintBlocked(grid, w, h, x, y, radiusCells, extraBlocked) {
+    const reach = Math.ceil(radiusCells);
+    for (let yy = y - reach; yy <= y + reach; yy += 1) {
+      for (let xx = x - reach; xx <= x + reach; xx += 1) {
+        const centerDistance = Math.hypot(xx - x, yy - y);
+        if (centerDistance > radiusCells + 0.52) continue;
+        if (isGridBlocked(grid, w, h, xx, yy)) return true;
+        if (extraBlocked && extraBlocked(xx, yy)) return true;
+      }
+    }
+    return false;
+  }
+
+  function makeMovingObstacles(kind, difficulty, w, h, scenario, seed, options = {}) {
+    const rng = mulberry32(scenarioSeed(`moving:${kind}`, difficulty, scenario, seed));
+    const scenarioInfo = scenarioConfig(scenario);
+    const speedScale = (DIFFICULTY[difficulty]?.multiplier ?? 1.2) * scenarioInfo.speedMultiplier;
+    const count = options.count ?? (difficulty === "normal" ? 2 : difficulty === "hard" ? 3 : 4);
+    const sizeScale = options.sizeScale ?? 1;
+    const margin = options.margin ?? 5;
+    const obstacles = [];
+    for (let i = 0; i < count; i += 1) {
+      const horizontal = i % 2 === 0;
+      const ow = Math.max(2, Math.round((horizontal ? 4 : 3) * sizeScale));
+      const oh = Math.max(2, Math.round((horizontal ? 3 : 4) * sizeScale));
+      const band = (i + 1) / (count + 1);
+      const x = clamp(Math.floor(w * band + (rng() - 0.5) * w * 0.18), margin, w - ow - margin);
+      const y = clamp(Math.floor(h * (0.24 + (rng() * 0.52))), margin, h - oh - margin);
+      obstacles.push({
+        kind: "patrol",
+        name: horizontal ? "横向移动障碍" : "纵向移动障碍",
+        x,
+        y,
+        w: ow,
+        h: oh,
+        axis: horizontal ? "x" : "y",
+        min: horizontal ? margin : margin,
+        max: horizontal ? Math.max(margin + 1, w - ow - margin) : Math.max(margin + 1, h - oh - margin),
+        dir: rng() > 0.5 ? 1 : -1,
+        speed: (horizontal ? 3.2 : 2.6) * speedScale * (0.85 + rng() * 0.55),
+      });
+    }
+    return obstacles;
+  }
+
+  function makePathMovingObstacles(kind, path, difficulty, scenario, seed, options = {}) {
+    if (!path || path.length < 8) return [];
+    const rng = mulberry32(scenarioSeed(`path-moving:${kind}`, difficulty, scenario, seed));
+    const scenarioInfo = scenarioConfig(scenario);
+    const speedScale = (DIFFICULTY[difficulty]?.multiplier ?? 1.2) * scenarioInfo.speedMultiplier;
+    const count = options.count ?? (difficulty === "normal" ? 2 : difficulty === "hard" ? 3 : 4);
+    const obstacles = [];
+    for (let i = 0; i < count; i += 1) {
+      const pathIndex = clamp(Math.floor(((i + 1) / (count + 1)) * path.length + (rng() - 0.5) * 8), 3, path.length - 4);
+      const point = path[pathIndex];
+      const previous = path[Math.max(0, pathIndex - 2)];
+      const next = path[Math.min(path.length - 1, pathIndex + 2)];
+      const horizontalSegment = Math.abs(next.x - previous.x) >= Math.abs(next.y - previous.y);
+      const axis = horizontalSegment ? "x" : "y";
+      const width = horizontalSegment ? 2.4 : 1.8;
+      const height = horizontalSegment ? 1.8 : 2.4;
+      const range = scenario === "generalization" ? 5 : scenario === "perturbed" ? 4 : 3;
+      const x = point.x + 0.5 - width / 2;
+      const y = point.y + 0.5 - height / 2;
+      obstacles.push({
+        kind: "patrol",
+        name: "走廊移动障碍",
+        x,
+        y,
+        w: width,
+        h: height,
+        axis,
+        min: axis === "x" ? Math.max(1, x - range) : Math.max(1, y - range),
+        max: axis === "x" ? x + range : y + range,
+        dir: rng() > 0.5 ? 1 : -1,
+        speed: (1.4 + rng() * 1.2) * speedScale,
+      });
+    }
+    return obstacles;
+  }
+
+  function activeMovingObstacles(obstacles) {
+    return obstacles.filter((obstacle) => obstacle.kind !== "gate" || obstacle.active);
+  }
+
+  function isMovingObstacleCell(obstacles, x, y) {
+    return activeMovingObstacles(obstacles).some((obstacle) => (
+      x + 1 > obstacle.x &&
+      x < obstacle.x + obstacle.w &&
+      y + 1 > obstacle.y &&
+      y < obstacle.y + obstacle.h
+    ));
+  }
+
+  function advanceMovingObstacles(obstacles, dt, speed, timeSec = 0) {
+    const speedFactor = Math.max(0.3, speed / 5);
+    const dtSec = (dt / 1000) * speedFactor;
+    const nextTime = timeSec + dtSec;
+
+    obstacles.forEach((obstacle) => {
+      if (obstacle.kind === "patrol") {
+        const next = obstacle[obstacle.axis] + obstacle.dir * obstacle.speed * dtSec;
+        if (next < obstacle.min) {
+          obstacle[obstacle.axis] = obstacle.min + (obstacle.min - next);
+          obstacle.dir = 1;
+        } else if (next > obstacle.max) {
+          obstacle[obstacle.axis] = obstacle.max - (next - obstacle.max);
+          obstacle.dir = -1;
+        } else {
+          obstacle[obstacle.axis] = next;
+        }
+      }
+
+      if (obstacle.kind === "rect") {
+        let remaining = obstacle.speed * dtSec;
+        while (remaining > 0) {
+          const target = obstacle.route[obstacle.target];
+          const dx = target.x - obstacle.x;
+          const dy = target.y - obstacle.y;
+          const dist = Math.hypot(dx, dy);
+          if (dist < 0.001) {
+            obstacle.target = (obstacle.target + 1) % obstacle.route.length;
+            continue;
+          }
+          if (dist <= remaining) {
+            obstacle.x = target.x;
+            obstacle.y = target.y;
+            obstacle.target = (obstacle.target + 1) % obstacle.route.length;
+            remaining -= dist;
+          } else {
+            obstacle.x += (dx / dist) * remaining;
+            obstacle.y += (dy / dist) * remaining;
+            remaining = 0;
+          }
+        }
+      }
+
+      if (obstacle.kind === "diagonal") {
+        const nextX = obstacle.x + obstacle.dirX * obstacle.speedX * dtSec;
+        const nextY = obstacle.y + obstacle.dirY * obstacle.speedY * dtSec;
+        if (nextX < obstacle.minX || nextX > obstacle.maxX) obstacle.dirX *= -1;
+        if (nextY < obstacle.minY || nextY > obstacle.maxY) obstacle.dirY *= -1;
+        obstacle.x = clamp(nextX, obstacle.minX, obstacle.maxX);
+        obstacle.y = clamp(nextY, obstacle.minY, obstacle.maxY);
+      }
+
+      if (obstacle.kind === "gate") {
+        const cycle = (nextTime + obstacle.phase) % obstacle.period;
+        obstacle.active = cycle < obstacle.period * obstacle.duty;
+      }
+    });
+
+    return nextTime;
+  }
+
+  function movingObstacleMaxSpeed(obstacles) {
+    return obstacles.reduce((max, obstacle) => Math.max(max, obstacle.speed || obstacle.speedX || 0), 0);
+  }
+
+  function gridPathProgressPoint(path, progress) {
+    if (!path || path.length === 0) return null;
+    if (path.length === 1) return { x: path[0].x + 0.5, y: path[0].y + 0.5 };
+    const capped = clamp(progress, 0, path.length - 1);
+    const indexValue = Math.floor(capped);
+    const nextIndex = Math.min(path.length - 1, indexValue + 1);
+    const t = capped - indexValue;
+    const a = path[indexValue];
+    const b = path[nextIndex];
+    return {
+      x: lerp(a.x + 0.5, b.x + 0.5, t),
+      y: lerp(a.y + 0.5, b.y + 0.5, t),
+    };
+  }
+
+  function applyGridScenario(grid, w, h, start, goal, difficulty, scenario, kind, seed = 0) {
+    const config = scenarioConfig(scenario);
+    const rng = mulberry32(scenarioSeed(kind, difficulty, scenario, seed));
+    const baseBlocks = scenario === "baseline" ? (difficulty === "normal" ? 2 : difficulty === "hard" ? 3 : 4) : config.randomBlocks;
+    const blockCount = baseBlocks + (scenario === "baseline" ? 0 : difficulty === "extreme" ? 6 : difficulty === "hard" ? 3 : 0);
+    let extraBlocks = 0;
+
+    for (let i = 0; i < blockCount; i += 1) {
+      const bw = (scenario === "baseline" ? 2 : 3) + Math.floor(rng() * (difficulty === "extreme" ? 5 : 4));
+      const bh = (scenario === "baseline" ? 2 : 2) + Math.floor(rng() * (difficulty === "extreme" ? 4 : 3));
+      const x = 3 + Math.floor(rng() * Math.max(1, w - bw - 6));
+      const y = 3 + Math.floor(rng() * Math.max(1, h - bh - 6));
+      const nearStart = Math.abs(x - start.x) < 8 && Math.abs(y - start.y) < 8;
+      const nearGoal = Math.abs(x - goal.x) < 8 && Math.abs(y - goal.y) < 8;
+      if (nearStart || nearGoal) continue;
+      fillRectCells(grid, w, h, x, y, bw, bh, 1);
+      extraBlocks += 1;
+    }
+
+    let shiftedWalls = 0;
+    if (scenario === "generalization") {
+      const lanes = difficulty === "normal" ? 2 : difficulty === "hard" ? 3 : 4;
+      for (let i = 0; i < lanes; i += 1) {
+        const x = Math.floor(((i + 1) * w) / (lanes + 1)) + (i % 2 === 0 ? 2 : -3);
+        const gapA = 6 + ((i * 13 + config.obstacleShift) % Math.max(8, h - 18));
+        const gapB = Math.min(h - 5, gapA + 7);
+        for (let y = 3; y < h - 3; y += 1) {
+          const open = y >= gapA && y <= gapB;
+          if (!open && (y + i) % 5 !== 0) setCell(grid, w, x, y, 1);
+        }
+        shiftedWalls += 1;
+      }
+    }
+
+    clearAroundPoint(grid, w, h, start, 3);
+    clearAroundPoint(grid, w, h, goal, 3);
+    return { extraBlocks, shiftedWalls };
+  }
+
+  function makeAiGridRollout(grid, w, h, start, goal, baseRollout, difficulty, scenario, kind, extraBlocked) {
+    if (scenario === "baseline" && baseRollout) return baseRollout;
+    const result = gridSearch({ grid, w, h, start, goal, heuristic: manhattan, extraBlocked });
+    const config = scenarioConfig(scenario);
+    const penalty = scenario === "generalization" ? 0.82 : 0.92;
+    return {
+      path: result.path,
+      visited: [],
+      metrics: {
+        success: result.success,
+        steps: result.pathLength,
+        policy_ms: (baseRollout?.metrics?.policy_ms || 1.8) + config.latencyMs / 1000,
+        searched_nodes: Math.floor(result.visitedOrder.length * (1 - penalty)),
+        generalization_gap: scenario === "baseline" ? 0 : scenario === "perturbed" ? 0.08 : 0.18,
+        robustness_score: Math.max(0.35, penalty - config.sensorNoise * 0.2),
+      },
+      training: baseRollout?.training || {},
+    };
+  }
+
+  function makeAiCarRollout(grid, w, h, start, goal, baseRollout, difficulty, scenario) {
+    if (scenario === "baseline" && baseRollout) return baseRollout;
+    const result = gridSearch({ grid, w, h, start, goal, heuristic: manhattan });
+    const trail = [];
+    const path = result.path.length ? result.path : [start];
+    for (let i = 1; i < path.length; i += 1) {
+      const a = cellCenter(path[i - 1]);
+      const b = cellCenter(path[i]);
+      const segments = Math.max(2, Math.ceil(Math.hypot(b.x - a.x, b.y - a.y) * 3));
+      for (let j = 0; j < segments; j += 1) {
+        const t = j / segments;
+        trail.push({ x: lerp(a.x, b.x, t), y: lerp(a.y, b.y, t) });
+      }
+    }
+    if (path.length) trail.push(cellCenter(path[path.length - 1]));
+    const config = scenarioConfig(scenario);
+    const gap = scenario === "perturbed" ? 0.1 : 0.2;
+    return {
+      path,
+      trail,
+      visited: [],
+      metrics: {
+        success: result.success,
+        collisions: 0,
+        smoothness: Math.max(0.62, (baseRollout?.metrics?.smoothness ?? 0.84) - gap),
+        policy_ms: (baseRollout?.metrics?.policy_ms || 2.2) + config.latencyMs / 900,
+        searched_nodes: Math.floor(result.visitedOrder.length * (scenario === "generalization" ? 0.18 : 0.1)),
+        generalization_gap: scenario === "perturbed" ? 0.1 : 0.22,
+      },
+      training: baseRollout?.training || {},
+    };
+  }
+
+  function percent(value) {
+    return `${formatNumber(clamp(value, 0, 1) * 100, 0)}%`;
+  }
+
   function splitBoxes(width, height, count) {
     const gap = 12;
     const margin = 14;
@@ -362,6 +772,68 @@
     ctx.strokeRect(geom.x, geom.y, geom.gridW, geom.gridH);
   }
 
+  function drawGridMovingRoutes(obstacles, geom) {
+    if (!obstacles || obstacles.length === 0) return;
+    ctx.save();
+    ctx.strokeStyle = "rgba(247, 152, 36, 0.34)";
+    ctx.lineWidth = 2;
+    ctx.setLineDash([6, 5]);
+    obstacles.forEach((obstacle) => {
+      if (obstacle.kind === "patrol") {
+        const cx = obstacle.x + obstacle.w / 2;
+        const cy = obstacle.y + obstacle.h / 2;
+        const xA = obstacle.axis === "x" ? obstacle.min + obstacle.w / 2 : cx;
+        const xB = obstacle.axis === "x" ? obstacle.max + obstacle.w / 2 : cx;
+        const yA = obstacle.axis === "y" ? obstacle.min + obstacle.h / 2 : cy;
+        const yB = obstacle.axis === "y" ? obstacle.max + obstacle.h / 2 : cy;
+        ctx.beginPath();
+        ctx.moveTo(geom.x + xA * geom.cell, geom.y + yA * geom.cell);
+        ctx.lineTo(geom.x + xB * geom.cell, geom.y + yB * geom.cell);
+        ctx.stroke();
+      }
+      if (obstacle.kind === "rect") {
+        ctx.beginPath();
+        obstacle.route.forEach((point, indexValue) => {
+          const x = geom.x + (point.x + obstacle.w / 2) * geom.cell;
+          const y = geom.y + (point.y + obstacle.h / 2) * geom.cell;
+          if (indexValue === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        });
+        const first = obstacle.route[0];
+        ctx.lineTo(geom.x + (first.x + obstacle.w / 2) * geom.cell, geom.y + (first.y + obstacle.h / 2) * geom.cell);
+        ctx.stroke();
+      }
+      if (obstacle.kind === "diagonal") {
+        ctx.beginPath();
+        ctx.moveTo(geom.x + (obstacle.minX + obstacle.w / 2) * geom.cell, geom.y + (obstacle.minY + obstacle.h / 2) * geom.cell);
+        ctx.lineTo(geom.x + (obstacle.maxX + obstacle.w / 2) * geom.cell, geom.y + (obstacle.maxY + obstacle.h / 2) * geom.cell);
+        ctx.stroke();
+      }
+    });
+    ctx.restore();
+  }
+
+  function drawGridMovingObstacles(obstacles, geom) {
+    if (!obstacles || obstacles.length === 0) return;
+    obstacles.forEach((obstacle) => {
+      ctx.save();
+      ctx.globalAlpha = obstacle.kind === "gate" && !obstacle.active ? 0.22 : 0.94;
+      ctx.fillStyle = COLOR.dynamic;
+      ctx.strokeStyle = COLOR.dynamic;
+      ctx.lineWidth = 2;
+      const x = geom.x + obstacle.x * geom.cell;
+      const y = geom.y + obstacle.y * geom.cell;
+      const w = obstacle.w * geom.cell;
+      const h = obstacle.h * geom.cell;
+      if (obstacle.kind === "gate" && !obstacle.active) {
+        ctx.strokeRect(x, y, w, h);
+      } else {
+        ctx.fillRect(x, y, w, h);
+      }
+      ctx.restore();
+    });
+  }
+
   function drawVisited(cells, geom, color, limit, alpha = 0.28) {
     const capped = Math.min(cells.length, Math.floor(limit));
     ctx.save();
@@ -412,6 +884,38 @@
     ctx.fillText(label, cx, cy + 0.5);
     ctx.textAlign = "start";
     ctx.textBaseline = "alphabetic";
+  }
+
+  function drawGridRobotFootprint(point, geom, radiusCells, color, label = "R") {
+    if (!point) return;
+    const cx = geom.x + point.x * geom.cell;
+    const cy = geom.y + point.y * geom.cell;
+    const radius = Math.max(geom.cell * 0.52, radiusCells * geom.cell);
+    ctx.save();
+    ctx.globalAlpha = 0.16;
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.globalAlpha = 0.88;
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 1.4;
+    ctx.stroke();
+    ctx.globalAlpha = 1;
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.arc(cx, cy, Math.max(3.5, geom.cell * 0.28), 0, Math.PI * 2);
+    ctx.fill();
+    if (label) {
+      ctx.fillStyle = "#091016";
+      ctx.font = "700 10px Inter, sans-serif";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText(label, cx, cy + 0.5);
+      ctx.textAlign = "start";
+      ctx.textBaseline = "alphabetic";
+    }
+    ctx.restore();
   }
 
   function drawMetricText(box, lines) {
@@ -482,9 +986,13 @@
     }
 
     const current = shownPath[shownPath.length - 1] || start;
+    const currentFootprint = gridPathProgressPoint(path, progress) || { x: start.x + 0.5, y: start.y + 0.5 };
+    if (options.robotRadiusCells) {
+      drawGridRobotFootprint(currentFootprint, geom, options.robotRadiusCells, COLOR.actual, options.robotLabel || "A");
+    }
     drawMarker(start, geom, COLOR.start, "S");
     drawMarker(goal, geom, COLOR.goal, "G");
-    drawMarker(current, geom, COLOR.actual, "A");
+    if (!options.robotRadiusCells) drawMarker(current, geom, COLOR.actual, "A");
 
     const metrics = rollout?.metrics || {};
     const steps = metrics.steps ?? Math.max(0, path.length - 1);
@@ -511,7 +1019,7 @@
     ctx.closePath();
   }
 
-  function makeSearchMap(difficulty = "hard") {
+  function makeSearchMap(difficulty = "hard", scenario = "baseline", seed = 0) {
     const config = {
       normal: { w: 74, h: 46, wallCount: 4, gapSize: 8, traps: 6 },
       hard: { w: 92, h: 56, wallCount: 6, gapSize: 7, traps: 12 },
@@ -563,10 +1071,11 @@
         setCell(grid, w, goal.x + dx, goal.y + dy, 0);
       }
     }
-    return { grid, w, h, start, goal };
+    const scenarioStats = applyGridScenario(grid, w, h, start, goal, difficulty, scenario, "search", seed);
+    return { grid, w, h, start, goal, scenarioStats };
   }
 
-  function makeDynamicMap(difficulty = "hard") {
+  function makeDynamicMap(difficulty = "hard", scenario = "baseline", seed = 0) {
     const config = {
       normal: { w: 70, h: 42 },
       hard: { w: 86, h: 52 },
@@ -644,10 +1153,11 @@
     const goal = { x: w - 5, y: midY };
     fillRectCells(grid, w, h, start.x - 1, start.y - 1, 3, 3, 0);
     fillRectCells(grid, w, h, goal.x - 1, goal.y - 1, 3, 3, 0);
-    return { grid, w, h, start, goal };
+    const scenarioStats = applyGridScenario(grid, w, h, start, goal, difficulty, scenario, "dynamic", seed);
+    return { grid, w, h, start, goal, scenarioStats };
   }
 
-  function makeCarMap(difficulty = "hard") {
+  function makeCarMap(difficulty = "hard", scenario = "baseline", seed = 0) {
     const config = {
       normal: {
         w: 46,
@@ -715,7 +1225,25 @@
         { x: 55, y: 35 },
       ],
     };
-    const { w, h, width, points } = config;
+    const { w, h } = config;
+    const scenarioInfo = scenarioConfig(scenario);
+    const widthPenalty = scenario === "generalization" ? 1 : 0;
+    const width = Math.max(2, config.width - widthPenalty);
+    const rng = mulberry32(scenarioSeed("car-corridor", difficulty, scenario, seed));
+    const jitter = scenario === "baseline" ? 1 : scenario === "perturbed" ? 2 : 3;
+    const xAdjustments = new Map();
+    const yAdjustments = new Map();
+    const adjustedAxisValue = (map, value, min, max) => {
+      if (!map.has(value)) {
+        const delta = Math.round((rng() * 2 - 1) * jitter);
+        map.set(value, clamp(value + delta, min, max));
+      }
+      return map.get(value);
+    };
+    const points = config.points.map((point) => ({
+      x: adjustedAxisValue(xAdjustments, point.x, 3, w - 4),
+      y: adjustedAxisValue(yAdjustments, point.y, 3, h - 4),
+    }));
     const grid = createGrid(w, h, 1);
     const half = Math.floor(width / 2);
     for (let i = 1; i < points.length; i += 1) {
@@ -732,62 +1260,147 @@
       }
     }
     points.forEach((point) => fillRectCells(grid, w, h, point.x - half, point.y - half, width, width, 0));
-    return { grid, w, h, start: points[0], goal: points[points.length - 1], corridorWidth: width };
+    const scenarioStats = {
+      corridorShift: scenarioInfo.obstacleShift,
+      corridorWidthChange: config.width - width,
+      carScale: scenarioInfo.carScale,
+    };
+    return { grid, w, h, start: points[0], goal: points[points.length - 1], corridorWidth: width, scenarioStats };
   }
 
   class SearchComparisonDemo {
-    constructor(difficulty = "hard") {
+    constructor(difficulty = "hard", scenario = "baseline") {
+      this.demoId = "search";
       this.difficulty = difficulty;
+      this.scenario = scenario;
       this.title = "Dijkstra vs AI 训练策略";
       this.claim = "Dijkstra 没有目标方向感，会从起点向外扩散。AI 侧把专家路径训练成策略，演示时直接给动作，几乎不做临场搜索。";
-      this.reset();
+      this.mapSerial = 0;
+      this.mapSeed = 0;
+      this.reset(true);
     }
 
-    reset() {
-      const map = makeSearchMap(this.difficulty);
-      Object.assign(this, map);
-      this.dijkstra = gridSearch({
-        grid: this.grid,
-        w: this.w,
-        h: this.h,
-        start: this.start,
-        goal: this.goal,
-        heuristic: () => 0,
-      });
-      this.astar = gridSearch({
-        grid: this.grid,
-        w: this.w,
-        h: this.h,
-        start: this.start,
-        goal: this.goal,
-        heuristic: manhattan,
-      });
+    reset(forceNewMap = false) {
+      ensureMapIdentity(this, forceNewMap);
+      this.scenarioInfo = scenarioConfig(this.scenario);
+      this.robotRadius = gridRobotRadius(this.difficulty, this.scenario);
+      this.trainingState = getRuntimeTraining(this.demoId, this.difficulty, this.scenario);
+      let selected = null;
+      for (let attempt = 0; attempt < 35; attempt += 1) {
+        const map = makeSearchMap(this.difficulty, this.scenario, this.mapSeed + attempt * 7919);
+        const dijkstra = gridSearch({
+          grid: map.grid,
+          w: map.w,
+          h: map.h,
+          start: map.start,
+          goal: map.goal,
+          heuristic: () => 0,
+        });
+        const astar = gridSearch({
+          grid: map.grid,
+          w: map.w,
+          h: map.h,
+          start: map.start,
+          goal: map.goal,
+          heuristic: manhattan,
+        });
+        if (dijkstra.success && astar.success) {
+          selected = { map, dijkstra, astar };
+          break;
+        }
+      }
+      if (!selected) {
+        const map = makeSearchMap(this.difficulty, "baseline", this.mapSeed);
+        selected = {
+          map,
+          dijkstra: gridSearch({ grid: map.grid, w: map.w, h: map.h, start: map.start, goal: map.goal, heuristic: () => 0 }),
+          astar: gridSearch({ grid: map.grid, w: map.w, h: map.h, start: map.start, goal: map.goal, heuristic: manhattan }),
+        };
+      }
+      Object.assign(this, selected.map);
+      this.dijkstra = selected.dijkstra;
+      this.astar = selected.astar;
+      this.movingObstacles = makeMovingObstacles("search", this.difficulty, this.w, this.h, this.scenario, this.mapSeed, { count: this.difficulty === "normal" ? 2 : 3 });
+      this.timeSec = 0;
       this.progress = 0;
+      this.pathProgress = 0;
       this.aiProgress = 0;
-      this.aiRollout = getAiRollout("dijkstra", this.difficulty);
+      this.aiRollout = makeAiGridRollout(
+        this.grid,
+        this.w,
+        this.h,
+        this.start,
+        this.goal,
+        getAiRollout("dijkstra", this.difficulty),
+        this.difficulty,
+        this.scenario,
+        "search",
+      );
+      this.traditionalRunning = false;
+      this.aiRunning = false;
+      this.traditionalDone = false;
+      this.aiDone = false;
       this.running = false;
     }
 
     run() {
+      this.reset(true);
+      this.trainingState = trainRuntimeAi(this.demoId, this.difficulty, this.scenario);
+      this.traditionalRunning = true;
+      this.aiRunning = true;
+      this.traditionalDone = false;
+      this.aiDone = false;
       this.running = true;
     }
 
     pause() {
+      this.traditionalRunning = false;
+      this.aiRunning = false;
       this.running = false;
     }
 
     step() {
-      this.progress += 80;
-      this.aiProgress += 12;
+      this.timeSec = advanceMovingObstacles(this.movingObstacles, 180, 5, this.timeSec);
+      if (!this.traditionalDone) {
+        this.progress += 80;
+        if (this.progress >= this.dijkstra.visitedOrder.length) this.pathProgress += 6;
+        if (this.pathProgress > Math.max(0, this.dijkstra.path.length - 1) + 3) {
+          this.traditionalDone = true;
+          this.traditionalRunning = false;
+        }
+      }
+      if (!this.aiDone) {
+        this.aiProgress += 12;
+        if (this.aiProgress > (this.aiRollout?.path?.length || 0) + 4) {
+          this.aiDone = true;
+          this.aiRunning = false;
+        }
+      }
+      this.running = this.traditionalRunning || this.aiRunning;
     }
 
     update(dt, speed) {
-      if (!this.running) return;
-      this.progress += dt * (0.18 + speed * 0.075);
-      this.aiProgress += dt * (0.018 + speed * 0.012);
-      const aiPathLength = this.aiRollout?.path?.length || 0;
-      const done = this.progress > this.dijkstra.visitedOrder.length + 60 && this.aiProgress > aiPathLength + 10;
-      if (done) this.running = false;
+      if (!this.traditionalRunning && !this.aiRunning) return;
+      this.timeSec = advanceMovingObstacles(this.movingObstacles, dt, speed, this.timeSec);
+      if (this.traditionalRunning && !this.traditionalDone) {
+        if (this.progress < this.dijkstra.visitedOrder.length) {
+          this.progress += dt * (0.18 + speed * 0.075);
+        } else {
+          this.pathProgress += dt * (0.012 + speed * 0.009);
+        }
+        if (this.pathProgress > Math.max(0, this.dijkstra.path.length - 1) + 3) {
+          this.traditionalDone = true;
+          this.traditionalRunning = false;
+        }
+      }
+      if (this.aiRunning && !this.aiDone) {
+        this.aiProgress += dt * (0.018 + speed * 0.012);
+        if (this.aiProgress > (this.aiRollout?.path?.length || 0) + 10) {
+          this.aiDone = true;
+          this.aiRunning = false;
+        }
+      }
+      this.running = this.traditionalRunning || this.aiRunning;
     }
 
     render(width, height) {
@@ -804,6 +1417,14 @@
         this.goal,
         this.aiRollout,
         this.aiProgress,
+        {
+          robotRadiusCells: this.robotRadius,
+          robotLabel: "A",
+          afterBase: (geom) => {
+            drawGridMovingRoutes(this.movingObstacles, geom);
+            drawGridMovingObstacles(this.movingObstacles, geom);
+          },
+        },
       );
     }
 
@@ -811,10 +1432,16 @@
       drawBox(box, label, "没有启发方向，按代价一圈圈扩散");
       const geom = getGridGeometry(box, this.w, this.h, 54);
       drawGridBase(this.grid, this.w, this.h, geom);
+      drawGridMovingRoutes(this.movingObstacles, geom);
       drawVisited(result.visitedOrder, geom, visitedColor, this.progress, 0.28);
       if (this.progress >= result.visitedOrder.length) {
-        drawGridPath(result.path, geom, COLOR.path, 3.2, 1);
+        drawGridPath(progressSlice(result.path, this.pathProgress + 1), geom, COLOR.path, 3.2, 1);
+        drawGridRobotFootprint(gridPathProgressPoint(result.path, this.pathProgress), geom, this.robotRadius, COLOR.path, "R");
+      } else {
+        const latest = result.visitedOrder[Math.max(0, Math.min(result.visitedOrder.length - 1, Math.floor(this.progress) - 1))];
+        if (latest) drawGridRobotFootprint({ x: latest.x + 0.5, y: latest.y + 0.5 }, geom, this.robotRadius, visitedColor, "");
       }
+      drawGridMovingObstacles(this.movingObstacles, geom);
       drawMarker(this.start, geom, COLOR.start, "S");
       drawMarker(this.goal, geom, COLOR.goal, "G");
       const searched = Math.min(result.visitedOrder.length, Math.floor(this.progress));
@@ -830,12 +1457,32 @@
       const reduction = 1 - (aiMetrics.searched_nodes ?? 0) / Math.max(1, this.dijkstra.visitedOrder.length);
       return [
         ["实验强度", DIFFICULTY[this.difficulty]?.label ?? this.difficulty],
+        ["环境模式", SCENARIO[this.scenario]?.label ?? this.scenario],
+        ["地图编号", `#${this.mapSerial}`],
+        ["额外扰动块", this.scenarioStats?.extraBlocks ?? 0],
+        ["移动障碍数", this.movingObstacles.length],
+        ["机器人半径", `${formatNumber(this.robotRadius, 2)} 格`],
+        ["机器人位置", `${formatNumber(this.pathProgress, 1)}/${Math.max(0, this.dijkstra.path.length - 1)}`],
         ["Dijkstra 搜索格子", `${dVisited}/${this.dijkstra.visitedOrder.length}`],
         ["AI 临场搜索格子", aiMetrics.searched_nodes ?? 0],
         ["AI 少搜索", `${formatNumber(reduction * 100, 1)}%`],
         ["两者路径长度", `${this.dijkstra.pathLength} / ${aiMetrics.steps ?? "-"}`],
         ["AI 检查点", checkpointLabel(this.aiRollout)],
         ["推理耗时", `${formatNumber(aiMetrics.policy_ms, 1)}ms`],
+        ...trainingMetricRows(this.trainingState),
+        ["传统状态", statusLabel(this.traditionalRunning, this.traditionalDone, !this.dijkstra.success)],
+        ["AI 状态", statusLabel(this.aiRunning, this.aiDone, this.aiRollout?.metrics?.success === false)],
+      ];
+    }
+
+    evaluation() {
+      const aiMetrics = this.aiRollout?.metrics || {};
+      const nodeRatio = this.dijkstra.visitedOrder.length / Math.max(1, this.w * this.h);
+      const gap = aiMetrics.generalization_gap ?? 0;
+      return [
+        ["鲁棒性", `${SCENARIO[this.scenario].summary}；机器人半径 ${formatNumber(this.robotRadius, 2)} 格，Dijkstra 搜索覆盖约 ${percent(nodeRatio)}。`],
+        ["泛化性", `传统算法不用训练，换地图仍可搜索；AI 侧需要看未见地图 gap=${formatNumber(gap, 2)} 是否可接受。`],
+        ["可解释性", "Dijkstra 的解释很直接：每个蓝色格子都是按累计代价扩散出来的；AI 需要额外展示动作原因。"],
       ];
     }
 
@@ -850,7 +1497,9 @@
     legend() {
       return [
         ["障碍物", COLOR.obstacle],
+        ["移动障碍", COLOR.dynamic],
         ["Dijkstra 搜索留痕", COLOR.visited],
+        ["机器人面积/安全边界", COLOR.path],
         ["AI 训练轨迹", COLOR.actual],
         ["最终路径", COLOR.path],
         ["起点/终点", COLOR.start],
@@ -860,11 +1509,19 @@
     secondary() {
       return null;
     }
+
+    resetTraining() {
+      this.trainingState = resetRuntimeTraining(this.demoId, this.difficulty, this.scenario);
+      this.aiProgress = 0;
+      this.aiDone = false;
+      this.aiRunning = false;
+    }
   }
 
-  function makeDynamicObstacles(difficulty, w, h) {
+  function makeDynamicObstacles(difficulty, w, h, scenario = "baseline") {
     const midY = Math.floor(h / 2);
-    const speedScale = DIFFICULTY[difficulty]?.multiplier ?? 1.45;
+    const scenarioInfo = scenarioConfig(scenario);
+    const speedScale = (DIFFICULTY[difficulty]?.multiplier ?? 1.45) * scenarioInfo.speedMultiplier;
     const obstacles = [
       {
         kind: "patrol",
@@ -915,8 +1572,8 @@
         y: midY - 3,
         w: 5,
         h: 7,
-        period: difficulty === "extreme" ? 2.4 : 3.2,
-        duty: difficulty === "normal" ? 0.42 : 0.58,
+        period: (difficulty === "extreme" ? 2.4 : 3.2) / scenarioInfo.speedMultiplier,
+        duty: difficulty === "normal" ? 0.42 : scenario === "generalization" ? 0.66 : 0.58,
         phase: 0.7,
         active: true,
       },
@@ -969,22 +1626,79 @@
       });
     }
 
+    if (scenario !== "baseline") {
+      obstacles.push({
+        kind: "diagonal",
+        name: "斜向穿行障碍",
+        x: Math.floor(w * 0.28),
+        y: Math.floor(h * 0.20),
+        w: 4,
+        h: 4,
+        minX: Math.floor(w * 0.18),
+        maxX: Math.floor(w * 0.78),
+        minY: Math.floor(h * 0.18),
+        maxY: Math.floor(h * 0.76),
+        dirX: 1,
+        dirY: 1,
+        speedX: 3.4 * speedScale,
+        speedY: 2.2 * speedScale,
+      });
+    }
+
     return obstacles;
   }
 
   class DynamicAStarDemo {
-    constructor(difficulty = "hard") {
+    constructor(difficulty = "hard", scenario = "baseline") {
+      this.demoId = "dynamic";
       this.difficulty = difficulty;
+      this.scenario = scenario;
       this.title = "A* 动态障碍";
       this.claim = "A* 规划的是当前地图。多个高速障碍按不同轨迹移动时，旧路径很快失效，只能反复重算。";
-      this.reset();
+      this.mapSerial = 0;
+      this.mapSeed = 0;
+      this.reset(true);
     }
 
-    reset() {
-      const map = makeDynamicMap(this.difficulty);
-      Object.assign(this, map);
+    reset(forceNewMap = false) {
+      ensureMapIdentity(this, forceNewMap);
+      this.scenarioInfo = scenarioConfig(this.scenario);
+      this.trainingState = getRuntimeTraining(this.demoId, this.difficulty, this.scenario);
+      this.robotRadius = gridRobotRadius(this.difficulty, this.scenario) + 0.1;
+      let selected = null;
+      for (let attempt = 0; attempt < 35; attempt += 1) {
+        const map = makeDynamicMap(this.difficulty, this.scenario, this.mapSeed + attempt * 6151);
+        const obstacles = makeDynamicObstacles(this.difficulty, map.w, map.h, this.scenario);
+        const probe = gridSearch({
+          grid: map.grid,
+          w: map.w,
+          h: map.h,
+          start: map.start,
+          goal: map.goal,
+          heuristic: manhattan,
+          extraBlocked: (x, y) => isGridFootprintBlocked(
+            map.grid,
+            map.w,
+            map.h,
+            x,
+            y,
+            this.robotRadius,
+            (checkX, checkY) => isMovingObstacleCell(obstacles, checkX, checkY),
+          ),
+        });
+        if (probe.success) {
+          selected = { map, obstacles };
+          break;
+        }
+      }
+      if (!selected) {
+        const map = makeDynamicMap(this.difficulty, "baseline", this.mapSeed);
+        selected = { map, obstacles: makeDynamicObstacles(this.difficulty, map.w, map.h, this.scenario) };
+      }
+      Object.assign(this, selected.map);
       this.agent = { ...this.start };
-      this.obstacles = makeDynamicObstacles(this.difficulty, this.w, this.h);
+      this.agentTrail = [{ ...this.agent }];
+      this.obstacles = selected.obstacles;
       this.searchLayers = [];
       this.oldPaths = [];
       this.currentPath = [];
@@ -998,28 +1712,54 @@
       this.failedPlans = 0;
       this.reached = false;
       this.running = false;
+      this.traditionalRunning = false;
+      this.aiRunning = false;
+      this.traditionalDone = false;
+      this.aiDone = false;
       this.timeSec = 0;
       this.agentAcc = 0;
       this.aiProgress = 0;
-      this.aiRollout = getAiRollout("astarDynamic", this.difficulty);
-      this.agentDelay = this.difficulty === "extreme" ? 95 : this.difficulty === "hard" ? 115 : 135;
+      this.aiRollout = makeAiGridRollout(
+        this.grid,
+        this.w,
+        this.h,
+        this.start,
+        this.goal,
+        getAiRollout("astarDynamic", this.difficulty),
+        this.difficulty,
+        this.scenario,
+        "dynamic",
+        (x, y) => this.isRobotBlockedCell(x, y),
+      );
+      this.agentDelay = (this.difficulty === "extreme" ? 95 : this.difficulty === "hard" ? 115 : 135) + this.scenarioInfo.latencyMs * 0.35;
       this.replan(true);
     }
 
     run() {
+      this.reset(true);
+      this.trainingState = trainRuntimeAi(this.demoId, this.difficulty, this.scenario);
+      this.traditionalRunning = true;
+      this.aiRunning = true;
+      this.traditionalDone = false;
+      this.aiDone = false;
       this.running = true;
     }
 
     pause() {
+      this.traditionalRunning = false;
+      this.aiRunning = false;
       this.running = false;
     }
 
     step() {
-      const wasRunning = this.running;
-      this.running = true;
+      const previousTraditional = this.traditionalRunning;
+      const previousAi = this.aiRunning;
+      this.traditionalRunning = !this.traditionalDone;
+      this.aiRunning = !this.aiDone;
       this.update(180, 5);
-      this.aiProgress += 10;
-      this.running = wasRunning;
+      this.traditionalRunning = previousTraditional && !this.traditionalDone;
+      this.aiRunning = previousAi && !this.aiDone;
+      this.running = this.traditionalRunning || this.aiRunning;
     }
 
     activeDynamicRects() {
@@ -1033,6 +1773,18 @@
         y + 1 > obstacle.y &&
         y < obstacle.y + obstacle.h
       ));
+    }
+
+    isRobotBlockedCell(x, y) {
+      return isGridFootprintBlocked(
+        this.grid,
+        this.w,
+        this.h,
+        x,
+        y,
+        this.robotRadius,
+        (checkX, checkY) => this.isDynamicCell(checkX, checkY),
+      );
     }
 
     moveDynamicObstacles(dt, speed) {
@@ -1078,6 +1830,15 @@
           }
         }
 
+        if (obstacle.kind === "diagonal") {
+          const nextX = obstacle.x + obstacle.dirX * obstacle.speedX * dtSec;
+          const nextY = obstacle.y + obstacle.dirY * obstacle.speedY * dtSec;
+          if (nextX < obstacle.minX || nextX > obstacle.maxX) obstacle.dirX *= -1;
+          if (nextY < obstacle.minY || nextY > obstacle.maxY) obstacle.dirY *= -1;
+          obstacle.x = clamp(nextX, obstacle.minX, obstacle.maxX);
+          obstacle.y = clamp(nextY, obstacle.minY, obstacle.maxY);
+        }
+
         if (obstacle.kind === "gate") {
           const cycle = (this.timeSec + obstacle.phase) % obstacle.period;
           obstacle.active = cycle < obstacle.period * obstacle.duty;
@@ -1086,7 +1847,7 @@
     }
 
     maxObstacleSpeed() {
-      return this.obstacles.reduce((max, obstacle) => Math.max(max, obstacle.speed || 0), 0);
+      return movingObstacleMaxSpeed(this.obstacles);
     }
 
     replan(isInitial = false) {
@@ -1098,7 +1859,7 @@
         start: this.agent,
         goal: this.goal,
         heuristic: manhattan,
-        extraBlocked: (x, y) => this.isDynamicCell(x, y),
+        extraBlocked: (x, y) => this.isRobotBlockedCell(x, y),
       });
       this.planCalls += 1;
       if (!isInitial) this.replans += 1;
@@ -1121,14 +1882,14 @@
       const end = Math.min(this.currentPath.length, this.pathIndex + limit);
       for (let i = this.pathIndex + 1; i < end; i += 1) {
         const p = this.currentPath[i];
-        if (this.isDynamicCell(p.x, p.y)) return true;
+        if (this.isRobotBlockedCell(p.x, p.y)) return true;
       }
       return false;
     }
 
     moveAgent() {
       if (this.reached) return;
-      if (this.isDynamicCell(this.agent.x, this.agent.y)) {
+      if (this.isRobotBlockedCell(this.agent.x, this.agent.y)) {
         this.nearMisses += 1;
         this.replan(false);
         return;
@@ -1136,7 +1897,8 @@
       if (!this.currentPath.length || this.pathIndex >= this.currentPath.length - 1) {
         if (this.agent.x === this.goal.x && this.agent.y === this.goal.y) {
           this.reached = true;
-          this.running = false;
+          this.traditionalDone = true;
+          this.traditionalRunning = false;
         } else {
           this.waitEvents += 1;
           this.replan(false);
@@ -1151,16 +1913,19 @@
       }
 
       const next = this.currentPath[this.pathIndex + 1];
-      if (this.isDynamicCell(next.x, next.y)) {
+      if (this.isRobotBlockedCell(next.x, next.y)) {
         this.blockedEvents += 1;
         this.replan(false);
         return;
       }
       this.agent = { ...next };
+      this.agentTrail.push({ ...this.agent });
+      if (this.agentTrail.length > 220) this.agentTrail.shift();
       this.pathIndex += 1;
       if (this.agent.x === this.goal.x && this.agent.y === this.goal.y) {
         this.reached = true;
-        this.running = false;
+        this.traditionalDone = true;
+        this.traditionalRunning = false;
       }
     }
 
@@ -1169,16 +1934,23 @@
       this.searchLayers.forEach((layer) => {
         layer.progress = Math.min(layer.visitedOrder.length, layer.progress + dt * (0.2 + visibleSpeed * 0.08));
       });
-      if (!this.running || this.reached) return;
-      this.aiProgress += dt * (0.016 + visibleSpeed * 0.011);
+      if (!this.traditionalRunning && !this.aiRunning) return;
+      if (this.aiRunning && !this.aiDone) {
+        this.aiProgress += dt * (0.016 + visibleSpeed * 0.011);
+        if (this.aiProgress > (this.aiRollout?.path?.length || 0) + 10) {
+          this.aiDone = true;
+          this.aiRunning = false;
+        }
+      }
 
       this.moveDynamicObstacles(dt, visibleSpeed);
       this.agentAcc += dt * (visibleSpeed / 5);
 
-      while (this.agentAcc >= this.agentDelay) {
+      while (this.traditionalRunning && this.agentAcc >= this.agentDelay) {
         this.moveAgent();
         this.agentAcc -= this.agentDelay;
       }
+      this.running = this.traditionalRunning || this.aiRunning;
     }
 
     render(width, height) {
@@ -1188,7 +1960,7 @@
     }
 
     renderTraditional(box) {
-      drawBox(box, "A* 动态障碍", "橙色障碍按横向、纵向、矩形和开关门轨迹移动");
+      drawBox(box, "A* 动态障碍", "机器人带半径，橙色障碍按多种轨迹移动");
       const geom = getGridGeometry(box, this.w, this.h, 54);
       drawGridBase(this.grid, this.w, this.h, geom);
       this.drawDynamicRoutes(geom);
@@ -1199,10 +1971,11 @@
       });
       this.oldPaths.forEach((path) => drawGridPath(path, geom, COLOR.oldPath, 2, 0.42));
       drawGridPath(this.currentPath.slice(this.pathIndex), geom, COLOR.path, 3, 1);
+      drawGridPath(this.agentTrail, geom, COLOR.actual, 2.8, 0.82);
 
       this.drawDynamicObstacles(geom);
 
-      drawMarker(this.agent, geom, COLOR.start, "R");
+      drawGridRobotFootprint({ x: this.agent.x + 0.5, y: this.agent.y + 0.5 }, geom, this.robotRadius, COLOR.actual, "R");
       drawMarker(this.goal, geom, COLOR.goal, "G");
       drawMetricText(box, [
         this.reached ? "状态: 已到达终点" : "状态: 路径跟随中",
@@ -1224,6 +1997,8 @@
         this.aiProgress,
         {
           waitSteps: this.aiRollout?.waitSteps || [],
+          robotRadiusCells: this.robotRadius,
+          robotLabel: "A",
           afterBase: (geom) => {
             this.drawDynamicRoutes(geom);
             this.drawDynamicObstacles(geom);
@@ -1261,6 +2036,12 @@
           ctx.lineTo(geom.x + (first.x + obstacle.w / 2) * geom.cell, geom.y + (first.y + obstacle.h / 2) * geom.cell);
           ctx.stroke();
         }
+        if (obstacle.kind === "diagonal") {
+          ctx.beginPath();
+          ctx.moveTo(geom.x + (obstacle.minX + obstacle.w / 2) * geom.cell, geom.y + (obstacle.minY + obstacle.h / 2) * geom.cell);
+          ctx.lineTo(geom.x + (obstacle.maxX + obstacle.w / 2) * geom.cell, geom.y + (obstacle.maxY + obstacle.h / 2) * geom.cell);
+          ctx.stroke();
+        }
       });
       ctx.restore();
     }
@@ -1290,8 +2071,13 @@
       const avgVisited = this.planCalls ? this.totalVisited / this.planCalls : 0;
       return [
         ["实验强度", DIFFICULTY[this.difficulty]?.label ?? this.difficulty],
-        ["动态障碍数", this.obstacles.length],
+        ["环境模式", SCENARIO[this.scenario]?.label ?? this.scenario],
+        ["地图编号", `#${this.mapSerial}`],
+        ["移动障碍数", this.obstacles.length],
         ["最快障碍速度", `${formatNumber(this.maxObstacleSpeed(), 1)} 格/秒`],
+        ["模拟延迟", `${formatNumber(this.scenarioInfo.latencyMs, 0)}ms`],
+        ["机器人半径", `${formatNumber(this.robotRadius, 2)} 格`],
+        ["机器人位置", `${this.agent.x},${this.agent.y}`],
         ["规划调用", this.planCalls],
         ["重新规划次数", this.replans],
         ["路径失效次数", this.blockedEvents],
@@ -1303,7 +2089,19 @@
         ["AI 重规划次数", this.aiRollout?.metrics?.replans ?? 0],
         ["AI 等待动作", this.aiRollout?.metrics?.waits ?? "-"],
         ["AI 检查点", checkpointLabel(this.aiRollout)],
-        ["状态", this.reached ? "已到达" : this.running ? "运行中" : "暂停"],
+        ...trainingMetricRows(this.trainingState),
+        ["传统状态", statusLabel(this.traditionalRunning, this.traditionalDone, false)],
+        ["AI 状态", statusLabel(this.aiRunning, this.aiDone, this.aiRollout?.metrics?.success === false)],
+      ];
+    }
+
+    evaluation() {
+      const avgVisited = this.planCalls ? this.totalVisited / this.planCalls : 0;
+      const risk = clamp((this.blockedEvents + this.nearMisses + this.waitEvents) / Math.max(1, this.planCalls + 4), 0, 1);
+      return [
+        ["鲁棒性", `机器人半径 ${formatNumber(this.robotRadius, 2)} 格，速度倍率 ${formatNumber(this.scenarioInfo.speedMultiplier, 2)}，延迟 ${formatNumber(this.scenarioInfo.latencyMs, 0)}ms；传统 A* 风险率约 ${percent(risk)}。`],
+        ["泛化性", `泛化场景会改变障碍轨迹和门周期，A* 可重新搜索，但会付出平均 ${formatNumber(avgVisited, 0)} 格/次的搜索成本。`],
+        ["可解释性", "A* 的旧路径、当前路径和搜索层都可追踪；AI 侧需要解释为什么等待、减速或绕行。"],
       ];
     }
 
@@ -1320,6 +2118,7 @@
         ["静态障碍", COLOR.obstacle],
         ["动态障碍", COLOR.dynamic],
         ["障碍运动轨迹", COLOR.dynamic],
+        ["机器人面积/安全边界", COLOR.actual],
         ["A* 搜索留痕", COLOR.visited],
         ["旧路径", COLOR.oldPath],
         ["当前路径", COLOR.path],
@@ -1330,6 +2129,13 @@
 
     secondary() {
       return null;
+    }
+
+    resetTraining() {
+      this.trainingState = resetRuntimeTraining(this.demoId, this.difficulty, this.scenario);
+      this.aiProgress = 0;
+      this.aiDone = false;
+      this.aiRunning = false;
     }
   }
 
@@ -1353,7 +2159,16 @@
     return point.x >= rect.x && point.x <= rect.x + rect.w && point.y >= rect.y && point.y <= rect.y + rect.h;
   }
 
-  function segmentBlocked(a, b, rects, areaW, areaH) {
+  function pointInInflatedRect(point, rect, radius = 0) {
+    return (
+      point.x >= rect.x - radius &&
+      point.x <= rect.x + rect.w + radius &&
+      point.y >= rect.y - radius &&
+      point.y <= rect.y + rect.h + radius
+    );
+  }
+
+  function segmentBlocked(a, b, rects, areaW, areaH, radius = 0) {
     const dx = b.x - a.x;
     const dy = b.y - a.y;
     const length = Math.hypot(dx, dy);
@@ -1361,9 +2176,9 @@
     for (let i = 0; i <= steps; i += 1) {
       const t = i / steps;
       const p = { x: lerp(a.x, b.x, t), y: lerp(a.y, b.y, t) };
-      if (p.x < 0 || p.y < 0 || p.x > areaW || p.y > areaH) return true;
+      if (p.x < radius || p.y < radius || p.x > areaW - radius || p.y > areaH - radius) return true;
       for (const rect of rects) {
-        if (pointInRect(p, rect)) return true;
+        if (pointInInflatedRect(p, rect, radius)) return true;
       }
     }
     return false;
@@ -1411,74 +2226,161 @@
     ctx.restore();
   }
 
+  function drawSafetyCircle(x, y, radius, color) {
+    ctx.save();
+    ctx.globalAlpha = 0.16;
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.arc(x, y, radius, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.globalAlpha = 0.8;
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 1;
+    ctx.stroke();
+    ctx.restore();
+  }
+
   class RRTDemo {
-    constructor(difficulty = "hard") {
+    constructor(difficulty = "hard", scenario = "baseline") {
+      this.demoId = "rrt";
       this.difficulty = difficulty;
+      this.scenario = scenario;
       this.title = "RRT 窄通道";
       this.claim = "RRT 靠随机采样长树。窄门太小的时候，采样不一定打中门口，所以同一个任务每次结果都可能不同。";
       this.areaW = 1000;
       this.areaH = 560;
-      this.reset();
+      this.mapSerial = 0;
+      this.mapSeed = 0;
+      this.reset(true);
     }
 
-    reset() {
+    reset(forceNewMap = false) {
+      ensureMapIdentity(this, forceNewMap);
       const config = {
         normal: { gap: 44, maxIterations: 1600, stepSize: 20, goalRadius: 28, goalBias: 0.07 },
         hard: { gap: 30, maxIterations: 2200, stepSize: 17, goalRadius: 24, goalBias: 0.05 },
         extreme: { gap: 22, maxIterations: 3000, stepSize: 14, goalRadius: 20, goalBias: 0.035 },
       }[this.difficulty] ?? { gap: 30, maxIterations: 2200, stepSize: 17, goalRadius: 24, goalBias: 0.05 };
-      const { gap } = config;
+      this.scenarioInfo = scenarioConfig(this.scenario);
+      this.trainingState = getRuntimeTraining(this.demoId, this.difficulty, this.scenario);
+      const rng = mulberry32(scenarioSeed("rrt-map", this.difficulty, this.scenario, this.mapSeed));
+      const gapPenalty = this.scenario === "baseline" ? 0 : this.scenario === "perturbed" ? 4 : 8;
+      this.robotRadius = 7 + (this.difficulty === "extreme" ? 3 : this.difficulty === "hard" ? 2 : 0) + this.scenarioInfo.generalization * 3;
+      const gap = Math.max(this.robotRadius * 2 + 12, config.gap - gapPenalty);
       const mid = this.areaH / 2;
       this.gap = gap;
+      const jitter = this.scenario === "baseline" ? 10 : this.scenario === "perturbed" ? 20 : 32;
+      const j = () => (rng() * 2 - 1) * jitter;
       this.rects = [
         { x: 482, y: 0, w: 46, h: mid - gap / 2 },
         { x: 482, y: mid + gap / 2, w: 46, h: mid - gap / 2 },
-        { x: 675, y: 72, w: 86, h: 170 },
-        { x: 690, y: 320, w: 90, h: 150 },
+        { x: 675 + j(), y: 72 + j() * 0.3, w: 86, h: 170 },
+        { x: 690 + j(), y: 320 + j() * 0.3, w: 90, h: 150 },
+        {
+          kind: "patrol",
+          mobile: true,
+          x: 360 + j(),
+          y: 86,
+          w: 62,
+          h: 46,
+          axis: "y",
+          min: 72,
+          max: 210,
+          dir: rng() > 0.5 ? 1 : -1,
+          speed: 28 * (DIFFICULTY[this.difficulty]?.multiplier ?? 1.2) * this.scenarioInfo.speedMultiplier,
+        },
       ];
       if (this.difficulty !== "normal") {
         this.rects.push(
-          { x: 250, y: 70, w: 78, h: 156 },
-          { x: 245, y: 338, w: 95, h: 120 },
-          { x: 572, y: 214, w: 80, h: 40 },
+          { x: 250 + j(), y: 70 + j() * 0.2, w: 78, h: 156 },
+          { x: 245 + j(), y: 338 + j() * 0.2, w: 95, h: 120 },
+          {
+            kind: "patrol",
+            mobile: true,
+            x: 572,
+            y: 214,
+            w: 80,
+            h: 40,
+            axis: "x",
+            min: 552,
+            max: 650,
+            dir: rng() > 0.5 ? 1 : -1,
+            speed: 22 * (DIFFICULTY[this.difficulty]?.multiplier ?? 1.2) * this.scenarioInfo.speedMultiplier,
+          },
         );
       }
       if (this.difficulty === "extreme") {
         this.rects.push(
-          { x: 360, y: 248, w: 74, h: 28 },
+          { x: 360 + j() * 0.4, y: 248, w: 74, h: 28 },
           { x: 808, y: 188, w: 64, h: 160 },
+        );
+      }
+      if (this.scenario !== "baseline") {
+        const shift = this.scenarioInfo.obstacleShift * 8;
+        this.rects.push(
+          { x: 394 + shift * 0.3, y: 120, w: 42, h: 90 },
+          { x: 562, y: 346 - shift * 0.2, w: 70, h: 64 },
+        );
+      }
+      if (this.scenario === "generalization") {
+        this.rects.push(
+          { x: 148, y: 220, w: 74, h: 118 },
+          { x: 820, y: 78, w: 54, h: 120 },
         );
       }
       this.start = { x: 75, y: 280 };
       this.goal = { x: 930, y: 280 };
       this.nodes = [{ ...this.start, parent: -1 }];
+      this.movingObstacles = this.rects.filter((rect) => rect.mobile);
+      this.timeSec = 0;
       this.iterations = 0;
-      this.maxIterations = config.maxIterations;
+      this.maxIterations = Math.max(600, Math.floor(config.maxIterations * (this.scenario === "baseline" ? 1 : 0.85)));
       this.stepSize = config.stepSize;
       this.goalRadius = config.goalRadius;
-      this.goalBias = config.goalBias;
+      this.goalBias = Math.max(0.02, config.goalBias - this.scenarioInfo.generalization * 0.012);
       this.finalPath = [];
       this.success = false;
       this.failed = false;
       this.running = false;
-      this.rng = mulberry32((Date.now() & 0xffffffff) || 1);
+      this.traditionalRunning = false;
+      this.aiRunning = false;
+      this.traditionalDone = false;
+      this.aiDone = false;
+      this.rng = mulberry32(scenarioSeed("rrt-sampling", this.difficulty, this.scenario, this.mapSeed));
       this.lastTrialSummary = "还没跑";
       this.aiProgress = 0;
       this.aiRollout = getAiRollout("rrtNarrow", this.difficulty);
     }
 
     run() {
-      if (this.success || this.failed) this.reset();
+      this.reset(true);
+      this.trainingState = trainRuntimeAi(this.demoId, this.difficulty, this.scenario);
+      this.traditionalRunning = true;
+      this.aiRunning = true;
+      this.traditionalDone = false;
+      this.aiDone = false;
       this.running = true;
     }
 
     pause() {
+      this.traditionalRunning = false;
+      this.aiRunning = false;
       this.running = false;
     }
 
     step() {
-      for (let i = 0; i < 8; i += 1) this.extendTree();
-      this.aiProgress += 3;
+      this.timeSec = advanceMovingObstacles(this.movingObstacles, 180, 5, this.timeSec);
+      if (!this.traditionalDone) {
+        for (let i = 0; i < 8; i += 1) this.extendTree();
+      }
+      if (!this.aiDone) {
+        this.aiProgress += 3;
+        if (this.aiProgress > (this.aiRollout?.path?.length || 0) + 6) {
+          this.aiDone = true;
+          this.aiRunning = false;
+        }
+      }
+      this.running = this.traditionalRunning || this.aiRunning;
     }
 
     samplePoint() {
@@ -1511,18 +2413,20 @@
         y: nearest.y + Math.sin(angle) * this.stepSize,
         parent: nearestIndex,
       };
-      if (!segmentBlocked(nearest, next, this.rects, this.areaW, this.areaH)) {
+      if (!segmentBlocked(nearest, next, this.rects, this.areaW, this.areaH, this.robotRadius)) {
         this.nodes.push(next);
-        if (Math.hypot(next.x - this.goal.x, next.y - this.goal.y) <= this.goalRadius && !segmentBlocked(next, this.goal, this.rects, this.areaW, this.areaH)) {
+        if (Math.hypot(next.x - this.goal.x, next.y - this.goal.y) <= this.goalRadius && !segmentBlocked(next, this.goal, this.rects, this.areaW, this.areaH, this.robotRadius)) {
           this.nodes.push({ ...this.goal, parent: this.nodes.length - 1 });
           this.success = true;
-          this.running = false;
+          this.traditionalDone = true;
+          this.traditionalRunning = false;
           this.finalPath = this.tracePath(this.nodes.length - 1);
         }
       }
       if (this.iterations >= this.maxIterations && !this.success) {
         this.failed = true;
-        this.running = false;
+        this.traditionalDone = true;
+        this.traditionalRunning = false;
       }
     }
 
@@ -1538,10 +2442,20 @@
     }
 
     update(dt, speed) {
-      if (!this.running) return;
-      const iterationsThisFrame = Math.max(1, Math.floor(speed * 2 + dt * 0.025 * speed));
-      for (let i = 0; i < iterationsThisFrame; i += 1) this.extendTree();
-      this.aiProgress += dt * (0.02 + speed * 0.018);
+      if (!this.traditionalRunning && !this.aiRunning) return;
+      this.timeSec = advanceMovingObstacles(this.movingObstacles, dt, speed, this.timeSec);
+      if (this.traditionalRunning && !this.traditionalDone) {
+        const iterationsThisFrame = Math.max(1, Math.floor(speed * 2 + dt * 0.025 * speed));
+        for (let i = 0; i < iterationsThisFrame; i += 1) this.extendTree();
+      }
+      if (this.aiRunning && !this.aiDone) {
+        this.aiProgress += dt * (0.02 + speed * 0.018);
+        if (this.aiProgress > (this.aiRollout?.path?.length || 0) + 6) {
+          this.aiDone = true;
+          this.aiRunning = false;
+        }
+      }
+      this.running = this.traditionalRunning || this.aiRunning;
     }
 
     simulateTrial(seed) {
@@ -1565,9 +2479,9 @@
           y: nearest.y + Math.sin(angle) * this.stepSize,
           parent: bestIndex,
         };
-        if (segmentBlocked(nearest, next, this.rects, this.areaW, this.areaH)) continue;
+        if (segmentBlocked(nearest, next, this.rects, this.areaW, this.areaH, this.robotRadius)) continue;
         nodes.push(next);
-        if (Math.hypot(next.x - this.goal.x, next.y - this.goal.y) <= this.goalRadius && !segmentBlocked(next, this.goal, this.rects, this.areaW, this.areaH)) {
+        if (Math.hypot(next.x - this.goal.x, next.y - this.goal.y) <= this.goalRadius && !segmentBlocked(next, this.goal, this.rects, this.areaW, this.areaH, this.robotRadius)) {
           nodes.push({ ...this.goal, parent: nodes.length - 1 });
           let path = [];
           let current = nodes.length - 1;
@@ -1613,8 +2527,9 @@
       ctx.strokeStyle = "#566276";
       ctx.strokeRect(fit.x, fit.y, fit.w, fit.h);
 
-      ctx.fillStyle = COLOR.obstacle;
+      this.drawMovingRectRoutes(sx, sy);
       this.rects.forEach((rect) => {
+        ctx.fillStyle = rect.mobile ? COLOR.dynamic : COLOR.obstacle;
         ctx.fillRect(sx(rect.x), sy(rect.y), rect.w * fit.scale, rect.h * fit.scale);
       });
 
@@ -1644,11 +2559,13 @@
         ctx.stroke();
       }
 
+      const currentNode = this.nodes[this.nodes.length - 1] || this.start;
+      drawSafetyCircle(sx(currentNode.x), sy(currentNode.y), this.robotRadius * fit.scale, COLOR.visited);
       drawCircle(sx(this.start.x), sy(this.start.y), 9, COLOR.start, "S");
       drawCircle(sx(this.goal.x), sy(this.goal.y), 11, COLOR.goal, "G");
       drawMetricText(box, [
         this.success ? "状态: 成功穿过窄门" : this.failed ? "状态: 本轮失败" : "状态: 随机采样中",
-        `迭代 ${this.iterations}/${this.maxIterations} | 节点 ${this.nodes.length} | ${this.lastTrialSummary}`,
+        `迭代 ${this.iterations}/${this.maxIterations} | 半径 ${formatNumber(this.robotRadius, 1)}px | ${this.lastTrialSummary}`,
       ]);
     }
 
@@ -1665,14 +2582,18 @@
       ctx.strokeStyle = "#566276";
       ctx.strokeRect(fit.x, fit.y, fit.w, fit.h);
 
-      ctx.fillStyle = COLOR.obstacle;
+      this.drawMovingRectRoutes(sx, sy);
       this.rects.forEach((rect) => {
+        ctx.fillStyle = rect.mobile ? COLOR.dynamic : COLOR.obstacle;
         ctx.fillRect(sx(rect.x), sy(rect.y), rect.w * fit.scale, rect.h * fit.scale);
       });
 
       const sampleProgress = this.aiProgress * 3;
       drawContinuousSamples(rollout?.samples, sx, sy, COLOR.actual, sampleProgress, 2.2, 0.55);
       drawContinuousPath(rollout?.path, sx, sy, COLOR.actual, 4, this.aiProgress, 1);
+      const aiPath = rollout?.path || [];
+      const aiPoint = aiPath[clamp(Math.floor(this.aiProgress) - 1, 0, Math.max(0, aiPath.length - 1))];
+      if (aiPoint) drawSafetyCircle(sx(aiPoint.x), sy(aiPoint.y), this.robotRadius * fit.scale, COLOR.actual);
       drawCircle(sx(this.start.x), sy(this.start.y), 9, COLOR.start, "S");
       drawCircle(sx(this.goal.x), sy(this.goal.y), 11, COLOR.goal, "G");
       const gate = rollout?.gate;
@@ -1686,11 +2607,37 @@
       ]);
     }
 
+    drawMovingRectRoutes(sx, sy) {
+      if (!this.movingObstacles.length) return;
+      ctx.save();
+      ctx.strokeStyle = "rgba(247, 152, 36, 0.38)";
+      ctx.lineWidth = 2;
+      ctx.setLineDash([7, 6]);
+      this.movingObstacles.forEach((obstacle) => {
+        const cx = obstacle.x + obstacle.w / 2;
+        const cy = obstacle.y + obstacle.h / 2;
+        const xA = obstacle.axis === "x" ? obstacle.min + obstacle.w / 2 : cx;
+        const xB = obstacle.axis === "x" ? obstacle.max + obstacle.w / 2 : cx;
+        const yA = obstacle.axis === "y" ? obstacle.min + obstacle.h / 2 : cy;
+        const yB = obstacle.axis === "y" ? obstacle.max + obstacle.h / 2 : cy;
+        ctx.beginPath();
+        ctx.moveTo(sx(xA), sy(yA));
+        ctx.lineTo(sx(xB), sy(yB));
+        ctx.stroke();
+      });
+      ctx.restore();
+    }
+
     metrics() {
       const pathLength = this.finalPath.length ? pathLengthContinuous(this.finalPath) : 0;
       return [
         ["实验强度", DIFFICULTY[this.difficulty]?.label ?? this.difficulty],
+        ["环境模式", SCENARIO[this.scenario]?.label ?? this.scenario],
+        ["地图编号", `#${this.mapSerial}`],
+        ["移动障碍数", this.movingObstacles.length],
+        ["最快障碍速度", `${formatNumber(movingObstacleMaxSpeed(this.movingObstacles), 1)} px/秒`],
         ["窄门宽度", `${this.gap} px`],
+        ["机器人安全半径", `${formatNumber(this.robotRadius, 1)} px`],
         ["当前状态", this.success ? "成功" : this.failed ? "失败" : this.running ? "运行中" : "暂停"],
         ["迭代次数", `${this.iterations}/${this.maxIterations}`],
         ["树节点数", this.nodes.length],
@@ -1698,6 +2645,19 @@
         ["20 次快速试验", this.lastTrialSummary],
         ["AI 引导样本", this.aiRollout?.metrics?.guided_samples ?? "-"],
         ["AI 检查点", checkpointLabel(this.aiRollout)],
+        ...trainingMetricRows(this.trainingState),
+        ["传统状态", statusLabel(this.traditionalRunning, this.traditionalDone, this.failed)],
+        ["AI 状态", statusLabel(this.aiRunning, this.aiDone, false)],
+      ];
+    }
+
+    evaluation() {
+      const clearance = Math.max(0, this.gap / 2 - this.robotRadius);
+      const successText = this.lastTrialSummary.includes("/20") ? this.lastTrialSummary : "点击快速跑 20 次后可看成功率";
+      return [
+        ["鲁棒性", `移动障碍 ${this.movingObstacles.length} 个，非点机器人安全余量约 ${formatNumber(clearance, 1)}px；余量越小，RRT 越容易试很多次仍过不去。`],
+        ["泛化性", `${SCENARIO[this.scenario].summary}；当前 20 次统计：${successText}。`],
+        ["可解释性", "蓝色树枝说明 RRT 试过哪些空间；AI 侧用青色采样点显示它把注意力放在窄门附近。"],
       ];
     }
 
@@ -1712,7 +2672,9 @@
     legend() {
       return [
         ["障碍物", COLOR.obstacle],
+        ["移动障碍轨迹", COLOR.dynamic],
         ["RRT 搜索树", COLOR.visited],
+        ["车体/安全边界", COLOR.visited],
         ["找到的路径", COLOR.path],
         ["AI 引导采样", COLOR.actual],
         ["起点/终点", COLOR.start],
@@ -1724,6 +2686,13 @@
         label: "快速跑 20 次",
         action: () => this.runTrials(),
       };
+    }
+
+    resetTraining() {
+      this.trainingState = resetRuntimeTraining(this.demoId, this.difficulty, this.scenario);
+      this.aiProgress = 0;
+      this.aiDone = false;
+      this.aiRunning = false;
     }
   }
 
@@ -1756,77 +2725,160 @@
   }
 
   class CarTrackingDemo {
-    constructor(difficulty = "hard") {
+    constructor(difficulty = "hard", scenario = "baseline") {
+      this.demoId = "car";
       this.difficulty = difficulty;
+      this.scenario = scenario;
       this.title = "网格路径 vs 小车";
       this.claim = "A* 给的是格子路线，不知道小车有转弯半径。直角路线看起来最短，真实小车可能跟不上。";
-      this.reset();
+      this.mapSerial = 0;
+      this.mapSeed = 0;
+      this.reset(true);
     }
 
-    reset() {
-      const map = makeCarMap(this.difficulty);
-      Object.assign(this, map);
-      this.searchResult = gridSearch({
-        grid: this.grid,
-        w: this.w,
-        h: this.h,
-        start: this.start,
-        goal: this.goal,
-        heuristic: manhattan,
-      });
+    reset(forceNewMap = false) {
+      ensureMapIdentity(this, forceNewMap);
+      this.scenarioInfo = scenarioConfig(this.scenario);
+      this.trainingState = getRuntimeTraining(this.demoId, this.difficulty, this.scenario);
+      let selected = null;
+      for (let attempt = 0; attempt < 35; attempt += 1) {
+        const map = makeCarMap(this.difficulty, this.scenario, this.mapSeed + attempt * 4271);
+        const searchResult = gridSearch({
+          grid: map.grid,
+          w: map.w,
+          h: map.h,
+          start: map.start,
+          goal: map.goal,
+          heuristic: manhattan,
+        });
+        if (searchResult.success) {
+          selected = { map, searchResult };
+          break;
+        }
+      }
+      if (!selected) {
+        const map = makeCarMap(this.difficulty, "baseline", this.mapSeed);
+        selected = {
+          map,
+          searchResult: gridSearch({ grid: map.grid, w: map.w, h: map.h, start: map.start, goal: map.goal, heuristic: manhattan }),
+        };
+      }
+      Object.assign(this, selected.map);
+      this.searchResult = selected.searchResult;
       this.path = this.searchResult.path;
       this.centers = this.path.map(cellCenter);
-      this.pose = { x: this.start.x + 0.5, y: this.start.y + 0.5, theta: 0 };
+      this.movingObstacles = makePathMovingObstacles("car", this.path, this.difficulty, this.scenario, this.mapSeed, { count: this.difficulty === "normal" ? 2 : 3 });
+      const startAngle = this.scenario === "baseline" ? 0 : this.scenario === "perturbed" ? 0.18 : -0.28;
+      this.pose = { x: this.start.x + 0.5, y: this.start.y + 0.5, theta: startAngle };
       this.waypoint = 1;
       this.trail = [{ x: this.pose.x, y: this.pose.y }];
       this.running = false;
+      this.traditionalRunning = false;
+      this.aiRunning = false;
+      this.traditionalDone = false;
+      this.aiDone = false;
       this.reached = false;
       this.collided = false;
       this.collisionPoint = null;
       this.maxError = 0;
       this.sharpTurns = countTurns(this.path);
-      this.carRadius = this.difficulty === "extreme" ? 0.55 : 0.48;
-      this.carSpeed = this.difficulty === "normal" ? 0.17 : this.difficulty === "hard" ? 0.2 : 0.23;
-      this.maxTurn = this.difficulty === "normal" ? 0.03 : this.difficulty === "hard" ? 0.023 : 0.018;
+      const bodyScale = this.scenarioInfo.carScale;
+      this.carLength = (this.difficulty === "extreme" ? 2.45 : this.difficulty === "hard" ? 2.25 : 2.05) * bodyScale;
+      this.carWidth = (this.difficulty === "extreme" ? 1.22 : this.difficulty === "hard" ? 1.1 : 1.0) * bodyScale;
+      this.safetyMargin = this.scenario === "baseline" ? 0.18 : this.scenario === "perturbed" ? 0.25 : 0.32;
+      this.carSpeed = (this.difficulty === "normal" ? 0.19 : this.difficulty === "hard" ? 0.22 : 0.25) * (1 + this.scenarioInfo.generalization * 0.08);
+      this.maxTurn = (this.difficulty === "normal" ? 0.022 : this.difficulty === "hard" ? 0.016 : 0.011) / (1 + this.scenarioInfo.generalization * 0.35);
+      this.minTurnRadius = this.carSpeed / Math.max(0.001, this.maxTurn);
+      this.timeSec = 0;
       this.aiProgress = 0;
-      this.aiRollout = getAiRollout("carControl", this.difficulty);
+      this.aiRollout = makeAiCarRollout(
+        this.grid,
+        this.w,
+        this.h,
+        this.start,
+        this.goal,
+        getAiRollout("carControl", this.difficulty),
+        this.difficulty,
+        this.scenario,
+      );
     }
 
     run() {
-      if (this.reached || this.collided) this.reset();
+      this.reset(true);
+      this.trainingState = trainRuntimeAi(this.demoId, this.difficulty, this.scenario);
+      this.traditionalRunning = true;
+      this.aiRunning = true;
+      this.traditionalDone = false;
+      this.aiDone = false;
       this.running = true;
     }
 
     pause() {
+      this.traditionalRunning = false;
+      this.aiRunning = false;
       this.running = false;
     }
 
     step() {
-      const wasRunning = this.running;
-      this.running = true;
-      for (let i = 0; i < 8; i += 1) this.advance();
-      this.aiProgress += 12;
-      this.running = wasRunning;
+      this.timeSec = advanceMovingObstacles(this.movingObstacles, 180, 5, this.timeSec);
+      if (!this.traditionalDone) {
+        const wasRunning = this.traditionalRunning;
+        this.traditionalRunning = true;
+        for (let i = 0; i < 8; i += 1) this.advance();
+        this.traditionalRunning = wasRunning && !this.traditionalDone;
+      }
+      if (!this.aiDone) {
+        this.aiProgress += 12;
+        if (this.aiProgress > (this.aiRollout?.trail?.length || 0) + 8) {
+          this.aiDone = true;
+          this.aiRunning = false;
+        }
+      }
+      this.running = this.traditionalRunning || this.aiRunning;
     }
 
-    collidesAt(x, y) {
-      const samples = [{ x, y }];
-      for (let i = 0; i < 12; i += 1) {
-        const angle = (Math.PI * 2 * i) / 12;
-        samples.push({
-          x: x + Math.cos(angle) * this.carRadius,
-          y: y + Math.sin(angle) * this.carRadius,
-        });
+    footprintSamples(x, y, theta, includeSafety = true) {
+      const length = this.carLength + (includeSafety ? this.safetyMargin * 2 : 0);
+      const width = this.carWidth + (includeSafety ? this.safetyMargin * 2 : 0);
+      const samples = [];
+      const cos = Math.cos(theta);
+      const sin = Math.sin(theta);
+      for (let ix = -2; ix <= 2; ix += 1) {
+        for (let iy = -2; iy <= 2; iy += 1) {
+          const lx = (ix / 2) * (length / 2);
+          const ly = (iy / 2) * (width / 2);
+          samples.push({
+            x: x + lx * cos - ly * sin,
+            y: y + lx * sin + ly * cos,
+          });
+        }
       }
+      return samples;
+    }
+
+    collidesAt(x, y, theta = this.pose.theta) {
+      const samples = this.footprintSamples(x, y, theta, true);
       return samples.some((sample) => {
         const cx = Math.floor(sample.x);
         const cy = Math.floor(sample.y);
-        return isGridBlocked(this.grid, this.w, this.h, cx, cy);
+        return isGridBlocked(this.grid, this.w, this.h, cx, cy) || isMovingObstacleCell(this.movingObstacles, cx, cy);
       });
     }
 
+    sweptCollides(fromPose, toPose) {
+      const steps = 5;
+      for (let i = 1; i <= steps; i += 1) {
+        const t = i / steps;
+        const x = lerp(fromPose.x, toPose.x, t);
+        const y = lerp(fromPose.y, toPose.y, t);
+        const theta = lerp(fromPose.theta, toPose.theta, t);
+        if (this.collidesAt(x, y, theta)) return { x, y, theta };
+      }
+      return null;
+    }
+
     advance() {
-      if (!this.running || this.reached || this.collided || this.centers.length < 2) return;
+      if (!this.traditionalRunning || this.reached || this.collided || this.centers.length < 2) return;
       if (this.waypoint >= this.centers.length) {
         this.reached = true;
         this.running = false;
@@ -1842,33 +2894,46 @@
       }
       const desired = Math.atan2(dy, dx);
       const delta = normalizeAngle(desired - this.pose.theta);
-      this.pose.theta += clamp(delta, -this.maxTurn, this.maxTurn);
-      const nextX = this.pose.x + Math.cos(this.pose.theta) * this.carSpeed;
-      const nextY = this.pose.y + Math.sin(this.pose.theta) * this.carSpeed;
-      this.pose.x = nextX;
-      this.pose.y = nextY;
+      const nextTheta = this.pose.theta + clamp(delta, -this.maxTurn, this.maxTurn);
+      const nextX = this.pose.x + Math.cos(nextTheta) * this.carSpeed;
+      const nextY = this.pose.y + Math.sin(nextTheta) * this.carSpeed;
+      const nextPose = { x: nextX, y: nextY, theta: nextTheta };
+      const collision = this.sweptCollides(this.pose, nextPose);
+      this.pose = nextPose;
       this.trail.push({ x: nextX, y: nextY });
       if (this.trail.length > 1600) this.trail.shift();
       this.maxError = Math.max(this.maxError, distanceToCenters(this.pose, this.centers));
 
-      if (this.collidesAt(nextX, nextY)) {
+      if (collision) {
         this.collided = true;
-        this.running = false;
-        this.collisionPoint = { x: nextX, y: nextY };
+        this.traditionalDone = true;
+        this.traditionalRunning = false;
+        this.collisionPoint = { x: collision.x, y: collision.y };
         return;
       }
       const goalCenter = cellCenter(this.goal);
       if (Math.hypot(nextX - goalCenter.x, nextY - goalCenter.y) < 0.72) {
         this.reached = true;
-        this.running = false;
+        this.traditionalDone = true;
+        this.traditionalRunning = false;
       }
     }
 
     update(dt, speed) {
-      if (!this.running) return;
-      const steps = Math.max(1, Math.floor(speed * 1.4 + dt * 0.018 * speed));
-      for (let i = 0; i < steps; i += 1) this.advance();
-      this.aiProgress += dt * (0.035 + speed * 0.016);
+      if (!this.traditionalRunning && !this.aiRunning) return;
+      this.timeSec = advanceMovingObstacles(this.movingObstacles, dt, speed, this.timeSec);
+      if (this.traditionalRunning && !this.traditionalDone) {
+        const steps = Math.max(1, Math.floor(speed * 1.4 + dt * 0.018 * speed));
+        for (let i = 0; i < steps; i += 1) this.advance();
+      }
+      if (this.aiRunning && !this.aiDone) {
+        this.aiProgress += dt * (0.035 + speed * 0.016);
+        if (this.aiProgress > (this.aiRollout?.trail?.length || 0) + 8) {
+          this.aiDone = true;
+          this.aiRunning = false;
+        }
+      }
+      this.running = this.traditionalRunning || this.aiRunning;
     }
 
     render(width, height) {
@@ -1881,16 +2946,18 @@
       drawBox(box, "网格路径 vs 小车", "黄色是网格路径，青色是带转弯限制的小车轨迹");
       const geom = getGridGeometry(box, this.w, this.h, 54);
       drawGridBase(this.grid, this.w, this.h, geom);
+      drawGridMovingRoutes(this.movingObstacles, geom);
       drawVisited(this.searchResult.visitedOrder, geom, COLOR.visited, this.searchResult.visitedOrder.length, 0.12);
       drawGridPath(this.path, geom, COLOR.path, 3, 1);
       this.drawTrail(geom);
+      drawGridMovingObstacles(this.movingObstacles, geom);
       this.drawCar(geom);
       if (this.collisionPoint) this.drawCollision(geom);
       drawMarker(this.start, geom, COLOR.start, "S");
       drawMarker(this.goal, geom, COLOR.goal, "G");
       drawMetricText(box, [
         this.collided ? "状态: 小车在直角处撞墙" : this.reached ? "状态: 已到达" : "状态: 正在跟踪 A* 路径",
-        `A* 转弯 ${this.sharpTurns} 次 | 最大偏离 ${formatNumber(this.maxError, 2)} 格 | 搜索格子 ${this.searchResult.visitedOrder.length}`,
+        `A* 转弯 ${this.sharpTurns} 次 | 最小转弯半径 ${formatNumber(this.minTurnRadius, 1)} 格 | 偏离 ${formatNumber(this.maxError, 2)} 格`,
       ]);
     }
 
@@ -1900,9 +2967,11 @@
       drawTrainingCurve(box, rollout);
       const geom = getGridGeometry(box, this.w, this.h, 54);
       drawGridBase(this.grid, this.w, this.h, geom);
+      drawGridMovingRoutes(this.movingObstacles, geom);
       drawVisited(rollout?.visited || [], geom, COLOR.actual, this.aiProgress * 2, 0.1);
       drawGridPath(rollout?.path || [], geom, COLOR.path, 2.2, 0.38);
       this.drawAiTrail(geom, rollout, this.aiProgress);
+      drawGridMovingObstacles(this.movingObstacles, geom);
       this.drawAiCar(geom, rollout, this.aiProgress);
       drawMarker(this.start, geom, COLOR.start, "S");
       drawMarker(this.goal, geom, COLOR.goal, "G");
@@ -1954,39 +3023,43 @@
       const point = trail[indexValue];
       const prev = trail[Math.max(0, indexValue - 2)] || point;
       const theta = Math.atan2(point.y - prev.y, point.x - prev.x);
-      const cx = geom.x + point.x * geom.cell;
-      const cy = geom.y + point.y * geom.cell;
-      const size = Math.max(8, geom.cell * 0.9);
+      this.drawVehicleBody(geom, { x: point.x, y: point.y, theta }, COLOR.actual, false);
+    }
+
+    drawVehicleBody(geom, pose, color, collided = false) {
+      const cx = geom.x + pose.x * geom.cell;
+      const cy = geom.y + pose.y * geom.cell;
+      const bodyW = this.carLength * geom.cell;
+      const bodyH = this.carWidth * geom.cell;
+      const safeW = (this.carLength + this.safetyMargin * 2) * geom.cell;
+      const safeH = (this.carWidth + this.safetyMargin * 2) * geom.cell;
       ctx.save();
       ctx.translate(cx, cy);
-      ctx.rotate(theta);
-      ctx.fillStyle = COLOR.actual;
-      ctx.beginPath();
-      ctx.moveTo(size * 0.75, 0);
-      ctx.lineTo(-size * 0.55, -size * 0.42);
-      ctx.lineTo(-size * 0.35, 0);
-      ctx.lineTo(-size * 0.55, size * 0.42);
-      ctx.closePath();
+      ctx.rotate(pose.theta);
+
+      ctx.globalAlpha = 0.14;
+      ctx.fillStyle = color;
+      roundedRectPath(-safeW / 2, -safeH / 2, safeW, safeH, Math.min(6, safeH / 3));
       ctx.fill();
+
+      ctx.globalAlpha = 0.9;
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 1.4;
+      roundedRectPath(-safeW / 2, -safeH / 2, safeW, safeH, Math.min(6, safeH / 3));
+      ctx.stroke();
+
+      ctx.globalAlpha = 1;
+      ctx.fillStyle = collided ? COLOR.failure : color;
+      roundedRectPath(-bodyW / 2, -bodyH / 2, bodyW, bodyH, Math.min(4, bodyH / 3));
+      ctx.fill();
+      ctx.fillStyle = "#091016";
+      ctx.globalAlpha = 0.7;
+      ctx.fillRect(bodyW * 0.1, -bodyH * 0.28, bodyW * 0.24, bodyH * 0.56);
       ctx.restore();
     }
 
     drawCar(geom) {
-      const cx = geom.x + this.pose.x * geom.cell;
-      const cy = geom.y + this.pose.y * geom.cell;
-      const size = Math.max(8, geom.cell * 0.9);
-      ctx.save();
-      ctx.translate(cx, cy);
-      ctx.rotate(this.pose.theta);
-      ctx.fillStyle = this.collided ? COLOR.failure : COLOR.actual;
-      ctx.beginPath();
-      ctx.moveTo(size * 0.75, 0);
-      ctx.lineTo(-size * 0.55, -size * 0.42);
-      ctx.lineTo(-size * 0.35, 0);
-      ctx.lineTo(-size * 0.55, size * 0.42);
-      ctx.closePath();
-      ctx.fill();
-      ctx.restore();
+      this.drawVehicleBody(geom, this.pose, COLOR.actual, this.collided);
     }
 
     drawCollision(geom) {
@@ -2005,14 +3078,35 @@
     metrics() {
       return [
         ["实验强度", DIFFICULTY[this.difficulty]?.label ?? this.difficulty],
+        ["环境模式", SCENARIO[this.scenario]?.label ?? this.scenario],
+        ["地图编号", `#${this.mapSerial}`],
+        ["移动障碍数", this.movingObstacles.length],
+        ["最快障碍速度", `${formatNumber(movingObstacleMaxSpeed(this.movingObstacles), 1)} 格/秒`],
         ["走廊宽度", `${this.corridorWidth} 格`],
+        ["车体尺寸", `${formatNumber(this.carLength, 2)} x ${formatNumber(this.carWidth, 2)} 格`],
+        ["安全边界", `${formatNumber(this.safetyMargin, 2)} 格`],
+        ["最小转弯半径", `${formatNumber(this.minTurnRadius, 1)} 格`],
+        ["走廊变化", `偏移 ${this.scenarioStats?.corridorShift ?? 0} / 变窄 ${this.scenarioStats?.corridorWidthChange ?? 0} 格`],
         ["A* 搜索格子", this.searchResult.visitedOrder.length],
         ["A* 路径长度", this.searchResult.pathLength],
         ["直角转弯次数", this.sharpTurns],
         ["最大跟踪偏离", `${formatNumber(this.maxError, 2)} 格`],
+        ["AI 控制进度", `${Math.min(Math.floor(this.aiProgress), this.aiRollout?.trail?.length || 0)}/${this.aiRollout?.trail?.length || 0}`],
         ["AI 碰撞次数", this.aiRollout?.metrics?.collisions ?? "-"],
         ["AI 检查点", checkpointLabel(this.aiRollout)],
-        ["小车状态", this.collided ? "撞墙" : this.reached ? "到达" : this.running ? "运行中" : "暂停"],
+        ...trainingMetricRows(this.trainingState),
+        ["传统状态", statusLabel(this.traditionalRunning, this.traditionalDone, this.collided)],
+        ["AI 状态", statusLabel(this.aiRunning, this.aiDone, false)],
+      ];
+    }
+
+    evaluation() {
+      const clearance = Math.max(0, this.corridorWidth - this.carWidth - this.safetyMargin * 2);
+      const aiMetrics = this.aiRollout?.metrics || {};
+      return [
+        ["鲁棒性", `移动障碍 ${this.movingObstacles.length} 个；小车宽 ${formatNumber(this.carWidth, 2)} 格，安全边界 ${formatNumber(this.safetyMargin, 2)} 格，剩余横向余量约 ${formatNumber(clearance, 2)} 格。`],
+        ["泛化性", `${SCENARIO[this.scenario].summary}；走廊偏移/变窄后，传统网格路径仍只保证“点”可走，不保证车身能过。`],
+        ["可解释性", `黄色是离散路径，青色矩形是实际车体；最小转弯半径 ${formatNumber(this.minTurnRadius, 1)} 格，AI 侧 gap=${formatNumber(aiMetrics.generalization_gap ?? 0, 2)}。`],
       ];
     }
 
@@ -2027,9 +3121,11 @@
     legend() {
       return [
         ["墙体", COLOR.obstacle],
+        ["移动障碍", COLOR.dynamic],
         ["A* 搜索留痕", COLOR.visited],
         ["A* 网格路径", COLOR.path],
         ["小车真实轨迹", COLOR.actual],
+        ["车体/安全边界", COLOR.actual],
         ["AI 控制轨迹", COLOR.actual],
         ["碰撞点", COLOR.failure],
       ];
@@ -2038,13 +3134,20 @@
     secondary() {
       return null;
     }
+
+    resetTraining() {
+      this.trainingState = resetRuntimeTraining(this.demoId, this.difficulty, this.scenario);
+      this.aiProgress = 0;
+      this.aiDone = false;
+      this.aiRunning = false;
+    }
   }
 
   const factories = {
-    search: () => new SearchComparisonDemo(state.difficulty),
-    dynamic: () => new DynamicAStarDemo(state.difficulty),
-    rrt: () => new RRTDemo(state.difficulty),
-    car: () => new CarTrackingDemo(state.difficulty),
+    search: () => new SearchComparisonDemo(state.difficulty, state.scenario),
+    dynamic: () => new DynamicAStarDemo(state.difficulty, state.scenario),
+    rrt: () => new RRTDemo(state.difficulty, state.scenario),
+    car: () => new CarTrackingDemo(state.difficulty, state.scenario),
   };
 
   function setActiveDemo(id) {
@@ -2064,6 +3167,7 @@
     demoClaim.textContent = demo.claim;
     renderMetrics(demo.metrics());
     renderDrawbacks(demo.drawbacks ? demo.drawbacks() : []);
+    renderEvaluation(demo.evaluation ? demo.evaluation() : []);
     renderLegend(demo.legend());
     const secondary = demo.secondary();
     if (secondary) {
@@ -2100,6 +3204,20 @@
       const item = document.createElement("li");
       item.textContent = text;
       drawbacksEl.append(item);
+    });
+  }
+
+  function renderEvaluation(rows) {
+    evaluationEl.replaceChildren();
+    rows.forEach(([label, text]) => {
+      const row = document.createElement("div");
+      row.className = "evaluation-row";
+      const labelEl = document.createElement("strong");
+      labelEl.textContent = label;
+      const textEl = document.createElement("span");
+      textEl.textContent = text;
+      row.append(labelEl, textEl);
+      evaluationEl.append(row);
     });
   }
 
@@ -2142,6 +3260,7 @@
       state.activeDemo.update(dt, state.speed);
       draw();
       renderMetrics(state.activeDemo.metrics());
+      renderEvaluation(state.activeDemo.evaluation ? state.activeDemo.evaluation() : []);
     }
     requestAnimationFrame(loop);
   }
@@ -2160,8 +3279,25 @@
     });
   });
 
-  runBtn.addEventListener("click", () => state.activeDemo?.run());
-  pauseBtn.addEventListener("click", () => state.activeDemo?.pause());
+  scenarioButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      state.scenario = button.dataset.scenario;
+      scenarioButtons.forEach((item) => {
+        item.classList.toggle("active", item.dataset.scenario === state.scenario);
+      });
+      setActiveDemo(state.activeId);
+    });
+  });
+
+  runBtn.addEventListener("click", () => {
+    state.activeDemo?.run();
+    draw();
+    syncSidePanel();
+  });
+  pauseBtn.addEventListener("click", () => {
+    state.activeDemo?.pause();
+    syncSidePanel();
+  });
   stepBtn.addEventListener("click", () => {
     state.activeDemo?.step();
     draw();
@@ -2169,6 +3305,11 @@
   });
   resetBtn.addEventListener("click", () => {
     state.activeDemo?.reset();
+    draw();
+    syncSidePanel();
+  });
+  trainingResetBtn.addEventListener("click", () => {
+    state.activeDemo?.resetTraining?.();
     draw();
     syncSidePanel();
   });
