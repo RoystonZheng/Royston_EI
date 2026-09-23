@@ -1,0 +1,31 @@
+[astar] OK, 耗时 1.7s, 输出 /Users/didi/Documents/personalcodexfile/ei/项目复现/AIFP-main/results/repro/astar_planner.png
+[rrt] OK, 耗时 0.1s, 输出 /Users/didi/Documents/personalcodexfile/ei/项目复现/AIFP-main/results/repro/rrt_planner.png
+[mcts] OK, 耗时 1.5s, 输出 /Users/didi/Documents/personalcodexfile/ei/项目复现/AIFP-main/results/repro/mcts_planner.png
+[q_learning] OK, 耗时 7.4s, 输出 /Users/didi/Documents/personalcodexfile/ei/项目复现/AIFP-main/results/repro/q_learning_planner.png
+
+[conn] OpenRouter API 连通性测试通过 (model=openai/gpt-oss-20b)
+[aifp/openai/gpt-oss-20b trial 1] FAILED
+Traceback (most recent call last):
+  File "/Users/didi/Documents/personalcodexfile/ei/项目复现/AIFP-main/run_llm_planners.py", line 337, in main
+    reached, msg = run_aifp(trial, model=model)
+  File "/Users/didi/Documents/personalcodexfile/ei/项目复现/AIFP-main/run_llm_planners.py", line 173, in run_aifp
+    json_match = re.search(r"\{[\s\S]*\}", positions_text)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/re.py", line 201, in search
+    return _compile(pattern, flags).search(string)
+TypeError: expected string or bytes-like object
+
+[aifp 统计] model=openai/gpt-oss-20b, 1 次试验, 成功 0 次, 成功率 0.0% (论文 GPT-4 双障碍场景参考值 36.7%)
+
+[conn] OpenRouter API 连通性测试通过 (model=deepseek/deepseek-chat-v3-0324)
+[aifp/deepseek/deepseek-chat-v3-0324 trial 1] OK - 到达目标
+  迭代次数=36, LLM调用=36, 重规划次数=7, JSON解析失败=0
+  路径点数=51, 终点距目标=0.100, 全路径无碰撞=True
+  耗时 144.6s, 输出 /Users/didi/Documents/personalcodexfile/ei/项目复现/AIFP-main/results/repro/aifp_trials/deepseek_deepseek-chat-v3-0324_trial_1.png
+[aifp 统计] model=deepseek/deepseek-chat-v3-0324, 1 次试验, 成功 1 次, 成功率 100.0% (论文 GPT-4 双障碍场景参考值 36.7%)
+
+[conn] OpenRouter API 连通性测试通过 (model=deepseek/deepseek-chat-v3-0324)
+[aifp/deepseek/deepseek-chat-v3-0324 trial 1] 未达目标(达到最大迭代)
+  迭代次数=8, LLM调用=8, 重规划次数=3, JSON解析失败=0
+  路径点数=8, 终点距目标=2.202, 全路径无碰撞=True
+  耗时 34.6s, 输出 /Users/didi/Documents/personalcodexfile/ei/项目复现/AIFP-main/results/repro/aifp_trials/deepseek_deepseek-chat-v3-0324_trial_1.png
+[aifp 统计] model=deepseek/deepseek-chat-v3-0324, 1 次试验, 成功 0 次, 成功率 0.0% (论文 GPT-4 双障碍场景参考值 36.7%)
