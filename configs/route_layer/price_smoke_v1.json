@@ -1,0 +1,24 @@
+{
+  "api_price_per_token": 0.000003,
+  "compute_price_per_ms": 0.00000001,
+  "electricity_price_per_kwh": 2.29,
+  "currency": "CNY",
+  "pricing_version": "tesla_cn_station_peak_v1",
+  "billing_period": "simulation",
+  "pricing_status": "official_station_reference",
+  "price_source": "Tesla China official Supercharger station page",
+  "price_source_url": "https://www.tesla.cn/findus/location/supercharger/cnsc9691?region=CN",
+  "reference_station": "深圳中航工业南航大厦 Tesla 超级充电站",
+  "reference_rate_type": "peak_window_total_charging_service_price",
+  "observed_at": "2026-10-13",
+  "price_basis": "charging_service_total_per_kwh_includes_electricity_and_service_fee",
+  "rate_schedule": {
+    "00:00-08:00": 1.39,
+    "08:00-10:00": 1.69,
+    "10:00-12:00": 2.29,
+    "12:00-14:00": 1.69,
+    "14:00-19:00": 2.29,
+    "19:00-24:00": 1.69
+  },
+  "notes": "烟雾测试采用该官方站点列示的峰时综合充电服务价 2.29 元/kWh；特斯拉价格按站点和时段动态变化，正式实验应按实际站点与仿真时段替换。"
+}
