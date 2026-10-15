@@ -36,6 +36,10 @@ class TraditionalExperimentTests(unittest.TestCase):
             self.assertEqual(manifest["seeds"], [0, 1])
             self.assertEqual(manifest["total_trace_count"], 90)
             self.assertTrue((output_dir / "index.html").exists())
+            index_html = (output_dir / "index.html").read_text(encoding="utf-8")
+            self.assertIn("seeds/seed_0/visualizations/orders/index.html", index_html)
+            self.assertIn("seeds/seed_1/visualizations/formal_scenarios/index.html", index_html)
+            self.assertNotIn("''.join(rows)", index_html)
             for seed_record in manifest["seeds_detail"]:
                 self.assertEqual(seed_record["order_trace_count"], 30)
                 self.assertEqual(seed_record["formal_trace_count"], 15)

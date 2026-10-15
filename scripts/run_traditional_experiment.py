@@ -50,6 +50,38 @@ def _write_json(path: Path, payload: object) -> None:
     )
 
 
+def _write_experiment_index(output_dir: Path, details: List[dict]) -> None:
+    """Write the seed-level index from an experiment manifest payload."""
+    index_rows = []
+    for detail in details:
+        index_rows.append(
+            "<tr><td>{seed}</td><td>{orders}</td><td>{formal}</td>"
+            "<td><a href=\"{order_index}\">订单轨迹</a></td>"
+            "<td><a href=\"{formal_index}\">正式场景轨迹</a></td></tr>".format(
+                seed=detail["seed"],
+                orders=detail["order_trace_count"],
+                formal=detail["formal_trace_count"],
+                order_index=html.escape(detail["order_visual_index"]),
+                formal_index=html.escape(detail["formal_visual_index"]),
+            )
+        )
+    output_dir.joinpath("index.html").write_text(
+        "<!doctype html><html lang='zh-CN'><meta charset='utf-8'>"
+        "<title>传统算法第一轮实验轨迹</title>"
+        "<style>body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif;"
+        "margin:28px;color:#1f2937}table{border-collapse:collapse;width:100%}"
+        "th,td{border-bottom:1px solid #ddd;padding:8px;text-align:left}"
+        "th{background:#eef2ff}</style>"
+        "<h1>传统算法第一轮实验轨迹</h1>"
+        "<p>每个种子包含订单方法轨迹和正式场景方法轨迹。原始 JSON 和 HTML 回放均保留。</p>"
+        "<table><thead><tr><th>种子</th><th>订单记录</th><th>正式场景记录</th>"
+        "<th>订单索引</th><th>正式场景索引</th></tr></thead><tbody>"
+        + "".join(index_rows)
+        + "</tbody></table></html>",
+        encoding="utf-8",
+    )
+
+
 def _load_price_profile(path: Path) -> Tuple[PriceConfig, Dict[str, object]]:
     payload = json.loads(path.read_text(encoding="utf-8"))
     return (
@@ -351,35 +383,7 @@ def main() -> None:
         "index_html": "index.html",
     }
     _write_json(output_dir / "manifest.json", manifest)
-    index_rows = []
-    for detail in details:
-        index_rows.append(
-            "<tr><td>{seed}</td><td>{orders}</td><td>{formal}</td>"
-            "<td><a href=\"{order_index}\">订单轨迹</a></td>"
-            "<td><a href=\"{formal_index}\">正式场景轨迹</a></td></tr>".format(
-                seed=detail["seed"],
-                orders=detail["order_trace_count"],
-                formal=detail["formal_trace_count"],
-                order_index=html.escape(detail["order_visual_index"]),
-                formal_index=html.escape(detail["formal_visual_index"]),
-            )
-        )
-    (output_dir / "index.html").write_text(
-        "<!doctype html><html lang='zh-CN'><meta charset='utf-8'>"
-        "<title>传统算法第一轮实验轨迹</title>"
-        "<style>body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif;"
-        "margin:28px;color:#1f2937}table{border-collapse:collapse;width:100%}"
-        "th,td{border-bottom:1px solid #ddd;padding:8px;text-align:left}"
-        "th{background:#eef2ff}</style>"
-        "<h1>传统算法第一轮实验轨迹</h1>"
-        "<p>10 个 100×100 地图种子；每个种子包含 30 条订单方法轨迹和 15 条正式场景方法轨迹。"
-        "原始 JSON 和 HTML 回放均保留。</p>"
-        "<table><thead><tr><th>种子</th><th>订单记录</th><th>正式场景记录</th>"
-        "<th>订单索引</th><th>正式场景索引</th></tr></thead><tbody>"
-        + "".join(index_rows)
-        + "</tbody></table></html>",
-        encoding="utf-8",
-    )
+    _write_experiment_index(output_dir, details)
     print(
         json.dumps(
             {
