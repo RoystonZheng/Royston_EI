@@ -15,6 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from dispatch_experiment.models import DispatchConfig
+from dispatch_experiment.llm import CODEX_DIRECT_ASSIGNMENT_INPUT_POLICY
 from dispatch_experiment.nyc_tlc_scenario import (
     NYCTLCZoneCentroidPickupOracle,
     load_dispatch_scenario,
@@ -76,8 +77,11 @@ def main() -> None:
         raise SystemExit("D5 performs live Codex CLI model calls; pass --allow-live-api after explicitly approving the run")
     if "D4_agent_llm_feedback_optimizer" in args.methods and args.feedback_mode == "deepseek" and not args.allow_live_api:
         raise SystemExit("D4 deepseek feedback performs live calls; pass --allow-live-api after explicitly approving the run")
-    if args.compact_records and any(method not in {"D0_greedy", "D1_optimizer"} for method in args.methods):
-        raise SystemExit("--compact-records is currently limited to the traditional D0/D1 baselines")
+    if args.compact_records and any(
+        method not in {"D0_greedy", "D1_optimizer", "D5_pure_llm_direct"}
+        for method in args.methods
+    ):
+        raise SystemExit("--compact-records is supported for D0/D1 and Codex CLI D5 runs")
     needs_live_api = "D4_agent_llm_feedback_optimizer" in args.methods and args.feedback_mode == "deepseek"
     if "D5_pure_llm_direct" in args.methods and not shutil.which("codex"):
         raise SystemExit("codex CLI not found; no run was started")
@@ -145,6 +149,11 @@ def main() -> None:
             "method_name": method_name,
             "llm_backend": config.llm_backend if method_name == "D5_pure_llm_direct" else None,
             "llm_model": config.llm_model if method_name == "D5_pure_llm_direct" else None,
+            "llm_input_protocol": (
+                CODEX_DIRECT_ASSIGNMENT_INPUT_POLICY
+                if method_name == "D5_pure_llm_direct"
+                else None
+            ),
             "scenario_fingerprint_sha256": scenario_fingerprint,
             "input_hashes": {
                 "scenario_json": loaded["scenario_metadata_sha256"],

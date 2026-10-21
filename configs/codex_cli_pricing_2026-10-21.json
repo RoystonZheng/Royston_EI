@@ -1,0 +1,29 @@
+{
+  "schema_version": "codex_cli_pricing_snapshot_v1",
+  "checked_date": "2026-10-21",
+  "pricing_mode": "standard",
+  "models": {
+    "gpt-5.6-luna": {
+      "codex_credits_per_1m_tokens": {
+        "input": 5.0,
+        "cached_input": 0.5,
+        "output": 30.0
+      },
+      "api_usd_per_1m_tokens": {
+        "input": 0.2,
+        "cached_input": 0.02,
+        "output": 1.2
+      }
+    }
+  },
+  "source_urls": {
+    "codex_usage_and_credit_rates": "https://developers.openai.com/codex/pricing",
+    "codex_credit_rate_card": "https://help.openai.com/en/articles/11481834-chatgpt-rate-card-business-enterpriseedu-credit-based-pricing",
+    "api_model_pricing": "https://developers.openai.com/api/docs/models/gpt-5.6-luna"
+  },
+  "interpretation": {
+    "codex_credit_equivalent": "Standard token-rate equivalent; included subscription usage may use different allowance multipliers.",
+    "api_equivalent_usd": "Reference comparison only. ChatGPT sign-in usage is not billed at API prices.",
+    "account_invoice": "Codex CLI does not report an account invoice amount. Credit purchase prices and plan/account terms vary."
+  }
+}

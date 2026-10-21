@@ -19,6 +19,11 @@ from pathlib import Path
 from typing import Any, Dict, List, Sequence, Tuple
 
 from route_experiment.llm_adapter import DeepSeekClient
+from codex_cli_support import (
+    CODEX_DISABLED_TOOL_FEATURES,
+    estimate_codex_usage_cost,
+    reserve_indexed_artifacts,
+)
 
 from .agent import CandidateFeedback
 from .models import Candidate, Order, Vehicle
@@ -31,6 +36,8 @@ DEEPSEEK_FLASH_PEAK_USD_PER_MILLION = {
     "cache_miss_input": 0.30,
     "output": 1.20,
 }
+
+CODEX_DIRECT_ASSIGNMENT_INPUT_POLICY = "hard_feasible_candidate_edges_v2"
 
 
 def build_direct_assignment_messages(
@@ -358,7 +365,31 @@ class CodexCliDirectAssignment:
         "tool_call",
         "image_view",
     }
+    NON_TOOL_ITEM_TYPES = {"agent_message", "reasoning", "plan", "error"}
     backend = "codex_cli"
+    input_policy = CODEX_DIRECT_ASSIGNMENT_INPUT_POLICY
+
+    @staticmethod
+    def _tool_policy() -> Dict[str, Any]:
+        return {
+            "shell_tool": "disabled",
+            "unified_exec": "disabled",
+            "disabled_features": list(CODEX_DISABLED_TOOL_FEATURES),
+            "user_config": "ignored",
+            "sandbox": "read-only",
+            "working_directory": "empty_temporary_directory",
+            "api_key_environment_variables_removed": [
+                "DEEPSEEK_API_KEY",
+                "DISPATCH_LLM_MODEL",
+                "DISPATCH_LLM_BASE_URL",
+                "OPENAI_API_KEY",
+                "OPENAI_BASE_URL",
+                "OPENAI_API_BASE",
+                "OPENAI_ORG_ID",
+                "OPENAI_PROJECT",
+                "CODEX_API_KEY",
+            ],
+        }
 
     def __init__(
         self,
@@ -375,6 +406,7 @@ class CodexCliDirectAssignment:
         self.reasoning_effort = reasoning_effort
         self.timeout_sec = timeout_sec
         self.call_count = 0
+        self.trace_index = 0
         self.input_tokens = 0
         self.cached_input_tokens = 0
         self.output_tokens = 0
@@ -383,6 +415,9 @@ class CodexCliDirectAssignment:
         self.cached_input_usage_call_count = 0
         self.output_usage_call_count = 0
         self.unknown_cost_count = 0
+        self.codex_standard_credit_equivalent = 0.0
+        self.api_equivalent_usd = 0.0
+        self.cost_estimate_call_count = 0
         self.api_cost_usd = None
         self.latency_ms = 0.0
         self.errors: List[str] = []
@@ -437,6 +472,7 @@ class CodexCliDirectAssignment:
                         non_message_item_types.add(item_type)
                     if (
                         item_type in cls.TOOL_ITEM_TYPES
+                        or item_type not in cls.NON_TOOL_ITEM_TYPES
                         or item_type.endswith("_call")
                         or item_type.endswith("_execution")
                     ):
@@ -481,6 +517,47 @@ class CodexCliDirectAssignment:
             "event_types": event_types,
         }
 
+    @classmethod
+    def _audit_jsonl(cls, stdout: str):
+        events = []
+        parse_errors = []
+        for line_number, line in enumerate(stdout.splitlines(), start=1):
+            if not line.strip():
+                continue
+            try:
+                events.append(json.loads(line))
+            except Exception as error:
+                parse_errors.append("line_{0}:{1}".format(line_number, type(error).__name__))
+        return events, cls._audit_events(events), parse_errors
+
+    def _record_codex_usage(self, audit: Dict[str, Any]) -> Dict[str, Any]:
+        cost_estimate = estimate_codex_usage_cost(
+            self.model,
+            audit.get("input_tokens"),
+            audit.get("cached_input_tokens"),
+            audit.get("output_tokens"),
+        )
+        if audit.get("usage_available"):
+            self.usage_call_count += 1
+            if isinstance(audit.get("input_tokens"), int):
+                self.input_tokens += audit["input_tokens"]
+                self.input_usage_call_count += 1
+            if isinstance(audit.get("cached_input_tokens"), int):
+                self.cached_input_tokens += audit["cached_input_tokens"]
+                self.cached_input_usage_call_count += 1
+            if isinstance(audit.get("output_tokens"), int):
+                self.output_tokens += audit["output_tokens"]
+                self.output_usage_call_count += 1
+            if isinstance(cost_estimate.get("codex_standard_credit_equivalent"), (int, float)):
+                self.codex_standard_credit_equivalent += cost_estimate["codex_standard_credit_equivalent"]
+                self.api_equivalent_usd += cost_estimate["api_equivalent_usd"]
+                self.cost_estimate_call_count += 1
+            else:
+                self.unknown_cost_count += 1
+        else:
+            self.unknown_cost_count += 1
+        return cost_estimate
+
     @staticmethod
     def _sha256(value: bytes) -> str:
         return hashlib.sha256(value).hexdigest()
@@ -506,6 +583,9 @@ class CodexCliDirectAssignment:
                 "status": "no_feasible_candidates",
                 "backend": "codex_cli",
                 "model": self.model,
+                "candidate_input_policy": self.input_policy,
+                "raw_candidate_count": len(candidates),
+                "prompt_candidate_count": 0,
                 "invocation_made": False,
                 "request_made": False,
                 "account_cost_usd": None,
@@ -522,6 +602,9 @@ class CodexCliDirectAssignment:
                 "status": "codex_cli_error",
                 "backend": "codex_cli",
                 "model": self.model,
+                "candidate_input_policy": self.input_policy,
+                "raw_candidate_count": len(candidates),
+                "prompt_candidate_count": len(feasible),
                 "invocation_made": False,
                 "request_made": False,
                 "error": detail,
@@ -531,11 +614,15 @@ class CodexCliDirectAssignment:
             self.last_record = record
             return [], record
 
+        feasible_candidates = sorted(feasible.values(), key=lambda item: item.candidate_id)
         messages = build_direct_assignment_messages(
             snapshot_time_sec=snapshot_time_sec,
             vehicles=vehicles,
             orders=orders,
-            candidates=candidates,
+            # Infeasible edges cannot be selected by the LLM or accepted by the
+            # local validator. Omitting them preserves the legal action set and
+            # keeps high-load prompts bounded.
+            candidates=feasible_candidates,
             max_wait_sec=max_wait_sec,
         )
         prompt = (
@@ -546,11 +633,17 @@ class CodexCliDirectAssignment:
         )
         prompt_bytes = prompt.encode("utf-8")
         schema_bytes = self.schema_path.read_bytes()
-        self.trace_dir.mkdir(parents=True, exist_ok=True)
-        call_id = "dispatch_round_{0:04d}".format(self.call_count + 1)
-        trace_path = self.trace_dir / (call_id + ".jsonl")
-        final_path = self.trace_dir / (call_id + ".final.json")
+        call_index, trace_paths = reserve_indexed_artifacts(
+            self.trace_dir,
+            "dispatch_round",
+            (".jsonl", ".final.json"),
+            (".jsonl",),
+            self.trace_index,
+        )
+        trace_path = trace_paths[".jsonl"]
+        final_path = trace_paths[".final.json"]
         started = time.perf_counter()
+        self.trace_index = call_index
         self.call_count += 1
         process = None
         stdout = ""
@@ -566,10 +659,6 @@ class CodexCliDirectAssignment:
                     "--skip-git-repo-check",
                     "--sandbox",
                     "read-only",
-                    "--disable",
-                    "shell_tool",
-                    "--disable",
-                    "unified_exec",
                     "--model",
                     self.model,
                     "--config",
@@ -582,6 +671,12 @@ class CodexCliDirectAssignment:
                     empty_cwd,
                     "-",
                 ]
+                disable_args = [
+                    argument
+                    for feature in CODEX_DISABLED_TOOL_FEATURES
+                    for argument in ("--disable", feature)
+                ]
+                command[-1:-1] = disable_args
                 child_env = os.environ.copy()
                 for name in (
                     "DEEPSEEK_API_KEY",
@@ -613,24 +708,34 @@ class CodexCliDirectAssignment:
             elapsed_ms = (time.perf_counter() - started) * 1000.0
             self.latency_ms += elapsed_ms
             self.errors.append("codex_cli_timeout")
-            self.unknown_cost_count += 1
             trace_path.write_text(stdout, encoding="utf-8")
+            partial_events, partial_audit, parse_errors = self._audit_jsonl(stdout)
+            cost_estimate = self._record_codex_usage(partial_audit)
             record = {
                 "status": "codex_cli_timeout",
                 "backend": "codex_cli",
+                "call_index": call_index,
                 "model": self.model,
+                "candidate_input_policy": self.input_policy,
+                "raw_candidate_count": len(candidates),
+                "prompt_candidate_count": len(feasible_candidates),
                 "codex_cli_version": self.cli_version,
                 "invocation_made": True,
-                "request_made": None,
+                "request_made": bool(partial_audit["turn_started_count"]),
                 "latency_ms": elapsed_ms,
                 "timeout_sec": self.timeout_sec,
                 "retry_count": 0,
-                "input_tokens": None,
-                "output_tokens": None,
-                "total_tokens": None,
-                "usage_status": "unknown_timeout",
+                "tool_policy": self._tool_policy(),
+                "input_tokens": partial_audit["input_tokens"],
+                "cached_input_tokens": partial_audit["cached_input_tokens"],
+                "output_tokens": partial_audit["output_tokens"],
+                "reasoning_tokens": partial_audit["reasoning_tokens"],
+                "total_tokens": partial_audit["total_tokens"],
+                "usage_status": "available_best_effort" if partial_audit["usage_available"] else "unknown_timeout",
                 "account_cost_usd": None,
-                "cost_status": "unknown_timeout",
+                "cost_status": "account_plan_or_credits_not_exposed_by_cli" if partial_audit["usage_available"] else "unknown_timeout",
+                "cost_estimate": cost_estimate,
+                "jsonl_parse_errors": parse_errors,
                 "trace_jsonl_path": str(trace_path),
                 "trace_jsonl_sha256": self._sha256(stdout.encode("utf-8")),
                 "stderr_tail": self._safe_error(stderr),
@@ -642,24 +747,34 @@ class CodexCliDirectAssignment:
             self.latency_ms += elapsed_ms
             detail = self._safe_error(str(error))
             self.errors.append(detail)
-            self.unknown_cost_count += 1
             trace_path.write_text(stdout, encoding="utf-8")
+            partial_events, partial_audit, parse_errors = self._audit_jsonl(stdout)
+            cost_estimate = self._record_codex_usage(partial_audit)
             record = {
                 "status": "codex_cli_error",
                 "backend": "codex_cli",
+                "call_index": call_index,
                 "model": self.model,
+                "candidate_input_policy": self.input_policy,
+                "raw_candidate_count": len(candidates),
+                "prompt_candidate_count": len(feasible_candidates),
                 "codex_cli_version": self.cli_version,
                 "invocation_made": True,
-                "request_made": None,
+                "request_made": bool(partial_audit["turn_started_count"]),
                 "latency_ms": elapsed_ms,
                 "retry_count": 0,
+                "tool_policy": self._tool_policy(),
                 "error": detail,
-                "input_tokens": None,
-                "output_tokens": None,
-                "total_tokens": None,
-                "usage_status": "unknown_cli_error",
+                "input_tokens": partial_audit["input_tokens"],
+                "cached_input_tokens": partial_audit["cached_input_tokens"],
+                "output_tokens": partial_audit["output_tokens"],
+                "reasoning_tokens": partial_audit["reasoning_tokens"],
+                "total_tokens": partial_audit["total_tokens"],
+                "usage_status": "available_best_effort" if partial_audit["usage_available"] else "unknown_cli_error",
                 "account_cost_usd": None,
-                "cost_status": "unknown_cli_error",
+                "cost_status": "account_plan_or_credits_not_exposed_by_cli" if partial_audit["usage_available"] else "unknown_cli_error",
+                "cost_estimate": cost_estimate,
+                "jsonl_parse_errors": parse_errors,
                 "trace_jsonl_path": str(trace_path),
                 "trace_jsonl_sha256": self._sha256(stdout.encode("utf-8")),
                 "stderr_tail": self._safe_error(stderr),
@@ -670,16 +785,7 @@ class CodexCliDirectAssignment:
         elapsed_ms = (time.perf_counter() - started) * 1000.0
         self.latency_ms += elapsed_ms
         trace_path.write_text(stdout, encoding="utf-8")
-        events = []
-        parse_errors = []
-        for line_number, line in enumerate(stdout.splitlines(), start=1):
-            if not line.strip():
-                continue
-            try:
-                events.append(json.loads(line))
-            except Exception as error:
-                parse_errors.append("line_{0}:{1}".format(line_number, type(error).__name__))
-        audit = self._audit_events(events)
+        events, audit, parse_errors = self._audit_jsonl(stdout)
         cli_error_messages = []
         for event in events:
             if event.get("type") != "error":
@@ -702,17 +808,9 @@ class CodexCliDirectAssignment:
             if isinstance(message, str):
                 cli_error_messages.append(self._safe_error(message))
         if audit["usage_available"]:
-            self.usage_call_count += 1
-            if audit["input_tokens"] is not None:
-                self.input_tokens += audit["input_tokens"]
-                self.input_usage_call_count += 1
-            if audit["cached_input_tokens"] is not None:
-                self.cached_input_tokens += audit["cached_input_tokens"]
-                self.cached_input_usage_call_count += 1
-            if audit["output_tokens"] is not None:
-                self.output_tokens += audit["output_tokens"]
-                self.output_usage_call_count += 1
-        self.unknown_cost_count += int(not audit["usage_available"])
+            cost_estimate = self._record_codex_usage(audit)
+        else:
+            cost_estimate = self._record_codex_usage(audit)
 
         final_text = final_path.read_text(encoding="utf-8") if final_path.exists() else ""
         final_bytes = final_text.encode("utf-8")
@@ -783,19 +881,18 @@ class CodexCliDirectAssignment:
         record = {
             "status": status,
             "backend": "codex_cli",
+            "call_index": call_index,
             "model": self.model,
+            "candidate_input_policy": self.input_policy,
+            "raw_candidate_count": len(candidates),
+            "prompt_candidate_count": len(feasible_candidates),
             "codex_cli_version": self.cli_version,
             "reasoning_effort": self.reasoning_effort,
             "invocation_made": True,
             "request_made": request_made,
             "cli_exit_code": exit_code,
             "retry_count": 0,
-            "tool_policy": {
-                "shell_tool": "disabled",
-                "unified_exec": "disabled",
-                "user_config": "ignored",
-                "sandbox": "read-only",
-            },
+            "tool_policy": self._tool_policy(),
             "latency_ms": elapsed_ms,
             "input_tokens": audit["input_tokens"],
             "cached_input_tokens": audit["cached_input_tokens"],
@@ -812,6 +909,7 @@ class CodexCliDirectAssignment:
             "event_types": audit["event_types"],
             "max_output_tokens": None,
             "account_cost_usd": None,
+            "cost_estimate": cost_estimate,
             "cost_status": (
                 "account_plan_or_credits_not_exposed_by_cli"
                 if audit["usage_available"]

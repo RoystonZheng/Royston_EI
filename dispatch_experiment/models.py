@@ -232,6 +232,9 @@ class ExperimentSummary(JsonModel):
     total_codex_cli_invocations: int = 0
     total_api_cost: Optional[float] = 0.0
     total_api_cost_usd: Optional[float] = None
+    total_codex_standard_credit_equivalent: Optional[float] = None
+    total_api_equivalent_usd: Optional[float] = None
+    codex_cost_estimate_status: str = "not_recorded"
     total_decision_time_ms: float = 0.0
     optimizer_time_ms: float = 0.0
     candidate_count_before_filter: int = 0

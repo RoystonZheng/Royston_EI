@@ -1,0 +1,52 @@
+{
+  "configuration_seed_method_rows": 150,
+  "configuration_seed_triplets": 50,
+  "complete_input_matched_triplets": 50,
+  "d5_complete_runs": 50,
+  "d5_live_runs_seed_1_to_9": 45,
+  "d5_seed_0_includes_captured_trace_replay_for_c4_f1": true,
+  "d5_llm_calls_in_result_summaries": 425,
+  "d5_validated_rounds": 18066,
+  "d5_invalid_rounds": 0,
+  "d5_detailed_response_status_counts": {
+    "accepted": 411,
+    "no_feasible_candidates": 15919,
+    "llm_error_or_invalid_response": 7
+  },
+  "d5_detailed_rejected_response_count": 7,
+  "d5_detailed_rejection_reasons": {
+    "duplicate_order_id": 1,
+    "duplicate_vehicle_selected": 1,
+    "duplicate_order_selected": 4,
+    "non_hard_feasible_candidate": 1
+  },
+  "cli_trace_audit": {
+    "trace_file_count": 383,
+    "turn_started_count": 383,
+    "turn_completed_with_usage_count": 383,
+    "tool_event_trace_file_count": 0,
+    "tool_event_trace_files": [],
+    "malformed_jsonl_lines": 0
+  },
+  "cost": {
+    "cohort": "D5 Codex CLI v2 seed 0 plus repeated runs seed 1-9 on the same five frozen configurations",
+    "run_count": 50,
+    "new_seed_1_to_9_run_count": 45,
+    "reused_seed_0_run_count": 5,
+    "codex_cli_call_count": 425,
+    "input_tokens_including_cached": 8810591,
+    "cached_input_tokens_subset_of_input": 4610816,
+    "output_tokens": 89927,
+    "total_tokens_input_plus_output": 8900518,
+    "codex_standard_credit_equivalent": 26.002092999999995,
+    "api_equivalent_usd": 1.04008372,
+    "account_invoice_amount": null,
+    "account_invoice_status": "not_reported_by_codex_cli",
+    "rate_card_equivalents_are_invoice": false,
+    "sources": [
+      "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/three_method_benchmark_v1/results/pure_llm_codex_cli_formal_v1/codex_usage_cost_reconciliation.json",
+      "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/three_method_benchmark_v1/results/pure_llm_codex_cli_feasible_edges_v2/codex_usage_cost_reconciliation_20261021.json"
+    ]
+  },
+  "scope_note": "Seeds 0-9 repeat runs on five frozen scenarios. These are not ten independent TLC demand samples or estimates of real NYC operations."
+}

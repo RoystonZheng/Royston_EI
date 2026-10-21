@@ -16,14 +16,13 @@
 - **路线层传统基线：**在 10 个 100×100 地图种子上，比较全图 Dijkstra、局部 Dijkstra 与局部 A*；每种子包括 10 个订单任务和 5 个正式场景，共归档 450 条任务—方法轨迹。结果是离线模拟基线。
 - **纯 LLM 路线实验：**v8 完成 10 种子、150 个任务的真实模型批次，合法路线为 0/150；原始响应、校验和回放均已留档，不能作为有效路线性能对照。详见[实验记录](docs/route-layer-pure-llm-run-2026-10-18-v8.md)。
 - **R4 路线 smoke：**DeepSeek 在一个 8×8 任务上完成过一次经本地有向边校验的路线。该结果只覆盖单任务。100×100 预检发现 130 个可达任务中有 128 个最短路径超过当前 32 次请求上限；正式批次待交互规则、预算和熔断门禁冻结。详见[R4 预算预检](docs/route-layer-r4-100x100-preflight-2026-10-21.md)。
-- **调度层基线：**D0 贪心与 D1 集中优化已完成原有 10 种子离线矩阵；两者在该组中作出相同选择。另在 NYC TLC 共享输入的 C2、C3、C4 五个场景/车队组合中完成 10 次 D0/D1 回放，逐轮校验通过。每格只有一个固定输入回放，不据此作统计显著性或普遍优势结论。详见[完成报告](docs/dispatch-layer-traditional-baselines-complete-2026-10-20.md)。
-- **纯 LLM 调度 smoke：**D5 在 C2 上发出一次请求并选择 3 个匹配；还有 1 单等待，结果为 `partial_run`，不是完整调度性能实验。详见[smoke 记录](docs/dispatch-layer-pure-llm-smoke-2026-10-20.md)。
+- **调度层 D0/D1/D5 对照：**在五个冻结的 NYC TLC 派生场景/车队配置上完成 seeds 0–9，共 50 组三方法配对、150 个结果；每组的场景指纹、地图、订单数和车辆数匹配。D5 Codex CLI 共 425 次调用、8,900,518 个输入与输出 token；公开费率等值为 26.002093 credits / USD 1.04008372，不是账户账单。各配置的完成订单数与 D0/D1 相同，等待、空驶和模拟能耗的差异方向不一致；7 条候选被本地规则拒绝且没有重试或回退。该批是同五个场景的重复模拟，不是独立 NYC 需求抽样。详见[对照报告](outputs/dispatch_layer/nyc_tlc_hvfhv_2024/three_method_benchmark_v1/results/pure_llm_codex_cli_formal_v1/comparison_report.md)和[Codex CLI 记录口径](docs/dispatch-layer-codex-cli-experiment-policy-2026-10-21.md)。
 - **数据准备：**本地保存 NYC TLC 2024 年 High Volume FHV 月度行程数据及区域表；另有 NYC DOT / Manhattan 路网与传感器匹配的预检材料。数据和代理成本的适用边界见[数据目录说明](data/dispatch/nyc_tlc_hvfhv_2024/README.md)及[数据集筛查](docs/dispatch-layer-dataset-survey-2026-10-19.md)。
 
 ### 尚待完成
 
 - 冻结 R4、R4-A、R4-B 的统一请求语义、输出长度与预算门禁，再决定是否启动 100×100 正式批次及消融。
-- 完成路线层 Agent-readable map 对照，以及调度层 Agent/优化器与纯 LLM 的完整场景对比和重复实验。
+- 完成路线层 Agent-readable map 对照及正式 R4 批次；调度层 D2–D4 Agent/优化器与 D0/D1/D5 的同输入对照仍待完成。
 - 基于正式对照结果确定论文中的效果结论；当前 smoke、预检和单次回放不支持普遍性能或真实运营主张。
 
 ## 实验方案

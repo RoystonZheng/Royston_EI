@@ -524,10 +524,14 @@ class DispatchSimulation:
                 "validator_status": "invalid" if errors else "valid",
                 "hard_constraint_errors": errors,
                 "one_to_one_valid": one_to_one_valid,
+                "direct_llm_assignment": direct_llm_record,
+                "direct_llm_error_count": (
+                    len(self.direct_llm.errors) if self.direct_llm is not None else 0
+                ),
             }
         if not self.retain_round_records and self.metrics["rounds"] == 0:
-            # Keep the complete first candidate table so compact D0/D1 runs
-            # still expose an auditable common initial decision input.
+            # Keep the complete first candidate table so compact D0/D1/D5
+            # runs still expose an auditable common initial decision input.
             def json_safe(value):
                 if isinstance(value, float) and not math.isfinite(value):
                     return None
@@ -790,6 +794,31 @@ class DispatchSimulation:
                 )
                 if self.direct_llm is not None
                 else None
+            ),
+            total_codex_standard_credit_equivalent=(
+                self.direct_llm.codex_standard_credit_equivalent
+                if self.direct_llm is not None
+                and self.direct_llm.cost_estimate_call_count == self.direct_llm.call_count
+                and self.direct_llm.call_count
+                else None
+            ),
+            total_api_equivalent_usd=(
+                self.direct_llm.api_equivalent_usd
+                if self.direct_llm is not None
+                and self.direct_llm.cost_estimate_call_count == self.direct_llm.call_count
+                and self.direct_llm.call_count
+                else None
+            ),
+            codex_cost_estimate_status=(
+                "estimated_from_official_standard_rate_card"
+                if self.direct_llm is not None
+                and self.direct_llm.cost_estimate_call_count == self.direct_llm.call_count
+                and self.direct_llm.call_count
+                else (
+                    "missing_or_partial"
+                    if self.direct_llm is not None and self.direct_llm.call_count
+                    else "not_recorded"
+                )
             ),
             total_decision_time_ms=self.metrics["total_decision_ms"],
             optimizer_time_ms=self.metrics["optimizer_ms"],

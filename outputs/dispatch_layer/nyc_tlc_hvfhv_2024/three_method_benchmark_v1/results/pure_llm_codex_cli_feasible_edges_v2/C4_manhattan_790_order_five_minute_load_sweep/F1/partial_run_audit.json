@@ -1,0 +1,149 @@
+{
+  "schema_version": "codex_dispatch_partial_run_audit_v1",
+  "status": "live_calls_complete_simulation_interrupted",
+  "case_id": "C4_manhattan_790_order_five_minute_load_sweep",
+  "fleet_id": "F1",
+  "seed": 0,
+  "input_protocol": "hard_feasible_candidate_edges_v2",
+  "model": "gpt-5.6-luna",
+  "codex_cli_version": "codex-cli 0.145.0",
+  "reasoning_effort": "low",
+  "retry_count": 0,
+  "codex_invocations": 5,
+  "usage_available_calls": 5,
+  "tool_event_count": 0,
+  "input_tokens": 114106,
+  "cached_input_tokens": 18432,
+  "output_tokens": 933,
+  "reasoning_tokens": 440,
+  "total_tokens": 115039,
+  "account_cost_usd": null,
+  "account_cost_status": "not_exposed_by_cli",
+  "simulation_result_complete": false,
+  "interruption_reason": "local simulation exceeded 15 minutes before aggregate result JSON was written; live Codex requests had already completed",
+  "calls": [
+    {
+      "trace": "dispatch_round_0001.jsonl",
+      "trace_sha256": "51aac5f8b6a19de1422d08104409e813f0e32498fcf37680ed8fabc019061386",
+      "final_file": "dispatch_round_0001.final.json",
+      "final_sha256": "f2306755c43fc50cc245dd4e59aac8931bee671b2fdca380ac7f438497985903",
+      "selected_candidate_ids": [
+        "round-0000__C4-F1-008__raw/fhvhv_tripdata_2024-01.parquet#12600140",
+        "round-0000__C4-F1-010__raw/fhvhv_tripdata_2024-01.parquet#12626545",
+        "round-0000__C4-F1-012__raw/fhvhv_tripdata_2024-01.parquet#12629818"
+      ],
+      "event_types": [
+        "thread.started",
+        "turn.started",
+        "item.completed",
+        "item.completed",
+        "turn.completed"
+      ],
+      "tool_events": [],
+      "turn_completed_count": 1,
+      "input_tokens": 18006,
+      "cached_input_tokens": 0,
+      "output_tokens": 164,
+      "reasoning_output_tokens": 53,
+      "total_tokens": 18170
+    },
+    {
+      "trace": "dispatch_round_0002.jsonl",
+      "trace_sha256": "f8d5fc81e5d6574e55e81005d8ce9cdb1f204f73f4e50231f859d7d7bb4943ca",
+      "final_file": "dispatch_round_0002.final.json",
+      "final_sha256": "0619b80d63be837e6a010e18802f73c8f76f0e7562be810cda66b58e0d58b7ad",
+      "selected_candidate_ids": [
+        "round-0001__C4-F1-001__raw/fhvhv_tripdata_2024-01.parquet#12630156",
+        "round-0001__C4-F1-004__raw/fhvhv_tripdata_2024-01.parquet#12613076",
+        "round-0001__C4-F1-006__raw/fhvhv_tripdata_2024-01.parquet#12593411"
+      ],
+      "event_types": [
+        "thread.started",
+        "turn.started",
+        "item.completed",
+        "item.completed",
+        "turn.completed"
+      ],
+      "tool_events": [],
+      "turn_completed_count": 1,
+      "input_tokens": 17487,
+      "cached_input_tokens": 9216,
+      "output_tokens": 222,
+      "reasoning_output_tokens": 111,
+      "total_tokens": 17709
+    },
+    {
+      "trace": "dispatch_round_0003.jsonl",
+      "trace_sha256": "21f55519af3ba0d8f7420635f08c39134c967a1d7c8c512656e4588f33abe6a4",
+      "final_file": "dispatch_round_0003.final.json",
+      "final_sha256": "154500fb4b06c80921fd09951571d3e81628f9f6959d394a6b0afa9a11f5dbfb",
+      "selected_candidate_ids": [
+        "round-0002__C4-F1-011__raw/fhvhv_tripdata_2024-01.parquet#12630568",
+        "round-0002__C4-F1-003__raw/fhvhv_tripdata_2024-01.parquet#12612340",
+        "round-0002__C4-F1-005__raw/fhvhv_tripdata_2024-01.parquet#12633168",
+        "round-0002__C4-F1-007__raw/fhvhv_tripdata_2024-01.parquet#12608365",
+        "round-0002__C4-F1-009__raw/fhvhv_tripdata_2024-01.parquet#12626924"
+      ],
+      "event_types": [
+        "thread.started",
+        "turn.started",
+        "item.completed",
+        "item.completed",
+        "turn.completed"
+      ],
+      "tool_events": [],
+      "turn_completed_count": 1,
+      "input_tokens": 17887,
+      "cached_input_tokens": 9216,
+      "output_tokens": 377,
+      "reasoning_output_tokens": 204,
+      "total_tokens": 18264
+    },
+    {
+      "trace": "dispatch_round_0004.jsonl",
+      "trace_sha256": "ef6a0409ebecd8302513f73700abf4d5c70f6739dd23a1402f5a1911aa2e668a",
+      "final_file": "dispatch_round_0004.final.json",
+      "final_sha256": "edecd5c79de060580bfa047e5d5b63c92481d73d8dd1680c9f0c80b94f608c19",
+      "selected_candidate_ids": [
+        "round-0003__C4-F1-002__raw/fhvhv_tripdata_2024-01.parquet#12624416"
+      ],
+      "event_types": [
+        "thread.started",
+        "turn.started",
+        "item.completed",
+        "item.completed",
+        "turn.completed"
+      ],
+      "tool_events": [],
+      "turn_completed_count": 1,
+      "input_tokens": 16424,
+      "cached_input_tokens": 0,
+      "output_tokens": 66,
+      "reasoning_output_tokens": 17,
+      "total_tokens": 16490
+    },
+    {
+      "trace": "dispatch_round_0005.jsonl",
+      "trace_sha256": "5984d38d4e07d03ffaac6da842449704b25a7d38c292966038a936eeedd61d89",
+      "final_file": "dispatch_round_0005.final.json",
+      "final_sha256": "36397ed3b93b6aa91c6758ee2252819bc8244997c4e600ed6f9d5955162976db",
+      "selected_candidate_ids": [
+        "round-0175__C4-F1-008__raw/fhvhv_tripdata_2024-01.parquet#12633705"
+      ],
+      "event_types": [
+        "thread.started",
+        "turn.started",
+        "item.completed",
+        "item.completed",
+        "turn.completed"
+      ],
+      "tool_events": [],
+      "turn_completed_count": 1,
+      "input_tokens": 44302,
+      "cached_input_tokens": 0,
+      "output_tokens": 104,
+      "reasoning_output_tokens": 55,
+      "total_tokens": 44406
+    }
+  ]
+}

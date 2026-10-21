@@ -1,0 +1,119 @@
+{
+  "experiment_id": "nyc_tlc_d5_codex_cli_formal_v1",
+  "created_at_utc": "2026-10-21T08:04:00+00:00",
+  "status": "completed",
+  "backend": "codex_cli",
+  "model": "gpt-5.6-luna",
+  "reasoning_effort": "low (CLI policy)",
+  "input_protocol": "hard_feasible_candidate_edges_v2",
+  "retry_policy": "zero model-request retries",
+  "scenario_package": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/three_method_benchmark_v1",
+  "scenario_package_manifest_sha256": "5780ac717b4f6ce3f92a169b676fa5f1ed75f919a08d7c85ec3df64e1f512b71",
+  "seeds_run_in_this_batch": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "seed0_reused_from": {
+    "d5": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/three_method_benchmark_v1/results/pure_llm_codex_cli_feasible_edges_v2",
+    "d0_d1": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/three_method_benchmark_v1/results/traditional_baselines_complete_v1",
+    "seed0_pairing_audit": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/three_method_benchmark_v1/results/three_method_codex_cli_seed0_matched_v1"
+  },
+  "interpretation": "The five scenario/fleet inputs are frozen. Seed variation repeats simulation/model runs on the same inputs; it does not create independent NYC demand samples.",
+  "configurations": [
+    {
+      "case": "C2_four_same_second_orders_three_vehicles",
+      "fleet_id": null,
+      "scenario_id": "C2_four_same_second_orders_three_vehicles",
+      "scenario_files": {
+        "scenario.json": {
+          "sha256": "bface8c9fbc2462f2966eecc76970c75170ef317c993efbf023179ae33ee0d2c"
+        },
+        "orders.json": {
+          "sha256": "c9c801ddaa7468dc8fdb77d65b16536d7e0711da14ff5a5e2ce969d057f36c02"
+        },
+        "zone_od_cost_matrix.csv.gz": {
+          "sha256": "87a2e4b0135f6159ca1b38719116b88c38b5172c6ba0f0bd1e01295ea2dfbcb0"
+        }
+      },
+      "scenario_dir": "./outputs/dispatch_layer/nyc_tlc_hvfhv_2024/three_method_benchmark_v1/cases/C2_four_same_second_orders_three_vehicles"
+    },
+    {
+      "case": "C3_manhattan_multizone_44_order_burst",
+      "fleet_id": null,
+      "scenario_id": "C3_manhattan_multizone_44_order_burst",
+      "scenario_files": {
+        "scenario.json": {
+          "sha256": "2b57f50f96aa2765a407a7c6ca63abfab37a3d42081f0ccd4b68751265295f16"
+        },
+        "orders.json": {
+          "sha256": "bfbae3bca04c69216d7583aaddb1c71f89a673cb184059214c22f046d893f3a0"
+        },
+        "zone_od_cost_matrix.csv.gz": {
+          "sha256": "87a2e4b0135f6159ca1b38719116b88c38b5172c6ba0f0bd1e01295ea2dfbcb0"
+        }
+      },
+      "scenario_dir": "./outputs/dispatch_layer/nyc_tlc_hvfhv_2024/three_method_benchmark_v1/cases/C3_manhattan_multizone_44_order_burst"
+    },
+    {
+      "case": "C4_manhattan_790_order_five_minute_load_sweep",
+      "fleet_id": "F1",
+      "scenario_id": "C4_manhattan_790_order_five_minute_load_sweep",
+      "scenario_files": {
+        "scenario.json": {
+          "sha256": "f61a787ec2bb2a8d2eadb719d33755784ad868710dde3727540671e48036909e"
+        },
+        "orders.json": {
+          "sha256": "b4431ba0c6c47209f4d6d0c1093e5755769402d4e0b5f0c5c4034ebdf51decc1"
+        },
+        "zone_od_cost_matrix.csv.gz": {
+          "sha256": "c9834f243b351b9dbc1cb7e1baefeac92ec50d87aeb65f9176af6ffd02b85dd3"
+        }
+      },
+      "scenario_dir": "./outputs/dispatch_layer/nyc_tlc_hvfhv_2024/three_method_benchmark_v1/cases/C4_manhattan_790_order_five_minute_load_sweep"
+    },
+    {
+      "case": "C4_manhattan_790_order_five_minute_load_sweep",
+      "fleet_id": "F2",
+      "scenario_id": "C4_manhattan_790_order_five_minute_load_sweep",
+      "scenario_files": {
+        "scenario.json": {
+          "sha256": "f61a787ec2bb2a8d2eadb719d33755784ad868710dde3727540671e48036909e"
+        },
+        "orders.json": {
+          "sha256": "b4431ba0c6c47209f4d6d0c1093e5755769402d4e0b5f0c5c4034ebdf51decc1"
+        },
+        "zone_od_cost_matrix.csv.gz": {
+          "sha256": "c9834f243b351b9dbc1cb7e1baefeac92ec50d87aeb65f9176af6ffd02b85dd3"
+        }
+      },
+      "scenario_dir": "./outputs/dispatch_layer/nyc_tlc_hvfhv_2024/three_method_benchmark_v1/cases/C4_manhattan_790_order_five_minute_load_sweep"
+    },
+    {
+      "case": "C4_manhattan_790_order_five_minute_load_sweep",
+      "fleet_id": "F4",
+      "scenario_id": "C4_manhattan_790_order_five_minute_load_sweep",
+      "scenario_files": {
+        "scenario.json": {
+          "sha256": "f61a787ec2bb2a8d2eadb719d33755784ad868710dde3727540671e48036909e"
+        },
+        "orders.json": {
+          "sha256": "b4431ba0c6c47209f4d6d0c1093e5755769402d4e0b5f0c5c4034ebdf51decc1"
+        },
+        "zone_od_cost_matrix.csv.gz": {
+          "sha256": "c9834f243b351b9dbc1cb7e1baefeac92ec50d87aeb65f9176af6ffd02b85dd3"
+        }
+      },
+      "scenario_dir": "./outputs/dispatch_layer/nyc_tlc_hvfhv_2024/three_method_benchmark_v1/cases/C4_manhattan_790_order_five_minute_load_sweep"
+    }
+  ],
+  "cost_accounting": "Reconcile raw Codex CLI turn usage after execution; report rate-card equivalents separately from unknown account billing.",
+  "updated_at_utc": "2026-10-21T10:17:10+00:00",
+  "failed_or_incomplete_cells": 0
+}
