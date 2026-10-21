@@ -1,0 +1,60 @@
+{
+  "failure_detail_zh": "方法未提供可验证路线。原始原因：no_legal_path 同任务的 3 种传统算法均找到有效路线；因此这不是地图物理不可达，本次失败来自 LLM 的路线生成或地点解析。",
+  "failure_reason": "no_legal_path",
+  "geometry": {
+    "attempted_route_edge_ids": [],
+    "attempted_route_node_ids": [],
+    "boundary": {
+      "max_x": 99,
+      "max_y": 99,
+      "min_x": 0,
+      "min_y": 0
+    },
+    "endpoint_node_ids": [],
+    "expanded_events": [],
+    "first_violation_step": null,
+    "map_id": "grid-100x100-seed-9",
+    "map_size": 100,
+    "move_count": 0,
+    "move_violations": [],
+    "nodes": [],
+    "road_context_edges": [],
+    "route_edges": [],
+    "route_node_ids": [],
+    "validated_prefix_node_ids": []
+  },
+  "llm_response_received": true,
+  "map_id": "grid-100x100-seed-9",
+  "method_name": "pure_llm_deepseek",
+  "proposal_energy_audit": {
+    "energy_model_version": "energy_v1",
+    "estimated_route_distance_m": null,
+    "exact_edge_moves": 0,
+    "interpretation": "No route steps were returned or recoverable; energy was not estimated.",
+    "proposed_move_count": 0,
+    "proxy_edge_moves": 0,
+    "reverse_edge_inferred_moves": 0,
+    "route_energy_estimate_kwh": null,
+    "status": "no_route_proposed",
+    "validated_prefix_energy_estimate_kwh": null,
+    "validated_prefix_move_count": 0
+  },
+  "scenario_id": "formal-0009-detour",
+  "scenario_type": "detour",
+  "schema_version": "route_trace_visual_record_v1",
+  "status": "failed",
+  "task_id": "formal-task-0009-detour",
+  "task_type": null,
+  "trace": {
+    "algorithm": "llm",
+    "expanded_nodes": 0,
+    "legs": [],
+    "method_name": "pure_llm_deepseek",
+    "route_edge_sequence": [],
+    "route_node_sequence": [],
+    "schema_version": "route_search_trace_v1",
+    "status": "failed"
+  },
+  "trace_id": "formal-0009-detour__pure_llm_deepseek",
+  "validation": null
+}

@@ -1,0 +1,148 @@
+{
+  "schema_version": "r4_stepwise_constraint_replay_audit_v1",
+  "audit_type": "offline_replay_of_saved_model_trace_against_updated_gate",
+  "source_artifact": "outputs/route_layer/r4_stepwise_live_v2/seed0_semantic_road_feature.json",
+  "no_new_api_requests": true,
+  "actual_run": {
+    "status": "model_gave_up",
+    "model": "deepseek-flash",
+    "api_request_count": 32,
+    "attempt_status_counts": {
+      "step_accepted": 29,
+      "step_invalid": 2,
+      "model_gave_up": 1
+    },
+    "accepted_move_count": 29,
+    "model_terminal_action": "give_up",
+    "model_terminal_node": "node_6_0",
+    "terminal_classification": [
+      "remaining_route_unreachable"
+    ],
+    "initial_reachability_preflight": {
+      "start_to_pickup": true,
+      "pickup_to_dropoff": true,
+      "chain_reachable": true
+    },
+    "input_bytes_before_compaction": 6334,
+    "input_bytes_after_compaction": 2353,
+    "api_usage": {
+      "llm_calls": 32,
+      "usage_complete": true,
+      "input_tokens": 41292,
+      "output_tokens": 3972,
+      "llm_latency_ms": 35061.357,
+      "client_retries": 0,
+      "serialized_user_input_bytes": 26026,
+      "serialized_messages_bytes": 77386
+    },
+    "api_cost_estimate_cny": 0.13579200000000002,
+    "validated_route_exists": false,
+    "actual_route_energy_status": "not_evaluated_no_validated_route",
+    "incomplete_prefix_energy_estimate": {
+      "status": "estimated",
+      "route_energy_estimate_kwh": 0.5424500000000002,
+      "validated_prefix_energy_estimate_kwh": 0.5424500000000002,
+      "estimated_route_distance_m": 2900.0,
+      "proposed_move_count": 29,
+      "validated_prefix_move_count": 29,
+      "exact_edge_moves": 29,
+      "reverse_edge_inferred_moves": 0,
+      "proxy_edge_moves": 0,
+      "energy_model_version": "energy_v1",
+      "fallback_length_m": 100.0,
+      "fallback_congestion_level": 0,
+      "fallback_signal_delay_sec": 0.0,
+      "interpretation": "not actual measured consumption; hypothetical sum for model-proposed directed edges. Disconnected edge sequences are not executable routes.",
+      "hypothetical_electricity_cost_amount": 1.2422105000000006
+    },
+    "invalid_proposals_rejected": [
+      {
+        "api_call": 3,
+        "step": 3,
+        "current_node_id": "node_0_7",
+        "proposed_direction": "N",
+        "allowed_directions": [
+          "E"
+        ],
+        "validator_errors": [
+          "directed_edge_missing"
+        ],
+        "accepted_into_route_state": false,
+        "proposal_energy_estimate": {
+          "status": "estimated",
+          "route_energy_estimate_kwh": 0.05399999999999999,
+          "validated_prefix_energy_estimate_kwh": 0.036,
+          "estimated_route_distance_m": 300.0,
+          "proposed_move_count": 3,
+          "validated_prefix_move_count": 2,
+          "exact_edge_moves": 2,
+          "reverse_edge_inferred_moves": 0,
+          "proxy_edge_moves": 1,
+          "energy_model_version": "energy_v1",
+          "fallback_length_m": 100.0,
+          "fallback_congestion_level": 0,
+          "fallback_signal_delay_sec": 0.0,
+          "interpretation": "not actual measured consumption; hypothetical sum for model-proposed directed edges. Disconnected edge sequences are not executable routes.",
+          "hypothetical_electricity_cost_amount": 0.12365999999999998
+        },
+        "output_constraint_mode": "strict_step_direction_schema"
+      },
+      {
+        "api_call": 9,
+        "step": 8,
+        "current_node_id": "node_4_6",
+        "proposed_direction": "N",
+        "allowed_directions": [
+          "E",
+          "W",
+          "S"
+        ],
+        "validator_errors": [
+          "node_revisited"
+        ],
+        "accepted_into_route_state": false,
+        "proposal_energy_estimate": {
+          "status": "estimated",
+          "route_energy_estimate_kwh": 0.148,
+          "validated_prefix_energy_estimate_kwh": 0.129,
+          "estimated_route_distance_m": 800.0,
+          "proposed_move_count": 8,
+          "validated_prefix_move_count": 7,
+          "exact_edge_moves": 8,
+          "reverse_edge_inferred_moves": 0,
+          "proxy_edge_moves": 0,
+          "energy_model_version": "energy_v1",
+          "fallback_length_m": 100.0,
+          "fallback_congestion_level": 0,
+          "fallback_signal_delay_sec": 0.0,
+          "interpretation": "not actual measured consumption; hypothetical sum for model-proposed directed edges. Disconnected edge sequences are not executable routes.",
+          "hypothetical_electricity_cost_amount": 0.33892
+        },
+        "output_constraint_mode": "strict_step_direction_schema"
+      }
+    ]
+  },
+  "updated_gate_replay": {
+    "initial_minimum_moves_lower_bound": 9,
+    "initial_action_budget": 32,
+    "first_divergence": {
+      "api_call": 26,
+      "step": 24,
+      "current_node_id": "node_2_2",
+      "old_model_direction": "S",
+      "new_allowed_directions": [],
+      "new_filtered_directions": {
+        "W": "remaining_action_budget_insufficient",
+        "S": "remaining_action_budget_insufficient",
+        "E": "remaining_action_budget_insufficient"
+      },
+      "remaining_minimum_moves_lower_bound": 6,
+      "remaining_action_budget": 7,
+      "new_schema_action_enum": [
+        "give_up"
+      ],
+      "classification": "old accepted move would be rejected by the updated deterministic feasibility/budget gate"
+    },
+    "interpretation": "This offline replay shows where the updated gate would stop the saved proposal stream. It is not a new model result and does not prove that a model would choose a different continuation or finish a route."
+  }
+}

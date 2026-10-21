@@ -1,0 +1,60 @@
+{
+  "failure_detail_zh": "模型返回了失败结果：判断起终点不可达（是否为预期失败需结合场景设计判断）。原始原因：unreachable 该正式场景预设为不可达，传统算法也按场景约束失败，属于设计中的不可行案例。",
+  "failure_reason": "unreachable",
+  "geometry": {
+    "attempted_route_edge_ids": [],
+    "attempted_route_node_ids": [],
+    "boundary": {
+      "max_x": 99,
+      "max_y": 99,
+      "min_x": 0,
+      "min_y": 0
+    },
+    "endpoint_node_ids": [],
+    "expanded_events": [],
+    "first_violation_step": null,
+    "map_id": "grid-100x100-seed-4",
+    "map_size": 100,
+    "move_count": 0,
+    "move_violations": [],
+    "nodes": [],
+    "road_context_edges": [],
+    "route_edges": [],
+    "route_node_ids": [],
+    "validated_prefix_node_ids": []
+  },
+  "llm_response_received": true,
+  "map_id": "grid-100x100-seed-4",
+  "method_name": "pure_llm_deepseek",
+  "proposal_energy_audit": {
+    "energy_model_version": "energy_v1",
+    "estimated_route_distance_m": null,
+    "exact_edge_moves": 0,
+    "interpretation": "No route steps were returned or recoverable; energy was not estimated.",
+    "proposed_move_count": 0,
+    "proxy_edge_moves": 0,
+    "reverse_edge_inferred_moves": 0,
+    "route_energy_estimate_kwh": null,
+    "status": "no_route_proposed",
+    "validated_prefix_energy_estimate_kwh": null,
+    "validated_prefix_move_count": 0
+  },
+  "scenario_id": "formal-0004-unreachable",
+  "scenario_type": "unreachable",
+  "schema_version": "route_trace_visual_record_v1",
+  "status": "failed",
+  "task_id": "formal-task-0004-unreachable",
+  "task_type": null,
+  "trace": {
+    "algorithm": "llm",
+    "expanded_nodes": 0,
+    "legs": [],
+    "method_name": "pure_llm_deepseek",
+    "route_edge_sequence": [],
+    "route_node_sequence": [],
+    "schema_version": "route_search_trace_v1",
+    "status": "failed"
+  },
+  "trace_id": "formal-0004-unreachable__pure_llm_deepseek",
+  "validation": null
+}

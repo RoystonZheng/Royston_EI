@@ -1,0 +1,149 @@
+{
+  "input_type": "order_batch",
+  "map_id": "grid-100x100-seed-0",
+  "map_version": "grid-v1-100",
+  "methods": [
+    "pure_llm_deepseek"
+  ],
+  "price_profile": {
+    "api_price_per_token": 3e-06,
+    "billing_period": "simulation",
+    "compute_price_per_ms": 1e-08,
+    "currency": "CNY",
+    "electricity_price_per_kwh": 2.29,
+    "notes": "烟雾测试采用该官方站点列示的峰时综合充电服务价 2.29 元/kWh；特斯拉价格按站点和时段动态变化，正式实验应按实际站点与仿真时段替换。",
+    "observed_at": "2026-10-13",
+    "price_basis": "charging_service_total_per_kwh_includes_electricity_and_service_fee",
+    "price_source": "Tesla China official Supercharger station page",
+    "price_source_url": "https://www.tesla.cn/findus/location/supercharger/cnsc9691?region=CN",
+    "pricing_status": "official_station_reference",
+    "pricing_version": "tesla_cn_station_peak_v1",
+    "rate_schedule": {
+      "00:00-08:00": 1.39,
+      "08:00-10:00": 1.69,
+      "10:00-12:00": 2.29,
+      "12:00-14:00": 1.69,
+      "14:00-19:00": 2.29,
+      "19:00-24:00": 1.69
+    },
+    "reference_rate_type": "peak_window_total_charging_service_price",
+    "reference_station": "深圳中航工业南航大厦 Tesla 超级充电站"
+  },
+  "random_seed": 0,
+  "results": [
+    {
+      "methods": [
+        {
+          "best_route_id": null,
+          "evaluation": null,
+          "failure_reason": "llm_output_parse_failed",
+          "invalid_route_count": 0,
+          "metadata": {
+            "compute_time_ms": 8480.344792,
+            "cost_status": "not_evaluated_route_api_recorded",
+            "llm_error": "Unterminated string starting at: line 1 column 4756 (char 4755)",
+            "llm_model": "deepseek-flash",
+            "llm_request_id": null,
+            "llm_retries": 0,
+            "llm_status": "output_parse_failed",
+            "observed_at": "2026-10-13",
+            "price_basis": "charging_service_total_per_kwh_includes_electricity_and_service_fee",
+            "price_source": "Tesla China official Supercharger station page",
+            "price_source_url": "https://www.tesla.cn/findus/location/supercharger/cnsc9691?region=CN",
+            "pricing_status": "official_station_reference",
+            "pricing_version": "tesla_cn_station_peak_v1",
+            "reference_rate_type": "peak_window_total_charging_service_price",
+            "reference_station": "深圳中航工业南航大厦 Tesla 超级充电站"
+          },
+          "method_name": "pure_llm_deepseek",
+          "monetary_cost": {
+            "api_cost_amount": 1.368888,
+            "compute_cost_amount": 8.480344792e-05,
+            "currency": "CNY",
+            "electricity_cost_amount": 0.0,
+            "total_monetary_cost": 1.36897280344792
+          },
+          "raw_output": {
+            "content": "{\"status\":\"completed\",\"pickup_node_id\":\"node_66_35\",\"dropoff_node_id\":\"node_58_66\",\"node_sequence\":[\"node_84_72\",\"node_84_71\",\"node_84_70\",\"node_84_69\",\"node_84_68\",\"node_84_67\",\"node_84_66\",\"node_84_65\",\"node_84_64\",\"node_84_63\",\"node_84_62\",\"node_84_61\",\"node_84_60\",\"node_84_59\",\"node_84_58\",\"node_84_57\",\"node_84_56\",\"node_84_55\",\"node_84_54\",\"node_84_53\",\"node_84_52\",\"node_84_51\",\"node_84_50\",\"node_84_49\",\"node_84_48\",\"node_84_47\",\"node_84_46\",\"node_84_45\",\"node_84_44\",\"node_84_43\",\"node_84_42\",\"node_84_41\",\"node_84_40\",\"node_84_39\",\"node_84_38\",\"node_84_37\",\"node_84_36\",\"node_84_35\",\"node_84_34\",\"node_84_33\",\"node_84_32\",\"node_84_31\",\"node_84_30\",\"node_84_29\",\"node_84_28\",\"node_84_27\",\"node_84_26\",\"node_84_25\",\"node_83_25\",\"node_82_25\",\"node_81_25\",\"node_80_25\",\"node_79_25\",\"node_78_25\",\"node_77_25\",\"node_76_25\",\"node_75_25\",\"node_74_25\",\"node_73_25\",\"node_72_25\",\"node_71_25\",\"node_70_25\",\"node_69_25\",\"node_68_25\",\"node_67_25\",\"node_66_25\",\"node_66_26\",\"node_66_27\",\"node_66_28\",\"node_66_29\",\"node_66_30\",\"node_66_31\",\"node_66_32\",\"node_66_33\",\"node_66_34\",\"node_66_35\",\"node_66_36\",\"node_66_37\",\"node_66_38\",\"node_66_39\",\"node_66_40\",\"node_66_41\",\"node_66_42\",\"node_66_43\",\"node_66_44\",\"node_66_45\",\"node_66_46\",\"node_66_47\",\"node_66_48\",\"node_66_49\",\"node_66_50\",\"node_66_51\",\"node_66_52\",\"node_66_53\",\"node_66_54\",\"node_66_55\",\"node_66_56\",\"node_66_57\",\"node_66_58\",\"node_66_59\",\"node_66_60\",\"node_66_61\",\"node_66_62\",\"node_66_63\",\"node_66_64\",\"node_66_65\",\"node_66_66\",\"node_66_67\",\"node_66_68\",\"node_66_69\",\"node_66_70\",\"node_66_71\",\"node_66_72\",\"node_66_73\",\"node_66_74\",\"node_66_75\",\"node_66_76\",\"node_66_77\",\"node_66_78\",\"node_66_79\",\"node_66_80\",\"node_66_81\",\"node_66_82\",\"node_65_82\",\"node_64_82\",\"node_63_82\",\"node_62_82\",\"node_61_82\",\"node_60_82\",\"node_59_82\",\"node_58_82\",\"node_58_81\",\"node_58_80\",\"node_58_79\",\"node_58_78\",\"node_58_77\",\"node_58_76\",\"node_58_75\",\"node_58_74\",\"node_58_73\",\"node_58_72\",\"node_58_71\",\"node_58_70\",\"node_58_69\",\"node_58_68\",\"node_58_67\",\"node_58_66\"],\"edge_sequence\":[\"edge_node_84_72_node_84_71\",\"edge_node_84_71_node_84_70\",\"edge_node_84_70_node_84_69\",\"edge_node_84_69_node_84_68\",\"edge_node_84_68_node_84_67\",\"edge_node_84_67_node_84_66\",\"edge_node_84_66_node_84_65\",\"edge_node_84_65_node_84_64\",\"edge_node_84_64_node_84_63\",\"edge_node_84_63_node_84_62\",\"edge_node_84_62_node_84_61\",\"edge_node_84_61_node_84_60\",\"edge_node_84_60_node_84_59\",\"edge_node_84_59_node_84_58\",\"edge_node_84_58_node_84_57\",\"edge_node_84_57_node_84_56\",\"edge_node_84_56_node_84_55\",\"edge_node_84_55_node_84_54\",\"edge_node_84_54_node_84_53\",\"edge_node_84_53_node_84_52\",\"edge_node_84_52_node_84_51\",\"edge_node_84_51_node_84_50\",\"edge_node_84_50_node_84_49\",\"edge_node_84_49_node_84_48\",\"edge_node_84_48_node_84_47\",\"edge_node_84_47_node_84_46\",\"edge_node_84_46_node_84_45\",\"edge_node_84_45_node_84_44\",\"edge_node_84_44_node_84_43\",\"edge_node_84_43_node_84_42\",\"edge_node_84_42_node_84_41\",\"edge_node_84_41_node_84_40\",\"edge_node_84_40_node_84_39\",\"edge_node_84_39_node_84_38\",\"edge_node_84_38_node_84_37\",\"edge_node_84_37_node_84_36\",\"edge_node_84_36_node_84_35\",\"edge_node_84_35_node_84_34\",\"edge_node_84_34_node_84_33\",\"edge_node_84_33_node_84_32\",\"edge_node_84_32_node_84_31\",\"edge_node_84_31_node_84_30\",\"edge_node_84_30_node_84_29\",\"edge_node_84_29_node_84_28\",\"edge_node_84_28_node_84_27\",\"edge_node_84_27_node_84_26\",\"edge_node_84_26_node_84_25\",\"edge_node_84_25_node_83_25\",\"edge_node_83_25_node_82_25\",\"edge_node_82_25_node_81_25\",\"edge_node_81_25_node_80_25\",\"edge_node_80_25_node_79_25\",\"edge_node_79_25_node_78_25\",\"edge_node_78_25_node_77_25\",\"edge_node_77_25_node_76_25\",\"edge_node_76_25_node_75_25\",\"edge_node_75_25_node_74_25\",\"edge_node_74_25_node_73_25\",\"edge_node_73_25_node_72_25\",\"edge_node_72_25_node_71_25\",\"edge_node_71_25_node_70_25\",\"edge_node_70_25_node_69_25\",\"edge_node_69_25_node_68_25\",\"edge_node_68_25_node_67_25\",\"edge_node_67_25_node_66_25\",\"edge_node_66_25_node_66_26\",\"edge_node_66_26_node_66_27\",\"edge_node_66_27_node_66_28\",\"edge_node_66_28_node_66_29\",\"edge_node_66_29_node_66_30\",\"edge_node_66_30_node_66_31\",\"edge_node_66_31_node_66_32\",\"edge_node_66_32_node_66_33\",\"edge_node_66_33_node_66_34\",\"edge_node_66_34_node_66_35\",\"edge_node_66_35_node_66_36\",\"edge_node_66_36_node_66_37\",\"edge_node_66_37_node_66_38\",\"edge_node_66_38_node_66_39\",\"edge_node_66_39_node_66_40\",\"edge_node_66_40_node_66_41\",\"edge_node_66_41_node_66_42\",\"edge_node_66_42_node_66_43\",\"edge_node_66_43_node_66_44\",\"edge_node_66_44_node_66_45\",\"edge_node_66_45_node_66_46\",\"edge_node_66_46_node_66_47\",\"edge_node_66_47_node_66_48\",\"edge_node_66_48_node_66_49\",\"edge_node_66_49_node_66_50\",\"edge_node_66_50_node_66_51\",\"edge_node_66_51_node_66_52\",\"edge_node_66_52_node_66_53\",\"edge_node_66_53_node_66_54\",\"",
+            "error": "Unterminated string starting at: line 1 column 4756 (char 4755)"
+          },
+          "resources": {
+            "compute_time_ms": 8480.344792,
+            "energy_kwh": 0.0,
+            "input_tokens": 454248,
+            "llm_calls": 1,
+            "llm_latency_ms": 8363.230875,
+            "output_tokens": 2048
+          },
+          "routes": [],
+          "status": "failed",
+          "task_id": "task-0000-0001",
+          "valid_route_count": 0,
+          "validation": null
+        }
+      ],
+      "task_id": "task-0000-0001",
+      "task_type": "semantic_landmark_nearby"
+    },
+    {
+      "methods": [
+        {
+          "best_route_id": null,
+          "evaluation": null,
+          "failure_reason": "IncompleteRead(0 bytes read)",
+          "invalid_route_count": 0,
+          "metadata": {
+            "compute_time_ms": 17258.885125,
+            "cost_status": "not_evaluated_route_api_recorded",
+            "llm_error": "IncompleteRead(0 bytes read)",
+            "llm_status": "request_failed",
+            "observed_at": "2026-10-13",
+            "price_basis": "charging_service_total_per_kwh_includes_electricity_and_service_fee",
+            "price_source": "Tesla China official Supercharger station page",
+            "price_source_url": "https://www.tesla.cn/findus/location/supercharger/cnsc9691?region=CN",
+            "pricing_status": "official_station_reference",
+            "pricing_version": "tesla_cn_station_peak_v1",
+            "reference_rate_type": "peak_window_total_charging_service_price",
+            "reference_station": "深圳中航工业南航大厦 Tesla 超级充电站"
+          },
+          "method_name": "pure_llm_deepseek",
+          "monetary_cost": {
+            "api_cost_amount": 0.0,
+            "compute_cost_amount": 0.00017258885125,
+            "currency": "CNY",
+            "electricity_cost_amount": 0.0,
+            "total_monetary_cost": 0.00017258885125
+          },
+          "raw_output": {
+            "reason": "IncompleteRead(0 bytes read)",
+            "status": "failed"
+          },
+          "resources": {
+            "compute_time_ms": 17258.885125,
+            "energy_kwh": 0.0,
+            "input_tokens": 0,
+            "llm_calls": 1,
+            "llm_latency_ms": 0.0,
+            "output_tokens": 0
+          },
+          "routes": [],
+          "status": "failed",
+          "task_id": "task-0000-0002",
+          "valid_route_count": 0,
+          "validation": null
+        }
+      ],
+      "task_id": "task-0000-0002",
+      "task_type": "semantic_landmark_relative"
+    }
+  ],
+  "run_type": "live_deepseek_pure_llm_experiment",
+  "schema_version": "pure_llm_experiment_routes_v1",
+  "semantic_policy": {
+    "baseline_visibility": "road_feature_input_protocol_v1",
+    "reads_roadside_features": true,
+    "resolver": "deepseek_v4_flash",
+    "semantic_tasks_remain_routable": true,
+    "uses_evaluator_truth": false
+  }
+}

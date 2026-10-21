@@ -1,0 +1,119 @@
+{
+  "schema_version": "r4_stepwise_posthoc_reachability_audit_v1",
+  "source_artifact": "seed0_semantic_road_feature.json",
+  "classification": "offline_reachability_witness_not_model_proposal_or_fallback",
+  "api_request_count": 12,
+  "api_error_count": 0,
+  "accepted_model_move_count": 11,
+  "model_terminal_action": "give_up",
+  "model_failure_reason_code": "unable_to_construct_route",
+  "terminal_node_id": "node_7_7",
+  "terminal_action_was_independently_reachability_checked_in_run": false,
+  "posthoc_remaining_route_reachable": true,
+  "pickup_node_id": "node_1_2",
+  "dropoff_node_id": "node_6_2",
+  "remaining_route_witness": {
+    "current_to_pickup": {
+      "node_sequence": [
+        "node_7_7",
+        "node_7_6",
+        "node_6_6",
+        "node_6_5",
+        "node_5_5",
+        "node_4_5",
+        "node_3_5",
+        "node_2_5",
+        "node_1_5",
+        "node_1_4",
+        "node_1_3",
+        "node_1_2"
+      ],
+      "edge_sequence": [
+        "edge_node_7_7_node_7_6",
+        "edge_node_7_6_node_6_6",
+        "edge_node_6_6_node_6_5",
+        "edge_node_6_5_node_5_5",
+        "edge_node_5_5_node_4_5",
+        "edge_node_4_5_node_3_5",
+        "edge_node_3_5_node_2_5",
+        "edge_node_2_5_node_1_5",
+        "edge_node_1_5_node_1_4",
+        "edge_node_1_4_node_1_3",
+        "edge_node_1_3_node_1_2"
+      ],
+      "directions": [
+        "S",
+        "W",
+        "S",
+        "W",
+        "W",
+        "W",
+        "W",
+        "W",
+        "S",
+        "S",
+        "S"
+      ]
+    },
+    "pickup_to_dropoff": {
+      "node_sequence": [
+        "node_1_2",
+        "node_2_2",
+        "node_3_2",
+        "node_4_2",
+        "node_5_2",
+        "node_6_2"
+      ],
+      "edge_sequence": [
+        "edge_node_1_2_node_2_2",
+        "edge_node_2_2_node_3_2",
+        "edge_node_3_2_node_4_2",
+        "edge_node_4_2_node_5_2",
+        "edge_node_5_2_node_6_2"
+      ],
+      "directions": [
+        "E",
+        "E",
+        "E",
+        "E",
+        "E"
+      ]
+    }
+  },
+  "accepted_prefix_node_sequence": [
+    "node_0_5",
+    "node_0_6",
+    "node_1_6",
+    "node_1_7",
+    "node_2_7",
+    "node_3_7",
+    "node_4_7",
+    "node_4_6",
+    "node_5_6",
+    "node_5_7",
+    "node_6_7",
+    "node_7_7"
+  ],
+  "accepted_prefix_edge_sequence": [
+    "edge_node_0_5_node_0_6",
+    "edge_node_0_6_node_1_6",
+    "edge_node_1_6_node_1_7",
+    "edge_node_1_7_node_2_7",
+    "edge_node_2_7_node_3_7",
+    "edge_node_3_7_node_4_7",
+    "edge_node_4_7_node_4_6",
+    "edge_node_4_6_node_5_6",
+    "edge_node_5_6_node_5_7",
+    "edge_node_5_7_node_6_7",
+    "edge_node_6_7_node_7_7"
+  ],
+  "witness_total_moves_including_prefix": 27,
+  "remaining_witness_moves": 16,
+  "api_call_limit": 16,
+  "calls_used_when_give_up_returned": 12,
+  "calls_available_after_response": 4,
+  "complete_route_validated": false,
+  "route_energy_kwh": null,
+  "route_electricity_cost": null,
+  "interpretation": "The response stream was healthy and every accepted move passed local directed-edge checks. The model gave up while a legal no-repeat continuation existed. The attempt had consumed 12 of 16 calls; only 4 calls remained for a witness requiring 16 additional moves, so this run could no longer finish within its configured cap."
+}

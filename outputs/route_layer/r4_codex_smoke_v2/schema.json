@@ -1,0 +1,60 @@
+{
+  "type": "object",
+  "properties": {
+    "action": {
+      "type": "string",
+      "enum": [
+        "move"
+      ]
+    },
+    "direction": {
+      "type": "string",
+      "enum": [
+        "N",
+        "S"
+      ]
+    },
+    "self_check": {
+      "type": "object",
+      "properties": {
+        "allowed_directed_edge": {
+          "type": "boolean"
+        },
+        "starts_at_current": {
+          "type": "boolean"
+        },
+        "inside_boundary": {
+          "type": "boolean"
+        },
+        "pickup_order_ok": {
+          "type": "boolean"
+        },
+        "not_revisited": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "allowed_directed_edge",
+        "starts_at_current",
+        "inside_boundary",
+        "pickup_order_ok",
+        "not_revisited"
+      ],
+      "additionalProperties": false
+    },
+    "failure_reason_code": {
+      "type": "string",
+      "enum": [
+        "none",
+        "unable_to_construct_route"
+      ]
+    }
+  },
+  "required": [
+    "action",
+    "direction",
+    "self_check",
+    "failure_reason_code"
+  ],
+  "additionalProperties": false
+}

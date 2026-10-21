@@ -1,0 +1,73 @@
+{
+  "api_base_url": "https://api.deepseek.com",
+  "api_key_env": "LLM_API_KEY",
+  "artifacts_complete": false,
+  "errors": [],
+  "index_html": "index.html",
+  "map_size": 100,
+  "methods": [
+    "pure_llm_deepseek"
+  ],
+  "model_requested": "deepseek-flash",
+  "models_observed": [
+    "deepseek-flash"
+  ],
+  "run_type": "live_deepseek_pure_llm_experiment",
+  "schema_version": "pure_llm_experiment_manifest_v1",
+  "seeds": [
+    0
+  ],
+  "seeds_detail": [
+    {
+      "errors": [],
+      "formal_count": 0,
+      "formal_routes_costs": "seeds/seed_0/pure_llm_formal_routes_costs_seed_0.json",
+      "formal_summary": {
+        "completed": 0,
+        "evaluated_routes": 0,
+        "failed": 0,
+        "task_count": 0,
+        "total_energy_kwh": 0.0,
+        "total_input_tokens": 0,
+        "total_llm_calls": 0,
+        "total_llm_latency_ms": 0.0,
+        "total_monetary_cost": 0.0,
+        "total_output_tokens": 0,
+        "valid_routes": 0
+      },
+      "formal_trace_count": 0,
+      "formal_visual_index": "seeds/seed_0/visualizations/formal_scenarios/index.html",
+      "map_id": "grid-100x100-seed-0",
+      "map_json": "seeds/seed_0/map_100x100_seed_0.json",
+      "order_count": 3,
+      "order_routes_costs": "seeds/seed_0/pure_llm_order_routes_costs_seed_0.json",
+      "order_summary": {
+        "completed": 0,
+        "evaluated_routes": 0,
+        "failed": 3,
+        "task_count": 3,
+        "total_energy_kwh": 0.0,
+        "total_input_tokens": 2024741,
+        "total_llm_calls": 3,
+        "total_llm_latency_ms": 16595.821458000002,
+        "total_monetary_cost": 6.08697331010125,
+        "total_output_tokens": 4193,
+        "valid_routes": 0
+      },
+      "order_trace_count": 3,
+      "order_visual_index": "seeds/seed_0/visualizations/orders/index.html",
+      "result_status": "completed",
+      "seed": 0,
+      "seed_dashboard_index": "seeds/seed_0/index.html"
+    }
+  ],
+  "semantic_policy": {
+    "baseline_visibility": "road_feature_input_protocol_v1",
+    "reads_roadside_features": true,
+    "resolver": "deepseek_v4_flash",
+    "semantic_tasks_remain_routable": true,
+    "uses_evaluator_truth": false
+  },
+  "status": "completed",
+  "total_trace_count": 3
+}

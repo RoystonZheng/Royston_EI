@@ -1,0 +1,60 @@
+{
+  "schema_version": "r4_stepwise_success_validation_audit_v1",
+  "audit_type": "offline_independent_audit_of_saved_validated_route",
+  "source_artifact": "outputs/route_layer/r4_stepwise_live_v3/seed0_semantic_road_feature.json",
+  "original_api_capture": "outputs/route_layer/r4_stepwise_live_v3/seed0_semantic_road_feature_raw_capture.json",
+  "original_api_capture_sha256": "7b511483eaa08878eea83ac6889fced80dc0cc9dcdadc67f894524fd8b3f7bec",
+  "raw_attempt_records_sha256": "665bac558732e941b13d05ffec9d8e92a316017dce97a7f83a48dcf075dcc257",
+  "raw_attempt_records_changed": false,
+  "derived_metadata_normalization": {
+    "field": "deepseek.route.validation_status",
+    "from": "unvalidated",
+    "to": "valid",
+    "reason": "normalization of derived route metadata from the already saved independent top-level validation; raw attempt records remain unchanged"
+  },
+  "status": "passed",
+  "checks": {
+    "route_status": true,
+    "route_source_is_llm": true,
+    "shared_validator_valid": true,
+    "start_matches_task": true,
+    "pickup_matches_qwen_resolution": true,
+    "dropoff_matches_qwen_resolution": true,
+    "pickup_precedes_dropoff": true,
+    "no_revisited_nodes": true,
+    "route_edge_count_matches_node_count": true,
+    "all_edges_present_with_exact_direction": true,
+    "all_route_nodes_inside_map": true,
+    "all_accepted_steps_passed_local_checks": true,
+    "all_accepted_steps_passed_model_self_check": true,
+    "map_semantics_hash_equal": true,
+    "no_algorithm_fallback": true,
+    "api_call_budget_respected": true
+  },
+  "counts": {
+    "api_requests": 31,
+    "accepted_route_moves": 25,
+    "rejected_model_proposals": 6,
+    "route_nodes": 26
+  },
+  "task": {
+    "start": "node_0_5",
+    "pickup": "node_1_2",
+    "dropoff": "node_6_2"
+  },
+  "route_metrics": {
+    "base_travel_time_sec": 257.5,
+    "congestion_delay_sec": 33.54166666666666,
+    "signal_delay_sec": 25.0,
+    "total_travel_time_sec": 316.04166666666663,
+    "energy_moving_kwh": 0.4500000000000001,
+    "energy_idle_signal_kwh": 0.00075,
+    "energy_congestion_kwh": 0.012000000000000004,
+    "energy_total_kwh": 0.4627500000000001,
+    "route_distance_m": 2500.0,
+    "simulation_estimate": true,
+    "energy_model_version": "energy_v1"
+  },
+  "api_cost_cny_estimate": 0.13234200000000002,
+  "route_electricity_cost_cny_estimate": 1.0596975000000002
+}

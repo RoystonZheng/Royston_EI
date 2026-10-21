@@ -1,0 +1,1365 @@
+{
+  "schema_version": "r4_route_input_size_audit_v1",
+  "generated_at_utc": "2026-10-18T15:33:09.763889+00:00",
+  "formal_result": false,
+  "source_input_tree": "outputs/route_layer/traditional_experiment_v1/seeds/",
+  "source_file_sha256_by_seed": {
+    "0": {
+      "map": "bdf7da792ecf78ae393f5441055d592f3585674bea48d4f12d2d2d1ce632adbe",
+      "orders": "867d863c961406fd89a620177253cf50493b0883988069a033d147d6496e7999",
+      "scenarios": "ddf3c2c65ac9d84fd7cf48e8fb8b16ba1633e023c6be276715244b9aee1c7718"
+    },
+    "1": {
+      "map": "f53f42036df9ccd30bdad348d7141afc7c6311ca7ae981480bb1647d364e090d",
+      "orders": "190fe1658cbfcb5428bb5295426890a63f69ab63e14efd980f2e4353f7e72b65",
+      "scenarios": "78966375b4552badfbc114e4739d0575e6bdfc3cc7eacc82338205610106f2b2"
+    },
+    "2": {
+      "map": "fc9222c6610de7d87f9f816794432807a8d0521691343855e60d24805937ebbd",
+      "orders": "d6c97b52062bf24d4030b4e5cdbe2578389a43761ce4ce12dd332a2194ff4390",
+      "scenarios": "249e514acdcc2b7d7a00a59d9ed685aa0dc8c297f2fafa8910be42a3d184b95a"
+    },
+    "3": {
+      "map": "8230220e109467546e652245ff47429183bfb32f8a7e2c1db15d9108ac4f0152",
+      "orders": "098a937b03fb8680e2a4e6a092b103f60b4638426b557673fbc6c484b7156cf1",
+      "scenarios": "717ff41667ec5d87eaae93e9c07ec3b4b667e524e5dd71a93b811950ca23d535"
+    },
+    "4": {
+      "map": "427abb25ff91080517daeec45bc3319d2e162f3752eda2f5f9022928b751a27c",
+      "orders": "3a39cca00c5c5acbf96e43585203d61d34396116c04cf40efa6aa15d6af05b9b",
+      "scenarios": "24a1ca130791791ca922d43f30cc1fac382852dfee7d7197d70e627454bbe0d4"
+    },
+    "5": {
+      "map": "12ff11b17419d274df45c6ae7dd0808987dba5d633a7ae781298455c0c3e93d6",
+      "orders": "11a4ee146c20ff80f02b680172dcf9e8c9ec8d96d945db6631c46a7490f72542",
+      "scenarios": "cb5660031b53430959ae47eb2b1a05962a1305444d2130e9c3cce54cf8afad60"
+    },
+    "6": {
+      "map": "d98f602f88f060a638b1cc8c218defda59254dd73bfecf06e0e1ee079b28779b",
+      "orders": "4209b5bea5856d7c8fed1068e3ca15622112d34f0077f6ad0678be3a938c3e43",
+      "scenarios": "40f82e42a32d2ef04084ecb31f59e2dd97e5dba09a2e90829e64893d213eaac3"
+    },
+    "7": {
+      "map": "6a78bfe44285f5bdef00da04462909fb52dc9f4464124bcad91d617265e5bd19",
+      "orders": "bade834ed5a7e6cccd751c3862826cc5c33890f9e3d088b82475bd7280871158",
+      "scenarios": "d78cd163c6af9000d5048089bf5344beca6fe44f9d4a7f0f77052544675b6981"
+    },
+    "8": {
+      "map": "73f75f0440a9c5321f36769d6f0977b6e55536e18acc4f6ec53d304c492a477d",
+      "orders": "e871e414a4da54a6e430eed1d6140129664a9556b035170e85b94b3a5245c5b7",
+      "scenarios": "1f112b4c172de4423922e7c40fb5cf2802fc7e53405f133a446f3c5267ac028f"
+    },
+    "9": {
+      "map": "6a9620be26aebff8383939a609e6b0224dcaf0eaaea0121a2f09e7da5fd899ee",
+      "orders": "ff7e0f7c542e66eb140f9f9a638fc432b371234e56aca3633139287942bad339",
+      "scenarios": "ae32374c97d9ad6c4e72363bb5c7d86b771dd3d1343a64ca52de86a0ae1406c2"
+    }
+  },
+  "size_proxy_note": "For semantic tasks, evaluator endpoint fields were used only to estimate package size; they were removed before message serialization. No API requests were made.",
+  "expected_tasks": 150,
+  "route_payloads_built": 140,
+  "pre_api_gate_skips": 10,
+  "skip_reasons": {
+    "r4_pickup_not_legal": 10
+  },
+  "payload_byte_summary": {
+    "min": 3604,
+    "mean": 21246.7,
+    "median": 20395.0,
+    "p95": 37226,
+    "max": 42014,
+    "sum": 2974535
+  },
+  "package_node_summary": {
+    "min": 476,
+    "median": 4613.0,
+    "max": 10000
+  },
+  "package_directed_edge_summary": {
+    "min": 1694,
+    "median": 16826.0,
+    "max": 36713
+  },
+  "max_route_attempts_per_condition": {
+    "R4": 3,
+    "R4-A": 3,
+    "R4-B": 1
+  },
+  "max_calls_if_all_attempts_used": 980,
+  "rough_cost_estimates_not_a_budget": {
+    "prior_smoke_ratio": {
+      "input_tokens_approx": 11871421,
+      "output_token_cap": 501760,
+      "max_api_cost_cny_approx": 37.1195
+    },
+    "one_token_per_byte": {
+      "input_tokens_approx": 21017745,
+      "output_token_cap": 501760,
+      "max_api_cost_cny_approx": 64.5585
+    }
+  },
+  "price_source_config": "configs/route_layer/price_smoke_v1.json",
+  "token_estimate_caveat": "The compact directional-code grid has not yet been token-counted by DeepSeek. Range uses prior smoke token/byte ratio and one token per byte; system prompt allowance 200 tokens/call. Actual R4/A/B tokenization and route lengths may differ.",
+  "task_size_rows": [
+    {
+      "seed": 0,
+      "task_id": "task-0000-0001",
+      "scope": "order",
+      "input_bytes": 12794,
+      "nodes": 2726,
+      "edges": 9864,
+      "cost_classes": 32
+    },
+    {
+      "seed": 0,
+      "task_id": "task-0000-0002",
+      "scope": "order",
+      "input_bytes": 21540,
+      "nodes": 4898,
+      "edges": 17849,
+      "cost_classes": 32
+    },
+    {
+      "seed": 0,
+      "task_id": "task-0000-0003",
+      "scope": "order",
+      "input_bytes": 19862,
+      "nodes": 4472,
+      "edges": 16280,
+      "cost_classes": 32
+    },
+    {
+      "seed": 0,
+      "task_id": "task-0000-0004",
+      "scope": "order",
+      "input_bytes": 18174,
+      "nodes": 4071,
+      "edges": 14847,
+      "cost_classes": 32
+    },
+    {
+      "seed": 0,
+      "task_id": "task-0000-0005",
+      "scope": "order",
+      "input_bytes": 33957,
+      "nodes": 7990,
+      "edges": 29196,
+      "cost_classes": 32
+    },
+    {
+      "seed": 0,
+      "task_id": "task-0000-0006",
+      "scope": "order",
+      "input_bytes": 31205,
+      "nodes": 7308,
+      "edges": 26726,
+      "cost_classes": 32
+    },
+    {
+      "seed": 0,
+      "task_id": "task-0000-0007",
+      "scope": "order",
+      "input_bytes": 33141,
+      "nodes": 7800,
+      "edges": 28547,
+      "cost_classes": 32
+    },
+    {
+      "seed": 0,
+      "task_id": "task-0000-0008",
+      "scope": "order",
+      "input_bytes": 14140,
+      "nodes": 3080,
+      "edges": 11200,
+      "cost_classes": 32
+    },
+    {
+      "seed": 0,
+      "task_id": "task-0000-0009",
+      "scope": "order",
+      "input_bytes": 13814,
+      "nodes": 2990,
+      "edges": 10853,
+      "cost_classes": 32
+    },
+    {
+      "seed": 0,
+      "task_id": "task-0000-0010",
+      "scope": "order",
+      "input_bytes": 20461,
+      "nodes": 4650,
+      "edges": 16954,
+      "cost_classes": 32
+    },
+    {
+      "seed": 0,
+      "task_id": "formal-task-0000-feasible",
+      "scope": "formal_scenario",
+      "input_bytes": 34007,
+      "nodes": 8000,
+      "edges": 29237,
+      "cost_classes": 32
+    },
+    {
+      "seed": 0,
+      "task_id": "formal-task-0000-boundary",
+      "scope": "formal_scenario",
+      "input_bytes": 21017,
+      "nodes": 4785,
+      "edges": 17460,
+      "cost_classes": 32
+    },
+    {
+      "seed": 0,
+      "task_id": "formal-task-0000-detour",
+      "scope": "formal_scenario",
+      "input_bytes": 13127,
+      "nodes": 2820,
+      "edges": 10268,
+      "cost_classes": 32
+    },
+    {
+      "seed": 0,
+      "task_id": "formal-task-0000-unreachable",
+      "scope": "formal_scenario",
+      "input_bytes": 27458,
+      "nodes": 6365,
+      "edges": 23211,
+      "cost_classes": 32
+    },
+    {
+      "seed": 1,
+      "task_id": "task-0001-0001",
+      "scope": "order",
+      "input_bytes": 27546,
+      "nodes": 6396,
+      "edges": 23400,
+      "cost_classes": 32
+    },
+    {
+      "seed": 1,
+      "task_id": "task-0001-0002",
+      "scope": "order",
+      "input_bytes": 10315,
+      "nodes": 2120,
+      "edges": 7671,
+      "cost_classes": 32
+    },
+    {
+      "seed": 1,
+      "task_id": "task-0001-0003",
+      "scope": "order",
+      "input_bytes": 35818,
+      "nodes": 8460,
+      "edges": 30965,
+      "cost_classes": 32
+    },
+    {
+      "seed": 1,
+      "task_id": "task-0001-0004",
+      "scope": "order",
+      "input_bytes": 30279,
+      "nodes": 7084,
+      "edges": 25897,
+      "cost_classes": 32
+    },
+    {
+      "seed": 1,
+      "task_id": "task-0001-0005",
+      "scope": "order",
+      "input_bytes": 21870,
+      "nodes": 4992,
+      "edges": 18205,
+      "cost_classes": 32
+    },
+    {
+      "seed": 1,
+      "task_id": "task-0001-0006",
+      "scope": "order",
+      "input_bytes": 24935,
+      "nodes": 5760,
+      "edges": 21052,
+      "cost_classes": 32
+    },
+    {
+      "seed": 1,
+      "task_id": "task-0001-0007",
+      "scope": "order",
+      "input_bytes": 11557,
+      "nodes": 2432,
+      "edges": 8801,
+      "cost_classes": 32
+    },
+    {
+      "seed": 1,
+      "task_id": "task-0001-0008",
+      "scope": "order",
+      "input_bytes": 13025,
+      "nodes": 2795,
+      "edges": 10177,
+      "cost_classes": 32
+    },
+    {
+      "seed": 1,
+      "task_id": "task-0001-0009",
+      "scope": "order",
+      "input_bytes": 12290,
+      "nodes": 2610,
+      "edges": 9481,
+      "cost_classes": 32
+    },
+    {
+      "seed": 1,
+      "task_id": "task-0001-0010",
+      "scope": "order",
+      "input_bytes": 21571,
+      "nodes": 4920,
+      "edges": 17920,
+      "cost_classes": 32
+    },
+    {
+      "seed": 1,
+      "task_id": "formal-task-0001-feasible",
+      "scope": "formal_scenario",
+      "input_bytes": 32744,
+      "nodes": 7700,
+      "edges": 28153,
+      "cost_classes": 32
+    },
+    {
+      "seed": 1,
+      "task_id": "formal-task-0001-boundary",
+      "scope": "formal_scenario",
+      "input_bytes": 24878,
+      "nodes": 5742,
+      "edges": 20963,
+      "cost_classes": 32
+    },
+    {
+      "seed": 1,
+      "task_id": "formal-task-0001-detour",
+      "scope": "formal_scenario",
+      "input_bytes": 23532,
+      "nodes": 5402,
+      "edges": 19709,
+      "cost_classes": 32
+    },
+    {
+      "seed": 1,
+      "task_id": "formal-task-0001-unreachable",
+      "scope": "formal_scenario",
+      "input_bytes": 32747,
+      "nodes": 7700,
+      "edges": 28162,
+      "cost_classes": 32
+    },
+    {
+      "seed": 2,
+      "task_id": "task-0002-0001",
+      "scope": "order",
+      "input_bytes": 40397,
+      "nodes": 9600,
+      "edges": 35238,
+      "cost_classes": 32
+    },
+    {
+      "seed": 2,
+      "task_id": "task-0002-0002",
+      "scope": "order",
+      "input_bytes": 8954,
+      "nodes": 1786,
+      "edges": 6475,
+      "cost_classes": 31
+    },
+    {
+      "seed": 2,
+      "task_id": "task-0002-0003",
+      "scope": "order",
+      "input_bytes": 10866,
+      "nodes": 2250,
+      "edges": 8191,
+      "cost_classes": 32
+    },
+    {
+      "seed": 2,
+      "task_id": "task-0002-0004",
+      "scope": "order",
+      "input_bytes": 23198,
+      "nodes": 5301,
+      "edges": 19343,
+      "cost_classes": 32
+    },
+    {
+      "seed": 2,
+      "task_id": "task-0002-0005",
+      "scope": "order",
+      "input_bytes": 27827,
+      "nodes": 6461,
+      "edges": 23632,
+      "cost_classes": 32
+    },
+    {
+      "seed": 2,
+      "task_id": "task-0002-0006",
+      "scope": "order",
+      "input_bytes": 31860,
+      "nodes": 7470,
+      "edges": 27369,
+      "cost_classes": 32
+    },
+    {
+      "seed": 2,
+      "task_id": "task-0002-0007",
+      "scope": "order",
+      "input_bytes": 27504,
+      "nodes": 6384,
+      "edges": 23353,
+      "cost_classes": 32
+    },
+    {
+      "seed": 2,
+      "task_id": "task-0002-0008",
+      "scope": "order",
+      "input_bytes": 15363,
+      "nodes": 3354,
+      "edges": 12219,
+      "cost_classes": 32
+    },
+    {
+      "seed": 2,
+      "task_id": "task-0002-0009",
+      "scope": "order",
+      "input_bytes": 20376,
+      "nodes": 4620,
+      "edges": 16866,
+      "cost_classes": 32
+    },
+    {
+      "seed": 2,
+      "task_id": "task-0002-0010",
+      "scope": "order",
+      "input_bytes": 20238,
+      "nodes": 4559,
+      "edges": 16628,
+      "cost_classes": 32
+    },
+    {
+      "seed": 2,
+      "task_id": "formal-task-0002-feasible",
+      "scope": "formal_scenario",
+      "input_bytes": 8219,
+      "nodes": 1586,
+      "edges": 5750,
+      "cost_classes": 31
+    },
+    {
+      "seed": 2,
+      "task_id": "formal-task-0002-boundary",
+      "scope": "formal_scenario",
+      "input_bytes": 16077,
+      "nodes": 3528,
+      "edges": 12842,
+      "cost_classes": 32
+    },
+    {
+      "seed": 2,
+      "task_id": "formal-task-0002-detour",
+      "scope": "formal_scenario",
+      "input_bytes": 42008,
+      "nodes": 10000,
+      "edges": 36713,
+      "cost_classes": 32
+    },
+    {
+      "seed": 2,
+      "task_id": "formal-task-0002-unreachable",
+      "scope": "formal_scenario",
+      "input_bytes": 42014,
+      "nodes": 10000,
+      "edges": 36705,
+      "cost_classes": 32
+    },
+    {
+      "seed": 3,
+      "task_id": "task-0003-0001",
+      "scope": "order",
+      "input_bytes": 22710,
+      "nodes": 5185,
+      "edges": 18906,
+      "cost_classes": 32
+    },
+    {
+      "seed": 3,
+      "task_id": "task-0003-0002",
+      "scope": "order",
+      "input_bytes": 11465,
+      "nodes": 2408,
+      "edges": 8727,
+      "cost_classes": 32
+    },
+    {
+      "seed": 3,
+      "task_id": "task-0003-0003",
+      "scope": "order",
+      "input_bytes": 13769,
+      "nodes": 2940,
+      "edges": 10617,
+      "cost_classes": 32
+    },
+    {
+      "seed": 3,
+      "task_id": "task-0003-0004",
+      "scope": "order",
+      "input_bytes": 12758,
+      "nodes": 2726,
+      "edges": 9873,
+      "cost_classes": 32
+    },
+    {
+      "seed": 3,
+      "task_id": "task-0003-0005",
+      "scope": "order",
+      "input_bytes": 18910,
+      "nodes": 4263,
+      "edges": 15540,
+      "cost_classes": 32
+    },
+    {
+      "seed": 3,
+      "task_id": "task-0003-0006",
+      "scope": "order",
+      "input_bytes": 34758,
+      "nodes": 8200,
+      "edges": 30002,
+      "cost_classes": 32
+    },
+    {
+      "seed": 3,
+      "task_id": "task-0003-0007",
+      "scope": "order",
+      "input_bytes": 8044,
+      "nodes": 1533,
+      "edges": 5511,
+      "cost_classes": 31
+    },
+    {
+      "seed": 3,
+      "task_id": "task-0003-0008",
+      "scope": "order",
+      "input_bytes": 10116,
+      "nodes": 2064,
+      "edges": 7496,
+      "cost_classes": 32
+    },
+    {
+      "seed": 3,
+      "task_id": "task-0003-0009",
+      "scope": "order",
+      "input_bytes": 32253,
+      "nodes": 7569,
+      "edges": 27672,
+      "cost_classes": 32
+    },
+    {
+      "seed": 3,
+      "task_id": "task-0003-0010",
+      "scope": "order",
+      "input_bytes": 34742,
+      "nodes": 8188,
+      "edges": 29939,
+      "cost_classes": 32
+    },
+    {
+      "seed": 3,
+      "task_id": "formal-task-0003-feasible",
+      "scope": "formal_scenario",
+      "input_bytes": 18303,
+      "nodes": 4104,
+      "edges": 14935,
+      "cost_classes": 32
+    },
+    {
+      "seed": 3,
+      "task_id": "formal-task-0003-boundary",
+      "scope": "formal_scenario",
+      "input_bytes": 12463,
+      "nodes": 2670,
+      "edges": 9678,
+      "cost_classes": 31
+    },
+    {
+      "seed": 3,
+      "task_id": "formal-task-0003-detour",
+      "scope": "formal_scenario",
+      "input_bytes": 3837,
+      "nodes": 533,
+      "edges": 1886,
+      "cost_classes": 26
+    },
+    {
+      "seed": 3,
+      "task_id": "formal-task-0003-unreachable",
+      "scope": "formal_scenario",
+      "input_bytes": 20583,
+      "nodes": 4674,
+      "edges": 17015,
+      "cost_classes": 32
+    },
+    {
+      "seed": 4,
+      "task_id": "task-0004-0001",
+      "scope": "order",
+      "input_bytes": 31514,
+      "nodes": 7392,
+      "edges": 26982,
+      "cost_classes": 32
+    },
+    {
+      "seed": 4,
+      "task_id": "task-0004-0002",
+      "scope": "order",
+      "input_bytes": 21103,
+      "nodes": 4800,
+      "edges": 17496,
+      "cost_classes": 32
+    },
+    {
+      "seed": 4,
+      "task_id": "task-0004-0003",
+      "scope": "order",
+      "input_bytes": 18541,
+      "nodes": 4136,
+      "edges": 15002,
+      "cost_classes": 32
+    },
+    {
+      "seed": 4,
+      "task_id": "task-0004-0004",
+      "scope": "order",
+      "input_bytes": 16367,
+      "nodes": 3626,
+      "edges": 13164,
+      "cost_classes": 32
+    },
+    {
+      "seed": 4,
+      "task_id": "task-0004-0005",
+      "scope": "order",
+      "input_bytes": 20414,
+      "nodes": 4606,
+      "edges": 16786,
+      "cost_classes": 32
+    },
+    {
+      "seed": 4,
+      "task_id": "task-0004-0006",
+      "scope": "order",
+      "input_bytes": 12860,
+      "nodes": 2750,
+      "edges": 9986,
+      "cost_classes": 31
+    },
+    {
+      "seed": 4,
+      "task_id": "task-0004-0007",
+      "scope": "order",
+      "input_bytes": 19331,
+      "nodes": 4355,
+      "edges": 15850,
+      "cost_classes": 32
+    },
+    {
+      "seed": 4,
+      "task_id": "task-0004-0008",
+      "scope": "order",
+      "input_bytes": 22372,
+      "nodes": 5110,
+      "edges": 18649,
+      "cost_classes": 32
+    },
+    {
+      "seed": 4,
+      "task_id": "task-0004-0009",
+      "scope": "order",
+      "input_bytes": 9434,
+      "nodes": 1904,
+      "edges": 6868,
+      "cost_classes": 32
+    },
+    {
+      "seed": 4,
+      "task_id": "task-0004-0010",
+      "scope": "order",
+      "input_bytes": 16626,
+      "nodes": 3696,
+      "edges": 13406,
+      "cost_classes": 32
+    },
+    {
+      "seed": 4,
+      "task_id": "formal-task-0004-feasible",
+      "scope": "formal_scenario",
+      "input_bytes": 18792,
+      "nodes": 4212,
+      "edges": 15334,
+      "cost_classes": 32
+    },
+    {
+      "seed": 4,
+      "task_id": "formal-task-0004-boundary",
+      "scope": "formal_scenario",
+      "input_bytes": 10500,
+      "nodes": 2160,
+      "edges": 7801,
+      "cost_classes": 32
+    },
+    {
+      "seed": 4,
+      "task_id": "formal-task-0004-detour",
+      "scope": "formal_scenario",
+      "input_bytes": 3604,
+      "nodes": 476,
+      "edges": 1694,
+      "cost_classes": 27
+    },
+    {
+      "seed": 4,
+      "task_id": "formal-task-0004-unreachable",
+      "scope": "formal_scenario",
+      "input_bytes": 23797,
+      "nodes": 5467,
+      "edges": 19908,
+      "cost_classes": 32
+    },
+    {
+      "seed": 5,
+      "task_id": "task-0005-0001",
+      "scope": "order",
+      "input_bytes": 13181,
+      "nodes": 2808,
+      "edges": 10227,
+      "cost_classes": 32
+    },
+    {
+      "seed": 5,
+      "task_id": "task-0005-0002",
+      "scope": "order",
+      "input_bytes": 15642,
+      "nodes": 3432,
+      "edges": 12494,
+      "cost_classes": 32
+    },
+    {
+      "seed": 5,
+      "task_id": "task-0005-0003",
+      "scope": "order",
+      "input_bytes": 27191,
+      "nodes": 6308,
+      "edges": 23099,
+      "cost_classes": 32
+    },
+    {
+      "seed": 5,
+      "task_id": "task-0005-0004",
+      "scope": "order",
+      "input_bytes": 37226,
+      "nodes": 8811,
+      "edges": 32245,
+      "cost_classes": 32
+    },
+    {
+      "seed": 5,
+      "task_id": "task-0005-0005",
+      "scope": "order",
+      "input_bytes": 22936,
+      "nodes": 5250,
+      "edges": 19170,
+      "cost_classes": 32
+    },
+    {
+      "seed": 5,
+      "task_id": "task-0005-0006",
+      "scope": "order",
+      "input_bytes": 30033,
+      "nodes": 7008,
+      "edges": 25674,
+      "cost_classes": 32
+    },
+    {
+      "seed": 5,
+      "task_id": "task-0005-0007",
+      "scope": "order",
+      "input_bytes": 9048,
+      "nodes": 1800,
+      "edges": 6529,
+      "cost_classes": 32
+    },
+    {
+      "seed": 5,
+      "task_id": "task-0005-0008",
+      "scope": "order",
+      "input_bytes": 17324,
+      "nodes": 3848,
+      "edges": 14035,
+      "cost_classes": 32
+    },
+    {
+      "seed": 5,
+      "task_id": "task-0005-0009",
+      "scope": "order",
+      "input_bytes": 6148,
+      "nodes": 1092,
+      "edges": 3930,
+      "cost_classes": 31
+    },
+    {
+      "seed": 5,
+      "task_id": "task-0005-0010",
+      "scope": "order",
+      "input_bytes": 15555,
+      "nodes": 3432,
+      "edges": 12494,
+      "cost_classes": 32
+    },
+    {
+      "seed": 5,
+      "task_id": "formal-task-0005-feasible",
+      "scope": "formal_scenario",
+      "input_bytes": 27343,
+      "nodes": 6336,
+      "edges": 23129,
+      "cost_classes": 32
+    },
+    {
+      "seed": 5,
+      "task_id": "formal-task-0005-boundary",
+      "scope": "formal_scenario",
+      "input_bytes": 35024,
+      "nodes": 8256,
+      "edges": 30229,
+      "cost_classes": 32
+    },
+    {
+      "seed": 5,
+      "task_id": "formal-task-0005-detour",
+      "scope": "formal_scenario",
+      "input_bytes": 7176,
+      "nodes": 1334,
+      "edges": 4830,
+      "cost_classes": 32
+    },
+    {
+      "seed": 5,
+      "task_id": "formal-task-0005-unreachable",
+      "scope": "formal_scenario",
+      "input_bytes": 36016,
+      "nodes": 8500,
+      "edges": 31145,
+      "cost_classes": 32
+    },
+    {
+      "seed": 6,
+      "task_id": "task-0006-0001",
+      "scope": "order",
+      "input_bytes": 14990,
+      "nodes": 3285,
+      "edges": 11904,
+      "cost_classes": 32
+    },
+    {
+      "seed": 6,
+      "task_id": "task-0006-0002",
+      "scope": "order",
+      "input_bytes": 31708,
+      "nodes": 7425,
+      "edges": 27131,
+      "cost_classes": 32
+    },
+    {
+      "seed": 6,
+      "task_id": "task-0006-0003",
+      "scope": "order",
+      "input_bytes": 17139,
+      "nodes": 3816,
+      "edges": 13861,
+      "cost_classes": 32
+    },
+    {
+      "seed": 6,
+      "task_id": "task-0006-0004",
+      "scope": "order",
+      "input_bytes": 19490,
+      "nodes": 4402,
+      "edges": 16030,
+      "cost_classes": 31
+    },
+    {
+      "seed": 6,
+      "task_id": "task-0006-0005",
+      "scope": "order",
+      "input_bytes": 10835,
+      "nodes": 2257,
+      "edges": 8141,
+      "cost_classes": 31
+    },
+    {
+      "seed": 6,
+      "task_id": "task-0006-0006",
+      "scope": "order",
+      "input_bytes": 17653,
+      "nodes": 3956,
+      "edges": 14411,
+      "cost_classes": 31
+    },
+    {
+      "seed": 6,
+      "task_id": "task-0006-0007",
+      "scope": "order",
+      "input_bytes": 11623,
+      "nodes": 2450,
+      "edges": 8863,
+      "cost_classes": 30
+    },
+    {
+      "seed": 6,
+      "task_id": "task-0006-0008",
+      "scope": "order",
+      "input_bytes": 33655,
+      "nodes": 7917,
+      "edges": 28956,
+      "cost_classes": 32
+    },
+    {
+      "seed": 6,
+      "task_id": "task-0006-0009",
+      "scope": "order",
+      "input_bytes": 24329,
+      "nodes": 5590,
+      "edges": 20388,
+      "cost_classes": 32
+    },
+    {
+      "seed": 6,
+      "task_id": "task-0006-0010",
+      "scope": "order",
+      "input_bytes": 29111,
+      "nodes": 6800,
+      "edges": 24791,
+      "cost_classes": 32
+    },
+    {
+      "seed": 6,
+      "task_id": "formal-task-0006-feasible",
+      "scope": "formal_scenario",
+      "input_bytes": 34497,
+      "nodes": 8134,
+      "edges": 29703,
+      "cost_classes": 32
+    },
+    {
+      "seed": 6,
+      "task_id": "formal-task-0006-boundary",
+      "scope": "formal_scenario",
+      "input_bytes": 39190,
+      "nodes": 9300,
+      "edges": 34034,
+      "cost_classes": 32
+    },
+    {
+      "seed": 6,
+      "task_id": "formal-task-0006-detour",
+      "scope": "formal_scenario",
+      "input_bytes": 26290,
+      "nodes": 6100,
+      "edges": 22198,
+      "cost_classes": 32
+    },
+    {
+      "seed": 6,
+      "task_id": "formal-task-0006-unreachable",
+      "scope": "formal_scenario",
+      "input_bytes": 31614,
+      "nodes": 7400,
+      "edges": 27042,
+      "cost_classes": 32
+    },
+    {
+      "seed": 7,
+      "task_id": "task-0007-0001",
+      "scope": "order",
+      "input_bytes": 31203,
+      "nodes": 7315,
+      "edges": 26790,
+      "cost_classes": 32
+    },
+    {
+      "seed": 7,
+      "task_id": "task-0007-0002",
+      "scope": "order",
+      "input_bytes": 10236,
+      "nodes": 2112,
+      "edges": 7626,
+      "cost_classes": 32
+    },
+    {
+      "seed": 7,
+      "task_id": "task-0007-0003",
+      "scope": "order",
+      "input_bytes": 25088,
+      "nodes": 5796,
+      "edges": 21194,
+      "cost_classes": 32
+    },
+    {
+      "seed": 7,
+      "task_id": "task-0007-0004",
+      "scope": "order",
+      "input_bytes": 24491,
+      "nodes": 5644,
+      "edges": 20643,
+      "cost_classes": 32
+    },
+    {
+      "seed": 7,
+      "task_id": "task-0007-0005",
+      "scope": "order",
+      "input_bytes": 39251,
+      "nodes": 9312,
+      "edges": 34133,
+      "cost_classes": 32
+    },
+    {
+      "seed": 7,
+      "task_id": "task-0007-0006",
+      "scope": "order",
+      "input_bytes": 9923,
+      "nodes": 2024,
+      "edges": 7336,
+      "cost_classes": 31
+    },
+    {
+      "seed": 7,
+      "task_id": "task-0007-0007",
+      "scope": "order",
+      "input_bytes": 20590,
+      "nodes": 4650,
+      "edges": 16950,
+      "cost_classes": 32
+    },
+    {
+      "seed": 7,
+      "task_id": "task-0007-0008",
+      "scope": "order",
+      "input_bytes": 13327,
+      "nodes": 2850,
+      "edges": 10354,
+      "cost_classes": 32
+    },
+    {
+      "seed": 7,
+      "task_id": "task-0007-0009",
+      "scope": "order",
+      "input_bytes": 15988,
+      "nodes": 3520,
+      "edges": 12791,
+      "cost_classes": 32
+    },
+    {
+      "seed": 7,
+      "task_id": "task-0007-0010",
+      "scope": "order",
+      "input_bytes": 21842,
+      "nodes": 4988,
+      "edges": 18195,
+      "cost_classes": 32
+    },
+    {
+      "seed": 7,
+      "task_id": "formal-task-0007-feasible",
+      "scope": "formal_scenario",
+      "input_bytes": 26814,
+      "nodes": 6200,
+      "edges": 22668,
+      "cost_classes": 32
+    },
+    {
+      "seed": 7,
+      "task_id": "formal-task-0007-boundary",
+      "scope": "formal_scenario",
+      "input_bytes": 26295,
+      "nodes": 6100,
+      "edges": 22292,
+      "cost_classes": 32
+    },
+    {
+      "seed": 7,
+      "task_id": "formal-task-0007-detour",
+      "scope": "formal_scenario",
+      "input_bytes": 26290,
+      "nodes": 6100,
+      "edges": 22330,
+      "cost_classes": 32
+    },
+    {
+      "seed": 7,
+      "task_id": "formal-task-0007-unreachable",
+      "scope": "formal_scenario",
+      "input_bytes": 32341,
+      "nodes": 7600,
+      "edges": 27848,
+      "cost_classes": 32
+    },
+    {
+      "seed": 8,
+      "task_id": "task-0008-0001",
+      "scope": "order",
+      "input_bytes": 10396,
+      "nodes": 2128,
+      "edges": 7634,
+      "cost_classes": 32
+    },
+    {
+      "seed": 8,
+      "task_id": "task-0008-0002",
+      "scope": "order",
+      "input_bytes": 18340,
+      "nodes": 4085,
+      "edges": 14811,
+      "cost_classes": 32
+    },
+    {
+      "seed": 8,
+      "task_id": "task-0008-0003",
+      "scope": "order",
+      "input_bytes": 14110,
+      "nodes": 3071,
+      "edges": 11095,
+      "cost_classes": 32
+    },
+    {
+      "seed": 8,
+      "task_id": "task-0008-0004",
+      "scope": "order",
+      "input_bytes": 10175,
+      "nodes": 2088,
+      "edges": 7531,
+      "cost_classes": 32
+    },
+    {
+      "seed": 8,
+      "task_id": "task-0008-0005",
+      "scope": "order",
+      "input_bytes": 23605,
+      "nodes": 5432,
+      "edges": 19734,
+      "cost_classes": 32
+    },
+    {
+      "seed": 8,
+      "task_id": "task-0008-0006",
+      "scope": "order",
+      "input_bytes": 15572,
+      "nodes": 3422,
+      "edges": 12425,
+      "cost_classes": 32
+    },
+    {
+      "seed": 8,
+      "task_id": "task-0008-0007",
+      "scope": "order",
+      "input_bytes": 17618,
+      "nodes": 3933,
+      "edges": 14261,
+      "cost_classes": 32
+    },
+    {
+      "seed": 8,
+      "task_id": "task-0008-0008",
+      "scope": "order",
+      "input_bytes": 14452,
+      "nodes": 3149,
+      "edges": 11412,
+      "cost_classes": 32
+    },
+    {
+      "seed": 8,
+      "task_id": "task-0008-0009",
+      "scope": "order",
+      "input_bytes": 18635,
+      "nodes": 4176,
+      "edges": 15180,
+      "cost_classes": 32
+    },
+    {
+      "seed": 8,
+      "task_id": "task-0008-0010",
+      "scope": "order",
+      "input_bytes": 24859,
+      "nodes": 5720,
+      "edges": 20810,
+      "cost_classes": 32
+    },
+    {
+      "seed": 8,
+      "task_id": "formal-task-0008-feasible",
+      "scope": "formal_scenario",
+      "input_bytes": 17465,
+      "nodes": 3870,
+      "edges": 14003,
+      "cost_classes": 32
+    },
+    {
+      "seed": 8,
+      "task_id": "formal-task-0008-boundary",
+      "scope": "formal_scenario",
+      "input_bytes": 8222,
+      "nodes": 1599,
+      "edges": 5751,
+      "cost_classes": 32
+    },
+    {
+      "seed": 8,
+      "task_id": "formal-task-0008-detour",
+      "scope": "formal_scenario",
+      "input_bytes": 38407,
+      "nodes": 9100,
+      "edges": 33270,
+      "cost_classes": 32
+    },
+    {
+      "seed": 8,
+      "task_id": "formal-task-0008-unreachable",
+      "scope": "formal_scenario",
+      "input_bytes": 24942,
+      "nodes": 5760,
+      "edges": 20958,
+      "cost_classes": 32
+    },
+    {
+      "seed": 9,
+      "task_id": "task-0009-0001",
+      "scope": "order",
+      "input_bytes": 23276,
+      "nodes": 5320,
+      "edges": 19356,
+      "cost_classes": 32
+    },
+    {
+      "seed": 9,
+      "task_id": "task-0009-0002",
+      "scope": "order",
+      "input_bytes": 16012,
+      "nodes": 3500,
+      "edges": 12677,
+      "cost_classes": 32
+    },
+    {
+      "seed": 9,
+      "task_id": "task-0009-0003",
+      "scope": "order",
+      "input_bytes": 17250,
+      "nodes": 3835,
+      "edges": 13913,
+      "cost_classes": 32
+    },
+    {
+      "seed": 9,
+      "task_id": "task-0009-0004",
+      "scope": "order",
+      "input_bytes": 17610,
+      "nodes": 3910,
+      "edges": 14232,
+      "cost_classes": 32
+    },
+    {
+      "seed": 9,
+      "task_id": "task-0009-0005",
+      "scope": "order",
+      "input_bytes": 24886,
+      "nodes": 5740,
+      "edges": 20911,
+      "cost_classes": 32
+    },
+    {
+      "seed": 9,
+      "task_id": "task-0009-0006",
+      "scope": "order",
+      "input_bytes": 23755,
+      "nodes": 5451,
+      "edges": 19853,
+      "cost_classes": 32
+    },
+    {
+      "seed": 9,
+      "task_id": "task-0009-0007",
+      "scope": "order",
+      "input_bytes": 8356,
+      "nodes": 1643,
+      "edges": 5942,
+      "cost_classes": 31
+    },
+    {
+      "seed": 9,
+      "task_id": "task-0009-0008",
+      "scope": "order",
+      "input_bytes": 25483,
+      "nodes": 5880,
+      "edges": 21428,
+      "cost_classes": 32
+    },
+    {
+      "seed": 9,
+      "task_id": "task-0009-0009",
+      "scope": "order",
+      "input_bytes": 20797,
+      "nodes": 4700,
+      "edges": 17091,
+      "cost_classes": 32
+    },
+    {
+      "seed": 9,
+      "task_id": "task-0009-0010",
+      "scope": "order",
+      "input_bytes": 17253,
+      "nodes": 3840,
+      "edges": 14006,
+      "cost_classes": 32
+    },
+    {
+      "seed": 9,
+      "task_id": "formal-task-0009-feasible",
+      "scope": "formal_scenario",
+      "input_bytes": 18159,
+      "nodes": 4050,
+      "edges": 14710,
+      "cost_classes": 32
+    },
+    {
+      "seed": 9,
+      "task_id": "formal-task-0009-boundary",
+      "scope": "formal_scenario",
+      "input_bytes": 14413,
+      "nodes": 3100,
+      "edges": 11251,
+      "cost_classes": 32
+    },
+    {
+      "seed": 9,
+      "task_id": "formal-task-0009-detour",
+      "scope": "formal_scenario",
+      "input_bytes": 11769,
+      "nodes": 2494,
+      "edges": 8975,
+      "cost_classes": 32
+    },
+    {
+      "seed": 9,
+      "task_id": "formal-task-0009-unreachable",
+      "scope": "formal_scenario",
+      "input_bytes": 40401,
+      "nodes": 9600,
+      "edges": 35136,
+      "cost_classes": 32
+    }
+  ]
+}

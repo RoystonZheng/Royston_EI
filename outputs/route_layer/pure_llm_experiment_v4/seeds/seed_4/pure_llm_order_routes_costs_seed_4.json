@@ -1,0 +1,554 @@
+{
+  "input_type": "order_batch",
+  "map_id": "grid-100x100-seed-4",
+  "map_version": "grid-v1-100",
+  "methods": [
+    "pure_llm_deepseek"
+  ],
+  "price_profile": {
+    "api_price_per_token": 3e-06,
+    "billing_period": "simulation",
+    "compute_price_per_ms": 1e-08,
+    "currency": "CNY",
+    "electricity_price_per_kwh": 2.29,
+    "notes": "烟雾测试采用该官方站点列示的峰时综合充电服务价 2.29 元/kWh；特斯拉价格按站点和时段动态变化，正式实验应按实际站点与仿真时段替换。",
+    "observed_at": "2026-10-13",
+    "price_basis": "charging_service_total_per_kwh_includes_electricity_and_service_fee",
+    "price_source": "Tesla China official Supercharger station page",
+    "price_source_url": "https://www.tesla.cn/findus/location/supercharger/cnsc9691?region=CN",
+    "pricing_status": "official_station_reference",
+    "pricing_version": "tesla_cn_station_peak_v1",
+    "rate_schedule": {
+      "00:00-08:00": 1.39,
+      "08:00-10:00": 1.69,
+      "10:00-12:00": 2.29,
+      "12:00-14:00": 1.69,
+      "14:00-19:00": 2.29,
+      "19:00-24:00": 1.69
+    },
+    "reference_rate_type": "peak_window_total_charging_service_price",
+    "reference_station": "深圳中航工业南航大厦 Tesla 超级充电站"
+  },
+  "random_seed": 4,
+  "results": [
+    {
+      "methods": [
+        {
+          "best_route_id": null,
+          "evaluation": null,
+          "failure_reason": "deepseek_request_failed:<urlopen error EOF occurred in violation of protocol (_ssl.c:1129)>",
+          "invalid_route_count": 0,
+          "metadata": {
+            "compute_time_ms": 5319.581500000027,
+            "cost_status": "not_evaluated_route_api_recorded",
+            "llm_error": "deepseek_request_failed:<urlopen error EOF occurred in violation of protocol (_ssl.c:1129)>",
+            "llm_status": "request_failed",
+            "observed_at": "2026-10-13",
+            "price_basis": "charging_service_total_per_kwh_includes_electricity_and_service_fee",
+            "price_source": "Tesla China official Supercharger station page",
+            "price_source_url": "https://www.tesla.cn/findus/location/supercharger/cnsc9691?region=CN",
+            "pricing_status": "official_station_reference",
+            "pricing_version": "tesla_cn_station_peak_v1",
+            "reference_rate_type": "peak_window_total_charging_service_price",
+            "reference_station": "深圳中航工业南航大厦 Tesla 超级充电站"
+          },
+          "method_name": "pure_llm_deepseek",
+          "monetary_cost": {
+            "api_cost_amount": 0.0,
+            "compute_cost_amount": 5.319581500000027e-05,
+            "currency": "CNY",
+            "electricity_cost_amount": 0.0,
+            "total_monetary_cost": 5.319581500000027e-05
+          },
+          "raw_output": {
+            "reason": "deepseek_request_failed:<urlopen error EOF occurred in violation of protocol (_ssl.c:1129)>",
+            "status": "failed"
+          },
+          "resources": {
+            "compute_time_ms": 5319.581500000027,
+            "energy_kwh": 0.0,
+            "input_tokens": 0,
+            "llm_calls": 1,
+            "llm_latency_ms": 0.0,
+            "output_tokens": 0
+          },
+          "routes": [],
+          "status": "failed",
+          "task_id": "task-0004-0001",
+          "valid_route_count": 0,
+          "validation": null
+        }
+      ],
+      "task_id": "task-0004-0001",
+      "task_type": "semantic_landmark_relative"
+    },
+    {
+      "methods": [
+        {
+          "best_route_id": null,
+          "evaluation": null,
+          "failure_reason": "deepseek_request_failed:<urlopen error EOF occurred in violation of protocol (_ssl.c:1129)>",
+          "invalid_route_count": 0,
+          "metadata": {
+            "compute_time_ms": 5230.6064160000005,
+            "cost_status": "not_evaluated_route_api_recorded",
+            "llm_error": "deepseek_request_failed:<urlopen error EOF occurred in violation of protocol (_ssl.c:1129)>",
+            "llm_status": "request_failed",
+            "observed_at": "2026-10-13",
+            "price_basis": "charging_service_total_per_kwh_includes_electricity_and_service_fee",
+            "price_source": "Tesla China official Supercharger station page",
+            "price_source_url": "https://www.tesla.cn/findus/location/supercharger/cnsc9691?region=CN",
+            "pricing_status": "official_station_reference",
+            "pricing_version": "tesla_cn_station_peak_v1",
+            "reference_rate_type": "peak_window_total_charging_service_price",
+            "reference_station": "深圳中航工业南航大厦 Tesla 超级充电站"
+          },
+          "method_name": "pure_llm_deepseek",
+          "monetary_cost": {
+            "api_cost_amount": 0.0,
+            "compute_cost_amount": 5.230606416000001e-05,
+            "currency": "CNY",
+            "electricity_cost_amount": 0.0,
+            "total_monetary_cost": 5.230606416000001e-05
+          },
+          "raw_output": {
+            "reason": "deepseek_request_failed:<urlopen error EOF occurred in violation of protocol (_ssl.c:1129)>",
+            "status": "failed"
+          },
+          "resources": {
+            "compute_time_ms": 5230.6064160000005,
+            "energy_kwh": 0.0,
+            "input_tokens": 0,
+            "llm_calls": 1,
+            "llm_latency_ms": 0.0,
+            "output_tokens": 0
+          },
+          "routes": [],
+          "status": "failed",
+          "task_id": "task-0004-0002",
+          "valid_route_count": 0,
+          "validation": null
+        }
+      ],
+      "task_id": "task-0004-0002",
+      "task_type": "exact_node"
+    },
+    {
+      "methods": [
+        {
+          "best_route_id": null,
+          "evaluation": null,
+          "failure_reason": "deepseek_request_failed:<urlopen error EOF occurred in violation of protocol (_ssl.c:1129)>",
+          "invalid_route_count": 0,
+          "metadata": {
+            "compute_time_ms": 3036.0828750000337,
+            "cost_status": "not_evaluated_route_api_recorded",
+            "llm_error": "deepseek_request_failed:<urlopen error EOF occurred in violation of protocol (_ssl.c:1129)>",
+            "llm_status": "request_failed",
+            "observed_at": "2026-10-13",
+            "price_basis": "charging_service_total_per_kwh_includes_electricity_and_service_fee",
+            "price_source": "Tesla China official Supercharger station page",
+            "price_source_url": "https://www.tesla.cn/findus/location/supercharger/cnsc9691?region=CN",
+            "pricing_status": "official_station_reference",
+            "pricing_version": "tesla_cn_station_peak_v1",
+            "reference_rate_type": "peak_window_total_charging_service_price",
+            "reference_station": "深圳中航工业南航大厦 Tesla 超级充电站"
+          },
+          "method_name": "pure_llm_deepseek",
+          "monetary_cost": {
+            "api_cost_amount": 0.0,
+            "compute_cost_amount": 3.0360828750000338e-05,
+            "currency": "CNY",
+            "electricity_cost_amount": 0.0,
+            "total_monetary_cost": 3.0360828750000338e-05
+          },
+          "raw_output": {
+            "reason": "deepseek_request_failed:<urlopen error EOF occurred in violation of protocol (_ssl.c:1129)>",
+            "status": "failed"
+          },
+          "resources": {
+            "compute_time_ms": 3036.0828750000337,
+            "energy_kwh": 0.0,
+            "input_tokens": 0,
+            "llm_calls": 1,
+            "llm_latency_ms": 0.0,
+            "output_tokens": 0
+          },
+          "routes": [],
+          "status": "failed",
+          "task_id": "task-0004-0003",
+          "valid_route_count": 0,
+          "validation": null
+        }
+      ],
+      "task_id": "task-0004-0003",
+      "task_type": "exact_node"
+    },
+    {
+      "methods": [
+        {
+          "best_route_id": null,
+          "evaluation": null,
+          "failure_reason": "deepseek_request_failed:<urlopen error EOF occurred in violation of protocol (_ssl.c:1129)>",
+          "invalid_route_count": 0,
+          "metadata": {
+            "compute_time_ms": 4138.767791999953,
+            "cost_status": "not_evaluated_route_api_recorded",
+            "llm_error": "deepseek_request_failed:<urlopen error EOF occurred in violation of protocol (_ssl.c:1129)>",
+            "llm_status": "request_failed",
+            "observed_at": "2026-10-13",
+            "price_basis": "charging_service_total_per_kwh_includes_electricity_and_service_fee",
+            "price_source": "Tesla China official Supercharger station page",
+            "price_source_url": "https://www.tesla.cn/findus/location/supercharger/cnsc9691?region=CN",
+            "pricing_status": "official_station_reference",
+            "pricing_version": "tesla_cn_station_peak_v1",
+            "reference_rate_type": "peak_window_total_charging_service_price",
+            "reference_station": "深圳中航工业南航大厦 Tesla 超级充电站"
+          },
+          "method_name": "pure_llm_deepseek",
+          "monetary_cost": {
+            "api_cost_amount": 0.0,
+            "compute_cost_amount": 4.138767791999953e-05,
+            "currency": "CNY",
+            "electricity_cost_amount": 0.0,
+            "total_monetary_cost": 4.138767791999953e-05
+          },
+          "raw_output": {
+            "reason": "deepseek_request_failed:<urlopen error EOF occurred in violation of protocol (_ssl.c:1129)>",
+            "status": "failed"
+          },
+          "resources": {
+            "compute_time_ms": 4138.767791999953,
+            "energy_kwh": 0.0,
+            "input_tokens": 0,
+            "llm_calls": 1,
+            "llm_latency_ms": 0.0,
+            "output_tokens": 0
+          },
+          "routes": [],
+          "status": "failed",
+          "task_id": "task-0004-0004",
+          "valid_route_count": 0,
+          "validation": null
+        }
+      ],
+      "task_id": "task-0004-0004",
+      "task_type": "semantic_landmark_nearby"
+    },
+    {
+      "methods": [
+        {
+          "best_route_id": null,
+          "evaluation": null,
+          "failure_reason": "deepseek_request_failed:<urlopen error EOF occurred in violation of protocol (_ssl.c:1129)>",
+          "invalid_route_count": 0,
+          "metadata": {
+            "compute_time_ms": 5255.525458999955,
+            "cost_status": "not_evaluated_route_api_recorded",
+            "llm_error": "deepseek_request_failed:<urlopen error EOF occurred in violation of protocol (_ssl.c:1129)>",
+            "llm_status": "request_failed",
+            "observed_at": "2026-10-13",
+            "price_basis": "charging_service_total_per_kwh_includes_electricity_and_service_fee",
+            "price_source": "Tesla China official Supercharger station page",
+            "price_source_url": "https://www.tesla.cn/findus/location/supercharger/cnsc9691?region=CN",
+            "pricing_status": "official_station_reference",
+            "pricing_version": "tesla_cn_station_peak_v1",
+            "reference_rate_type": "peak_window_total_charging_service_price",
+            "reference_station": "深圳中航工业南航大厦 Tesla 超级充电站"
+          },
+          "method_name": "pure_llm_deepseek",
+          "monetary_cost": {
+            "api_cost_amount": 0.0,
+            "compute_cost_amount": 5.255525458999955e-05,
+            "currency": "CNY",
+            "electricity_cost_amount": 0.0,
+            "total_monetary_cost": 5.255525458999955e-05
+          },
+          "raw_output": {
+            "reason": "deepseek_request_failed:<urlopen error EOF occurred in violation of protocol (_ssl.c:1129)>",
+            "status": "failed"
+          },
+          "resources": {
+            "compute_time_ms": 5255.525458999955,
+            "energy_kwh": 0.0,
+            "input_tokens": 0,
+            "llm_calls": 1,
+            "llm_latency_ms": 0.0,
+            "output_tokens": 0
+          },
+          "routes": [],
+          "status": "failed",
+          "task_id": "task-0004-0005",
+          "valid_route_count": 0,
+          "validation": null
+        }
+      ],
+      "task_id": "task-0004-0005",
+      "task_type": "exact_node"
+    },
+    {
+      "methods": [
+        {
+          "best_route_id": null,
+          "evaluation": null,
+          "failure_reason": "deepseek_request_failed:<urlopen error EOF occurred in violation of protocol (_ssl.c:1129)>",
+          "invalid_route_count": 0,
+          "metadata": {
+            "compute_time_ms": 5104.954083999928,
+            "cost_status": "not_evaluated_route_api_recorded",
+            "llm_error": "deepseek_request_failed:<urlopen error EOF occurred in violation of protocol (_ssl.c:1129)>",
+            "llm_status": "request_failed",
+            "observed_at": "2026-10-13",
+            "price_basis": "charging_service_total_per_kwh_includes_electricity_and_service_fee",
+            "price_source": "Tesla China official Supercharger station page",
+            "price_source_url": "https://www.tesla.cn/findus/location/supercharger/cnsc9691?region=CN",
+            "pricing_status": "official_station_reference",
+            "pricing_version": "tesla_cn_station_peak_v1",
+            "reference_rate_type": "peak_window_total_charging_service_price",
+            "reference_station": "深圳中航工业南航大厦 Tesla 超级充电站"
+          },
+          "method_name": "pure_llm_deepseek",
+          "monetary_cost": {
+            "api_cost_amount": 0.0,
+            "compute_cost_amount": 5.104954083999928e-05,
+            "currency": "CNY",
+            "electricity_cost_amount": 0.0,
+            "total_monetary_cost": 5.104954083999928e-05
+          },
+          "raw_output": {
+            "reason": "deepseek_request_failed:<urlopen error EOF occurred in violation of protocol (_ssl.c:1129)>",
+            "status": "failed"
+          },
+          "resources": {
+            "compute_time_ms": 5104.954083999928,
+            "energy_kwh": 0.0,
+            "input_tokens": 0,
+            "llm_calls": 1,
+            "llm_latency_ms": 0.0,
+            "output_tokens": 0
+          },
+          "routes": [],
+          "status": "failed",
+          "task_id": "task-0004-0006",
+          "valid_route_count": 0,
+          "validation": null
+        }
+      ],
+      "task_id": "task-0004-0006",
+      "task_type": "semantic_road_feature_position"
+    },
+    {
+      "methods": [
+        {
+          "best_route_id": null,
+          "evaluation": null,
+          "failure_reason": "deepseek_request_failed:<urlopen error EOF occurred in violation of protocol (_ssl.c:1129)>",
+          "invalid_route_count": 0,
+          "metadata": {
+            "compute_time_ms": 5208.945041999982,
+            "cost_status": "not_evaluated_route_api_recorded",
+            "llm_error": "deepseek_request_failed:<urlopen error EOF occurred in violation of protocol (_ssl.c:1129)>",
+            "llm_status": "request_failed",
+            "observed_at": "2026-10-13",
+            "price_basis": "charging_service_total_per_kwh_includes_electricity_and_service_fee",
+            "price_source": "Tesla China official Supercharger station page",
+            "price_source_url": "https://www.tesla.cn/findus/location/supercharger/cnsc9691?region=CN",
+            "pricing_status": "official_station_reference",
+            "pricing_version": "tesla_cn_station_peak_v1",
+            "reference_rate_type": "peak_window_total_charging_service_price",
+            "reference_station": "深圳中航工业南航大厦 Tesla 超级充电站"
+          },
+          "method_name": "pure_llm_deepseek",
+          "monetary_cost": {
+            "api_cost_amount": 0.0,
+            "compute_cost_amount": 5.208945041999982e-05,
+            "currency": "CNY",
+            "electricity_cost_amount": 0.0,
+            "total_monetary_cost": 5.208945041999982e-05
+          },
+          "raw_output": {
+            "reason": "deepseek_request_failed:<urlopen error EOF occurred in violation of protocol (_ssl.c:1129)>",
+            "status": "failed"
+          },
+          "resources": {
+            "compute_time_ms": 5208.945041999982,
+            "energy_kwh": 0.0,
+            "input_tokens": 0,
+            "llm_calls": 1,
+            "llm_latency_ms": 0.0,
+            "output_tokens": 0
+          },
+          "routes": [],
+          "status": "failed",
+          "task_id": "task-0004-0007",
+          "valid_route_count": 0,
+          "validation": null
+        }
+      ],
+      "task_id": "task-0004-0007",
+      "task_type": "exact_node"
+    },
+    {
+      "methods": [
+        {
+          "best_route_id": null,
+          "evaluation": null,
+          "failure_reason": "deepseek_request_failed:<urlopen error EOF occurred in violation of protocol (_ssl.c:1129)>",
+          "invalid_route_count": 0,
+          "metadata": {
+            "compute_time_ms": 5251.12512499993,
+            "cost_status": "not_evaluated_route_api_recorded",
+            "llm_error": "deepseek_request_failed:<urlopen error EOF occurred in violation of protocol (_ssl.c:1129)>",
+            "llm_status": "request_failed",
+            "observed_at": "2026-10-13",
+            "price_basis": "charging_service_total_per_kwh_includes_electricity_and_service_fee",
+            "price_source": "Tesla China official Supercharger station page",
+            "price_source_url": "https://www.tesla.cn/findus/location/supercharger/cnsc9691?region=CN",
+            "pricing_status": "official_station_reference",
+            "pricing_version": "tesla_cn_station_peak_v1",
+            "reference_rate_type": "peak_window_total_charging_service_price",
+            "reference_station": "深圳中航工业南航大厦 Tesla 超级充电站"
+          },
+          "method_name": "pure_llm_deepseek",
+          "monetary_cost": {
+            "api_cost_amount": 0.0,
+            "compute_cost_amount": 5.251125124999931e-05,
+            "currency": "CNY",
+            "electricity_cost_amount": 0.0,
+            "total_monetary_cost": 5.251125124999931e-05
+          },
+          "raw_output": {
+            "reason": "deepseek_request_failed:<urlopen error EOF occurred in violation of protocol (_ssl.c:1129)>",
+            "status": "failed"
+          },
+          "resources": {
+            "compute_time_ms": 5251.12512499993,
+            "energy_kwh": 0.0,
+            "input_tokens": 0,
+            "llm_calls": 1,
+            "llm_latency_ms": 0.0,
+            "output_tokens": 0
+          },
+          "routes": [],
+          "status": "failed",
+          "task_id": "task-0004-0008",
+          "valid_route_count": 0,
+          "validation": null
+        }
+      ],
+      "task_id": "task-0004-0008",
+      "task_type": "exact_node"
+    },
+    {
+      "methods": [
+        {
+          "best_route_id": null,
+          "evaluation": null,
+          "failure_reason": "deepseek_request_failed:<urlopen error EOF occurred in violation of protocol (_ssl.c:1129)>",
+          "invalid_route_count": 0,
+          "metadata": {
+            "compute_time_ms": 5108.63770800006,
+            "cost_status": "not_evaluated_route_api_recorded",
+            "llm_error": "deepseek_request_failed:<urlopen error EOF occurred in violation of protocol (_ssl.c:1129)>",
+            "llm_status": "request_failed",
+            "observed_at": "2026-10-13",
+            "price_basis": "charging_service_total_per_kwh_includes_electricity_and_service_fee",
+            "price_source": "Tesla China official Supercharger station page",
+            "price_source_url": "https://www.tesla.cn/findus/location/supercharger/cnsc9691?region=CN",
+            "pricing_status": "official_station_reference",
+            "pricing_version": "tesla_cn_station_peak_v1",
+            "reference_rate_type": "peak_window_total_charging_service_price",
+            "reference_station": "深圳中航工业南航大厦 Tesla 超级充电站"
+          },
+          "method_name": "pure_llm_deepseek",
+          "monetary_cost": {
+            "api_cost_amount": 0.0,
+            "compute_cost_amount": 5.1086377080000605e-05,
+            "currency": "CNY",
+            "electricity_cost_amount": 0.0,
+            "total_monetary_cost": 5.1086377080000605e-05
+          },
+          "raw_output": {
+            "reason": "deepseek_request_failed:<urlopen error EOF occurred in violation of protocol (_ssl.c:1129)>",
+            "status": "failed"
+          },
+          "resources": {
+            "compute_time_ms": 5108.63770800006,
+            "energy_kwh": 0.0,
+            "input_tokens": 0,
+            "llm_calls": 1,
+            "llm_latency_ms": 0.0,
+            "output_tokens": 0
+          },
+          "routes": [],
+          "status": "failed",
+          "task_id": "task-0004-0009",
+          "valid_route_count": 0,
+          "validation": null
+        }
+      ],
+      "task_id": "task-0004-0009",
+      "task_type": "exact_node"
+    },
+    {
+      "methods": [
+        {
+          "best_route_id": null,
+          "evaluation": null,
+          "failure_reason": "deepseek_request_failed:<urlopen error EOF occurred in violation of protocol (_ssl.c:1129)>",
+          "invalid_route_count": 0,
+          "metadata": {
+            "compute_time_ms": 5200.388166000039,
+            "cost_status": "not_evaluated_route_api_recorded",
+            "llm_error": "deepseek_request_failed:<urlopen error EOF occurred in violation of protocol (_ssl.c:1129)>",
+            "llm_status": "request_failed",
+            "observed_at": "2026-10-13",
+            "price_basis": "charging_service_total_per_kwh_includes_electricity_and_service_fee",
+            "price_source": "Tesla China official Supercharger station page",
+            "price_source_url": "https://www.tesla.cn/findus/location/supercharger/cnsc9691?region=CN",
+            "pricing_status": "official_station_reference",
+            "pricing_version": "tesla_cn_station_peak_v1",
+            "reference_rate_type": "peak_window_total_charging_service_price",
+            "reference_station": "深圳中航工业南航大厦 Tesla 超级充电站"
+          },
+          "method_name": "pure_llm_deepseek",
+          "monetary_cost": {
+            "api_cost_amount": 0.0,
+            "compute_cost_amount": 5.200388166000039e-05,
+            "currency": "CNY",
+            "electricity_cost_amount": 0.0,
+            "total_monetary_cost": 5.200388166000039e-05
+          },
+          "raw_output": {
+            "reason": "deepseek_request_failed:<urlopen error EOF occurred in violation of protocol (_ssl.c:1129)>",
+            "status": "failed"
+          },
+          "resources": {
+            "compute_time_ms": 5200.388166000039,
+            "energy_kwh": 0.0,
+            "input_tokens": 0,
+            "llm_calls": 1,
+            "llm_latency_ms": 0.0,
+            "output_tokens": 0
+          },
+          "routes": [],
+          "status": "failed",
+          "task_id": "task-0004-0010",
+          "valid_route_count": 0,
+          "validation": null
+        }
+      ],
+      "task_id": "task-0004-0010",
+      "task_type": "exact_node"
+    }
+  ],
+  "run_type": "live_deepseek_pure_llm_experiment",
+  "schema_version": "pure_llm_experiment_routes_v1",
+  "semantic_policy": {
+    "baseline_visibility": "road_feature_input_protocol_v1",
+    "reads_roadside_features": true,
+    "resolver": "deepseek_v4_flash",
+    "semantic_tasks_remain_routable": true,
+    "uses_evaluator_truth": false
+  }
+}

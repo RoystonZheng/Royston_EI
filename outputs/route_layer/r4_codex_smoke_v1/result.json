@@ -1,0 +1,55 @@
+{
+  "schema_version": "r4_codex_one_step_smoke_v1",
+  "status": "failed_or_rejected",
+  "model_invocation_count": 1,
+  "application_retry_count": 0,
+  "process_exit_code": 0,
+  "timed_out": false,
+  "latency_ms": 9181.313,
+  "model": "gpt-6-luna",
+  "reasoning_effort": "low",
+  "provider": "codex_cli_chatgpt_account",
+  "api_key_used": false,
+  "usage_metrics": "unavailable_from_offline-preflight; inspect Codex account usage separately",
+  "task_id": "task-0000-0009",
+  "map_id": "grid-8x8-seed-0",
+  "map_version": "grid-v1-8",
+  "start_node_id": "node_0_5",
+  "pickup_node_id": "node_1_2",
+  "dropoff_node_id": "node_6_2",
+  "current_node_id": "node_0_5",
+  "allowed_directions": [
+    "S",
+    "N"
+  ],
+  "allowed_edge_ids": [
+    "edge_node_0_5_node_0_4",
+    "edge_node_0_5_node_0_6"
+  ],
+  "schema_sha256": "aa322b2145388fa6dd034720af63013bd8c34da5c1a251bff3173d231ee03a53",
+  "schema_bytes": 853,
+  "prompt_bytes": 2466,
+  "response": null,
+  "schema_checks": {
+    "json_object": false,
+    "required_fields_present": false,
+    "no_extra_fields": false,
+    "action_allowed_by_schema": false,
+    "direction_allowed_by_dynamic_schema": false,
+    "self_check_shape_valid": false,
+    "self_check_all_true": false,
+    "failure_code_consistent": false
+  },
+  "local_step_validator_passed": false,
+  "route_complete": false,
+  "route_energy_kwh": null,
+  "cli_event_type_counts": {
+    "thread.started": 1,
+    "item.completed": 4,
+    "turn.started": 1,
+    "turn.completed": 1
+  },
+  "stderr_bytes": 6746,
+  "stderr_sha256": "57c8fbf530538b4c56c91d031236aa30d6067bb4dd4728f467ca8e66ebda1a36",
+  "retry_policy": "zero; no rerun after any failure"
+}

@@ -1,0 +1,347 @@
+{
+  "input_type": "formal_scenario_set",
+  "map_id": "grid-100x100-seed-1",
+  "map_version": "grid-v1-100",
+  "methods": [
+    "pure_llm_deepseek"
+  ],
+  "price_profile": {
+    "api_price_per_token": 3e-06,
+    "billing_period": "simulation",
+    "compute_price_per_ms": 1e-08,
+    "currency": "CNY",
+    "electricity_price_per_kwh": 2.29,
+    "notes": "烟雾测试采用该官方站点列示的峰时综合充电服务价 2.29 元/kWh；特斯拉价格按站点和时段动态变化，正式实验应按实际站点与仿真时段替换。",
+    "observed_at": "2026-10-13",
+    "price_basis": "charging_service_total_per_kwh_includes_electricity_and_service_fee",
+    "price_source": "Tesla China official Supercharger station page",
+    "price_source_url": "https://www.tesla.cn/findus/location/supercharger/cnsc9691?region=CN",
+    "pricing_status": "official_station_reference",
+    "pricing_version": "tesla_cn_station_peak_v1",
+    "rate_schedule": {
+      "00:00-08:00": 1.39,
+      "08:00-10:00": 1.69,
+      "10:00-12:00": 2.29,
+      "12:00-14:00": 1.69,
+      "14:00-19:00": 2.29,
+      "19:00-24:00": 1.69
+    },
+    "reference_rate_type": "peak_window_total_charging_service_price",
+    "reference_station": "深圳中航工业南航大厦 Tesla 超级充电站"
+  },
+  "random_seed": 1,
+  "results": [
+    {
+      "methods": [
+        {
+          "best_route_id": null,
+          "evaluation": null,
+          "failure_reason": "deepseek_request_failed:deepseek_http_status:400",
+          "invalid_route_count": 0,
+          "metadata": {
+            "attempt_number": 1,
+            "compute_time_ms": 2482.820000000004,
+            "cost_status": "not_evaluated_route_api_recorded",
+            "llm_error": "deepseek_request_failed:deepseek_http_status:400",
+            "llm_status": "request_failed",
+            "max_output_tokens_requested": 1024,
+            "observed_at": "2026-10-13",
+            "price_basis": "charging_service_total_per_kwh_includes_electricity_and_service_fee",
+            "price_source": "Tesla China official Supercharger station page",
+            "price_source_url": "https://www.tesla.cn/findus/location/supercharger/cnsc9691?region=CN",
+            "pricing_status": "official_station_reference",
+            "pricing_version": "tesla_cn_station_peak_v1",
+            "reasoning_effort_requested": "none",
+            "reference_rate_type": "peak_window_total_charging_service_price",
+            "reference_station": "深圳中航工业南航大厦 Tesla 超级充电站"
+          },
+          "method_name": "pure_llm_deepseek",
+          "monetary_cost": {
+            "api_cost_amount": 0.0,
+            "compute_cost_amount": 2.4828200000000038e-05,
+            "currency": "CNY",
+            "electricity_cost_amount": 0.0,
+            "total_monetary_cost": 2.4828200000000038e-05
+          },
+          "raw_output": {
+            "reason": "deepseek_request_failed:deepseek_http_status:400",
+            "status": "failed"
+          },
+          "resources": {
+            "compute_time_ms": 2482.820000000004,
+            "energy_kwh": 0.0,
+            "input_tokens": 0,
+            "llm_calls": 1,
+            "llm_latency_ms": 0.0,
+            "output_tokens": 0
+          },
+          "routes": [],
+          "status": "failed",
+          "task_id": "formal-task-0001-feasible",
+          "valid_route_count": 0,
+          "validation": null
+        }
+      ],
+      "scenario_id": "formal-0001-feasible",
+      "scenario_type": "feasible",
+      "task_id": "formal-task-0001-feasible"
+    },
+    {
+      "methods": [
+        {
+          "best_route_id": null,
+          "evaluation": null,
+          "failure_reason": "llm_move_sequence_invalid",
+          "invalid_route_count": 0,
+          "metadata": {
+            "attempt_number": 1,
+            "compute_time_ms": 15671.23700000002,
+            "cost_status": "not_evaluated_route_api_recorded",
+            "llm_error": "llm_move_missing_directed_edge:edge_node_24_55_node_25_55",
+            "llm_model": "deepseek-flash",
+            "llm_request_id": null,
+            "llm_retries": 0,
+            "llm_status": "move_sequence_invalid",
+            "max_output_tokens_requested": 1024,
+            "move_sequence": "EENNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEENNNNNNNNNNNNNNN",
+            "observed_at": "2026-10-13",
+            "price_basis": "charging_service_total_per_kwh_includes_electricity_and_service_fee",
+            "price_source": "Tesla China official Supercharger station page",
+            "price_source_url": "https://www.tesla.cn/findus/location/supercharger/cnsc9691?region=CN",
+            "pricing_status": "official_station_reference",
+            "pricing_version": "tesla_cn_station_peak_v1",
+            "reasoning_effort_requested": "none",
+            "reference_rate_type": "peak_window_total_charging_service_price",
+            "reference_station": "深圳中航工业南航大厦 Tesla 超级充电站",
+            "semantic_resolution": null
+          },
+          "method_name": "pure_llm_deepseek",
+          "monetary_cost": {
+            "api_cost_amount": 2.892723,
+            "compute_cost_amount": 0.0001567123700000002,
+            "currency": "CNY",
+            "electricity_cost_amount": 0.0,
+            "total_monetary_cost": 2.89287971237
+          },
+          "raw_output": {
+            "dropoff_node_id": "node_82_15",
+            "edge_sequence": [],
+            "move_sequence": "EENNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEENNNNNNNNNNNNNNN",
+            "node_sequence": [],
+            "pickup_node_id": "node_18_55",
+            "reason": null,
+            "status": "completed"
+          },
+          "resources": {
+            "compute_time_ms": 15671.23700000002,
+            "energy_kwh": 0.0,
+            "input_tokens": 964172,
+            "llm_calls": 1,
+            "llm_latency_ms": 15417.297540999982,
+            "output_tokens": 69
+          },
+          "routes": [],
+          "status": "failed",
+          "task_id": "formal-task-0001-boundary",
+          "valid_route_count": 0,
+          "validation": null
+        }
+      ],
+      "scenario_id": "formal-0001-boundary",
+      "scenario_type": "boundary",
+      "task_id": "formal-task-0001-boundary"
+    },
+    {
+      "methods": [
+        {
+          "best_route_id": null,
+          "evaluation": null,
+          "failure_reason": "illegal_endpoint",
+          "invalid_route_count": 0,
+          "metadata": {
+            "attempt_number": 1,
+            "compute_time_ms": 9747.10670799999,
+            "cost_status": "not_evaluated_route_api_recorded",
+            "llm_model": "deepseek-flash",
+            "llm_request_id": null,
+            "llm_retries": 0,
+            "llm_status": "model_failed",
+            "max_output_tokens_requested": 1024,
+            "observed_at": "2026-10-13",
+            "price_basis": "charging_service_total_per_kwh_includes_electricity_and_service_fee",
+            "price_source": "Tesla China official Supercharger station page",
+            "price_source_url": "https://www.tesla.cn/findus/location/supercharger/cnsc9691?region=CN",
+            "pricing_status": "official_station_reference",
+            "pricing_version": "tesla_cn_station_peak_v1",
+            "reasoning_effort_requested": "none",
+            "reference_rate_type": "peak_window_total_charging_service_price",
+            "reference_station": "深圳中航工业南航大厦 Tesla 超级充电站",
+            "search_trace": {
+              "algorithm": "llm",
+              "expanded_nodes": 0,
+              "legs": [],
+              "method_name": "pure_llm_deepseek",
+              "route_edge_sequence": [],
+              "route_node_sequence": [],
+              "schema_version": "route_search_trace_v1",
+              "status": "failed"
+            },
+            "semantic_resolution": null
+          },
+          "method_name": "pure_llm_deepseek",
+          "monetary_cost": {
+            "api_cost_amount": 1.519929,
+            "compute_cost_amount": 9.747106707999991e-05,
+            "currency": "CNY",
+            "electricity_cost_amount": 0.0,
+            "total_monetary_cost": 1.52002647106708
+          },
+          "raw_output": {
+            "dropoff_node_id": null,
+            "edge_sequence": [],
+            "move_sequence": "",
+            "node_sequence": [],
+            "pickup_node_id": null,
+            "reason": "illegal_endpoint",
+            "status": "failed"
+          },
+          "resources": {
+            "compute_time_ms": 9747.10670799999,
+            "energy_kwh": 0.0,
+            "input_tokens": 506611,
+            "llm_calls": 1,
+            "llm_latency_ms": 9615.920625,
+            "output_tokens": 32
+          },
+          "routes": [],
+          "status": "failed",
+          "task_id": "formal-task-0001-illegal",
+          "valid_route_count": 0,
+          "validation": null
+        }
+      ],
+      "scenario_id": "formal-0001-illegal_endpoint",
+      "scenario_type": "illegal_endpoint",
+      "task_id": "formal-task-0001-illegal"
+    },
+    {
+      "methods": [
+        {
+          "best_route_id": null,
+          "evaluation": null,
+          "failure_reason": "The read operation timed out",
+          "invalid_route_count": 0,
+          "metadata": {
+            "attempt_number": 1,
+            "compute_time_ms": 91864.25287499998,
+            "cost_status": "not_evaluated_route_api_recorded",
+            "llm_error": "The read operation timed out",
+            "llm_status": "request_failed",
+            "max_output_tokens_requested": 1024,
+            "observed_at": "2026-10-13",
+            "price_basis": "charging_service_total_per_kwh_includes_electricity_and_service_fee",
+            "price_source": "Tesla China official Supercharger station page",
+            "price_source_url": "https://www.tesla.cn/findus/location/supercharger/cnsc9691?region=CN",
+            "pricing_status": "official_station_reference",
+            "pricing_version": "tesla_cn_station_peak_v1",
+            "reasoning_effort_requested": "none",
+            "reference_rate_type": "peak_window_total_charging_service_price",
+            "reference_station": "深圳中航工业南航大厦 Tesla 超级充电站"
+          },
+          "method_name": "pure_llm_deepseek",
+          "monetary_cost": {
+            "api_cost_amount": 0.0,
+            "compute_cost_amount": 0.0009186425287499997,
+            "currency": "CNY",
+            "electricity_cost_amount": 0.0,
+            "total_monetary_cost": 0.0009186425287499997
+          },
+          "raw_output": {
+            "reason": "The read operation timed out",
+            "status": "failed"
+          },
+          "resources": {
+            "compute_time_ms": 91864.25287499998,
+            "energy_kwh": 0.0,
+            "input_tokens": 0,
+            "llm_calls": 1,
+            "llm_latency_ms": 0.0,
+            "output_tokens": 0
+          },
+          "routes": [],
+          "status": "failed",
+          "task_id": "formal-task-0001-detour",
+          "valid_route_count": 0,
+          "validation": null
+        }
+      ],
+      "scenario_id": "formal-0001-detour",
+      "scenario_type": "detour",
+      "task_id": "formal-task-0001-detour"
+    },
+    {
+      "methods": [
+        {
+          "best_route_id": null,
+          "evaluation": null,
+          "failure_reason": "deepseek_request_failed:deepseek_http_status:400",
+          "invalid_route_count": 0,
+          "metadata": {
+            "attempt_number": 1,
+            "compute_time_ms": 2710.155499999985,
+            "cost_status": "not_evaluated_route_api_recorded",
+            "llm_error": "deepseek_request_failed:deepseek_http_status:400",
+            "llm_status": "request_failed",
+            "max_output_tokens_requested": 1024,
+            "observed_at": "2026-10-13",
+            "price_basis": "charging_service_total_per_kwh_includes_electricity_and_service_fee",
+            "price_source": "Tesla China official Supercharger station page",
+            "price_source_url": "https://www.tesla.cn/findus/location/supercharger/cnsc9691?region=CN",
+            "pricing_status": "official_station_reference",
+            "pricing_version": "tesla_cn_station_peak_v1",
+            "reasoning_effort_requested": "none",
+            "reference_rate_type": "peak_window_total_charging_service_price",
+            "reference_station": "深圳中航工业南航大厦 Tesla 超级充电站"
+          },
+          "method_name": "pure_llm_deepseek",
+          "monetary_cost": {
+            "api_cost_amount": 0.0,
+            "compute_cost_amount": 2.710155499999985e-05,
+            "currency": "CNY",
+            "electricity_cost_amount": 0.0,
+            "total_monetary_cost": 2.710155499999985e-05
+          },
+          "raw_output": {
+            "reason": "deepseek_request_failed:deepseek_http_status:400",
+            "status": "failed"
+          },
+          "resources": {
+            "compute_time_ms": 2710.155499999985,
+            "energy_kwh": 0.0,
+            "input_tokens": 0,
+            "llm_calls": 1,
+            "llm_latency_ms": 0.0,
+            "output_tokens": 0
+          },
+          "routes": [],
+          "status": "failed",
+          "task_id": "formal-task-0001-unreachable",
+          "valid_route_count": 0,
+          "validation": null
+        }
+      ],
+      "scenario_id": "formal-0001-unreachable",
+      "scenario_type": "unreachable",
+      "task_id": "formal-task-0001-unreachable"
+    }
+  ],
+  "run_type": "live_deepseek_pure_llm_experiment",
+  "schema_version": "pure_llm_experiment_routes_v1",
+  "semantic_policy": {
+    "baseline_visibility": "road_feature_input_protocol_v1",
+    "reads_roadside_features": true,
+    "resolver": "deepseek_v4_flash",
+    "semantic_tasks_remain_routable": true,
+    "uses_evaluator_truth": false
+  }
+}

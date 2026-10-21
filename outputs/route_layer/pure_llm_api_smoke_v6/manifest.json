@@ -1,0 +1,93 @@
+{
+  "api_base_url": "https://api.deepseek.com",
+  "api_key_env": "LLM_API_KEY",
+  "errors": [],
+  "index_html": "index.html",
+  "map_size": 20,
+  "methods": [
+    "pure_llm_deepseek"
+  ],
+  "model_requested": "deepseek-flash",
+  "price_profile": {
+    "api_price_per_token": 3e-06,
+    "billing_period": "simulation",
+    "compute_price_per_ms": 1e-08,
+    "currency": "CNY",
+    "electricity_price_per_kwh": 2.29,
+    "notes": "烟雾测试采用该官方站点列示的峰时综合充电服务价 2.29 元/kWh；特斯拉价格按站点和时段动态变化，正式实验应按实际站点与仿真时段替换。",
+    "observed_at": "2026-10-13",
+    "price_basis": "charging_service_total_per_kwh_includes_electricity_and_service_fee",
+    "price_source": "Tesla China official Supercharger station page",
+    "price_source_url": "https://www.tesla.cn/findus/location/supercharger/cnsc9691?region=CN",
+    "pricing_status": "official_station_reference",
+    "pricing_version": "tesla_cn_station_peak_v1",
+    "rate_schedule": {
+      "00:00-08:00": 1.39,
+      "08:00-10:00": 1.69,
+      "10:00-12:00": 2.29,
+      "12:00-14:00": 1.69,
+      "14:00-19:00": 2.29,
+      "19:00-24:00": 1.69
+    },
+    "reference_rate_type": "peak_window_total_charging_service_price",
+    "reference_station": "深圳中航工业南航大厦 Tesla 超级充电站"
+  },
+  "run_type": "live_deepseek_pure_llm_experiment",
+  "schema_version": "pure_llm_experiment_manifest_v1",
+  "seeds": [
+    0
+  ],
+  "seeds_detail": [
+    {
+      "errors": [],
+      "formal_count": 0,
+      "formal_routes_costs": "seeds/seed_0/pure_llm_formal_routes_costs_seed_0.json",
+      "formal_summary": {
+        "completed": 0,
+        "evaluated_routes": 0,
+        "failed": 0,
+        "task_count": 0,
+        "total_energy_kwh": 0.0,
+        "total_input_tokens": 0,
+        "total_llm_calls": 0,
+        "total_llm_latency_ms": 0.0,
+        "total_monetary_cost": 0.0,
+        "total_output_tokens": 0,
+        "valid_routes": 0
+      },
+      "formal_trace_count": 0,
+      "formal_visual_index": "seeds/seed_0/visualizations/formal_scenarios/index.html",
+      "map_id": "grid-20x20-seed-0",
+      "map_json": "seeds/seed_0/map_20x20_seed_0.json",
+      "order_count": 1,
+      "order_routes_costs": "seeds/seed_0/pure_llm_order_routes_costs_seed_0.json",
+      "order_summary": {
+        "completed": 0,
+        "evaluated_routes": 0,
+        "failed": 1,
+        "task_count": 1,
+        "total_energy_kwh": 0.0,
+        "total_input_tokens": 66225,
+        "total_llm_calls": 1,
+        "total_llm_latency_ms": 1607.860708,
+        "total_monetary_cost": 0.19882324831958,
+        "total_output_tokens": 44,
+        "valid_routes": 0
+      },
+      "order_trace_count": 1,
+      "order_visual_index": "seeds/seed_0/visualizations/orders/index.html",
+      "result_status": "completed",
+      "seed": 0,
+      "seed_dashboard_index": "seeds/seed_0/index.html"
+    }
+  ],
+  "semantic_policy": {
+    "baseline_visibility": "road_feature_input_protocol_v1",
+    "reads_roadside_features": true,
+    "resolver": "deepseek_v4_flash",
+    "semantic_tasks_remain_routable": true,
+    "uses_evaluator_truth": false
+  },
+  "status": "completed",
+  "total_trace_count": 1
+}

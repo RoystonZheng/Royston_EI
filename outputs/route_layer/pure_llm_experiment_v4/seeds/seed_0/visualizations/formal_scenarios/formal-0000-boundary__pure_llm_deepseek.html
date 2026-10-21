@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<title>路线规划检索轨迹 - formal-0000-boundary__pure_llm_deepseek</title>
+<style>
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;margin:0;background:#f4f6fb;color:#1f2937}
+header{padding:16px 22px;background:#172554;color:#fff}
+h1{font-size:20px;margin:0 0 6px} .meta{font-size:13px;opacity:.9}
+main{display:grid;grid-template-columns:minmax(620px,1fr) 360px;gap:14px;padding:14px}
+.card{background:#fff;border:1px solid #dbe3f0;border-radius:10px;padding:14px;box-shadow:0 2px 8px #17255412}
+canvas{width:100%;height:680px;border:1px solid #dbe3f0;border-radius:8px;background:#fbfdff}
+label{font-size:13px} input{width:100%} table{width:100%;border-collapse:collapse;font-size:12px}
+td,th{padding:5px;border-bottom:1px solid #e5e7eb;text-align:left;vertical-align:top}
+.legend span{display:inline-block;margin-right:10px;font-size:12px} .dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:4px}
+.blue{background:#2563eb} .red{background:#dc2626} .orange{background:#f59e0b}
+</style></head><body>
+<header><h1>路线规划检索与运行轨迹</h1><div class="meta">formal-0000-boundary__pure_llm_deepseek</div></header>
+<main><section class="card"><canvas id="map" width="1000" height="760"></canvas>
+<p><label>检索回放步数：<output id="stepLabel">0</output></label>
+<input id="step" type="range" min="0" value="0"></p>
+<div class="legend"><span><i class="dot blue"></i>已展开节点</span><span><i class="dot orange"></i>当前节点</span><span><i class="dot red"></i>最终路线</span></div></section>
+<section class="card"><div id="summary"></div><h3>每段检索</h3><table><thead><tr><th>段</th><th>状态</th><th>起点 → 终点</th><th>展开</th></tr></thead><tbody id="legs"></tbody></table></section></main>
+<script>
+const DATA = {"schema_version":"route_trace_visual_record_v1","trace_id":"formal-0000-boundary__pure_llm_deepseek","map_id":"grid-100x100-seed-0","task_id":"formal-task-0000-boundary","task_type":null,"scenario_id":"formal-0000-boundary","scenario_type":"boundary","method_name":"pure_llm_deepseek","status":"failed","failure_reason":"llm_output_parse_failed","trace":{"schema_version":"route_search_trace_v1","method_name":"pure_llm_deepseek","algorithm":"dijkstra","status":"missing","legs":[],"expanded_nodes":0,"route_node_sequence":[],"route_edge_sequence":[]},"geometry":{"map_id":"grid-100x100-seed-0","map_size":100,"boundary":{"max_x":99,"max_y":99,"min_x":0,"min_y":0},"nodes":[],"expanded_events":[],"route_node_ids":[],"route_edges":[],"endpoint_node_ids":[]}};
+const trace = DATA.trace || {}; const geo = DATA.geometry || {};
+const canvas = document.getElementById('map'); const ctx = canvas.getContext('2d');
+const nodes = Object.fromEntries((geo.nodes || []).map(n => [n.node_id, n]));
+const events = geo.expanded_events || []; const route = geo.route_node_ids || [];
+const endpointIds = new Set(geo.endpoint_node_ids || []);
+const minX = geo.boundary.min_x, maxX = geo.boundary.max_x, minY = geo.boundary.min_y, maxY = geo.boundary.max_y;
+function pos(n) { return [35 + (n.x-minX)/(Math.max(1,maxX-minX))*930, 720 - (n.y-minY)/(Math.max(1,maxY-minY))*660]; }
+function draw() {
+  const limit = Number(document.getElementById('step').value || 0); ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.strokeStyle='#eef2f7'; ctx.lineWidth=1;
+  for(let x=minX;x<=maxX;x++) { const a=pos({x,y:minY}),b=pos({x,y:maxY});ctx.beginPath();ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);ctx.stroke(); }
+  for(let y=minY;y<=maxY;y++) { const a=pos({x:minX,y}),b=pos({x:maxX,y});ctx.beginPath();ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);ctx.stroke(); }
+  const expanded = new Set(events.slice(0,limit).map(e=>e.node_id));
+  for(const id of expanded) { const n=nodes[id]; if(!n)continue; const p=pos(n);ctx.fillStyle='#2563ebaa';ctx.beginPath();ctx.arc(p[0],p[1],5,0,Math.PI*2);ctx.fill(); }
+  if(route.length>1) { ctx.strokeStyle='#dc2626';ctx.lineWidth=5;ctx.beginPath();route.forEach((id,i)=>{const n=nodes[id];if(!n)return;const p=pos(n);if(i)ctx.lineTo(p[0],p[1]);else ctx.moveTo(p[0],p[1]);});ctx.stroke(); }
+  for(const id of endpointIds) { const n=nodes[id];if(!n)continue;const p=pos(n);ctx.fillStyle='#f59e0b';ctx.beginPath();ctx.arc(p[0],p[1],8,0,Math.PI*2);ctx.fill();ctx.fillStyle='#111827';ctx.font='11px sans-serif';ctx.fillText(id,p[0]+8,p[1]-8); }
+  const current = events[Math.max(0,limit-1)]; if(current && nodes[current.node_id]) { const p=pos(nodes[current.node_id]);ctx.fillStyle='#f59e0b';ctx.strokeStyle='#92400e';ctx.lineWidth=2;ctx.beginPath();ctx.arc(p[0],p[1],10,0,Math.PI*2);ctx.stroke(); }
+  document.getElementById('stepLabel').value = limit + '/' + events.length;
+}
+const slider=document.getElementById('step');slider.max=events.length;slider.value=events.length;slider.addEventListener('input',draw); 
+    document.getElementById('summary').innerHTML='<b>算法：</b>'+trace.method_name+' ('+trace.algorithm+')<br><b>状态：</b>'+trace.status+'<br><b>展开节点：</b>'+(trace.algorithm==='llm'?'—':trace.expanded_nodes)+'<br><b>最终路线节点：</b>'+route.length;
+document.getElementById('legs').innerHTML=(trace.legs||[]).map((leg,i)=>'<tr><td>'+(i+1)+'</td><td>'+leg.status+'</td><td>'+leg.source_node_id+' → '+leg.target_node_id+'</td><td>'+((leg.expanded_node_ids||[]).length)+'</td></tr>').join('');
+draw();
+</script></body></html>

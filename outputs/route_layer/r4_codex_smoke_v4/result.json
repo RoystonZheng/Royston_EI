@@ -1,0 +1,74 @@
+{
+  "experiment_id": "r4_codex_one_step_smoke_v4",
+  "status": "single_step_no_tool_smoke_passed",
+  "scope": "One next-step action on the frozen 8x8 seed 0 task; no complete route requested.",
+  "provider": "Codex CLI using the logged-in ChatGPT account; OPENAI_API_KEY and DEEPSEEK_API_KEY removed from the child environment.",
+  "model": "gpt-5.6-luna",
+  "reasoning_effort": "low",
+  "cli_invocation_count": 1,
+  "model_turn_count": 1,
+  "retry_count": 0,
+  "tool_call_count": 0,
+  "features_temporarily_disabled": [
+    "shell_tool",
+    "unified_exec"
+  ],
+  "response": {
+    "action": "move",
+    "direction": "S",
+    "self_check": {
+      "allowed_directed_edge": true,
+      "starts_at_current": true,
+      "inside_boundary": true,
+      "pickup_order_ok": true,
+      "not_revisited": true
+    },
+    "failure_reason_code": "none"
+  },
+  "allowed_directions": [
+    "N",
+    "S"
+  ],
+  "allowed_edge_ids": [
+    "edge_node_0_5_node_0_4",
+    "edge_node_0_5_node_0_6"
+  ],
+  "selected_edge_id": "edge_node_0_5_node_0_6",
+  "validation": {
+    "exact_top_level_fields": true,
+    "action_is_move": true,
+    "direction_in_schema": true,
+    "direction_in_dynamic_candidates": true,
+    "five_self_check_fields_present": true,
+    "all_self_checks_true": true,
+    "failure_reason_none": true,
+    "no_tool_events": true,
+    "completed_turn_usage_present": true
+  },
+  "usage": {
+    "input_tokens": 16172,
+    "cached_input_tokens": 0,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 762,
+    "reasoning_output_tokens": 702
+  },
+  "nonfatal_cli_warnings": [
+    "Skill descriptions were shortened to fit the 2% skills context budget. Codex can still see every skill, but some descriptions are shorter. Disable unused skills or plugins to leave more room for the rest."
+  ],
+  "interpretation": "The CLI account path and structured one-step output worked with no tool or command execution. The returned S action is in the precomputed legal candidate set and maps to edge_node_0_5_node_0_6. This is a one-step model-only smoke, not a full route, optimality result, or formal R4 batch result.",
+  "hook_check": {
+    "marketplace_source_stop_entries": 0,
+    "installed_cache_stop_entries": 0,
+    "collector_script_exists_in_both_packages": true,
+    "stop_hook_runtime_reload_verified": false,
+    "note": "Stop hook is intentionally disabled in both files; restart Codex to verify the running desktop process has reloaded it."
+  },
+  "evidence": {
+    "prompt": "prompt.txt",
+    "schema": "schema.json",
+    "metadata": "request_metadata.json",
+    "events": "cli_events.jsonl",
+    "stderr": "cli_stderr.log",
+    "response": "model_response.json"
+  }
+}

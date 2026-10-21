@@ -1,0 +1,152 @@
+{
+  "schema_version": "r4_100x100_stepwise_budget_audit_v1",
+  "date": "2026-10-21",
+  "api_requests_this_audit": 0,
+  "input_consistency": {
+    "maps_and_orders_byte_identical": 20,
+    "formal_scenarios_semantically_identical_after_removing_embedded_road_map": 10,
+    "formal_scenario_raw_hashes_differ": 10
+  },
+  "workload": {
+    "seed_count": 10,
+    "order_tasks_per_seed": 10,
+    "formal_scenarios_per_seed": 5,
+    "total_task_rows_per_method": 150,
+    "order_exact_tasks_total": 70,
+    "order_semantic_tasks_total": 30,
+    "formal_scenario_types_each_seed": [
+      "feasible",
+      "boundary",
+      "illegal_endpoint",
+      "detour",
+      "unreachable"
+    ],
+    "r4_groups": [
+      "R4",
+      "R4-A",
+      "R4-B"
+    ],
+    "group_task_rows_total": 450,
+    "baseline_route_api_eligible_tasks": 130,
+    "excluded_from_baseline_routed_set": {
+      "illegal_endpoint": 10,
+      "unreachable": 10
+    }
+  },
+  "directed_hop_audit": {
+    "method": "offline BFS over frozen directed map, start-to-pickup plus pickup-to-dropoff; evaluator truth used only for sizing, never model input",
+    "routable_task_count": 130,
+    "sum_minimum_directed_hops": 17219,
+    "mean_minimum_directed_hops": 132.45384615384614,
+    "median_minimum_directed_hops": 123.5,
+    "p90_minimum_directed_hops": 198,
+    "p95_minimum_directed_hops": 226,
+    "max_minimum_directed_hops": 264,
+    "tasks_over_32_hops": 128,
+    "tasks_at_most_32_hops": 2,
+    "orders_over_32_of_100": 99,
+    "formal_over_32_of_30": 29
+  },
+  "smoke_v3_observed": {
+    "api_calls": 31,
+    "accepted_edges": 25,
+    "rejected_proposals": 6,
+    "input_tokens": 40270,
+    "output_tokens": 3844,
+    "input_tokens_per_call": 1299.032258064516,
+    "output_tokens_per_call": 124.0,
+    "calls_per_accepted_edge": 1.24,
+    "api_cny_per_call": 0.004269096774193549,
+    "api_cost_cny": 0.13234200000000002,
+    "price_basis": "seed0 8x8 observed v3 smoke at configured per-token estimate"
+  },
+  "budget_scenarios": {
+    "current_32_call_cap": {
+      "max_calls_assuming_130_api_eligible_tasks_each_group": 12480,
+      "three_group_cost_proxy_cny_using_v3_mean_call_cost": 53.278327741935485,
+      "feasibility": "not adequate: 128/130 shortest directed paths exceed the 32-call limit"
+    },
+    "stepwise_repeated_full_grid": {
+      "ideal_proposals": {
+        "serialized_message_bytes_per_group": 420879015,
+        "input_token_proxy": 218798626,
+        "input_api_cost_proxy_cny": 656.395878,
+        "calls_per_group": 17219,
+        "output_token_proxy": 2135156.0,
+        "output_api_cost_proxy_cny": 6.405468,
+        "total_three_group_cost_proxy_cny": 1988.4040380000001
+      },
+      "v3_rejection_rate_extrapolation": {
+        "serialized_message_bytes_per_group": 521889979,
+        "input_token_proxy": 271310296,
+        "input_api_cost_proxy_cny": 813.930888,
+        "calls_per_group": 21351.56,
+        "output_token_proxy": 2647593.44,
+        "output_api_cost_proxy_cny": 7.94278032,
+        "total_three_group_cost_proxy_cny": 2465.62100496
+      },
+      "status": "planning proxy only; every step request repeats the compact local grid; 100x100 input tokenization unverified"
+    },
+    "whole_route_one_call_per_task": {
+      "serialized_message_bytes_per_group": 2763676,
+      "input_token_proxy": 1436728,
+      "input_api_cost_proxy_cny": 4.3101840000000005,
+      "calls_per_group": 130,
+      "scope": "input only; output token cap/route output size and feedback attempts excluded"
+    },
+    "gate": "Do not choose a formal budget from byte-token extrapolation alone; freeze interaction mode and runtime cost breaker first."
+  },
+  "gates": {
+    "do_not_start_formal_batch": true,
+    "must_freeze_stepwise_semantics_for_R4_A_B": true,
+    "must_add_runtime_cost_circuit_breaker": true,
+    "must_set_request_and_per_task_call_caps_from_100x100_workload": true,
+    "must_not_pass_baseline_routes_or_evaluator_truth_to_llm": true
+  },
+  "r4_100x100_prompt_size_preflight": {
+    "routable_task_count": 130,
+    "initial_prompt_bytes": {
+      "min": 4389,
+      "median": 19898,
+      "p90": 34431,
+      "p95": 35800,
+      "max": 42787,
+      "mean": 21259.05,
+      "sum_one_per_task": 2763676
+    },
+    "request_repeats_full_compact_grid": true,
+    "mean_prompt_bytes_vs_8x8_v3_initial_prompt_bytes": 8.712725409836064,
+    "ideal_stepwise_full_grid": {
+      "serialized_message_bytes_per_group": 420879015,
+      "input_token_proxy": 218798626,
+      "input_api_cost_proxy_cny": 656.395878,
+      "calls_per_group": 17219,
+      "output_token_proxy": 2135156.0,
+      "output_api_cost_proxy_cny": 6.405468,
+      "total_three_group_cost_proxy_cny": 1988.4040380000001
+    },
+    "v3_rejection_rate_stepwise_full_grid": {
+      "serialized_message_bytes_per_group": 521889979,
+      "input_token_proxy": 271310296,
+      "input_api_cost_proxy_cny": 813.930888,
+      "calls_per_group": 21351.56,
+      "output_token_proxy": 2647593.44,
+      "output_api_cost_proxy_cny": 7.94278032,
+      "total_three_group_cost_proxy_cny": 2465.62100496
+    },
+    "one_complete_route_request_per_task_input_only_proxy": {
+      "serialized_message_bytes_per_group": 2763676,
+      "input_token_proxy": 1436728,
+      "input_api_cost_proxy_cny": 4.3101840000000005,
+      "calls_per_group": 130,
+      "scope": "input only; output token cap/route output size and feedback attempts excluded"
+    },
+    "token_proxy_method": {
+      "observed_input_tokens": 40270,
+      "observed_serialized_messages_bytes": 77463,
+      "input_tokens_per_serialized_message_byte": 0.5198610949743748,
+      "limitations": "8x8 single-smoke ratio; tool schema bytes are not included in message-byte denominator; estimate is not a quote or spend ceiling"
+    }
+  },
+  "previous_call_average_budget_estimate_status": "superseded: 8x8 per-call average omitted the much larger 100x100 map payload repeated on every step."
+}

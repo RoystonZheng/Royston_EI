@@ -1,0 +1,30 @@
+{
+  "experiment_id": "r4_codex_one_step_smoke_v2",
+  "status": "failed_before_model_inference",
+  "scope": "single 8x8 one-step route-action smoke; no full-route generation",
+  "provider": "Codex CLI with ChatGPT account login",
+  "model": "gpt-6-luna",
+  "reasoning_effort": "low",
+  "cli_invocation_count": 1,
+  "retry_count": 0,
+  "model_inference_count": 0,
+  "provider_error": {
+    "http_status": 400,
+    "type": "invalid_request_error",
+    "message": "The requested gpt-6-luna model is not supported when using Codex with a ChatGPT account."
+  },
+  "usage": null,
+  "usage_note": "No model response or usage event was returned; token usage is unavailable, not reported as zero.",
+  "route_action": null,
+  "local_validation": "not_run_no_model_response",
+  "api_key_used": false,
+  "evidence": {
+    "prompt": "prompt.txt",
+    "schema": "schema.json",
+    "metadata": "request_metadata.json",
+    "cli_events": "cli_events.jsonl",
+    "stderr": "cli_stderr.log",
+    "response": "model_response.json (not created)"
+  },
+  "interpretation": "This attempt establishes that this model identifier is unavailable through the current ChatGPT-account CLI route. It does not establish that Codex-account inference is impossible with all supported models, and it produced no route result."
+}

@@ -1,0 +1,45 @@
+{
+  "schema_version": "r4_retry_user_input_audit_v1",
+  "formal_result": false,
+  "api_requests_sent": 0,
+  "source_smoke_artifact": "outputs/route_layer/r4_smoke_v9/seed0_semantic_road_feature.json",
+  "original_user_json_bytes": 1652,
+  "feedback_json_bytes": 699,
+  "v9_legacy_retry_message_parseable_json": false,
+  "v9_legacy_retry_parse_error": "JSONDecodeError: Extra data",
+  "fixed_retry_message_parseable_json": true,
+  "fixed_retry_top_level_keys": [
+    "map",
+    "output_contract",
+    "r4_validation_feedback",
+    "route_query",
+    "schema_version"
+  ],
+  "fixed_retry_feedback_schema_version": "r4_route_validation_feedback_v1",
+  "fixed_retry_user_json_bytes": 2377,
+  "observed_second_vs_first_input_token_delta": 209,
+  "map_encoding_audit": {
+    "encoding": "directional-cost-grid-v1",
+    "encoded_directed_edges": 205,
+    "source_map_directed_edges": 205,
+    "edge_sets_exactly_equal": true,
+    "all_encoded_costs_match_source_edges": true,
+    "first_move_E_from_start": "node_0_5",
+    "first_move_E_slot": ".",
+    "reverse_one_way_edge_exists": true,
+    "illegal_forward_edge_exists": false,
+    "model_replay_first_violation": {
+      "step": 1,
+      "move": "E",
+      "kind": "one_way_direction",
+      "message": "llm_move_missing_directed_edge:edge_node_0_5_node_1_5",
+      "from_node_id": "node_0_5",
+      "to_node_id": "node_1_5",
+      "edge_id": "edge_node_0_5_node_1_5",
+      "reverse_edge_id": "edge_node_1_5_node_0_5",
+      "reverse_edge_one_way": true,
+      "blocked": false
+    }
+  },
+  "base_messages_sha256": "1ab42f99397c624aca67f34b2c52addb624880a3f282febe6982bd91721eac71"
+}

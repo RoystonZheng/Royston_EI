@@ -1,0 +1,352 @@
+{
+  "errors": [],
+  "map_size": 100,
+  "price_profile": {
+    "api_price_per_token": 3e-06,
+    "billing_period": "simulation",
+    "compute_price_per_ms": 1e-08,
+    "currency": "CNY",
+    "electricity_price_per_kwh": 2.29,
+    "notes": "烟雾测试采用该官方站点列示的峰时综合充电服务价 2.29 元/kWh；特斯拉价格按站点和时段动态变化，正式实验应按实际站点与仿真时段替换。",
+    "observed_at": "2026-10-13",
+    "price_basis": "charging_service_total_per_kwh_includes_electricity_and_service_fee",
+    "price_source": "Tesla China official Supercharger station page",
+    "price_source_url": "https://www.tesla.cn/findus/location/supercharger/cnsc9691?region=CN",
+    "pricing_status": "official_station_reference",
+    "pricing_version": "tesla_cn_station_peak_v1",
+    "rate_schedule": {
+      "00:00-08:00": 1.39,
+      "08:00-10:00": 1.69,
+      "10:00-12:00": 2.29,
+      "12:00-14:00": 1.69,
+      "14:00-19:00": 2.29,
+      "19:00-24:00": 1.69
+    },
+    "reference_rate_type": "peak_window_total_charging_service_price",
+    "reference_station": "深圳中航工业南航大厦 Tesla 超级充电站"
+  },
+  "run_type": "offline_seed_smoke",
+  "schema_version": "traditional_seed_smoke_manifest_v1",
+  "seeds": [
+    0,
+    1
+  ],
+  "semantic_policy": {
+    "baseline_visibility": "graph_only",
+    "reads_roadside_features": false,
+    "resolver": "graph_only",
+    "semantic_tasks_remain_routable": true,
+    "uses_evaluator_truth": false
+  },
+  "status": "passed",
+  "summaries": [
+    {
+      "artifacts": {
+        "map": "outputs/route_layer/traditional_seed_smoke/seeds/map_100x100_seed_0.json",
+        "orders": "outputs/route_layer/traditional_seed_smoke/seeds/order_tasks_seed_0.json",
+        "routes_and_costs": "outputs/route_layer/traditional_seed_smoke/seeds/traditional_routes_seed_0_costs.json",
+        "summary": "outputs/route_layer/traditional_seed_smoke/seeds/smoke_summary_seed_0.json"
+      },
+      "coverage": {
+        "boundary_case": true,
+        "detour_case": true,
+        "feasible_case": true,
+        "illegal_endpoint_case": true,
+        "legal_dropoff_count": 2480,
+        "legal_pickup_count": 2500,
+        "semantic_landmark_case": false,
+        "unreachable_case": true
+      },
+      "deterministic_check": {
+        "map_hash": "05a0c94e30cc1c84d04d0400fe46c19d4d5463adea3db0205af10df9de5e9985",
+        "order_hash": "26f0f13a0cd31b63cbad99dae363f5f49d1a63cd2b344172f88ff9494da08256",
+        "passed": true,
+        "repeat_map_hash": "05a0c94e30cc1c84d04d0400fe46c19d4d5463adea3db0205af10df9de5e9985",
+        "repeat_order_hash": "26f0f13a0cd31b63cbad99dae363f5f49d1a63cd2b344172f88ff9494da08256"
+      },
+      "errors": [],
+      "exact_task_count": 7,
+      "formal_scenario_types": [
+        "boundary",
+        "detour",
+        "feasible",
+        "illegal_endpoint",
+        "unreachable"
+      ],
+      "formal_summary": {
+        "full_map_dijkstra": {
+          "completed": 3,
+          "evaluated_routes": 3,
+          "failed": 2,
+          "not_evaluated": 2,
+          "task_count": 5,
+          "total_api_cost": 0.0,
+          "total_compute_cost": 1.0552525099999955e-06,
+          "total_electricity_cost": 20.025591999999932,
+          "total_energy_kwh": 8.74479999999997,
+          "total_monetary_cost": 20.025593055252443,
+          "valid_routes": 3
+        },
+        "local_a_star": {
+          "completed": 3,
+          "evaluated_routes": 3,
+          "failed": 2,
+          "not_evaluated": 2,
+          "task_count": 5,
+          "total_api_cost": 0.0,
+          "total_compute_cost": 6.991924570000006e-06,
+          "total_electricity_cost": 20.025591999999932,
+          "total_energy_kwh": 8.74479999999997,
+          "total_monetary_cost": 20.025598991924504,
+          "valid_routes": 3
+        },
+        "local_dijkstra": {
+          "completed": 3,
+          "evaluated_routes": 3,
+          "failed": 2,
+          "not_evaluated": 2,
+          "task_count": 5,
+          "total_api_cost": 0.0,
+          "total_compute_cost": 6.942704590000002e-06,
+          "total_electricity_cost": 20.025591999999932,
+          "total_energy_kwh": 8.74479999999997,
+          "total_monetary_cost": 20.025598942704523,
+          "valid_routes": 3
+        }
+      },
+      "map_id": "grid-100x100-seed-0",
+      "map_size": 100,
+      "mixed_summary": {
+        "full_map_dijkstra": {
+          "completed": 10,
+          "evaluated_routes": 10,
+          "failed": 0,
+          "not_evaluated": 0,
+          "task_count": 10,
+          "total_api_cost": 0.0,
+          "total_compute_cost": 3.6107216800000067e-06,
+          "total_electricity_cost": 56.34064099999986,
+          "total_energy_kwh": 24.602899999999938,
+          "total_monetary_cost": 56.34064461072153,
+          "valid_routes": 10
+        },
+        "local_a_star": {
+          "completed": 10,
+          "evaluated_routes": 10,
+          "failed": 0,
+          "not_evaluated": 0,
+          "task_count": 10,
+          "total_api_cost": 0.0,
+          "total_compute_cost": 2.114333415000001e-05,
+          "total_electricity_cost": 56.34064099999986,
+          "total_energy_kwh": 24.602899999999938,
+          "total_monetary_cost": 56.34066214333401,
+          "valid_routes": 10
+        },
+        "local_dijkstra": {
+          "completed": 10,
+          "evaluated_routes": 10,
+          "failed": 0,
+          "not_evaluated": 0,
+          "task_count": 10,
+          "total_api_cost": 0.0,
+          "total_compute_cost": 2.2105302510000017e-05,
+          "total_electricity_cost": 56.34064099999986,
+          "total_energy_kwh": 24.602899999999938,
+          "total_monetary_cost": 56.34066310530238,
+          "valid_routes": 10
+        }
+      },
+      "price_profile": {
+        "api_price_per_token": 3e-06,
+        "billing_period": "simulation",
+        "compute_price_per_ms": 1e-08,
+        "currency": "CNY",
+        "electricity_price_per_kwh": 2.29,
+        "notes": "烟雾测试采用该官方站点列示的峰时综合充电服务价 2.29 元/kWh；特斯拉价格按站点和时段动态变化，正式实验应按实际站点与仿真时段替换。",
+        "observed_at": "2026-10-13",
+        "price_basis": "charging_service_total_per_kwh_includes_electricity_and_service_fee",
+        "price_source": "Tesla China official Supercharger station page",
+        "price_source_url": "https://www.tesla.cn/findus/location/supercharger/cnsc9691?region=CN",
+        "pricing_status": "official_station_reference",
+        "pricing_version": "tesla_cn_station_peak_v1",
+        "rate_schedule": {
+          "00:00-08:00": 1.39,
+          "08:00-10:00": 1.69,
+          "10:00-12:00": 2.29,
+          "12:00-14:00": 1.69,
+          "14:00-19:00": 2.29,
+          "19:00-24:00": 1.69
+        },
+        "reference_rate_type": "peak_window_total_charging_service_price",
+        "reference_station": "深圳中航工业南航大厦 Tesla 超级充电站"
+      },
+      "random_seed": 0,
+      "run_type": "offline_seed_smoke",
+      "schema_version": "traditional_seed_smoke_summary_v1",
+      "semantic_policy": {
+        "baseline_visibility": "graph_only",
+        "reads_roadside_features": false,
+        "resolver": "graph_only",
+        "semantic_tasks_remain_routable": true,
+        "uses_evaluator_truth": false
+      },
+      "semantic_task_count": 3,
+      "task_count": 10
+    },
+    {
+      "artifacts": {
+        "map": "outputs/route_layer/traditional_seed_smoke/seeds/map_100x100_seed_1.json",
+        "orders": "outputs/route_layer/traditional_seed_smoke/seeds/order_tasks_seed_1.json",
+        "routes_and_costs": "outputs/route_layer/traditional_seed_smoke/seeds/traditional_routes_seed_1_costs.json",
+        "summary": "outputs/route_layer/traditional_seed_smoke/seeds/smoke_summary_seed_1.json"
+      },
+      "coverage": {
+        "boundary_case": true,
+        "detour_case": true,
+        "feasible_case": true,
+        "illegal_endpoint_case": true,
+        "legal_dropoff_count": 2474,
+        "legal_pickup_count": 2574,
+        "semantic_landmark_case": false,
+        "unreachable_case": true
+      },
+      "deterministic_check": {
+        "map_hash": "f1a8f35c90b2c9252f135c04844223b7545be113d2da3a3c1e834ce63c8a1717",
+        "order_hash": "845a323d8b52166e45323306fdc1dd2a3177bebb72563bf2cc1ba96bb619f05c",
+        "passed": true,
+        "repeat_map_hash": "f1a8f35c90b2c9252f135c04844223b7545be113d2da3a3c1e834ce63c8a1717",
+        "repeat_order_hash": "845a323d8b52166e45323306fdc1dd2a3177bebb72563bf2cc1ba96bb619f05c"
+      },
+      "errors": [],
+      "exact_task_count": 7,
+      "formal_scenario_types": [
+        "boundary",
+        "detour",
+        "feasible",
+        "illegal_endpoint",
+        "unreachable"
+      ],
+      "formal_summary": {
+        "full_map_dijkstra": {
+          "completed": 3,
+          "evaluated_routes": 3,
+          "failed": 2,
+          "not_evaluated": 2,
+          "task_count": 5,
+          "total_api_cost": 0.0,
+          "total_compute_cost": 1.363508340000017e-06,
+          "total_electricity_cost": 23.326397999999905,
+          "total_energy_kwh": 10.186199999999959,
+          "total_monetary_cost": 23.326399363508248,
+          "valid_routes": 3
+        },
+        "local_a_star": {
+          "completed": 3,
+          "evaluated_routes": 3,
+          "failed": 2,
+          "not_evaluated": 2,
+          "task_count": 5,
+          "total_api_cost": 0.0,
+          "total_compute_cost": 8.235184589999988e-06,
+          "total_electricity_cost": 23.326397999999905,
+          "total_energy_kwh": 10.186199999999959,
+          "total_monetary_cost": 23.326406235184496,
+          "valid_routes": 3
+        },
+        "local_dijkstra": {
+          "completed": 3,
+          "evaluated_routes": 3,
+          "failed": 2,
+          "not_evaluated": 2,
+          "task_count": 5,
+          "total_api_cost": 0.0,
+          "total_compute_cost": 8.419203750000043e-06,
+          "total_electricity_cost": 23.326397999999905,
+          "total_energy_kwh": 10.186199999999959,
+          "total_monetary_cost": 23.326406419203657,
+          "valid_routes": 3
+        }
+      },
+      "map_id": "grid-100x100-seed-1",
+      "map_size": 100,
+      "mixed_summary": {
+        "full_map_dijkstra": {
+          "completed": 10,
+          "evaluated_routes": 10,
+          "failed": 0,
+          "not_evaluated": 0,
+          "task_count": 10,
+          "total_api_cost": 0.0,
+          "total_compute_cost": 3.4802849999999807e-06,
+          "total_electricity_cost": 46.994234999999975,
+          "total_energy_kwh": 20.52149999999999,
+          "total_monetary_cost": 46.99423848028498,
+          "valid_routes": 10
+        },
+        "local_a_star": {
+          "completed": 10,
+          "evaluated_routes": 10,
+          "failed": 0,
+          "not_evaluated": 0,
+          "task_count": 10,
+          "total_api_cost": 0.0,
+          "total_compute_cost": 1.8841805849999958e-05,
+          "total_electricity_cost": 46.994234999999975,
+          "total_energy_kwh": 20.52149999999999,
+          "total_monetary_cost": 46.99425384180583,
+          "valid_routes": 10
+        },
+        "local_dijkstra": {
+          "completed": 10,
+          "evaluated_routes": 10,
+          "failed": 0,
+          "not_evaluated": 0,
+          "task_count": 10,
+          "total_api_cost": 0.0,
+          "total_compute_cost": 1.917699957999993e-05,
+          "total_electricity_cost": 46.994234999999975,
+          "total_energy_kwh": 20.52149999999999,
+          "total_monetary_cost": 46.99425417699957,
+          "valid_routes": 10
+        }
+      },
+      "price_profile": {
+        "api_price_per_token": 3e-06,
+        "billing_period": "simulation",
+        "compute_price_per_ms": 1e-08,
+        "currency": "CNY",
+        "electricity_price_per_kwh": 2.29,
+        "notes": "烟雾测试采用该官方站点列示的峰时综合充电服务价 2.29 元/kWh；特斯拉价格按站点和时段动态变化，正式实验应按实际站点与仿真时段替换。",
+        "observed_at": "2026-10-13",
+        "price_basis": "charging_service_total_per_kwh_includes_electricity_and_service_fee",
+        "price_source": "Tesla China official Supercharger station page",
+        "price_source_url": "https://www.tesla.cn/findus/location/supercharger/cnsc9691?region=CN",
+        "pricing_status": "official_station_reference",
+        "pricing_version": "tesla_cn_station_peak_v1",
+        "rate_schedule": {
+          "00:00-08:00": 1.39,
+          "08:00-10:00": 1.69,
+          "10:00-12:00": 2.29,
+          "12:00-14:00": 1.69,
+          "14:00-19:00": 2.29,
+          "19:00-24:00": 1.69
+        },
+        "reference_rate_type": "peak_window_total_charging_service_price",
+        "reference_station": "深圳中航工业南航大厦 Tesla 超级充电站"
+      },
+      "random_seed": 1,
+      "run_type": "offline_seed_smoke",
+      "schema_version": "traditional_seed_smoke_summary_v1",
+      "semantic_policy": {
+        "baseline_visibility": "graph_only",
+        "reads_roadside_features": false,
+        "resolver": "graph_only",
+        "semantic_tasks_remain_routable": true,
+        "uses_evaluator_truth": false
+      },
+      "semantic_task_count": 3,
+      "task_count": 10
+    }
+  ]
+}

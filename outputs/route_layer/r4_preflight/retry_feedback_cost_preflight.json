@@ -1,0 +1,171 @@
+{
+  "schema_version": "r4_retry_feedback_cost_preflight_v1",
+  "generated_from": "outputs/route_layer/r4_preflight/route_input_size_audit.json + outputs/route_layer/r4_smoke_v9/seed0_semantic_road_feature.json",
+  "formal_result": false,
+  "api_requests_sent": 0,
+  "eligible_payloads_per_condition": 140,
+  "pre_api_gate_skips_per_source_audit": 10,
+  "max_calls": 980,
+  "attempts_per_condition": {
+    "R4": 3,
+    "R4-A": 3,
+    "R4-B": 1
+  },
+  "feedback_bearing_calls_max": 560,
+  "input_payload_bytes_sum_per_condition": 2974535,
+  "price_per_token_cny": 3e-06,
+  "max_output_tokens_per_call": 512,
+  "observed_v9": {
+    "first_request_input_tokens": 998,
+    "first_request_total_utf8_bytes": 3013,
+    "feedback_json_bytes": 699,
+    "feedback_input_token_delta": 209
+  },
+  "scenarios": {
+    "smoke_calibrated_observed_feedback": {
+      "input_tokens_approx": 7455644,
+      "output_tokens_at_cap": 501760,
+      "total_cost_cny_approx": 23.872212,
+      "input_ratio_tokens_per_byte_from_v9_first_request": 0.331231
+    },
+    "one_token_per_user_byte_200_system_tokens_observed_feedback": {
+      "input_tokens_approx": 21134785,
+      "output_tokens_at_cap": 501760,
+      "total_cost_cny_approx": 64.909635
+    },
+    "one_token_per_user_byte_200_system_tokens_feedback_at_one_token_per_byte": {
+      "input_tokens_approx": 21409185,
+      "output_tokens_at_cap": 501760,
+      "total_cost_cny_approx": 65.732835
+    }
+  },
+  "caveats": [
+    "All values are planning estimates, not a formal budget or API quote.",
+    "The smoke-calibrated token-per-byte ratio came from one 8x8 request and may not transfer to 100x100 compact-grid payloads.",
+    "The one-token-per-byte scenarios are conservative size proxies; actual tokenizer counts depend on the service tokenizer.",
+    "Observed 209-token feedback overhead covers this one-violation smoke feedback only; larger validator feedback can be longer.",
+    "System prompt size is approximated with the v9 prompt for all three conditions; R4-A and R4-B prompt sizes may differ.",
+    "The output calculation assumes every maximum attempt reaches the 512-token cap, including retries.",
+    "The 10 omitted payloads are exactly the predefined illegal_endpoint scenario for each seed; both endpoints are illegal. They require zero route-search calls but stay in each condition’s 150-task outcome denominator."
+  ],
+  "sample_accounting": {
+    "total_tasks_per_condition": 150,
+    "api_eligible_tasks_per_condition": 140,
+    "pre_api_endpoint_rejection_tasks_per_condition": 10,
+    "pre_api_rejection_class": "predefined illegal_endpoint scenario; both endpoint legality flags are false",
+    "pre_api_rejections_remain_in_result_denominator": true,
+    "pre_api_rejection_task_records": [
+      {
+        "seed": 0,
+        "task_id": "formal-task-0000-illegal",
+        "scenario_type": "illegal_endpoint",
+        "pickup_node_id": "node_85_90",
+        "pickup_is_legal": false,
+        "dropoff_node_id": "node_90_61",
+        "dropoff_is_legal": false,
+        "api_calls": 0,
+        "result_denominator_included": true
+      },
+      {
+        "seed": 1,
+        "task_id": "formal-task-0001-illegal",
+        "scenario_type": "illegal_endpoint",
+        "pickup_node_id": "node_52_38",
+        "pickup_is_legal": false,
+        "dropoff_node_id": "node_70_89",
+        "dropoff_is_legal": false,
+        "api_calls": 0,
+        "result_denominator_included": true
+      },
+      {
+        "seed": 2,
+        "task_id": "formal-task-0002-illegal",
+        "scenario_type": "illegal_endpoint",
+        "pickup_node_id": "node_66_34",
+        "pickup_is_legal": false,
+        "dropoff_node_id": "node_23_46",
+        "dropoff_is_legal": false,
+        "api_calls": 0,
+        "result_denominator_included": true
+      },
+      {
+        "seed": 3,
+        "task_id": "formal-task-0003-illegal",
+        "scenario_type": "illegal_endpoint",
+        "pickup_node_id": "node_7_2",
+        "pickup_is_legal": false,
+        "dropoff_node_id": "node_66_2",
+        "dropoff_is_legal": false,
+        "api_calls": 0,
+        "result_denominator_included": true
+      },
+      {
+        "seed": 4,
+        "task_id": "formal-task-0004-illegal",
+        "scenario_type": "illegal_endpoint",
+        "pickup_node_id": "node_9_72",
+        "pickup_is_legal": false,
+        "dropoff_node_id": "node_7_29",
+        "dropoff_is_legal": false,
+        "api_calls": 0,
+        "result_denominator_included": true
+      },
+      {
+        "seed": 5,
+        "task_id": "formal-task-0005-illegal",
+        "scenario_type": "illegal_endpoint",
+        "pickup_node_id": "node_98_27",
+        "pickup_is_legal": false,
+        "dropoff_node_id": "node_17_16",
+        "dropoff_is_legal": false,
+        "api_calls": 0,
+        "result_denominator_included": true
+      },
+      {
+        "seed": 6,
+        "task_id": "formal-task-0006-illegal",
+        "scenario_type": "illegal_endpoint",
+        "pickup_node_id": "node_16_21",
+        "pickup_is_legal": false,
+        "dropoff_node_id": "node_72_30",
+        "dropoff_is_legal": false,
+        "api_calls": 0,
+        "result_denominator_included": true
+      },
+      {
+        "seed": 7,
+        "task_id": "formal-task-0007-illegal",
+        "scenario_type": "illegal_endpoint",
+        "pickup_node_id": "node_10_69",
+        "pickup_is_legal": false,
+        "dropoff_node_id": "node_40_13",
+        "dropoff_is_legal": false,
+        "api_calls": 0,
+        "result_denominator_included": true
+      },
+      {
+        "seed": 8,
+        "task_id": "formal-task-0008-illegal",
+        "scenario_type": "illegal_endpoint",
+        "pickup_node_id": "node_15_9",
+        "pickup_is_legal": false,
+        "dropoff_node_id": "node_27_4",
+        "dropoff_is_legal": false,
+        "api_calls": 0,
+        "result_denominator_included": true
+      },
+      {
+        "seed": 9,
+        "task_id": "formal-task-0009-illegal",
+        "scenario_type": "illegal_endpoint",
+        "pickup_node_id": "node_37_67",
+        "pickup_is_legal": false,
+        "dropoff_node_id": "node_55_10",
+        "dropoff_is_legal": false,
+        "api_calls": 0,
+        "result_denominator_included": true
+      }
+    ],
+    "max_calls_exclude_pre_api_rejections": true
+  }
+}

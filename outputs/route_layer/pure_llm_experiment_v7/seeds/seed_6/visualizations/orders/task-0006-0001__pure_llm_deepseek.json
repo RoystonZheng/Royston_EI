@@ -1,0 +1,7313 @@
+{
+  "failure_detail_zh": "模型已返回路线，但路线校验发现非法移动：单行方向相反 5 步。 同任务的 3 种传统算法均找到有效路线；因此这不是地图物理不可达，本次失败来自 LLM 的路线生成或地点解析。",
+  "failure_reason": "llm_move_sequence_invalid",
+  "geometry": {
+    "attempted_route_edge_ids": [
+      "edge_node_12_61_node_13_61",
+      "edge_node_13_61_node_14_61",
+      "edge_node_14_61_node_15_61",
+      "edge_node_15_61_node_16_61",
+      "edge_node_16_61_node_17_61",
+      "edge_node_17_61_node_18_61",
+      "edge_node_18_61_node_19_61",
+      "edge_node_19_61_node_20_61",
+      "edge_node_20_61_node_21_61",
+      "edge_node_21_61_node_22_61",
+      "edge_node_22_61_node_23_61",
+      "edge_node_23_61_node_24_61",
+      "edge_node_24_61_node_25_61",
+      "edge_node_25_61_node_26_61",
+      "edge_node_26_61_node_27_61",
+      "edge_node_27_61_node_28_61",
+      "edge_node_28_61_node_29_61",
+      "edge_node_29_61_node_30_61",
+      "edge_node_30_61_node_31_61",
+      "edge_node_31_61_node_32_61",
+      "edge_node_32_61_node_33_61",
+      "edge_node_33_61_node_34_61",
+      "edge_node_34_61_node_35_61",
+      "edge_node_35_61_node_36_61",
+      "edge_node_36_61_node_37_61",
+      "edge_node_37_61_node_38_61",
+      "edge_node_38_61_node_39_61",
+      "edge_node_39_61_node_40_61",
+      "edge_node_40_61_node_41_61",
+      "edge_node_41_61_node_42_61",
+      "edge_node_42_61_node_43_61",
+      "edge_node_43_61_node_44_61",
+      "edge_node_44_61_node_45_61",
+      "edge_node_45_61_node_46_61",
+      "edge_node_46_61_node_47_61",
+      "edge_node_47_61_node_48_61",
+      "edge_node_48_61_node_49_61",
+      "edge_node_49_61_node_50_61",
+      "edge_node_50_61_node_51_61",
+      "edge_node_51_61_node_52_61",
+      "edge_node_52_61_node_53_61",
+      "edge_node_53_61_node_54_61",
+      "edge_node_54_61_node_55_61",
+      "edge_node_55_61_node_56_61",
+      "edge_node_56_61_node_57_61",
+      "edge_node_57_61_node_58_61",
+      "edge_node_58_61_node_59_61",
+      "edge_node_59_61_node_60_61",
+      "edge_node_60_61_node_61_61",
+      "edge_node_61_61_node_62_61",
+      "edge_node_62_61_node_63_61",
+      "edge_node_63_61_node_64_61",
+      "edge_node_64_61_node_64_60",
+      "edge_node_64_60_node_64_59",
+      "edge_node_64_59_node_64_58",
+      "edge_node_64_58_node_64_57",
+      "edge_node_64_57_node_64_56",
+      "edge_node_64_56_node_64_55",
+      "edge_node_64_55_node_64_54",
+      "edge_node_64_54_node_64_53",
+      "edge_node_64_53_node_64_52",
+      "edge_node_64_52_node_64_51",
+      "edge_node_64_51_node_64_50",
+      "edge_node_64_50_node_64_49",
+      "edge_node_64_49_node_64_48",
+      "edge_node_64_48_node_64_47",
+      "edge_node_64_47_node_64_46",
+      "edge_node_64_46_node_64_45",
+      "edge_node_64_45_node_64_44",
+      "edge_node_64_44_node_64_43",
+      "edge_node_64_43_node_64_42",
+      "edge_node_64_42_node_64_41",
+      "edge_node_64_41_node_64_40",
+      "edge_node_64_40_node_64_39",
+      "edge_node_64_39_node_64_38",
+      "edge_node_64_38_node_64_37",
+      "edge_node_64_37_node_63_37",
+      "edge_node_63_37_node_62_37",
+      "edge_node_62_37_node_61_37",
+      "edge_node_61_37_node_60_37",
+      "edge_node_60_37_node_59_37",
+      "edge_node_59_37_node_58_37",
+      "edge_node_58_37_node_57_37"
+    ],
+    "attempted_route_node_ids": [
+      "node_12_61",
+      "node_13_61",
+      "node_14_61",
+      "node_15_61",
+      "node_16_61",
+      "node_17_61",
+      "node_18_61",
+      "node_19_61",
+      "node_20_61",
+      "node_21_61",
+      "node_22_61",
+      "node_23_61",
+      "node_24_61",
+      "node_25_61",
+      "node_26_61",
+      "node_27_61",
+      "node_28_61",
+      "node_29_61",
+      "node_30_61",
+      "node_31_61",
+      "node_32_61",
+      "node_33_61",
+      "node_34_61",
+      "node_35_61",
+      "node_36_61",
+      "node_37_61",
+      "node_38_61",
+      "node_39_61",
+      "node_40_61",
+      "node_41_61",
+      "node_42_61",
+      "node_43_61",
+      "node_44_61",
+      "node_45_61",
+      "node_46_61",
+      "node_47_61",
+      "node_48_61",
+      "node_49_61",
+      "node_50_61",
+      "node_51_61",
+      "node_52_61",
+      "node_53_61",
+      "node_54_61",
+      "node_55_61",
+      "node_56_61",
+      "node_57_61",
+      "node_58_61",
+      "node_59_61",
+      "node_60_61",
+      "node_61_61",
+      "node_62_61",
+      "node_63_61",
+      "node_64_61",
+      "node_64_60",
+      "node_64_59",
+      "node_64_58",
+      "node_64_57",
+      "node_64_56",
+      "node_64_55",
+      "node_64_54",
+      "node_64_53",
+      "node_64_52",
+      "node_64_51",
+      "node_64_50",
+      "node_64_49",
+      "node_64_48",
+      "node_64_47",
+      "node_64_46",
+      "node_64_45",
+      "node_64_44",
+      "node_64_43",
+      "node_64_42",
+      "node_64_41",
+      "node_64_40",
+      "node_64_39",
+      "node_64_38",
+      "node_64_37",
+      "node_63_37",
+      "node_62_37",
+      "node_61_37",
+      "node_60_37",
+      "node_59_37",
+      "node_58_37",
+      "node_57_37"
+    ],
+    "boundary": {
+      "max_x": 99,
+      "max_y": 99,
+      "min_x": 0,
+      "min_y": 0
+    },
+    "endpoint_node_ids": [
+      "node_12_61",
+      "node_64_37",
+      "node_57_43"
+    ],
+    "expanded_events": [],
+    "first_violation_step": 12,
+    "map_id": "grid-100x100-seed-6",
+    "map_size": 100,
+    "move_count": 83,
+    "move_violations": [
+      {
+        "blocked": false,
+        "edge_id": "edge_node_23_61_node_24_61",
+        "from_node_id": "node_23_61",
+        "from_xy": [
+          23,
+          61
+        ],
+        "kind": "one_way_direction",
+        "message": "llm_move_missing_directed_edge:edge_node_23_61_node_24_61",
+        "move": "E",
+        "reverse_edge_id": "edge_node_24_61_node_23_61",
+        "reverse_edge_one_way": true,
+        "step": 12,
+        "to_node_id": "node_24_61",
+        "to_xy": [
+          24,
+          61
+        ]
+      },
+      {
+        "blocked": false,
+        "edge_id": "edge_node_36_61_node_37_61",
+        "from_node_id": "node_36_61",
+        "from_xy": [
+          36,
+          61
+        ],
+        "kind": "one_way_direction",
+        "message": "llm_move_missing_directed_edge:edge_node_36_61_node_37_61",
+        "move": "E",
+        "reverse_edge_id": "edge_node_37_61_node_36_61",
+        "reverse_edge_one_way": true,
+        "step": 25,
+        "to_node_id": "node_37_61",
+        "to_xy": [
+          37,
+          61
+        ]
+      },
+      {
+        "blocked": false,
+        "edge_id": "edge_node_54_61_node_55_61",
+        "from_node_id": "node_54_61",
+        "from_xy": [
+          54,
+          61
+        ],
+        "kind": "one_way_direction",
+        "message": "llm_move_missing_directed_edge:edge_node_54_61_node_55_61",
+        "move": "E",
+        "reverse_edge_id": "edge_node_55_61_node_54_61",
+        "reverse_edge_one_way": true,
+        "step": 43,
+        "to_node_id": "node_55_61",
+        "to_xy": [
+          55,
+          61
+        ]
+      },
+      {
+        "blocked": false,
+        "edge_id": "edge_node_64_49_node_64_48",
+        "from_node_id": "node_64_49",
+        "from_xy": [
+          64,
+          49
+        ],
+        "kind": "one_way_direction",
+        "message": "llm_move_missing_directed_edge:edge_node_64_49_node_64_48",
+        "move": "S",
+        "reverse_edge_id": "edge_node_64_48_node_64_49",
+        "reverse_edge_one_way": true,
+        "step": 65,
+        "to_node_id": "node_64_48",
+        "to_xy": [
+          64,
+          48
+        ]
+      },
+      {
+        "blocked": false,
+        "edge_id": "edge_node_64_38_node_64_37",
+        "from_node_id": "node_64_38",
+        "from_xy": [
+          64,
+          38
+        ],
+        "kind": "one_way_direction",
+        "message": "llm_move_missing_directed_edge:edge_node_64_38_node_64_37",
+        "move": "S",
+        "reverse_edge_id": "edge_node_64_37_node_64_38",
+        "reverse_edge_one_way": true,
+        "step": 76,
+        "to_node_id": "node_64_37",
+        "to_xy": [
+          64,
+          37
+        ]
+      }
+    ],
+    "nodes": [
+      {
+        "node_id": "node_12_61",
+        "x": 12,
+        "y": 61
+      },
+      {
+        "node_id": "node_13_61",
+        "x": 13,
+        "y": 61
+      },
+      {
+        "node_id": "node_14_61",
+        "x": 14,
+        "y": 61
+      },
+      {
+        "node_id": "node_15_61",
+        "x": 15,
+        "y": 61
+      },
+      {
+        "node_id": "node_16_61",
+        "x": 16,
+        "y": 61
+      },
+      {
+        "node_id": "node_17_61",
+        "x": 17,
+        "y": 61
+      },
+      {
+        "node_id": "node_18_61",
+        "x": 18,
+        "y": 61
+      },
+      {
+        "node_id": "node_19_61",
+        "x": 19,
+        "y": 61
+      },
+      {
+        "node_id": "node_20_61",
+        "x": 20,
+        "y": 61
+      },
+      {
+        "node_id": "node_21_61",
+        "x": 21,
+        "y": 61
+      },
+      {
+        "node_id": "node_22_61",
+        "x": 22,
+        "y": 61
+      },
+      {
+        "node_id": "node_23_61",
+        "x": 23,
+        "y": 61
+      },
+      {
+        "node_id": "node_24_61",
+        "x": 24,
+        "y": 61
+      },
+      {
+        "node_id": "node_25_61",
+        "x": 25,
+        "y": 61
+      },
+      {
+        "node_id": "node_26_61",
+        "x": 26,
+        "y": 61
+      },
+      {
+        "node_id": "node_27_61",
+        "x": 27,
+        "y": 61
+      },
+      {
+        "node_id": "node_28_61",
+        "x": 28,
+        "y": 61
+      },
+      {
+        "node_id": "node_29_61",
+        "x": 29,
+        "y": 61
+      },
+      {
+        "node_id": "node_30_61",
+        "x": 30,
+        "y": 61
+      },
+      {
+        "node_id": "node_31_61",
+        "x": 31,
+        "y": 61
+      },
+      {
+        "node_id": "node_32_61",
+        "x": 32,
+        "y": 61
+      },
+      {
+        "node_id": "node_33_61",
+        "x": 33,
+        "y": 61
+      },
+      {
+        "node_id": "node_34_61",
+        "x": 34,
+        "y": 61
+      },
+      {
+        "node_id": "node_35_61",
+        "x": 35,
+        "y": 61
+      },
+      {
+        "node_id": "node_36_61",
+        "x": 36,
+        "y": 61
+      },
+      {
+        "node_id": "node_37_61",
+        "x": 37,
+        "y": 61
+      },
+      {
+        "node_id": "node_38_61",
+        "x": 38,
+        "y": 61
+      },
+      {
+        "node_id": "node_39_61",
+        "x": 39,
+        "y": 61
+      },
+      {
+        "node_id": "node_40_61",
+        "x": 40,
+        "y": 61
+      },
+      {
+        "node_id": "node_41_61",
+        "x": 41,
+        "y": 61
+      },
+      {
+        "node_id": "node_42_61",
+        "x": 42,
+        "y": 61
+      },
+      {
+        "node_id": "node_43_61",
+        "x": 43,
+        "y": 61
+      },
+      {
+        "node_id": "node_44_61",
+        "x": 44,
+        "y": 61
+      },
+      {
+        "node_id": "node_45_61",
+        "x": 45,
+        "y": 61
+      },
+      {
+        "node_id": "node_46_61",
+        "x": 46,
+        "y": 61
+      },
+      {
+        "node_id": "node_47_61",
+        "x": 47,
+        "y": 61
+      },
+      {
+        "node_id": "node_48_61",
+        "x": 48,
+        "y": 61
+      },
+      {
+        "node_id": "node_49_61",
+        "x": 49,
+        "y": 61
+      },
+      {
+        "node_id": "node_50_61",
+        "x": 50,
+        "y": 61
+      },
+      {
+        "node_id": "node_51_61",
+        "x": 51,
+        "y": 61
+      },
+      {
+        "node_id": "node_52_61",
+        "x": 52,
+        "y": 61
+      },
+      {
+        "node_id": "node_53_61",
+        "x": 53,
+        "y": 61
+      },
+      {
+        "node_id": "node_54_61",
+        "x": 54,
+        "y": 61
+      },
+      {
+        "node_id": "node_55_61",
+        "x": 55,
+        "y": 61
+      },
+      {
+        "node_id": "node_56_61",
+        "x": 56,
+        "y": 61
+      },
+      {
+        "node_id": "node_57_61",
+        "x": 57,
+        "y": 61
+      },
+      {
+        "node_id": "node_58_61",
+        "x": 58,
+        "y": 61
+      },
+      {
+        "node_id": "node_59_61",
+        "x": 59,
+        "y": 61
+      },
+      {
+        "node_id": "node_60_61",
+        "x": 60,
+        "y": 61
+      },
+      {
+        "node_id": "node_61_61",
+        "x": 61,
+        "y": 61
+      },
+      {
+        "node_id": "node_62_61",
+        "x": 62,
+        "y": 61
+      },
+      {
+        "node_id": "node_63_61",
+        "x": 63,
+        "y": 61
+      },
+      {
+        "node_id": "node_64_61",
+        "x": 64,
+        "y": 61
+      },
+      {
+        "node_id": "node_64_60",
+        "x": 64,
+        "y": 60
+      },
+      {
+        "node_id": "node_64_59",
+        "x": 64,
+        "y": 59
+      },
+      {
+        "node_id": "node_64_58",
+        "x": 64,
+        "y": 58
+      },
+      {
+        "node_id": "node_64_57",
+        "x": 64,
+        "y": 57
+      },
+      {
+        "node_id": "node_64_56",
+        "x": 64,
+        "y": 56
+      },
+      {
+        "node_id": "node_64_55",
+        "x": 64,
+        "y": 55
+      },
+      {
+        "node_id": "node_64_54",
+        "x": 64,
+        "y": 54
+      },
+      {
+        "node_id": "node_64_53",
+        "x": 64,
+        "y": 53
+      },
+      {
+        "node_id": "node_64_52",
+        "x": 64,
+        "y": 52
+      },
+      {
+        "node_id": "node_64_51",
+        "x": 64,
+        "y": 51
+      },
+      {
+        "node_id": "node_64_50",
+        "x": 64,
+        "y": 50
+      },
+      {
+        "node_id": "node_64_49",
+        "x": 64,
+        "y": 49
+      },
+      {
+        "node_id": "node_64_48",
+        "x": 64,
+        "y": 48
+      },
+      {
+        "node_id": "node_64_47",
+        "x": 64,
+        "y": 47
+      },
+      {
+        "node_id": "node_64_46",
+        "x": 64,
+        "y": 46
+      },
+      {
+        "node_id": "node_64_45",
+        "x": 64,
+        "y": 45
+      },
+      {
+        "node_id": "node_64_44",
+        "x": 64,
+        "y": 44
+      },
+      {
+        "node_id": "node_64_43",
+        "x": 64,
+        "y": 43
+      },
+      {
+        "node_id": "node_64_42",
+        "x": 64,
+        "y": 42
+      },
+      {
+        "node_id": "node_64_41",
+        "x": 64,
+        "y": 41
+      },
+      {
+        "node_id": "node_64_40",
+        "x": 64,
+        "y": 40
+      },
+      {
+        "node_id": "node_64_39",
+        "x": 64,
+        "y": 39
+      },
+      {
+        "node_id": "node_64_38",
+        "x": 64,
+        "y": 38
+      },
+      {
+        "node_id": "node_64_37",
+        "x": 64,
+        "y": 37
+      },
+      {
+        "node_id": "node_63_37",
+        "x": 63,
+        "y": 37
+      },
+      {
+        "node_id": "node_62_37",
+        "x": 62,
+        "y": 37
+      },
+      {
+        "node_id": "node_61_37",
+        "x": 61,
+        "y": 37
+      },
+      {
+        "node_id": "node_60_37",
+        "x": 60,
+        "y": 37
+      },
+      {
+        "node_id": "node_59_37",
+        "x": 59,
+        "y": 37
+      },
+      {
+        "node_id": "node_58_37",
+        "x": 58,
+        "y": 37
+      },
+      {
+        "node_id": "node_57_37",
+        "x": 57,
+        "y": 37
+      }
+    ],
+    "road_context_edges": [
+      {
+        "edge_id": "edge_node_21_59_node_22_59",
+        "from_node": "node_21_59",
+        "from_xy": [
+          21,
+          59
+        ],
+        "one_way": false,
+        "to_node": "node_22_59",
+        "to_xy": [
+          22,
+          59
+        ]
+      },
+      {
+        "edge_id": "edge_node_22_59_node_21_59",
+        "from_node": "node_22_59",
+        "from_xy": [
+          22,
+          59
+        ],
+        "one_way": false,
+        "to_node": "node_21_59",
+        "to_xy": [
+          21,
+          59
+        ]
+      },
+      {
+        "edge_id": "edge_node_21_59_node_21_60",
+        "from_node": "node_21_59",
+        "from_xy": [
+          21,
+          59
+        ],
+        "one_way": false,
+        "to_node": "node_21_60",
+        "to_xy": [
+          21,
+          60
+        ]
+      },
+      {
+        "edge_id": "edge_node_21_60_node_21_59",
+        "from_node": "node_21_60",
+        "from_xy": [
+          21,
+          60
+        ],
+        "one_way": false,
+        "to_node": "node_21_59",
+        "to_xy": [
+          21,
+          59
+        ]
+      },
+      {
+        "edge_id": "edge_node_21_60_node_22_60",
+        "from_node": "node_21_60",
+        "from_xy": [
+          21,
+          60
+        ],
+        "one_way": false,
+        "to_node": "node_22_60",
+        "to_xy": [
+          22,
+          60
+        ]
+      },
+      {
+        "edge_id": "edge_node_22_60_node_21_60",
+        "from_node": "node_22_60",
+        "from_xy": [
+          22,
+          60
+        ],
+        "one_way": false,
+        "to_node": "node_21_60",
+        "to_xy": [
+          21,
+          60
+        ]
+      },
+      {
+        "edge_id": "edge_node_21_60_node_21_61",
+        "from_node": "node_21_60",
+        "from_xy": [
+          21,
+          60
+        ],
+        "one_way": false,
+        "to_node": "node_21_61",
+        "to_xy": [
+          21,
+          61
+        ]
+      },
+      {
+        "edge_id": "edge_node_21_61_node_21_60",
+        "from_node": "node_21_61",
+        "from_xy": [
+          21,
+          61
+        ],
+        "one_way": false,
+        "to_node": "node_21_60",
+        "to_xy": [
+          21,
+          60
+        ]
+      },
+      {
+        "edge_id": "edge_node_21_61_node_22_61",
+        "from_node": "node_21_61",
+        "from_xy": [
+          21,
+          61
+        ],
+        "one_way": false,
+        "to_node": "node_22_61",
+        "to_xy": [
+          22,
+          61
+        ]
+      },
+      {
+        "edge_id": "edge_node_22_61_node_21_61",
+        "from_node": "node_22_61",
+        "from_xy": [
+          22,
+          61
+        ],
+        "one_way": false,
+        "to_node": "node_21_61",
+        "to_xy": [
+          21,
+          61
+        ]
+      },
+      {
+        "edge_id": "edge_node_21_61_node_21_62",
+        "from_node": "node_21_61",
+        "from_xy": [
+          21,
+          61
+        ],
+        "one_way": false,
+        "to_node": "node_21_62",
+        "to_xy": [
+          21,
+          62
+        ]
+      },
+      {
+        "edge_id": "edge_node_21_62_node_21_61",
+        "from_node": "node_21_62",
+        "from_xy": [
+          21,
+          62
+        ],
+        "one_way": false,
+        "to_node": "node_21_61",
+        "to_xy": [
+          21,
+          61
+        ]
+      },
+      {
+        "edge_id": "edge_node_21_62_node_22_62",
+        "from_node": "node_21_62",
+        "from_xy": [
+          21,
+          62
+        ],
+        "one_way": false,
+        "to_node": "node_22_62",
+        "to_xy": [
+          22,
+          62
+        ]
+      },
+      {
+        "edge_id": "edge_node_22_62_node_21_62",
+        "from_node": "node_22_62",
+        "from_xy": [
+          22,
+          62
+        ],
+        "one_way": false,
+        "to_node": "node_21_62",
+        "to_xy": [
+          21,
+          62
+        ]
+      },
+      {
+        "edge_id": "edge_node_21_62_node_21_63",
+        "from_node": "node_21_62",
+        "from_xy": [
+          21,
+          62
+        ],
+        "one_way": false,
+        "to_node": "node_21_63",
+        "to_xy": [
+          21,
+          63
+        ]
+      },
+      {
+        "edge_id": "edge_node_21_63_node_21_62",
+        "from_node": "node_21_63",
+        "from_xy": [
+          21,
+          63
+        ],
+        "one_way": false,
+        "to_node": "node_21_62",
+        "to_xy": [
+          21,
+          62
+        ]
+      },
+      {
+        "edge_id": "edge_node_21_63_node_22_63",
+        "from_node": "node_21_63",
+        "from_xy": [
+          21,
+          63
+        ],
+        "one_way": false,
+        "to_node": "node_22_63",
+        "to_xy": [
+          22,
+          63
+        ]
+      },
+      {
+        "edge_id": "edge_node_22_63_node_21_63",
+        "from_node": "node_22_63",
+        "from_xy": [
+          22,
+          63
+        ],
+        "one_way": false,
+        "to_node": "node_21_63",
+        "to_xy": [
+          21,
+          63
+        ]
+      },
+      {
+        "edge_id": "edge_node_22_59_node_23_59",
+        "from_node": "node_22_59",
+        "from_xy": [
+          22,
+          59
+        ],
+        "one_way": false,
+        "to_node": "node_23_59",
+        "to_xy": [
+          23,
+          59
+        ]
+      },
+      {
+        "edge_id": "edge_node_23_59_node_22_59",
+        "from_node": "node_23_59",
+        "from_xy": [
+          23,
+          59
+        ],
+        "one_way": false,
+        "to_node": "node_22_59",
+        "to_xy": [
+          22,
+          59
+        ]
+      },
+      {
+        "edge_id": "edge_node_22_59_node_22_60",
+        "from_node": "node_22_59",
+        "from_xy": [
+          22,
+          59
+        ],
+        "one_way": false,
+        "to_node": "node_22_60",
+        "to_xy": [
+          22,
+          60
+        ]
+      },
+      {
+        "edge_id": "edge_node_22_60_node_22_59",
+        "from_node": "node_22_60",
+        "from_xy": [
+          22,
+          60
+        ],
+        "one_way": false,
+        "to_node": "node_22_59",
+        "to_xy": [
+          22,
+          59
+        ]
+      },
+      {
+        "edge_id": "edge_node_22_60_node_23_60",
+        "from_node": "node_22_60",
+        "from_xy": [
+          22,
+          60
+        ],
+        "one_way": true,
+        "to_node": "node_23_60",
+        "to_xy": [
+          23,
+          60
+        ]
+      },
+      {
+        "edge_id": "edge_node_22_60_node_22_61",
+        "from_node": "node_22_60",
+        "from_xy": [
+          22,
+          60
+        ],
+        "one_way": false,
+        "to_node": "node_22_61",
+        "to_xy": [
+          22,
+          61
+        ]
+      },
+      {
+        "edge_id": "edge_node_22_61_node_22_60",
+        "from_node": "node_22_61",
+        "from_xy": [
+          22,
+          61
+        ],
+        "one_way": false,
+        "to_node": "node_22_60",
+        "to_xy": [
+          22,
+          60
+        ]
+      },
+      {
+        "edge_id": "edge_node_22_61_node_23_61",
+        "from_node": "node_22_61",
+        "from_xy": [
+          22,
+          61
+        ],
+        "one_way": false,
+        "to_node": "node_23_61",
+        "to_xy": [
+          23,
+          61
+        ]
+      },
+      {
+        "edge_id": "edge_node_23_61_node_22_61",
+        "from_node": "node_23_61",
+        "from_xy": [
+          23,
+          61
+        ],
+        "one_way": false,
+        "to_node": "node_22_61",
+        "to_xy": [
+          22,
+          61
+        ]
+      },
+      {
+        "edge_id": "edge_node_22_61_node_22_62",
+        "from_node": "node_22_61",
+        "from_xy": [
+          22,
+          61
+        ],
+        "one_way": false,
+        "to_node": "node_22_62",
+        "to_xy": [
+          22,
+          62
+        ]
+      },
+      {
+        "edge_id": "edge_node_22_62_node_22_61",
+        "from_node": "node_22_62",
+        "from_xy": [
+          22,
+          62
+        ],
+        "one_way": false,
+        "to_node": "node_22_61",
+        "to_xy": [
+          22,
+          61
+        ]
+      },
+      {
+        "edge_id": "edge_node_22_62_node_23_62",
+        "from_node": "node_22_62",
+        "from_xy": [
+          22,
+          62
+        ],
+        "one_way": false,
+        "to_node": "node_23_62",
+        "to_xy": [
+          23,
+          62
+        ]
+      },
+      {
+        "edge_id": "edge_node_23_62_node_22_62",
+        "from_node": "node_23_62",
+        "from_xy": [
+          23,
+          62
+        ],
+        "one_way": false,
+        "to_node": "node_22_62",
+        "to_xy": [
+          22,
+          62
+        ]
+      },
+      {
+        "edge_id": "edge_node_22_63_node_22_62",
+        "from_node": "node_22_63",
+        "from_xy": [
+          22,
+          63
+        ],
+        "one_way": true,
+        "to_node": "node_22_62",
+        "to_xy": [
+          22,
+          62
+        ]
+      },
+      {
+        "edge_id": "edge_node_22_63_node_23_63",
+        "from_node": "node_22_63",
+        "from_xy": [
+          22,
+          63
+        ],
+        "one_way": false,
+        "to_node": "node_23_63",
+        "to_xy": [
+          23,
+          63
+        ]
+      },
+      {
+        "edge_id": "edge_node_23_63_node_22_63",
+        "from_node": "node_23_63",
+        "from_xy": [
+          23,
+          63
+        ],
+        "one_way": false,
+        "to_node": "node_22_63",
+        "to_xy": [
+          22,
+          63
+        ]
+      },
+      {
+        "edge_id": "edge_node_23_59_node_24_59",
+        "from_node": "node_23_59",
+        "from_xy": [
+          23,
+          59
+        ],
+        "one_way": false,
+        "to_node": "node_24_59",
+        "to_xy": [
+          24,
+          59
+        ]
+      },
+      {
+        "edge_id": "edge_node_24_59_node_23_59",
+        "from_node": "node_24_59",
+        "from_xy": [
+          24,
+          59
+        ],
+        "one_way": false,
+        "to_node": "node_23_59",
+        "to_xy": [
+          23,
+          59
+        ]
+      },
+      {
+        "edge_id": "edge_node_23_59_node_23_60",
+        "from_node": "node_23_59",
+        "from_xy": [
+          23,
+          59
+        ],
+        "one_way": false,
+        "to_node": "node_23_60",
+        "to_xy": [
+          23,
+          60
+        ]
+      },
+      {
+        "edge_id": "edge_node_23_60_node_23_59",
+        "from_node": "node_23_60",
+        "from_xy": [
+          23,
+          60
+        ],
+        "one_way": false,
+        "to_node": "node_23_59",
+        "to_xy": [
+          23,
+          59
+        ]
+      },
+      {
+        "edge_id": "edge_node_23_60_node_24_60",
+        "from_node": "node_23_60",
+        "from_xy": [
+          23,
+          60
+        ],
+        "one_way": false,
+        "to_node": "node_24_60",
+        "to_xy": [
+          24,
+          60
+        ]
+      },
+      {
+        "edge_id": "edge_node_24_60_node_23_60",
+        "from_node": "node_24_60",
+        "from_xy": [
+          24,
+          60
+        ],
+        "one_way": false,
+        "to_node": "node_23_60",
+        "to_xy": [
+          23,
+          60
+        ]
+      },
+      {
+        "edge_id": "edge_node_23_60_node_23_61",
+        "from_node": "node_23_60",
+        "from_xy": [
+          23,
+          60
+        ],
+        "one_way": false,
+        "to_node": "node_23_61",
+        "to_xy": [
+          23,
+          61
+        ]
+      },
+      {
+        "edge_id": "edge_node_23_61_node_23_60",
+        "from_node": "node_23_61",
+        "from_xy": [
+          23,
+          61
+        ],
+        "one_way": false,
+        "to_node": "node_23_60",
+        "to_xy": [
+          23,
+          60
+        ]
+      },
+      {
+        "edge_id": "edge_node_24_61_node_23_61",
+        "from_node": "node_24_61",
+        "from_xy": [
+          24,
+          61
+        ],
+        "one_way": true,
+        "to_node": "node_23_61",
+        "to_xy": [
+          23,
+          61
+        ]
+      },
+      {
+        "edge_id": "edge_node_23_61_node_23_62",
+        "from_node": "node_23_61",
+        "from_xy": [
+          23,
+          61
+        ],
+        "one_way": false,
+        "to_node": "node_23_62",
+        "to_xy": [
+          23,
+          62
+        ]
+      },
+      {
+        "edge_id": "edge_node_23_62_node_23_61",
+        "from_node": "node_23_62",
+        "from_xy": [
+          23,
+          62
+        ],
+        "one_way": false,
+        "to_node": "node_23_61",
+        "to_xy": [
+          23,
+          61
+        ]
+      },
+      {
+        "edge_id": "edge_node_23_62_node_24_62",
+        "from_node": "node_23_62",
+        "from_xy": [
+          23,
+          62
+        ],
+        "one_way": true,
+        "to_node": "node_24_62",
+        "to_xy": [
+          24,
+          62
+        ]
+      },
+      {
+        "edge_id": "edge_node_23_62_node_23_63",
+        "from_node": "node_23_62",
+        "from_xy": [
+          23,
+          62
+        ],
+        "one_way": false,
+        "to_node": "node_23_63",
+        "to_xy": [
+          23,
+          63
+        ]
+      },
+      {
+        "edge_id": "edge_node_23_63_node_23_62",
+        "from_node": "node_23_63",
+        "from_xy": [
+          23,
+          63
+        ],
+        "one_way": false,
+        "to_node": "node_23_62",
+        "to_xy": [
+          23,
+          62
+        ]
+      },
+      {
+        "edge_id": "edge_node_23_63_node_24_63",
+        "from_node": "node_23_63",
+        "from_xy": [
+          23,
+          63
+        ],
+        "one_way": false,
+        "to_node": "node_24_63",
+        "to_xy": [
+          24,
+          63
+        ]
+      },
+      {
+        "edge_id": "edge_node_24_63_node_23_63",
+        "from_node": "node_24_63",
+        "from_xy": [
+          24,
+          63
+        ],
+        "one_way": false,
+        "to_node": "node_23_63",
+        "to_xy": [
+          23,
+          63
+        ]
+      },
+      {
+        "edge_id": "edge_node_24_59_node_25_59",
+        "from_node": "node_24_59",
+        "from_xy": [
+          24,
+          59
+        ],
+        "one_way": false,
+        "to_node": "node_25_59",
+        "to_xy": [
+          25,
+          59
+        ]
+      },
+      {
+        "edge_id": "edge_node_25_59_node_24_59",
+        "from_node": "node_25_59",
+        "from_xy": [
+          25,
+          59
+        ],
+        "one_way": false,
+        "to_node": "node_24_59",
+        "to_xy": [
+          24,
+          59
+        ]
+      },
+      {
+        "edge_id": "edge_node_24_59_node_24_60",
+        "from_node": "node_24_59",
+        "from_xy": [
+          24,
+          59
+        ],
+        "one_way": false,
+        "to_node": "node_24_60",
+        "to_xy": [
+          24,
+          60
+        ]
+      },
+      {
+        "edge_id": "edge_node_24_60_node_24_59",
+        "from_node": "node_24_60",
+        "from_xy": [
+          24,
+          60
+        ],
+        "one_way": false,
+        "to_node": "node_24_59",
+        "to_xy": [
+          24,
+          59
+        ]
+      },
+      {
+        "edge_id": "edge_node_24_60_node_25_60",
+        "from_node": "node_24_60",
+        "from_xy": [
+          24,
+          60
+        ],
+        "one_way": false,
+        "to_node": "node_25_60",
+        "to_xy": [
+          25,
+          60
+        ]
+      },
+      {
+        "edge_id": "edge_node_25_60_node_24_60",
+        "from_node": "node_25_60",
+        "from_xy": [
+          25,
+          60
+        ],
+        "one_way": false,
+        "to_node": "node_24_60",
+        "to_xy": [
+          24,
+          60
+        ]
+      },
+      {
+        "edge_id": "edge_node_24_60_node_24_61",
+        "from_node": "node_24_60",
+        "from_xy": [
+          24,
+          60
+        ],
+        "one_way": false,
+        "to_node": "node_24_61",
+        "to_xy": [
+          24,
+          61
+        ]
+      },
+      {
+        "edge_id": "edge_node_24_61_node_24_60",
+        "from_node": "node_24_61",
+        "from_xy": [
+          24,
+          61
+        ],
+        "one_way": false,
+        "to_node": "node_24_60",
+        "to_xy": [
+          24,
+          60
+        ]
+      },
+      {
+        "edge_id": "edge_node_24_61_node_25_61",
+        "from_node": "node_24_61",
+        "from_xy": [
+          24,
+          61
+        ],
+        "one_way": false,
+        "to_node": "node_25_61",
+        "to_xy": [
+          25,
+          61
+        ]
+      },
+      {
+        "edge_id": "edge_node_25_61_node_24_61",
+        "from_node": "node_25_61",
+        "from_xy": [
+          25,
+          61
+        ],
+        "one_way": false,
+        "to_node": "node_24_61",
+        "to_xy": [
+          24,
+          61
+        ]
+      },
+      {
+        "edge_id": "edge_node_24_61_node_24_62",
+        "from_node": "node_24_61",
+        "from_xy": [
+          24,
+          61
+        ],
+        "one_way": false,
+        "to_node": "node_24_62",
+        "to_xy": [
+          24,
+          62
+        ]
+      },
+      {
+        "edge_id": "edge_node_24_62_node_24_61",
+        "from_node": "node_24_62",
+        "from_xy": [
+          24,
+          62
+        ],
+        "one_way": false,
+        "to_node": "node_24_61",
+        "to_xy": [
+          24,
+          61
+        ]
+      },
+      {
+        "edge_id": "edge_node_24_62_node_25_62",
+        "from_node": "node_24_62",
+        "from_xy": [
+          24,
+          62
+        ],
+        "one_way": false,
+        "to_node": "node_25_62",
+        "to_xy": [
+          25,
+          62
+        ]
+      },
+      {
+        "edge_id": "edge_node_25_62_node_24_62",
+        "from_node": "node_25_62",
+        "from_xy": [
+          25,
+          62
+        ],
+        "one_way": false,
+        "to_node": "node_24_62",
+        "to_xy": [
+          24,
+          62
+        ]
+      },
+      {
+        "edge_id": "edge_node_24_62_node_24_63",
+        "from_node": "node_24_62",
+        "from_xy": [
+          24,
+          62
+        ],
+        "one_way": false,
+        "to_node": "node_24_63",
+        "to_xy": [
+          24,
+          63
+        ]
+      },
+      {
+        "edge_id": "edge_node_24_63_node_24_62",
+        "from_node": "node_24_63",
+        "from_xy": [
+          24,
+          63
+        ],
+        "one_way": false,
+        "to_node": "node_24_62",
+        "to_xy": [
+          24,
+          62
+        ]
+      },
+      {
+        "edge_id": "edge_node_24_63_node_25_63",
+        "from_node": "node_24_63",
+        "from_xy": [
+          24,
+          63
+        ],
+        "one_way": false,
+        "to_node": "node_25_63",
+        "to_xy": [
+          25,
+          63
+        ]
+      },
+      {
+        "edge_id": "edge_node_25_63_node_24_63",
+        "from_node": "node_25_63",
+        "from_xy": [
+          25,
+          63
+        ],
+        "one_way": false,
+        "to_node": "node_24_63",
+        "to_xy": [
+          24,
+          63
+        ]
+      },
+      {
+        "edge_id": "edge_node_25_59_node_26_59",
+        "from_node": "node_25_59",
+        "from_xy": [
+          25,
+          59
+        ],
+        "one_way": true,
+        "to_node": "node_26_59",
+        "to_xy": [
+          26,
+          59
+        ]
+      },
+      {
+        "edge_id": "edge_node_25_59_node_25_60",
+        "from_node": "node_25_59",
+        "from_xy": [
+          25,
+          59
+        ],
+        "one_way": false,
+        "to_node": "node_25_60",
+        "to_xy": [
+          25,
+          60
+        ]
+      },
+      {
+        "edge_id": "edge_node_25_60_node_25_59",
+        "from_node": "node_25_60",
+        "from_xy": [
+          25,
+          60
+        ],
+        "one_way": false,
+        "to_node": "node_25_59",
+        "to_xy": [
+          25,
+          59
+        ]
+      },
+      {
+        "edge_id": "edge_node_25_60_node_26_60",
+        "from_node": "node_25_60",
+        "from_xy": [
+          25,
+          60
+        ],
+        "one_way": false,
+        "to_node": "node_26_60",
+        "to_xy": [
+          26,
+          60
+        ]
+      },
+      {
+        "edge_id": "edge_node_26_60_node_25_60",
+        "from_node": "node_26_60",
+        "from_xy": [
+          26,
+          60
+        ],
+        "one_way": false,
+        "to_node": "node_25_60",
+        "to_xy": [
+          25,
+          60
+        ]
+      },
+      {
+        "edge_id": "edge_node_25_60_node_25_61",
+        "from_node": "node_25_60",
+        "from_xy": [
+          25,
+          60
+        ],
+        "one_way": false,
+        "to_node": "node_25_61",
+        "to_xy": [
+          25,
+          61
+        ]
+      },
+      {
+        "edge_id": "edge_node_25_61_node_25_60",
+        "from_node": "node_25_61",
+        "from_xy": [
+          25,
+          61
+        ],
+        "one_way": false,
+        "to_node": "node_25_60",
+        "to_xy": [
+          25,
+          60
+        ]
+      },
+      {
+        "edge_id": "edge_node_25_61_node_26_61",
+        "from_node": "node_25_61",
+        "from_xy": [
+          25,
+          61
+        ],
+        "one_way": false,
+        "to_node": "node_26_61",
+        "to_xy": [
+          26,
+          61
+        ]
+      },
+      {
+        "edge_id": "edge_node_26_61_node_25_61",
+        "from_node": "node_26_61",
+        "from_xy": [
+          26,
+          61
+        ],
+        "one_way": false,
+        "to_node": "node_25_61",
+        "to_xy": [
+          25,
+          61
+        ]
+      },
+      {
+        "edge_id": "edge_node_25_61_node_25_62",
+        "from_node": "node_25_61",
+        "from_xy": [
+          25,
+          61
+        ],
+        "one_way": false,
+        "to_node": "node_25_62",
+        "to_xy": [
+          25,
+          62
+        ]
+      },
+      {
+        "edge_id": "edge_node_25_62_node_25_61",
+        "from_node": "node_25_62",
+        "from_xy": [
+          25,
+          62
+        ],
+        "one_way": false,
+        "to_node": "node_25_61",
+        "to_xy": [
+          25,
+          61
+        ]
+      },
+      {
+        "edge_id": "edge_node_26_62_node_25_62",
+        "from_node": "node_26_62",
+        "from_xy": [
+          26,
+          62
+        ],
+        "one_way": true,
+        "to_node": "node_25_62",
+        "to_xy": [
+          25,
+          62
+        ]
+      },
+      {
+        "edge_id": "edge_node_25_62_node_25_63",
+        "from_node": "node_25_62",
+        "from_xy": [
+          25,
+          62
+        ],
+        "one_way": false,
+        "to_node": "node_25_63",
+        "to_xy": [
+          25,
+          63
+        ]
+      },
+      {
+        "edge_id": "edge_node_25_63_node_25_62",
+        "from_node": "node_25_63",
+        "from_xy": [
+          25,
+          63
+        ],
+        "one_way": false,
+        "to_node": "node_25_62",
+        "to_xy": [
+          25,
+          62
+        ]
+      },
+      {
+        "edge_id": "edge_node_25_63_node_26_63",
+        "from_node": "node_25_63",
+        "from_xy": [
+          25,
+          63
+        ],
+        "one_way": false,
+        "to_node": "node_26_63",
+        "to_xy": [
+          26,
+          63
+        ]
+      },
+      {
+        "edge_id": "edge_node_26_63_node_25_63",
+        "from_node": "node_26_63",
+        "from_xy": [
+          26,
+          63
+        ],
+        "one_way": false,
+        "to_node": "node_25_63",
+        "to_xy": [
+          25,
+          63
+        ]
+      },
+      {
+        "edge_id": "edge_node_26_60_node_26_59",
+        "from_node": "node_26_60",
+        "from_xy": [
+          26,
+          60
+        ],
+        "one_way": true,
+        "to_node": "node_26_59",
+        "to_xy": [
+          26,
+          59
+        ]
+      },
+      {
+        "edge_id": "edge_node_26_61_node_26_60",
+        "from_node": "node_26_61",
+        "from_xy": [
+          26,
+          61
+        ],
+        "one_way": true,
+        "to_node": "node_26_60",
+        "to_xy": [
+          26,
+          60
+        ]
+      },
+      {
+        "edge_id": "edge_node_26_61_node_26_62",
+        "from_node": "node_26_61",
+        "from_xy": [
+          26,
+          61
+        ],
+        "one_way": false,
+        "to_node": "node_26_62",
+        "to_xy": [
+          26,
+          62
+        ]
+      },
+      {
+        "edge_id": "edge_node_26_62_node_26_61",
+        "from_node": "node_26_62",
+        "from_xy": [
+          26,
+          62
+        ],
+        "one_way": false,
+        "to_node": "node_26_61",
+        "to_xy": [
+          26,
+          61
+        ]
+      },
+      {
+        "edge_id": "edge_node_26_62_node_26_63",
+        "from_node": "node_26_62",
+        "from_xy": [
+          26,
+          62
+        ],
+        "one_way": false,
+        "to_node": "node_26_63",
+        "to_xy": [
+          26,
+          63
+        ]
+      },
+      {
+        "edge_id": "edge_node_26_63_node_26_62",
+        "from_node": "node_26_63",
+        "from_xy": [
+          26,
+          63
+        ],
+        "one_way": false,
+        "to_node": "node_26_62",
+        "to_xy": [
+          26,
+          62
+        ]
+      },
+      {
+        "edge_id": "edge_node_34_59_node_35_59",
+        "from_node": "node_34_59",
+        "from_xy": [
+          34,
+          59
+        ],
+        "one_way": false,
+        "to_node": "node_35_59",
+        "to_xy": [
+          35,
+          59
+        ]
+      },
+      {
+        "edge_id": "edge_node_35_59_node_34_59",
+        "from_node": "node_35_59",
+        "from_xy": [
+          35,
+          59
+        ],
+        "one_way": false,
+        "to_node": "node_34_59",
+        "to_xy": [
+          34,
+          59
+        ]
+      },
+      {
+        "edge_id": "edge_node_34_59_node_34_60",
+        "from_node": "node_34_59",
+        "from_xy": [
+          34,
+          59
+        ],
+        "one_way": false,
+        "to_node": "node_34_60",
+        "to_xy": [
+          34,
+          60
+        ]
+      },
+      {
+        "edge_id": "edge_node_34_60_node_34_59",
+        "from_node": "node_34_60",
+        "from_xy": [
+          34,
+          60
+        ],
+        "one_way": false,
+        "to_node": "node_34_59",
+        "to_xy": [
+          34,
+          59
+        ]
+      },
+      {
+        "edge_id": "edge_node_34_60_node_35_60",
+        "from_node": "node_34_60",
+        "from_xy": [
+          34,
+          60
+        ],
+        "one_way": false,
+        "to_node": "node_35_60",
+        "to_xy": [
+          35,
+          60
+        ]
+      },
+      {
+        "edge_id": "edge_node_35_60_node_34_60",
+        "from_node": "node_35_60",
+        "from_xy": [
+          35,
+          60
+        ],
+        "one_way": false,
+        "to_node": "node_34_60",
+        "to_xy": [
+          34,
+          60
+        ]
+      },
+      {
+        "edge_id": "edge_node_34_60_node_34_61",
+        "from_node": "node_34_60",
+        "from_xy": [
+          34,
+          60
+        ],
+        "one_way": false,
+        "to_node": "node_34_61",
+        "to_xy": [
+          34,
+          61
+        ]
+      },
+      {
+        "edge_id": "edge_node_34_61_node_34_60",
+        "from_node": "node_34_61",
+        "from_xy": [
+          34,
+          61
+        ],
+        "one_way": false,
+        "to_node": "node_34_60",
+        "to_xy": [
+          34,
+          60
+        ]
+      },
+      {
+        "edge_id": "edge_node_34_61_node_35_61",
+        "from_node": "node_34_61",
+        "from_xy": [
+          34,
+          61
+        ],
+        "one_way": false,
+        "to_node": "node_35_61",
+        "to_xy": [
+          35,
+          61
+        ]
+      },
+      {
+        "edge_id": "edge_node_35_61_node_34_61",
+        "from_node": "node_35_61",
+        "from_xy": [
+          35,
+          61
+        ],
+        "one_way": false,
+        "to_node": "node_34_61",
+        "to_xy": [
+          34,
+          61
+        ]
+      },
+      {
+        "edge_id": "edge_node_34_61_node_34_62",
+        "from_node": "node_34_61",
+        "from_xy": [
+          34,
+          61
+        ],
+        "one_way": false,
+        "to_node": "node_34_62",
+        "to_xy": [
+          34,
+          62
+        ]
+      },
+      {
+        "edge_id": "edge_node_34_62_node_34_61",
+        "from_node": "node_34_62",
+        "from_xy": [
+          34,
+          62
+        ],
+        "one_way": false,
+        "to_node": "node_34_61",
+        "to_xy": [
+          34,
+          61
+        ]
+      },
+      {
+        "edge_id": "edge_node_34_62_node_35_62",
+        "from_node": "node_34_62",
+        "from_xy": [
+          34,
+          62
+        ],
+        "one_way": false,
+        "to_node": "node_35_62",
+        "to_xy": [
+          35,
+          62
+        ]
+      },
+      {
+        "edge_id": "edge_node_35_62_node_34_62",
+        "from_node": "node_35_62",
+        "from_xy": [
+          35,
+          62
+        ],
+        "one_way": false,
+        "to_node": "node_34_62",
+        "to_xy": [
+          34,
+          62
+        ]
+      },
+      {
+        "edge_id": "edge_node_34_62_node_34_63",
+        "from_node": "node_34_62",
+        "from_xy": [
+          34,
+          62
+        ],
+        "one_way": false,
+        "to_node": "node_34_63",
+        "to_xy": [
+          34,
+          63
+        ]
+      },
+      {
+        "edge_id": "edge_node_34_63_node_34_62",
+        "from_node": "node_34_63",
+        "from_xy": [
+          34,
+          63
+        ],
+        "one_way": false,
+        "to_node": "node_34_62",
+        "to_xy": [
+          34,
+          62
+        ]
+      },
+      {
+        "edge_id": "edge_node_34_63_node_35_63",
+        "from_node": "node_34_63",
+        "from_xy": [
+          34,
+          63
+        ],
+        "one_way": false,
+        "to_node": "node_35_63",
+        "to_xy": [
+          35,
+          63
+        ]
+      },
+      {
+        "edge_id": "edge_node_35_63_node_34_63",
+        "from_node": "node_35_63",
+        "from_xy": [
+          35,
+          63
+        ],
+        "one_way": false,
+        "to_node": "node_34_63",
+        "to_xy": [
+          34,
+          63
+        ]
+      },
+      {
+        "edge_id": "edge_node_35_59_node_36_59",
+        "from_node": "node_35_59",
+        "from_xy": [
+          35,
+          59
+        ],
+        "one_way": true,
+        "to_node": "node_36_59",
+        "to_xy": [
+          36,
+          59
+        ]
+      },
+      {
+        "edge_id": "edge_node_35_59_node_35_60",
+        "from_node": "node_35_59",
+        "from_xy": [
+          35,
+          59
+        ],
+        "one_way": false,
+        "to_node": "node_35_60",
+        "to_xy": [
+          35,
+          60
+        ]
+      },
+      {
+        "edge_id": "edge_node_35_60_node_35_59",
+        "from_node": "node_35_60",
+        "from_xy": [
+          35,
+          60
+        ],
+        "one_way": false,
+        "to_node": "node_35_59",
+        "to_xy": [
+          35,
+          59
+        ]
+      },
+      {
+        "edge_id": "edge_node_35_60_node_36_60",
+        "from_node": "node_35_60",
+        "from_xy": [
+          35,
+          60
+        ],
+        "one_way": false,
+        "to_node": "node_36_60",
+        "to_xy": [
+          36,
+          60
+        ]
+      },
+      {
+        "edge_id": "edge_node_36_60_node_35_60",
+        "from_node": "node_36_60",
+        "from_xy": [
+          36,
+          60
+        ],
+        "one_way": false,
+        "to_node": "node_35_60",
+        "to_xy": [
+          35,
+          60
+        ]
+      },
+      {
+        "edge_id": "edge_node_35_61_node_35_60",
+        "from_node": "node_35_61",
+        "from_xy": [
+          35,
+          61
+        ],
+        "one_way": true,
+        "to_node": "node_35_60",
+        "to_xy": [
+          35,
+          60
+        ]
+      },
+      {
+        "edge_id": "edge_node_35_61_node_36_61",
+        "from_node": "node_35_61",
+        "from_xy": [
+          35,
+          61
+        ],
+        "one_way": false,
+        "to_node": "node_36_61",
+        "to_xy": [
+          36,
+          61
+        ]
+      },
+      {
+        "edge_id": "edge_node_36_61_node_35_61",
+        "from_node": "node_36_61",
+        "from_xy": [
+          36,
+          61
+        ],
+        "one_way": false,
+        "to_node": "node_35_61",
+        "to_xy": [
+          35,
+          61
+        ]
+      },
+      {
+        "edge_id": "edge_node_35_61_node_35_62",
+        "from_node": "node_35_61",
+        "from_xy": [
+          35,
+          61
+        ],
+        "one_way": false,
+        "to_node": "node_35_62",
+        "to_xy": [
+          35,
+          62
+        ]
+      },
+      {
+        "edge_id": "edge_node_35_62_node_35_61",
+        "from_node": "node_35_62",
+        "from_xy": [
+          35,
+          62
+        ],
+        "one_way": false,
+        "to_node": "node_35_61",
+        "to_xy": [
+          35,
+          61
+        ]
+      },
+      {
+        "edge_id": "edge_node_35_62_node_36_62",
+        "from_node": "node_35_62",
+        "from_xy": [
+          35,
+          62
+        ],
+        "one_way": false,
+        "to_node": "node_36_62",
+        "to_xy": [
+          36,
+          62
+        ]
+      },
+      {
+        "edge_id": "edge_node_36_62_node_35_62",
+        "from_node": "node_36_62",
+        "from_xy": [
+          36,
+          62
+        ],
+        "one_way": false,
+        "to_node": "node_35_62",
+        "to_xy": [
+          35,
+          62
+        ]
+      },
+      {
+        "edge_id": "edge_node_35_62_node_35_63",
+        "from_node": "node_35_62",
+        "from_xy": [
+          35,
+          62
+        ],
+        "one_way": false,
+        "to_node": "node_35_63",
+        "to_xy": [
+          35,
+          63
+        ]
+      },
+      {
+        "edge_id": "edge_node_35_63_node_35_62",
+        "from_node": "node_35_63",
+        "from_xy": [
+          35,
+          63
+        ],
+        "one_way": false,
+        "to_node": "node_35_62",
+        "to_xy": [
+          35,
+          62
+        ]
+      },
+      {
+        "edge_id": "edge_node_35_63_node_36_63",
+        "from_node": "node_35_63",
+        "from_xy": [
+          35,
+          63
+        ],
+        "one_way": false,
+        "to_node": "node_36_63",
+        "to_xy": [
+          36,
+          63
+        ]
+      },
+      {
+        "edge_id": "edge_node_36_63_node_35_63",
+        "from_node": "node_36_63",
+        "from_xy": [
+          36,
+          63
+        ],
+        "one_way": false,
+        "to_node": "node_35_63",
+        "to_xy": [
+          35,
+          63
+        ]
+      },
+      {
+        "edge_id": "edge_node_36_59_node_37_59",
+        "from_node": "node_36_59",
+        "from_xy": [
+          36,
+          59
+        ],
+        "one_way": false,
+        "to_node": "node_37_59",
+        "to_xy": [
+          37,
+          59
+        ]
+      },
+      {
+        "edge_id": "edge_node_37_59_node_36_59",
+        "from_node": "node_37_59",
+        "from_xy": [
+          37,
+          59
+        ],
+        "one_way": false,
+        "to_node": "node_36_59",
+        "to_xy": [
+          36,
+          59
+        ]
+      },
+      {
+        "edge_id": "edge_node_36_59_node_36_60",
+        "from_node": "node_36_59",
+        "from_xy": [
+          36,
+          59
+        ],
+        "one_way": false,
+        "to_node": "node_36_60",
+        "to_xy": [
+          36,
+          60
+        ]
+      },
+      {
+        "edge_id": "edge_node_36_60_node_36_59",
+        "from_node": "node_36_60",
+        "from_xy": [
+          36,
+          60
+        ],
+        "one_way": false,
+        "to_node": "node_36_59",
+        "to_xy": [
+          36,
+          59
+        ]
+      },
+      {
+        "edge_id": "edge_node_37_60_node_36_60",
+        "from_node": "node_37_60",
+        "from_xy": [
+          37,
+          60
+        ],
+        "one_way": true,
+        "to_node": "node_36_60",
+        "to_xy": [
+          36,
+          60
+        ]
+      },
+      {
+        "edge_id": "edge_node_36_60_node_36_61",
+        "from_node": "node_36_60",
+        "from_xy": [
+          36,
+          60
+        ],
+        "one_way": false,
+        "to_node": "node_36_61",
+        "to_xy": [
+          36,
+          61
+        ]
+      },
+      {
+        "edge_id": "edge_node_36_61_node_36_60",
+        "from_node": "node_36_61",
+        "from_xy": [
+          36,
+          61
+        ],
+        "one_way": false,
+        "to_node": "node_36_60",
+        "to_xy": [
+          36,
+          60
+        ]
+      },
+      {
+        "edge_id": "edge_node_37_61_node_36_61",
+        "from_node": "node_37_61",
+        "from_xy": [
+          37,
+          61
+        ],
+        "one_way": true,
+        "to_node": "node_36_61",
+        "to_xy": [
+          36,
+          61
+        ]
+      },
+      {
+        "edge_id": "edge_node_36_61_node_36_62",
+        "from_node": "node_36_61",
+        "from_xy": [
+          36,
+          61
+        ],
+        "one_way": false,
+        "to_node": "node_36_62",
+        "to_xy": [
+          36,
+          62
+        ]
+      },
+      {
+        "edge_id": "edge_node_36_62_node_36_61",
+        "from_node": "node_36_62",
+        "from_xy": [
+          36,
+          62
+        ],
+        "one_way": false,
+        "to_node": "node_36_61",
+        "to_xy": [
+          36,
+          61
+        ]
+      },
+      {
+        "edge_id": "edge_node_36_62_node_37_62",
+        "from_node": "node_36_62",
+        "from_xy": [
+          36,
+          62
+        ],
+        "one_way": true,
+        "to_node": "node_37_62",
+        "to_xy": [
+          37,
+          62
+        ]
+      },
+      {
+        "edge_id": "edge_node_36_63_node_36_62",
+        "from_node": "node_36_63",
+        "from_xy": [
+          36,
+          63
+        ],
+        "one_way": true,
+        "to_node": "node_36_62",
+        "to_xy": [
+          36,
+          62
+        ]
+      },
+      {
+        "edge_id": "edge_node_36_63_node_37_63",
+        "from_node": "node_36_63",
+        "from_xy": [
+          36,
+          63
+        ],
+        "one_way": false,
+        "to_node": "node_37_63",
+        "to_xy": [
+          37,
+          63
+        ]
+      },
+      {
+        "edge_id": "edge_node_37_63_node_36_63",
+        "from_node": "node_37_63",
+        "from_xy": [
+          37,
+          63
+        ],
+        "one_way": false,
+        "to_node": "node_36_63",
+        "to_xy": [
+          36,
+          63
+        ]
+      },
+      {
+        "edge_id": "edge_node_37_59_node_38_59",
+        "from_node": "node_37_59",
+        "from_xy": [
+          37,
+          59
+        ],
+        "one_way": false,
+        "to_node": "node_38_59",
+        "to_xy": [
+          38,
+          59
+        ]
+      },
+      {
+        "edge_id": "edge_node_38_59_node_37_59",
+        "from_node": "node_38_59",
+        "from_xy": [
+          38,
+          59
+        ],
+        "one_way": false,
+        "to_node": "node_37_59",
+        "to_xy": [
+          37,
+          59
+        ]
+      },
+      {
+        "edge_id": "edge_node_37_59_node_37_60",
+        "from_node": "node_37_59",
+        "from_xy": [
+          37,
+          59
+        ],
+        "one_way": false,
+        "to_node": "node_37_60",
+        "to_xy": [
+          37,
+          60
+        ]
+      },
+      {
+        "edge_id": "edge_node_37_60_node_37_59",
+        "from_node": "node_37_60",
+        "from_xy": [
+          37,
+          60
+        ],
+        "one_way": false,
+        "to_node": "node_37_59",
+        "to_xy": [
+          37,
+          59
+        ]
+      },
+      {
+        "edge_id": "edge_node_37_60_node_38_60",
+        "from_node": "node_37_60",
+        "from_xy": [
+          37,
+          60
+        ],
+        "one_way": false,
+        "to_node": "node_38_60",
+        "to_xy": [
+          38,
+          60
+        ]
+      },
+      {
+        "edge_id": "edge_node_38_60_node_37_60",
+        "from_node": "node_38_60",
+        "from_xy": [
+          38,
+          60
+        ],
+        "one_way": false,
+        "to_node": "node_37_60",
+        "to_xy": [
+          37,
+          60
+        ]
+      },
+      {
+        "edge_id": "edge_node_37_60_node_37_61",
+        "from_node": "node_37_60",
+        "from_xy": [
+          37,
+          60
+        ],
+        "one_way": false,
+        "to_node": "node_37_61",
+        "to_xy": [
+          37,
+          61
+        ]
+      },
+      {
+        "edge_id": "edge_node_37_61_node_37_60",
+        "from_node": "node_37_61",
+        "from_xy": [
+          37,
+          61
+        ],
+        "one_way": false,
+        "to_node": "node_37_60",
+        "to_xy": [
+          37,
+          60
+        ]
+      },
+      {
+        "edge_id": "edge_node_37_61_node_38_61",
+        "from_node": "node_37_61",
+        "from_xy": [
+          37,
+          61
+        ],
+        "one_way": false,
+        "to_node": "node_38_61",
+        "to_xy": [
+          38,
+          61
+        ]
+      },
+      {
+        "edge_id": "edge_node_38_61_node_37_61",
+        "from_node": "node_38_61",
+        "from_xy": [
+          38,
+          61
+        ],
+        "one_way": false,
+        "to_node": "node_37_61",
+        "to_xy": [
+          37,
+          61
+        ]
+      },
+      {
+        "edge_id": "edge_node_37_61_node_37_62",
+        "from_node": "node_37_61",
+        "from_xy": [
+          37,
+          61
+        ],
+        "one_way": false,
+        "to_node": "node_37_62",
+        "to_xy": [
+          37,
+          62
+        ]
+      },
+      {
+        "edge_id": "edge_node_37_62_node_37_61",
+        "from_node": "node_37_62",
+        "from_xy": [
+          37,
+          62
+        ],
+        "one_way": false,
+        "to_node": "node_37_61",
+        "to_xy": [
+          37,
+          61
+        ]
+      },
+      {
+        "edge_id": "edge_node_37_62_node_38_62",
+        "from_node": "node_37_62",
+        "from_xy": [
+          37,
+          62
+        ],
+        "one_way": false,
+        "to_node": "node_38_62",
+        "to_xy": [
+          38,
+          62
+        ]
+      },
+      {
+        "edge_id": "edge_node_38_62_node_37_62",
+        "from_node": "node_38_62",
+        "from_xy": [
+          38,
+          62
+        ],
+        "one_way": false,
+        "to_node": "node_37_62",
+        "to_xy": [
+          37,
+          62
+        ]
+      },
+      {
+        "edge_id": "edge_node_37_62_node_37_63",
+        "from_node": "node_37_62",
+        "from_xy": [
+          37,
+          62
+        ],
+        "one_way": false,
+        "to_node": "node_37_63",
+        "to_xy": [
+          37,
+          63
+        ]
+      },
+      {
+        "edge_id": "edge_node_37_63_node_37_62",
+        "from_node": "node_37_63",
+        "from_xy": [
+          37,
+          63
+        ],
+        "one_way": false,
+        "to_node": "node_37_62",
+        "to_xy": [
+          37,
+          62
+        ]
+      },
+      {
+        "edge_id": "edge_node_37_63_node_38_63",
+        "from_node": "node_37_63",
+        "from_xy": [
+          37,
+          63
+        ],
+        "one_way": false,
+        "to_node": "node_38_63",
+        "to_xy": [
+          38,
+          63
+        ]
+      },
+      {
+        "edge_id": "edge_node_38_63_node_37_63",
+        "from_node": "node_38_63",
+        "from_xy": [
+          38,
+          63
+        ],
+        "one_way": false,
+        "to_node": "node_37_63",
+        "to_xy": [
+          37,
+          63
+        ]
+      },
+      {
+        "edge_id": "edge_node_39_59_node_38_59",
+        "from_node": "node_39_59",
+        "from_xy": [
+          39,
+          59
+        ],
+        "one_way": true,
+        "to_node": "node_38_59",
+        "to_xy": [
+          38,
+          59
+        ]
+      },
+      {
+        "edge_id": "edge_node_38_59_node_38_60",
+        "from_node": "node_38_59",
+        "from_xy": [
+          38,
+          59
+        ],
+        "one_way": false,
+        "to_node": "node_38_60",
+        "to_xy": [
+          38,
+          60
+        ]
+      },
+      {
+        "edge_id": "edge_node_38_60_node_38_59",
+        "from_node": "node_38_60",
+        "from_xy": [
+          38,
+          60
+        ],
+        "one_way": false,
+        "to_node": "node_38_59",
+        "to_xy": [
+          38,
+          59
+        ]
+      },
+      {
+        "edge_id": "edge_node_38_60_node_39_60",
+        "from_node": "node_38_60",
+        "from_xy": [
+          38,
+          60
+        ],
+        "one_way": true,
+        "to_node": "node_39_60",
+        "to_xy": [
+          39,
+          60
+        ]
+      },
+      {
+        "edge_id": "edge_node_38_60_node_38_61",
+        "from_node": "node_38_60",
+        "from_xy": [
+          38,
+          60
+        ],
+        "one_way": false,
+        "to_node": "node_38_61",
+        "to_xy": [
+          38,
+          61
+        ]
+      },
+      {
+        "edge_id": "edge_node_38_61_node_38_60",
+        "from_node": "node_38_61",
+        "from_xy": [
+          38,
+          61
+        ],
+        "one_way": false,
+        "to_node": "node_38_60",
+        "to_xy": [
+          38,
+          60
+        ]
+      },
+      {
+        "edge_id": "edge_node_38_61_node_39_61",
+        "from_node": "node_38_61",
+        "from_xy": [
+          38,
+          61
+        ],
+        "one_way": false,
+        "to_node": "node_39_61",
+        "to_xy": [
+          39,
+          61
+        ]
+      },
+      {
+        "edge_id": "edge_node_39_61_node_38_61",
+        "from_node": "node_39_61",
+        "from_xy": [
+          39,
+          61
+        ],
+        "one_way": false,
+        "to_node": "node_38_61",
+        "to_xy": [
+          38,
+          61
+        ]
+      },
+      {
+        "edge_id": "edge_node_38_61_node_38_62",
+        "from_node": "node_38_61",
+        "from_xy": [
+          38,
+          61
+        ],
+        "one_way": false,
+        "to_node": "node_38_62",
+        "to_xy": [
+          38,
+          62
+        ]
+      },
+      {
+        "edge_id": "edge_node_38_62_node_38_61",
+        "from_node": "node_38_62",
+        "from_xy": [
+          38,
+          62
+        ],
+        "one_way": false,
+        "to_node": "node_38_61",
+        "to_xy": [
+          38,
+          61
+        ]
+      },
+      {
+        "edge_id": "edge_node_38_62_node_39_62",
+        "from_node": "node_38_62",
+        "from_xy": [
+          38,
+          62
+        ],
+        "one_way": false,
+        "to_node": "node_39_62",
+        "to_xy": [
+          39,
+          62
+        ]
+      },
+      {
+        "edge_id": "edge_node_39_62_node_38_62",
+        "from_node": "node_39_62",
+        "from_xy": [
+          39,
+          62
+        ],
+        "one_way": false,
+        "to_node": "node_38_62",
+        "to_xy": [
+          38,
+          62
+        ]
+      },
+      {
+        "edge_id": "edge_node_38_62_node_38_63",
+        "from_node": "node_38_62",
+        "from_xy": [
+          38,
+          62
+        ],
+        "one_way": true,
+        "to_node": "node_38_63",
+        "to_xy": [
+          38,
+          63
+        ]
+      },
+      {
+        "edge_id": "edge_node_38_63_node_39_63",
+        "from_node": "node_38_63",
+        "from_xy": [
+          38,
+          63
+        ],
+        "one_way": false,
+        "to_node": "node_39_63",
+        "to_xy": [
+          39,
+          63
+        ]
+      },
+      {
+        "edge_id": "edge_node_39_63_node_38_63",
+        "from_node": "node_39_63",
+        "from_xy": [
+          39,
+          63
+        ],
+        "one_way": false,
+        "to_node": "node_38_63",
+        "to_xy": [
+          38,
+          63
+        ]
+      },
+      {
+        "edge_id": "edge_node_39_59_node_39_60",
+        "from_node": "node_39_59",
+        "from_xy": [
+          39,
+          59
+        ],
+        "one_way": false,
+        "to_node": "node_39_60",
+        "to_xy": [
+          39,
+          60
+        ]
+      },
+      {
+        "edge_id": "edge_node_39_60_node_39_59",
+        "from_node": "node_39_60",
+        "from_xy": [
+          39,
+          60
+        ],
+        "one_way": false,
+        "to_node": "node_39_59",
+        "to_xy": [
+          39,
+          59
+        ]
+      },
+      {
+        "edge_id": "edge_node_39_60_node_39_61",
+        "from_node": "node_39_60",
+        "from_xy": [
+          39,
+          60
+        ],
+        "one_way": false,
+        "to_node": "node_39_61",
+        "to_xy": [
+          39,
+          61
+        ]
+      },
+      {
+        "edge_id": "edge_node_39_61_node_39_60",
+        "from_node": "node_39_61",
+        "from_xy": [
+          39,
+          61
+        ],
+        "one_way": false,
+        "to_node": "node_39_60",
+        "to_xy": [
+          39,
+          60
+        ]
+      },
+      {
+        "edge_id": "edge_node_39_61_node_39_62",
+        "from_node": "node_39_61",
+        "from_xy": [
+          39,
+          61
+        ],
+        "one_way": false,
+        "to_node": "node_39_62",
+        "to_xy": [
+          39,
+          62
+        ]
+      },
+      {
+        "edge_id": "edge_node_39_62_node_39_61",
+        "from_node": "node_39_62",
+        "from_xy": [
+          39,
+          62
+        ],
+        "one_way": false,
+        "to_node": "node_39_61",
+        "to_xy": [
+          39,
+          61
+        ]
+      },
+      {
+        "edge_id": "edge_node_39_62_node_39_63",
+        "from_node": "node_39_62",
+        "from_xy": [
+          39,
+          62
+        ],
+        "one_way": false,
+        "to_node": "node_39_63",
+        "to_xy": [
+          39,
+          63
+        ]
+      },
+      {
+        "edge_id": "edge_node_39_63_node_39_62",
+        "from_node": "node_39_63",
+        "from_xy": [
+          39,
+          63
+        ],
+        "one_way": false,
+        "to_node": "node_39_62",
+        "to_xy": [
+          39,
+          62
+        ]
+      },
+      {
+        "edge_id": "edge_node_52_59_node_53_59",
+        "from_node": "node_52_59",
+        "from_xy": [
+          52,
+          59
+        ],
+        "one_way": false,
+        "to_node": "node_53_59",
+        "to_xy": [
+          53,
+          59
+        ]
+      },
+      {
+        "edge_id": "edge_node_53_59_node_52_59",
+        "from_node": "node_53_59",
+        "from_xy": [
+          53,
+          59
+        ],
+        "one_way": false,
+        "to_node": "node_52_59",
+        "to_xy": [
+          52,
+          59
+        ]
+      },
+      {
+        "edge_id": "edge_node_52_59_node_52_60",
+        "from_node": "node_52_59",
+        "from_xy": [
+          52,
+          59
+        ],
+        "one_way": false,
+        "to_node": "node_52_60",
+        "to_xy": [
+          52,
+          60
+        ]
+      },
+      {
+        "edge_id": "edge_node_52_60_node_52_59",
+        "from_node": "node_52_60",
+        "from_xy": [
+          52,
+          60
+        ],
+        "one_way": false,
+        "to_node": "node_52_59",
+        "to_xy": [
+          52,
+          59
+        ]
+      },
+      {
+        "edge_id": "edge_node_52_60_node_53_60",
+        "from_node": "node_52_60",
+        "from_xy": [
+          52,
+          60
+        ],
+        "one_way": false,
+        "to_node": "node_53_60",
+        "to_xy": [
+          53,
+          60
+        ]
+      },
+      {
+        "edge_id": "edge_node_53_60_node_52_60",
+        "from_node": "node_53_60",
+        "from_xy": [
+          53,
+          60
+        ],
+        "one_way": false,
+        "to_node": "node_52_60",
+        "to_xy": [
+          52,
+          60
+        ]
+      },
+      {
+        "edge_id": "edge_node_52_60_node_52_61",
+        "from_node": "node_52_60",
+        "from_xy": [
+          52,
+          60
+        ],
+        "one_way": false,
+        "to_node": "node_52_61",
+        "to_xy": [
+          52,
+          61
+        ]
+      },
+      {
+        "edge_id": "edge_node_52_61_node_52_60",
+        "from_node": "node_52_61",
+        "from_xy": [
+          52,
+          61
+        ],
+        "one_way": false,
+        "to_node": "node_52_60",
+        "to_xy": [
+          52,
+          60
+        ]
+      },
+      {
+        "edge_id": "edge_node_52_61_node_53_61",
+        "from_node": "node_52_61",
+        "from_xy": [
+          52,
+          61
+        ],
+        "one_way": false,
+        "to_node": "node_53_61",
+        "to_xy": [
+          53,
+          61
+        ]
+      },
+      {
+        "edge_id": "edge_node_53_61_node_52_61",
+        "from_node": "node_53_61",
+        "from_xy": [
+          53,
+          61
+        ],
+        "one_way": false,
+        "to_node": "node_52_61",
+        "to_xy": [
+          52,
+          61
+        ]
+      },
+      {
+        "edge_id": "edge_node_52_61_node_52_62",
+        "from_node": "node_52_61",
+        "from_xy": [
+          52,
+          61
+        ],
+        "one_way": false,
+        "to_node": "node_52_62",
+        "to_xy": [
+          52,
+          62
+        ]
+      },
+      {
+        "edge_id": "edge_node_52_62_node_52_61",
+        "from_node": "node_52_62",
+        "from_xy": [
+          52,
+          62
+        ],
+        "one_way": false,
+        "to_node": "node_52_61",
+        "to_xy": [
+          52,
+          61
+        ]
+      },
+      {
+        "edge_id": "edge_node_52_62_node_53_62",
+        "from_node": "node_52_62",
+        "from_xy": [
+          52,
+          62
+        ],
+        "one_way": false,
+        "to_node": "node_53_62",
+        "to_xy": [
+          53,
+          62
+        ]
+      },
+      {
+        "edge_id": "edge_node_53_62_node_52_62",
+        "from_node": "node_53_62",
+        "from_xy": [
+          53,
+          62
+        ],
+        "one_way": false,
+        "to_node": "node_52_62",
+        "to_xy": [
+          52,
+          62
+        ]
+      },
+      {
+        "edge_id": "edge_node_52_62_node_52_63",
+        "from_node": "node_52_62",
+        "from_xy": [
+          52,
+          62
+        ],
+        "one_way": false,
+        "to_node": "node_52_63",
+        "to_xy": [
+          52,
+          63
+        ]
+      },
+      {
+        "edge_id": "edge_node_52_63_node_52_62",
+        "from_node": "node_52_63",
+        "from_xy": [
+          52,
+          63
+        ],
+        "one_way": false,
+        "to_node": "node_52_62",
+        "to_xy": [
+          52,
+          62
+        ]
+      },
+      {
+        "edge_id": "edge_node_52_63_node_53_63",
+        "from_node": "node_52_63",
+        "from_xy": [
+          52,
+          63
+        ],
+        "one_way": false,
+        "to_node": "node_53_63",
+        "to_xy": [
+          53,
+          63
+        ]
+      },
+      {
+        "edge_id": "edge_node_53_63_node_52_63",
+        "from_node": "node_53_63",
+        "from_xy": [
+          53,
+          63
+        ],
+        "one_way": false,
+        "to_node": "node_52_63",
+        "to_xy": [
+          52,
+          63
+        ]
+      },
+      {
+        "edge_id": "edge_node_53_59_node_54_59",
+        "from_node": "node_53_59",
+        "from_xy": [
+          53,
+          59
+        ],
+        "one_way": false,
+        "to_node": "node_54_59",
+        "to_xy": [
+          54,
+          59
+        ]
+      },
+      {
+        "edge_id": "edge_node_54_59_node_53_59",
+        "from_node": "node_54_59",
+        "from_xy": [
+          54,
+          59
+        ],
+        "one_way": false,
+        "to_node": "node_53_59",
+        "to_xy": [
+          53,
+          59
+        ]
+      },
+      {
+        "edge_id": "edge_node_53_59_node_53_60",
+        "from_node": "node_53_59",
+        "from_xy": [
+          53,
+          59
+        ],
+        "one_way": false,
+        "to_node": "node_53_60",
+        "to_xy": [
+          53,
+          60
+        ]
+      },
+      {
+        "edge_id": "edge_node_53_60_node_53_59",
+        "from_node": "node_53_60",
+        "from_xy": [
+          53,
+          60
+        ],
+        "one_way": false,
+        "to_node": "node_53_59",
+        "to_xy": [
+          53,
+          59
+        ]
+      },
+      {
+        "edge_id": "edge_node_53_60_node_54_60",
+        "from_node": "node_53_60",
+        "from_xy": [
+          53,
+          60
+        ],
+        "one_way": false,
+        "to_node": "node_54_60",
+        "to_xy": [
+          54,
+          60
+        ]
+      },
+      {
+        "edge_id": "edge_node_54_60_node_53_60",
+        "from_node": "node_54_60",
+        "from_xy": [
+          54,
+          60
+        ],
+        "one_way": false,
+        "to_node": "node_53_60",
+        "to_xy": [
+          53,
+          60
+        ]
+      },
+      {
+        "edge_id": "edge_node_53_60_node_53_61",
+        "from_node": "node_53_60",
+        "from_xy": [
+          53,
+          60
+        ],
+        "one_way": false,
+        "to_node": "node_53_61",
+        "to_xy": [
+          53,
+          61
+        ]
+      },
+      {
+        "edge_id": "edge_node_53_61_node_53_60",
+        "from_node": "node_53_61",
+        "from_xy": [
+          53,
+          61
+        ],
+        "one_way": false,
+        "to_node": "node_53_60",
+        "to_xy": [
+          53,
+          60
+        ]
+      },
+      {
+        "edge_id": "edge_node_53_61_node_54_61",
+        "from_node": "node_53_61",
+        "from_xy": [
+          53,
+          61
+        ],
+        "one_way": false,
+        "to_node": "node_54_61",
+        "to_xy": [
+          54,
+          61
+        ]
+      },
+      {
+        "edge_id": "edge_node_54_61_node_53_61",
+        "from_node": "node_54_61",
+        "from_xy": [
+          54,
+          61
+        ],
+        "one_way": false,
+        "to_node": "node_53_61",
+        "to_xy": [
+          53,
+          61
+        ]
+      },
+      {
+        "edge_id": "edge_node_53_61_node_53_62",
+        "from_node": "node_53_61",
+        "from_xy": [
+          53,
+          61
+        ],
+        "one_way": false,
+        "to_node": "node_53_62",
+        "to_xy": [
+          53,
+          62
+        ]
+      },
+      {
+        "edge_id": "edge_node_53_62_node_53_61",
+        "from_node": "node_53_62",
+        "from_xy": [
+          53,
+          62
+        ],
+        "one_way": false,
+        "to_node": "node_53_61",
+        "to_xy": [
+          53,
+          61
+        ]
+      },
+      {
+        "edge_id": "edge_node_53_62_node_54_62",
+        "from_node": "node_53_62",
+        "from_xy": [
+          53,
+          62
+        ],
+        "one_way": true,
+        "to_node": "node_54_62",
+        "to_xy": [
+          54,
+          62
+        ]
+      },
+      {
+        "edge_id": "edge_node_53_62_node_53_63",
+        "from_node": "node_53_62",
+        "from_xy": [
+          53,
+          62
+        ],
+        "one_way": false,
+        "to_node": "node_53_63",
+        "to_xy": [
+          53,
+          63
+        ]
+      },
+      {
+        "edge_id": "edge_node_53_63_node_53_62",
+        "from_node": "node_53_63",
+        "from_xy": [
+          53,
+          63
+        ],
+        "one_way": false,
+        "to_node": "node_53_62",
+        "to_xy": [
+          53,
+          62
+        ]
+      },
+      {
+        "edge_id": "edge_node_53_63_node_54_63",
+        "from_node": "node_53_63",
+        "from_xy": [
+          53,
+          63
+        ],
+        "one_way": false,
+        "to_node": "node_54_63",
+        "to_xy": [
+          54,
+          63
+        ]
+      },
+      {
+        "edge_id": "edge_node_54_63_node_53_63",
+        "from_node": "node_54_63",
+        "from_xy": [
+          54,
+          63
+        ],
+        "one_way": false,
+        "to_node": "node_53_63",
+        "to_xy": [
+          53,
+          63
+        ]
+      },
+      {
+        "edge_id": "edge_node_54_59_node_55_59",
+        "from_node": "node_54_59",
+        "from_xy": [
+          54,
+          59
+        ],
+        "one_way": false,
+        "to_node": "node_55_59",
+        "to_xy": [
+          55,
+          59
+        ]
+      },
+      {
+        "edge_id": "edge_node_55_59_node_54_59",
+        "from_node": "node_55_59",
+        "from_xy": [
+          55,
+          59
+        ],
+        "one_way": false,
+        "to_node": "node_54_59",
+        "to_xy": [
+          54,
+          59
+        ]
+      },
+      {
+        "edge_id": "edge_node_54_59_node_54_60",
+        "from_node": "node_54_59",
+        "from_xy": [
+          54,
+          59
+        ],
+        "one_way": false,
+        "to_node": "node_54_60",
+        "to_xy": [
+          54,
+          60
+        ]
+      },
+      {
+        "edge_id": "edge_node_54_60_node_54_59",
+        "from_node": "node_54_60",
+        "from_xy": [
+          54,
+          60
+        ],
+        "one_way": false,
+        "to_node": "node_54_59",
+        "to_xy": [
+          54,
+          59
+        ]
+      },
+      {
+        "edge_id": "edge_node_54_60_node_55_60",
+        "from_node": "node_54_60",
+        "from_xy": [
+          54,
+          60
+        ],
+        "one_way": true,
+        "to_node": "node_55_60",
+        "to_xy": [
+          55,
+          60
+        ]
+      },
+      {
+        "edge_id": "edge_node_54_60_node_54_61",
+        "from_node": "node_54_60",
+        "from_xy": [
+          54,
+          60
+        ],
+        "one_way": false,
+        "to_node": "node_54_61",
+        "to_xy": [
+          54,
+          61
+        ]
+      },
+      {
+        "edge_id": "edge_node_54_61_node_54_60",
+        "from_node": "node_54_61",
+        "from_xy": [
+          54,
+          61
+        ],
+        "one_way": false,
+        "to_node": "node_54_60",
+        "to_xy": [
+          54,
+          60
+        ]
+      },
+      {
+        "edge_id": "edge_node_55_61_node_54_61",
+        "from_node": "node_55_61",
+        "from_xy": [
+          55,
+          61
+        ],
+        "one_way": true,
+        "to_node": "node_54_61",
+        "to_xy": [
+          54,
+          61
+        ]
+      },
+      {
+        "edge_id": "edge_node_54_61_node_54_62",
+        "from_node": "node_54_61",
+        "from_xy": [
+          54,
+          61
+        ],
+        "one_way": false,
+        "to_node": "node_54_62",
+        "to_xy": [
+          54,
+          62
+        ]
+      },
+      {
+        "edge_id": "edge_node_54_62_node_54_61",
+        "from_node": "node_54_62",
+        "from_xy": [
+          54,
+          62
+        ],
+        "one_way": false,
+        "to_node": "node_54_61",
+        "to_xy": [
+          54,
+          61
+        ]
+      },
+      {
+        "edge_id": "edge_node_54_62_node_55_62",
+        "from_node": "node_54_62",
+        "from_xy": [
+          54,
+          62
+        ],
+        "one_way": false,
+        "to_node": "node_55_62",
+        "to_xy": [
+          55,
+          62
+        ]
+      },
+      {
+        "edge_id": "edge_node_55_62_node_54_62",
+        "from_node": "node_55_62",
+        "from_xy": [
+          55,
+          62
+        ],
+        "one_way": false,
+        "to_node": "node_54_62",
+        "to_xy": [
+          54,
+          62
+        ]
+      },
+      {
+        "edge_id": "edge_node_54_63_node_54_62",
+        "from_node": "node_54_63",
+        "from_xy": [
+          54,
+          63
+        ],
+        "one_way": true,
+        "to_node": "node_54_62",
+        "to_xy": [
+          54,
+          62
+        ]
+      },
+      {
+        "edge_id": "edge_node_54_63_node_55_63",
+        "from_node": "node_54_63",
+        "from_xy": [
+          54,
+          63
+        ],
+        "one_way": false,
+        "to_node": "node_55_63",
+        "to_xy": [
+          55,
+          63
+        ]
+      },
+      {
+        "edge_id": "edge_node_55_63_node_54_63",
+        "from_node": "node_55_63",
+        "from_xy": [
+          55,
+          63
+        ],
+        "one_way": false,
+        "to_node": "node_54_63",
+        "to_xy": [
+          54,
+          63
+        ]
+      },
+      {
+        "edge_id": "edge_node_55_59_node_56_59",
+        "from_node": "node_55_59",
+        "from_xy": [
+          55,
+          59
+        ],
+        "one_way": false,
+        "to_node": "node_56_59",
+        "to_xy": [
+          56,
+          59
+        ]
+      },
+      {
+        "edge_id": "edge_node_56_59_node_55_59",
+        "from_node": "node_56_59",
+        "from_xy": [
+          56,
+          59
+        ],
+        "one_way": false,
+        "to_node": "node_55_59",
+        "to_xy": [
+          55,
+          59
+        ]
+      },
+      {
+        "edge_id": "edge_node_55_59_node_55_60",
+        "from_node": "node_55_59",
+        "from_xy": [
+          55,
+          59
+        ],
+        "one_way": false,
+        "to_node": "node_55_60",
+        "to_xy": [
+          55,
+          60
+        ]
+      },
+      {
+        "edge_id": "edge_node_55_60_node_55_59",
+        "from_node": "node_55_60",
+        "from_xy": [
+          55,
+          60
+        ],
+        "one_way": false,
+        "to_node": "node_55_59",
+        "to_xy": [
+          55,
+          59
+        ]
+      },
+      {
+        "edge_id": "edge_node_55_60_node_56_60",
+        "from_node": "node_55_60",
+        "from_xy": [
+          55,
+          60
+        ],
+        "one_way": false,
+        "to_node": "node_56_60",
+        "to_xy": [
+          56,
+          60
+        ]
+      },
+      {
+        "edge_id": "edge_node_56_60_node_55_60",
+        "from_node": "node_56_60",
+        "from_xy": [
+          56,
+          60
+        ],
+        "one_way": false,
+        "to_node": "node_55_60",
+        "to_xy": [
+          55,
+          60
+        ]
+      },
+      {
+        "edge_id": "edge_node_55_61_node_55_60",
+        "from_node": "node_55_61",
+        "from_xy": [
+          55,
+          61
+        ],
+        "one_way": true,
+        "to_node": "node_55_60",
+        "to_xy": [
+          55,
+          60
+        ]
+      },
+      {
+        "edge_id": "edge_node_55_61_node_56_61",
+        "from_node": "node_55_61",
+        "from_xy": [
+          55,
+          61
+        ],
+        "one_way": false,
+        "to_node": "node_56_61",
+        "to_xy": [
+          56,
+          61
+        ]
+      },
+      {
+        "edge_id": "edge_node_56_61_node_55_61",
+        "from_node": "node_56_61",
+        "from_xy": [
+          56,
+          61
+        ],
+        "one_way": false,
+        "to_node": "node_55_61",
+        "to_xy": [
+          55,
+          61
+        ]
+      },
+      {
+        "edge_id": "edge_node_55_61_node_55_62",
+        "from_node": "node_55_61",
+        "from_xy": [
+          55,
+          61
+        ],
+        "one_way": true,
+        "to_node": "node_55_62",
+        "to_xy": [
+          55,
+          62
+        ]
+      },
+      {
+        "edge_id": "edge_node_55_62_node_56_62",
+        "from_node": "node_55_62",
+        "from_xy": [
+          55,
+          62
+        ],
+        "one_way": false,
+        "to_node": "node_56_62",
+        "to_xy": [
+          56,
+          62
+        ]
+      },
+      {
+        "edge_id": "edge_node_56_62_node_55_62",
+        "from_node": "node_56_62",
+        "from_xy": [
+          56,
+          62
+        ],
+        "one_way": false,
+        "to_node": "node_55_62",
+        "to_xy": [
+          55,
+          62
+        ]
+      },
+      {
+        "edge_id": "edge_node_55_62_node_55_63",
+        "from_node": "node_55_62",
+        "from_xy": [
+          55,
+          62
+        ],
+        "one_way": false,
+        "to_node": "node_55_63",
+        "to_xy": [
+          55,
+          63
+        ]
+      },
+      {
+        "edge_id": "edge_node_55_63_node_55_62",
+        "from_node": "node_55_63",
+        "from_xy": [
+          55,
+          63
+        ],
+        "one_way": false,
+        "to_node": "node_55_62",
+        "to_xy": [
+          55,
+          62
+        ]
+      },
+      {
+        "edge_id": "edge_node_55_63_node_56_63",
+        "from_node": "node_55_63",
+        "from_xy": [
+          55,
+          63
+        ],
+        "one_way": false,
+        "to_node": "node_56_63",
+        "to_xy": [
+          56,
+          63
+        ]
+      },
+      {
+        "edge_id": "edge_node_56_63_node_55_63",
+        "from_node": "node_56_63",
+        "from_xy": [
+          56,
+          63
+        ],
+        "one_way": false,
+        "to_node": "node_55_63",
+        "to_xy": [
+          55,
+          63
+        ]
+      },
+      {
+        "edge_id": "edge_node_56_59_node_57_59",
+        "from_node": "node_56_59",
+        "from_xy": [
+          56,
+          59
+        ],
+        "one_way": false,
+        "to_node": "node_57_59",
+        "to_xy": [
+          57,
+          59
+        ]
+      },
+      {
+        "edge_id": "edge_node_57_59_node_56_59",
+        "from_node": "node_57_59",
+        "from_xy": [
+          57,
+          59
+        ],
+        "one_way": false,
+        "to_node": "node_56_59",
+        "to_xy": [
+          56,
+          59
+        ]
+      },
+      {
+        "edge_id": "edge_node_56_59_node_56_60",
+        "from_node": "node_56_59",
+        "from_xy": [
+          56,
+          59
+        ],
+        "one_way": false,
+        "to_node": "node_56_60",
+        "to_xy": [
+          56,
+          60
+        ]
+      },
+      {
+        "edge_id": "edge_node_56_60_node_56_59",
+        "from_node": "node_56_60",
+        "from_xy": [
+          56,
+          60
+        ],
+        "one_way": false,
+        "to_node": "node_56_59",
+        "to_xy": [
+          56,
+          59
+        ]
+      },
+      {
+        "edge_id": "edge_node_56_60_node_57_60",
+        "from_node": "node_56_60",
+        "from_xy": [
+          56,
+          60
+        ],
+        "one_way": false,
+        "to_node": "node_57_60",
+        "to_xy": [
+          57,
+          60
+        ]
+      },
+      {
+        "edge_id": "edge_node_57_60_node_56_60",
+        "from_node": "node_57_60",
+        "from_xy": [
+          57,
+          60
+        ],
+        "one_way": false,
+        "to_node": "node_56_60",
+        "to_xy": [
+          56,
+          60
+        ]
+      },
+      {
+        "edge_id": "edge_node_56_60_node_56_61",
+        "from_node": "node_56_60",
+        "from_xy": [
+          56,
+          60
+        ],
+        "one_way": true,
+        "to_node": "node_56_61",
+        "to_xy": [
+          56,
+          61
+        ]
+      },
+      {
+        "edge_id": "edge_node_56_61_node_57_61",
+        "from_node": "node_56_61",
+        "from_xy": [
+          56,
+          61
+        ],
+        "one_way": false,
+        "to_node": "node_57_61",
+        "to_xy": [
+          57,
+          61
+        ]
+      },
+      {
+        "edge_id": "edge_node_57_61_node_56_61",
+        "from_node": "node_57_61",
+        "from_xy": [
+          57,
+          61
+        ],
+        "one_way": false,
+        "to_node": "node_56_61",
+        "to_xy": [
+          56,
+          61
+        ]
+      },
+      {
+        "edge_id": "edge_node_56_61_node_56_62",
+        "from_node": "node_56_61",
+        "from_xy": [
+          56,
+          61
+        ],
+        "one_way": false,
+        "to_node": "node_56_62",
+        "to_xy": [
+          56,
+          62
+        ]
+      },
+      {
+        "edge_id": "edge_node_56_62_node_56_61",
+        "from_node": "node_56_62",
+        "from_xy": [
+          56,
+          62
+        ],
+        "one_way": false,
+        "to_node": "node_56_61",
+        "to_xy": [
+          56,
+          61
+        ]
+      },
+      {
+        "edge_id": "edge_node_56_62_node_57_62",
+        "from_node": "node_56_62",
+        "from_xy": [
+          56,
+          62
+        ],
+        "one_way": false,
+        "to_node": "node_57_62",
+        "to_xy": [
+          57,
+          62
+        ]
+      },
+      {
+        "edge_id": "edge_node_57_62_node_56_62",
+        "from_node": "node_57_62",
+        "from_xy": [
+          57,
+          62
+        ],
+        "one_way": false,
+        "to_node": "node_56_62",
+        "to_xy": [
+          56,
+          62
+        ]
+      },
+      {
+        "edge_id": "edge_node_56_62_node_56_63",
+        "from_node": "node_56_62",
+        "from_xy": [
+          56,
+          62
+        ],
+        "one_way": false,
+        "to_node": "node_56_63",
+        "to_xy": [
+          56,
+          63
+        ]
+      },
+      {
+        "edge_id": "edge_node_56_63_node_56_62",
+        "from_node": "node_56_63",
+        "from_xy": [
+          56,
+          63
+        ],
+        "one_way": false,
+        "to_node": "node_56_62",
+        "to_xy": [
+          56,
+          62
+        ]
+      },
+      {
+        "edge_id": "edge_node_56_63_node_57_63",
+        "from_node": "node_56_63",
+        "from_xy": [
+          56,
+          63
+        ],
+        "one_way": false,
+        "to_node": "node_57_63",
+        "to_xy": [
+          57,
+          63
+        ]
+      },
+      {
+        "edge_id": "edge_node_57_63_node_56_63",
+        "from_node": "node_57_63",
+        "from_xy": [
+          57,
+          63
+        ],
+        "one_way": false,
+        "to_node": "node_56_63",
+        "to_xy": [
+          56,
+          63
+        ]
+      },
+      {
+        "edge_id": "edge_node_57_59_node_57_60",
+        "from_node": "node_57_59",
+        "from_xy": [
+          57,
+          59
+        ],
+        "one_way": false,
+        "to_node": "node_57_60",
+        "to_xy": [
+          57,
+          60
+        ]
+      },
+      {
+        "edge_id": "edge_node_57_60_node_57_59",
+        "from_node": "node_57_60",
+        "from_xy": [
+          57,
+          60
+        ],
+        "one_way": false,
+        "to_node": "node_57_59",
+        "to_xy": [
+          57,
+          59
+        ]
+      },
+      {
+        "edge_id": "edge_node_57_60_node_57_61",
+        "from_node": "node_57_60",
+        "from_xy": [
+          57,
+          60
+        ],
+        "one_way": false,
+        "to_node": "node_57_61",
+        "to_xy": [
+          57,
+          61
+        ]
+      },
+      {
+        "edge_id": "edge_node_57_61_node_57_60",
+        "from_node": "node_57_61",
+        "from_xy": [
+          57,
+          61
+        ],
+        "one_way": false,
+        "to_node": "node_57_60",
+        "to_xy": [
+          57,
+          60
+        ]
+      },
+      {
+        "edge_id": "edge_node_57_61_node_57_62",
+        "from_node": "node_57_61",
+        "from_xy": [
+          57,
+          61
+        ],
+        "one_way": true,
+        "to_node": "node_57_62",
+        "to_xy": [
+          57,
+          62
+        ]
+      },
+      {
+        "edge_id": "edge_node_57_63_node_57_62",
+        "from_node": "node_57_63",
+        "from_xy": [
+          57,
+          63
+        ],
+        "one_way": true,
+        "to_node": "node_57_62",
+        "to_xy": [
+          57,
+          62
+        ]
+      },
+      {
+        "edge_id": "edge_node_62_35_node_63_35",
+        "from_node": "node_62_35",
+        "from_xy": [
+          62,
+          35
+        ],
+        "one_way": false,
+        "to_node": "node_63_35",
+        "to_xy": [
+          63,
+          35
+        ]
+      },
+      {
+        "edge_id": "edge_node_63_35_node_62_35",
+        "from_node": "node_63_35",
+        "from_xy": [
+          63,
+          35
+        ],
+        "one_way": false,
+        "to_node": "node_62_35",
+        "to_xy": [
+          62,
+          35
+        ]
+      },
+      {
+        "edge_id": "edge_node_62_35_node_62_36",
+        "from_node": "node_62_35",
+        "from_xy": [
+          62,
+          35
+        ],
+        "one_way": false,
+        "to_node": "node_62_36",
+        "to_xy": [
+          62,
+          36
+        ]
+      },
+      {
+        "edge_id": "edge_node_62_36_node_62_35",
+        "from_node": "node_62_36",
+        "from_xy": [
+          62,
+          36
+        ],
+        "one_way": false,
+        "to_node": "node_62_35",
+        "to_xy": [
+          62,
+          35
+        ]
+      },
+      {
+        "edge_id": "edge_node_62_36_node_63_36",
+        "from_node": "node_62_36",
+        "from_xy": [
+          62,
+          36
+        ],
+        "one_way": false,
+        "to_node": "node_63_36",
+        "to_xy": [
+          63,
+          36
+        ]
+      },
+      {
+        "edge_id": "edge_node_63_36_node_62_36",
+        "from_node": "node_63_36",
+        "from_xy": [
+          63,
+          36
+        ],
+        "one_way": false,
+        "to_node": "node_62_36",
+        "to_xy": [
+          62,
+          36
+        ]
+      },
+      {
+        "edge_id": "edge_node_62_36_node_62_37",
+        "from_node": "node_62_36",
+        "from_xy": [
+          62,
+          36
+        ],
+        "one_way": false,
+        "to_node": "node_62_37",
+        "to_xy": [
+          62,
+          37
+        ]
+      },
+      {
+        "edge_id": "edge_node_62_37_node_62_36",
+        "from_node": "node_62_37",
+        "from_xy": [
+          62,
+          37
+        ],
+        "one_way": false,
+        "to_node": "node_62_36",
+        "to_xy": [
+          62,
+          36
+        ]
+      },
+      {
+        "edge_id": "edge_node_62_37_node_63_37",
+        "from_node": "node_62_37",
+        "from_xy": [
+          62,
+          37
+        ],
+        "one_way": false,
+        "to_node": "node_63_37",
+        "to_xy": [
+          63,
+          37
+        ]
+      },
+      {
+        "edge_id": "edge_node_63_37_node_62_37",
+        "from_node": "node_63_37",
+        "from_xy": [
+          63,
+          37
+        ],
+        "one_way": false,
+        "to_node": "node_62_37",
+        "to_xy": [
+          62,
+          37
+        ]
+      },
+      {
+        "edge_id": "edge_node_62_37_node_62_38",
+        "from_node": "node_62_37",
+        "from_xy": [
+          62,
+          37
+        ],
+        "one_way": false,
+        "to_node": "node_62_38",
+        "to_xy": [
+          62,
+          38
+        ]
+      },
+      {
+        "edge_id": "edge_node_62_38_node_62_37",
+        "from_node": "node_62_38",
+        "from_xy": [
+          62,
+          38
+        ],
+        "one_way": false,
+        "to_node": "node_62_37",
+        "to_xy": [
+          62,
+          37
+        ]
+      },
+      {
+        "edge_id": "edge_node_62_38_node_63_38",
+        "from_node": "node_62_38",
+        "from_xy": [
+          62,
+          38
+        ],
+        "one_way": true,
+        "to_node": "node_63_38",
+        "to_xy": [
+          63,
+          38
+        ]
+      },
+      {
+        "edge_id": "edge_node_62_38_node_62_39",
+        "from_node": "node_62_38",
+        "from_xy": [
+          62,
+          38
+        ],
+        "one_way": false,
+        "to_node": "node_62_39",
+        "to_xy": [
+          62,
+          39
+        ]
+      },
+      {
+        "edge_id": "edge_node_62_39_node_62_38",
+        "from_node": "node_62_39",
+        "from_xy": [
+          62,
+          39
+        ],
+        "one_way": false,
+        "to_node": "node_62_38",
+        "to_xy": [
+          62,
+          38
+        ]
+      },
+      {
+        "edge_id": "edge_node_62_39_node_63_39",
+        "from_node": "node_62_39",
+        "from_xy": [
+          62,
+          39
+        ],
+        "one_way": false,
+        "to_node": "node_63_39",
+        "to_xy": [
+          63,
+          39
+        ]
+      },
+      {
+        "edge_id": "edge_node_63_39_node_62_39",
+        "from_node": "node_63_39",
+        "from_xy": [
+          63,
+          39
+        ],
+        "one_way": false,
+        "to_node": "node_62_39",
+        "to_xy": [
+          62,
+          39
+        ]
+      },
+      {
+        "edge_id": "edge_node_62_39_node_62_40",
+        "from_node": "node_62_39",
+        "from_xy": [
+          62,
+          39
+        ],
+        "one_way": false,
+        "to_node": "node_62_40",
+        "to_xy": [
+          62,
+          40
+        ]
+      },
+      {
+        "edge_id": "edge_node_62_40_node_62_39",
+        "from_node": "node_62_40",
+        "from_xy": [
+          62,
+          40
+        ],
+        "one_way": false,
+        "to_node": "node_62_39",
+        "to_xy": [
+          62,
+          39
+        ]
+      },
+      {
+        "edge_id": "edge_node_62_40_node_63_40",
+        "from_node": "node_62_40",
+        "from_xy": [
+          62,
+          40
+        ],
+        "one_way": false,
+        "to_node": "node_63_40",
+        "to_xy": [
+          63,
+          40
+        ]
+      },
+      {
+        "edge_id": "edge_node_63_40_node_62_40",
+        "from_node": "node_63_40",
+        "from_xy": [
+          63,
+          40
+        ],
+        "one_way": false,
+        "to_node": "node_62_40",
+        "to_xy": [
+          62,
+          40
+        ]
+      },
+      {
+        "edge_id": "edge_node_62_46_node_63_46",
+        "from_node": "node_62_46",
+        "from_xy": [
+          62,
+          46
+        ],
+        "one_way": false,
+        "to_node": "node_63_46",
+        "to_xy": [
+          63,
+          46
+        ]
+      },
+      {
+        "edge_id": "edge_node_63_46_node_62_46",
+        "from_node": "node_63_46",
+        "from_xy": [
+          63,
+          46
+        ],
+        "one_way": false,
+        "to_node": "node_62_46",
+        "to_xy": [
+          62,
+          46
+        ]
+      },
+      {
+        "edge_id": "edge_node_62_46_node_62_47",
+        "from_node": "node_62_46",
+        "from_xy": [
+          62,
+          46
+        ],
+        "one_way": false,
+        "to_node": "node_62_47",
+        "to_xy": [
+          62,
+          47
+        ]
+      },
+      {
+        "edge_id": "edge_node_62_47_node_62_46",
+        "from_node": "node_62_47",
+        "from_xy": [
+          62,
+          47
+        ],
+        "one_way": false,
+        "to_node": "node_62_46",
+        "to_xy": [
+          62,
+          46
+        ]
+      },
+      {
+        "edge_id": "edge_node_62_47_node_63_47",
+        "from_node": "node_62_47",
+        "from_xy": [
+          62,
+          47
+        ],
+        "one_way": false,
+        "to_node": "node_63_47",
+        "to_xy": [
+          63,
+          47
+        ]
+      },
+      {
+        "edge_id": "edge_node_63_47_node_62_47",
+        "from_node": "node_63_47",
+        "from_xy": [
+          63,
+          47
+        ],
+        "one_way": false,
+        "to_node": "node_62_47",
+        "to_xy": [
+          62,
+          47
+        ]
+      },
+      {
+        "edge_id": "edge_node_62_47_node_62_48",
+        "from_node": "node_62_47",
+        "from_xy": [
+          62,
+          47
+        ],
+        "one_way": false,
+        "to_node": "node_62_48",
+        "to_xy": [
+          62,
+          48
+        ]
+      },
+      {
+        "edge_id": "edge_node_62_48_node_62_47",
+        "from_node": "node_62_48",
+        "from_xy": [
+          62,
+          48
+        ],
+        "one_way": false,
+        "to_node": "node_62_47",
+        "to_xy": [
+          62,
+          47
+        ]
+      },
+      {
+        "edge_id": "edge_node_62_48_node_63_48",
+        "from_node": "node_62_48",
+        "from_xy": [
+          62,
+          48
+        ],
+        "one_way": false,
+        "to_node": "node_63_48",
+        "to_xy": [
+          63,
+          48
+        ]
+      },
+      {
+        "edge_id": "edge_node_63_48_node_62_48",
+        "from_node": "node_63_48",
+        "from_xy": [
+          63,
+          48
+        ],
+        "one_way": false,
+        "to_node": "node_62_48",
+        "to_xy": [
+          62,
+          48
+        ]
+      },
+      {
+        "edge_id": "edge_node_62_48_node_62_49",
+        "from_node": "node_62_48",
+        "from_xy": [
+          62,
+          48
+        ],
+        "one_way": false,
+        "to_node": "node_62_49",
+        "to_xy": [
+          62,
+          49
+        ]
+      },
+      {
+        "edge_id": "edge_node_62_49_node_62_48",
+        "from_node": "node_62_49",
+        "from_xy": [
+          62,
+          49
+        ],
+        "one_way": false,
+        "to_node": "node_62_48",
+        "to_xy": [
+          62,
+          48
+        ]
+      },
+      {
+        "edge_id": "edge_node_62_49_node_63_49",
+        "from_node": "node_62_49",
+        "from_xy": [
+          62,
+          49
+        ],
+        "one_way": false,
+        "to_node": "node_63_49",
+        "to_xy": [
+          63,
+          49
+        ]
+      },
+      {
+        "edge_id": "edge_node_63_49_node_62_49",
+        "from_node": "node_63_49",
+        "from_xy": [
+          63,
+          49
+        ],
+        "one_way": false,
+        "to_node": "node_62_49",
+        "to_xy": [
+          62,
+          49
+        ]
+      },
+      {
+        "edge_id": "edge_node_62_49_node_62_50",
+        "from_node": "node_62_49",
+        "from_xy": [
+          62,
+          49
+        ],
+        "one_way": true,
+        "to_node": "node_62_50",
+        "to_xy": [
+          62,
+          50
+        ]
+      },
+      {
+        "edge_id": "edge_node_62_50_node_63_50",
+        "from_node": "node_62_50",
+        "from_xy": [
+          62,
+          50
+        ],
+        "one_way": true,
+        "to_node": "node_63_50",
+        "to_xy": [
+          63,
+          50
+        ]
+      },
+      {
+        "edge_id": "edge_node_62_50_node_62_51",
+        "from_node": "node_62_50",
+        "from_xy": [
+          62,
+          50
+        ],
+        "one_way": false,
+        "to_node": "node_62_51",
+        "to_xy": [
+          62,
+          51
+        ]
+      },
+      {
+        "edge_id": "edge_node_62_51_node_62_50",
+        "from_node": "node_62_51",
+        "from_xy": [
+          62,
+          51
+        ],
+        "one_way": false,
+        "to_node": "node_62_50",
+        "to_xy": [
+          62,
+          50
+        ]
+      },
+      {
+        "edge_id": "edge_node_62_51_node_63_51",
+        "from_node": "node_62_51",
+        "from_xy": [
+          62,
+          51
+        ],
+        "one_way": false,
+        "to_node": "node_63_51",
+        "to_xy": [
+          63,
+          51
+        ]
+      },
+      {
+        "edge_id": "edge_node_63_51_node_62_51",
+        "from_node": "node_63_51",
+        "from_xy": [
+          63,
+          51
+        ],
+        "one_way": false,
+        "to_node": "node_62_51",
+        "to_xy": [
+          62,
+          51
+        ]
+      },
+      {
+        "edge_id": "edge_node_63_35_node_64_35",
+        "from_node": "node_63_35",
+        "from_xy": [
+          63,
+          35
+        ],
+        "one_way": false,
+        "to_node": "node_64_35",
+        "to_xy": [
+          64,
+          35
+        ]
+      },
+      {
+        "edge_id": "edge_node_64_35_node_63_35",
+        "from_node": "node_64_35",
+        "from_xy": [
+          64,
+          35
+        ],
+        "one_way": false,
+        "to_node": "node_63_35",
+        "to_xy": [
+          63,
+          35
+        ]
+      },
+      {
+        "edge_id": "edge_node_63_36_node_63_35",
+        "from_node": "node_63_36",
+        "from_xy": [
+          63,
+          36
+        ],
+        "one_way": true,
+        "to_node": "node_63_35",
+        "to_xy": [
+          63,
+          35
+        ]
+      },
+      {
+        "edge_id": "edge_node_63_36_node_64_36",
+        "from_node": "node_63_36",
+        "from_xy": [
+          63,
+          36
+        ],
+        "one_way": false,
+        "to_node": "node_64_36",
+        "to_xy": [
+          64,
+          36
+        ]
+      },
+      {
+        "edge_id": "edge_node_64_36_node_63_36",
+        "from_node": "node_64_36",
+        "from_xy": [
+          64,
+          36
+        ],
+        "one_way": false,
+        "to_node": "node_63_36",
+        "to_xy": [
+          63,
+          36
+        ]
+      },
+      {
+        "edge_id": "edge_node_63_37_node_63_36",
+        "from_node": "node_63_37",
+        "from_xy": [
+          63,
+          37
+        ],
+        "one_way": true,
+        "to_node": "node_63_36",
+        "to_xy": [
+          63,
+          36
+        ]
+      },
+      {
+        "edge_id": "edge_node_63_37_node_64_37",
+        "from_node": "node_63_37",
+        "from_xy": [
+          63,
+          37
+        ],
+        "one_way": false,
+        "to_node": "node_64_37",
+        "to_xy": [
+          64,
+          37
+        ]
+      },
+      {
+        "edge_id": "edge_node_64_37_node_63_37",
+        "from_node": "node_64_37",
+        "from_xy": [
+          64,
+          37
+        ],
+        "one_way": false,
+        "to_node": "node_63_37",
+        "to_xy": [
+          63,
+          37
+        ]
+      },
+      {
+        "edge_id": "edge_node_63_37_node_63_38",
+        "from_node": "node_63_37",
+        "from_xy": [
+          63,
+          37
+        ],
+        "one_way": false,
+        "to_node": "node_63_38",
+        "to_xy": [
+          63,
+          38
+        ]
+      },
+      {
+        "edge_id": "edge_node_63_38_node_63_37",
+        "from_node": "node_63_38",
+        "from_xy": [
+          63,
+          38
+        ],
+        "one_way": false,
+        "to_node": "node_63_37",
+        "to_xy": [
+          63,
+          37
+        ]
+      },
+      {
+        "edge_id": "edge_node_63_38_node_64_38",
+        "from_node": "node_63_38",
+        "from_xy": [
+          63,
+          38
+        ],
+        "one_way": false,
+        "to_node": "node_64_38",
+        "to_xy": [
+          64,
+          38
+        ]
+      },
+      {
+        "edge_id": "edge_node_64_38_node_63_38",
+        "from_node": "node_64_38",
+        "from_xy": [
+          64,
+          38
+        ],
+        "one_way": false,
+        "to_node": "node_63_38",
+        "to_xy": [
+          63,
+          38
+        ]
+      },
+      {
+        "edge_id": "edge_node_63_38_node_63_39",
+        "from_node": "node_63_38",
+        "from_xy": [
+          63,
+          38
+        ],
+        "one_way": false,
+        "to_node": "node_63_39",
+        "to_xy": [
+          63,
+          39
+        ]
+      },
+      {
+        "edge_id": "edge_node_63_39_node_63_38",
+        "from_node": "node_63_39",
+        "from_xy": [
+          63,
+          39
+        ],
+        "one_way": false,
+        "to_node": "node_63_38",
+        "to_xy": [
+          63,
+          38
+        ]
+      },
+      {
+        "edge_id": "edge_node_63_39_node_64_39",
+        "from_node": "node_63_39",
+        "from_xy": [
+          63,
+          39
+        ],
+        "one_way": false,
+        "to_node": "node_64_39",
+        "to_xy": [
+          64,
+          39
+        ]
+      },
+      {
+        "edge_id": "edge_node_64_39_node_63_39",
+        "from_node": "node_64_39",
+        "from_xy": [
+          64,
+          39
+        ],
+        "one_way": false,
+        "to_node": "node_63_39",
+        "to_xy": [
+          63,
+          39
+        ]
+      },
+      {
+        "edge_id": "edge_node_63_39_node_63_40",
+        "from_node": "node_63_39",
+        "from_xy": [
+          63,
+          39
+        ],
+        "one_way": false,
+        "to_node": "node_63_40",
+        "to_xy": [
+          63,
+          40
+        ]
+      },
+      {
+        "edge_id": "edge_node_63_40_node_63_39",
+        "from_node": "node_63_40",
+        "from_xy": [
+          63,
+          40
+        ],
+        "one_way": false,
+        "to_node": "node_63_39",
+        "to_xy": [
+          63,
+          39
+        ]
+      },
+      {
+        "edge_id": "edge_node_63_40_node_64_40",
+        "from_node": "node_63_40",
+        "from_xy": [
+          63,
+          40
+        ],
+        "one_way": false,
+        "to_node": "node_64_40",
+        "to_xy": [
+          64,
+          40
+        ]
+      },
+      {
+        "edge_id": "edge_node_64_40_node_63_40",
+        "from_node": "node_64_40",
+        "from_xy": [
+          64,
+          40
+        ],
+        "one_way": false,
+        "to_node": "node_63_40",
+        "to_xy": [
+          63,
+          40
+        ]
+      },
+      {
+        "edge_id": "edge_node_63_46_node_64_46",
+        "from_node": "node_63_46",
+        "from_xy": [
+          63,
+          46
+        ],
+        "one_way": false,
+        "to_node": "node_64_46",
+        "to_xy": [
+          64,
+          46
+        ]
+      },
+      {
+        "edge_id": "edge_node_64_46_node_63_46",
+        "from_node": "node_64_46",
+        "from_xy": [
+          64,
+          46
+        ],
+        "one_way": false,
+        "to_node": "node_63_46",
+        "to_xy": [
+          63,
+          46
+        ]
+      },
+      {
+        "edge_id": "edge_node_63_46_node_63_47",
+        "from_node": "node_63_46",
+        "from_xy": [
+          63,
+          46
+        ],
+        "one_way": true,
+        "to_node": "node_63_47",
+        "to_xy": [
+          63,
+          47
+        ]
+      },
+      {
+        "edge_id": "edge_node_63_47_node_64_47",
+        "from_node": "node_63_47",
+        "from_xy": [
+          63,
+          47
+        ],
+        "one_way": false,
+        "to_node": "node_64_47",
+        "to_xy": [
+          64,
+          47
+        ]
+      },
+      {
+        "edge_id": "edge_node_64_47_node_63_47",
+        "from_node": "node_64_47",
+        "from_xy": [
+          64,
+          47
+        ],
+        "one_way": false,
+        "to_node": "node_63_47",
+        "to_xy": [
+          63,
+          47
+        ]
+      },
+      {
+        "edge_id": "edge_node_63_47_node_63_48",
+        "from_node": "node_63_47",
+        "from_xy": [
+          63,
+          47
+        ],
+        "one_way": false,
+        "to_node": "node_63_48",
+        "to_xy": [
+          63,
+          48
+        ]
+      },
+      {
+        "edge_id": "edge_node_63_48_node_63_47",
+        "from_node": "node_63_48",
+        "from_xy": [
+          63,
+          48
+        ],
+        "one_way": false,
+        "to_node": "node_63_47",
+        "to_xy": [
+          63,
+          47
+        ]
+      },
+      {
+        "edge_id": "edge_node_63_48_node_64_48",
+        "from_node": "node_63_48",
+        "from_xy": [
+          63,
+          48
+        ],
+        "one_way": false,
+        "to_node": "node_64_48",
+        "to_xy": [
+          64,
+          48
+        ]
+      },
+      {
+        "edge_id": "edge_node_64_48_node_63_48",
+        "from_node": "node_64_48",
+        "from_xy": [
+          64,
+          48
+        ],
+        "one_way": false,
+        "to_node": "node_63_48",
+        "to_xy": [
+          63,
+          48
+        ]
+      },
+      {
+        "edge_id": "edge_node_63_48_node_63_49",
+        "from_node": "node_63_48",
+        "from_xy": [
+          63,
+          48
+        ],
+        "one_way": false,
+        "to_node": "node_63_49",
+        "to_xy": [
+          63,
+          49
+        ]
+      },
+      {
+        "edge_id": "edge_node_63_49_node_63_48",
+        "from_node": "node_63_49",
+        "from_xy": [
+          63,
+          49
+        ],
+        "one_way": false,
+        "to_node": "node_63_48",
+        "to_xy": [
+          63,
+          48
+        ]
+      },
+      {
+        "edge_id": "edge_node_63_49_node_64_49",
+        "from_node": "node_63_49",
+        "from_xy": [
+          63,
+          49
+        ],
+        "one_way": true,
+        "to_node": "node_64_49",
+        "to_xy": [
+          64,
+          49
+        ]
+      },
+      {
+        "edge_id": "edge_node_63_49_node_63_50",
+        "from_node": "node_63_49",
+        "from_xy": [
+          63,
+          49
+        ],
+        "one_way": false,
+        "to_node": "node_63_50",
+        "to_xy": [
+          63,
+          50
+        ]
+      },
+      {
+        "edge_id": "edge_node_63_50_node_63_49",
+        "from_node": "node_63_50",
+        "from_xy": [
+          63,
+          50
+        ],
+        "one_way": false,
+        "to_node": "node_63_49",
+        "to_xy": [
+          63,
+          49
+        ]
+      },
+      {
+        "edge_id": "edge_node_63_50_node_64_50",
+        "from_node": "node_63_50",
+        "from_xy": [
+          63,
+          50
+        ],
+        "one_way": false,
+        "to_node": "node_64_50",
+        "to_xy": [
+          64,
+          50
+        ]
+      },
+      {
+        "edge_id": "edge_node_64_50_node_63_50",
+        "from_node": "node_64_50",
+        "from_xy": [
+          64,
+          50
+        ],
+        "one_way": false,
+        "to_node": "node_63_50",
+        "to_xy": [
+          63,
+          50
+        ]
+      },
+      {
+        "edge_id": "edge_node_63_50_node_63_51",
+        "from_node": "node_63_50",
+        "from_xy": [
+          63,
+          50
+        ],
+        "one_way": false,
+        "to_node": "node_63_51",
+        "to_xy": [
+          63,
+          51
+        ]
+      },
+      {
+        "edge_id": "edge_node_63_51_node_63_50",
+        "from_node": "node_63_51",
+        "from_xy": [
+          63,
+          51
+        ],
+        "one_way": false,
+        "to_node": "node_63_50",
+        "to_xy": [
+          63,
+          50
+        ]
+      },
+      {
+        "edge_id": "edge_node_63_51_node_64_51",
+        "from_node": "node_63_51",
+        "from_xy": [
+          63,
+          51
+        ],
+        "one_way": false,
+        "to_node": "node_64_51",
+        "to_xy": [
+          64,
+          51
+        ]
+      },
+      {
+        "edge_id": "edge_node_64_51_node_63_51",
+        "from_node": "node_64_51",
+        "from_xy": [
+          64,
+          51
+        ],
+        "one_way": false,
+        "to_node": "node_63_51",
+        "to_xy": [
+          63,
+          51
+        ]
+      },
+      {
+        "edge_id": "edge_node_64_35_node_65_35",
+        "from_node": "node_64_35",
+        "from_xy": [
+          64,
+          35
+        ],
+        "one_way": false,
+        "to_node": "node_65_35",
+        "to_xy": [
+          65,
+          35
+        ]
+      },
+      {
+        "edge_id": "edge_node_65_35_node_64_35",
+        "from_node": "node_65_35",
+        "from_xy": [
+          65,
+          35
+        ],
+        "one_way": false,
+        "to_node": "node_64_35",
+        "to_xy": [
+          64,
+          35
+        ]
+      },
+      {
+        "edge_id": "edge_node_64_35_node_64_36",
+        "from_node": "node_64_35",
+        "from_xy": [
+          64,
+          35
+        ],
+        "one_way": false,
+        "to_node": "node_64_36",
+        "to_xy": [
+          64,
+          36
+        ]
+      },
+      {
+        "edge_id": "edge_node_64_36_node_64_35",
+        "from_node": "node_64_36",
+        "from_xy": [
+          64,
+          36
+        ],
+        "one_way": false,
+        "to_node": "node_64_35",
+        "to_xy": [
+          64,
+          35
+        ]
+      },
+      {
+        "edge_id": "edge_node_64_36_node_65_36",
+        "from_node": "node_64_36",
+        "from_xy": [
+          64,
+          36
+        ],
+        "one_way": false,
+        "to_node": "node_65_36",
+        "to_xy": [
+          65,
+          36
+        ]
+      },
+      {
+        "edge_id": "edge_node_65_36_node_64_36",
+        "from_node": "node_65_36",
+        "from_xy": [
+          65,
+          36
+        ],
+        "one_way": false,
+        "to_node": "node_64_36",
+        "to_xy": [
+          64,
+          36
+        ]
+      },
+      {
+        "edge_id": "edge_node_64_36_node_64_37",
+        "from_node": "node_64_36",
+        "from_xy": [
+          64,
+          36
+        ],
+        "one_way": false,
+        "to_node": "node_64_37",
+        "to_xy": [
+          64,
+          37
+        ]
+      },
+      {
+        "edge_id": "edge_node_64_37_node_64_36",
+        "from_node": "node_64_37",
+        "from_xy": [
+          64,
+          37
+        ],
+        "one_way": false,
+        "to_node": "node_64_36",
+        "to_xy": [
+          64,
+          36
+        ]
+      },
+      {
+        "edge_id": "edge_node_64_37_node_65_37",
+        "from_node": "node_64_37",
+        "from_xy": [
+          64,
+          37
+        ],
+        "one_way": false,
+        "to_node": "node_65_37",
+        "to_xy": [
+          65,
+          37
+        ]
+      },
+      {
+        "edge_id": "edge_node_65_37_node_64_37",
+        "from_node": "node_65_37",
+        "from_xy": [
+          65,
+          37
+        ],
+        "one_way": false,
+        "to_node": "node_64_37",
+        "to_xy": [
+          64,
+          37
+        ]
+      },
+      {
+        "edge_id": "edge_node_64_37_node_64_38",
+        "from_node": "node_64_37",
+        "from_xy": [
+          64,
+          37
+        ],
+        "one_way": true,
+        "to_node": "node_64_38",
+        "to_xy": [
+          64,
+          38
+        ]
+      },
+      {
+        "edge_id": "edge_node_65_38_node_64_38",
+        "from_node": "node_65_38",
+        "from_xy": [
+          65,
+          38
+        ],
+        "one_way": true,
+        "to_node": "node_64_38",
+        "to_xy": [
+          64,
+          38
+        ]
+      },
+      {
+        "edge_id": "edge_node_64_38_node_64_39",
+        "from_node": "node_64_38",
+        "from_xy": [
+          64,
+          38
+        ],
+        "one_way": false,
+        "to_node": "node_64_39",
+        "to_xy": [
+          64,
+          39
+        ]
+      },
+      {
+        "edge_id": "edge_node_64_39_node_64_38",
+        "from_node": "node_64_39",
+        "from_xy": [
+          64,
+          39
+        ],
+        "one_way": false,
+        "to_node": "node_64_38",
+        "to_xy": [
+          64,
+          38
+        ]
+      },
+      {
+        "edge_id": "edge_node_64_39_node_65_39",
+        "from_node": "node_64_39",
+        "from_xy": [
+          64,
+          39
+        ],
+        "one_way": false,
+        "to_node": "node_65_39",
+        "to_xy": [
+          65,
+          39
+        ]
+      },
+      {
+        "edge_id": "edge_node_65_39_node_64_39",
+        "from_node": "node_65_39",
+        "from_xy": [
+          65,
+          39
+        ],
+        "one_way": false,
+        "to_node": "node_64_39",
+        "to_xy": [
+          64,
+          39
+        ]
+      },
+      {
+        "edge_id": "edge_node_64_39_node_64_40",
+        "from_node": "node_64_39",
+        "from_xy": [
+          64,
+          39
+        ],
+        "one_way": false,
+        "to_node": "node_64_40",
+        "to_xy": [
+          64,
+          40
+        ]
+      },
+      {
+        "edge_id": "edge_node_64_40_node_64_39",
+        "from_node": "node_64_40",
+        "from_xy": [
+          64,
+          40
+        ],
+        "one_way": false,
+        "to_node": "node_64_39",
+        "to_xy": [
+          64,
+          39
+        ]
+      },
+      {
+        "edge_id": "edge_node_64_40_node_65_40",
+        "from_node": "node_64_40",
+        "from_xy": [
+          64,
+          40
+        ],
+        "one_way": false,
+        "to_node": "node_65_40",
+        "to_xy": [
+          65,
+          40
+        ]
+      },
+      {
+        "edge_id": "edge_node_65_40_node_64_40",
+        "from_node": "node_65_40",
+        "from_xy": [
+          65,
+          40
+        ],
+        "one_way": false,
+        "to_node": "node_64_40",
+        "to_xy": [
+          64,
+          40
+        ]
+      },
+      {
+        "edge_id": "edge_node_64_46_node_65_46",
+        "from_node": "node_64_46",
+        "from_xy": [
+          64,
+          46
+        ],
+        "one_way": false,
+        "to_node": "node_65_46",
+        "to_xy": [
+          65,
+          46
+        ]
+      },
+      {
+        "edge_id": "edge_node_65_46_node_64_46",
+        "from_node": "node_65_46",
+        "from_xy": [
+          65,
+          46
+        ],
+        "one_way": false,
+        "to_node": "node_64_46",
+        "to_xy": [
+          64,
+          46
+        ]
+      },
+      {
+        "edge_id": "edge_node_64_46_node_64_47",
+        "from_node": "node_64_46",
+        "from_xy": [
+          64,
+          46
+        ],
+        "one_way": false,
+        "to_node": "node_64_47",
+        "to_xy": [
+          64,
+          47
+        ]
+      },
+      {
+        "edge_id": "edge_node_64_47_node_64_46",
+        "from_node": "node_64_47",
+        "from_xy": [
+          64,
+          47
+        ],
+        "one_way": false,
+        "to_node": "node_64_46",
+        "to_xy": [
+          64,
+          46
+        ]
+      },
+      {
+        "edge_id": "edge_node_64_47_node_65_47",
+        "from_node": "node_64_47",
+        "from_xy": [
+          64,
+          47
+        ],
+        "one_way": false,
+        "to_node": "node_65_47",
+        "to_xy": [
+          65,
+          47
+        ]
+      },
+      {
+        "edge_id": "edge_node_65_47_node_64_47",
+        "from_node": "node_65_47",
+        "from_xy": [
+          65,
+          47
+        ],
+        "one_way": false,
+        "to_node": "node_64_47",
+        "to_xy": [
+          64,
+          47
+        ]
+      },
+      {
+        "edge_id": "edge_node_64_47_node_64_48",
+        "from_node": "node_64_47",
+        "from_xy": [
+          64,
+          47
+        ],
+        "one_way": false,
+        "to_node": "node_64_48",
+        "to_xy": [
+          64,
+          48
+        ]
+      },
+      {
+        "edge_id": "edge_node_64_48_node_64_47",
+        "from_node": "node_64_48",
+        "from_xy": [
+          64,
+          48
+        ],
+        "one_way": false,
+        "to_node": "node_64_47",
+        "to_xy": [
+          64,
+          47
+        ]
+      },
+      {
+        "edge_id": "edge_node_64_48_node_65_48",
+        "from_node": "node_64_48",
+        "from_xy": [
+          64,
+          48
+        ],
+        "one_way": false,
+        "to_node": "node_65_48",
+        "to_xy": [
+          65,
+          48
+        ]
+      },
+      {
+        "edge_id": "edge_node_65_48_node_64_48",
+        "from_node": "node_65_48",
+        "from_xy": [
+          65,
+          48
+        ],
+        "one_way": false,
+        "to_node": "node_64_48",
+        "to_xy": [
+          64,
+          48
+        ]
+      },
+      {
+        "edge_id": "edge_node_64_48_node_64_49",
+        "from_node": "node_64_48",
+        "from_xy": [
+          64,
+          48
+        ],
+        "one_way": true,
+        "to_node": "node_64_49",
+        "to_xy": [
+          64,
+          49
+        ]
+      },
+      {
+        "edge_id": "edge_node_64_49_node_65_49",
+        "from_node": "node_64_49",
+        "from_xy": [
+          64,
+          49
+        ],
+        "one_way": false,
+        "to_node": "node_65_49",
+        "to_xy": [
+          65,
+          49
+        ]
+      },
+      {
+        "edge_id": "edge_node_65_49_node_64_49",
+        "from_node": "node_65_49",
+        "from_xy": [
+          65,
+          49
+        ],
+        "one_way": false,
+        "to_node": "node_64_49",
+        "to_xy": [
+          64,
+          49
+        ]
+      },
+      {
+        "edge_id": "edge_node_64_49_node_64_50",
+        "from_node": "node_64_49",
+        "from_xy": [
+          64,
+          49
+        ],
+        "one_way": false,
+        "to_node": "node_64_50",
+        "to_xy": [
+          64,
+          50
+        ]
+      },
+      {
+        "edge_id": "edge_node_64_50_node_64_49",
+        "from_node": "node_64_50",
+        "from_xy": [
+          64,
+          50
+        ],
+        "one_way": false,
+        "to_node": "node_64_49",
+        "to_xy": [
+          64,
+          49
+        ]
+      },
+      {
+        "edge_id": "edge_node_64_50_node_65_50",
+        "from_node": "node_64_50",
+        "from_xy": [
+          64,
+          50
+        ],
+        "one_way": false,
+        "to_node": "node_65_50",
+        "to_xy": [
+          65,
+          50
+        ]
+      },
+      {
+        "edge_id": "edge_node_65_50_node_64_50",
+        "from_node": "node_65_50",
+        "from_xy": [
+          65,
+          50
+        ],
+        "one_way": false,
+        "to_node": "node_64_50",
+        "to_xy": [
+          64,
+          50
+        ]
+      },
+      {
+        "edge_id": "edge_node_64_50_node_64_51",
+        "from_node": "node_64_50",
+        "from_xy": [
+          64,
+          50
+        ],
+        "one_way": false,
+        "to_node": "node_64_51",
+        "to_xy": [
+          64,
+          51
+        ]
+      },
+      {
+        "edge_id": "edge_node_64_51_node_64_50",
+        "from_node": "node_64_51",
+        "from_xy": [
+          64,
+          51
+        ],
+        "one_way": false,
+        "to_node": "node_64_50",
+        "to_xy": [
+          64,
+          50
+        ]
+      },
+      {
+        "edge_id": "edge_node_65_51_node_64_51",
+        "from_node": "node_65_51",
+        "from_xy": [
+          65,
+          51
+        ],
+        "one_way": true,
+        "to_node": "node_64_51",
+        "to_xy": [
+          64,
+          51
+        ]
+      },
+      {
+        "edge_id": "edge_node_65_35_node_66_35",
+        "from_node": "node_65_35",
+        "from_xy": [
+          65,
+          35
+        ],
+        "one_way": false,
+        "to_node": "node_66_35",
+        "to_xy": [
+          66,
+          35
+        ]
+      },
+      {
+        "edge_id": "edge_node_66_35_node_65_35",
+        "from_node": "node_66_35",
+        "from_xy": [
+          66,
+          35
+        ],
+        "one_way": false,
+        "to_node": "node_65_35",
+        "to_xy": [
+          65,
+          35
+        ]
+      },
+      {
+        "edge_id": "edge_node_65_35_node_65_36",
+        "from_node": "node_65_35",
+        "from_xy": [
+          65,
+          35
+        ],
+        "one_way": false,
+        "to_node": "node_65_36",
+        "to_xy": [
+          65,
+          36
+        ]
+      },
+      {
+        "edge_id": "edge_node_65_36_node_65_35",
+        "from_node": "node_65_36",
+        "from_xy": [
+          65,
+          36
+        ],
+        "one_way": false,
+        "to_node": "node_65_35",
+        "to_xy": [
+          65,
+          35
+        ]
+      },
+      {
+        "edge_id": "edge_node_65_36_node_66_36",
+        "from_node": "node_65_36",
+        "from_xy": [
+          65,
+          36
+        ],
+        "one_way": false,
+        "to_node": "node_66_36",
+        "to_xy": [
+          66,
+          36
+        ]
+      },
+      {
+        "edge_id": "edge_node_66_36_node_65_36",
+        "from_node": "node_66_36",
+        "from_xy": [
+          66,
+          36
+        ],
+        "one_way": false,
+        "to_node": "node_65_36",
+        "to_xy": [
+          65,
+          36
+        ]
+      },
+      {
+        "edge_id": "edge_node_65_36_node_65_37",
+        "from_node": "node_65_36",
+        "from_xy": [
+          65,
+          36
+        ],
+        "one_way": false,
+        "to_node": "node_65_37",
+        "to_xy": [
+          65,
+          37
+        ]
+      },
+      {
+        "edge_id": "edge_node_65_37_node_65_36",
+        "from_node": "node_65_37",
+        "from_xy": [
+          65,
+          37
+        ],
+        "one_way": false,
+        "to_node": "node_65_36",
+        "to_xy": [
+          65,
+          36
+        ]
+      },
+      {
+        "edge_id": "edge_node_65_37_node_66_37",
+        "from_node": "node_65_37",
+        "from_xy": [
+          65,
+          37
+        ],
+        "one_way": true,
+        "to_node": "node_66_37",
+        "to_xy": [
+          66,
+          37
+        ]
+      },
+      {
+        "edge_id": "edge_node_65_37_node_65_38",
+        "from_node": "node_65_37",
+        "from_xy": [
+          65,
+          37
+        ],
+        "one_way": false,
+        "to_node": "node_65_38",
+        "to_xy": [
+          65,
+          38
+        ]
+      },
+      {
+        "edge_id": "edge_node_65_38_node_65_37",
+        "from_node": "node_65_38",
+        "from_xy": [
+          65,
+          38
+        ],
+        "one_way": false,
+        "to_node": "node_65_37",
+        "to_xy": [
+          65,
+          37
+        ]
+      },
+      {
+        "edge_id": "edge_node_65_38_node_66_38",
+        "from_node": "node_65_38",
+        "from_xy": [
+          65,
+          38
+        ],
+        "one_way": true,
+        "to_node": "node_66_38",
+        "to_xy": [
+          66,
+          38
+        ]
+      },
+      {
+        "edge_id": "edge_node_65_38_node_65_39",
+        "from_node": "node_65_38",
+        "from_xy": [
+          65,
+          38
+        ],
+        "one_way": false,
+        "to_node": "node_65_39",
+        "to_xy": [
+          65,
+          39
+        ]
+      },
+      {
+        "edge_id": "edge_node_65_39_node_65_38",
+        "from_node": "node_65_39",
+        "from_xy": [
+          65,
+          39
+        ],
+        "one_way": false,
+        "to_node": "node_65_38",
+        "to_xy": [
+          65,
+          38
+        ]
+      },
+      {
+        "edge_id": "edge_node_65_39_node_66_39",
+        "from_node": "node_65_39",
+        "from_xy": [
+          65,
+          39
+        ],
+        "one_way": false,
+        "to_node": "node_66_39",
+        "to_xy": [
+          66,
+          39
+        ]
+      },
+      {
+        "edge_id": "edge_node_66_39_node_65_39",
+        "from_node": "node_66_39",
+        "from_xy": [
+          66,
+          39
+        ],
+        "one_way": false,
+        "to_node": "node_65_39",
+        "to_xy": [
+          65,
+          39
+        ]
+      },
+      {
+        "edge_id": "edge_node_65_39_node_65_40",
+        "from_node": "node_65_39",
+        "from_xy": [
+          65,
+          39
+        ],
+        "one_way": false,
+        "to_node": "node_65_40",
+        "to_xy": [
+          65,
+          40
+        ]
+      },
+      {
+        "edge_id": "edge_node_65_40_node_65_39",
+        "from_node": "node_65_40",
+        "from_xy": [
+          65,
+          40
+        ],
+        "one_way": false,
+        "to_node": "node_65_39",
+        "to_xy": [
+          65,
+          39
+        ]
+      },
+      {
+        "edge_id": "edge_node_65_40_node_66_40",
+        "from_node": "node_65_40",
+        "from_xy": [
+          65,
+          40
+        ],
+        "one_way": false,
+        "to_node": "node_66_40",
+        "to_xy": [
+          66,
+          40
+        ]
+      },
+      {
+        "edge_id": "edge_node_66_40_node_65_40",
+        "from_node": "node_66_40",
+        "from_xy": [
+          66,
+          40
+        ],
+        "one_way": false,
+        "to_node": "node_65_40",
+        "to_xy": [
+          65,
+          40
+        ]
+      },
+      {
+        "edge_id": "edge_node_65_46_node_66_46",
+        "from_node": "node_65_46",
+        "from_xy": [
+          65,
+          46
+        ],
+        "one_way": false,
+        "to_node": "node_66_46",
+        "to_xy": [
+          66,
+          46
+        ]
+      },
+      {
+        "edge_id": "edge_node_66_46_node_65_46",
+        "from_node": "node_66_46",
+        "from_xy": [
+          66,
+          46
+        ],
+        "one_way": false,
+        "to_node": "node_65_46",
+        "to_xy": [
+          65,
+          46
+        ]
+      },
+      {
+        "edge_id": "edge_node_65_46_node_65_47",
+        "from_node": "node_65_46",
+        "from_xy": [
+          65,
+          46
+        ],
+        "one_way": false,
+        "to_node": "node_65_47",
+        "to_xy": [
+          65,
+          47
+        ]
+      },
+      {
+        "edge_id": "edge_node_65_47_node_65_46",
+        "from_node": "node_65_47",
+        "from_xy": [
+          65,
+          47
+        ],
+        "one_way": false,
+        "to_node": "node_65_46",
+        "to_xy": [
+          65,
+          46
+        ]
+      },
+      {
+        "edge_id": "edge_node_66_47_node_65_47",
+        "from_node": "node_66_47",
+        "from_xy": [
+          66,
+          47
+        ],
+        "one_way": true,
+        "to_node": "node_65_47",
+        "to_xy": [
+          65,
+          47
+        ]
+      },
+      {
+        "edge_id": "edge_node_65_48_node_65_47",
+        "from_node": "node_65_48",
+        "from_xy": [
+          65,
+          48
+        ],
+        "one_way": true,
+        "to_node": "node_65_47",
+        "to_xy": [
+          65,
+          47
+        ]
+      },
+      {
+        "edge_id": "edge_node_65_48_node_66_48",
+        "from_node": "node_65_48",
+        "from_xy": [
+          65,
+          48
+        ],
+        "one_way": false,
+        "to_node": "node_66_48",
+        "to_xy": [
+          66,
+          48
+        ]
+      },
+      {
+        "edge_id": "edge_node_66_48_node_65_48",
+        "from_node": "node_66_48",
+        "from_xy": [
+          66,
+          48
+        ],
+        "one_way": false,
+        "to_node": "node_65_48",
+        "to_xy": [
+          65,
+          48
+        ]
+      },
+      {
+        "edge_id": "edge_node_65_48_node_65_49",
+        "from_node": "node_65_48",
+        "from_xy": [
+          65,
+          48
+        ],
+        "one_way": false,
+        "to_node": "node_65_49",
+        "to_xy": [
+          65,
+          49
+        ]
+      },
+      {
+        "edge_id": "edge_node_65_49_node_65_48",
+        "from_node": "node_65_49",
+        "from_xy": [
+          65,
+          49
+        ],
+        "one_way": false,
+        "to_node": "node_65_48",
+        "to_xy": [
+          65,
+          48
+        ]
+      },
+      {
+        "edge_id": "edge_node_65_49_node_66_49",
+        "from_node": "node_65_49",
+        "from_xy": [
+          65,
+          49
+        ],
+        "one_way": false,
+        "to_node": "node_66_49",
+        "to_xy": [
+          66,
+          49
+        ]
+      },
+      {
+        "edge_id": "edge_node_66_49_node_65_49",
+        "from_node": "node_66_49",
+        "from_xy": [
+          66,
+          49
+        ],
+        "one_way": false,
+        "to_node": "node_65_49",
+        "to_xy": [
+          65,
+          49
+        ]
+      },
+      {
+        "edge_id": "edge_node_65_49_node_65_50",
+        "from_node": "node_65_49",
+        "from_xy": [
+          65,
+          49
+        ],
+        "one_way": false,
+        "to_node": "node_65_50",
+        "to_xy": [
+          65,
+          50
+        ]
+      },
+      {
+        "edge_id": "edge_node_65_50_node_65_49",
+        "from_node": "node_65_50",
+        "from_xy": [
+          65,
+          50
+        ],
+        "one_way": false,
+        "to_node": "node_65_49",
+        "to_xy": [
+          65,
+          49
+        ]
+      },
+      {
+        "edge_id": "edge_node_65_50_node_66_50",
+        "from_node": "node_65_50",
+        "from_xy": [
+          65,
+          50
+        ],
+        "one_way": false,
+        "to_node": "node_66_50",
+        "to_xy": [
+          66,
+          50
+        ]
+      },
+      {
+        "edge_id": "edge_node_66_50_node_65_50",
+        "from_node": "node_66_50",
+        "from_xy": [
+          66,
+          50
+        ],
+        "one_way": false,
+        "to_node": "node_65_50",
+        "to_xy": [
+          65,
+          50
+        ]
+      },
+      {
+        "edge_id": "edge_node_65_50_node_65_51",
+        "from_node": "node_65_50",
+        "from_xy": [
+          65,
+          50
+        ],
+        "one_way": false,
+        "to_node": "node_65_51",
+        "to_xy": [
+          65,
+          51
+        ]
+      },
+      {
+        "edge_id": "edge_node_65_51_node_65_50",
+        "from_node": "node_65_51",
+        "from_xy": [
+          65,
+          51
+        ],
+        "one_way": false,
+        "to_node": "node_65_50",
+        "to_xy": [
+          65,
+          50
+        ]
+      },
+      {
+        "edge_id": "edge_node_65_51_node_66_51",
+        "from_node": "node_65_51",
+        "from_xy": [
+          65,
+          51
+        ],
+        "one_way": true,
+        "to_node": "node_66_51",
+        "to_xy": [
+          66,
+          51
+        ]
+      },
+      {
+        "edge_id": "edge_node_66_35_node_66_36",
+        "from_node": "node_66_35",
+        "from_xy": [
+          66,
+          35
+        ],
+        "one_way": false,
+        "to_node": "node_66_36",
+        "to_xy": [
+          66,
+          36
+        ]
+      },
+      {
+        "edge_id": "edge_node_66_36_node_66_35",
+        "from_node": "node_66_36",
+        "from_xy": [
+          66,
+          36
+        ],
+        "one_way": false,
+        "to_node": "node_66_35",
+        "to_xy": [
+          66,
+          35
+        ]
+      },
+      {
+        "edge_id": "edge_node_66_36_node_66_37",
+        "from_node": "node_66_36",
+        "from_xy": [
+          66,
+          36
+        ],
+        "one_way": false,
+        "to_node": "node_66_37",
+        "to_xy": [
+          66,
+          37
+        ]
+      },
+      {
+        "edge_id": "edge_node_66_37_node_66_36",
+        "from_node": "node_66_37",
+        "from_xy": [
+          66,
+          37
+        ],
+        "one_way": false,
+        "to_node": "node_66_36",
+        "to_xy": [
+          66,
+          36
+        ]
+      },
+      {
+        "edge_id": "edge_node_66_37_node_66_38",
+        "from_node": "node_66_37",
+        "from_xy": [
+          66,
+          37
+        ],
+        "one_way": false,
+        "to_node": "node_66_38",
+        "to_xy": [
+          66,
+          38
+        ]
+      },
+      {
+        "edge_id": "edge_node_66_38_node_66_37",
+        "from_node": "node_66_38",
+        "from_xy": [
+          66,
+          38
+        ],
+        "one_way": false,
+        "to_node": "node_66_37",
+        "to_xy": [
+          66,
+          37
+        ]
+      },
+      {
+        "edge_id": "edge_node_66_38_node_66_39",
+        "from_node": "node_66_38",
+        "from_xy": [
+          66,
+          38
+        ],
+        "one_way": false,
+        "to_node": "node_66_39",
+        "to_xy": [
+          66,
+          39
+        ]
+      },
+      {
+        "edge_id": "edge_node_66_39_node_66_38",
+        "from_node": "node_66_39",
+        "from_xy": [
+          66,
+          39
+        ],
+        "one_way": false,
+        "to_node": "node_66_38",
+        "to_xy": [
+          66,
+          38
+        ]
+      },
+      {
+        "edge_id": "edge_node_66_39_node_66_40",
+        "from_node": "node_66_39",
+        "from_xy": [
+          66,
+          39
+        ],
+        "one_way": false,
+        "to_node": "node_66_40",
+        "to_xy": [
+          66,
+          40
+        ]
+      },
+      {
+        "edge_id": "edge_node_66_40_node_66_39",
+        "from_node": "node_66_40",
+        "from_xy": [
+          66,
+          40
+        ],
+        "one_way": false,
+        "to_node": "node_66_39",
+        "to_xy": [
+          66,
+          39
+        ]
+      },
+      {
+        "edge_id": "edge_node_66_46_node_66_47",
+        "from_node": "node_66_46",
+        "from_xy": [
+          66,
+          46
+        ],
+        "one_way": false,
+        "to_node": "node_66_47",
+        "to_xy": [
+          66,
+          47
+        ]
+      },
+      {
+        "edge_id": "edge_node_66_47_node_66_46",
+        "from_node": "node_66_47",
+        "from_xy": [
+          66,
+          47
+        ],
+        "one_way": false,
+        "to_node": "node_66_46",
+        "to_xy": [
+          66,
+          46
+        ]
+      },
+      {
+        "edge_id": "edge_node_66_47_node_66_48",
+        "from_node": "node_66_47",
+        "from_xy": [
+          66,
+          47
+        ],
+        "one_way": false,
+        "to_node": "node_66_48",
+        "to_xy": [
+          66,
+          48
+        ]
+      },
+      {
+        "edge_id": "edge_node_66_48_node_66_47",
+        "from_node": "node_66_48",
+        "from_xy": [
+          66,
+          48
+        ],
+        "one_way": false,
+        "to_node": "node_66_47",
+        "to_xy": [
+          66,
+          47
+        ]
+      },
+      {
+        "edge_id": "edge_node_66_48_node_66_49",
+        "from_node": "node_66_48",
+        "from_xy": [
+          66,
+          48
+        ],
+        "one_way": true,
+        "to_node": "node_66_49",
+        "to_xy": [
+          66,
+          49
+        ]
+      },
+      {
+        "edge_id": "edge_node_66_49_node_66_50",
+        "from_node": "node_66_49",
+        "from_xy": [
+          66,
+          49
+        ],
+        "one_way": false,
+        "to_node": "node_66_50",
+        "to_xy": [
+          66,
+          50
+        ]
+      },
+      {
+        "edge_id": "edge_node_66_50_node_66_49",
+        "from_node": "node_66_50",
+        "from_xy": [
+          66,
+          50
+        ],
+        "one_way": false,
+        "to_node": "node_66_49",
+        "to_xy": [
+          66,
+          49
+        ]
+      },
+      {
+        "edge_id": "edge_node_66_50_node_66_51",
+        "from_node": "node_66_50",
+        "from_xy": [
+          66,
+          50
+        ],
+        "one_way": false,
+        "to_node": "node_66_51",
+        "to_xy": [
+          66,
+          51
+        ]
+      },
+      {
+        "edge_id": "edge_node_66_51_node_66_50",
+        "from_node": "node_66_51",
+        "from_xy": [
+          66,
+          51
+        ],
+        "one_way": false,
+        "to_node": "node_66_50",
+        "to_xy": [
+          66,
+          50
+        ]
+      }
+    ],
+    "route_edges": [],
+    "route_node_ids": [],
+    "validated_prefix_node_ids": [
+      "node_12_61",
+      "node_13_61",
+      "node_14_61",
+      "node_15_61",
+      "node_16_61",
+      "node_17_61",
+      "node_18_61",
+      "node_19_61",
+      "node_20_61",
+      "node_21_61",
+      "node_22_61",
+      "node_23_61"
+    ]
+  },
+  "llm_response_received": true,
+  "map_id": "grid-100x100-seed-6",
+  "method_name": "pure_llm_deepseek",
+  "proposal_energy_audit": {
+    "energy_model_version": "energy_v1",
+    "estimated_route_distance_m": 8300.0,
+    "exact_edge_moves": 78,
+    "fallback_congestion_level": 0.0,
+    "fallback_length_m": 100.0,
+    "fallback_signal_delay_sec": 0.0,
+    "interpretation": "not actual measured consumption; hypothetical estimate for the model-proposed path. Valid-prefix estimate stops before the first illegal move.",
+    "proposed_move_count": 83,
+    "proxy_edge_moves": 0,
+    "recovered_move_sequence": false,
+    "reverse_edge_inferred_moves": 5,
+    "route_energy_estimate_kwh": 1.5373500000000002,
+    "status": "estimated",
+    "validated_prefix_energy_estimate_kwh": 0.20529999999999995,
+    "validated_prefix_move_count": 11
+  },
+  "scenario_id": null,
+  "scenario_type": null,
+  "schema_version": "route_trace_visual_record_v1",
+  "status": "failed",
+  "task_id": "task-0006-0001",
+  "task_type": "exact_node",
+  "trace": {
+    "algorithm": "llm",
+    "attempted_move_sequence": "EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEESSSSSSSSSSSSSSSSSSSSSSSSWWWWWWW",
+    "attempted_route_edge_sequence": [
+      "edge_node_12_61_node_13_61",
+      "edge_node_13_61_node_14_61",
+      "edge_node_14_61_node_15_61",
+      "edge_node_15_61_node_16_61",
+      "edge_node_16_61_node_17_61",
+      "edge_node_17_61_node_18_61",
+      "edge_node_18_61_node_19_61",
+      "edge_node_19_61_node_20_61",
+      "edge_node_20_61_node_21_61",
+      "edge_node_21_61_node_22_61",
+      "edge_node_22_61_node_23_61",
+      "edge_node_23_61_node_24_61",
+      "edge_node_24_61_node_25_61",
+      "edge_node_25_61_node_26_61",
+      "edge_node_26_61_node_27_61",
+      "edge_node_27_61_node_28_61",
+      "edge_node_28_61_node_29_61",
+      "edge_node_29_61_node_30_61",
+      "edge_node_30_61_node_31_61",
+      "edge_node_31_61_node_32_61",
+      "edge_node_32_61_node_33_61",
+      "edge_node_33_61_node_34_61",
+      "edge_node_34_61_node_35_61",
+      "edge_node_35_61_node_36_61",
+      "edge_node_36_61_node_37_61",
+      "edge_node_37_61_node_38_61",
+      "edge_node_38_61_node_39_61",
+      "edge_node_39_61_node_40_61",
+      "edge_node_40_61_node_41_61",
+      "edge_node_41_61_node_42_61",
+      "edge_node_42_61_node_43_61",
+      "edge_node_43_61_node_44_61",
+      "edge_node_44_61_node_45_61",
+      "edge_node_45_61_node_46_61",
+      "edge_node_46_61_node_47_61",
+      "edge_node_47_61_node_48_61",
+      "edge_node_48_61_node_49_61",
+      "edge_node_49_61_node_50_61",
+      "edge_node_50_61_node_51_61",
+      "edge_node_51_61_node_52_61",
+      "edge_node_52_61_node_53_61",
+      "edge_node_53_61_node_54_61",
+      "edge_node_54_61_node_55_61",
+      "edge_node_55_61_node_56_61",
+      "edge_node_56_61_node_57_61",
+      "edge_node_57_61_node_58_61",
+      "edge_node_58_61_node_59_61",
+      "edge_node_59_61_node_60_61",
+      "edge_node_60_61_node_61_61",
+      "edge_node_61_61_node_62_61",
+      "edge_node_62_61_node_63_61",
+      "edge_node_63_61_node_64_61",
+      "edge_node_64_61_node_64_60",
+      "edge_node_64_60_node_64_59",
+      "edge_node_64_59_node_64_58",
+      "edge_node_64_58_node_64_57",
+      "edge_node_64_57_node_64_56",
+      "edge_node_64_56_node_64_55",
+      "edge_node_64_55_node_64_54",
+      "edge_node_64_54_node_64_53",
+      "edge_node_64_53_node_64_52",
+      "edge_node_64_52_node_64_51",
+      "edge_node_64_51_node_64_50",
+      "edge_node_64_50_node_64_49",
+      "edge_node_64_49_node_64_48",
+      "edge_node_64_48_node_64_47",
+      "edge_node_64_47_node_64_46",
+      "edge_node_64_46_node_64_45",
+      "edge_node_64_45_node_64_44",
+      "edge_node_64_44_node_64_43",
+      "edge_node_64_43_node_64_42",
+      "edge_node_64_42_node_64_41",
+      "edge_node_64_41_node_64_40",
+      "edge_node_64_40_node_64_39",
+      "edge_node_64_39_node_64_38",
+      "edge_node_64_38_node_64_37",
+      "edge_node_64_37_node_63_37",
+      "edge_node_63_37_node_62_37",
+      "edge_node_62_37_node_61_37",
+      "edge_node_61_37_node_60_37",
+      "edge_node_60_37_node_59_37",
+      "edge_node_59_37_node_58_37",
+      "edge_node_58_37_node_57_37"
+    ],
+    "attempted_route_node_sequence": [
+      "node_12_61",
+      "node_13_61",
+      "node_14_61",
+      "node_15_61",
+      "node_16_61",
+      "node_17_61",
+      "node_18_61",
+      "node_19_61",
+      "node_20_61",
+      "node_21_61",
+      "node_22_61",
+      "node_23_61",
+      "node_24_61",
+      "node_25_61",
+      "node_26_61",
+      "node_27_61",
+      "node_28_61",
+      "node_29_61",
+      "node_30_61",
+      "node_31_61",
+      "node_32_61",
+      "node_33_61",
+      "node_34_61",
+      "node_35_61",
+      "node_36_61",
+      "node_37_61",
+      "node_38_61",
+      "node_39_61",
+      "node_40_61",
+      "node_41_61",
+      "node_42_61",
+      "node_43_61",
+      "node_44_61",
+      "node_45_61",
+      "node_46_61",
+      "node_47_61",
+      "node_48_61",
+      "node_49_61",
+      "node_50_61",
+      "node_51_61",
+      "node_52_61",
+      "node_53_61",
+      "node_54_61",
+      "node_55_61",
+      "node_56_61",
+      "node_57_61",
+      "node_58_61",
+      "node_59_61",
+      "node_60_61",
+      "node_61_61",
+      "node_62_61",
+      "node_63_61",
+      "node_64_61",
+      "node_64_60",
+      "node_64_59",
+      "node_64_58",
+      "node_64_57",
+      "node_64_56",
+      "node_64_55",
+      "node_64_54",
+      "node_64_53",
+      "node_64_52",
+      "node_64_51",
+      "node_64_50",
+      "node_64_49",
+      "node_64_48",
+      "node_64_47",
+      "node_64_46",
+      "node_64_45",
+      "node_64_44",
+      "node_64_43",
+      "node_64_42",
+      "node_64_41",
+      "node_64_40",
+      "node_64_39",
+      "node_64_38",
+      "node_64_37",
+      "node_63_37",
+      "node_62_37",
+      "node_61_37",
+      "node_60_37",
+      "node_59_37",
+      "node_58_37",
+      "node_57_37"
+    ],
+    "expanded_nodes": 0,
+    "failure_detail_zh": "模型已返回路线，但路线校验发现非法移动：单行方向相反 5 步。 同任务的 3 种传统算法均找到有效路线；因此这不是地图物理不可达，本次失败来自 LLM 的路线生成或地点解析。",
+    "failure_reason": "llm_move_sequence_invalid",
+    "first_violation_step": 12,
+    "legs": [
+      {
+        "expanded_events": [],
+        "expanded_node_ids": [],
+        "source_node_id": "node_12_61",
+        "status": "invalid",
+        "target_node_id": "node_64_37"
+      },
+      {
+        "expanded_events": [],
+        "expanded_node_ids": [],
+        "source_node_id": "node_64_37",
+        "status": "not_started",
+        "target_node_id": "node_57_43"
+      }
+    ],
+    "method_name": "pure_llm_deepseek",
+    "move_count": 83,
+    "move_violations": [
+      {
+        "blocked": false,
+        "edge_id": "edge_node_23_61_node_24_61",
+        "from_node_id": "node_23_61",
+        "kind": "one_way_direction",
+        "message": "llm_move_missing_directed_edge:edge_node_23_61_node_24_61",
+        "move": "E",
+        "reverse_edge_id": "edge_node_24_61_node_23_61",
+        "reverse_edge_one_way": true,
+        "step": 12,
+        "to_node_id": "node_24_61"
+      },
+      {
+        "blocked": false,
+        "edge_id": "edge_node_36_61_node_37_61",
+        "from_node_id": "node_36_61",
+        "kind": "one_way_direction",
+        "message": "llm_move_missing_directed_edge:edge_node_36_61_node_37_61",
+        "move": "E",
+        "reverse_edge_id": "edge_node_37_61_node_36_61",
+        "reverse_edge_one_way": true,
+        "step": 25,
+        "to_node_id": "node_37_61"
+      },
+      {
+        "blocked": false,
+        "edge_id": "edge_node_54_61_node_55_61",
+        "from_node_id": "node_54_61",
+        "kind": "one_way_direction",
+        "message": "llm_move_missing_directed_edge:edge_node_54_61_node_55_61",
+        "move": "E",
+        "reverse_edge_id": "edge_node_55_61_node_54_61",
+        "reverse_edge_one_way": true,
+        "step": 43,
+        "to_node_id": "node_55_61"
+      },
+      {
+        "blocked": false,
+        "edge_id": "edge_node_64_49_node_64_48",
+        "from_node_id": "node_64_49",
+        "kind": "one_way_direction",
+        "message": "llm_move_missing_directed_edge:edge_node_64_49_node_64_48",
+        "move": "S",
+        "reverse_edge_id": "edge_node_64_48_node_64_49",
+        "reverse_edge_one_way": true,
+        "step": 65,
+        "to_node_id": "node_64_48"
+      },
+      {
+        "blocked": false,
+        "edge_id": "edge_node_64_38_node_64_37",
+        "from_node_id": "node_64_38",
+        "kind": "one_way_direction",
+        "message": "llm_move_missing_directed_edge:edge_node_64_38_node_64_37",
+        "move": "S",
+        "reverse_edge_id": "edge_node_64_37_node_64_38",
+        "reverse_edge_one_way": true,
+        "step": 76,
+        "to_node_id": "node_64_37"
+      }
+    ],
+    "proposal_recovered_partial_response": false,
+    "route_edge_sequence": [],
+    "route_node_sequence": [],
+    "schema_version": "route_search_trace_v1",
+    "status": "invalid",
+    "trace_reconstructed_from_stored_model_output": true,
+    "validated_prefix_edge_sequence": [
+      "edge_node_12_61_node_13_61",
+      "edge_node_13_61_node_14_61",
+      "edge_node_14_61_node_15_61",
+      "edge_node_15_61_node_16_61",
+      "edge_node_16_61_node_17_61",
+      "edge_node_17_61_node_18_61",
+      "edge_node_18_61_node_19_61",
+      "edge_node_19_61_node_20_61",
+      "edge_node_20_61_node_21_61",
+      "edge_node_21_61_node_22_61",
+      "edge_node_22_61_node_23_61"
+    ],
+    "validated_prefix_node_sequence": [
+      "node_12_61",
+      "node_13_61",
+      "node_14_61",
+      "node_15_61",
+      "node_16_61",
+      "node_17_61",
+      "node_18_61",
+      "node_19_61",
+      "node_20_61",
+      "node_21_61",
+      "node_22_61",
+      "node_23_61"
+    ]
+  },
+  "trace_id": "task-0006-0001__pure_llm_deepseek",
+  "validation": null
+}

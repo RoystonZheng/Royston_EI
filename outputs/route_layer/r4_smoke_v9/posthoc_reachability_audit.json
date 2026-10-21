@@ -1,0 +1,28 @@
+{
+  "schema_version": "r4_smoke_posthoc_reachability_audit_v1",
+  "source_artifact": "seed0_semantic_road_feature.json",
+  "method": "directed_graph_breadth_first_reachability_only",
+  "sent_to_model": false,
+  "used_as_route_fallback": false,
+  "start_node_id": "node_0_5",
+  "pickup_node_id": "node_1_2",
+  "dropoff_node_id": "node_6_2",
+  "start_to_pickup_reachable": true,
+  "pickup_to_dropoff_reachable": true,
+  "task_reachable": true,
+  "start_to_pickup_node_sequence": [
+    "node_0_5",
+    "node_0_4",
+    "node_0_3",
+    "node_0_2",
+    "node_1_2"
+  ],
+  "pickup_to_dropoff_node_sequence": [
+    "node_1_2",
+    "node_2_2",
+    "node_3_2",
+    "node_4_2",
+    "node_5_2",
+    "node_6_2"
+  ]
+}

@@ -1,0 +1,508 @@
+{
+  "input_type": "formal_scenario_set",
+  "map_id": "grid-100x100-seed-8",
+  "map_version": "grid-v1-100",
+  "methods": [
+    "pure_llm_deepseek"
+  ],
+  "price_profile": {
+    "api_price_per_token": 3e-06,
+    "billing_period": "simulation",
+    "compute_price_per_ms": 1e-08,
+    "currency": "CNY",
+    "electricity_price_per_kwh": 2.29,
+    "notes": "烟雾测试采用该官方站点列示的峰时综合充电服务价 2.29 元/kWh；特斯拉价格按站点和时段动态变化，正式实验应按实际站点与仿真时段替换。",
+    "observed_at": "2026-10-13",
+    "price_basis": "charging_service_total_per_kwh_includes_electricity_and_service_fee",
+    "price_source": "Tesla China official Supercharger station page",
+    "price_source_url": "https://www.tesla.cn/findus/location/supercharger/cnsc9691?region=CN",
+    "pricing_status": "official_station_reference",
+    "pricing_version": "tesla_cn_station_peak_v1",
+    "rate_schedule": {
+      "00:00-08:00": 1.39,
+      "08:00-10:00": 1.69,
+      "10:00-12:00": 2.29,
+      "12:00-14:00": 1.69,
+      "14:00-19:00": 2.29,
+      "19:00-24:00": 1.69
+    },
+    "reference_rate_type": "peak_window_total_charging_service_price",
+    "reference_station": "深圳中航工业南航大厦 Tesla 超级充电站"
+  },
+  "random_seed": 8,
+  "results": [
+    {
+      "methods": [
+        {
+          "best_route_id": null,
+          "evaluation": null,
+          "failure_reason": "llm_move_sequence_invalid",
+          "invalid_route_count": 0,
+          "metadata": {
+            "attempt_number": 1,
+            "baseline_assessment_zh": "同任务的 3 种传统算法均找到有效路线；因此这不是地图物理不可达，本次失败来自 LLM 的路线生成或地点解析。",
+            "compute_time_ms": 1760.6574170000044,
+            "cost_status": "not_evaluated_route_api_recorded",
+            "failure_detail_zh": "模型已返回路线，但路线校验发现非法移动：单行方向相反 5 步。 同任务的 3 种传统算法均找到有效路线；因此这不是地图物理不可达，本次失败来自 LLM 的路线生成或地点解析。",
+            "failure_reason_label_zh": "模型已返回路线，但路线校验发现非法移动：单行方向相反 5 步",
+            "input_map_encoding": "grid-road-v1",
+            "llm_error": "llm_move_missing_directed_edge:edge_node_59_19_node_59_20",
+            "llm_model": "deepseek-flash",
+            "llm_request_id": null,
+            "llm_response_received": true,
+            "llm_retries": 0,
+            "llm_status": "move_sequence_invalid",
+            "max_output_tokens_requested": 1024,
+            "move_sequence": "EEEEEEEEEEEEEEEEEEEEEENNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN",
+            "observed_at": "2026-10-13",
+            "price_basis": "charging_service_total_per_kwh_includes_electricity_and_service_fee",
+            "price_source": "Tesla China official Supercharger station page",
+            "price_source_url": "https://www.tesla.cn/findus/location/supercharger/cnsc9691?region=CN",
+            "pricing_status": "official_station_reference",
+            "pricing_version": "tesla_cn_station_peak_v1",
+            "prompt_char_count": 38730,
+            "proposal_energy_audit": {
+              "energy_model_version": "energy_v1",
+              "estimated_route_distance_m": 6400.0,
+              "exact_edge_moves": 59,
+              "fallback_congestion_level": 0,
+              "fallback_length_m": 100.0,
+              "fallback_signal_delay_sec": 0.0,
+              "interpretation": "not actual measured consumption; hypothetical estimate for the model-proposed path. Valid-prefix estimate stops before the first illegal move.",
+              "proposed_move_count": 64,
+              "proxy_edge_moves": 0,
+              "recovered_move_sequence": false,
+              "reverse_edge_inferred_moves": 5,
+              "route_energy_estimate_kwh": 1.1885000000000003,
+              "status": "estimated",
+              "validated_prefix_energy_estimate_kwh": 0.5036000000000002,
+              "validated_prefix_move_count": 27
+            },
+            "proposal_move_violation_count": 5,
+            "proposal_move_violation_counts": {
+              "one_way_direction": 5
+            },
+            "reasoning_effort_requested": "none",
+            "reference_rate_type": "peak_window_total_charging_service_price",
+            "reference_station": "深圳中航工业南航大厦 Tesla 超级充电站",
+            "semantic_resolution": null
+          },
+          "method_name": "pure_llm_deepseek",
+          "monetary_cost": {
+            "api_cost_amount": 0.039531000000000004,
+            "compute_cost_amount": 1.7606574170000045e-05,
+            "currency": "CNY",
+            "electricity_cost_amount": 0.0,
+            "total_monetary_cost": 0.03954860657417
+          },
+          "raw_output": {
+            "dropoff_node_id": "node_59_83",
+            "edge_sequence": [],
+            "move_sequence": "EEEEEEEEEEEEEEEEEEEEEENNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN",
+            "node_sequence": [],
+            "pickup_node_id": "node_59_56",
+            "reason": null,
+            "status": "completed"
+          },
+          "resources": {
+            "compute_time_ms": 1760.6574170000044,
+            "energy_kwh": 0.0,
+            "input_tokens": 13124,
+            "llm_calls": 1,
+            "llm_latency_ms": 1587.9538749999824,
+            "output_tokens": 53
+          },
+          "routes": [],
+          "status": "failed",
+          "task_id": "formal-task-0008-feasible",
+          "valid_route_count": 0,
+          "validation": null
+        }
+      ],
+      "scenario_id": "formal-0008-feasible",
+      "scenario_type": "feasible",
+      "task_id": "formal-task-0008-feasible"
+    },
+    {
+      "methods": [
+        {
+          "best_route_id": null,
+          "evaluation": null,
+          "failure_reason": "llm_move_sequence_invalid",
+          "invalid_route_count": 0,
+          "metadata": {
+            "attempt_number": 1,
+            "baseline_assessment_zh": "同任务的 3 种传统算法均找到有效路线；因此这不是地图物理不可达，本次失败来自 LLM 的路线生成或地点解析。",
+            "compute_time_ms": 1044.7571670000002,
+            "cost_status": "not_evaluated_route_api_recorded",
+            "failure_detail_zh": "模型已返回路线，但路线校验发现非法移动：单行方向相反 7 步。 同任务的 3 种传统算法均找到有效路线；因此这不是地图物理不可达，本次失败来自 LLM 的路线生成或地点解析。",
+            "failure_reason_label_zh": "模型已返回路线，但路线校验发现非法移动：单行方向相反 7 步",
+            "input_map_encoding": "grid-road-v1",
+            "llm_error": "llm_move_missing_directed_edge:edge_node_3_64_node_4_64",
+            "llm_model": "deepseek-flash",
+            "llm_request_id": null,
+            "llm_response_received": true,
+            "llm_retries": 0,
+            "llm_status": "move_sequence_invalid",
+            "max_output_tokens_requested": 1024,
+            "move_sequence": "EEEEEEEEEEEEEEEEEEEEEEEEEEEEEENNNNNNNWWWWWWWWWWWWWWWWWWWWWWWSSSSSSSSSSSSSSSSSS",
+            "observed_at": "2026-10-13",
+            "price_basis": "charging_service_total_per_kwh_includes_electricity_and_service_fee",
+            "price_source": "Tesla China official Supercharger station page",
+            "price_source_url": "https://www.tesla.cn/findus/location/supercharger/cnsc9691?region=CN",
+            "pricing_status": "official_station_reference",
+            "pricing_version": "tesla_cn_station_peak_v1",
+            "prompt_char_count": 17583,
+            "proposal_energy_audit": {
+              "energy_model_version": "energy_v1",
+              "estimated_route_distance_m": 7800.0,
+              "exact_edge_moves": 71,
+              "fallback_congestion_level": 0,
+              "fallback_length_m": 100.0,
+              "fallback_signal_delay_sec": 0.0,
+              "interpretation": "not actual measured consumption; hypothetical estimate for the model-proposed path. Valid-prefix estimate stops before the first illegal move.",
+              "proposed_move_count": 78,
+              "proxy_edge_moves": 0,
+              "recovered_move_sequence": false,
+              "reverse_edge_inferred_moves": 7,
+              "route_energy_estimate_kwh": 1.4454500000000006,
+              "status": "estimated",
+              "validated_prefix_energy_estimate_kwh": 0.054599999999999996,
+              "validated_prefix_move_count": 3
+            },
+            "proposal_move_violation_count": 7,
+            "proposal_move_violation_counts": {
+              "one_way_direction": 7
+            },
+            "reasoning_effort_requested": "none",
+            "reference_rate_type": "peak_window_total_charging_service_price",
+            "reference_station": "深圳中航工业南航大厦 Tesla 超级充电站",
+            "semantic_resolution": null
+          },
+          "method_name": "pure_llm_deepseek",
+          "monetary_cost": {
+            "api_cost_amount": 0.018186,
+            "compute_cost_amount": 1.0447571670000002e-05,
+            "currency": "CNY",
+            "electricity_cost_amount": 0.0,
+            "total_monetary_cost": 0.01819644757167
+          },
+          "raw_output": {
+            "dropoff_node_id": "node_7_53",
+            "edge_sequence": [],
+            "move_sequence": "EEEEEEEEEEEEEEEEEEEEEEEEEEEEEENNNNNNNWWWWWWWWWWWWWWWWWWWWWWWSSSSSSSSSSSSSSSSSS",
+            "node_sequence": [],
+            "pickup_node_id": "node_30_71",
+            "reason": null,
+            "status": "completed"
+          },
+          "resources": {
+            "compute_time_ms": 1044.7571670000002,
+            "energy_kwh": 0.0,
+            "input_tokens": 5993,
+            "llm_calls": 1,
+            "llm_latency_ms": 967.0835000000011,
+            "output_tokens": 69
+          },
+          "routes": [],
+          "status": "failed",
+          "task_id": "formal-task-0008-boundary",
+          "valid_route_count": 0,
+          "validation": null
+        }
+      ],
+      "scenario_id": "formal-0008-boundary",
+      "scenario_type": "boundary",
+      "task_id": "formal-task-0008-boundary"
+    },
+    {
+      "methods": [
+        {
+          "best_route_id": null,
+          "evaluation": null,
+          "failure_reason": "illegal_endpoint",
+          "invalid_route_count": 0,
+          "metadata": {
+            "attempt_number": 1,
+            "baseline_assessment_zh": "该正式场景预设为非法端点，传统算法也按场景约束失败，属于设计中的不可行案例。",
+            "compute_time_ms": 1196.7237080000075,
+            "cost_status": "not_evaluated_route_api_recorded",
+            "failure_detail_zh": "模型返回了失败结果：判断场景端点不合法（是否为预期失败需结合场景设计判断）。原始原因：illegal_endpoint 该正式场景预设为非法端点，传统算法也按场景约束失败，属于设计中的不可行案例。",
+            "failure_reason_label_zh": "模型返回了失败结果：判断场景端点不合法（是否为预期失败需结合场景设计判断）",
+            "input_map_encoding": "grid-road-v1",
+            "llm_model": "deepseek-flash",
+            "llm_request_id": null,
+            "llm_response_received": true,
+            "llm_retries": 0,
+            "llm_status": "model_failed",
+            "max_output_tokens_requested": 1024,
+            "observed_at": "2026-10-13",
+            "price_basis": "charging_service_total_per_kwh_includes_electricity_and_service_fee",
+            "price_source": "Tesla China official Supercharger station page",
+            "price_source_url": "https://www.tesla.cn/findus/location/supercharger/cnsc9691?region=CN",
+            "pricing_status": "official_station_reference",
+            "pricing_version": "tesla_cn_station_peak_v1",
+            "prompt_char_count": 35045,
+            "proposal_energy_audit": {
+              "energy_model_version": "energy_v1",
+              "estimated_route_distance_m": null,
+              "exact_edge_moves": 0,
+              "interpretation": "No route steps were returned or recoverable; energy was not estimated.",
+              "proposed_move_count": 0,
+              "proxy_edge_moves": 0,
+              "reverse_edge_inferred_moves": 0,
+              "route_energy_estimate_kwh": null,
+              "status": "no_route_proposed",
+              "validated_prefix_energy_estimate_kwh": null,
+              "validated_prefix_move_count": 0
+            },
+            "proposal_move_violation_count": 0,
+            "proposal_move_violation_counts": {},
+            "reasoning_effort_requested": "none",
+            "reference_rate_type": "peak_window_total_charging_service_price",
+            "reference_station": "深圳中航工业南航大厦 Tesla 超级充电站",
+            "search_trace": {
+              "algorithm": "llm",
+              "expanded_nodes": 0,
+              "legs": [],
+              "method_name": "pure_llm_deepseek",
+              "route_edge_sequence": [],
+              "route_node_sequence": [],
+              "schema_version": "route_search_trace_v1",
+              "status": "failed"
+            },
+            "semantic_resolution": null
+          },
+          "method_name": "pure_llm_deepseek",
+          "monetary_cost": {
+            "api_cost_amount": 0.035763,
+            "compute_cost_amount": 1.1967237080000076e-05,
+            "currency": "CNY",
+            "electricity_cost_amount": 0.0,
+            "total_monetary_cost": 0.035774967237080006
+          },
+          "raw_output": {
+            "dropoff_node_id": null,
+            "edge_sequence": [],
+            "move_sequence": "",
+            "node_sequence": [],
+            "pickup_node_id": null,
+            "reason": "illegal_endpoint",
+            "status": "failed"
+          },
+          "resources": {
+            "compute_time_ms": 1196.7237080000075,
+            "energy_kwh": 0.0,
+            "input_tokens": 11889,
+            "llm_calls": 1,
+            "llm_latency_ms": 1038.3845000000065,
+            "output_tokens": 32
+          },
+          "routes": [],
+          "status": "failed",
+          "task_id": "formal-task-0008-illegal",
+          "valid_route_count": 0,
+          "validation": null
+        }
+      ],
+      "scenario_id": "formal-0008-illegal_endpoint",
+      "scenario_type": "illegal_endpoint",
+      "task_id": "formal-task-0008-illegal"
+    },
+    {
+      "methods": [
+        {
+          "best_route_id": null,
+          "evaluation": null,
+          "failure_reason": "llm_move_sequence_invalid",
+          "invalid_route_count": 0,
+          "metadata": {
+            "attempt_number": 1,
+            "baseline_assessment_zh": "同任务的 3 种传统算法均找到有效路线；因此这不是地图物理不可达，本次失败来自 LLM 的路线生成或地点解析。",
+            "compute_time_ms": 1597.727916999986,
+            "cost_status": "not_evaluated_route_api_recorded",
+            "failure_detail_zh": "模型已返回路线，但路线校验发现非法移动：单行方向相反 14 步。 同任务的 3 种传统算法均找到有效路线；因此这不是地图物理不可达，本次失败来自 LLM 的路线生成或地点解析。",
+            "failure_reason_label_zh": "模型已返回路线，但路线校验发现非法移动：单行方向相反 14 步",
+            "input_map_encoding": "grid-road-v1",
+            "llm_error": "llm_move_missing_directed_edge:edge_node_0_22_node_0_23",
+            "llm_model": "deepseek-flash",
+            "llm_request_id": null,
+            "llm_response_received": true,
+            "llm_retries": 0,
+            "llm_status": "move_sequence_invalid",
+            "max_output_tokens_requested": 1024,
+            "move_sequence": "NNNNNNNNNNNNNNNNNNNNNNNEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEENNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN",
+            "observed_at": "2026-10-13",
+            "price_basis": "charging_service_total_per_kwh_includes_electricity_and_service_fee",
+            "price_source": "Tesla China official Supercharger station page",
+            "price_source_url": "https://www.tesla.cn/findus/location/supercharger/cnsc9691?region=CN",
+            "pricing_status": "official_station_reference",
+            "pricing_version": "tesla_cn_station_peak_v1",
+            "prompt_char_count": 87301,
+            "proposal_energy_audit": {
+              "energy_model_version": "energy_v1",
+              "estimated_route_distance_m": 17700.0,
+              "exact_edge_moves": 163,
+              "fallback_congestion_level": 0,
+              "fallback_length_m": 100.0,
+              "fallback_signal_delay_sec": 0.0,
+              "interpretation": "not actual measured consumption; hypothetical estimate for the model-proposed path. Valid-prefix estimate stops before the first illegal move.",
+              "proposed_move_count": 177,
+              "proxy_edge_moves": 0,
+              "recovered_move_sequence": false,
+              "reverse_edge_inferred_moves": 14,
+              "route_energy_estimate_kwh": 3.2887499999999936,
+              "status": "estimated",
+              "validated_prefix_energy_estimate_kwh": 0.41120000000000007,
+              "validated_prefix_move_count": 22
+            },
+            "proposal_move_violation_count": 14,
+            "proposal_move_violation_counts": {
+              "one_way_direction": 14
+            },
+            "reasoning_effort_requested": "none",
+            "reference_rate_type": "peak_window_total_charging_service_price",
+            "reference_station": "深圳中航工业南航大厦 Tesla 超级充电站",
+            "semantic_resolution": null
+          },
+          "method_name": "pure_llm_deepseek",
+          "monetary_cost": {
+            "api_cost_amount": 0.088482,
+            "compute_cost_amount": 1.597727916999986e-05,
+            "currency": "CNY",
+            "electricity_cost_amount": 0.0,
+            "total_monetary_cost": 0.08849797727917
+          },
+          "raw_output": {
+            "dropoff_node_id": "node_80_97",
+            "edge_sequence": [],
+            "move_sequence": "NNNNNNNNNNNNNNNNNNNNNNNEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEENNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN",
+            "node_sequence": [],
+            "pickup_node_id": "node_0_23",
+            "reason": null,
+            "status": "completed"
+          },
+          "resources": {
+            "compute_time_ms": 1597.727916999986,
+            "energy_kwh": 0.0,
+            "input_tokens": 29433,
+            "llm_calls": 1,
+            "llm_latency_ms": 1206.5701660000059,
+            "output_tokens": 61
+          },
+          "routes": [],
+          "status": "failed",
+          "task_id": "formal-task-0008-detour",
+          "valid_route_count": 0,
+          "validation": null
+        }
+      ],
+      "scenario_id": "formal-0008-detour",
+      "scenario_type": "detour",
+      "task_id": "formal-task-0008-detour"
+    },
+    {
+      "methods": [
+        {
+          "best_route_id": null,
+          "evaluation": null,
+          "failure_reason": "unreachable",
+          "invalid_route_count": 0,
+          "metadata": {
+            "attempt_number": 1,
+            "baseline_assessment_zh": "该正式场景预设为不可达，传统算法也按场景约束失败，属于设计中的不可行案例。",
+            "compute_time_ms": 1524.051500000013,
+            "cost_status": "not_evaluated_route_api_recorded",
+            "failure_detail_zh": "模型返回了失败结果：判断起终点不可达（是否为预期失败需结合场景设计判断）。原始原因：unreachable 该正式场景预设为不可达，传统算法也按场景约束失败，属于设计中的不可行案例。",
+            "failure_reason_label_zh": "模型返回了失败结果：判断起终点不可达（是否为预期失败需结合场景设计判断）",
+            "input_map_encoding": "grid-road-v1",
+            "llm_model": "deepseek-flash",
+            "llm_request_id": null,
+            "llm_response_received": true,
+            "llm_retries": 0,
+            "llm_status": "model_failed",
+            "max_output_tokens_requested": 1024,
+            "observed_at": "2026-10-13",
+            "price_basis": "charging_service_total_per_kwh_includes_electricity_and_service_fee",
+            "price_source": "Tesla China official Supercharger station page",
+            "price_source_url": "https://www.tesla.cn/findus/location/supercharger/cnsc9691?region=CN",
+            "pricing_status": "official_station_reference",
+            "pricing_version": "tesla_cn_station_peak_v1",
+            "prompt_char_count": 56440,
+            "proposal_energy_audit": {
+              "energy_model_version": "energy_v1",
+              "estimated_route_distance_m": null,
+              "exact_edge_moves": 0,
+              "interpretation": "No route steps were returned or recoverable; energy was not estimated.",
+              "proposed_move_count": 0,
+              "proxy_edge_moves": 0,
+              "reverse_edge_inferred_moves": 0,
+              "route_energy_estimate_kwh": null,
+              "status": "no_route_proposed",
+              "validated_prefix_energy_estimate_kwh": null,
+              "validated_prefix_move_count": 0
+            },
+            "proposal_move_violation_count": 0,
+            "proposal_move_violation_counts": {},
+            "reasoning_effort_requested": "none",
+            "reference_rate_type": "peak_window_total_charging_service_price",
+            "reference_station": "深圳中航工业南航大厦 Tesla 超级充电站",
+            "search_trace": {
+              "algorithm": "llm",
+              "expanded_nodes": 0,
+              "legs": [],
+              "method_name": "pure_llm_deepseek",
+              "route_edge_sequence": [],
+              "route_node_sequence": [],
+              "schema_version": "route_search_trace_v1",
+              "status": "failed"
+            },
+            "semantic_resolution": null
+          },
+          "method_name": "pure_llm_deepseek",
+          "monetary_cost": {
+            "api_cost_amount": 0.057216,
+            "compute_cost_amount": 1.524051500000013e-05,
+            "currency": "CNY",
+            "electricity_cost_amount": 0.0,
+            "total_monetary_cost": 0.057231240515000004
+          },
+          "raw_output": {
+            "dropoff_node_id": null,
+            "edge_sequence": [],
+            "move_sequence": "",
+            "node_sequence": [],
+            "pickup_node_id": null,
+            "reason": "unreachable",
+            "status": "failed"
+          },
+          "resources": {
+            "compute_time_ms": 1524.051500000013,
+            "energy_kwh": 0.0,
+            "input_tokens": 19041,
+            "llm_calls": 1,
+            "llm_latency_ms": 1247.7415000000178,
+            "output_tokens": 31
+          },
+          "routes": [],
+          "status": "failed",
+          "task_id": "formal-task-0008-unreachable",
+          "valid_route_count": 0,
+          "validation": null
+        }
+      ],
+      "scenario_id": "formal-0008-unreachable",
+      "scenario_type": "unreachable",
+      "task_id": "formal-task-0008-unreachable"
+    }
+  ],
+  "run_type": "live_deepseek_pure_llm_experiment",
+  "schema_version": "pure_llm_experiment_routes_v1",
+  "semantic_policy": {
+    "baseline_visibility": "road_feature_input_protocol_v1",
+    "reads_roadside_features": true,
+    "resolver": "deepseek_v4_flash",
+    "semantic_tasks_remain_routable": true,
+    "uses_evaluator_truth": false
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "experiment_id": "r4_codex_one_step_smoke_v3",
+  "status": "format_smoke_passed_with_method_contamination",
+  "scope": "one structured route action on the 8x8 seed 0 task; no full route requested",
+  "provider": "Codex CLI with ChatGPT account login",
+  "model": "gpt-5.6-luna",
+  "reasoning_effort": "low",
+  "cli_invocation_count": 1,
+  "retry_count": 0,
+  "model_turn_count": 1,
+  "response": {
+    "action": "move",
+    "direction": "S",
+    "self_check": {
+      "allowed_directed_edge": true,
+      "starts_at_current": true,
+      "inside_boundary": true,
+      "pickup_order_ok": true,
+      "not_revisited": true
+    },
+    "failure_reason_code": "none"
+  },
+  "allowed_directions": [
+    "S",
+    "N"
+  ],
+  "local_checks": {
+    "all_top_level_required_fields_present": true,
+    "action_is_move": true,
+    "direction_in_schema_and_task_candidates": true,
+    "all_self_checks_true": true,
+    "failure_reason_none": true
+  },
+  "tool_intervention": {
+    "type": "command_execution",
+    "purpose": "The model ran a local Dijkstra search on the supplied directional-cost grid before finalizing its one-step action.",
+    "printed_full_route_directions": [
+      "S",
+      "S",
+      "S",
+      "E",
+      "E",
+      "E",
+      "E",
+      "E",
+      "E"
+    ],
+    "printed_cost_seconds": 95.208333,
+    "exit_code": 0,
+    "initial_intermediate_action": "N",
+    "final_action_after_tool": "S"
+  },
+  "usage": {
+    "input_tokens": 73264,
+    "cached_input_tokens": 52864,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 2360,
+    "reasoning_output_tokens": 385
+  },
+  "api_key_used": false,
+  "interpretation": "This proves the ChatGPT-account CLI can invoke gpt-5.6-luna and return schema-shaped output for this task. The chosen action is in the locally supplied legal candidate set. Because the model used local Dijkstra search to choose the action, this is not valid evidence of independent LLM route search and must not be merged into the pure-LLM or R4 route-comparison results. No retry or full-route generation occurred.",
+  "evidence": {
+    "prompt": "prompt.txt",
+    "schema": "schema.json",
+    "metadata": "request_metadata.json",
+    "cli_events": "cli_events.jsonl",
+    "stderr": "cli_stderr.log",
+    "response": "model_response.json"
+  }
+}

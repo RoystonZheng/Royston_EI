@@ -1,0 +1,92 @@
+{
+  "request_version": "r4_codex_one_step_smoke_v4",
+  "status": "single_step_no_tool_smoke_passed",
+  "source_result": "outputs/route_layer/r4_stepwise_live_v3/seed0_semantic_road_feature.json",
+  "scope": "One next-step action on the frozen 8x8 seed 0 task; no complete route requested.",
+  "map_id": "grid-8x8-seed-0",
+  "map_version": "grid-v1-8",
+  "random_seed": 0,
+  "task_id": "task-0000-0009",
+  "start_node_id": "node_0_5",
+  "pickup_node_id": "node_1_2",
+  "dropoff_node_id": "node_6_2",
+  "current_node_id": "node_0_5",
+  "visited_node_ids": [
+    "node_0_5"
+  ],
+  "allowed_directions": [
+    "N",
+    "S"
+  ],
+  "allowed_edge_ids": [
+    "edge_node_0_5_node_0_4",
+    "edge_node_0_5_node_0_6"
+  ],
+  "selected_direction": "S",
+  "selected_edge_id": "edge_node_0_5_node_0_6",
+  "single_action_only": true,
+  "max_model_invocations_authorized": 1,
+  "cli_invocation_count": 1,
+  "model_turn_count": 1,
+  "retry_count": 0,
+  "tool_call_count": 0,
+  "provider": "Codex CLI using the logged-in ChatGPT account; OPENAI_API_KEY and DEEPSEEK_API_KEY removed from the child environment.",
+  "model": "gpt-5.6-luna",
+  "reasoning_effort": "low",
+  "sandbox": "read-only",
+  "ephemeral_session": true,
+  "application_retries": 0,
+  "output_token_limit": null,
+  "openai_api_key_removed_from_child_env": true,
+  "deepseek_api_key_removed_from_child_env": true,
+  "api_key_used": false,
+  "temporarily_disabled_features": [
+    "shell_tool",
+    "unified_exec"
+  ],
+  "prompt_forbids_all_tool_calls": true,
+  "schema_bytes": 1126,
+  "schema_sha256": "c1575665c6fe960484f671eb0aa1a990e2fe767d872f40f30328376dbc25a05d",
+  "prompt_bytes": 2807,
+  "prompt_sha256": "7e0dd032277f2d357b4c118c9b534bd4ece1c1a3ec6055cf364f5a133bf91816",
+  "usage": {
+    "input_tokens": 16172,
+    "cached_input_tokens": 0,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 762,
+    "reasoning_output_tokens": 702
+  },
+  "local_validation": {
+    "exact_top_level_fields": true,
+    "action_is_move": true,
+    "direction_in_schema": true,
+    "direction_in_dynamic_candidates": true,
+    "five_self_check_fields_present": true,
+    "all_self_checks_true": true,
+    "failure_reason_none": true,
+    "no_tool_events": true,
+    "completed_turn_usage_present": true
+  },
+  "cli_events": [
+    "thread.started",
+    "turn.started",
+    "item.completed:error_nonfatal_warning",
+    "item.completed:agent_message",
+    "turn.completed"
+  ],
+  "cli_nonfatal_warnings": [
+    "Skill descriptions were shortened to fit the 2% skills context budget. Codex can still see every skill, but some descriptions are shorter. Disable unused skills or plugins to leave more room for the rest."
+  ],
+  "cli_stderr_observations": [
+    "Non-fatal model-cache warning: cached models file lacked base_instructions.",
+    "Non-fatal rollout state database discrepancy; CLI fell back to path lookup."
+  ],
+  "hook_check": {
+    "marketplace_source_stop_entries": 0,
+    "installed_cache_stop_entries": 0,
+    "collector_script_exists_in_both_packages": true,
+    "stop_hook_runtime_reload_verified": false,
+    "note": "Stop hook is intentionally disabled in both files; restart Codex to verify the running desktop process has reloaded it."
+  },
+  "authorization_basis": "User authorized one no-tool verification; exactly one CLI invocation was made."
+}
