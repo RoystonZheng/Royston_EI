@@ -1,0 +1,58 @@
+{
+  "failure_reason": "illegal_pickup_endpoint",
+  "geometry": {
+    "attempted_route_edge_ids": [],
+    "attempted_route_node_ids": [],
+    "boundary": {
+      "max_x": 99,
+      "max_y": 99,
+      "min_x": 0,
+      "min_y": 0
+    },
+    "endpoint_node_ids": [],
+    "expanded_events": [],
+    "first_violation_step": null,
+    "map_id": "grid-100x100-seed-2",
+    "map_size": 100,
+    "move_count": 0,
+    "move_violations": [],
+    "nodes": [],
+    "road_context_edges": [],
+    "route_edges": [],
+    "route_node_ids": [],
+    "validated_prefix_node_ids": []
+  },
+  "map_id": "grid-100x100-seed-2",
+  "method_name": "local_dijkstra",
+  "scenario_id": "formal-0002-illegal_endpoint",
+  "scenario_type": "illegal_endpoint",
+  "schema_version": "route_trace_visual_record_v1",
+  "status": "failed",
+  "task_id": "formal-task-0002-illegal",
+  "task_type": null,
+  "trace": {
+    "algorithm": "dijkstra",
+    "expanded_nodes": 0,
+    "legs": [],
+    "method_name": "local_dijkstra",
+    "reason": "illegal_pickup_endpoint",
+    "route_edge_sequence": [],
+    "route_node_sequence": [],
+    "schema_version": "route_search_trace_v1",
+    "status": "not_started"
+  },
+  "trace_id": "formal-0002-illegal_endpoint__local_dijkstra",
+  "validation": {
+    "boundary_violation": false,
+    "direction_valid": false,
+    "dropoff_exact_match": false,
+    "errors": [
+      "pickup_not_legal"
+    ],
+    "legal_dropoff": false,
+    "legal_pickup": false,
+    "pickup_exact_match": false,
+    "status": "illegal_endpoint",
+    "valid": false
+  }
+}
