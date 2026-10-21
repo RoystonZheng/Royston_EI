@@ -1,0 +1,68 @@
+{
+  "scenario_id": "C2_four_same_second_orders_three_vehicles",
+  "title": "同秒四单争抢三车",
+  "source_dataset": "NYC TLC 2024 High-Volume FHV, single-match candidate request trace",
+  "source_request_window": [
+    "2024-01-20 21:54:06",
+    "2024-01-20 21:54:07"
+  ],
+  "request_trace_row_count": 4,
+  "origin_zone_counts": {
+    "79": 4
+  },
+  "distinct_origin_zone_count": 1,
+  "distinct_destination_zone_count": 3,
+  "fleet_variants": [
+    {
+      "fleet_id": "F3_same_zone",
+      "vehicle_count": 3,
+      "positions_by_zone": {
+        "79": 3
+      },
+      "vehicles": [
+        {
+          "vehicle_id": "C2-001",
+          "initial_position_node_id": "zone_79",
+          "position_node_id": "zone_79"
+        },
+        {
+          "vehicle_id": "C2-002",
+          "initial_position_node_id": "zone_79",
+          "position_node_id": "zone_79"
+        },
+        {
+          "vehicle_id": "C2-003",
+          "initial_position_node_id": "zone_79",
+          "position_node_id": "zone_79"
+        }
+      ],
+      "initial_same_zone_candidate_count_per_order": "count of synthetic vehicles placed in that order's pickup zone"
+    }
+  ],
+  "dispatch_controls": {
+    "max_pickup_wait_sec": 300.0,
+    "passenger_no_show_rate": 0.0,
+    "one_to_one_assignment": true,
+    "time_origin": "2024-01-20 21:54:06",
+    "horizon_sec": 60
+  },
+  "intended_competition": "Four orders arrive in the same recorded second at Zone 79; three vehicles create a 4-by-3 one-to-one matching instance.",
+  "limitations": [
+    "All starting vehicles are co-located at Zone 79, so pickup costs tie at zone resolution; use distinct reachable starts after a road network is available for cost-sensitive comparison.",
+    "Synthetic vehicles are deliberately placed in request pickup zones; this creates zero zone-level pickup time and omits within-zone driving distance.",
+    "NYC TLC rows are already-dispatched/completed trips; unserved demand and real vehicle availability are absent.",
+    "The existing zone OD proxy from the earlier pilot is not included as a validated road-cost model."
+  ],
+  "input_files": {
+    "orders_json": {
+      "file": "orders.json",
+      "sha256": "c9c801ddaa7468dc8fdb77d65b16536d7e0711da14ff5a5e2ce969d057f36c02",
+      "bytes": 1352
+    },
+    "orders_parquet": {
+      "file": "orders.parquet",
+      "sha256": "52e1a6e2b8dab45c7d0115ad64f0bb331373f8ca111e19ae3415cd58d48d3b75",
+      "bytes": 2199
+    }
+  }
+}

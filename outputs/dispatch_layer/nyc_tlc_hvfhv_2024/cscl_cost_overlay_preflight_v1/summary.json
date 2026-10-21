@@ -1,0 +1,40 @@
+{
+  "classification": "partial geometry-to-cost overlay preflight; not a complete route-cost graph",
+  "generated_at_utc": "2026-10-20T03:19:58+00:00",
+  "inputs_sha256": {
+    "ezpass_snapshot": "b4b467fc31f3245cd07ab1048d0aa7d81d08ebbcc3f78803d40bd8e7de15aaca",
+    "cscl_manhattan_snapshot": "7de50e9521dc50d6803d45e9a6a50b49a7e0b80fda4ce2661c806f86d24ed4f9",
+    "matching_audit": "f8f0a519d9ed5a55b9db9ed9f854f9320825065d566a43d6fbe71364e1c4260e",
+    "overlay_script": "78a7a2c84a3ddd6f4d28e684e3f7a599a8fced4332a6acadc466d2d2b6c660b9"
+  },
+  "accepted_valid_sensor_links": 129,
+  "accepted_sensor_observation_to_directed_primitive_rows": 727,
+  "sensor_polyline_sampled_length_km": 57.054,
+  "sensor_polyline_sampled_length_mapped_km": 56.976,
+  "sensor_polyline_mapped_fraction": 0.9986,
+  "sensor_geometry_sample_intervals": 5821,
+  "mapped_sensor_geometry_sample_intervals": 5810,
+  "unmapped_sensor_sample_intervals": 7,
+  "zero_projected_length_sensor_intervals": 3,
+  "nearby_candidate_road_segments_rejected_by_direction": 80,
+  "manhattan_cscl_routeable_directed_primitive_count": 32491,
+  "manhattan_cscl_routeable_directed_geometry_length_km": 1309.125,
+  "manhattan_cscl_directed_geometry_length_with_observed_cost_candidate_km": 55.417,
+  "manhattan_cscl_directed_geometry_length_coverage_fraction": 0.04233,
+  "directed_primitives_with_any_observed_cost_candidate": 726,
+  "directed_primitives_fully_covered_by_any_single_sensor": 547,
+  "source_speed_consistency": {
+    "links_with_reported_and_derived_speed": 129,
+    "median_relative_difference": 0.0002,
+    "max_relative_difference": 0.00516,
+    "interpretation": "Reported median_speed_fps is used as the observed corridor speed. Derived link_length_ft / median_tt_sec is retained as a consistency check, not substituted when the reported speed is present."
+  },
+  "missing_cost_policy": "No cost is assigned outside covered subsegment intervals; no zero fill or guessed speed is applied.",
+  "limitations": [
+    "The overlay uses local equirectangular coordinates and 10m sampled sensor intervals; it estimates subsegment coverage and is not survey-grade exact line intersection.",
+    "A sensor speed over the sensor corridor is used to estimate time only on the mapped subsegment length; observations are not averaged across overlapping sensors.",
+    "A partial interval does not make a whole CSCL primitive fully observed; route graph splitting at observation boundaries is still needed.",
+    "No endpoint snapping, turn restrictions, grade separation, connected component, shortest path, C4 pickup ETA coverage, or OD cost matrix has been validated.",
+    "CSCL topology is current 2026 while DOT speeds are a January 2024 snapshot."
+  ]
+}

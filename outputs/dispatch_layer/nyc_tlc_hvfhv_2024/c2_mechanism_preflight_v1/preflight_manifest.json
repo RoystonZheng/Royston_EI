@@ -1,0 +1,80 @@
+{
+  "experiment_id": "nyc_tlc_c2_matching_mechanism_preflight_v1",
+  "created_at_utc": "2026-10-19T09:46:34.652490+00:00",
+  "status": "completed_mechanism_preflight",
+  "performance_claim": false,
+  "scenario_id": "C2_four_same_second_orders_three_vehicles",
+  "scenario_fingerprint_sha256": "3aae4d3fd25e2b0310ee608dd3a527ce9d41e57d634e166cf2a4103efc10a42d",
+  "source_scenario_dir": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/multi_vehicle_competition_scenarios_v1/C2_four_same_second_orders_three_vehicles",
+  "methods": [
+    {
+      "method_name": "D0_greedy",
+      "scenario_fingerprint_sha256": "3aae4d3fd25e2b0310ee608dd3a527ce9d41e57d634e166cf2a4103efc10a42d",
+      "initial_round_audit": {
+        "dispatch_round_id": "round-0000",
+        "snapshot_time_sec": 0.0,
+        "trigger_type": "new_order",
+        "candidate_count": 12,
+        "hard_feasible_candidate_count": 12,
+        "all_candidates_route_reachable": true,
+        "selected_assignment_count": 3,
+        "selected_distinct_vehicle_count": 3,
+        "selected_distinct_order_count": 3,
+        "waiting_order_count_at_decision": 4,
+        "candidate_vehicle_count": 3,
+        "selected_vehicle_ids": [
+          "C2-001",
+          "C2-002",
+          "C2-003"
+        ],
+        "selected_order_ids": [
+          "raw/fhvhv_tripdata_2024-01.parquet#12486977",
+          "raw/fhvhv_tripdata_2024-01.parquet#12495753",
+          "raw/fhvhv_tripdata_2024-01.parquet#12520025"
+        ],
+        "validator_status": "valid",
+        "hard_constraint_errors": []
+      },
+      "final_status_counts": {
+        "completed": 3,
+        "unserved": 1
+      },
+      "result_file": "D0_greedy.json"
+    },
+    {
+      "method_name": "D1_optimizer",
+      "scenario_fingerprint_sha256": "3aae4d3fd25e2b0310ee608dd3a527ce9d41e57d634e166cf2a4103efc10a42d",
+      "initial_round_audit": {
+        "dispatch_round_id": "round-0000",
+        "snapshot_time_sec": 0.0,
+        "trigger_type": "new_order",
+        "candidate_count": 12,
+        "hard_feasible_candidate_count": 12,
+        "all_candidates_route_reachable": true,
+        "selected_assignment_count": 3,
+        "selected_distinct_vehicle_count": 3,
+        "selected_distinct_order_count": 3,
+        "waiting_order_count_at_decision": 4,
+        "candidate_vehicle_count": 3,
+        "selected_vehicle_ids": [
+          "C2-001",
+          "C2-003",
+          "C2-002"
+        ],
+        "selected_order_ids": [
+          "raw/fhvhv_tripdata_2024-01.parquet#12486977",
+          "raw/fhvhv_tripdata_2024-01.parquet#12495753",
+          "raw/fhvhv_tripdata_2024-01.parquet#12520025"
+        ],
+        "validator_status": "valid",
+        "hard_constraint_errors": []
+      },
+      "final_status_counts": {
+        "completed": 3,
+        "unserved": 1
+      },
+      "result_file": "D1_optimizer.json"
+    }
+  ],
+  "interpretation": "Checks initial candidate generation, one-to-one feasibility, maximum initial assignment count, and D0/D1 use of the same inputs. Results are not NYC performance estimates: vehicle positions are synthetic, pickup legs are zero by design, and ride costs are training-period zone OD medians."
+}

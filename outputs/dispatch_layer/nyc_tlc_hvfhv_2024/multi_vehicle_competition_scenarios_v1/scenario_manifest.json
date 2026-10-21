@@ -1,0 +1,106 @@
+{
+  "dataset_package_id": "nyc_tlc_2024_multivehicle_competition_scenarios_v1",
+  "created_date": "2026-10-19",
+  "source_dataset_id": "bqxa-629f",
+  "source_trace": {
+    "file": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/audit_2024-01/request_trace_2024-01.parquet",
+    "sha256": "f9d48edf6cb764ec209808fbe6edebe843e4c3283280de43742eff5f8d3177cd",
+    "audit_file": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/audit_2024-01/audit_2024-01.json"
+  },
+  "scenario_design": {
+    "prior_pilot_training_window_not_used_by_this_builder": [
+      "2024-01-01 00:00:00",
+      "2024-01-16 00:00:00"
+    ],
+    "event_windows_are_from_test_period": true,
+    "focus_manhattan_zones": [
+      79,
+      125,
+      148,
+      161,
+      162,
+      163,
+      164,
+      170,
+      186,
+      230,
+      231,
+      234
+    ],
+    "raw_source_and_existing_trace_modified": false,
+    "vehicles_are_synthetic": true,
+    "vehicle_positions_are_deliberately_co_located_with_pickup_zones": true,
+    "same_zone_pickup_assumption": "zero zone-level pickup time; intra-zone movement omitted",
+    "no_show_rate": 0.0,
+    "max_pickup_wait_sec": 300.0,
+    "formal_performance_result": false
+  },
+  "scenarios": [
+    {
+      "scenario_id": "C1_one_order_three_vehicle_candidates",
+      "title": "单订单多车候选机制检查",
+      "order_count": 1,
+      "distinct_origin_zone_count": 1,
+      "distinct_destination_zone_count": 1,
+      "fleet_counts": [
+        3
+      ],
+      "source_request_window": [
+        "2024-01-20 21:54:06",
+        "2024-01-20 21:54:07"
+      ],
+      "intended_competition": "One order has three initially co-located synthetic vehicles available.",
+      "scenario_json_sha256": "a7e6937c532dfdf94b6798b1c1006b394b9dad8e3b6b1bd022b618fc786b9834"
+    },
+    {
+      "scenario_id": "C2_four_same_second_orders_three_vehicles",
+      "title": "同秒四单争抢三车",
+      "order_count": 4,
+      "distinct_origin_zone_count": 1,
+      "distinct_destination_zone_count": 3,
+      "fleet_counts": [
+        3
+      ],
+      "source_request_window": [
+        "2024-01-20 21:54:06",
+        "2024-01-20 21:54:07"
+      ],
+      "intended_competition": "Four orders arrive in the same recorded second at Zone 79; three vehicles create a 4-by-3 one-to-one matching instance.",
+      "scenario_json_sha256": "bface8c9fbc2462f2966eecc76970c75170ef317c993efbf023179ae33ee0d2c"
+    },
+    {
+      "scenario_id": "C3_manhattan_multizone_44_order_burst",
+      "title": "曼哈顿九起点区跨区突发",
+      "order_count": 44,
+      "distinct_origin_zone_count": 9,
+      "distinct_destination_zone_count": 32,
+      "fleet_counts": [
+        18
+      ],
+      "source_request_window": [
+        "2024-01-17 20:00:20",
+        "2024-01-17 20:00:30"
+      ],
+      "intended_competition": "Forty-four requests over ten seconds across nine Manhattan pickup zones; two co-located synthetic vehicles per observed origin create same-zone multi-vehicle candidates and same-zone order contention.",
+      "scenario_json_sha256": "2b57f50f96aa2765a407a7c6ca63abfab37a3d42081f0ccd4b68751265295f16"
+    },
+    {
+      "scenario_id": "C4_manhattan_790_order_five_minute_load_sweep",
+      "title": "曼哈顿十二关注区五分钟负载阶梯",
+      "order_count": 790,
+      "distinct_origin_zone_count": 12,
+      "distinct_destination_zone_count": 126,
+      "fleet_counts": [
+        12,
+        24,
+        48
+      ],
+      "source_request_window": [
+        "2024-01-20 23:20:00",
+        "2024-01-20 23:25:00"
+      ],
+      "intended_competition": "Seven hundred ninety requests over five minutes across twelve Manhattan focus zones; fleet variants place one, two, or four synthetic vehicles in each zone.",
+      "scenario_json_sha256": "f61a787ec2bb2a8d2eadb719d33755784ad868710dde3727540671e48036909e"
+    }
+  ]
+}

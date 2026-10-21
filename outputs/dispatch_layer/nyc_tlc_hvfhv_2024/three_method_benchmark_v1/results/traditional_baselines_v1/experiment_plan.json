@@ -1,0 +1,88 @@
+{
+  "experiment": "traditional_baselines_v1",
+  "methods": [
+    "D0_greedy",
+    "D1_optimizer"
+  ],
+  "seed_range": [
+    0,
+    9
+  ],
+  "runs": [
+    {
+      "case": "C3_manhattan_multizone_44_order_burst",
+      "fleet_id": null
+    },
+    {
+      "case": "C4_manhattan_790_order_five_minute_load_sweep",
+      "fleet_id": "F1"
+    },
+    {
+      "case": "C4_manhattan_790_order_five_minute_load_sweep",
+      "fleet_id": "F2"
+    },
+    {
+      "case": "C4_manhattan_790_order_five_minute_load_sweep",
+      "fleet_id": "F4"
+    }
+  ],
+  "note": "Paired offline comparison; C2 excluded from performance runs because it is a small interface smoke case.",
+  "execution_status": "partial",
+  "completed_runs": [
+    {
+      "case": "C3_manhattan_multizone_44_order_burst",
+      "fleet_id": "F2_per_observed_origin",
+      "methods": [
+        "D0_greedy",
+        "D1_optimizer"
+      ],
+      "seeds": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    }
+  ],
+  "interrupted_runs": [
+    {
+      "case": "C4_manhattan_790_order_five_minute_load_sweep",
+      "fleet_id": "F1",
+      "methods": [
+        "D0_greedy",
+        "D1_optimizer"
+      ],
+      "seed": 0,
+      "status": "interrupted_before_result_write"
+    }
+  ],
+  "not_run": [
+    {
+      "case": "C4_manhattan_790_order_five_minute_load_sweep",
+      "fleet_ids": [
+        "F1",
+        "F2",
+        "F4"
+      ],
+      "seeds": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "status": "not_completed"
+    }
+  ]
+}

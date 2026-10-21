@@ -1,0 +1,71 @@
+{
+  "experiment_type": "shared_input_mechanism_preflight",
+  "performance_claim": false,
+  "case_id": "C3_manhattan_multizone_44_order_burst",
+  "seed": 0,
+  "scenario_fingerprint_sha256": "b058c273877e18fdb65f38aaa203fddbbf61b559cdb516d8a103a380a61dbb25",
+  "first_dispatch_input_sha256": "64ee43c0115a7d44fc47090664ca47346f8ef649a3f232e9a6d3e1bd49cc58a3",
+  "first_dispatch_input_equal_across_methods": true,
+  "first_dispatch_input_candidate_count": 72,
+  "methods": {
+    "D0_greedy": {
+      "scenario_fingerprint_sha256": "b058c273877e18fdb65f38aaa203fddbbf61b559cdb516d8a103a380a61dbb25",
+      "round_count": 42,
+      "invalid_round_count": 0,
+      "one_to_one_violation_count": 0,
+      "hard_feasible_candidate_count_total": 67,
+      "candidate_count_before_filter": 5473,
+      "candidate_count_after_filter": 5473,
+      "served_orders": 16,
+      "unserved_orders": 28,
+      "average_pickup_wait_sec": 74.27219907559545,
+      "p95_pickup_wait_sec": 196.9243215191786,
+      "total_empty_distance_m": 5941.775926047637,
+      "total_energy_kwh": 30.646912744448574,
+      "total_decision_time_ms": 175.6239610000005,
+      "optimizer_time_ms": 0.473875000000179,
+      "llm_calls": 0
+    },
+    "D1_optimizer": {
+      "scenario_fingerprint_sha256": "b058c273877e18fdb65f38aaa203fddbbf61b559cdb516d8a103a380a61dbb25",
+      "round_count": 42,
+      "invalid_round_count": 0,
+      "one_to_one_violation_count": 0,
+      "hard_feasible_candidate_count_total": 67,
+      "candidate_count_before_filter": 5473,
+      "candidate_count_after_filter": 5473,
+      "served_orders": 16,
+      "unserved_orders": 28,
+      "average_pickup_wait_sec": 74.27219907559545,
+      "p95_pickup_wait_sec": 196.9243215191786,
+      "total_empty_distance_m": 5941.775926047637,
+      "total_energy_kwh": 26.252148336128574,
+      "total_decision_time_ms": 215.15683500000063,
+      "optimizer_time_ms": 0.9045850000002353,
+      "llm_calls": 0
+    },
+    "D2_agent_optimizer": {
+      "scenario_fingerprint_sha256": "b058c273877e18fdb65f38aaa203fddbbf61b559cdb516d8a103a380a61dbb25",
+      "round_count": 42,
+      "invalid_round_count": 0,
+      "one_to_one_violation_count": 0,
+      "hard_feasible_candidate_count_total": 67,
+      "candidate_count_before_filter": 5473,
+      "candidate_count_after_filter": 47,
+      "served_orders": 16,
+      "unserved_orders": 28,
+      "average_pickup_wait_sec": 74.27219907559545,
+      "p95_pickup_wait_sec": 196.9243215191786,
+      "total_empty_distance_m": 5941.775926047637,
+      "total_energy_kwh": 26.252148336128574,
+      "total_decision_time_ms": 282.55521099999953,
+      "optimizer_time_ms": 0.5851689999967213,
+      "llm_calls": 0
+    }
+  },
+  "interpretation": "One synthetic fleet scenario and one seed; mechanism/input-contract evidence only, not NYC performance or a statistical comparison.",
+  "assignment_pair_disagreements_vs_D0": {
+    "D1_optimizer": 1,
+    "D2_agent_optimizer": 1
+  }
+}

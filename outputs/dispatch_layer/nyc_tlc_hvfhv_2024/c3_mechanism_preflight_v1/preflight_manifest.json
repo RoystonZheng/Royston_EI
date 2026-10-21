@@ -1,0 +1,431 @@
+{
+  "experiment_id": "nyc_tlc_c3_multiround_mechanism_preflight_v1",
+  "created_at_utc": "2026-10-19T09:57:55.684181+00:00",
+  "status": "completed_mechanism_preflight",
+  "performance_claim": false,
+  "scenario_id": "C3_manhattan_multizone_44_order_burst",
+  "scenario_fingerprint_sha256": "458eb7d5fedf2f069555067dc5b121788883813888f9c62b9dda5e6176e82a18",
+  "source_scenario_dir": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/multi_vehicle_competition_scenarios_v1/C3_manhattan_multizone_44_order_burst",
+  "source_request_window": [
+    "2024-01-17 20:00:20",
+    "2024-01-17 20:00:30"
+  ],
+  "source_dataset": "bqxa-629f",
+  "source_monthly_file": {
+    "file": "raw/fhvhv_tripdata_2024-01.parquet",
+    "bytes": 472757547,
+    "sha256": "9897de352aa52cea36b70348cc6721b8d4494327ce39c85f0dba83d86ecaa098",
+    "source_url": "https://d37ci6vzurychx.cloudfront.net/trip-data/fhvhv_tripdata_2024-01.parquet"
+  },
+  "dataset_manifest_sha256": "89a27af3722b902a8b6efe50ac1ac1a47f458894b51b4e382a12461a2ef90a25",
+  "experiment_script_sha256": "5ca14ca926b888b3bb971207dc7b1f83d77e52ef66f21d6bb28a568d07778b95",
+  "cost_matrix": {
+    "file": "zone_cost_matrix_train_2024-01-01_15_full_observed_od.csv.gz",
+    "duckdb_version": "1.5.6",
+    "training_window_pickup_datetime": [
+      "2024-01-01 00:00:00",
+      "2024-01-16 00:00:00"
+    ],
+    "aggregation": "median trip_time and trip_miles per directed OD; completed single-match records",
+    "filters": [
+      "shared_match_flag = N",
+      "request_datetime <= pickup_datetime < dropoff_datetime",
+      "trip_time > 0 and trip_miles > 0",
+      "non-null zones and pickup_zone_id != dropoff_zone_id"
+    ],
+    "component_policy": "no SCC clipping; retain every observed qualifying directed OD pair",
+    "directed_od_pair_count": 55388,
+    "training_trip_rows_in_matrix": 8244947,
+    "matrix_sha256": "87a2e4b0135f6159ca1b38719116b88c38b5172c6ba0f0bd1e01295ea2dfbcb0",
+    "matrix_bytes": 500889,
+    "direct_c3_order_od_pair_count": 42,
+    "all_c3_direct_order_od_pairs_present": true
+  },
+  "pickup_cost_policy": "Same-zone vehicle-to-pickup legs have zero time/distance by scenario design. All cross-zone empty pickup routes are explicitly unreachable because occupied TLC trips do not provide empty pickup ETAs.",
+  "ride_cost_policy": "Use only the direct observed median time/distance for each requested OD; no SCC clipping, no shortest-path composition, and no street-level route claim.",
+  "methods": [
+    {
+      "method_name": "D0_greedy",
+      "scenario_fingerprint_sha256": "458eb7d5fedf2f069555067dc5b121788883813888f9c62b9dda5e6176e82a18",
+      "round_audit": {
+        "dispatch_round_count": 41,
+        "candidate_count_total": 26,
+        "hard_feasible_candidate_count_total": 26,
+        "rounds_with_same_order_feasible_for_multiple_vehicles": 5,
+        "distinct_orders_observed_with_multi_vehicle_competition": 9,
+        "selected_assignment_count_across_rounds": 16,
+        "one_to_one_violations": [],
+        "invalid_rounds": [],
+        "rounds_during_request_burst": [
+          {
+            "dispatch_round_id": "round-0000",
+            "time_sec": 0.0,
+            "candidate_count": 8,
+            "hard_feasible_candidate_count": 8,
+            "waiting_order_count": 4,
+            "contested_order_count": 4,
+            "selected_assignment_count": 4,
+            "validator_status": "valid"
+          },
+          {
+            "dispatch_round_id": "round-0001",
+            "time_sec": 0.0,
+            "candidate_count": 0,
+            "hard_feasible_candidate_count": 0,
+            "waiting_order_count": 0,
+            "contested_order_count": 0,
+            "selected_assignment_count": 0,
+            "validator_status": "valid"
+          },
+          {
+            "dispatch_round_id": "round-0002",
+            "time_sec": 1.0,
+            "candidate_count": 6,
+            "hard_feasible_candidate_count": 6,
+            "waiting_order_count": 5,
+            "contested_order_count": 1,
+            "selected_assignment_count": 5,
+            "validator_status": "valid"
+          },
+          {
+            "dispatch_round_id": "round-0003",
+            "time_sec": 1.0,
+            "candidate_count": 0,
+            "hard_feasible_candidate_count": 0,
+            "waiting_order_count": 0,
+            "contested_order_count": 0,
+            "selected_assignment_count": 0,
+            "validator_status": "valid"
+          },
+          {
+            "dispatch_round_id": "round-0004",
+            "time_sec": 2.0,
+            "candidate_count": 2,
+            "hard_feasible_candidate_count": 2,
+            "waiting_order_count": 1,
+            "contested_order_count": 1,
+            "selected_assignment_count": 1,
+            "validator_status": "valid"
+          },
+          {
+            "dispatch_round_id": "round-0005",
+            "time_sec": 2.0,
+            "candidate_count": 0,
+            "hard_feasible_candidate_count": 0,
+            "waiting_order_count": 0,
+            "contested_order_count": 0,
+            "selected_assignment_count": 0,
+            "validator_status": "valid"
+          },
+          {
+            "dispatch_round_id": "round-0006",
+            "time_sec": 3.0,
+            "candidate_count": 2,
+            "hard_feasible_candidate_count": 2,
+            "waiting_order_count": 2,
+            "contested_order_count": 0,
+            "selected_assignment_count": 1,
+            "validator_status": "valid"
+          },
+          {
+            "dispatch_round_id": "round-0007",
+            "time_sec": 3.0,
+            "candidate_count": 0,
+            "hard_feasible_candidate_count": 0,
+            "waiting_order_count": 0,
+            "contested_order_count": 0,
+            "selected_assignment_count": 0,
+            "validator_status": "valid"
+          },
+          {
+            "dispatch_round_id": "round-0008",
+            "time_sec": 4.0,
+            "candidate_count": 3,
+            "hard_feasible_candidate_count": 3,
+            "waiting_order_count": 2,
+            "contested_order_count": 1,
+            "selected_assignment_count": 2,
+            "validator_status": "valid"
+          },
+          {
+            "dispatch_round_id": "round-0009",
+            "time_sec": 4.0,
+            "candidate_count": 0,
+            "hard_feasible_candidate_count": 0,
+            "waiting_order_count": 0,
+            "contested_order_count": 0,
+            "selected_assignment_count": 0,
+            "validator_status": "valid"
+          },
+          {
+            "dispatch_round_id": "round-0010",
+            "time_sec": 5.0,
+            "candidate_count": 4,
+            "hard_feasible_candidate_count": 4,
+            "waiting_order_count": 2,
+            "contested_order_count": 2,
+            "selected_assignment_count": 2,
+            "validator_status": "valid"
+          },
+          {
+            "dispatch_round_id": "round-0011",
+            "time_sec": 5.0,
+            "candidate_count": 0,
+            "hard_feasible_candidate_count": 0,
+            "waiting_order_count": 0,
+            "contested_order_count": 0,
+            "selected_assignment_count": 0,
+            "validator_status": "valid"
+          },
+          {
+            "dispatch_round_id": "round-0012",
+            "time_sec": 6.0,
+            "candidate_count": 0,
+            "hard_feasible_candidate_count": 0,
+            "waiting_order_count": 0,
+            "contested_order_count": 0,
+            "selected_assignment_count": 0,
+            "validator_status": "valid"
+          },
+          {
+            "dispatch_round_id": "round-0013",
+            "time_sec": 7.0,
+            "candidate_count": 0,
+            "hard_feasible_candidate_count": 0,
+            "waiting_order_count": 0,
+            "contested_order_count": 0,
+            "selected_assignment_count": 0,
+            "validator_status": "valid"
+          },
+          {
+            "dispatch_round_id": "round-0014",
+            "time_sec": 8.0,
+            "candidate_count": 0,
+            "hard_feasible_candidate_count": 0,
+            "waiting_order_count": 0,
+            "contested_order_count": 0,
+            "selected_assignment_count": 0,
+            "validator_status": "valid"
+          },
+          {
+            "dispatch_round_id": "round-0015",
+            "time_sec": 9.0,
+            "candidate_count": 1,
+            "hard_feasible_candidate_count": 1,
+            "waiting_order_count": 1,
+            "contested_order_count": 0,
+            "selected_assignment_count": 1,
+            "validator_status": "valid"
+          },
+          {
+            "dispatch_round_id": "round-0016",
+            "time_sec": 9.0,
+            "candidate_count": 0,
+            "hard_feasible_candidate_count": 0,
+            "waiting_order_count": 0,
+            "contested_order_count": 0,
+            "selected_assignment_count": 0,
+            "validator_status": "valid"
+          }
+        ]
+      },
+      "final_status_counts": {
+        "completed": 16,
+        "unserved": 28
+      },
+      "result_file": "D0_greedy.json"
+    },
+    {
+      "method_name": "D1_optimizer",
+      "scenario_fingerprint_sha256": "458eb7d5fedf2f069555067dc5b121788883813888f9c62b9dda5e6176e82a18",
+      "round_audit": {
+        "dispatch_round_count": 41,
+        "candidate_count_total": 26,
+        "hard_feasible_candidate_count_total": 26,
+        "rounds_with_same_order_feasible_for_multiple_vehicles": 5,
+        "distinct_orders_observed_with_multi_vehicle_competition": 9,
+        "selected_assignment_count_across_rounds": 16,
+        "one_to_one_violations": [],
+        "invalid_rounds": [],
+        "rounds_during_request_burst": [
+          {
+            "dispatch_round_id": "round-0000",
+            "time_sec": 0.0,
+            "candidate_count": 8,
+            "hard_feasible_candidate_count": 8,
+            "waiting_order_count": 4,
+            "contested_order_count": 4,
+            "selected_assignment_count": 4,
+            "validator_status": "valid"
+          },
+          {
+            "dispatch_round_id": "round-0001",
+            "time_sec": 0.0,
+            "candidate_count": 0,
+            "hard_feasible_candidate_count": 0,
+            "waiting_order_count": 0,
+            "contested_order_count": 0,
+            "selected_assignment_count": 0,
+            "validator_status": "valid"
+          },
+          {
+            "dispatch_round_id": "round-0002",
+            "time_sec": 1.0,
+            "candidate_count": 6,
+            "hard_feasible_candidate_count": 6,
+            "waiting_order_count": 5,
+            "contested_order_count": 1,
+            "selected_assignment_count": 5,
+            "validator_status": "valid"
+          },
+          {
+            "dispatch_round_id": "round-0003",
+            "time_sec": 1.0,
+            "candidate_count": 0,
+            "hard_feasible_candidate_count": 0,
+            "waiting_order_count": 0,
+            "contested_order_count": 0,
+            "selected_assignment_count": 0,
+            "validator_status": "valid"
+          },
+          {
+            "dispatch_round_id": "round-0004",
+            "time_sec": 2.0,
+            "candidate_count": 2,
+            "hard_feasible_candidate_count": 2,
+            "waiting_order_count": 1,
+            "contested_order_count": 1,
+            "selected_assignment_count": 1,
+            "validator_status": "valid"
+          },
+          {
+            "dispatch_round_id": "round-0005",
+            "time_sec": 2.0,
+            "candidate_count": 0,
+            "hard_feasible_candidate_count": 0,
+            "waiting_order_count": 0,
+            "contested_order_count": 0,
+            "selected_assignment_count": 0,
+            "validator_status": "valid"
+          },
+          {
+            "dispatch_round_id": "round-0006",
+            "time_sec": 3.0,
+            "candidate_count": 2,
+            "hard_feasible_candidate_count": 2,
+            "waiting_order_count": 2,
+            "contested_order_count": 0,
+            "selected_assignment_count": 1,
+            "validator_status": "valid"
+          },
+          {
+            "dispatch_round_id": "round-0007",
+            "time_sec": 3.0,
+            "candidate_count": 0,
+            "hard_feasible_candidate_count": 0,
+            "waiting_order_count": 0,
+            "contested_order_count": 0,
+            "selected_assignment_count": 0,
+            "validator_status": "valid"
+          },
+          {
+            "dispatch_round_id": "round-0008",
+            "time_sec": 4.0,
+            "candidate_count": 3,
+            "hard_feasible_candidate_count": 3,
+            "waiting_order_count": 2,
+            "contested_order_count": 1,
+            "selected_assignment_count": 2,
+            "validator_status": "valid"
+          },
+          {
+            "dispatch_round_id": "round-0009",
+            "time_sec": 4.0,
+            "candidate_count": 0,
+            "hard_feasible_candidate_count": 0,
+            "waiting_order_count": 0,
+            "contested_order_count": 0,
+            "selected_assignment_count": 0,
+            "validator_status": "valid"
+          },
+          {
+            "dispatch_round_id": "round-0010",
+            "time_sec": 5.0,
+            "candidate_count": 4,
+            "hard_feasible_candidate_count": 4,
+            "waiting_order_count": 2,
+            "contested_order_count": 2,
+            "selected_assignment_count": 2,
+            "validator_status": "valid"
+          },
+          {
+            "dispatch_round_id": "round-0011",
+            "time_sec": 5.0,
+            "candidate_count": 0,
+            "hard_feasible_candidate_count": 0,
+            "waiting_order_count": 0,
+            "contested_order_count": 0,
+            "selected_assignment_count": 0,
+            "validator_status": "valid"
+          },
+          {
+            "dispatch_round_id": "round-0012",
+            "time_sec": 6.0,
+            "candidate_count": 0,
+            "hard_feasible_candidate_count": 0,
+            "waiting_order_count": 0,
+            "contested_order_count": 0,
+            "selected_assignment_count": 0,
+            "validator_status": "valid"
+          },
+          {
+            "dispatch_round_id": "round-0013",
+            "time_sec": 7.0,
+            "candidate_count": 0,
+            "hard_feasible_candidate_count": 0,
+            "waiting_order_count": 0,
+            "contested_order_count": 0,
+            "selected_assignment_count": 0,
+            "validator_status": "valid"
+          },
+          {
+            "dispatch_round_id": "round-0014",
+            "time_sec": 8.0,
+            "candidate_count": 0,
+            "hard_feasible_candidate_count": 0,
+            "waiting_order_count": 0,
+            "contested_order_count": 0,
+            "selected_assignment_count": 0,
+            "validator_status": "valid"
+          },
+          {
+            "dispatch_round_id": "round-0015",
+            "time_sec": 9.0,
+            "candidate_count": 1,
+            "hard_feasible_candidate_count": 1,
+            "waiting_order_count": 1,
+            "contested_order_count": 0,
+            "selected_assignment_count": 1,
+            "validator_status": "valid"
+          },
+          {
+            "dispatch_round_id": "round-0016",
+            "time_sec": 9.0,
+            "candidate_count": 0,
+            "hard_feasible_candidate_count": 0,
+            "waiting_order_count": 0,
+            "contested_order_count": 0,
+            "selected_assignment_count": 0,
+            "validator_status": "valid"
+          }
+        ]
+      },
+      "final_status_counts": {
+        "completed": 16,
+        "unserved": 28
+      },
+      "result_file": "D1_optimizer.json"
+    }
+  ],
+  "interpretation": "Checks multi-round candidate generation, same-zone multi-vehicle competition, one-to-one assignment validation, and D0/D1 execution on identical inputs. Synthetic vehicle positions, zero within-zone pickup cost, already-dispatched TLC trips, and occupied-trip OD proxies mean these results are not NYC service, wait-time, or algorithm-performance estimates."
+}

@@ -1,0 +1,68 @@
+{
+  "scenario_id": "C1_one_order_three_vehicle_candidates",
+  "title": "单订单多车候选机制检查",
+  "source_dataset": "NYC TLC 2024 High-Volume FHV, single-match candidate request trace",
+  "source_request_window": [
+    "2024-01-20 21:54:06",
+    "2024-01-20 21:54:07"
+  ],
+  "request_trace_row_count": 1,
+  "origin_zone_counts": {
+    "79": 1
+  },
+  "distinct_origin_zone_count": 1,
+  "distinct_destination_zone_count": 1,
+  "fleet_variants": [
+    {
+      "fleet_id": "F3_same_zone",
+      "vehicle_count": 3,
+      "positions_by_zone": {
+        "79": 3
+      },
+      "vehicles": [
+        {
+          "vehicle_id": "C1-001",
+          "initial_position_node_id": "zone_79",
+          "position_node_id": "zone_79"
+        },
+        {
+          "vehicle_id": "C1-002",
+          "initial_position_node_id": "zone_79",
+          "position_node_id": "zone_79"
+        },
+        {
+          "vehicle_id": "C1-003",
+          "initial_position_node_id": "zone_79",
+          "position_node_id": "zone_79"
+        }
+      ],
+      "initial_same_zone_candidate_count_per_order": "count of synthetic vehicles placed in that order's pickup zone"
+    }
+  ],
+  "dispatch_controls": {
+    "max_pickup_wait_sec": 300.0,
+    "passenger_no_show_rate": 0.0,
+    "one_to_one_assignment": true,
+    "time_origin": "2024-01-20 21:54:06",
+    "horizon_sec": 60
+  },
+  "intended_competition": "One order has three initially co-located synthetic vehicles available.",
+  "limitations": [
+    "Mechanism-only singleton; not a performance comparison.",
+    "Synthetic vehicles are deliberately placed in request pickup zones; this creates zero zone-level pickup time and omits within-zone driving distance.",
+    "NYC TLC rows are already-dispatched/completed trips; unserved demand and real vehicle availability are absent.",
+    "The existing zone OD proxy from the earlier pilot is not included as a validated road-cost model."
+  ],
+  "input_files": {
+    "orders_json": {
+      "file": "orders.json",
+      "sha256": "00fb73b8250c7ef9c3d1a355a41565a635680705284bba14836d15e68543ada3",
+      "bytes": 517
+    },
+    "orders_parquet": {
+      "file": "orders.parquet",
+      "sha256": "77c0f8e93a61a0f2a9e393dcafa890b398c9fefe6dca77a59cb67a0b242e10ce",
+      "bytes": 2058
+    }
+  }
+}

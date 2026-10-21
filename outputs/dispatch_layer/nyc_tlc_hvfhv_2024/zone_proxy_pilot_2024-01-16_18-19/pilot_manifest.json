@@ -1,0 +1,145 @@
+{
+  "experiment_label": "exploratory_zone_proxy_pilot_not_formal_result",
+  "created_date": "2026-10-19",
+  "pilot_script_sha256": "c5fed177173f7bd11d31cb5d4aba5825e4df5d4ff3d75fbb7b11be8d4cbb1b78",
+  "duckdb_version": "1.5.6",
+  "source_dataset_id": "bqxa-629f",
+  "source_monthly_file_sha256": {
+    "fhvhv_tripdata_2024-01.parquet": "9897de352aa52cea36b70348cc6721b8d4494327ce39c85f0dba83d86ecaa098",
+    "fhvhv_tripdata_2024-02.parquet": "54bafa7bcf3f06e7833fcbccf7ef158eb793a72ee1c4bb8bf080e56ae71a15d6"
+  },
+  "request_trace_sha256": "f9d48edf6cb764ec209808fbe6edebe843e4c3283280de43742eff5f8d3177cd",
+  "cost_model": {
+    "source_fields": [
+      "trip_time",
+      "trip_miles"
+    ],
+    "training_pickup_window": [
+      "2024-01-01 00:00:00",
+      "2024-01-16 00:00:00"
+    ],
+    "aggregation": "directed taxi-zone OD medians over completed single-match trips",
+    "empty_vehicle_travel_assumption": "occupied trip OD medians proxy empty reposition and ride-leg costs",
+    "missing_direct_pair": "Dijkstra over observed directed zone OD proxy edges",
+    "component_policy": "largest strongly connected component of training OD graph",
+    "zone_count": 260,
+    "directed_cost_pair_count": 55143,
+    "coordinate_note": "zone_id is stored in the x field only as a stable placeholder; map coordinates are not geographic and are not used for routing",
+    "cost_matrix_file": "zone_cost_matrix_train_2024-01-01_15.csv.gz",
+    "cost_matrix_sha256": "399929432d67e2612765831dd114a163b11a9895c4a04a124f346ea6b8c8e783"
+  },
+  "test_sample": {
+    "request_time_window": [
+      "2024-01-16 18:00:00",
+      "2024-01-16 19:00:00"
+    ],
+    "window_total_events": 38782,
+    "window_events_with_both_zones_in_component": 38631,
+    "window_cross_zone_events_within_component": 35349,
+    "sample_size": 100,
+    "sample_fraction": 0.0028289343404339583,
+    "sample_method": "deterministic lowest MD5(source_record_id) sample; original request timestamps retained",
+    "same_zone_orders_excluded": true,
+    "vehicle_count": 10,
+    "vehicle_initial_positions": [
+      "zone_231",
+      "zone_212",
+      "zone_125",
+      "zone_76",
+      "zone_141",
+      "zone_116",
+      "zone_220",
+      "zone_84",
+      "zone_137",
+      "zone_159"
+    ],
+    "vehicle_initialization": "synthetic, sampled with replacement by Jan 1-15 pickup-zone frequency",
+    "no_show_rate": 0.0
+  },
+  "method_results": [
+    {
+      "method": "D0_greedy",
+      "result_file": "D0_greedy_pilot.json",
+      "summary": {
+        "experiment_run_id": "run-seed-0",
+        "method_name": "D0_greedy",
+        "seed": 0,
+        "map_id": "nyc_hvfhv_empirical_zone_cost_graph_v1",
+        "vehicle_count": 10,
+        "order_count": 100,
+        "served_orders": 5,
+        "unserved_orders": 95,
+        "cancelled_orders": 0,
+        "service_rate": 0.05,
+        "average_pickup_wait_sec": 0.0,
+        "p95_pickup_wait_sec": 0.0,
+        "max_pickup_wait_sec": 0.0,
+        "total_empty_distance_m": 0.0,
+        "total_energy_kwh": 2.78007738624,
+        "total_dispatch_rounds": 199,
+        "total_llm_calls": 0,
+        "total_api_cost": 0.0,
+        "total_decision_time_ms": 165.57221906259656,
+        "optimizer_time_ms": 0.7655736990272999,
+        "candidate_count_before_filter": 5,
+        "candidate_count_after_filter": 5,
+        "fallback_count": 0,
+        "commitment_violations": 0,
+        "status_counts": {
+          "unserved": 95,
+          "completed": 5
+        }
+      },
+      "candidate_conflict_audit": {
+        "rounds_with_order_feasible_for_multiple_vehicles": 0,
+        "orders_with_multi_vehicle_competition": 0
+      }
+    },
+    {
+      "method": "D1_optimizer",
+      "result_file": "D1_optimizer_pilot.json",
+      "summary": {
+        "experiment_run_id": "run-seed-0",
+        "method_name": "D1_optimizer",
+        "seed": 0,
+        "map_id": "nyc_hvfhv_empirical_zone_cost_graph_v1",
+        "vehicle_count": 10,
+        "order_count": 100,
+        "served_orders": 5,
+        "unserved_orders": 95,
+        "cancelled_orders": 0,
+        "service_rate": 0.05,
+        "average_pickup_wait_sec": 0.0,
+        "p95_pickup_wait_sec": 0.0,
+        "max_pickup_wait_sec": 0.0,
+        "total_empty_distance_m": 0.0,
+        "total_energy_kwh": 2.78007738624,
+        "total_dispatch_rounds": 199,
+        "total_llm_calls": 0,
+        "total_api_cost": 0.0,
+        "total_decision_time_ms": 165.4681672807783,
+        "optimizer_time_ms": 0.23058149963617325,
+        "candidate_count_before_filter": 5,
+        "candidate_count_after_filter": 5,
+        "fallback_count": 0,
+        "commitment_violations": 0,
+        "status_counts": {
+          "unserved": 95,
+          "completed": 5
+        }
+      },
+      "candidate_conflict_audit": {
+        "rounds_with_order_feasible_for_multiple_vehicles": 0,
+        "orders_with_multi_vehicle_competition": 0
+      }
+    }
+  ],
+  "limitations": [
+    "Only completed/dispatched source trips are present; unserved requests are absent.",
+    "The cost graph is a taxi-zone proxy, not a physical road graph or route-layer experiment.",
+    "Occupied trip time/distance do not equal empty pickup-leg costs.",
+    "The 100-order sample is heavily downsampled from the citywide hour and is not an NYC service-rate estimate.",
+    "Vehicle states and no-show behavior are assumptions; no actual fleet identifiers or states are available.",
+    "This is one fixed-window pilot, not a multi-seed formal comparison."
+  ]
+}

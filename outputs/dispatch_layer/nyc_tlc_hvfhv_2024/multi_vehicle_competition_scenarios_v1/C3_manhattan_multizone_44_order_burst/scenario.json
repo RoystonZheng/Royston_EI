@@ -1,0 +1,159 @@
+{
+  "scenario_id": "C3_manhattan_multizone_44_order_burst",
+  "title": "曼哈顿九起点区跨区突发",
+  "source_dataset": "NYC TLC 2024 High-Volume FHV, single-match candidate request trace",
+  "source_request_window": [
+    "2024-01-17 20:00:20",
+    "2024-01-17 20:00:30"
+  ],
+  "request_trace_row_count": 44,
+  "origin_zone_counts": {
+    "79": 3,
+    "125": 1,
+    "161": 13,
+    "162": 8,
+    "163": 7,
+    "164": 6,
+    "230": 2,
+    "231": 1,
+    "234": 3
+  },
+  "distinct_origin_zone_count": 9,
+  "distinct_destination_zone_count": 32,
+  "fleet_variants": [
+    {
+      "fleet_id": "F2_per_observed_origin",
+      "vehicle_count": 18,
+      "positions_by_zone": {
+        "79": 2,
+        "125": 2,
+        "161": 2,
+        "162": 2,
+        "163": 2,
+        "164": 2,
+        "230": 2,
+        "231": 2,
+        "234": 2
+      },
+      "vehicles": [
+        {
+          "vehicle_id": "C3-001",
+          "initial_position_node_id": "zone_79",
+          "position_node_id": "zone_79"
+        },
+        {
+          "vehicle_id": "C3-002",
+          "initial_position_node_id": "zone_79",
+          "position_node_id": "zone_79"
+        },
+        {
+          "vehicle_id": "C3-003",
+          "initial_position_node_id": "zone_125",
+          "position_node_id": "zone_125"
+        },
+        {
+          "vehicle_id": "C3-004",
+          "initial_position_node_id": "zone_125",
+          "position_node_id": "zone_125"
+        },
+        {
+          "vehicle_id": "C3-005",
+          "initial_position_node_id": "zone_161",
+          "position_node_id": "zone_161"
+        },
+        {
+          "vehicle_id": "C3-006",
+          "initial_position_node_id": "zone_161",
+          "position_node_id": "zone_161"
+        },
+        {
+          "vehicle_id": "C3-007",
+          "initial_position_node_id": "zone_162",
+          "position_node_id": "zone_162"
+        },
+        {
+          "vehicle_id": "C3-008",
+          "initial_position_node_id": "zone_162",
+          "position_node_id": "zone_162"
+        },
+        {
+          "vehicle_id": "C3-009",
+          "initial_position_node_id": "zone_163",
+          "position_node_id": "zone_163"
+        },
+        {
+          "vehicle_id": "C3-010",
+          "initial_position_node_id": "zone_163",
+          "position_node_id": "zone_163"
+        },
+        {
+          "vehicle_id": "C3-011",
+          "initial_position_node_id": "zone_164",
+          "position_node_id": "zone_164"
+        },
+        {
+          "vehicle_id": "C3-012",
+          "initial_position_node_id": "zone_164",
+          "position_node_id": "zone_164"
+        },
+        {
+          "vehicle_id": "C3-013",
+          "initial_position_node_id": "zone_230",
+          "position_node_id": "zone_230"
+        },
+        {
+          "vehicle_id": "C3-014",
+          "initial_position_node_id": "zone_230",
+          "position_node_id": "zone_230"
+        },
+        {
+          "vehicle_id": "C3-015",
+          "initial_position_node_id": "zone_231",
+          "position_node_id": "zone_231"
+        },
+        {
+          "vehicle_id": "C3-016",
+          "initial_position_node_id": "zone_231",
+          "position_node_id": "zone_231"
+        },
+        {
+          "vehicle_id": "C3-017",
+          "initial_position_node_id": "zone_234",
+          "position_node_id": "zone_234"
+        },
+        {
+          "vehicle_id": "C3-018",
+          "initial_position_node_id": "zone_234",
+          "position_node_id": "zone_234"
+        }
+      ],
+      "initial_same_zone_candidate_count_per_order": "count of synthetic vehicles placed in that order's pickup zone"
+    }
+  ],
+  "dispatch_controls": {
+    "max_pickup_wait_sec": 300.0,
+    "passenger_no_show_rate": 0.0,
+    "one_to_one_assignment": true,
+    "time_origin": "2024-01-17 20:00:20",
+    "horizon_sec": 60
+  },
+  "intended_competition": "Forty-four requests over ten seconds across nine Manhattan pickup zones; two co-located synthetic vehicles per observed origin create same-zone multi-vehicle candidates and same-zone order contention.",
+  "limitations": [
+    "This dense supply layout is controlled and does not estimate actual vehicle supply or cross-zone reachability.",
+    "Synthetic vehicles are deliberately placed in request pickup zones; this creates zero zone-level pickup time and omits within-zone driving distance.",
+    "NYC TLC rows are already-dispatched/completed trips; unserved demand and real vehicle availability are absent.",
+    "The existing zone OD proxy from the earlier pilot is not included as a validated road-cost model."
+  ],
+  "input_files": {
+    "orders_json": {
+      "file": "orders.json",
+      "sha256": "bfbae3bca04c69216d7583aaddb1c71f89a673cb184059214c22f046d893f3a0",
+      "bytes": 12373
+    },
+    "orders_parquet": {
+      "file": "orders.parquet",
+      "sha256": "6eb299aa886083ec11ffe85809e1352748f7aee8609d0cdab328e4fbf92410f6",
+      "bytes": 3029
+    }
+  }
+}

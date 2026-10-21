@@ -1,0 +1,36 @@
+{
+  "experiment": "traditional_baselines_complete_v1",
+  "methods": [
+    "D0_greedy",
+    "D1_optimizer"
+  ],
+  "cells": [
+    {
+      "case": "C2_four_same_second_orders_three_vehicles",
+      "fleet_id": null,
+      "seed": 0
+    },
+    {
+      "case": "C3_manhattan_multizone_44_order_burst",
+      "fleet_id": null,
+      "seed": 0
+    },
+    {
+      "case": "C4_manhattan_790_order_five_minute_load_sweep",
+      "fleet_id": "F1",
+      "seed": 0
+    },
+    {
+      "case": "C4_manhattan_790_order_five_minute_load_sweep",
+      "fleet_id": "F2",
+      "seed": 0
+    },
+    {
+      "case": "C4_manhattan_790_order_five_minute_load_sweep",
+      "fleet_id": "F4",
+      "seed": 0
+    }
+  ],
+  "recording_mode": "compact_round_audits_with_full_first_round_candidate_table",
+  "reason_for_single_seed_per_cell": "Each case and fleet layout is fixed; the earlier C3 seeds 0-9 produced identical decisions and outcomes, so duplicate seeds do not add independent demand samples."
+}

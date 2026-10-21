@@ -1,0 +1,3 @@
+# C3 multi-round mechanism preflight
+
+This package runs D0 and D1 on the 44-order, 18-vehicle C3 burst using identical inputs. It rebuilds an untrimmed observed zone OD training matrix from January 1–15 source trips. Pickup cost is zero only for same-zone vehicles; cross-zone empty pickup is unavailable. The matrix stores direct occupied-trip medians and is not a road network. Results validate mechanism execution and are not NYC performance estimates. See `preflight_manifest.json`, the two per-method logs, and `execution_source_snapshot_audit.json`. The runner source snapshot is saved and its SHA-256 matches the source hash recorded at run time.

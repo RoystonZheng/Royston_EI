@@ -1,0 +1,54 @@
+{
+  "classification": "matching preflight only; no route-cost assignment and no dispatch rerun",
+  "generated_at_utc": "2026-10-20T03:12:39+00:00",
+  "inputs_sha256": {
+    "ezpass_snapshot": "b4b467fc31f3245cd07ab1048d0aa7d81d08ebbcc3f78803d40bd8e7de15aaca",
+    "cscl_manhattan_snapshot": "7de50e9521dc50d6803d45e9a6a50b49a7e0b80fda4ce2661c806f86d24ed4f9",
+    "matching_script": "101476ad48e2c3c8ed00aa454b77d9d726f88e9c43538c69ccaa5801a2f689ed"
+  },
+  "coordinate_method": "local equirectangular projection at 40.76N; adequate for short-distance screening, not survey-grade measurement",
+  "sampling_spacing_m": 15.0,
+  "match_radius_m": 25.0,
+  "cscl_manhattan_features": 14111,
+  "cscl_vehicle_direction_features_ft_tf_tw": 11435,
+  "cscl_geometry_segments_indexed": 26987,
+  "ezpass_manhattan_links": 180,
+  "ezpass_manhattan_links_with_valid_observed_time": 133,
+  "valid_links_name_and_geometry_matched": 129,
+  "valid_link_match_rate": 0.9699,
+  "unique_cscl_physicalids_associated_with_matched_valid_links": 575,
+  "direction_check_basis": "E-ZPass encoded polyline point order vs nearest same-name CSCL segment geometry; FT permits digitized direction, TF reverse, TW either; excludes |heading cosine| < 0.5. This is a screening check, not a traffic-direction ground-truth audit.",
+  "valid_matched_link_direction_interval_counts": {
+    "comparable": 3911,
+    "compatible": 3911,
+    "incompatible": 0,
+    "one_way_comparable": 2530,
+    "one_way_compatible": 2530,
+    "one_way_incompatible": 0,
+    "two_way_comparable": 1381
+  },
+  "approx_feature_coverage_denominator_note": "This ratio is not reported as a route-cost coverage rate: sensor links can cover only part of a CSCL feature, and one sensor time has not yet been apportioned across features.",
+  "matched_feature_trafdir_counts_nonexclusive": {
+    "TW": 212,
+    "TF": 324,
+    "FT": 191
+  },
+  "valid_time_link_match_status_counts": {
+    "name_geometry_match": 129,
+    "unmatched": 2,
+    "geometry_only_name_mismatch": 2
+  },
+  "all_link_match_status_counts": {
+    "geometry_only_name_mismatch": 4,
+    "name_geometry_match": 174,
+    "unmatched": 2
+  },
+  "limitations": [
+    "CSCL is the current 2026 street centerline while E-ZPass costs are a January 2024 snapshot.",
+    "A name-and-geometry match identifies candidate roadway features only. Sampled one-way direction checks are reported separately; this does not prove exact sensor-to-edge overlap or cost allocation.",
+    "No median travel time has been assigned to CSCL edges; no unobserved edge has been filled or treated as zero.",
+    "No directed shortest paths, zone-to-zone cost matrix, D0/D1 rerun, or route-layer rerun were produced.",
+    "The local projection and 15m sampling are screening approximations; finalists require exact projected geometry validation."
+  ],
+  "per_sensor_records": 180
+}

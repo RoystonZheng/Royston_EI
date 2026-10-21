@@ -1,0 +1,355 @@
+{
+  "experiment_id": "nyc_tlc_c4_load_sweep_mechanism_v1",
+  "created_at_utc": "2026-10-19T12:03:52.893149+00:00",
+  "status": "completed_mechanism_preflight",
+  "performance_claim": false,
+  "scenario_id": "C4_manhattan_790_order_five_minute_load_sweep",
+  "scenario_metadata_sha256": "f61a787ec2bb2a8d2eadb719d33755784ad868710dde3727540671e48036909e",
+  "orders_json_sha256": "b4431ba0c6c47209f4d6d0c1093e5755769402d4e0b5f0c5c4034ebdf51decc1",
+  "dataset_manifest_sha256": "89a27af3722b902a8b6efe50ac1ac1a47f458894b51b4e382a12461a2ef90a25",
+  "source_monthly_file": {
+    "file": "raw/fhvhv_tripdata_2024-01.parquet",
+    "bytes": 472757547,
+    "sha256": "9897de352aa52cea36b70348cc6721b8d4494327ce39c85f0dba83d86ecaa098",
+    "source_url": "https://d37ci6vzurychx.cloudfront.net/trip-data/fhvhv_tripdata_2024-01.parquet"
+  },
+  "experiment_script_sha256": "ccb1e3e5073f5c46803c34619e2aeb1efece22796be6bdcdb343488aabb4e681",
+  "cost_matrix": {
+    "file": "zone_cost_matrix_train_2024-01-01_15_full_observed_od_including_same_zone.csv.gz",
+    "duckdb_version": "1.5.6",
+    "training_window_pickup_datetime": [
+      "2024-01-01 00:00:00",
+      "2024-01-16 00:00:00"
+    ],
+    "aggregation": "median trip_time and trip_miles per directed OD; completed single-match records",
+    "filters": [
+      "shared_match_flag = N",
+      "request_datetime <= pickup_datetime < dropoff_datetime",
+      "trip_time > 0 and trip_miles > 0",
+      "non-null zones"
+    ],
+    "same_zone_pairs_included": true,
+    "component_policy": "no SCC clipping; retain every observed qualifying directed OD pair",
+    "directed_od_pair_count": 55644,
+    "training_trip_rows_in_matrix": 8915237,
+    "matrix_sha256": "c9834f243b351b9dbc1cb7e1baefeac92ec50d87aeb65f9176af6ffd02b85dd3",
+    "matrix_bytes": 503398,
+    "same_zone_order_od_pair_count": 8
+  },
+  "fleet_scenario_fingerprints": {
+    "F1": "9311077f6911a800da0537930e2e77b9c5180fe8e1f113e5fd66541fc119edaf",
+    "F2": "cdb1f1461c800ea245922b99c71addf6190c2e6e33bd7553f1ef2c52b83098e4",
+    "F4": "ae12e470adff4664f765bf054eeb2d412dccec5f598c8aeab37670f82e630537"
+  },
+  "methods": [
+    {
+      "fleet_id": "F1",
+      "vehicle_count": 12,
+      "method_name": "D0_greedy",
+      "scenario_fingerprint_sha256": "9311077f6911a800da0537930e2e77b9c5180fe8e1f113e5fd66541fc119edaf",
+      "summary": {
+        "experiment_run_id": "run-seed-0",
+        "method_name": "D0_greedy",
+        "seed": 0,
+        "map_id": "nyc_tlc_zone_od_proxy_v1",
+        "vehicle_count": 12,
+        "order_count": 790,
+        "served_orders": 13,
+        "unserved_orders": 777,
+        "cancelled_orders": 0,
+        "service_rate": 0.016455696202531647,
+        "average_pickup_wait_sec": 22.53846153846154,
+        "p95_pickup_wait_sec": 293.0,
+        "max_pickup_wait_sec": 293.0,
+        "total_empty_distance_m": 0.0,
+        "total_energy_kwh": 14.494379708159999,
+        "total_dispatch_rounds": 572,
+        "total_llm_calls": 0,
+        "total_api_cost": 0.0,
+        "total_decision_time_ms": 23297.760960413143,
+        "optimizer_time_ms": 64.79101441800594,
+        "candidate_count_before_filter": 14,
+        "candidate_count_after_filter": 14,
+        "fallback_count": 0,
+        "commitment_violations": 0,
+        "status_counts": {
+          "completed": 13,
+          "unserved": 777
+        }
+      },
+      "candidate_audit": {
+        "dispatch_round_count": 572,
+        "candidate_decision_count": 2453420,
+        "retained_candidate_count": 14,
+        "rejected_decision_counts_by_reason": {
+          "cross_zone_empty_pickup_cost_unavailable": 2442695,
+          "max_pickup_wait_exceeded": 10711
+        },
+        "rounds_with_multi_vehicle_order_competition": 0,
+        "distinct_orders_with_multi_vehicle_competition": 0,
+        "selected_assignment_count": 13,
+        "validation_error_count": 0
+      },
+      "result_file": "D0_greedy_F1.json"
+    },
+    {
+      "fleet_id": "F1",
+      "vehicle_count": 12,
+      "method_name": "D1_optimizer",
+      "scenario_fingerprint_sha256": "9311077f6911a800da0537930e2e77b9c5180fe8e1f113e5fd66541fc119edaf",
+      "summary": {
+        "experiment_run_id": "run-seed-0",
+        "method_name": "D1_optimizer",
+        "seed": 0,
+        "map_id": "nyc_tlc_zone_od_proxy_v1",
+        "vehicle_count": 12,
+        "order_count": 790,
+        "served_orders": 13,
+        "unserved_orders": 777,
+        "cancelled_orders": 0,
+        "service_rate": 0.016455696202531647,
+        "average_pickup_wait_sec": 22.53846153846154,
+        "p95_pickup_wait_sec": 293.0,
+        "max_pickup_wait_sec": 293.0,
+        "total_empty_distance_m": 0.0,
+        "total_energy_kwh": 13.803778010879999,
+        "total_dispatch_rounds": 572,
+        "total_llm_calls": 0,
+        "total_api_cost": 0.0,
+        "total_decision_time_ms": 25676.534275291488,
+        "optimizer_time_ms": 4.140461329370737,
+        "candidate_count_before_filter": 14,
+        "candidate_count_after_filter": 14,
+        "fallback_count": 0,
+        "commitment_violations": 0,
+        "status_counts": {
+          "completed": 13,
+          "unserved": 777
+        }
+      },
+      "candidate_audit": {
+        "dispatch_round_count": 572,
+        "candidate_decision_count": 2453420,
+        "retained_candidate_count": 14,
+        "rejected_decision_counts_by_reason": {
+          "cross_zone_empty_pickup_cost_unavailable": 2442695,
+          "max_pickup_wait_exceeded": 10711
+        },
+        "rounds_with_multi_vehicle_order_competition": 0,
+        "distinct_orders_with_multi_vehicle_competition": 0,
+        "selected_assignment_count": 13,
+        "validation_error_count": 0
+      },
+      "result_file": "D1_optimizer_F1.json"
+    },
+    {
+      "fleet_id": "F2",
+      "vehicle_count": 24,
+      "method_name": "D0_greedy",
+      "scenario_fingerprint_sha256": "cdb1f1461c800ea245922b99c71addf6190c2e6e33bd7553f1ef2c52b83098e4",
+      "summary": {
+        "experiment_run_id": "run-seed-0",
+        "method_name": "D0_greedy",
+        "seed": 0,
+        "map_id": "nyc_tlc_zone_od_proxy_v1",
+        "vehicle_count": 24,
+        "order_count": 790,
+        "served_orders": 25,
+        "unserved_orders": 765,
+        "cancelled_orders": 0,
+        "service_rate": 0.03164556962025317,
+        "average_pickup_wait_sec": 11.72,
+        "p95_pickup_wait_sec": 0.0,
+        "max_pickup_wait_sec": 293.0,
+        "total_empty_distance_m": 0.0,
+        "total_energy_kwh": 29.687906730239998,
+        "total_dispatch_rounds": 586,
+        "total_llm_calls": 0,
+        "total_api_cost": 0.0,
+        "total_decision_time_ms": 42695.482531096786,
+        "optimizer_time_ms": 40.89815285988152,
+        "candidate_count_before_filter": 39,
+        "candidate_count_after_filter": 39,
+        "fallback_count": 0,
+        "commitment_violations": 0,
+        "status_counts": {
+          "completed": 25,
+          "unserved": 765
+        }
+      },
+      "candidate_audit": {
+        "dispatch_round_count": 586,
+        "candidate_decision_count": 4961398,
+        "retained_candidate_count": 39,
+        "rejected_decision_counts_by_reason": {
+          "cross_zone_empty_pickup_cost_unavailable": 4815777,
+          "max_pickup_wait_exceeded": 145582
+        },
+        "rounds_with_multi_vehicle_order_competition": 8,
+        "distinct_orders_with_multi_vehicle_competition": 13,
+        "selected_assignment_count": 25,
+        "validation_error_count": 0
+      },
+      "result_file": "D0_greedy_F2.json"
+    },
+    {
+      "fleet_id": "F2",
+      "vehicle_count": 24,
+      "method_name": "D1_optimizer",
+      "scenario_fingerprint_sha256": "cdb1f1461c800ea245922b99c71addf6190c2e6e33bd7553f1ef2c52b83098e4",
+      "summary": {
+        "experiment_run_id": "run-seed-0",
+        "method_name": "D1_optimizer",
+        "seed": 0,
+        "map_id": "nyc_tlc_zone_od_proxy_v1",
+        "vehicle_count": 24,
+        "order_count": 790,
+        "served_orders": 25,
+        "unserved_orders": 765,
+        "cancelled_orders": 0,
+        "service_rate": 0.03164556962025317,
+        "average_pickup_wait_sec": 11.72,
+        "p95_pickup_wait_sec": 0.0,
+        "max_pickup_wait_sec": 293.0,
+        "total_empty_distance_m": 0.0,
+        "total_energy_kwh": 29.687906730239998,
+        "total_dispatch_rounds": 586,
+        "total_llm_calls": 0,
+        "total_api_cost": 0.0,
+        "total_decision_time_ms": 37067.16349511407,
+        "optimizer_time_ms": 2.59871082380414,
+        "candidate_count_before_filter": 39,
+        "candidate_count_after_filter": 39,
+        "fallback_count": 0,
+        "commitment_violations": 0,
+        "status_counts": {
+          "completed": 25,
+          "unserved": 765
+        }
+      },
+      "candidate_audit": {
+        "dispatch_round_count": 586,
+        "candidate_decision_count": 4961398,
+        "retained_candidate_count": 39,
+        "rejected_decision_counts_by_reason": {
+          "cross_zone_empty_pickup_cost_unavailable": 4815777,
+          "max_pickup_wait_exceeded": 145582
+        },
+        "rounds_with_multi_vehicle_order_competition": 8,
+        "distinct_orders_with_multi_vehicle_competition": 13,
+        "selected_assignment_count": 25,
+        "validation_error_count": 0
+      },
+      "result_file": "D1_optimizer_F2.json"
+    },
+    {
+      "fleet_id": "F4",
+      "vehicle_count": 48,
+      "method_name": "D0_greedy",
+      "scenario_fingerprint_sha256": "ae12e470adff4664f765bf054eeb2d412dccec5f598c8aeab37670f82e630537",
+      "summary": {
+        "experiment_run_id": "run-seed-0",
+        "method_name": "D0_greedy",
+        "seed": 0,
+        "map_id": "nyc_tlc_zone_od_proxy_v1",
+        "vehicle_count": 48,
+        "order_count": 790,
+        "served_orders": 50,
+        "unserved_orders": 740,
+        "cancelled_orders": 0,
+        "service_rate": 0.06329113924050633,
+        "average_pickup_wait_sec": 11.8,
+        "p95_pickup_wait_sec": 0.0,
+        "max_pickup_wait_sec": 297.0,
+        "total_empty_distance_m": 0.0,
+        "total_energy_kwh": 68.0274536832,
+        "total_dispatch_rounds": 620,
+        "total_llm_calls": 0,
+        "total_api_cost": 0.0,
+        "total_decision_time_ms": 82771.55120158568,
+        "optimizer_time_ms": 45.7465008366853,
+        "candidate_count_before_filter": 127,
+        "candidate_count_after_filter": 127,
+        "fallback_count": 0,
+        "commitment_violations": 0,
+        "status_counts": {
+          "completed": 50,
+          "unserved": 740
+        }
+      },
+      "candidate_audit": {
+        "dispatch_round_count": 620,
+        "candidate_decision_count": 9602349,
+        "retained_candidate_count": 127,
+        "rejected_decision_counts_by_reason": {
+          "cross_zone_empty_pickup_cost_unavailable": 9335273,
+          "max_pickup_wait_exceeded": 266949
+        },
+        "rounds_with_multi_vehicle_order_competition": 18,
+        "distinct_orders_with_multi_vehicle_competition": 38,
+        "selected_assignment_count": 50,
+        "validation_error_count": 0
+      },
+      "result_file": "D0_greedy_F4.json"
+    },
+    {
+      "fleet_id": "F4",
+      "vehicle_count": 48,
+      "method_name": "D1_optimizer",
+      "scenario_fingerprint_sha256": "ae12e470adff4664f765bf054eeb2d412dccec5f598c8aeab37670f82e630537",
+      "summary": {
+        "experiment_run_id": "run-seed-0",
+        "method_name": "D1_optimizer",
+        "seed": 0,
+        "map_id": "nyc_tlc_zone_od_proxy_v1",
+        "vehicle_count": 48,
+        "order_count": 790,
+        "served_orders": 50,
+        "unserved_orders": 740,
+        "cancelled_orders": 0,
+        "service_rate": 0.06329113924050633,
+        "average_pickup_wait_sec": 11.8,
+        "p95_pickup_wait_sec": 0.0,
+        "max_pickup_wait_sec": 297.0,
+        "total_empty_distance_m": 0.0,
+        "total_energy_kwh": 68.0274536832,
+        "total_dispatch_rounds": 620,
+        "total_llm_calls": 0,
+        "total_api_cost": 0.0,
+        "total_decision_time_ms": 57524.553128750995,
+        "optimizer_time_ms": 3.4205694682896137,
+        "candidate_count_before_filter": 127,
+        "candidate_count_after_filter": 127,
+        "fallback_count": 0,
+        "commitment_violations": 0,
+        "status_counts": {
+          "completed": 50,
+          "unserved": 740
+        }
+      },
+      "candidate_audit": {
+        "dispatch_round_count": 620,
+        "candidate_decision_count": 9602349,
+        "retained_candidate_count": 127,
+        "rejected_decision_counts_by_reason": {
+          "cross_zone_empty_pickup_cost_unavailable": 9335273,
+          "max_pickup_wait_exceeded": 266949
+        },
+        "rounds_with_multi_vehicle_order_competition": 18,
+        "distinct_orders_with_multi_vehicle_competition": 38,
+        "selected_assignment_count": 50,
+        "validation_error_count": 0
+      },
+      "result_file": "D1_optimizer_F4.json"
+    }
+  ],
+  "pickup_cost_policy": "Same-zone empty pickup is zero by synthetic placement; cross-zone empty pickup is explicitly unavailable.",
+  "ride_cost_policy": "Use each order's direct observed January 1-15 OD median time and distance, including same-zone trips; do not compose zone OD medians into road routes.",
+  "trace_policy": "Compact per-round validation/candidate audit only; full candidate and state snapshots are not stored for C4. Final orders, vehicle states, assignments, input hashes and aggregate decision counts are retained.",
+  "interpretation": "Compares load and synthetic fleet-size scenarios for mechanism execution only. The source slice is already-dispatched/completed demand, initial fleet positions are invented, within-zone pickup is zero, and cross-zone pickup is disabled; results are not NYC service-rate or dispatch-performance estimates.",
+  "matrix_builder_source": {
+    "path": "scripts/run_nyc_tlc_c3_mechanism_preflight.py",
+    "sha256": "9bca7816f9792f12063d7410fa7241a8fd8ac1684134d0ae638d253f75d2bb7d",
+    "function": "build_untrimmed_zone_od_matrix(include_same_zone=True)"
+  }
+}

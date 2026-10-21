@@ -1,0 +1,537 @@
+{
+  "scenario_id": "C4_manhattan_790_order_five_minute_load_sweep",
+  "title": "曼哈顿十二关注区五分钟负载阶梯",
+  "source_dataset": "NYC TLC 2024 High-Volume FHV, single-match candidate request trace",
+  "source_request_window": [
+    "2024-01-20 23:20:00",
+    "2024-01-20 23:25:00"
+  ],
+  "request_trace_row_count": 790,
+  "origin_zone_counts": {
+    "79": 171,
+    "125": 34,
+    "148": 122,
+    "161": 20,
+    "162": 22,
+    "163": 38,
+    "164": 44,
+    "170": 60,
+    "186": 20,
+    "230": 69,
+    "231": 116,
+    "234": 74
+  },
+  "distinct_origin_zone_count": 12,
+  "distinct_destination_zone_count": 126,
+  "fleet_variants": [
+    {
+      "fleet_id": "F1",
+      "vehicle_count": 12,
+      "positions_by_zone": {
+        "79": 1,
+        "125": 1,
+        "148": 1,
+        "161": 1,
+        "162": 1,
+        "163": 1,
+        "164": 1,
+        "170": 1,
+        "186": 1,
+        "230": 1,
+        "231": 1,
+        "234": 1
+      },
+      "vehicles": [
+        {
+          "vehicle_id": "C4-F1-001",
+          "initial_position_node_id": "zone_79",
+          "position_node_id": "zone_79"
+        },
+        {
+          "vehicle_id": "C4-F1-002",
+          "initial_position_node_id": "zone_125",
+          "position_node_id": "zone_125"
+        },
+        {
+          "vehicle_id": "C4-F1-003",
+          "initial_position_node_id": "zone_148",
+          "position_node_id": "zone_148"
+        },
+        {
+          "vehicle_id": "C4-F1-004",
+          "initial_position_node_id": "zone_161",
+          "position_node_id": "zone_161"
+        },
+        {
+          "vehicle_id": "C4-F1-005",
+          "initial_position_node_id": "zone_162",
+          "position_node_id": "zone_162"
+        },
+        {
+          "vehicle_id": "C4-F1-006",
+          "initial_position_node_id": "zone_163",
+          "position_node_id": "zone_163"
+        },
+        {
+          "vehicle_id": "C4-F1-007",
+          "initial_position_node_id": "zone_164",
+          "position_node_id": "zone_164"
+        },
+        {
+          "vehicle_id": "C4-F1-008",
+          "initial_position_node_id": "zone_170",
+          "position_node_id": "zone_170"
+        },
+        {
+          "vehicle_id": "C4-F1-009",
+          "initial_position_node_id": "zone_186",
+          "position_node_id": "zone_186"
+        },
+        {
+          "vehicle_id": "C4-F1-010",
+          "initial_position_node_id": "zone_230",
+          "position_node_id": "zone_230"
+        },
+        {
+          "vehicle_id": "C4-F1-011",
+          "initial_position_node_id": "zone_231",
+          "position_node_id": "zone_231"
+        },
+        {
+          "vehicle_id": "C4-F1-012",
+          "initial_position_node_id": "zone_234",
+          "position_node_id": "zone_234"
+        }
+      ],
+      "initial_same_zone_candidate_count_per_order": "count of synthetic vehicles placed in that order's pickup zone"
+    },
+    {
+      "fleet_id": "F2",
+      "vehicle_count": 24,
+      "positions_by_zone": {
+        "79": 2,
+        "125": 2,
+        "148": 2,
+        "161": 2,
+        "162": 2,
+        "163": 2,
+        "164": 2,
+        "170": 2,
+        "186": 2,
+        "230": 2,
+        "231": 2,
+        "234": 2
+      },
+      "vehicles": [
+        {
+          "vehicle_id": "C4-F2-001",
+          "initial_position_node_id": "zone_79",
+          "position_node_id": "zone_79"
+        },
+        {
+          "vehicle_id": "C4-F2-002",
+          "initial_position_node_id": "zone_79",
+          "position_node_id": "zone_79"
+        },
+        {
+          "vehicle_id": "C4-F2-003",
+          "initial_position_node_id": "zone_125",
+          "position_node_id": "zone_125"
+        },
+        {
+          "vehicle_id": "C4-F2-004",
+          "initial_position_node_id": "zone_125",
+          "position_node_id": "zone_125"
+        },
+        {
+          "vehicle_id": "C4-F2-005",
+          "initial_position_node_id": "zone_148",
+          "position_node_id": "zone_148"
+        },
+        {
+          "vehicle_id": "C4-F2-006",
+          "initial_position_node_id": "zone_148",
+          "position_node_id": "zone_148"
+        },
+        {
+          "vehicle_id": "C4-F2-007",
+          "initial_position_node_id": "zone_161",
+          "position_node_id": "zone_161"
+        },
+        {
+          "vehicle_id": "C4-F2-008",
+          "initial_position_node_id": "zone_161",
+          "position_node_id": "zone_161"
+        },
+        {
+          "vehicle_id": "C4-F2-009",
+          "initial_position_node_id": "zone_162",
+          "position_node_id": "zone_162"
+        },
+        {
+          "vehicle_id": "C4-F2-010",
+          "initial_position_node_id": "zone_162",
+          "position_node_id": "zone_162"
+        },
+        {
+          "vehicle_id": "C4-F2-011",
+          "initial_position_node_id": "zone_163",
+          "position_node_id": "zone_163"
+        },
+        {
+          "vehicle_id": "C4-F2-012",
+          "initial_position_node_id": "zone_163",
+          "position_node_id": "zone_163"
+        },
+        {
+          "vehicle_id": "C4-F2-013",
+          "initial_position_node_id": "zone_164",
+          "position_node_id": "zone_164"
+        },
+        {
+          "vehicle_id": "C4-F2-014",
+          "initial_position_node_id": "zone_164",
+          "position_node_id": "zone_164"
+        },
+        {
+          "vehicle_id": "C4-F2-015",
+          "initial_position_node_id": "zone_170",
+          "position_node_id": "zone_170"
+        },
+        {
+          "vehicle_id": "C4-F2-016",
+          "initial_position_node_id": "zone_170",
+          "position_node_id": "zone_170"
+        },
+        {
+          "vehicle_id": "C4-F2-017",
+          "initial_position_node_id": "zone_186",
+          "position_node_id": "zone_186"
+        },
+        {
+          "vehicle_id": "C4-F2-018",
+          "initial_position_node_id": "zone_186",
+          "position_node_id": "zone_186"
+        },
+        {
+          "vehicle_id": "C4-F2-019",
+          "initial_position_node_id": "zone_230",
+          "position_node_id": "zone_230"
+        },
+        {
+          "vehicle_id": "C4-F2-020",
+          "initial_position_node_id": "zone_230",
+          "position_node_id": "zone_230"
+        },
+        {
+          "vehicle_id": "C4-F2-021",
+          "initial_position_node_id": "zone_231",
+          "position_node_id": "zone_231"
+        },
+        {
+          "vehicle_id": "C4-F2-022",
+          "initial_position_node_id": "zone_231",
+          "position_node_id": "zone_231"
+        },
+        {
+          "vehicle_id": "C4-F2-023",
+          "initial_position_node_id": "zone_234",
+          "position_node_id": "zone_234"
+        },
+        {
+          "vehicle_id": "C4-F2-024",
+          "initial_position_node_id": "zone_234",
+          "position_node_id": "zone_234"
+        }
+      ],
+      "initial_same_zone_candidate_count_per_order": "count of synthetic vehicles placed in that order's pickup zone"
+    },
+    {
+      "fleet_id": "F4",
+      "vehicle_count": 48,
+      "positions_by_zone": {
+        "79": 4,
+        "125": 4,
+        "148": 4,
+        "161": 4,
+        "162": 4,
+        "163": 4,
+        "164": 4,
+        "170": 4,
+        "186": 4,
+        "230": 4,
+        "231": 4,
+        "234": 4
+      },
+      "vehicles": [
+        {
+          "vehicle_id": "C4-F4-001",
+          "initial_position_node_id": "zone_79",
+          "position_node_id": "zone_79"
+        },
+        {
+          "vehicle_id": "C4-F4-002",
+          "initial_position_node_id": "zone_79",
+          "position_node_id": "zone_79"
+        },
+        {
+          "vehicle_id": "C4-F4-003",
+          "initial_position_node_id": "zone_79",
+          "position_node_id": "zone_79"
+        },
+        {
+          "vehicle_id": "C4-F4-004",
+          "initial_position_node_id": "zone_79",
+          "position_node_id": "zone_79"
+        },
+        {
+          "vehicle_id": "C4-F4-005",
+          "initial_position_node_id": "zone_125",
+          "position_node_id": "zone_125"
+        },
+        {
+          "vehicle_id": "C4-F4-006",
+          "initial_position_node_id": "zone_125",
+          "position_node_id": "zone_125"
+        },
+        {
+          "vehicle_id": "C4-F4-007",
+          "initial_position_node_id": "zone_125",
+          "position_node_id": "zone_125"
+        },
+        {
+          "vehicle_id": "C4-F4-008",
+          "initial_position_node_id": "zone_125",
+          "position_node_id": "zone_125"
+        },
+        {
+          "vehicle_id": "C4-F4-009",
+          "initial_position_node_id": "zone_148",
+          "position_node_id": "zone_148"
+        },
+        {
+          "vehicle_id": "C4-F4-010",
+          "initial_position_node_id": "zone_148",
+          "position_node_id": "zone_148"
+        },
+        {
+          "vehicle_id": "C4-F4-011",
+          "initial_position_node_id": "zone_148",
+          "position_node_id": "zone_148"
+        },
+        {
+          "vehicle_id": "C4-F4-012",
+          "initial_position_node_id": "zone_148",
+          "position_node_id": "zone_148"
+        },
+        {
+          "vehicle_id": "C4-F4-013",
+          "initial_position_node_id": "zone_161",
+          "position_node_id": "zone_161"
+        },
+        {
+          "vehicle_id": "C4-F4-014",
+          "initial_position_node_id": "zone_161",
+          "position_node_id": "zone_161"
+        },
+        {
+          "vehicle_id": "C4-F4-015",
+          "initial_position_node_id": "zone_161",
+          "position_node_id": "zone_161"
+        },
+        {
+          "vehicle_id": "C4-F4-016",
+          "initial_position_node_id": "zone_161",
+          "position_node_id": "zone_161"
+        },
+        {
+          "vehicle_id": "C4-F4-017",
+          "initial_position_node_id": "zone_162",
+          "position_node_id": "zone_162"
+        },
+        {
+          "vehicle_id": "C4-F4-018",
+          "initial_position_node_id": "zone_162",
+          "position_node_id": "zone_162"
+        },
+        {
+          "vehicle_id": "C4-F4-019",
+          "initial_position_node_id": "zone_162",
+          "position_node_id": "zone_162"
+        },
+        {
+          "vehicle_id": "C4-F4-020",
+          "initial_position_node_id": "zone_162",
+          "position_node_id": "zone_162"
+        },
+        {
+          "vehicle_id": "C4-F4-021",
+          "initial_position_node_id": "zone_163",
+          "position_node_id": "zone_163"
+        },
+        {
+          "vehicle_id": "C4-F4-022",
+          "initial_position_node_id": "zone_163",
+          "position_node_id": "zone_163"
+        },
+        {
+          "vehicle_id": "C4-F4-023",
+          "initial_position_node_id": "zone_163",
+          "position_node_id": "zone_163"
+        },
+        {
+          "vehicle_id": "C4-F4-024",
+          "initial_position_node_id": "zone_163",
+          "position_node_id": "zone_163"
+        },
+        {
+          "vehicle_id": "C4-F4-025",
+          "initial_position_node_id": "zone_164",
+          "position_node_id": "zone_164"
+        },
+        {
+          "vehicle_id": "C4-F4-026",
+          "initial_position_node_id": "zone_164",
+          "position_node_id": "zone_164"
+        },
+        {
+          "vehicle_id": "C4-F4-027",
+          "initial_position_node_id": "zone_164",
+          "position_node_id": "zone_164"
+        },
+        {
+          "vehicle_id": "C4-F4-028",
+          "initial_position_node_id": "zone_164",
+          "position_node_id": "zone_164"
+        },
+        {
+          "vehicle_id": "C4-F4-029",
+          "initial_position_node_id": "zone_170",
+          "position_node_id": "zone_170"
+        },
+        {
+          "vehicle_id": "C4-F4-030",
+          "initial_position_node_id": "zone_170",
+          "position_node_id": "zone_170"
+        },
+        {
+          "vehicle_id": "C4-F4-031",
+          "initial_position_node_id": "zone_170",
+          "position_node_id": "zone_170"
+        },
+        {
+          "vehicle_id": "C4-F4-032",
+          "initial_position_node_id": "zone_170",
+          "position_node_id": "zone_170"
+        },
+        {
+          "vehicle_id": "C4-F4-033",
+          "initial_position_node_id": "zone_186",
+          "position_node_id": "zone_186"
+        },
+        {
+          "vehicle_id": "C4-F4-034",
+          "initial_position_node_id": "zone_186",
+          "position_node_id": "zone_186"
+        },
+        {
+          "vehicle_id": "C4-F4-035",
+          "initial_position_node_id": "zone_186",
+          "position_node_id": "zone_186"
+        },
+        {
+          "vehicle_id": "C4-F4-036",
+          "initial_position_node_id": "zone_186",
+          "position_node_id": "zone_186"
+        },
+        {
+          "vehicle_id": "C4-F4-037",
+          "initial_position_node_id": "zone_230",
+          "position_node_id": "zone_230"
+        },
+        {
+          "vehicle_id": "C4-F4-038",
+          "initial_position_node_id": "zone_230",
+          "position_node_id": "zone_230"
+        },
+        {
+          "vehicle_id": "C4-F4-039",
+          "initial_position_node_id": "zone_230",
+          "position_node_id": "zone_230"
+        },
+        {
+          "vehicle_id": "C4-F4-040",
+          "initial_position_node_id": "zone_230",
+          "position_node_id": "zone_230"
+        },
+        {
+          "vehicle_id": "C4-F4-041",
+          "initial_position_node_id": "zone_231",
+          "position_node_id": "zone_231"
+        },
+        {
+          "vehicle_id": "C4-F4-042",
+          "initial_position_node_id": "zone_231",
+          "position_node_id": "zone_231"
+        },
+        {
+          "vehicle_id": "C4-F4-043",
+          "initial_position_node_id": "zone_231",
+          "position_node_id": "zone_231"
+        },
+        {
+          "vehicle_id": "C4-F4-044",
+          "initial_position_node_id": "zone_231",
+          "position_node_id": "zone_231"
+        },
+        {
+          "vehicle_id": "C4-F4-045",
+          "initial_position_node_id": "zone_234",
+          "position_node_id": "zone_234"
+        },
+        {
+          "vehicle_id": "C4-F4-046",
+          "initial_position_node_id": "zone_234",
+          "position_node_id": "zone_234"
+        },
+        {
+          "vehicle_id": "C4-F4-047",
+          "initial_position_node_id": "zone_234",
+          "position_node_id": "zone_234"
+        },
+        {
+          "vehicle_id": "C4-F4-048",
+          "initial_position_node_id": "zone_234",
+          "position_node_id": "zone_234"
+        }
+      ],
+      "initial_same_zone_candidate_count_per_order": "count of synthetic vehicles placed in that order's pickup zone"
+    }
+  ],
+  "dispatch_controls": {
+    "max_pickup_wait_sec": 300.0,
+    "passenger_no_show_rate": 0.0,
+    "one_to_one_assignment": true,
+    "time_origin": "2024-01-20 23:20:00",
+    "horizon_sec": 300
+  },
+  "intended_competition": "Seven hundred ninety requests over five minutes across twelve Manhattan focus zones; fleet variants place one, two, or four synthetic vehicles in each zone.",
+  "limitations": [
+    "Fleet sweep is a controlled load sensitivity analysis, not an inferred NYC fleet-size estimate.",
+    "Synthetic vehicles are deliberately placed in request pickup zones; this creates zero zone-level pickup time and omits within-zone driving distance.",
+    "NYC TLC rows are already-dispatched/completed trips; unserved demand and real vehicle availability are absent.",
+    "The existing zone OD proxy from the earlier pilot is not included as a validated road-cost model."
+  ],
+  "input_files": {
+    "orders_json": {
+      "file": "orders.json",
+      "sha256": "b4431ba0c6c47209f4d6d0c1093e5755769402d4e0b5f0c5c4034ebdf51decc1",
+      "bytes": 225447
+    },
+    "orders_parquet": {
+      "file": "orders.parquet",
+      "sha256": "9ee43765ce9359b1ca57921d136c1b9f4f01a9369a5c19fadc415ea48507273f",
+      "bytes": 12854
+    }
+  }
+}

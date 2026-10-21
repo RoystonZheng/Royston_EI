@@ -1,0 +1,343 @@
+{
+  "experiment": "traditional_baselines_v1",
+  "overall_status": "partial",
+  "case_id": "C3_manhattan_multizone_44_order_burst",
+  "fleet_id": "F2_per_observed_origin",
+  "request_count": 44,
+  "vehicle_count": 18,
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "methods": {
+    "D0_greedy": {
+      "served_orders": {
+        "mean": 16,
+        "sample_sd": 0.0,
+        "min": 16,
+        "max": 16,
+        "distinct_values": 1
+      },
+      "unserved_orders": {
+        "mean": 28,
+        "sample_sd": 0.0,
+        "min": 28,
+        "max": 28,
+        "distinct_values": 1
+      },
+      "service_rate": {
+        "mean": 0.36363636363636365,
+        "sample_sd": 0.0,
+        "min": 0.36363636363636365,
+        "max": 0.36363636363636365,
+        "distinct_values": 1
+      },
+      "average_pickup_wait_sec": {
+        "mean": 74.27219907559545,
+        "sample_sd": 0.0,
+        "min": 74.27219907559545,
+        "max": 74.27219907559545,
+        "distinct_values": 1
+      },
+      "p95_pickup_wait_sec": {
+        "mean": 196.9243215191786,
+        "sample_sd": 0.0,
+        "min": 196.9243215191786,
+        "max": 196.9243215191786,
+        "distinct_values": 1
+      },
+      "total_empty_distance_m": {
+        "mean": 5941.775926047637,
+        "sample_sd": 0.0,
+        "min": 5941.775926047637,
+        "max": 5941.775926047637,
+        "distinct_values": 1
+      },
+      "total_energy_kwh": {
+        "mean": 30.646912744448574,
+        "sample_sd": 0.0,
+        "min": 30.646912744448574,
+        "max": 30.646912744448574,
+        "distinct_values": 1
+      },
+      "total_decision_time_ms": {
+        "mean": 169.88785969999986,
+        "sample_sd": 4.858209234058126,
+        "min": 163.6249989999996,
+        "max": 177.21162599999985,
+        "distinct_values": 10
+      },
+      "optimizer_time_ms": {
+        "mean": 0.5044800000000627,
+        "sample_sd": 0.04341996812799056,
+        "min": 0.44012799999981755,
+        "max": 0.5952560000008766,
+        "distinct_values": 10
+      },
+      "total_dispatch_rounds": {
+        "mean": 42,
+        "sample_sd": 0.0,
+        "min": 42,
+        "max": 42,
+        "distinct_values": 1
+      },
+      "candidate_count_before_filter": {
+        "mean": 5473,
+        "sample_sd": 0.0,
+        "min": 5473,
+        "max": 5473,
+        "distinct_values": 1
+      },
+      "candidate_count_after_filter": {
+        "mean": 5473,
+        "sample_sd": 0.0,
+        "min": 5473,
+        "max": 5473,
+        "distinct_values": 1
+      },
+      "fallback_count": {
+        "mean": 0,
+        "sample_sd": 0.0,
+        "min": 0,
+        "max": 0,
+        "distinct_values": 1
+      },
+      "commitment_violations": {
+        "mean": 0,
+        "sample_sd": 0.0,
+        "min": 0,
+        "max": 0,
+        "distinct_values": 1
+      },
+      "rounds_per_run": [
+        42
+      ],
+      "all_rounds_valid_no_fallback_or_commitment_violation": true,
+      "same_decision_and_outcome_across_seeds": true
+    },
+    "D1_optimizer": {
+      "served_orders": {
+        "mean": 16,
+        "sample_sd": 0.0,
+        "min": 16,
+        "max": 16,
+        "distinct_values": 1
+      },
+      "unserved_orders": {
+        "mean": 28,
+        "sample_sd": 0.0,
+        "min": 28,
+        "max": 28,
+        "distinct_values": 1
+      },
+      "service_rate": {
+        "mean": 0.36363636363636365,
+        "sample_sd": 0.0,
+        "min": 0.36363636363636365,
+        "max": 0.36363636363636365,
+        "distinct_values": 1
+      },
+      "average_pickup_wait_sec": {
+        "mean": 74.27219907559545,
+        "sample_sd": 0.0,
+        "min": 74.27219907559545,
+        "max": 74.27219907559545,
+        "distinct_values": 1
+      },
+      "p95_pickup_wait_sec": {
+        "mean": 196.9243215191786,
+        "sample_sd": 0.0,
+        "min": 196.9243215191786,
+        "max": 196.9243215191786,
+        "distinct_values": 1
+      },
+      "total_empty_distance_m": {
+        "mean": 5941.775926047637,
+        "sample_sd": 0.0,
+        "min": 5941.775926047637,
+        "max": 5941.775926047637,
+        "distinct_values": 1
+      },
+      "total_energy_kwh": {
+        "mean": 26.252148336128574,
+        "sample_sd": 0.0,
+        "min": 26.252148336128574,
+        "max": 26.252148336128574,
+        "distinct_values": 1
+      },
+      "total_decision_time_ms": {
+        "mean": 217.38163700000007,
+        "sample_sd": 9.92499133441779,
+        "min": 205.70774999999838,
+        "max": 236.4654140000014,
+        "distinct_values": 10
+      },
+      "optimizer_time_ms": {
+        "mean": 0.8456064999999846,
+        "sample_sd": 0.06836512750368803,
+        "min": 0.7427070000010083,
+        "max": 0.9572040000014326,
+        "distinct_values": 10
+      },
+      "total_dispatch_rounds": {
+        "mean": 42,
+        "sample_sd": 0.0,
+        "min": 42,
+        "max": 42,
+        "distinct_values": 1
+      },
+      "candidate_count_before_filter": {
+        "mean": 5473,
+        "sample_sd": 0.0,
+        "min": 5473,
+        "max": 5473,
+        "distinct_values": 1
+      },
+      "candidate_count_after_filter": {
+        "mean": 5473,
+        "sample_sd": 0.0,
+        "min": 5473,
+        "max": 5473,
+        "distinct_values": 1
+      },
+      "fallback_count": {
+        "mean": 0,
+        "sample_sd": 0.0,
+        "min": 0,
+        "max": 0,
+        "distinct_values": 1
+      },
+      "commitment_violations": {
+        "mean": 0,
+        "sample_sd": 0.0,
+        "min": 0,
+        "max": 0,
+        "distinct_values": 1
+      },
+      "rounds_per_run": [
+        42
+      ],
+      "all_rounds_valid_no_fallback_or_commitment_violation": true,
+      "same_decision_and_outcome_across_seeds": true
+    }
+  },
+  "paired_input_checks": {
+    "scenario_fingerprint_sha256": "b058c273877e18fdb65f38aaa203fddbbf61b559cdb516d8a103a380a61dbb25",
+    "all_seeds_same_scenario_fingerprint": true,
+    "all_seed_pairs_same_package_hashes_and_first_dispatch_input": true,
+    "per_seed": [
+      {
+        "seed": 0,
+        "first_dispatch_input_equal": true,
+        "input_hashes_equal": true,
+        "first_dispatch_candidate_count": 72,
+        "served_orders_same": false,
+        "served_order_count_difference": 2,
+        "vehicle_for_shared_orders_different": 0
+      },
+      {
+        "seed": 1,
+        "first_dispatch_input_equal": true,
+        "input_hashes_equal": true,
+        "first_dispatch_candidate_count": 72,
+        "served_orders_same": false,
+        "served_order_count_difference": 2,
+        "vehicle_for_shared_orders_different": 0
+      },
+      {
+        "seed": 2,
+        "first_dispatch_input_equal": true,
+        "input_hashes_equal": true,
+        "first_dispatch_candidate_count": 72,
+        "served_orders_same": false,
+        "served_order_count_difference": 2,
+        "vehicle_for_shared_orders_different": 0
+      },
+      {
+        "seed": 3,
+        "first_dispatch_input_equal": true,
+        "input_hashes_equal": true,
+        "first_dispatch_candidate_count": 72,
+        "served_orders_same": false,
+        "served_order_count_difference": 2,
+        "vehicle_for_shared_orders_different": 0
+      },
+      {
+        "seed": 4,
+        "first_dispatch_input_equal": true,
+        "input_hashes_equal": true,
+        "first_dispatch_candidate_count": 72,
+        "served_orders_same": false,
+        "served_order_count_difference": 2,
+        "vehicle_for_shared_orders_different": 0
+      },
+      {
+        "seed": 5,
+        "first_dispatch_input_equal": true,
+        "input_hashes_equal": true,
+        "first_dispatch_candidate_count": 72,
+        "served_orders_same": false,
+        "served_order_count_difference": 2,
+        "vehicle_for_shared_orders_different": 0
+      },
+      {
+        "seed": 6,
+        "first_dispatch_input_equal": true,
+        "input_hashes_equal": true,
+        "first_dispatch_candidate_count": 72,
+        "served_orders_same": false,
+        "served_order_count_difference": 2,
+        "vehicle_for_shared_orders_different": 0
+      },
+      {
+        "seed": 7,
+        "first_dispatch_input_equal": true,
+        "input_hashes_equal": true,
+        "first_dispatch_candidate_count": 72,
+        "served_orders_same": false,
+        "served_order_count_difference": 2,
+        "vehicle_for_shared_orders_different": 0
+      },
+      {
+        "seed": 8,
+        "first_dispatch_input_equal": true,
+        "input_hashes_equal": true,
+        "first_dispatch_candidate_count": 72,
+        "served_orders_same": false,
+        "served_order_count_difference": 2,
+        "vehicle_for_shared_orders_different": 0
+      },
+      {
+        "seed": 9,
+        "first_dispatch_input_equal": true,
+        "input_hashes_equal": true,
+        "first_dispatch_candidate_count": 72,
+        "served_orders_same": false,
+        "served_order_count_difference": 2,
+        "vehicle_for_shared_orders_different": 0
+      }
+    ]
+  },
+  "interpretation_limits": [
+    "The 10 seeds replay the same fixed request trace and synthetic fleet; output metrics are identical across seeds, so they are repeated deterministic executions, not independent samples.",
+    "NYC TLC records are already dispatched/completed trips; fleet positions and empty pickup costs are synthetic proxies.",
+    "C4 was interrupted before any completed comparison result; no C4 metrics are reported."
+  ],
+  "c4_status": {
+    "planned": "790-order C4 at fleet sizes 12, 24, and 48, seeds 0-9",
+    "completed": false,
+    "attempted_cell": {
+      "fleet_id": "F1",
+      "seed": 0
+    },
+    "outcome": "Interrupted during candidate snapshot deep copy before a result file was written."
+  }
+}

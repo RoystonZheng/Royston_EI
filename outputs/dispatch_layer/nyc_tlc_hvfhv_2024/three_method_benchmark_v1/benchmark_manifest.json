@@ -1,0 +1,162 @@
+{
+  "schema_version": "nyc-tlc-shared-dispatch-input-v1",
+  "package_kind": "common-input-package_for_dispatch_method_comparison",
+  "created_date": "2026-10-20",
+  "performance_claim": false,
+  "source_dataset": "NYC TLC 2024 High Volume FHV trip data, dataset bqxa-629f",
+  "raw_source_manifest": {
+    "path": "data/dispatch/nyc_tlc_hvfhv_2024/manifest.json",
+    "sha256": "89a27af3722b902a8b6efe50ac1ac1a47f458894b51b4e382a12461a2ef90a25"
+  },
+  "method_groups": {
+    "traditional": [
+      "D0_greedy",
+      "D1_optimizer"
+    ],
+    "pure_llm": [
+      "D5_pure_llm_direct"
+    ],
+    "research_agent_optimizer": [
+      "D2_agent_optimizer",
+      "D3_agent_llm_context_optimizer",
+      "D4_agent_llm_feedback_optimizer"
+    ]
+  },
+  "common_runtime_contract": "dispatch-agent-v1 DispatchInput/Candidate set; all methods use the same order trace, fleet variant, zone OD cost matrix, hard constraints, and independent output validator.",
+  "pickup_cost_proxy": {
+    "policy_id": "synthetic_zone_centroid_pickup_proxy_v1",
+    "distance_method": "haversine between official taxi-zone polygon area centroids, multiplied by detour_factor",
+    "speed_mps": 5.0,
+    "detour_factor": 1.3,
+    "minimum_intrazonal_distance_m": 300.0,
+    "interpretation": "synthetic zone-level pickup cost for controlled method comparison; not measured street distance or ETA"
+  },
+  "zone_centroids": {
+    "path": "zone_centroids.json",
+    "source_path": "data/dispatch/nyc_dot_ezpass_2021_2024/c4_zone_subset_2026-10-20/taxi_zones.geojson",
+    "source_sha256": "761233eceab4e8a761d3bfd9ee970cdd6daa851a9d40580d0173948fe0561daf",
+    "zone_count": 125,
+    "sha256": "7c297f2d995ed5257d3d8e8a3a2264d6e63ff47bd0ff8276891caa39591d1125"
+  },
+  "cases": {
+    "C2_four_same_second_orders_three_vehicles": {
+      "path": "cases/C2_four_same_second_orders_three_vehicles",
+      "scenario_id": "C2_four_same_second_orders_three_vehicles",
+      "request_count": 4,
+      "fleet_ids": [
+        "F3_same_zone"
+      ],
+      "source_scenario_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/multi_vehicle_competition_scenarios_v1/C2_four_same_second_orders_three_vehicles",
+      "source_cost_matrix_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/c3_mechanism_preflight_v1/zone_cost_matrix_train_2024-01-01_15_full_observed_od.csv.gz",
+      "training_preflight_manifest_sha256": "92af5895d2128ebc9597459a2b5acba4d6b9d680a546f3a552242eb5b323d406",
+      "files": {
+        "scenario.json": {
+          "path": "scenario.json",
+          "bytes": 2453,
+          "sha256": "bface8c9fbc2462f2966eecc76970c75170ef317c993efbf023179ae33ee0d2c"
+        },
+        "orders.json": {
+          "path": "orders.json",
+          "bytes": 1352,
+          "sha256": "c9c801ddaa7468dc8fdb77d65b16536d7e0711da14ff5a5e2ce969d057f36c02"
+        },
+        "orders.parquet": {
+          "path": "orders.parquet",
+          "bytes": 2199,
+          "sha256": "52e1a6e2b8dab45c7d0115ad64f0bb331373f8ca111e19ae3415cd58d48d3b75"
+        },
+        "zone_od_cost_matrix.csv.gz": {
+          "path": "zone_od_cost_matrix.csv.gz",
+          "bytes": 500889,
+          "sha256": "87a2e4b0135f6159ca1b38719116b88c38b5172c6ba0f0bd1e01295ea2dfbcb0"
+        }
+      },
+      "limitations": [
+        "All starting vehicles are co-located at Zone 79, so pickup costs tie at zone resolution; use distinct reachable starts after a road network is available for cost-sensitive comparison.",
+        "Synthetic vehicles are deliberately placed in request pickup zones; this creates zero zone-level pickup time and omits within-zone driving distance.",
+        "NYC TLC rows are already-dispatched/completed trips; unserved demand and real vehicle availability are absent.",
+        "The existing zone OD proxy from the earlier pilot is not included as a validated road-cost model."
+      ]
+    },
+    "C3_manhattan_multizone_44_order_burst": {
+      "path": "cases/C3_manhattan_multizone_44_order_burst",
+      "scenario_id": "C3_manhattan_multizone_44_order_burst",
+      "request_count": 44,
+      "fleet_ids": [
+        "F2_per_observed_origin"
+      ],
+      "source_scenario_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/multi_vehicle_competition_scenarios_v1/C3_manhattan_multizone_44_order_burst",
+      "source_cost_matrix_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/c3_mechanism_preflight_v1/zone_cost_matrix_train_2024-01-01_15_full_observed_od.csv.gz",
+      "training_preflight_manifest_sha256": "92af5895d2128ebc9597459a2b5acba4d6b9d680a546f3a552242eb5b323d406",
+      "files": {
+        "scenario.json": {
+          "path": "scenario.json",
+          "bytes": 4929,
+          "sha256": "2b57f50f96aa2765a407a7c6ca63abfab37a3d42081f0ccd4b68751265295f16"
+        },
+        "orders.json": {
+          "path": "orders.json",
+          "bytes": 12373,
+          "sha256": "bfbae3bca04c69216d7583aaddb1c71f89a673cb184059214c22f046d893f3a0"
+        },
+        "orders.parquet": {
+          "path": "orders.parquet",
+          "bytes": 3029,
+          "sha256": "6eb299aa886083ec11ffe85809e1352748f7aee8609d0cdab328e4fbf92410f6"
+        },
+        "zone_od_cost_matrix.csv.gz": {
+          "path": "zone_od_cost_matrix.csv.gz",
+          "bytes": 500889,
+          "sha256": "87a2e4b0135f6159ca1b38719116b88c38b5172c6ba0f0bd1e01295ea2dfbcb0"
+        }
+      },
+      "limitations": [
+        "This dense supply layout is controlled and does not estimate actual vehicle supply or cross-zone reachability.",
+        "Synthetic vehicles are deliberately placed in request pickup zones; this creates zero zone-level pickup time and omits within-zone driving distance.",
+        "NYC TLC rows are already-dispatched/completed trips; unserved demand and real vehicle availability are absent.",
+        "The existing zone OD proxy from the earlier pilot is not included as a validated road-cost model."
+      ]
+    },
+    "C4_manhattan_790_order_five_minute_load_sweep": {
+      "path": "cases/C4_manhattan_790_order_five_minute_load_sweep",
+      "scenario_id": "C4_manhattan_790_order_five_minute_load_sweep",
+      "request_count": 790,
+      "fleet_ids": [
+        "F1",
+        "F2",
+        "F4"
+      ],
+      "source_scenario_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/multi_vehicle_competition_scenarios_v1/C4_manhattan_790_order_five_minute_load_sweep",
+      "source_cost_matrix_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/c4_load_sweep_mechanism_v1/zone_cost_matrix_train_2024-01-01_15_full_observed_od_including_same_zone.csv.gz",
+      "training_preflight_manifest_sha256": "599f1ae9fd75e251e5f1ffdd9e1be7727aac1c0ffab8204ab1c8baa0ab53ce20",
+      "files": {
+        "scenario.json": {
+          "path": "scenario.json",
+          "bytes": 15788,
+          "sha256": "f61a787ec2bb2a8d2eadb719d33755784ad868710dde3727540671e48036909e"
+        },
+        "orders.json": {
+          "path": "orders.json",
+          "bytes": 225447,
+          "sha256": "b4431ba0c6c47209f4d6d0c1093e5755769402d4e0b5f0c5c4034ebdf51decc1"
+        },
+        "orders.parquet": {
+          "path": "orders.parquet",
+          "bytes": 12854,
+          "sha256": "9ee43765ce9359b1ca57921d136c1b9f4f01a9369a5c19fadc415ea48507273f"
+        },
+        "zone_od_cost_matrix.csv.gz": {
+          "path": "zone_od_cost_matrix.csv.gz",
+          "bytes": 503398,
+          "sha256": "c9834f243b351b9dbc1cb7e1baefeac92ec50d87aeb65f9176af6ffd02b85dd3"
+        }
+      },
+      "limitations": [
+        "Fleet sweep is a controlled load sensitivity analysis, not an inferred NYC fleet-size estimate.",
+        "Synthetic vehicles are deliberately placed in request pickup zones; this creates zero zone-level pickup time and omits within-zone driving distance.",
+        "NYC TLC rows are already-dispatched/completed trips; unserved demand and real vehicle availability are absent.",
+        "The existing zone OD proxy from the earlier pilot is not included as a validated road-cost model."
+      ]
+    }
+  }
+}

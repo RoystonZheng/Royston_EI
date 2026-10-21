@@ -1,0 +1,1810 @@
+{
+  "schema_version": "dispatch-agent-v1",
+  "experiment_type": "nyc_tlc_shared_input_method_run",
+  "run_mode": "single_round_smoke",
+  "partial_run": true,
+  "performance_claim": false,
+  "recording_mode": "full_round_records",
+  "case_id": "C2_four_same_second_orders_three_vehicles",
+  "scenario_id": "C2_four_same_second_orders_three_vehicles",
+  "fleet_id": "F3_same_zone",
+  "method_name": "D5_pure_llm_direct",
+  "llm_backend": "codex_cli",
+  "llm_model": "gpt-5.6-luna",
+  "scenario_fingerprint_sha256": "b668fdfdaba939c868d887957e3891ab7e90dce3d54f1d781a7a855b3603e1ff",
+  "input_hashes": {
+    "scenario_json": "bface8c9fbc2462f2966eecc76970c75170ef317c993efbf023179ae33ee0d2c",
+    "orders_json": "c9c801ddaa7468dc8fdb77d65b16536d7e0711da14ff5a5e2ce969d057f36c02",
+    "zone_od_cost_matrix": "87a2e4b0135f6159ca1b38719116b88c38b5172c6ba0f0bd1e01295ea2dfbcb0"
+  },
+  "cost_semantics": {
+    "pickup": {
+      "policy_id": "synthetic_zone_centroid_pickup_proxy_v1",
+      "distance_method": "haversine between official taxi-zone polygon area centroids, multiplied by detour_factor",
+      "speed_mps": 5.0,
+      "detour_factor": 1.3,
+      "minimum_intrazonal_distance_m": 300.0,
+      "interpretation": "synthetic zone-level pickup cost for controlled method comparison; not measured street distance or ETA"
+    },
+    "ride": "direct observed training-period zone OD median proxy; not street routing"
+  },
+  "config": {
+    "map_size": 266,
+    "vehicle_count": 3,
+    "order_count": 4,
+    "horizon_sec": 60,
+    "max_pickup_wait_sec": 300.0,
+    "post_arrival_boarding_timeout_sec": 180.0,
+    "passenger_no_show_rate": 0.0,
+    "pickup_sampling_mode": "equal_probability_area_weighted_hotspots_v1",
+    "max_next_reservation_per_vehicle": 1,
+    "moving_kwh_per_km": 0.18,
+    "electricity_price_per_kwh": 2.29,
+    "method_name": "D5_pure_llm_direct",
+    "context_function_mode": "manual_linear_clip",
+    "feedback_mode": "none",
+    "seed": 0,
+    "schema_version": "dispatch-agent-v1",
+    "llm_backend": "codex_cli",
+    "llm_model": "gpt-5.6-luna"
+  },
+  "summary": {
+    "experiment_run_id": "run-seed-0",
+    "method_name": "D5_pure_llm_direct",
+    "seed": 0,
+    "map_id": "nyc_tlc_zone_od_proxy_v1",
+    "vehicle_count": 3,
+    "order_count": 4,
+    "served_orders": 0,
+    "unserved_orders": 0,
+    "cancelled_orders": 0,
+    "service_rate": 0.0,
+    "average_pickup_wait_sec": null,
+    "p95_pickup_wait_sec": null,
+    "max_pickup_wait_sec": null,
+    "total_empty_distance_m": 900.0,
+    "total_energy_kwh": 1.6770364416,
+    "total_dispatch_rounds": 1,
+    "total_llm_calls": 1,
+    "total_llm_input_tokens": 17955,
+    "total_llm_cached_input_tokens": 0,
+    "total_llm_output_tokens": 216,
+    "total_llm_tokens": 18171,
+    "llm_usage_status": "available_best_effort",
+    "total_codex_cli_invocations": 1,
+    "total_api_cost": null,
+    "total_api_cost_usd": null,
+    "total_decision_time_ms": 10414.752667,
+    "optimizer_time_ms": 0.0,
+    "candidate_count_before_filter": 12,
+    "candidate_count_after_filter": 12,
+    "fallback_count": 0,
+    "commitment_violations": 0,
+    "status_counts": {
+      "assigned": 3,
+      "waiting": 1
+    }
+  },
+  "rounds": [
+    {
+      "dispatch_round_id": "round-0000",
+      "trigger_type": "new_order",
+      "snapshot_time_sec": 0.0,
+      "input": {
+        "dispatch_round_id": "round-0000",
+        "experiment_run_id": "run-seed-0",
+        "snapshot_time_sec": 0.0,
+        "trigger_type": "new_order",
+        "vehicles": [
+          {
+            "vehicle_id": "C2-001",
+            "initial_position_node_id": "zone_79",
+            "position_node_id": "zone_79",
+            "state": "idle",
+            "current_order_id": null,
+            "reserved_order_id": null,
+            "current_pickup_node_id": null,
+            "current_dropoff_node_id": null,
+            "available_time_sec": 0.0,
+            "planned_pickup_time_sec": null,
+            "planned_dropoff_time_sec": null,
+            "boarding_deadline_time_sec": null,
+            "last_assignment_time_sec": null,
+            "total_busy_sec": 0.0,
+            "total_empty_distance_m": 0.0,
+            "total_energy_kwh": 0.0
+          },
+          {
+            "vehicle_id": "C2-002",
+            "initial_position_node_id": "zone_79",
+            "position_node_id": "zone_79",
+            "state": "idle",
+            "current_order_id": null,
+            "reserved_order_id": null,
+            "current_pickup_node_id": null,
+            "current_dropoff_node_id": null,
+            "available_time_sec": 0.0,
+            "planned_pickup_time_sec": null,
+            "planned_dropoff_time_sec": null,
+            "boarding_deadline_time_sec": null,
+            "last_assignment_time_sec": null,
+            "total_busy_sec": 0.0,
+            "total_empty_distance_m": 0.0,
+            "total_energy_kwh": 0.0
+          },
+          {
+            "vehicle_id": "C2-003",
+            "initial_position_node_id": "zone_79",
+            "position_node_id": "zone_79",
+            "state": "idle",
+            "current_order_id": null,
+            "reserved_order_id": null,
+            "current_pickup_node_id": null,
+            "current_dropoff_node_id": null,
+            "available_time_sec": 0.0,
+            "planned_pickup_time_sec": null,
+            "planned_dropoff_time_sec": null,
+            "boarding_deadline_time_sec": null,
+            "last_assignment_time_sec": null,
+            "total_busy_sec": 0.0,
+            "total_empty_distance_m": 0.0,
+            "total_energy_kwh": 0.0
+          }
+        ],
+        "orders": [
+          {
+            "order_id": "raw/fhvhv_tripdata_2024-01.parquet#12486977",
+            "arrival_time_sec": 0.0,
+            "pickup_node_id": "zone_79",
+            "dropoff_node_id": "zone_90",
+            "hotspot_id": "C2_four_same_second_orders_three_vehicles",
+            "passenger_no_show": false,
+            "status": "waiting",
+            "assigned_vehicle_id": null,
+            "assignment_time_sec": null,
+            "pickup_arrival_time_sec": null,
+            "boarding_time_sec": null,
+            "dropoff_time_sec": null,
+            "cancel_time_sec": null,
+            "cancel_reason": null
+          },
+          {
+            "order_id": "raw/fhvhv_tripdata_2024-01.parquet#12495753",
+            "arrival_time_sec": 0.0,
+            "pickup_node_id": "zone_79",
+            "dropoff_node_id": "zone_170",
+            "hotspot_id": "C2_four_same_second_orders_three_vehicles",
+            "passenger_no_show": false,
+            "status": "waiting",
+            "assigned_vehicle_id": null,
+            "assignment_time_sec": null,
+            "pickup_arrival_time_sec": null,
+            "boarding_time_sec": null,
+            "dropoff_time_sec": null,
+            "cancel_time_sec": null,
+            "cancel_reason": null
+          },
+          {
+            "order_id": "raw/fhvhv_tripdata_2024-01.parquet#12520025",
+            "arrival_time_sec": 0.0,
+            "pickup_node_id": "zone_79",
+            "dropoff_node_id": "zone_90",
+            "hotspot_id": "C2_four_same_second_orders_three_vehicles",
+            "passenger_no_show": false,
+            "status": "waiting",
+            "assigned_vehicle_id": null,
+            "assignment_time_sec": null,
+            "pickup_arrival_time_sec": null,
+            "boarding_time_sec": null,
+            "dropoff_time_sec": null,
+            "cancel_time_sec": null,
+            "cancel_reason": null
+          },
+          {
+            "order_id": "raw/fhvhv_tripdata_2024-01.parquet#12525729",
+            "arrival_time_sec": 0.0,
+            "pickup_node_id": "zone_79",
+            "dropoff_node_id": "zone_265",
+            "hotspot_id": "C2_four_same_second_orders_three_vehicles",
+            "passenger_no_show": false,
+            "status": "waiting",
+            "assigned_vehicle_id": null,
+            "assignment_time_sec": null,
+            "pickup_arrival_time_sec": null,
+            "boarding_time_sec": null,
+            "dropoff_time_sec": null,
+            "cancel_time_sec": null,
+            "cancel_reason": null
+          }
+        ],
+        "candidates": [
+          {
+            "candidate_id": "round-0000__C2-001__raw/fhvhv_tripdata_2024-01.parquet#12486977",
+            "dispatch_round_id": "round-0000",
+            "vehicle_id": "C2-001",
+            "order_id": "raw/fhvhv_tripdata_2024-01.parquet#12486977",
+            "candidate_type": "immediate_pickup",
+            "route_reachability": true,
+            "pickup_leg": {
+              "reachable": true,
+              "distance_m": 300.0,
+              "duration_sec": 60.0,
+              "node_sequence": [
+                "zone_79",
+                "zone_79"
+              ],
+              "edge_sequence": [],
+              "reason": "synthetic_zone_centroid_pickup_proxy"
+            },
+            "ride_leg": {
+              "reachable": true,
+              "distance_m": 2768.07168,
+              "duration_sec": 686.0,
+              "node_sequence": [
+                "zone_79",
+                "zone_90"
+              ],
+              "edge_sequence": [
+                "od_79_90"
+              ],
+              "reason": null
+            },
+            "vehicle_available_time_sec": 0.0,
+            "predicted_pickup_time_sec": 60.0,
+            "predicted_dropoff_time_sec": 746.0,
+            "predicted_wait_sec": 60.0,
+            "empty_distance_m": 300.0,
+            "total_distance_m": 3068.07168,
+            "energy_kwh": 0.5522529024,
+            "current_commitment_ok": true,
+            "one_to_one_ok": true,
+            "time_non_overlap_ok": true,
+            "max_wait_ok": true,
+            "hard_constraint_ok": true,
+            "feature_vector": {
+              "local_order_density": 0.4,
+              "local_idle_vehicle_density": 1.0,
+              "demand_supply_ratio": 1.3333333333333333,
+              "commitment_slack": 0.0,
+              "candidate_eta": 0.2,
+              "time_context": 0.0,
+              "vehicle_state_code": 0.0
+            },
+            "context_threshold_sec": null,
+            "context_pass": true,
+            "feedback_decision": null,
+            "feedback_risk": null,
+            "feedback_reason": null,
+            "rejection_reason": null
+          },
+          {
+            "candidate_id": "round-0000__C2-001__raw/fhvhv_tripdata_2024-01.parquet#12495753",
+            "dispatch_round_id": "round-0000",
+            "vehicle_id": "C2-001",
+            "order_id": "raw/fhvhv_tripdata_2024-01.parquet#12495753",
+            "candidate_type": "immediate_pickup",
+            "route_reachability": true,
+            "pickup_leg": {
+              "reachable": true,
+              "distance_m": 300.0,
+              "duration_sec": 60.0,
+              "node_sequence": [
+                "zone_79",
+                "zone_79"
+              ],
+              "edge_sequence": [],
+              "reason": "synthetic_zone_centroid_pickup_proxy"
+            },
+            "ride_leg": {
+              "reachable": true,
+              "distance_m": 2880.7257600000003,
+              "duration_sec": 622.0,
+              "node_sequence": [
+                "zone_79",
+                "zone_170"
+              ],
+              "edge_sequence": [
+                "od_79_170"
+              ],
+              "reason": null
+            },
+            "vehicle_available_time_sec": 0.0,
+            "predicted_pickup_time_sec": 60.0,
+            "predicted_dropoff_time_sec": 682.0,
+            "predicted_wait_sec": 60.0,
+            "empty_distance_m": 300.0,
+            "total_distance_m": 3180.7257600000003,
+            "energy_kwh": 0.5725306367999999,
+            "current_commitment_ok": true,
+            "one_to_one_ok": true,
+            "time_non_overlap_ok": true,
+            "max_wait_ok": true,
+            "hard_constraint_ok": true,
+            "feature_vector": {
+              "local_order_density": 0.4,
+              "local_idle_vehicle_density": 1.0,
+              "demand_supply_ratio": 1.3333333333333333,
+              "commitment_slack": 0.0,
+              "candidate_eta": 0.2,
+              "time_context": 0.0,
+              "vehicle_state_code": 0.0
+            },
+            "context_threshold_sec": null,
+            "context_pass": true,
+            "feedback_decision": null,
+            "feedback_risk": null,
+            "feedback_reason": null,
+            "rejection_reason": null
+          },
+          {
+            "candidate_id": "round-0000__C2-001__raw/fhvhv_tripdata_2024-01.parquet#12520025",
+            "dispatch_round_id": "round-0000",
+            "vehicle_id": "C2-001",
+            "order_id": "raw/fhvhv_tripdata_2024-01.parquet#12520025",
+            "candidate_type": "immediate_pickup",
+            "route_reachability": true,
+            "pickup_leg": {
+              "reachable": true,
+              "distance_m": 300.0,
+              "duration_sec": 60.0,
+              "node_sequence": [
+                "zone_79",
+                "zone_79"
+              ],
+              "edge_sequence": [],
+              "reason": "synthetic_zone_centroid_pickup_proxy"
+            },
+            "ride_leg": {
+              "reachable": true,
+              "distance_m": 2768.07168,
+              "duration_sec": 686.0,
+              "node_sequence": [
+                "zone_79",
+                "zone_90"
+              ],
+              "edge_sequence": [
+                "od_79_90"
+              ],
+              "reason": null
+            },
+            "vehicle_available_time_sec": 0.0,
+            "predicted_pickup_time_sec": 60.0,
+            "predicted_dropoff_time_sec": 746.0,
+            "predicted_wait_sec": 60.0,
+            "empty_distance_m": 300.0,
+            "total_distance_m": 3068.07168,
+            "energy_kwh": 0.5522529024,
+            "current_commitment_ok": true,
+            "one_to_one_ok": true,
+            "time_non_overlap_ok": true,
+            "max_wait_ok": true,
+            "hard_constraint_ok": true,
+            "feature_vector": {
+              "local_order_density": 0.4,
+              "local_idle_vehicle_density": 1.0,
+              "demand_supply_ratio": 1.3333333333333333,
+              "commitment_slack": 0.0,
+              "candidate_eta": 0.2,
+              "time_context": 0.0,
+              "vehicle_state_code": 0.0
+            },
+            "context_threshold_sec": null,
+            "context_pass": true,
+            "feedback_decision": null,
+            "feedback_risk": null,
+            "feedback_reason": null,
+            "rejection_reason": null
+          },
+          {
+            "candidate_id": "round-0000__C2-001__raw/fhvhv_tripdata_2024-01.parquet#12525729",
+            "dispatch_round_id": "round-0000",
+            "vehicle_id": "C2-001",
+            "order_id": "raw/fhvhv_tripdata_2024-01.parquet#12525729",
+            "candidate_type": "immediate_pickup",
+            "route_reachability": true,
+            "pickup_leg": {
+              "reachable": true,
+              "distance_m": 300.0,
+              "duration_sec": 60.0,
+              "node_sequence": [
+                "zone_79",
+                "zone_79"
+              ],
+              "edge_sequence": [],
+              "reason": "synthetic_zone_centroid_pickup_proxy"
+            },
+            "ride_leg": {
+              "reachable": true,
+              "distance_m": 14645.835072000002,
+              "duration_sec": 1918.5,
+              "node_sequence": [
+                "zone_79",
+                "zone_265"
+              ],
+              "edge_sequence": [
+                "od_79_265"
+              ],
+              "reason": null
+            },
+            "vehicle_available_time_sec": 0.0,
+            "predicted_pickup_time_sec": 60.0,
+            "predicted_dropoff_time_sec": 1978.5,
+            "predicted_wait_sec": 60.0,
+            "empty_distance_m": 300.0,
+            "total_distance_m": 14945.835072000002,
+            "energy_kwh": 2.69025031296,
+            "current_commitment_ok": true,
+            "one_to_one_ok": true,
+            "time_non_overlap_ok": true,
+            "max_wait_ok": true,
+            "hard_constraint_ok": true,
+            "feature_vector": {
+              "local_order_density": 0.4,
+              "local_idle_vehicle_density": 1.0,
+              "demand_supply_ratio": 1.3333333333333333,
+              "commitment_slack": 0.0,
+              "candidate_eta": 0.2,
+              "time_context": 0.0,
+              "vehicle_state_code": 0.0
+            },
+            "context_threshold_sec": null,
+            "context_pass": true,
+            "feedback_decision": null,
+            "feedback_risk": null,
+            "feedback_reason": null,
+            "rejection_reason": null
+          },
+          {
+            "candidate_id": "round-0000__C2-002__raw/fhvhv_tripdata_2024-01.parquet#12486977",
+            "dispatch_round_id": "round-0000",
+            "vehicle_id": "C2-002",
+            "order_id": "raw/fhvhv_tripdata_2024-01.parquet#12486977",
+            "candidate_type": "immediate_pickup",
+            "route_reachability": true,
+            "pickup_leg": {
+              "reachable": true,
+              "distance_m": 300.0,
+              "duration_sec": 60.0,
+              "node_sequence": [
+                "zone_79",
+                "zone_79"
+              ],
+              "edge_sequence": [],
+              "reason": "synthetic_zone_centroid_pickup_proxy"
+            },
+            "ride_leg": {
+              "reachable": true,
+              "distance_m": 2768.07168,
+              "duration_sec": 686.0,
+              "node_sequence": [
+                "zone_79",
+                "zone_90"
+              ],
+              "edge_sequence": [
+                "od_79_90"
+              ],
+              "reason": null
+            },
+            "vehicle_available_time_sec": 0.0,
+            "predicted_pickup_time_sec": 60.0,
+            "predicted_dropoff_time_sec": 746.0,
+            "predicted_wait_sec": 60.0,
+            "empty_distance_m": 300.0,
+            "total_distance_m": 3068.07168,
+            "energy_kwh": 0.5522529024,
+            "current_commitment_ok": true,
+            "one_to_one_ok": true,
+            "time_non_overlap_ok": true,
+            "max_wait_ok": true,
+            "hard_constraint_ok": true,
+            "feature_vector": {
+              "local_order_density": 0.4,
+              "local_idle_vehicle_density": 1.0,
+              "demand_supply_ratio": 1.3333333333333333,
+              "commitment_slack": 0.0,
+              "candidate_eta": 0.2,
+              "time_context": 0.0,
+              "vehicle_state_code": 0.0
+            },
+            "context_threshold_sec": null,
+            "context_pass": true,
+            "feedback_decision": null,
+            "feedback_risk": null,
+            "feedback_reason": null,
+            "rejection_reason": null
+          },
+          {
+            "candidate_id": "round-0000__C2-002__raw/fhvhv_tripdata_2024-01.parquet#12495753",
+            "dispatch_round_id": "round-0000",
+            "vehicle_id": "C2-002",
+            "order_id": "raw/fhvhv_tripdata_2024-01.parquet#12495753",
+            "candidate_type": "immediate_pickup",
+            "route_reachability": true,
+            "pickup_leg": {
+              "reachable": true,
+              "distance_m": 300.0,
+              "duration_sec": 60.0,
+              "node_sequence": [
+                "zone_79",
+                "zone_79"
+              ],
+              "edge_sequence": [],
+              "reason": "synthetic_zone_centroid_pickup_proxy"
+            },
+            "ride_leg": {
+              "reachable": true,
+              "distance_m": 2880.7257600000003,
+              "duration_sec": 622.0,
+              "node_sequence": [
+                "zone_79",
+                "zone_170"
+              ],
+              "edge_sequence": [
+                "od_79_170"
+              ],
+              "reason": null
+            },
+            "vehicle_available_time_sec": 0.0,
+            "predicted_pickup_time_sec": 60.0,
+            "predicted_dropoff_time_sec": 682.0,
+            "predicted_wait_sec": 60.0,
+            "empty_distance_m": 300.0,
+            "total_distance_m": 3180.7257600000003,
+            "energy_kwh": 0.5725306367999999,
+            "current_commitment_ok": true,
+            "one_to_one_ok": true,
+            "time_non_overlap_ok": true,
+            "max_wait_ok": true,
+            "hard_constraint_ok": true,
+            "feature_vector": {
+              "local_order_density": 0.4,
+              "local_idle_vehicle_density": 1.0,
+              "demand_supply_ratio": 1.3333333333333333,
+              "commitment_slack": 0.0,
+              "candidate_eta": 0.2,
+              "time_context": 0.0,
+              "vehicle_state_code": 0.0
+            },
+            "context_threshold_sec": null,
+            "context_pass": true,
+            "feedback_decision": null,
+            "feedback_risk": null,
+            "feedback_reason": null,
+            "rejection_reason": null
+          },
+          {
+            "candidate_id": "round-0000__C2-002__raw/fhvhv_tripdata_2024-01.parquet#12520025",
+            "dispatch_round_id": "round-0000",
+            "vehicle_id": "C2-002",
+            "order_id": "raw/fhvhv_tripdata_2024-01.parquet#12520025",
+            "candidate_type": "immediate_pickup",
+            "route_reachability": true,
+            "pickup_leg": {
+              "reachable": true,
+              "distance_m": 300.0,
+              "duration_sec": 60.0,
+              "node_sequence": [
+                "zone_79",
+                "zone_79"
+              ],
+              "edge_sequence": [],
+              "reason": "synthetic_zone_centroid_pickup_proxy"
+            },
+            "ride_leg": {
+              "reachable": true,
+              "distance_m": 2768.07168,
+              "duration_sec": 686.0,
+              "node_sequence": [
+                "zone_79",
+                "zone_90"
+              ],
+              "edge_sequence": [
+                "od_79_90"
+              ],
+              "reason": null
+            },
+            "vehicle_available_time_sec": 0.0,
+            "predicted_pickup_time_sec": 60.0,
+            "predicted_dropoff_time_sec": 746.0,
+            "predicted_wait_sec": 60.0,
+            "empty_distance_m": 300.0,
+            "total_distance_m": 3068.07168,
+            "energy_kwh": 0.5522529024,
+            "current_commitment_ok": true,
+            "one_to_one_ok": true,
+            "time_non_overlap_ok": true,
+            "max_wait_ok": true,
+            "hard_constraint_ok": true,
+            "feature_vector": {
+              "local_order_density": 0.4,
+              "local_idle_vehicle_density": 1.0,
+              "demand_supply_ratio": 1.3333333333333333,
+              "commitment_slack": 0.0,
+              "candidate_eta": 0.2,
+              "time_context": 0.0,
+              "vehicle_state_code": 0.0
+            },
+            "context_threshold_sec": null,
+            "context_pass": true,
+            "feedback_decision": null,
+            "feedback_risk": null,
+            "feedback_reason": null,
+            "rejection_reason": null
+          },
+          {
+            "candidate_id": "round-0000__C2-002__raw/fhvhv_tripdata_2024-01.parquet#12525729",
+            "dispatch_round_id": "round-0000",
+            "vehicle_id": "C2-002",
+            "order_id": "raw/fhvhv_tripdata_2024-01.parquet#12525729",
+            "candidate_type": "immediate_pickup",
+            "route_reachability": true,
+            "pickup_leg": {
+              "reachable": true,
+              "distance_m": 300.0,
+              "duration_sec": 60.0,
+              "node_sequence": [
+                "zone_79",
+                "zone_79"
+              ],
+              "edge_sequence": [],
+              "reason": "synthetic_zone_centroid_pickup_proxy"
+            },
+            "ride_leg": {
+              "reachable": true,
+              "distance_m": 14645.835072000002,
+              "duration_sec": 1918.5,
+              "node_sequence": [
+                "zone_79",
+                "zone_265"
+              ],
+              "edge_sequence": [
+                "od_79_265"
+              ],
+              "reason": null
+            },
+            "vehicle_available_time_sec": 0.0,
+            "predicted_pickup_time_sec": 60.0,
+            "predicted_dropoff_time_sec": 1978.5,
+            "predicted_wait_sec": 60.0,
+            "empty_distance_m": 300.0,
+            "total_distance_m": 14945.835072000002,
+            "energy_kwh": 2.69025031296,
+            "current_commitment_ok": true,
+            "one_to_one_ok": true,
+            "time_non_overlap_ok": true,
+            "max_wait_ok": true,
+            "hard_constraint_ok": true,
+            "feature_vector": {
+              "local_order_density": 0.4,
+              "local_idle_vehicle_density": 1.0,
+              "demand_supply_ratio": 1.3333333333333333,
+              "commitment_slack": 0.0,
+              "candidate_eta": 0.2,
+              "time_context": 0.0,
+              "vehicle_state_code": 0.0
+            },
+            "context_threshold_sec": null,
+            "context_pass": true,
+            "feedback_decision": null,
+            "feedback_risk": null,
+            "feedback_reason": null,
+            "rejection_reason": null
+          },
+          {
+            "candidate_id": "round-0000__C2-003__raw/fhvhv_tripdata_2024-01.parquet#12486977",
+            "dispatch_round_id": "round-0000",
+            "vehicle_id": "C2-003",
+            "order_id": "raw/fhvhv_tripdata_2024-01.parquet#12486977",
+            "candidate_type": "immediate_pickup",
+            "route_reachability": true,
+            "pickup_leg": {
+              "reachable": true,
+              "distance_m": 300.0,
+              "duration_sec": 60.0,
+              "node_sequence": [
+                "zone_79",
+                "zone_79"
+              ],
+              "edge_sequence": [],
+              "reason": "synthetic_zone_centroid_pickup_proxy"
+            },
+            "ride_leg": {
+              "reachable": true,
+              "distance_m": 2768.07168,
+              "duration_sec": 686.0,
+              "node_sequence": [
+                "zone_79",
+                "zone_90"
+              ],
+              "edge_sequence": [
+                "od_79_90"
+              ],
+              "reason": null
+            },
+            "vehicle_available_time_sec": 0.0,
+            "predicted_pickup_time_sec": 60.0,
+            "predicted_dropoff_time_sec": 746.0,
+            "predicted_wait_sec": 60.0,
+            "empty_distance_m": 300.0,
+            "total_distance_m": 3068.07168,
+            "energy_kwh": 0.5522529024,
+            "current_commitment_ok": true,
+            "one_to_one_ok": true,
+            "time_non_overlap_ok": true,
+            "max_wait_ok": true,
+            "hard_constraint_ok": true,
+            "feature_vector": {
+              "local_order_density": 0.4,
+              "local_idle_vehicle_density": 1.0,
+              "demand_supply_ratio": 1.3333333333333333,
+              "commitment_slack": 0.0,
+              "candidate_eta": 0.2,
+              "time_context": 0.0,
+              "vehicle_state_code": 0.0
+            },
+            "context_threshold_sec": null,
+            "context_pass": true,
+            "feedback_decision": null,
+            "feedback_risk": null,
+            "feedback_reason": null,
+            "rejection_reason": null
+          },
+          {
+            "candidate_id": "round-0000__C2-003__raw/fhvhv_tripdata_2024-01.parquet#12495753",
+            "dispatch_round_id": "round-0000",
+            "vehicle_id": "C2-003",
+            "order_id": "raw/fhvhv_tripdata_2024-01.parquet#12495753",
+            "candidate_type": "immediate_pickup",
+            "route_reachability": true,
+            "pickup_leg": {
+              "reachable": true,
+              "distance_m": 300.0,
+              "duration_sec": 60.0,
+              "node_sequence": [
+                "zone_79",
+                "zone_79"
+              ],
+              "edge_sequence": [],
+              "reason": "synthetic_zone_centroid_pickup_proxy"
+            },
+            "ride_leg": {
+              "reachable": true,
+              "distance_m": 2880.7257600000003,
+              "duration_sec": 622.0,
+              "node_sequence": [
+                "zone_79",
+                "zone_170"
+              ],
+              "edge_sequence": [
+                "od_79_170"
+              ],
+              "reason": null
+            },
+            "vehicle_available_time_sec": 0.0,
+            "predicted_pickup_time_sec": 60.0,
+            "predicted_dropoff_time_sec": 682.0,
+            "predicted_wait_sec": 60.0,
+            "empty_distance_m": 300.0,
+            "total_distance_m": 3180.7257600000003,
+            "energy_kwh": 0.5725306367999999,
+            "current_commitment_ok": true,
+            "one_to_one_ok": true,
+            "time_non_overlap_ok": true,
+            "max_wait_ok": true,
+            "hard_constraint_ok": true,
+            "feature_vector": {
+              "local_order_density": 0.4,
+              "local_idle_vehicle_density": 1.0,
+              "demand_supply_ratio": 1.3333333333333333,
+              "commitment_slack": 0.0,
+              "candidate_eta": 0.2,
+              "time_context": 0.0,
+              "vehicle_state_code": 0.0
+            },
+            "context_threshold_sec": null,
+            "context_pass": true,
+            "feedback_decision": null,
+            "feedback_risk": null,
+            "feedback_reason": null,
+            "rejection_reason": null
+          },
+          {
+            "candidate_id": "round-0000__C2-003__raw/fhvhv_tripdata_2024-01.parquet#12520025",
+            "dispatch_round_id": "round-0000",
+            "vehicle_id": "C2-003",
+            "order_id": "raw/fhvhv_tripdata_2024-01.parquet#12520025",
+            "candidate_type": "immediate_pickup",
+            "route_reachability": true,
+            "pickup_leg": {
+              "reachable": true,
+              "distance_m": 300.0,
+              "duration_sec": 60.0,
+              "node_sequence": [
+                "zone_79",
+                "zone_79"
+              ],
+              "edge_sequence": [],
+              "reason": "synthetic_zone_centroid_pickup_proxy"
+            },
+            "ride_leg": {
+              "reachable": true,
+              "distance_m": 2768.07168,
+              "duration_sec": 686.0,
+              "node_sequence": [
+                "zone_79",
+                "zone_90"
+              ],
+              "edge_sequence": [
+                "od_79_90"
+              ],
+              "reason": null
+            },
+            "vehicle_available_time_sec": 0.0,
+            "predicted_pickup_time_sec": 60.0,
+            "predicted_dropoff_time_sec": 746.0,
+            "predicted_wait_sec": 60.0,
+            "empty_distance_m": 300.0,
+            "total_distance_m": 3068.07168,
+            "energy_kwh": 0.5522529024,
+            "current_commitment_ok": true,
+            "one_to_one_ok": true,
+            "time_non_overlap_ok": true,
+            "max_wait_ok": true,
+            "hard_constraint_ok": true,
+            "feature_vector": {
+              "local_order_density": 0.4,
+              "local_idle_vehicle_density": 1.0,
+              "demand_supply_ratio": 1.3333333333333333,
+              "commitment_slack": 0.0,
+              "candidate_eta": 0.2,
+              "time_context": 0.0,
+              "vehicle_state_code": 0.0
+            },
+            "context_threshold_sec": null,
+            "context_pass": true,
+            "feedback_decision": null,
+            "feedback_risk": null,
+            "feedback_reason": null,
+            "rejection_reason": null
+          },
+          {
+            "candidate_id": "round-0000__C2-003__raw/fhvhv_tripdata_2024-01.parquet#12525729",
+            "dispatch_round_id": "round-0000",
+            "vehicle_id": "C2-003",
+            "order_id": "raw/fhvhv_tripdata_2024-01.parquet#12525729",
+            "candidate_type": "immediate_pickup",
+            "route_reachability": true,
+            "pickup_leg": {
+              "reachable": true,
+              "distance_m": 300.0,
+              "duration_sec": 60.0,
+              "node_sequence": [
+                "zone_79",
+                "zone_79"
+              ],
+              "edge_sequence": [],
+              "reason": "synthetic_zone_centroid_pickup_proxy"
+            },
+            "ride_leg": {
+              "reachable": true,
+              "distance_m": 14645.835072000002,
+              "duration_sec": 1918.5,
+              "node_sequence": [
+                "zone_79",
+                "zone_265"
+              ],
+              "edge_sequence": [
+                "od_79_265"
+              ],
+              "reason": null
+            },
+            "vehicle_available_time_sec": 0.0,
+            "predicted_pickup_time_sec": 60.0,
+            "predicted_dropoff_time_sec": 1978.5,
+            "predicted_wait_sec": 60.0,
+            "empty_distance_m": 300.0,
+            "total_distance_m": 14945.835072000002,
+            "energy_kwh": 2.69025031296,
+            "current_commitment_ok": true,
+            "one_to_one_ok": true,
+            "time_non_overlap_ok": true,
+            "max_wait_ok": true,
+            "hard_constraint_ok": true,
+            "feature_vector": {
+              "local_order_density": 0.4,
+              "local_idle_vehicle_density": 1.0,
+              "demand_supply_ratio": 1.3333333333333333,
+              "commitment_slack": 0.0,
+              "candidate_eta": 0.2,
+              "time_context": 0.0,
+              "vehicle_state_code": 0.0
+            },
+            "context_threshold_sec": null,
+            "context_pass": true,
+            "feedback_decision": null,
+            "feedback_risk": null,
+            "feedback_reason": null,
+            "rejection_reason": null
+          }
+        ],
+        "max_pickup_wait_sec": 300.0,
+        "post_arrival_boarding_timeout_sec": 180.0,
+        "one_to_one_rule": true,
+        "max_next_reservation_per_vehicle": 1,
+        "objective_priority": [
+          "preserve_commitments",
+          "maximize_served_orders",
+          "minimize_wait",
+          "minimize_empty_distance",
+          "minimize_energy"
+        ],
+        "schema_version": "dispatch-agent-v1",
+        "future_order_visibility": false
+      },
+      "output": {
+        "decision_package_id": "decision-round-0000",
+        "dispatch_round_id": "round-0000",
+        "method_name": "D5_pure_llm_direct",
+        "method_version": "dispatch-agent-v1",
+        "assignments": [
+          {
+            "assignment_id": "assignment-round-0000__C2-001__raw/fhvhv_tripdata_2024-01.parquet#12486977",
+            "candidate_id": "round-0000__C2-001__raw/fhvhv_tripdata_2024-01.parquet#12486977",
+            "vehicle_id": "C2-001",
+            "order_id": "raw/fhvhv_tripdata_2024-01.parquet#12486977",
+            "assignment_type": "immediate",
+            "predicted_pickup_time_sec": 60.0,
+            "predicted_dropoff_time_sec": 746.0,
+            "predicted_wait_sec": 60.0
+          },
+          {
+            "assignment_id": "assignment-round-0000__C2-002__raw/fhvhv_tripdata_2024-01.parquet#12495753",
+            "candidate_id": "round-0000__C2-002__raw/fhvhv_tripdata_2024-01.parquet#12495753",
+            "vehicle_id": "C2-002",
+            "order_id": "raw/fhvhv_tripdata_2024-01.parquet#12495753",
+            "assignment_type": "immediate",
+            "predicted_pickup_time_sec": 60.0,
+            "predicted_dropoff_time_sec": 682.0,
+            "predicted_wait_sec": 60.0
+          },
+          {
+            "assignment_id": "assignment-round-0000__C2-003__raw/fhvhv_tripdata_2024-01.parquet#12520025",
+            "candidate_id": "round-0000__C2-003__raw/fhvhv_tripdata_2024-01.parquet#12520025",
+            "vehicle_id": "C2-003",
+            "order_id": "raw/fhvhv_tripdata_2024-01.parquet#12520025",
+            "assignment_type": "immediate",
+            "predicted_pickup_time_sec": 60.0,
+            "predicted_dropoff_time_sec": 746.0,
+            "predicted_wait_sec": 60.0
+          }
+        ],
+        "unserved_order_ids": [
+          "raw/fhvhv_tripdata_2024-01.parquet#12525729"
+        ],
+        "selected_candidate_ids": [
+          "round-0000__C2-001__raw/fhvhv_tripdata_2024-01.parquet#12486977",
+          "round-0000__C2-002__raw/fhvhv_tripdata_2024-01.parquet#12495753",
+          "round-0000__C2-003__raw/fhvhv_tripdata_2024-01.parquet#12520025"
+        ],
+        "candidate_decisions": [],
+        "optimizer_status": "accepted",
+        "fallback_used": false,
+        "fallback_reason": null,
+        "validator_status": "valid",
+        "hard_constraint_errors": [],
+        "agent_time_ms": 0.0,
+        "function_time_ms": 0.0,
+        "llm_time_ms": 10411.920583000001,
+        "optimizer_time_ms": 0.0,
+        "total_decision_time_ms": 10414.752667,
+        "llm_call_count": 1,
+        "input_tokens": 17955,
+        "output_tokens": 216,
+        "api_cost": null,
+        "api_cost_usd": null,
+        "audit": {
+          "context_function": {
+            "function_id": "linear_clip",
+            "function_mode": "manual_linear_clip",
+            "function_version": "context-v1",
+            "feature_names": [
+              "local_order_density",
+              "local_idle_vehicle_density",
+              "demand_supply_ratio",
+              "commitment_slack",
+              "candidate_eta",
+              "time_context",
+              "vehicle_state_code"
+            ],
+            "formula": "clip(base + sum(w_i * feature_i), min_threshold, max_threshold)",
+            "parameters": {
+              "base": 240.0,
+              "weights": [
+                -20.0,
+                30.0,
+                -5.0,
+                15.0,
+                -60.0,
+                0.0,
+                0.0
+              ]
+            },
+            "min_threshold_sec": 120.0,
+            "max_threshold_sec": 300.0
+          },
+          "feedback_mode": "none",
+          "feedback_evaluation_count": 0,
+          "live_llm": true,
+          "llm_error_count": 0,
+          "audit_label": "pure_llm_direct_matching",
+          "future_order_visibility": false,
+          "direct_llm_assignment": {
+            "status": "accepted",
+            "backend": "codex_cli",
+            "model": "gpt-5.6-luna",
+            "codex_cli_version": "codex-cli 0.145.0",
+            "reasoning_effort": "low",
+            "invocation_made": true,
+            "request_made": true,
+            "cli_exit_code": 0,
+            "retry_count": 0,
+            "tool_policy": {
+              "shell_tool": "disabled",
+              "unified_exec": "disabled",
+              "user_config": "ignored",
+              "sandbox": "read-only"
+            },
+            "latency_ms": 10411.920583000001,
+            "input_tokens": 17955,
+            "cached_input_tokens": 0,
+            "output_tokens": 216,
+            "reasoning_tokens": 111,
+            "total_tokens": 18171,
+            "usage_status": "available_best_effort",
+            "usage_source": "codex_exec_json_turn_completed_event",
+            "turn_started_count": 1,
+            "turn_completed_usage_count": 1,
+            "tool_usage_detected": false,
+            "tool_item_types": [],
+            "other_non_message_item_types": [
+              "error"
+            ],
+            "event_types": [
+              "thread.started",
+              "turn.started",
+              "item.completed",
+              "item.completed",
+              "turn.completed"
+            ],
+            "max_output_tokens": null,
+            "account_cost_usd": null,
+            "cost_status": "account_plan_or_credits_not_exposed_by_cli",
+            "cli_error_messages": [],
+            "prompt_sha256": "998e0ba7fc2fa8f34183acd91118568145183a7ee34853754539fefd3682532e",
+            "schema_sha256": "df3e3708ed18c2e55a392895df453800308a96cd1afed0820eecd8b21be8e198",
+            "trace_jsonl_path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/three_method_benchmark_v1/results/pure_llm_codex_cli_v2/C2_four_same_second_orders_three_vehicles/single_fleet/codex_cli_traces/dispatch_round_0001.jsonl",
+            "trace_jsonl_sha256": "4b717d4cf29cc724a60e6cbde86e3ed91dd6c760b93a85f6322b840b6ca12155",
+            "final_json_path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/three_method_benchmark_v1/results/pure_llm_codex_cli_v2/C2_four_same_second_orders_three_vehicles/single_fleet/codex_cli_traces/dispatch_round_0001.final.json",
+            "final_json_sha256": "a7ed6af993f4d0e568c411f2fe4948e39f3b8e2534d0c96c02c2973635ab62df",
+            "jsonl_parse_errors": [],
+            "error": null,
+            "stderr_tail": "2026-10-21T06:13:40.947529Z ERROR codex_models_manager::cache: failed to load models cache: missing field `base_instructions` at line 139 column 5\n2026-10-21T06:13:43.286245Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-21T06:13:43.291205Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-21T06:13:43.295805Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-21T06:13:43.300194Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-21T06:13:43.306578Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n2026-10-21T06:13:43.310637Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back\n"
+          },
+          "direct_llm_error_count": 0,
+          "direct_llm_unknown_cost_count": 0,
+          "api_cost_currency": null
+        }
+      },
+      "candidates": [
+        {
+          "candidate_id": "round-0000__C2-001__raw/fhvhv_tripdata_2024-01.parquet#12486977",
+          "dispatch_round_id": "round-0000",
+          "vehicle_id": "C2-001",
+          "order_id": "raw/fhvhv_tripdata_2024-01.parquet#12486977",
+          "candidate_type": "immediate_pickup",
+          "route_reachability": true,
+          "pickup_leg": {
+            "reachable": true,
+            "distance_m": 300.0,
+            "duration_sec": 60.0,
+            "node_sequence": [
+              "zone_79",
+              "zone_79"
+            ],
+            "edge_sequence": [],
+            "reason": "synthetic_zone_centroid_pickup_proxy"
+          },
+          "ride_leg": {
+            "reachable": true,
+            "distance_m": 2768.07168,
+            "duration_sec": 686.0,
+            "node_sequence": [
+              "zone_79",
+              "zone_90"
+            ],
+            "edge_sequence": [
+              "od_79_90"
+            ],
+            "reason": null
+          },
+          "vehicle_available_time_sec": 0.0,
+          "predicted_pickup_time_sec": 60.0,
+          "predicted_dropoff_time_sec": 746.0,
+          "predicted_wait_sec": 60.0,
+          "empty_distance_m": 300.0,
+          "total_distance_m": 3068.07168,
+          "energy_kwh": 0.5522529024,
+          "current_commitment_ok": true,
+          "one_to_one_ok": true,
+          "time_non_overlap_ok": true,
+          "max_wait_ok": true,
+          "hard_constraint_ok": true,
+          "feature_vector": {
+            "local_order_density": 0.4,
+            "local_idle_vehicle_density": 1.0,
+            "demand_supply_ratio": 1.3333333333333333,
+            "commitment_slack": 0.0,
+            "candidate_eta": 0.2,
+            "time_context": 0.0,
+            "vehicle_state_code": 0.0
+          },
+          "context_threshold_sec": null,
+          "context_pass": true,
+          "feedback_decision": null,
+          "feedback_risk": null,
+          "feedback_reason": null,
+          "rejection_reason": null
+        },
+        {
+          "candidate_id": "round-0000__C2-001__raw/fhvhv_tripdata_2024-01.parquet#12495753",
+          "dispatch_round_id": "round-0000",
+          "vehicle_id": "C2-001",
+          "order_id": "raw/fhvhv_tripdata_2024-01.parquet#12495753",
+          "candidate_type": "immediate_pickup",
+          "route_reachability": true,
+          "pickup_leg": {
+            "reachable": true,
+            "distance_m": 300.0,
+            "duration_sec": 60.0,
+            "node_sequence": [
+              "zone_79",
+              "zone_79"
+            ],
+            "edge_sequence": [],
+            "reason": "synthetic_zone_centroid_pickup_proxy"
+          },
+          "ride_leg": {
+            "reachable": true,
+            "distance_m": 2880.7257600000003,
+            "duration_sec": 622.0,
+            "node_sequence": [
+              "zone_79",
+              "zone_170"
+            ],
+            "edge_sequence": [
+              "od_79_170"
+            ],
+            "reason": null
+          },
+          "vehicle_available_time_sec": 0.0,
+          "predicted_pickup_time_sec": 60.0,
+          "predicted_dropoff_time_sec": 682.0,
+          "predicted_wait_sec": 60.0,
+          "empty_distance_m": 300.0,
+          "total_distance_m": 3180.7257600000003,
+          "energy_kwh": 0.5725306367999999,
+          "current_commitment_ok": true,
+          "one_to_one_ok": true,
+          "time_non_overlap_ok": true,
+          "max_wait_ok": true,
+          "hard_constraint_ok": true,
+          "feature_vector": {
+            "local_order_density": 0.4,
+            "local_idle_vehicle_density": 1.0,
+            "demand_supply_ratio": 1.3333333333333333,
+            "commitment_slack": 0.0,
+            "candidate_eta": 0.2,
+            "time_context": 0.0,
+            "vehicle_state_code": 0.0
+          },
+          "context_threshold_sec": null,
+          "context_pass": true,
+          "feedback_decision": null,
+          "feedback_risk": null,
+          "feedback_reason": null,
+          "rejection_reason": null
+        },
+        {
+          "candidate_id": "round-0000__C2-001__raw/fhvhv_tripdata_2024-01.parquet#12520025",
+          "dispatch_round_id": "round-0000",
+          "vehicle_id": "C2-001",
+          "order_id": "raw/fhvhv_tripdata_2024-01.parquet#12520025",
+          "candidate_type": "immediate_pickup",
+          "route_reachability": true,
+          "pickup_leg": {
+            "reachable": true,
+            "distance_m": 300.0,
+            "duration_sec": 60.0,
+            "node_sequence": [
+              "zone_79",
+              "zone_79"
+            ],
+            "edge_sequence": [],
+            "reason": "synthetic_zone_centroid_pickup_proxy"
+          },
+          "ride_leg": {
+            "reachable": true,
+            "distance_m": 2768.07168,
+            "duration_sec": 686.0,
+            "node_sequence": [
+              "zone_79",
+              "zone_90"
+            ],
+            "edge_sequence": [
+              "od_79_90"
+            ],
+            "reason": null
+          },
+          "vehicle_available_time_sec": 0.0,
+          "predicted_pickup_time_sec": 60.0,
+          "predicted_dropoff_time_sec": 746.0,
+          "predicted_wait_sec": 60.0,
+          "empty_distance_m": 300.0,
+          "total_distance_m": 3068.07168,
+          "energy_kwh": 0.5522529024,
+          "current_commitment_ok": true,
+          "one_to_one_ok": true,
+          "time_non_overlap_ok": true,
+          "max_wait_ok": true,
+          "hard_constraint_ok": true,
+          "feature_vector": {
+            "local_order_density": 0.4,
+            "local_idle_vehicle_density": 1.0,
+            "demand_supply_ratio": 1.3333333333333333,
+            "commitment_slack": 0.0,
+            "candidate_eta": 0.2,
+            "time_context": 0.0,
+            "vehicle_state_code": 0.0
+          },
+          "context_threshold_sec": null,
+          "context_pass": true,
+          "feedback_decision": null,
+          "feedback_risk": null,
+          "feedback_reason": null,
+          "rejection_reason": null
+        },
+        {
+          "candidate_id": "round-0000__C2-001__raw/fhvhv_tripdata_2024-01.parquet#12525729",
+          "dispatch_round_id": "round-0000",
+          "vehicle_id": "C2-001",
+          "order_id": "raw/fhvhv_tripdata_2024-01.parquet#12525729",
+          "candidate_type": "immediate_pickup",
+          "route_reachability": true,
+          "pickup_leg": {
+            "reachable": true,
+            "distance_m": 300.0,
+            "duration_sec": 60.0,
+            "node_sequence": [
+              "zone_79",
+              "zone_79"
+            ],
+            "edge_sequence": [],
+            "reason": "synthetic_zone_centroid_pickup_proxy"
+          },
+          "ride_leg": {
+            "reachable": true,
+            "distance_m": 14645.835072000002,
+            "duration_sec": 1918.5,
+            "node_sequence": [
+              "zone_79",
+              "zone_265"
+            ],
+            "edge_sequence": [
+              "od_79_265"
+            ],
+            "reason": null
+          },
+          "vehicle_available_time_sec": 0.0,
+          "predicted_pickup_time_sec": 60.0,
+          "predicted_dropoff_time_sec": 1978.5,
+          "predicted_wait_sec": 60.0,
+          "empty_distance_m": 300.0,
+          "total_distance_m": 14945.835072000002,
+          "energy_kwh": 2.69025031296,
+          "current_commitment_ok": true,
+          "one_to_one_ok": true,
+          "time_non_overlap_ok": true,
+          "max_wait_ok": true,
+          "hard_constraint_ok": true,
+          "feature_vector": {
+            "local_order_density": 0.4,
+            "local_idle_vehicle_density": 1.0,
+            "demand_supply_ratio": 1.3333333333333333,
+            "commitment_slack": 0.0,
+            "candidate_eta": 0.2,
+            "time_context": 0.0,
+            "vehicle_state_code": 0.0
+          },
+          "context_threshold_sec": null,
+          "context_pass": true,
+          "feedback_decision": null,
+          "feedback_risk": null,
+          "feedback_reason": null,
+          "rejection_reason": null
+        },
+        {
+          "candidate_id": "round-0000__C2-002__raw/fhvhv_tripdata_2024-01.parquet#12486977",
+          "dispatch_round_id": "round-0000",
+          "vehicle_id": "C2-002",
+          "order_id": "raw/fhvhv_tripdata_2024-01.parquet#12486977",
+          "candidate_type": "immediate_pickup",
+          "route_reachability": true,
+          "pickup_leg": {
+            "reachable": true,
+            "distance_m": 300.0,
+            "duration_sec": 60.0,
+            "node_sequence": [
+              "zone_79",
+              "zone_79"
+            ],
+            "edge_sequence": [],
+            "reason": "synthetic_zone_centroid_pickup_proxy"
+          },
+          "ride_leg": {
+            "reachable": true,
+            "distance_m": 2768.07168,
+            "duration_sec": 686.0,
+            "node_sequence": [
+              "zone_79",
+              "zone_90"
+            ],
+            "edge_sequence": [
+              "od_79_90"
+            ],
+            "reason": null
+          },
+          "vehicle_available_time_sec": 0.0,
+          "predicted_pickup_time_sec": 60.0,
+          "predicted_dropoff_time_sec": 746.0,
+          "predicted_wait_sec": 60.0,
+          "empty_distance_m": 300.0,
+          "total_distance_m": 3068.07168,
+          "energy_kwh": 0.5522529024,
+          "current_commitment_ok": true,
+          "one_to_one_ok": true,
+          "time_non_overlap_ok": true,
+          "max_wait_ok": true,
+          "hard_constraint_ok": true,
+          "feature_vector": {
+            "local_order_density": 0.4,
+            "local_idle_vehicle_density": 1.0,
+            "demand_supply_ratio": 1.3333333333333333,
+            "commitment_slack": 0.0,
+            "candidate_eta": 0.2,
+            "time_context": 0.0,
+            "vehicle_state_code": 0.0
+          },
+          "context_threshold_sec": null,
+          "context_pass": true,
+          "feedback_decision": null,
+          "feedback_risk": null,
+          "feedback_reason": null,
+          "rejection_reason": null
+        },
+        {
+          "candidate_id": "round-0000__C2-002__raw/fhvhv_tripdata_2024-01.parquet#12495753",
+          "dispatch_round_id": "round-0000",
+          "vehicle_id": "C2-002",
+          "order_id": "raw/fhvhv_tripdata_2024-01.parquet#12495753",
+          "candidate_type": "immediate_pickup",
+          "route_reachability": true,
+          "pickup_leg": {
+            "reachable": true,
+            "distance_m": 300.0,
+            "duration_sec": 60.0,
+            "node_sequence": [
+              "zone_79",
+              "zone_79"
+            ],
+            "edge_sequence": [],
+            "reason": "synthetic_zone_centroid_pickup_proxy"
+          },
+          "ride_leg": {
+            "reachable": true,
+            "distance_m": 2880.7257600000003,
+            "duration_sec": 622.0,
+            "node_sequence": [
+              "zone_79",
+              "zone_170"
+            ],
+            "edge_sequence": [
+              "od_79_170"
+            ],
+            "reason": null
+          },
+          "vehicle_available_time_sec": 0.0,
+          "predicted_pickup_time_sec": 60.0,
+          "predicted_dropoff_time_sec": 682.0,
+          "predicted_wait_sec": 60.0,
+          "empty_distance_m": 300.0,
+          "total_distance_m": 3180.7257600000003,
+          "energy_kwh": 0.5725306367999999,
+          "current_commitment_ok": true,
+          "one_to_one_ok": true,
+          "time_non_overlap_ok": true,
+          "max_wait_ok": true,
+          "hard_constraint_ok": true,
+          "feature_vector": {
+            "local_order_density": 0.4,
+            "local_idle_vehicle_density": 1.0,
+            "demand_supply_ratio": 1.3333333333333333,
+            "commitment_slack": 0.0,
+            "candidate_eta": 0.2,
+            "time_context": 0.0,
+            "vehicle_state_code": 0.0
+          },
+          "context_threshold_sec": null,
+          "context_pass": true,
+          "feedback_decision": null,
+          "feedback_risk": null,
+          "feedback_reason": null,
+          "rejection_reason": null
+        },
+        {
+          "candidate_id": "round-0000__C2-002__raw/fhvhv_tripdata_2024-01.parquet#12520025",
+          "dispatch_round_id": "round-0000",
+          "vehicle_id": "C2-002",
+          "order_id": "raw/fhvhv_tripdata_2024-01.parquet#12520025",
+          "candidate_type": "immediate_pickup",
+          "route_reachability": true,
+          "pickup_leg": {
+            "reachable": true,
+            "distance_m": 300.0,
+            "duration_sec": 60.0,
+            "node_sequence": [
+              "zone_79",
+              "zone_79"
+            ],
+            "edge_sequence": [],
+            "reason": "synthetic_zone_centroid_pickup_proxy"
+          },
+          "ride_leg": {
+            "reachable": true,
+            "distance_m": 2768.07168,
+            "duration_sec": 686.0,
+            "node_sequence": [
+              "zone_79",
+              "zone_90"
+            ],
+            "edge_sequence": [
+              "od_79_90"
+            ],
+            "reason": null
+          },
+          "vehicle_available_time_sec": 0.0,
+          "predicted_pickup_time_sec": 60.0,
+          "predicted_dropoff_time_sec": 746.0,
+          "predicted_wait_sec": 60.0,
+          "empty_distance_m": 300.0,
+          "total_distance_m": 3068.07168,
+          "energy_kwh": 0.5522529024,
+          "current_commitment_ok": true,
+          "one_to_one_ok": true,
+          "time_non_overlap_ok": true,
+          "max_wait_ok": true,
+          "hard_constraint_ok": true,
+          "feature_vector": {
+            "local_order_density": 0.4,
+            "local_idle_vehicle_density": 1.0,
+            "demand_supply_ratio": 1.3333333333333333,
+            "commitment_slack": 0.0,
+            "candidate_eta": 0.2,
+            "time_context": 0.0,
+            "vehicle_state_code": 0.0
+          },
+          "context_threshold_sec": null,
+          "context_pass": true,
+          "feedback_decision": null,
+          "feedback_risk": null,
+          "feedback_reason": null,
+          "rejection_reason": null
+        },
+        {
+          "candidate_id": "round-0000__C2-002__raw/fhvhv_tripdata_2024-01.parquet#12525729",
+          "dispatch_round_id": "round-0000",
+          "vehicle_id": "C2-002",
+          "order_id": "raw/fhvhv_tripdata_2024-01.parquet#12525729",
+          "candidate_type": "immediate_pickup",
+          "route_reachability": true,
+          "pickup_leg": {
+            "reachable": true,
+            "distance_m": 300.0,
+            "duration_sec": 60.0,
+            "node_sequence": [
+              "zone_79",
+              "zone_79"
+            ],
+            "edge_sequence": [],
+            "reason": "synthetic_zone_centroid_pickup_proxy"
+          },
+          "ride_leg": {
+            "reachable": true,
+            "distance_m": 14645.835072000002,
+            "duration_sec": 1918.5,
+            "node_sequence": [
+              "zone_79",
+              "zone_265"
+            ],
+            "edge_sequence": [
+              "od_79_265"
+            ],
+            "reason": null
+          },
+          "vehicle_available_time_sec": 0.0,
+          "predicted_pickup_time_sec": 60.0,
+          "predicted_dropoff_time_sec": 1978.5,
+          "predicted_wait_sec": 60.0,
+          "empty_distance_m": 300.0,
+          "total_distance_m": 14945.835072000002,
+          "energy_kwh": 2.69025031296,
+          "current_commitment_ok": true,
+          "one_to_one_ok": true,
+          "time_non_overlap_ok": true,
+          "max_wait_ok": true,
+          "hard_constraint_ok": true,
+          "feature_vector": {
+            "local_order_density": 0.4,
+            "local_idle_vehicle_density": 1.0,
+            "demand_supply_ratio": 1.3333333333333333,
+            "commitment_slack": 0.0,
+            "candidate_eta": 0.2,
+            "time_context": 0.0,
+            "vehicle_state_code": 0.0
+          },
+          "context_threshold_sec": null,
+          "context_pass": true,
+          "feedback_decision": null,
+          "feedback_risk": null,
+          "feedback_reason": null,
+          "rejection_reason": null
+        },
+        {
+          "candidate_id": "round-0000__C2-003__raw/fhvhv_tripdata_2024-01.parquet#12486977",
+          "dispatch_round_id": "round-0000",
+          "vehicle_id": "C2-003",
+          "order_id": "raw/fhvhv_tripdata_2024-01.parquet#12486977",
+          "candidate_type": "immediate_pickup",
+          "route_reachability": true,
+          "pickup_leg": {
+            "reachable": true,
+            "distance_m": 300.0,
+            "duration_sec": 60.0,
+            "node_sequence": [
+              "zone_79",
+              "zone_79"
+            ],
+            "edge_sequence": [],
+            "reason": "synthetic_zone_centroid_pickup_proxy"
+          },
+          "ride_leg": {
+            "reachable": true,
+            "distance_m": 2768.07168,
+            "duration_sec": 686.0,
+            "node_sequence": [
+              "zone_79",
+              "zone_90"
+            ],
+            "edge_sequence": [
+              "od_79_90"
+            ],
+            "reason": null
+          },
+          "vehicle_available_time_sec": 0.0,
+          "predicted_pickup_time_sec": 60.0,
+          "predicted_dropoff_time_sec": 746.0,
+          "predicted_wait_sec": 60.0,
+          "empty_distance_m": 300.0,
+          "total_distance_m": 3068.07168,
+          "energy_kwh": 0.5522529024,
+          "current_commitment_ok": true,
+          "one_to_one_ok": true,
+          "time_non_overlap_ok": true,
+          "max_wait_ok": true,
+          "hard_constraint_ok": true,
+          "feature_vector": {
+            "local_order_density": 0.4,
+            "local_idle_vehicle_density": 1.0,
+            "demand_supply_ratio": 1.3333333333333333,
+            "commitment_slack": 0.0,
+            "candidate_eta": 0.2,
+            "time_context": 0.0,
+            "vehicle_state_code": 0.0
+          },
+          "context_threshold_sec": null,
+          "context_pass": true,
+          "feedback_decision": null,
+          "feedback_risk": null,
+          "feedback_reason": null,
+          "rejection_reason": null
+        },
+        {
+          "candidate_id": "round-0000__C2-003__raw/fhvhv_tripdata_2024-01.parquet#12495753",
+          "dispatch_round_id": "round-0000",
+          "vehicle_id": "C2-003",
+          "order_id": "raw/fhvhv_tripdata_2024-01.parquet#12495753",
+          "candidate_type": "immediate_pickup",
+          "route_reachability": true,
+          "pickup_leg": {
+            "reachable": true,
+            "distance_m": 300.0,
+            "duration_sec": 60.0,
+            "node_sequence": [
+              "zone_79",
+              "zone_79"
+            ],
+            "edge_sequence": [],
+            "reason": "synthetic_zone_centroid_pickup_proxy"
+          },
+          "ride_leg": {
+            "reachable": true,
+            "distance_m": 2880.7257600000003,
+            "duration_sec": 622.0,
+            "node_sequence": [
+              "zone_79",
+              "zone_170"
+            ],
+            "edge_sequence": [
+              "od_79_170"
+            ],
+            "reason": null
+          },
+          "vehicle_available_time_sec": 0.0,
+          "predicted_pickup_time_sec": 60.0,
+          "predicted_dropoff_time_sec": 682.0,
+          "predicted_wait_sec": 60.0,
+          "empty_distance_m": 300.0,
+          "total_distance_m": 3180.7257600000003,
+          "energy_kwh": 0.5725306367999999,
+          "current_commitment_ok": true,
+          "one_to_one_ok": true,
+          "time_non_overlap_ok": true,
+          "max_wait_ok": true,
+          "hard_constraint_ok": true,
+          "feature_vector": {
+            "local_order_density": 0.4,
+            "local_idle_vehicle_density": 1.0,
+            "demand_supply_ratio": 1.3333333333333333,
+            "commitment_slack": 0.0,
+            "candidate_eta": 0.2,
+            "time_context": 0.0,
+            "vehicle_state_code": 0.0
+          },
+          "context_threshold_sec": null,
+          "context_pass": true,
+          "feedback_decision": null,
+          "feedback_risk": null,
+          "feedback_reason": null,
+          "rejection_reason": null
+        },
+        {
+          "candidate_id": "round-0000__C2-003__raw/fhvhv_tripdata_2024-01.parquet#12520025",
+          "dispatch_round_id": "round-0000",
+          "vehicle_id": "C2-003",
+          "order_id": "raw/fhvhv_tripdata_2024-01.parquet#12520025",
+          "candidate_type": "immediate_pickup",
+          "route_reachability": true,
+          "pickup_leg": {
+            "reachable": true,
+            "distance_m": 300.0,
+            "duration_sec": 60.0,
+            "node_sequence": [
+              "zone_79",
+              "zone_79"
+            ],
+            "edge_sequence": [],
+            "reason": "synthetic_zone_centroid_pickup_proxy"
+          },
+          "ride_leg": {
+            "reachable": true,
+            "distance_m": 2768.07168,
+            "duration_sec": 686.0,
+            "node_sequence": [
+              "zone_79",
+              "zone_90"
+            ],
+            "edge_sequence": [
+              "od_79_90"
+            ],
+            "reason": null
+          },
+          "vehicle_available_time_sec": 0.0,
+          "predicted_pickup_time_sec": 60.0,
+          "predicted_dropoff_time_sec": 746.0,
+          "predicted_wait_sec": 60.0,
+          "empty_distance_m": 300.0,
+          "total_distance_m": 3068.07168,
+          "energy_kwh": 0.5522529024,
+          "current_commitment_ok": true,
+          "one_to_one_ok": true,
+          "time_non_overlap_ok": true,
+          "max_wait_ok": true,
+          "hard_constraint_ok": true,
+          "feature_vector": {
+            "local_order_density": 0.4,
+            "local_idle_vehicle_density": 1.0,
+            "demand_supply_ratio": 1.3333333333333333,
+            "commitment_slack": 0.0,
+            "candidate_eta": 0.2,
+            "time_context": 0.0,
+            "vehicle_state_code": 0.0
+          },
+          "context_threshold_sec": null,
+          "context_pass": true,
+          "feedback_decision": null,
+          "feedback_risk": null,
+          "feedback_reason": null,
+          "rejection_reason": null
+        },
+        {
+          "candidate_id": "round-0000__C2-003__raw/fhvhv_tripdata_2024-01.parquet#12525729",
+          "dispatch_round_id": "round-0000",
+          "vehicle_id": "C2-003",
+          "order_id": "raw/fhvhv_tripdata_2024-01.parquet#12525729",
+          "candidate_type": "immediate_pickup",
+          "route_reachability": true,
+          "pickup_leg": {
+            "reachable": true,
+            "distance_m": 300.0,
+            "duration_sec": 60.0,
+            "node_sequence": [
+              "zone_79",
+              "zone_79"
+            ],
+            "edge_sequence": [],
+            "reason": "synthetic_zone_centroid_pickup_proxy"
+          },
+          "ride_leg": {
+            "reachable": true,
+            "distance_m": 14645.835072000002,
+            "duration_sec": 1918.5,
+            "node_sequence": [
+              "zone_79",
+              "zone_265"
+            ],
+            "edge_sequence": [
+              "od_79_265"
+            ],
+            "reason": null
+          },
+          "vehicle_available_time_sec": 0.0,
+          "predicted_pickup_time_sec": 60.0,
+          "predicted_dropoff_time_sec": 1978.5,
+          "predicted_wait_sec": 60.0,
+          "empty_distance_m": 300.0,
+          "total_distance_m": 14945.835072000002,
+          "energy_kwh": 2.69025031296,
+          "current_commitment_ok": true,
+          "one_to_one_ok": true,
+          "time_non_overlap_ok": true,
+          "max_wait_ok": true,
+          "hard_constraint_ok": true,
+          "feature_vector": {
+            "local_order_density": 0.4,
+            "local_idle_vehicle_density": 1.0,
+            "demand_supply_ratio": 1.3333333333333333,
+            "commitment_slack": 0.0,
+            "candidate_eta": 0.2,
+            "time_context": 0.0,
+            "vehicle_state_code": 0.0
+          },
+          "context_threshold_sec": null,
+          "context_pass": true,
+          "feedback_decision": null,
+          "feedback_risk": null,
+          "feedback_reason": null,
+          "rejection_reason": null
+        }
+      ]
+    }
+  ]
+}

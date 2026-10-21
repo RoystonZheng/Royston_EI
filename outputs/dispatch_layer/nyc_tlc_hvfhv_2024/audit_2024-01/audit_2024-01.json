@@ -1,0 +1,392 @@
+{
+  "audit_version": "nyc-tlc-hvfhv-month-audit-v1",
+  "audited_request_month": "2024-01",
+  "source_dataset": "NYC TLC 2024 High Volume FHV Trip Data",
+  "dataset_id": "bqxa-629f",
+  "source_page": "https://data.cityofnewyork.us/Transportation/2024-High-Volume-FHV-Trip-Data/bqxa-629f",
+  "publisher_download_page": "https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page",
+  "duckdb_version": "1.5.6",
+  "source_month_file": "data/dispatch/nyc_tlc_hvfhv_2024/raw/fhvhv_tripdata_2024-01.parquet",
+  "source_month_sha256": "9897de352aa52cea36b70348cc6721b8d4494327ce39c85f0dba83d86ecaa098",
+  "source_month_file_audit": {
+    "row_count": 19663930,
+    "pickup_min": "2024-01-01 00:00:00",
+    "pickup_max": "2024-01-31 23:59:59",
+    "request_min": "2023-12-31 23:01:55",
+    "request_max": "2024-02-01 00:07:07",
+    "request_null": 0,
+    "pickup_null": 0,
+    "dropoff_null": 0,
+    "pu_zone_null": 0,
+    "do_zone_null": 0,
+    "trip_time_null": 0,
+    "trip_miles_null": 0,
+    "shared_match_null": 0,
+    "request_after_pickup": 188251,
+    "max_request_after_pickup_s": 2863,
+    "nonpositive_trip_interval": 2,
+    "nonpositive_trip_time": 2,
+    "negative_trip_miles": 0,
+    "trip_time_mismatch_over_60s": 0,
+    "pu_zone_unmatched": 0,
+    "do_zone_unmatched": 0,
+    "shared_match_y": 227948,
+    "shared_match_n": 19435982,
+    "shared_match_other": 0,
+    "request_before_month": 858,
+    "request_after_month": 3,
+    "request_to_pickup_median_s": 221.0,
+    "request_to_pickup_p95_s": 545.0,
+    "request_to_pickup_max_s": 73837
+  },
+  "source_month_full_row_hash_duplicate_fingerprints": 0,
+  "request_month_cohort_source_files": [
+    "raw/fhvhv_tripdata_2024-01.parquet",
+    "raw/fhvhv_tripdata_2024-02.parquet"
+  ],
+  "request_month_cohort": {
+    "row_count": 19664474,
+    "shared_match_y": 227967,
+    "shared_match_n": 19436507,
+    "shared_match_other": 0,
+    "request_after_pickup": 188248,
+    "nonpositive_trip_interval": 2,
+    "nonpositive_trip_time": 2,
+    "negative_trip_miles": 0,
+    "pu_zone_unmatched": 0,
+    "do_zone_unmatched": 0,
+    "candidate_rows": 19248258,
+    "candidate_request_min": "2024-01-01 00:00:01",
+    "candidate_request_max": "2024-01-31 23:59:59",
+    "request_to_pickup_median_s": 220.0,
+    "request_to_pickup_p95_s": 541.0,
+    "request_to_pickup_max_s": 73837,
+    "distinct_pickup_zones": 262,
+    "distinct_dropoff_zones": 261,
+    "distinct_od_pairs": 58695
+  },
+  "hourly_request_counts_in_trace": [
+    {
+      "hour": 0,
+      "events": 670946
+    },
+    {
+      "hour": 1,
+      "events": 471235
+    },
+    {
+      "hour": 2,
+      "events": 350023
+    },
+    {
+      "hour": 3,
+      "events": 284074
+    },
+    {
+      "hour": 4,
+      "events": 275901
+    },
+    {
+      "hour": 5,
+      "events": 336677
+    },
+    {
+      "hour": 6,
+      "events": 551192
+    },
+    {
+      "hour": 7,
+      "events": 870627
+    },
+    {
+      "hour": 8,
+      "events": 990105
+    },
+    {
+      "hour": 9,
+      "events": 875988
+    },
+    {
+      "hour": 10,
+      "events": 796575
+    },
+    {
+      "hour": 11,
+      "events": 791788
+    },
+    {
+      "hour": 12,
+      "events": 815411
+    },
+    {
+      "hour": 13,
+      "events": 853310
+    },
+    {
+      "hour": 14,
+      "events": 948958
+    },
+    {
+      "hour": 15,
+      "events": 965268
+    },
+    {
+      "hour": 16,
+      "events": 1012468
+    },
+    {
+      "hour": 17,
+      "events": 1160402
+    },
+    {
+      "hour": 18,
+      "events": 1197670
+    },
+    {
+      "hour": 19,
+      "events": 1134786
+    },
+    {
+      "hour": 20,
+      "events": 1039791
+    },
+    {
+      "hour": 21,
+      "events": 1009986
+    },
+    {
+      "hour": 22,
+      "events": 984733
+    },
+    {
+      "hour": 23,
+      "events": 860344
+    }
+  ],
+  "top_20_od_pairs_in_trace": [
+    {
+      "pickup_zone_id": 132,
+      "dropoff_zone_id": 265,
+      "events": 67943
+    },
+    {
+      "pickup_zone_id": 76,
+      "dropoff_zone_id": 76,
+      "events": 63166
+    },
+    {
+      "pickup_zone_id": 26,
+      "dropoff_zone_id": 26,
+      "events": 50495
+    },
+    {
+      "pickup_zone_id": 138,
+      "dropoff_zone_id": 265,
+      "events": 41561
+    },
+    {
+      "pickup_zone_id": 39,
+      "dropoff_zone_id": 39,
+      "events": 40046
+    },
+    {
+      "pickup_zone_id": 61,
+      "dropoff_zone_id": 61,
+      "events": 32206
+    },
+    {
+      "pickup_zone_id": 7,
+      "dropoff_zone_id": 7,
+      "events": 29759
+    },
+    {
+      "pickup_zone_id": 14,
+      "dropoff_zone_id": 14,
+      "events": 29556
+    },
+    {
+      "pickup_zone_id": 129,
+      "dropoff_zone_id": 129,
+      "events": 27647
+    },
+    {
+      "pickup_zone_id": 95,
+      "dropoff_zone_id": 95,
+      "events": 25893
+    },
+    {
+      "pickup_zone_id": 216,
+      "dropoff_zone_id": 132,
+      "events": 24233
+    },
+    {
+      "pickup_zone_id": 181,
+      "dropoff_zone_id": 181,
+      "events": 23319
+    },
+    {
+      "pickup_zone_id": 216,
+      "dropoff_zone_id": 216,
+      "events": 22213
+    },
+    {
+      "pickup_zone_id": 37,
+      "dropoff_zone_id": 37,
+      "events": 21751
+    },
+    {
+      "pickup_zone_id": 255,
+      "dropoff_zone_id": 112,
+      "events": 20795
+    },
+    {
+      "pickup_zone_id": 36,
+      "dropoff_zone_id": 37,
+      "events": 20453
+    },
+    {
+      "pickup_zone_id": 37,
+      "dropoff_zone_id": 36,
+      "events": 19281
+    },
+    {
+      "pickup_zone_id": 42,
+      "dropoff_zone_id": 42,
+      "events": 19193
+    },
+    {
+      "pickup_zone_id": 230,
+      "dropoff_zone_id": 265,
+      "events": 19124
+    },
+    {
+      "pickup_zone_id": 112,
+      "dropoff_zone_id": 255,
+      "events": 19012
+    }
+  ],
+  "trace_file": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/audit_2024-01/request_trace_2024-01.parquet",
+  "trace_bytes": 184950739,
+  "trace_sha256": "f9d48edf6cb764ec209808fbe6edebe843e4c3283280de43742eff5f8d3177cd",
+  "trace_columns": [
+    "source_record_id",
+    "source_file",
+    "source_row_number",
+    "request_datetime",
+    "arrival_time_sec",
+    "pickup_zone_id",
+    "dropoff_zone_id"
+  ],
+  "selection_rules": [
+    "request_datetime in [2024-01-01 00:00:00, 2024-02-01 00:00:00) across all 2024 monthly files",
+    "shared_match_flag = N",
+    "request_datetime <= pickup_datetime < dropoff_datetime",
+    "trip_time > 0 and trip_miles >= 0",
+    "pickup and dropoff zone IDs both present in taxi_zone_lookup.csv"
+  ],
+  "interpretation_limits": [
+    "The source records dispatched/completed trips, not all attempted or unserved requests.",
+    "The trace contains no actual pickup/dropoff outcome fields; those remain outside scheduler input.",
+    "The filter uses ex-post shared-match and chronology fields, so this is a curated historical trace, not an unbiased population of all demand.",
+    "Zone IDs are not graph node IDs; a NYC road network and explicit fleet-state assumptions are still required before running the existing simulator.",
+    "Timestamps are retained as provided by the source; no timezone conversion is applied."
+  ],
+  "schema": [
+    {
+      "column": "hvfhs_license_num",
+      "type": "VARCHAR"
+    },
+    {
+      "column": "dispatching_base_num",
+      "type": "VARCHAR"
+    },
+    {
+      "column": "originating_base_num",
+      "type": "VARCHAR"
+    },
+    {
+      "column": "request_datetime",
+      "type": "TIMESTAMP"
+    },
+    {
+      "column": "on_scene_datetime",
+      "type": "TIMESTAMP"
+    },
+    {
+      "column": "pickup_datetime",
+      "type": "TIMESTAMP"
+    },
+    {
+      "column": "dropoff_datetime",
+      "type": "TIMESTAMP"
+    },
+    {
+      "column": "PULocationID",
+      "type": "INTEGER"
+    },
+    {
+      "column": "DOLocationID",
+      "type": "INTEGER"
+    },
+    {
+      "column": "trip_miles",
+      "type": "DOUBLE"
+    },
+    {
+      "column": "trip_time",
+      "type": "BIGINT"
+    },
+    {
+      "column": "base_passenger_fare",
+      "type": "DOUBLE"
+    },
+    {
+      "column": "tolls",
+      "type": "DOUBLE"
+    },
+    {
+      "column": "bcf",
+      "type": "DOUBLE"
+    },
+    {
+      "column": "sales_tax",
+      "type": "DOUBLE"
+    },
+    {
+      "column": "congestion_surcharge",
+      "type": "DOUBLE"
+    },
+    {
+      "column": "airport_fee",
+      "type": "DOUBLE"
+    },
+    {
+      "column": "tips",
+      "type": "DOUBLE"
+    },
+    {
+      "column": "driver_pay",
+      "type": "DOUBLE"
+    },
+    {
+      "column": "shared_request_flag",
+      "type": "VARCHAR"
+    },
+    {
+      "column": "shared_match_flag",
+      "type": "VARCHAR"
+    },
+    {
+      "column": "access_a_ride_flag",
+      "type": "VARCHAR"
+    },
+    {
+      "column": "wav_request_flag",
+      "type": "VARCHAR"
+    },
+    {
+      "column": "wav_match_flag",
+      "type": "VARCHAR"
+    }
+  ]
+}
