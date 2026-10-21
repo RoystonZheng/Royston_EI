@@ -61,7 +61,7 @@
 | 纯 LLM 与车辆 Agent 工作流 | 待后续实现 | 尚未接入 DeepSeek、离线 mock、解析失败、反馈重规划和回退记录。 |
 | Agent-readable 与原始图结构对照 | 部分满足 | 已在同一地图中建立 `graph_only` 与 `road_feature_input_protocol_v1` 的受控场景记录和可视化；传统基线仍对语义任务完成图规则解析和路线生成。尚未在统一路线任务上运行两种输入并比较定位、路线和成本指标。 |
 | Agent + 传统算法 / Agent + LLM 消融 | 待后续实现 | 尚未实现可替换路线工具和消融运行。 |
-| 10 个种子正式路线层实验 | 已完成传统首轮 | `scripts/run_traditional_experiment.py` 已运行种子 0–9；每个种子 30 条订单方法轨迹 + 15 条正式场景方法轨迹，共 450 条，清单和总索引位于 `outputs/route_layer/traditional_experiment_v1/`。 |
+| 10 个种子正式路线层实验 | 已完成传统首轮 | `scripts/run_traditional_experiment.py` 已运行种子 0–9；每个种子 30 条订单方法轨迹 + 15 条正式场景方法轨迹，共 450 条，清单和总索引位于 `outputs/route_layer/traditional_experiment_v1/`；每个种子另有原地图—算法结果联动总览页。 |
 
 ## 方案闭环核查
 
@@ -89,7 +89,7 @@
 - 传统路线入口：`scripts/run_traditional_routes.py`；传统订单结果：`outputs/route_layer/traditional_routes/routes_map_seed_0_task_seed_0.json`（含顶层 `semantic_policy` 与每条语义结果的 `semantic_resolution`）；正式场景结果：`outputs/route_layer/traditional_routes/formal_routes_seed_0.json`。
 - 费用评估入口：`scripts/calculate_route_costs.py`；种子 0 订单费用结果：`outputs/route_layer/traditional_routes/routes_map_seed_0_task_seed_0_costs.json`；正式场景费用结果：`outputs/route_layer/traditional_routes/formal_routes_seed_0_costs.json`。当前产物使用 `energy_v1` 和 `tesla_cn_station_peak_v1`，电耗价格为 Tesla 中国深圳站点峰时综合充电服务价 `2.29 CNY/kWh`，并在产物中保留官方来源、站点、时段和采集日期。
 - 多种子烟雾入口：`scripts/run_seed_smoke.py`；默认运行种子 0–1 的 100×100 地图、70/30 订单、五类正式场景、R0/R1/R2 和费用链路；产物见 `outputs/route_layer/traditional_seed_smoke/manifest.json`。参考价格配置：`configs/route_layer/price_smoke_v1.json`，引用 [Tesla 中国官方深圳站点页面](https://www.tesla.cn/findus/location/supercharger/cnsc9691?region=CN)，采用 10:00–12:00、14:00–19:00 的 `2.29 CNY/kWh` 峰时综合充电服务价。
-- 当前测试：`python3 -m unittest discover -s tests -v`，30/30 通过；另有 `python3 -m py_compile route_experiment/*.py scripts/*.py`、种子 0–1 多种子烟雾运行和种子 0–9 第一轮传统算法运行通过。
+- 当前测试：`python3 -m unittest discover -s tests -v`，31/31 通过；另有 `python3 -m py_compile route_experiment/*.py scripts/*.py`、种子 0–1 多种子烟雾运行和种子 0–9 第一轮传统算法运行通过。
 
 ## 当前边界
 

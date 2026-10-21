@@ -1,0 +1,17 @@
+flowchart TD
+    A[共享 RouteInputPackage<br/>同一地图、任务、道路状态] --> B[确定性地图适配器]
+    B --> C[RoadFeatureInputProtocol v1<br/>实体·特征·关系·约束·语义索引]
+    A --> D[自然语言上车/下车目标]
+    C --> E[本地 Hugging Face Qwen3-4B-Instruct-2507]
+    D --> E
+    E --> F[RouteIntent JSON<br/>地标/特征引用、侧别、方向、关系、偏好、置信度]
+    F --> G[候选实体物化与合法候选过滤<br/>不读取评估器真值]
+    C --> G
+    G --> H[DeepSeek Flash 路线候选生成<br/>仅输出结构化路径]
+    H --> I[独立路线验证器<br/>有向边、边界、端点、禁行边、可达性]
+    I -->|合法| J[统一路线评估器<br/>时间、距离、电耗、费用]
+    J --> K[路线结果、完整日志与可视化回放]
+    I -->|非法且未达三次| L[结构化错误反馈<br/>不含真实答案节点]
+    L --> H
+    I -->|三次后仍非法| M[结构化失败记录<br/>不调用传统算法兜底]
+    M --> K

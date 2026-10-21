@@ -38,6 +38,7 @@
 
 - 总索引：[traditional_experiment_v1/index.html](../outputs/route_layer/traditional_experiment_v1/index.html)
 - 总清单：[manifest.json](../outputs/route_layer/traditional_experiment_v1/manifest.json)
+- 单种子总览：`outputs/route_layer/traditional_experiment_v1/seeds/seed_<seed>/index.html`。进入后左侧保留该种子的原地图和道路特征，右侧列出订单与正式场景的每个算法结果；点击任意行可联动显示搜索展开节点、最终路线和起点/上车点/终点，并查看计算时间、能耗、距离、行驶时间、费用、验证状态、失败原因以及逐步 HTML/原始 JSON 入口。
 - 单种子订单轨迹索引：`outputs/route_layer/traditional_experiment_v1/seeds/seed_<seed>/visualizations/orders/index.html`
 - 单种子正式场景轨迹索引：`outputs/route_layer/traditional_experiment_v1/seeds/seed_<seed>/visualizations/formal_scenarios/index.html`
 - 单种子路线和费用 JSON：`outputs/route_layer/traditional_experiment_v1/seeds/seed_<seed>/traditional_*_routes_costs_seed_<seed>.json`

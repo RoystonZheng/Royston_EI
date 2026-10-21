@@ -6,9 +6,11 @@ import unittest
 from pathlib import Path
 
 from route_experiment.mapgen import generate_map
-from route_experiment.models import MapConfig, PackageConfig
+from route_experiment.models import Edge, MapConfig, PackageConfig
 from route_experiment.routing import (
     build_route_input_package,
+    directed_path_exists,
+    route_chain_reachability,
     run_traditional_route,
 )
 from route_experiment.scenario import generate_formal_scenario_set
@@ -23,6 +25,23 @@ class TraditionalRoutingTests(unittest.TestCase):
             seed=0,
             config=TaskGenerationConfig(task_count=10, exact_ratio=0.7),
         )
+
+    def test_route_chain_preflight_checks_directional_reachability_only(self):
+        edges = [
+            Edge("s-p", "start", "pickup", 100.0, 10.0, one_way=True),
+            Edge("p-d", "pickup", "dropoff", 100.0, 10.0, one_way=True),
+        ]
+
+        self.assertEqual(
+            route_chain_reachability(edges, "start", "pickup", "dropoff"),
+            {
+                "start_to_pickup": True,
+                "pickup_to_dropoff": True,
+                "chain_reachable": True,
+            },
+        )
+        self.assertTrue(directed_path_exists(edges, "start", "dropoff"))
+        self.assertFalse(directed_path_exists(edges, "dropoff", "start"))
 
     def test_full_and_local_traditional_methods_find_same_exact_route(self):
         task = next(task for task in self.batch.tasks if task.task_type == "exact_node")

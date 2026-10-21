@@ -25,6 +25,13 @@ from .costs import (
 )
 from .evaluation import evaluate_route
 from .semantic import resolve_graph_only_semantic_task
+from .llm_adapter import (
+    DeepSeekClient,
+    LLMRoutePlanner,
+    build_route_messages,
+    parse_route_output,
+    validate_llm_route,
+)
 
 __all__ = [
     "Edge",
@@ -49,4 +56,9 @@ __all__ = [
     "evaluate_route",
     "price_costs",
     "resolve_graph_only_semantic_task",
+    "DeepSeekClient",
+    "LLMRoutePlanner",
+    "build_route_messages",
+    "parse_route_output",
+    "validate_llm_route",
 ]

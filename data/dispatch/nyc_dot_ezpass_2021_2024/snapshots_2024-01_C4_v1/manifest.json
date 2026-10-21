@@ -1,0 +1,48 @@
+{
+  "created_at_utc": "2026-10-20T02:56:39.633257+00:00",
+  "status": "downloaded_single_historical_sensor_snapshot_for_feasibility_audit",
+  "source_dataset_id": "erdf-2akx",
+  "source_dataset_name": "EZ Pass Readers 2021-July 2024",
+  "source_agency": "NYC DOT",
+  "source_dataset_url": "https://data.cityofnewyork.us/Transportation/EZ-Pass-Readers-2021-July-2024/erdf-2akx",
+  "source_api_url": "https://data.cityofnewyork.us/resource/erdf-2akx.json",
+  "query_timestamp": "2024-01-20T23:20:59",
+  "query_url": "https://data.cityofnewyork.us/resource/erdf-2akx.json?%24select=sid%2Clink_name%2Cborough%2Cpolyline%2Clink_length_ft%2Caggregation_period_sec%2Cn_samples%2Cmedian_calculation_timestamp%2Cmedian_tt_sec%2Cmedian_speed_fps&%24where=median_calculation_timestamp+%3D+%272024-01-20T23%3A20%3A59%27&%24limit=1000",
+  "fields": [
+    "sid",
+    "link_name",
+    "borough",
+    "polyline",
+    "link_length_ft",
+    "aggregation_period_sec",
+    "n_samples",
+    "median_calculation_timestamp",
+    "median_tt_sec",
+    "median_speed_fps"
+  ],
+  "record_count": 351,
+  "unique_segment_count": 351,
+  "valid_travel_time_records": 253,
+  "borough_counts": {
+    "Brooklyn": 46,
+    "Manhattan": 180,
+    "Queens": 89,
+    "Staten Island": 36
+  },
+  "aggregation_period_sec_counts": {
+    "0": 98,
+    "900": 253
+  },
+  "raw_json_file": "c4_2024-01-20_23-20-59.json",
+  "raw_json_bytes": 115895,
+  "raw_json_sha256": "b4b467fc31f3245cd07ab1048d0aa7d81d08ebbcc3f78803d40bd8e7de15aaca",
+  "derived_csv_file": "c4_2024-01-20_23-20-59.csv",
+  "derived_csv_bytes": 52128,
+  "derived_csv_sha256": "622d636d01bb6e7dfee54a58d08d3de4941d4d1cb17e85fde653149648ff0af7",
+  "limitations": [
+    "This is one historical snapshot, not the entire DOT archive.",
+    "The observations describe monitored road segments only and do not form a complete road graph or zone-to-zone ETA matrix.",
+    "Vehicle identity, idle availability, and unserved ride-hailing requests are absent.",
+    "This download supports a data-coverage preflight only; no dispatch results were recalculated."
+  ]
+}

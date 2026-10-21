@@ -24,6 +24,7 @@ from route_experiment.routing import TRADITIONAL_METHODS, run_traditional_method
 from route_experiment.scenario import generate_formal_scenario_set
 from route_experiment.taskgen import TaskGenerationConfig, generate_order_tasks
 from scripts.render_traditional_traces import render
+from scripts.render_seed_dashboard import render_seed_dashboard
 
 
 SEMANTIC_POLICY = {
@@ -54,13 +55,20 @@ def _write_experiment_index(output_dir: Path, details: List[dict]) -> None:
     """Write the seed-level index from an experiment manifest payload."""
     index_rows = []
     for detail in details:
+        map_preview = Path(detail["seed_dashboard_index"]).with_name(
+            "map_preview.html"
+        ).as_posix()
         index_rows.append(
-            "<tr><td>{seed}</td><td>{orders}</td><td>{formal}</td>"
+            "<tr><td><a href=\"{seed_index}\">种子总览</a><br>{seed}</td>"
+            "<td><a href=\"{map_preview}\">原始地图</a></td>"
+            "<td>{orders}</td><td>{formal}</td>"
             "<td><a href=\"{order_index}\">订单轨迹</a></td>"
             "<td><a href=\"{formal_index}\">正式场景轨迹</a></td></tr>".format(
                 seed=detail["seed"],
                 orders=detail["order_trace_count"],
                 formal=detail["formal_trace_count"],
+                seed_index=html.escape(detail["seed_dashboard_index"]),
+                map_preview=html.escape(map_preview),
                 order_index=html.escape(detail["order_visual_index"]),
                 formal_index=html.escape(detail["formal_visual_index"]),
             )
@@ -73,8 +81,8 @@ def _write_experiment_index(output_dir: Path, details: List[dict]) -> None:
         "th,td{border-bottom:1px solid #ddd;padding:8px;text-align:left}"
         "th{background:#eef2ff}</style>"
         "<h1>传统算法第一轮实验轨迹</h1>"
-        "<p>每个种子包含订单方法轨迹和正式场景方法轨迹。原始 JSON 和 HTML 回放均保留。</p>"
-        "<table><thead><tr><th>种子</th><th>订单记录</th><th>正式场景记录</th>"
+        "<p>点击种子总览查看原地图、算法结果和单条检索回放。原始 JSON 和 HTML 回放均保留。</p>"
+        "<table><thead><tr><th>种子</th><th>原始地图</th><th>订单记录</th><th>正式场景记录</th>"
         "<th>订单索引</th><th>正式场景索引</th></tr></thead><tbody>"
         + "".join(index_rows)
         + "</tbody></table></html>",
@@ -279,6 +287,7 @@ def _run_seed(seed: int, size: int, output_dir: Path, price_config, price_profil
     formal_visual_manifest = render(
         map_path, formal_routes_path, formal_visual_dir
     )
+    render_seed_dashboard(seed_dir)
 
     errors = []
     if batch.exact_task_count != 7 or batch.semantic_task_count != 3:
@@ -326,6 +335,9 @@ def _run_seed(seed: int, size: int, output_dir: Path, price_config, price_profil
         ),
         "formal_visual_index": str(
             (formal_visual_dir / "index.html").relative_to(output_dir)
+        ),
+        "seed_dashboard_index": str(
+            (seed_dir / "index.html").relative_to(output_dir)
         ),
         "map_json": str(map_path.relative_to(output_dir)),
         "orders_json": str(order_path.relative_to(output_dir)),

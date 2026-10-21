@@ -75,6 +75,51 @@ def _adjacency(
     return adjacency
 
 
+def directed_path_exists(
+    edges: Sequence[Edge],
+    source_node_id: str,
+    target_node_id: str,
+    blocked_edge_ids: Iterable[str] = (),
+) -> bool:
+    """Check directed reachability without constructing or returning a route."""
+
+    adjacency = _adjacency(edges, set(blocked_edge_ids))
+    pending = [source_node_id]
+    visited = {source_node_id}
+    while pending:
+        current_id = pending.pop()
+        if current_id == target_node_id:
+            return True
+        for edge in adjacency.get(current_id, []):
+            if edge.to_node not in visited:
+                visited.add(edge.to_node)
+                pending.append(edge.to_node)
+    return False
+
+
+def route_chain_reachability(
+    edges: Sequence[Edge],
+    start_node_id: str,
+    pickup_node_id: str,
+    dropoff_node_id: str,
+    blocked_edge_ids: Iterable[str] = (),
+) -> Dict[str, bool]:
+    """Return feasibility of the two directed legs, without a path proposal."""
+
+    blocked = set(blocked_edge_ids)
+    start_to_pickup = directed_path_exists(
+        edges, start_node_id, pickup_node_id, blocked
+    )
+    pickup_to_dropoff = directed_path_exists(
+        edges, pickup_node_id, dropoff_node_id, blocked
+    )
+    return {
+        "start_to_pickup": start_to_pickup,
+        "pickup_to_dropoff": pickup_to_dropoff,
+        "chain_reachable": start_to_pickup and pickup_to_dropoff,
+    }
+
+
 def _heuristic_time_sec(node_id: str, target_id: str, nodes: Dict[str, object], max_speed: float) -> float:
     node = nodes[node_id]
     target = nodes[target_id]
@@ -248,24 +293,13 @@ def _chain_reachable(
 ) -> bool:
     """Check directed reachability for start → pickup → dropoff."""
 
-    adjacency = _adjacency(edges, blocked_edge_ids)
-
-    def reachable(source_id: str, target_id: str) -> bool:
-        pending = [source_id]
-        visited = {source_id}
-        while pending:
-            current_id = pending.pop()
-            if current_id == target_id:
-                return True
-            for edge in adjacency.get(current_id, []):
-                if edge.to_node not in visited:
-                    visited.add(edge.to_node)
-                    pending.append(edge.to_node)
-        return False
-
-    return reachable(task.start_node_id, task.pickup_node_id) and reachable(
-        task.pickup_node_id, task.dropoff_node_id
-    )
+    return route_chain_reachability(
+        edges,
+        task.start_node_id,
+        task.pickup_node_id,
+        task.dropoff_node_id,
+        blocked_edge_ids,
+    )["chain_reachable"]
 
 
 def _region_for_margin(road_map: RoadMap, task: VehicleOrderTask, margin: int):
