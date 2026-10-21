@@ -1,0 +1,217 @@
+{
+  "coverage": {
+    "boundary_case": true,
+    "detour_case": true,
+    "feasible_case": true,
+    "illegal_endpoint_case": true,
+    "legal_dropoff_count": 2537,
+    "legal_pickup_count": 2507,
+    "semantic_landmark_case": false,
+    "unreachable_case": true
+  },
+  "map_id": "grid-100x100-seed-7",
+  "map_version": "grid-v1-100",
+  "metadata": {
+    "case_details": {
+      "detour_exact": {
+        "detour_reason": "directed_road_constraints",
+        "geometric_lower_bound_m": 1300.0,
+        "leg": "start_to_pickup",
+        "shortest_distance_m": 1500.0
+      }
+    },
+    "case_types": [
+      "feasible",
+      "boundary",
+      "illegal_endpoint",
+      "detour",
+      "unreachable"
+    ]
+  },
+  "random_seed": 7,
+  "scenarios": [
+    {
+      "blocked_edge_ids": [],
+      "coverage": {
+        "boundary_case": false,
+        "detour_case": false,
+        "feasible_case": true,
+        "illegal_endpoint_case": false,
+        "legal_dropoff_count": 2537,
+        "legal_pickup_count": 2507,
+        "semantic_landmark_case": false,
+        "unreachable_case": false
+      },
+      "feature_scenarios": [],
+      "metadata": {},
+      "random_seed": 7,
+      "scenario_id": "formal-0007-feasible",
+      "scenario_type": "feasible",
+      "tasks": [
+        {
+          "dropoff_node_id": "node_63_92",
+          "dropoff_text": null,
+          "order_id": "formal-order-0007-feasible",
+          "pickup_node_id": "node_22_51",
+          "pickup_text": null,
+          "start_node_id": "node_53_5",
+          "task_id": "formal-task-0007-feasible",
+          "task_type": "feasible_exact",
+          "true_dropoff_node_id": "node_63_92",
+          "true_pickup_node_id": "node_22_51",
+          "vehicle_id": "formal-vehicle-0007-feasible"
+        }
+      ]
+    },
+    {
+      "blocked_edge_ids": [],
+      "coverage": {
+        "boundary_case": true,
+        "detour_case": false,
+        "feasible_case": false,
+        "illegal_endpoint_case": false,
+        "legal_dropoff_count": 2537,
+        "legal_pickup_count": 2507,
+        "semantic_landmark_case": false,
+        "unreachable_case": false
+      },
+      "feature_scenarios": [],
+      "metadata": {},
+      "random_seed": 7,
+      "scenario_id": "formal-0007-boundary",
+      "scenario_type": "boundary",
+      "tasks": [
+        {
+          "dropoff_node_id": "node_11_77",
+          "dropoff_text": null,
+          "order_id": "formal-order-0007-boundary",
+          "pickup_node_id": "node_6_62",
+          "pickup_text": null,
+          "start_node_id": "node_99_37",
+          "task_id": "formal-task-0007-boundary",
+          "task_type": "boundary_exact",
+          "true_dropoff_node_id": "node_11_77",
+          "true_pickup_node_id": "node_6_62",
+          "vehicle_id": "formal-vehicle-0007-boundary"
+        }
+      ]
+    },
+    {
+      "blocked_edge_ids": [],
+      "coverage": {
+        "boundary_case": false,
+        "detour_case": false,
+        "feasible_case": false,
+        "illegal_endpoint_case": true,
+        "legal_dropoff_count": 2537,
+        "legal_pickup_count": 2507,
+        "semantic_landmark_case": false,
+        "unreachable_case": false
+      },
+      "feature_scenarios": [],
+      "metadata": {},
+      "random_seed": 7,
+      "scenario_id": "formal-0007-illegal_endpoint",
+      "scenario_type": "illegal_endpoint",
+      "tasks": [
+        {
+          "dropoff_node_id": "node_40_13",
+          "dropoff_text": null,
+          "order_id": "formal-order-0007-illegal",
+          "pickup_node_id": "node_10_69",
+          "pickup_text": null,
+          "start_node_id": "node_87_79",
+          "task_id": "formal-task-0007-illegal",
+          "task_type": "illegal_endpoint",
+          "true_dropoff_node_id": "node_40_13",
+          "true_pickup_node_id": "node_10_69",
+          "vehicle_id": "formal-vehicle-0007-illegal"
+        }
+      ]
+    },
+    {
+      "blocked_edge_ids": [],
+      "coverage": {
+        "boundary_case": false,
+        "detour_case": true,
+        "feasible_case": false,
+        "illegal_endpoint_case": false,
+        "legal_dropoff_count": 2537,
+        "legal_pickup_count": 2507,
+        "semantic_landmark_case": false,
+        "unreachable_case": false
+      },
+      "feature_scenarios": [],
+      "metadata": {
+        "detour_reason": "directed_road_constraints",
+        "geometric_lower_bound_m": 1300.0,
+        "leg": "start_to_pickup",
+        "shortest_distance_m": 1500.0
+      },
+      "random_seed": 7,
+      "scenario_id": "formal-0007-detour",
+      "scenario_type": "detour",
+      "tasks": [
+        {
+          "dropoff_node_id": "node_94_50",
+          "dropoff_text": null,
+          "order_id": "formal-order-0007-detour",
+          "pickup_node_id": "node_0_13",
+          "pickup_text": null,
+          "start_node_id": "node_0_0",
+          "task_id": "formal-task-0007-detour",
+          "task_type": "detour_exact",
+          "true_dropoff_node_id": "node_94_50",
+          "true_pickup_node_id": "node_0_13",
+          "vehicle_id": "formal-vehicle-0007-detour"
+        }
+      ]
+    },
+    {
+      "blocked_edge_ids": [
+        "edge_node_81_13_node_82_13",
+        "edge_node_82_13_node_81_13",
+        "edge_node_82_12_node_82_13",
+        "edge_node_82_13_node_82_12",
+        "edge_node_82_13_node_83_13",
+        "edge_node_83_13_node_82_13",
+        "edge_node_82_13_node_82_14",
+        "edge_node_82_14_node_82_13"
+      ],
+      "coverage": {
+        "boundary_case": false,
+        "detour_case": false,
+        "feasible_case": false,
+        "illegal_endpoint_case": false,
+        "legal_dropoff_count": 2537,
+        "legal_pickup_count": 2507,
+        "semantic_landmark_case": false,
+        "unreachable_case": true
+      },
+      "feature_scenarios": [],
+      "metadata": {
+        "blocked_edge_count": 8,
+        "unreachable_reason": "incident_edges_closed"
+      },
+      "random_seed": 7,
+      "scenario_id": "formal-0007-unreachable",
+      "scenario_type": "unreachable",
+      "tasks": [
+        {
+          "dropoff_node_id": "node_82_13",
+          "dropoff_text": null,
+          "order_id": "formal-order-0007-unreachable",
+          "pickup_node_id": "node_33_42",
+          "pickup_text": null,
+          "start_node_id": "node_9_50",
+          "task_id": "formal-task-0007-unreachable",
+          "task_type": "unreachable_exact",
+          "true_dropoff_node_id": "node_82_13",
+          "true_pickup_node_id": "node_33_42",
+          "vehicle_id": "formal-vehicle-0007-unreachable"
+        }
+      ]
+    }
+  ],
+  "set_id": "formal-scenario-set-0007"
+}
