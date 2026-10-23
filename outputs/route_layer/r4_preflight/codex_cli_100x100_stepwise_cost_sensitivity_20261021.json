@@ -1,0 +1,142 @@
+{
+  "schema_version": "codex_cli_100x100_stepwise_cost_sensitivity_v1",
+  "checked_date": "2026-10-21",
+  "api_requests_made_for_this_projection": 0,
+  "status": "offline_low_confidence_sensitivity_not_a_budget_or_invoice",
+  "calibration": {
+    "source_runs": [
+      "outputs/route_layer/r4_codex_independent_pilot_v5/",
+      "outputs/route_layer/r4_codex_independent_pilot_v6/",
+      "outputs/route_layer/r4_codex_independent_pilot_v7/",
+      "outputs/route_layer/r4_codex_independent_pilot_v8/"
+    ],
+    "included_observed_requests": 28,
+    "excluded_observed_request": {
+      "run": "outputs/route_layer/r4_codex_independent_pilot_v7/",
+      "request_number": 2,
+      "reason": "input usage 10302 was an isolated outlier against adjacent same-format requests around 9774 to 9816"
+    },
+    "observed_serialized_prompt_plus_schema_bytes": {
+      "min": 4273,
+      "mean": 4417.428571,
+      "max": 4568
+    },
+    "observed_input_tokens": {
+      "min": 9704,
+      "mean": 9778.785714,
+      "max": 9860
+    },
+    "linear_fit": {
+      "input_tokens_equals_intercept_plus_slope_times_serialized_bytes": true,
+      "intercept_tokens": 7381.092947,
+      "slope_tokens_per_byte": 0.542780201,
+      "r_squared_in_small_observed_byte_range": 0.991766,
+      "limitation": "The calibration covers only 4.27 to 4.57 KB 8x8 prompts. It is extrapolated to much larger 100x100 prompts and is not a tokenizer measurement."
+    }
+  },
+  "workload": {
+    "source_audit": "outputs/route_layer/r4_preflight/r4_100x100_stepwise_budget_audit_20261021.json",
+    "routable_tasks_per_group": 130,
+    "minimum_directed_hops_per_group": 17219,
+    "repeated_prompt_plus_step_schema_bytes_per_group": 446197487,
+    "serialization_scope": "repeats the full compact local map and per-step schema on every one-step request; includes the growing visited-node list",
+    "current_route_action_budget": 32,
+    "tasks_exceeding_current_budget": 128,
+    "tasks_total": 130,
+    "projection_assumes": [
+      "the 32-step route action budget is raised enough to allow these routes",
+      "the model takes exactly the shortest directed hop count",
+      "no rejected proposals, retries, detours, or extra feedback requests",
+      "three groups use the same stepwise serialized-input pattern"
+    ]
+  },
+  "input_token_sensitivity_per_group": {
+    "low_slope_tokens_per_byte": 0.4,
+    "central_fitted_slope_tokens_per_byte": 0.542780201,
+    "high_slope_tokens_per_byte": 0.7,
+    "calibrated_to_observed_mean_at_mean_8x8_serialized_size": true,
+    "estimated_input_tokens": {
+      "low": 316434425,
+      "central": 369282201,
+      "high": 427474560
+    },
+    "these_are_sensitivity_points_not_statistical_confidence_bounds": true
+  },
+  "output_token_sensitivity_per_group": {
+    "observed_output_tokens_per_call": {
+      "p25": 320.75,
+      "median": 460,
+      "mean": 743.642857,
+      "p75": 891
+    },
+    "scenario_output_tokens_per_call": [300, 600, 1000],
+    "estimated_output_tokens": {
+      "300_per_call": 5165700,
+      "600_per_call": 10331400,
+      "1000_per_call": 17219000
+    },
+    "output_scenarios_are_not_caps": true
+  },
+  "official_standard_rate_card": {
+    "codex_credits_per_million_tokens": {
+      "uncached_input": 5,
+      "cached_input": 0.5,
+      "output": 30
+    },
+    "api_reference_usd_per_million_tokens": {
+      "uncached_input": 0.2,
+      "cached_input": 0.02,
+      "output": 1.2
+    },
+    "source_urls": [
+      "https://developers.openai.com/codex/pricing",
+      "https://developers.openai.com/api/docs/models/gpt-5.6-luna"
+    ],
+    "account_cost": "not_reported_by_codex_cli; API reference price and Standard credit equivalent are not the actual account bill"
+  },
+  "central_scenario_per_group": {
+    "input_tokens": 369282201,
+    "output_tokens_by_scenario": {
+      "300_per_call": 5165700,
+      "600_per_call": 10331400,
+      "1000_per_call": 17219000
+    },
+    "api_equivalent_usd_by_output_scenario": {
+      "300_per_call": 80.05528,
+      "600_per_call": 86.25412,
+      "1000_per_call": 94.51924
+    },
+    "codex_standard_credit_equivalent_by_output_scenario": {
+      "300_per_call": 2001.382005,
+      "600_per_call": 2156.353005,
+      "1000_per_call": 2363.638005
+    }
+  },
+  "central_scenario_three_groups": {
+    "api_equivalent_usd_by_output_scenario": {
+      "300_per_call": 240.16584,
+      "600_per_call": 258.76236,
+      "1000_per_call": 283.55772
+    },
+    "codex_standard_credit_equivalent_by_output_scenario": {
+      "300_per_call": 6004.146015,
+      "600_per_call": 6469.059015,
+      "1000_per_call": 7090.914015
+    }
+  },
+  "gate": {
+    "formal_batch_ready": false,
+    "reasons": [
+      "128 of 130 routable tasks exceed the current 32-action route budget even under shortest paths",
+      "Codex token calibration is extrapolated far beyond the observed 8x8 input size",
+      "v8 completed one route but used 29 edges versus 9 for same-task full-map Dijkstra, about 3.75x travel time",
+      "the estimated Standard credits and API-equivalent prices are not actual account usage or an invoice"
+    ],
+    "next_offline_gates": [
+      "choose and freeze the shared model-call protocol for R4, R4-A, and R4-B",
+      "set an explicit per-task and whole-batch action/request cap",
+      "implement and offline-test a runtime credit/token stop gate",
+      "do not use this sensitivity estimate as a spend authorization"
+    ]
+  }
+}

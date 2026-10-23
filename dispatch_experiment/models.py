@@ -34,6 +34,8 @@ class DispatchConfig(JsonModel):
     schema_version: str = "dispatch-agent-v1"
     llm_backend: str = "codex_cli"
     llm_model: str = "gpt-5.6-luna"
+    neural_ranker_model_path: Optional[str] = None
+    neural_ranker_top_k: int = 8
 
 
 @dataclass
@@ -108,6 +110,7 @@ class Candidate(JsonModel):
     hard_constraint_ok: bool
     feature_vector: Dict[str, float] = field(default_factory=dict)
     context_threshold_sec: Optional[float] = None
+    neural_score: Optional[float] = None
     context_pass: bool = True
     feedback_decision: Optional[str] = None
     feedback_risk: Optional[float] = None

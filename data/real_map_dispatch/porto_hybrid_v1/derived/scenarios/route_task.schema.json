@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:porto-fixed-route-task-v1",
+  "title": "Porto fixed-fleet route-execution task and event record",
+  "type": "object",
+  "required": ["scenario_id", "status", "seed", "vehicles", "orders", "route_legs", "route_preflight"],
+  "properties": {
+    "scenario_id": {"type": "string"},
+    "status": {"enum": ["draft_preflight_pending", "frozen_prevalidated"]},
+    "seed": {"type": "integer"},
+    "vehicles": {"type": "array", "items": {"$ref": "#/$defs/vehicle"}},
+    "orders": {"type": "array", "items": {"$ref": "#/$defs/order"}},
+    "route_legs": {"type": "array", "items": {"$ref": "#/$defs/routeLeg"}},
+    "route_preflight": {"type": "object", "required": ["status", "required_before_experiment"], "properties": {"status": {"enum": ["not_run", "passed", "failed"]}, "required_before_experiment": {"const": true}}},
+    "runtime_events": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/runtimeEvent"}
+    }
+  },
+  "$defs": {
+    "point": {
+      "type": "object",
+      "required": ["point_id", "point_kind", "lon", "lat", "uncertainty_radius_m"],
+      "properties": {
+        "point_id": {"type": "string"},
+        "point_kind": {"enum": ["heat_cell_proxy", "fuzzy_road_feature_sample"]},
+        "lon": {"type": "number", "minimum": -180, "maximum": 180},
+        "lat": {"type": "number", "minimum": -90, "maximum": 90},
+        "uncertainty_radius_m": {"type": "number", "minimum": 0},
+        "map_match_status": {"enum": ["pending", "matched", "failed"]},
+        "validation_truth": {"type": "object", "description": "Validator-only metadata; never send source way/node IDs to the route planner."}
+      }
+    },
+    "vehicle": {
+      "type": "object",
+      "required": ["vehicle_id", "initial_position", "fixed_order_sequence"],
+      "properties": {
+        "vehicle_id": {"type": "string"},
+        "initial_position": {"$ref": "#/$defs/point"},
+        "fixed_order_sequence": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "order": {
+      "type": "object",
+      "required": ["order_id", "vehicle_id", "sequence_index", "order_kind", "pickup", "dropoff", "route_validation_status"],
+      "properties": {
+        "order_id": {"type": "string"},
+        "vehicle_id": {"type": "string"},
+        "sequence_index": {"type": "integer", "minimum": 0},
+        "order_kind": {"enum": ["candidate_point_to_candidate_point", "fuzzy_single_endpoint", "fuzzy_both_endpoints"]},
+        "pickup": {"$ref": "#/$defs/point"},
+        "dropoff": {"$ref": "#/$defs/point"},
+        "route_validation_status": {"enum": ["pending", "passed", "failed"]}
+      }
+    },
+    "routeLeg": {
+      "type": "object",
+      "required": ["route_task_id", "vehicle_id", "order_id", "leg_role", "from_point_id", "to_point_id", "traditional_reachability_status"],
+      "properties": {
+        "route_task_id": {"type": "string"},
+        "vehicle_id": {"type": "string"},
+        "order_id": {"type": "string"},
+        "leg_role": {"enum": ["vehicle_to_pickup", "pickup_to_dropoff"]},
+        "from_point_id": {"type": "string"},
+        "to_point_id": {"type": "string"},
+        "traditional_reachability_status": {"enum": ["pending", "reachable", "unreachable"]},
+        "validated_link_sequence": {"type": "array", "items": {"type": "string"}, "description": "Only the validator stores this; do not expose its route as the answer to another method."}
+      }
+    },
+    "runtimeEvent": {
+      "type": "object",
+      "required": ["event_id", "event_type", "sim_time_s", "vehicle_id"],
+      "properties": {
+        "event_id": {"type": "string"},
+        "event_type": {"enum": ["plan_start", "plan_complete", "vehicle_depart", "edge_enter", "signal_wait_start", "signal_wait_end", "edge_exit", "pickup_arrive", "dropoff_arrive", "order_complete"]},
+        "sim_time_s": {"type": "number", "minimum": 0},
+        "wall_time_utc": {"type": "string", "format": "date-time"},
+        "vehicle_id": {"type": "string"},
+        "order_id": {"type": "string"},
+        "link_id": {"type": "string"},
+        "duration_s": {"type": "number", "minimum": 0},
+        "signal_phase": {"type": "string"},
+        "queue_length_veh": {"type": "integer", "minimum": 0},
+        "source_type": {"enum": ["osm", "simulated", "measured_planner_runtime"]}
+      }
+    }
+  }
+}

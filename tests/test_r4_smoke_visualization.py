@@ -1,4 +1,5 @@
 import subprocess
+import json
 import sys
 import tempfile
 import unittest
@@ -9,6 +10,53 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class R4SmokeVisualizationTests(unittest.TestCase):
+    def test_codex_backend_replay_discloses_usage_cost_and_tool_audit(self):
+        source = ROOT / "outputs/route_layer/r4_stepwise_live_v3/seed0_semantic_road_feature.json"
+        renderer = ROOT / "scripts/render_route_r4_smoke.py"
+        data = json.loads(source.read_text(encoding="utf-8"))
+        provider = data.pop("deepseek")
+        provider["backend"] = "codex_cli"
+        provider["model_invocation_count"] = provider.get("request_count", 1)
+        provider.setdefault("estimated_cost", {})["api_cost_amount"] = None
+        provider["estimated_cost"]["account_cost_status"] = "actual_codex_account_invoice_or_allowance_not_reported_by_cli"
+        provider["estimated_cost"]["codex_rate_card_estimate"] = {
+            "codex_standard_credit_equivalent_min": 0.001,
+            "codex_standard_credit_equivalent_max": 0.001,
+            "api_equivalent_usd_min": 0.0002,
+            "api_equivalent_usd_max": 0.0002,
+        }
+        if provider.get("attempts"):
+            provider["attempts"][0]["provider_audit"] = {
+                "backend": "codex_cli",
+                "trace_jsonl_path": "r4_step_0001.jsonl",
+                "event_audit": {
+                    "tool_usage_detected": False,
+                    "tool_item_types": [],
+                },
+            }
+        data["codex_cli"] = provider
+        data["route_model_backend"] = "codex_cli"
+        data["model_invocation_count"] = provider["model_invocation_count"]
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            input_json = Path(temp_dir) / "codex_result.json"
+            output = Path(temp_dir) / "replay.html"
+            input_json.write_text(json.dumps(data, ensure_ascii=False), encoding="utf-8")
+            result = subprocess.run(
+                [sys.executable, str(renderer), "--input-json", str(input_json), "--output-html", str(output)],
+                check=False,
+                capture_output=True,
+                text=True,
+            )
+            html = output.read_text(encoding="utf-8")
+
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn("Codex 标准速率等值", html)
+        self.assertIn("API 标价等值", html)
+        self.assertIn("Codex CLI 未返回账户账单或订阅额度扣减", html)
+        self.assertIn("Codex 原始事件记录", html)
+        self.assertIn("r4_step_0001.jsonl", html)
+
     def test_v12_replay_shows_the_returned_failure_reason(self):
         source = (
             ROOT

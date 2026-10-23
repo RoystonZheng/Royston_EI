@@ -110,7 +110,7 @@ class R4StepwiseTests(unittest.TestCase):
                     "starts_at_current": True,
                     "inside_boundary": True,
                     "pickup_order_ok": True,
-                    "not_revisited": True,
+                    "target_node_is_new": True,
                 },
                 "failure_reason_code": "none",
             }
@@ -126,7 +126,7 @@ class R4StepwiseTests(unittest.TestCase):
                     "starts_at_current": True,
                     "inside_boundary": True,
                     "pickup_order_ok": True,
-                    "not_revisited": True,
+                    "target_node_is_new": True,
                 },
                 "failure_reason_code": "unable_to_construct_route",
             }
@@ -168,6 +168,7 @@ class R4StepwiseTests(unittest.TestCase):
         self.assertNotIn("road_state_version", compact["m"])
         map_audit = audit_r4_stepwise_map_equivalence(self.package, compact["m"])
         self.assertTrue(map_audit["passed"])
+
         self.assertEqual(map_audit["expected_semantics_sha256"], map_audit["recovered_semantics_sha256"])
         self.assertEqual(compact["m"]["g"], full["map"]["directional_cost_codes_by_y"])
         for (source, target), edge in self.edge_by_pair.items():
@@ -199,6 +200,81 @@ class R4StepwiseTests(unittest.TestCase):
         self.assertEqual(
             audit_r4_stepwise_map_equivalence(self.package, altered)["reason"],
             "compact_grid_boundary_mismatch",
+        )
+
+    def test_route_feature_context_is_serialized_separately_from_graph_and_rejects_truth(self):
+        context = {
+            "protocol": {"name": "RoadFeatureInputProtocol", "version": "v1"},
+            "pickup_reference": {
+                "entry_id": "feature:sign_01",
+                "entry_type": "road_sign",
+                "name": "北门方向牌",
+                "relation_to_feature": "opposite_side",
+            },
+            "intent": {
+                "pickup_anchor_ref": "feature:sign_01",
+                "pickup_side": "west",
+            },
+        }
+        messages = build_r4_stepwise_messages(
+            self.package,
+            self.task.start_node_id,
+            self.task.pickup_node_id,
+            self.task.dropoff_node_id,
+            current_node_id=self.task.start_node_id,
+            visited_node_ids=[self.task.start_node_id],
+            route_feature_context=context,
+        )
+        payload = json.loads(messages[-1]["content"])
+        self.assertEqual(payload["i"], context)
+        self.assertIn("RoadFeatureInputProtocol v1", messages[0]["content"])
+        self.assertEqual(payload["q"]["p"], self.task.pickup_node_id)
+        with self.assertRaisesRegex(ValueError, "contains_evaluator_truth"):
+            build_r4_stepwise_messages(
+                self.package,
+                self.task.start_node_id,
+                self.task.pickup_node_id,
+                self.task.dropoff_node_id,
+                current_node_id=self.task.start_node_id,
+                visited_node_ids=[self.task.start_node_id],
+                route_feature_context={"true_pickup_node_id": self.task.pickup_node_id},
+            )
+
+    def test_stepwise_prompt_uses_explicit_visited_nodes_and_positive_self_check(self):
+        messages = build_r4_stepwise_messages(
+            self.package,
+            self.task.start_node_id,
+            self.task.pickup_node_id,
+            self.task.dropoff_node_id,
+            current_node_id=self.task.pickup_node_id,
+            visited_node_ids=[self.task.start_node_id, self.task.pickup_node_id],
+            pickup_seen=True,
+            accepted_directions=["N"],
+        )
+        payload = json.loads(messages[1]["content"])
+        self.assertEqual(payload["v"], "r4-step-v2")
+        self.assertEqual(
+            payload["s"]["v"],
+            [self.task.start_node_id, self.task.pickup_node_id],
+        )
+        self.assertNotIn("a", payload["s"])
+        self.assertIn("target_node_is_new", messages[0]["content"])
+        self.assertNotIn("not_revisited", messages[0]["content"])
+        constraint = build_r4_step_output_constraint(
+            self.package,
+            self.full_constraint,
+            current_node_id=self.task.start_node_id,
+            pickup_seen=False,
+            visited_node_ids=[self.task.start_node_id],
+        )
+        self.assertIn(
+            "target_node_is_new",
+            constraint.schema["properties"]["self_check"]["required"],
+        )
+        self.assertIn(
+            "首次访问的节点",
+            constraint.schema["properties"]["self_check"]["properties"]
+            ["target_node_is_new"]["description"],
         )
 
     def test_dynamic_schema_only_offers_directions_with_a_reachable_route_continuation(self):
@@ -363,21 +439,25 @@ class R4StepwiseTests(unittest.TestCase):
         self.assertEqual(result["attempts"][0]["status"], "step_invalid")
         self.assertIn("input_user_sha256", result["attempts"][0])
 
-    def test_false_model_self_check_is_rejected_even_when_local_edge_is_valid(self):
+    def test_false_model_self_check_is_recorded_but_local_validator_controls_acceptance(self):
         failed_self_check = {
-            "allowed_directed_edge": False,
+            "allowed_directed_edge": True,
             "starts_at_current": True,
             "inside_boundary": True,
             "pickup_order_ok": True,
-            "not_revisited": True,
+            "target_node_is_new": False,
         }
-        client = StepSequenceClient([self._move("N", failed_self_check)])
-        result = self._run(client, max_api_calls=1)
+        client = StepSequenceClient([self._move("N", failed_self_check), self._move("E")])
+        result = self._run(client, max_api_calls=2)
         attempt = result["attempts"][0]
-        self.assertEqual(attempt["status"], "step_invalid")
-        self.assertIn("model_self_check_failed", attempt["local_checks"]["errors"])
-        self.assertFalse(attempt["local_checks"]["passed"])
-        self.assertEqual(attempt["request_state"]["n"], self.task.start_node_id)
+        self.assertEqual(result["status"], "route_validated")
+        self.assertEqual(attempt["status"], "step_accepted")
+        self.assertNotIn("model_self_check_failed", attempt["local_checks"]["errors"])
+        self.assertTrue(attempt["local_checks"]["passed"])
+        self.assertFalse(attempt["local_checks"]["flags"]["model_self_check_passed"])
+        self.assertEqual(attempt["model_self_check_mismatch_fields"], ["target_node_is_new"])
+        self.assertTrue(result["steps"][0]["accepted_step"])
+        self.assertEqual(result["steps"][0]["to_node_id"], "node_0_1")
 
     def test_reachable_task_rejects_model_give_up_and_continues_same_state(self):
         client = StepSequenceClient([self._give_up(), self._move("N"), self._move("E")])
@@ -446,6 +526,30 @@ class R4StepwiseTests(unittest.TestCase):
         self.assertEqual(result["status"], "step_call_budget_exhausted")
         self.assertEqual(result["api_request_count"], 2)
         self.assertEqual(len(client.calls), 2)
+        self.assertIsNone(result["route"])
+
+    def test_route_action_budget_is_separate_from_request_limit(self):
+        client = StepSequenceClient([self._move("N")])
+        client.route_constraint = self.full_constraint
+        result = run_r4_stepwise_route_search(
+            client,
+            self.package,
+            self.road_map,
+            self.task,
+            self.task.pickup_node_id,
+            self.task.dropoff_node_id,
+            max_api_calls=1,
+            max_route_actions=8,
+        )
+
+        sent = json.loads(client.calls[0][-1]["content"])
+        self.assertEqual(result["status"], "request_limit_exhausted")
+        self.assertEqual(result["api_request_count"], 1)
+        self.assertEqual(result["api_call_limit"], 1)
+        self.assertEqual(result["route_action_budget"], 8)
+        self.assertEqual(result["route_action_budget_mode"], "separate_from_request_limit")
+        self.assertEqual(sent["s"]["b"], 8)
+        self.assertEqual(result["steps"][0]["to_node_id"], self.task.pickup_node_id)
         self.assertIsNone(result["route"])
 
     def test_network_error_is_recorded_without_retry_or_route_fallback(self):

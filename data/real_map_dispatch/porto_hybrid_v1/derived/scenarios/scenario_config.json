@@ -1,0 +1,123 @@
+{
+  "scenario_id": "porto_fixed_fleet_route_v1",
+  "status": "design_frozen_data_preflight_pending",
+  "purpose": "compare fixed-sequence route execution methods on an OSM-derived SUMO network; no dispatch layer",
+  "map": {
+    "source_snapshot": "../../raw/osm/porto_candidate.osm",
+    "source_timestamp_utc": "2026-10-22T04:01:05Z",
+    "candidate_fence_wgs84": {
+      "west": -8.635,
+      "south": 41.138,
+      "east": -8.595,
+      "north": 41.162
+    },
+    "candidate_hotspots": 30,
+    "display_generated_order_endpoints_on_base_map": false,
+    "final_fence_frozen": false,
+    "sumo_network_built": false
+  },
+  "fleet_and_orders": {
+    "fleet_size": 10,
+    "orders_per_vehicle": 10,
+    "total_orders_per_seed": 100,
+    "fixed_vehicle_order_sequence": true,
+    "dispatch_or_reassignment": false,
+    "orders_begin_after_previous_dropoff": true,
+    "endpoint_mix": {
+      "candidate_to_candidate": 0.7,
+      "road_feature_order": 0.3,
+      "allowed_road_feature_endpoint_patterns": ["one_candidate_one_fuzzy", "two_fuzzy"],
+      "pattern_split_within_road_feature_orders": "not_frozen",
+      "status": "mix_defined_internal_split_unfrozen",
+      "uncertainty_radius_m": 35
+    },
+    "seeds": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+    "route_legs_to_prevalidate_per_seed": 200,
+    "orders_frozen_after_route_preflight": true
+  },
+  "order_dataset": {
+    "generator": "../../generate_fixed_fleet_orders.py",
+    "manifest": "orders_manifest.json",
+    "draft_file_pattern": "orders_seed_{seed}_draft.json",
+    "drafts_are_not_formal_experiment_inputs": true,
+    "generator_status": "legacy_single_fuzzy_endpoint_rule_requires_update",
+    "formal_generation_ready": false
+  },
+  "traffic_environment": {
+    "engine": "Eclipse SUMO with TraCI",
+    "clock_step_s": 1,
+    "environment_runs_while_planning": true,
+    "signal_programs": {
+      "mode": "frozen SUMO fixed-time programs with seed-stable offsets",
+      "source_type": "simulated",
+      "measured_porto_phases": false,
+      "signal_updates_affect_queue_and_travel_time": true
+    },
+    "background_demand": {
+      "source": "historical Porto taxi OD/time-bin shape as a proxy, converted to simulated traffic",
+      "levels": ["low_sensitivity", "medium_primary", "high_sensitivity"],
+      "traffic_flow_values_frozen": false,
+      "same_seed_schedule_across_methods": true
+    },
+    "experimental_fleet_enters_shared_network": true,
+    "vehicle_signal_control": false,
+    "mid_order_route_replanning": false
+  },
+  "planner_clock": {
+    "vehicle_departure_not_before_plan_completion": true,
+    "measured_planner_wall_time_recorded": true,
+    "planner_delay_in_simulation_time": true,
+    "signals_background_and_other_vehicles_advance_during_planning": true,
+    "route_state_input_is_read_only": true
+  },
+  "methods": [
+    {
+      "method_id": "R1_TD_DIJKSTRA",
+      "description": "time-dependent Dijkstra on directed links using the shared traffic forecast"
+    },
+    {
+      "method_id": "R2_PURE_LLM",
+      "description": "LLM directly constructs routes from existing directed links and shared traffic features; independent validation only, no route fallback"
+    },
+    {
+      "method_id": "R3_AGENT_MAP_OPTIMIZER",
+      "description": "same LLM with typed Agent-readable map queries proposes routes; a mathematical optimizer selects among legal proposals"
+    }
+  ],
+  "objective_tracks": [
+    {
+      "objective_id": "FASTEST",
+      "predicted_objective": "minimize time-dependent route travel time including forecast signal delay and queue delay"
+    },
+    {
+      "objective_id": "LOWEST_ENERGY",
+      "predicted_objective": "minimize predicted electricity use under one frozen SUMO EV model and parameter set"
+    }
+  ],
+  "fairness_controls": {
+    "same_map_facts": true,
+    "same_traffic_forecast_values": true,
+    "same_vehicle_and_order_files": true,
+    "same_signal_program_and_background_seed": true,
+    "same_vehicle_type": true,
+    "preflight_route_is_not_revealed_as_answer": true,
+    "illegal_route_fallback": false
+  },
+  "formal_run_matrix": {
+    "primary_traffic_level": "medium_primary",
+    "primary_seeds": 10,
+    "methods": 3,
+    "objectives": 2,
+    "estimated_llm_planning_requests_max": 4000,
+    "retry_policy_default": "no_retry",
+    "additional_low_high_sensitivity": "pending compute and model budget gate"
+  },
+  "current_preflight": {
+    "sumo_installed": false,
+    "netconvert_installed": false,
+    "python_traci_installed": false,
+    "final_directed_link_graph_built": false,
+    "route_leg_reachability_passed": false,
+    "formal_experiment_started": false
+  }
+}

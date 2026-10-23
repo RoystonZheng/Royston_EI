@@ -19,7 +19,6 @@ from .r4_constraints import R4RouteOutputConstraint, build_r4_route_output_const
 from .routing import edge_travel_time_sec
 
 
-_BASE36 = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 _DIRECTION_ORDER = ("E", "W", "N", "S")
 _DIRECTION_DELTAS = {"E": (1, 0), "W": (-1, 0), "N": (0, 1), "S": (0, -1)}
 _SELF_CHECK_KEYS = (
@@ -27,8 +26,33 @@ _SELF_CHECK_KEYS = (
     "starts_at_current",
     "inside_boundary",
     "pickup_order_ok",
-    "not_revisited",
+    "target_node_is_new",
 )
+_SELF_CHECK_LOCAL_FLAGS = {
+    "allowed_directed_edge": "allowed_directed_edge",
+    "starts_at_current": "starts_at_current",
+    "inside_boundary": "inside_boundary",
+    "pickup_order_ok": "pickup_order_ok",
+    "target_node_is_new": "not_revisited",
+}
+_SELF_CHECK_DESCRIPTIONS = {
+    "allowed_directed_edge": "本步的方向对应从当前位置出发且实际允许通行的有向道路边。",
+    "starts_at_current": "本步有向道路边的起点就是当前节点 s.n。",
+    "inside_boundary": "本步目标节点仍在地图边界内。",
+    "pickup_order_ok": "本步不会在上车前到达下车点。",
+    "target_node_is_new": "目标节点是首次访问的节点，尚未出现在 s.v 列表中。",
+}
+
+
+def _model_self_check_mismatch_fields(
+    model_self_check: Dict[str, Any], local_flags: Dict[str, Any]
+) -> List[str]:
+    """Return self-check fields that disagree with deterministic local facts."""
+    return sorted(
+        key
+        for key, local_key in _SELF_CHECK_LOCAL_FLAGS.items()
+        if model_self_check.get(key) is not local_flags.get(local_key)
+    )
 
 
 def _shortest_path_edge_count(
@@ -131,16 +155,6 @@ def _remaining_route_reachable(
         visited_node_ids,
         blocked_edge_ids,
     ) is not None
-
-
-def _base36_fixed(value: int, width: int = 3) -> str:
-    if value < 0 or value >= 36**width:
-        raise ValueError("r4_stepwise_base36_value_out_of_range")
-    chars = []
-    for _ in range(width):
-        chars.append(_BASE36[value % 36])
-        value //= 36
-    return "".join(reversed(chars))
 
 
 def _node_xy(node_id: str) -> Tuple[int, int]:
@@ -282,6 +296,7 @@ def build_r4_stepwise_messages(
     accepted_directions: Iterable[str] = (),
     feedback: Optional[Dict[str, Any]] = None,
     remaining_action_budget: Optional[int] = None,
+    route_feature_context: Optional[Dict[str, Any]] = None,
 ) -> List[Dict[str, str]]:
     """Build the slim route request and current authoritative step state."""
 
@@ -315,11 +330,6 @@ def build_r4_stepwise_messages(
     equivalence = audit_r4_stepwise_map_equivalence(package, compact_map)
     if not equivalence["passed"]:
         raise ValueError("r4_stepwise_map_equivalence_failed")
-    x0, y0, width = compact_map["x0"], compact_map["y0"], compact_map["w"]
-    visited_code = "".join(
-        _base36_fixed((node_by_id[node_id].y - y0) * width + node_by_id[node_id].x - x0)
-        for node_id in visited
-    )
     accepted = list(accepted_directions)
     if any(direction not in _DIRECTION_ORDER for direction in accepted):
         raise ValueError("r4_stepwise_accepted_directions_invalid")
@@ -333,7 +343,7 @@ def build_r4_stepwise_messages(
             raise ValueError("r4_stepwise_accepted_state_route_mismatch")
 
     user_payload: Dict[str, Any] = {
-        "v": "r4-step-v1",
+        "v": "r4-step-v2",
         "m": compact_map,
         "q": {
             "s": start_node_id,
@@ -344,8 +354,7 @@ def build_r4_stepwise_messages(
         "s": {
             "n": current_node_id,
             "p": pickup_seen,
-            "v": visited_code,
-            "a": "".join(accepted),
+            "v": visited,
         },
     }
     if remaining_action_budget is not None:
@@ -356,20 +365,33 @@ def build_r4_stepwise_messages(
             for key in ("code", "direction")
             if key in feedback
         }
+    if route_feature_context is not None:
+        # Keep only JSON data and reject evaluator truth before serialization.
+        feature_context_json = json.dumps(
+            route_feature_context, ensure_ascii=False, sort_keys=True, separators=(",", ":")
+        )
+        if any(
+            marker in feature_context_json.lower()
+            for marker in ("true_pickup_node_id", "true_dropoff_node_id", "ground_truth")
+        ):
+            raise ValueError("r4_stepwise_route_feature_context_contains_evaluator_truth")
+        user_payload["i"] = route_feature_context
     system = (
         "你逐步为一辆车提出路线动作。用户消息的 m.g 是有向道路成本网格：坐标原点为 m.x0/m.y0，"
         "行按 y 递增、格点按 x 递增，每格连续四个字符按 E/W/N/S 表示出边；'.' 为无边，其他码在 m.c 中对应"
         "[行驶秒数, 米数]。节点编号为 node_x_y，边界为 x0..x0+w-1、y0..y0+h-1。"
-        "s.a 是已接纳的 E/W/N/S 方向序列，s.v 是每个节点三位大写 base36 索引的拼接；"
-        "索引 j 解码为 node_(x0+j%w)_(y0+floor(j/w))，不是十六进制。"
+        "s.v 是按访问顺序排列的完整 node_x_y 节点编号列表，包含起点和当前节点；判断是否重访时直接查目标编号是否在 s.v 中。"
         "只依据当前地图事实，从 s.n 提议一条下一步方向；工具 schema 的 direction 候选由本地程序过滤，"
         "仅包含真实允许的有向出边、仍保留到达剩余目标的路线且能放入剩余调用预算的方向。"
         "目标顺序是 q.s→q.p→q.d，首次在已上车后到达 q.d 即结束。不得重复访问节点，不得越界，不得逆单行。"
         "q.o 要求优先降低总行驶秒数，再降低距离。先规划完整的剩余路线，再只提交该路线的下一步；不要只按局部方向贪心。"
         "若 s.b 存在，它表示含本次请求在内的剩余动作调用预算，路线必须在预算耗尽前到达下车点。"
+        "若有 i，它是已通过白名单校验的 RoadFeatureInputProtocol v1 相关语义片段和地点意图；"
+        "它只说明 q 中固定端点的道路特征依据，不得据此修改 q 的端点，也不能把未列出的道路边当成存在。"
         "输出 submit_r4_route 工具参数：action=move 时只给一个 direction；"
         "action=give_up 时 direction 为空且不声称地图无路。"
-        "self_check 必须逐项填写 allowed_directed_edge、starts_at_current、inside_boundary、pickup_order_ok、not_revisited；"
+        "self_check 必须逐项填写 allowed_directed_edge、starts_at_current、inside_boundary、pickup_order_ok、target_node_is_new；"
+        "若目标节点编号首次出现在路线中，target_node_is_new 填 true；若已在 s.v 中，填 false。"
         "它们是你对本步的结构化声明，本地程序会独立校验并决定是否推进状态。"
         "若有 f，按该程序错误修正动作；失败动作没有改变 s 中的当前位置或已访问集合。不要输出长篇自由文本推理。"
     )
@@ -412,7 +434,11 @@ class R4StepOutputConstraint:
                 "self_check": {
                     "type": "object",
                     "properties": {
-                        key: {"type": "boolean"} for key in _SELF_CHECK_KEYS
+                        key: {
+                            "type": "boolean",
+                            "description": _SELF_CHECK_DESCRIPTIONS[key],
+                        }
+                        for key in _SELF_CHECK_KEYS
                     },
                     "required": list(_SELF_CHECK_KEYS),
                     "additionalProperties": False,
@@ -713,7 +739,14 @@ def _attempt_replay(
             "edge_id": edge_id if local_checks["passed"] else None,
             "direction": direction,
             "model_edge_check": (
-                "PASS" if all(model_self_check.values()) else "FAIL_OR_INCOMPLETE"
+                "PASS"
+                if all(model_self_check.values())
+                else "SELF_CHECK_MISMATCH"
+                if local_checks["passed"]
+                else "FAIL_OR_INCOMPLETE"
+            ),
+            "model_self_check_mismatch_fields": _model_self_check_mismatch_fields(
+                model_self_check, local_checks.get("flags", {})
             ),
             "local_directed_edge_check": "PASS" if local_checks["flags"]["allowed_directed_edge"] else "FAIL",
             "local_continuity_check": "PASS" if local_checks["flags"]["starts_at_current"] else "FAIL",
@@ -764,13 +797,21 @@ def run_r4_stepwise_route_search(
     selected_dropoff_node_id: str,
     *,
     max_api_calls: int,
+    max_route_actions: Optional[int] = None,
     blocked_edge_ids: Iterable[str] = (),
     on_attempt: Optional[Callable[[Dict[str, Any]], None]] = None,
+    route_feature_context: Optional[Dict[str, Any]] = None,
 ) -> Dict[str, Any]:
     """Request and locally validate one route action per bounded API call."""
 
-    if isinstance(max_api_calls, bool) or not 1 <= int(max_api_calls) <= 64:
-        raise ValueError("r4_stepwise_api_call_budget_must_be_between_1_and_64")
+    if isinstance(max_api_calls, bool) or not 1 <= int(max_api_calls) <= 4096:
+        raise ValueError("r4_stepwise_api_call_budget_must_be_between_1_and_4096")
+    split_route_budget = max_route_actions is not None
+    route_action_budget = (
+        int(max_route_actions) if split_route_budget else int(max_api_calls)
+    )
+    if isinstance(max_route_actions, bool) or not 1 <= route_action_budget <= 4096:
+        raise ValueError("r4_stepwise_route_action_budget_must_be_between_1_and_4096")
     if task.start_node_id == selected_dropoff_node_id:
         raise ValueError("r4_stepwise_start_equals_dropoff")
     full_constraint = build_r4_route_output_constraint(
@@ -811,6 +852,10 @@ def run_r4_stepwise_route_search(
             "status": final_status,
             "api_request_count": len(attempts),
             "api_call_limit": int(max_api_calls),
+            "route_action_budget": route_action_budget,
+            "route_action_budget_mode": (
+                "separate_from_request_limit" if split_route_budget else "legacy_shared_limit"
+            ),
             "attempts": attempts,
             "steps": step_records,
             "route": final_route,
@@ -841,7 +886,11 @@ def run_r4_stepwise_route_search(
         }
 
     for call_number in range(1, int(max_api_calls) + 1):
-        remaining_action_budget = int(max_api_calls) - call_number + 1
+        remaining_action_budget = (
+            route_action_budget - len(accepted_edges)
+            if split_route_budget
+            else int(max_api_calls) - call_number + 1
+        )
         constraint = build_r4_step_output_constraint(
             package,
             full_constraint,
@@ -863,6 +912,7 @@ def run_r4_stepwise_route_search(
             accepted_directions=accepted_directions,
             feedback=feedback_for_next_request,
             remaining_action_budget=remaining_action_budget,
+            route_feature_context=route_feature_context,
         )
         feedback_for_next_request = None
         user_bytes = len(messages[-1]["content"].encode("utf-8"))
@@ -1087,11 +1137,10 @@ def run_r4_stepwise_route_search(
                     full_constraint,
                     remaining_action_budget=remaining_action_budget,
                 )
-                if not all(model_self_check.values()):
-                    local["passed"] = False
-                    if "model_self_check_failed" not in local["errors"]:
-                        local["errors"].append("model_self_check_failed")
                 local["flags"]["model_self_check_passed"] = all(model_self_check.values())
+                model_self_check_mismatch_fields = _model_self_check_mismatch_fields(
+                    model_self_check, local["flags"]
+                )
                 attempt.update(
                     {
                         "parsed_output": payload,
@@ -1106,6 +1155,7 @@ def run_r4_stepwise_route_search(
                             None,
                         ),
                         "model_self_check": model_self_check,
+                        "model_self_check_mismatch_fields": model_self_check_mismatch_fields,
                         "local_checks": {
                             "passed": local["passed"],
                             "flags": local["flags"],
@@ -1144,6 +1194,7 @@ def run_r4_stepwise_route_search(
                             "direction": direction,
                             "accepted_step": False,
                             "model_self_check": model_self_check,
+                            "model_self_check_mismatch_fields": model_self_check_mismatch_fields,
                             "local_checks": attempt["local_checks"],
                             "feedback": attempt["feedback"],
                         }
@@ -1172,6 +1223,7 @@ def run_r4_stepwise_route_search(
                             "to_node_id": edge.to_node,
                             "accepted_step": True,
                             "model_self_check": model_self_check,
+                            "model_self_check_mismatch_fields": model_self_check_mismatch_fields,
                             "local_checks": attempt["local_checks"],
                             "remaining_minimum_moves_after_move": local[
                                 "remaining_minimum_moves_after_move"
@@ -1238,6 +1290,11 @@ def run_r4_stepwise_route_search(
             on_attempt(snapshot())
 
     result = snapshot()
-    if result["status"] == "step_call_budget_exhausted" and len(attempts) < int(max_api_calls):
-        result["status"] = final_status
+    if (
+        split_route_budget
+        and len(attempts) >= int(max_api_calls)
+        and len(accepted_edges) < route_action_budget
+        and final_status == "step_call_budget_exhausted"
+    ):
+        result["status"] = "request_limit_exhausted"
     return result

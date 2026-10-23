@@ -1,0 +1,220 @@
+{
+  "schema_version": "route_intent_query_v2",
+  "task_id": "task-0006-0010",
+  "map_id": "grid-100x100-seed-6",
+  "map_version": "grid-v1-100",
+  "map_input_mode": "road_feature_protocol_v1",
+  "start_node_id": "node_84_57",
+  "pickup_text": "请在北侧入口指示牌旁、西侧的合法上车点上车。",
+  "dropoff_text": "请在体育馆东门附近下车。",
+  "pickup_resolution_mode": "road_feature_relation",
+  "dropoff_resolution_mode": "landmark_graph_candidates",
+  "matched_pickup_entries": [
+    {
+      "entry_id": "feature:sign_02",
+      "entry_type": "road_sign",
+      "name": "北侧入口指示牌",
+      "aliases": [
+        "北门指示牌",
+        "北侧入口"
+      ],
+      "side_of_road": "west_side",
+      "orientation": "toward_east",
+      "anchor_coordinates": {
+        "x": 18,
+        "y": 15
+      }
+    },
+    {
+      "entry_id": "feature:sign_07",
+      "entry_type": "road_sign",
+      "name": "北侧入口指示牌",
+      "aliases": [
+        "北门指示牌",
+        "北侧入口"
+      ],
+      "side_of_road": "west_side",
+      "orientation": "toward_east",
+      "anchor_coordinates": {
+        "x": 4,
+        "y": 11
+      }
+    }
+  ],
+  "matched_dropoff_entries": [
+    {
+      "entry_id": "landmark:node_94_1",
+      "entry_type": "landmark",
+      "name": "体育馆东门",
+      "aliases": [
+        "体育馆东侧入口"
+      ],
+      "anchor_coordinates": {
+        "x": 94,
+        "y": 1
+      }
+    }
+  ],
+  "pickup_candidates": [
+    {
+      "candidate_ref": "P00",
+      "coordinates": {
+        "x": 18,
+        "y": 15
+      },
+      "relation_to_feature": "feature_side",
+      "manhattan_distance_to_anchors": [
+        {
+          "anchor_ref": "feature:sign_02",
+          "distance": 0
+        },
+        {
+          "anchor_ref": "feature:sign_07",
+          "distance": 18
+        }
+      ]
+    },
+    {
+      "candidate_ref": "P01",
+      "coordinates": {
+        "x": 19,
+        "y": 15
+      },
+      "relation_to_feature": "opposite_side",
+      "manhattan_distance_to_anchors": [
+        {
+          "anchor_ref": "feature:sign_02",
+          "distance": 1
+        },
+        {
+          "anchor_ref": "feature:sign_07",
+          "distance": 19
+        }
+      ]
+    },
+    {
+      "candidate_ref": "P02",
+      "coordinates": {
+        "x": 4,
+        "y": 11
+      },
+      "relation_to_feature": "feature_side",
+      "manhattan_distance_to_anchors": [
+        {
+          "anchor_ref": "feature:sign_02",
+          "distance": 18
+        },
+        {
+          "anchor_ref": "feature:sign_07",
+          "distance": 0
+        }
+      ]
+    },
+    {
+      "candidate_ref": "P03",
+      "coordinates": {
+        "x": 5,
+        "y": 11
+      },
+      "relation_to_feature": "opposite_side",
+      "manhattan_distance_to_anchors": [
+        {
+          "anchor_ref": "feature:sign_02",
+          "distance": 17
+        },
+        {
+          "anchor_ref": "feature:sign_07",
+          "distance": 1
+        }
+      ]
+    }
+  ],
+  "dropoff_candidates": [
+    {
+      "candidate_ref": "D00",
+      "coordinates": {
+        "x": 90,
+        "y": 1
+      },
+      "manhattan_distance_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_94_1",
+          "distance": 4
+        }
+      ]
+    },
+    {
+      "candidate_ref": "D01",
+      "coordinates": {
+        "x": 91,
+        "y": 0
+      },
+      "manhattan_distance_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_94_1",
+          "distance": 4
+        }
+      ]
+    },
+    {
+      "candidate_ref": "D02",
+      "coordinates": {
+        "x": 91,
+        "y": 1
+      },
+      "manhattan_distance_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_94_1",
+          "distance": 3
+        }
+      ]
+    },
+    {
+      "candidate_ref": "D03",
+      "coordinates": {
+        "x": 93,
+        "y": 4
+      },
+      "manhattan_distance_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_94_1",
+          "distance": 4
+        }
+      ]
+    },
+    {
+      "candidate_ref": "D04",
+      "coordinates": {
+        "x": 94,
+        "y": 1
+      },
+      "manhattan_distance_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_94_1",
+          "distance": 0
+        }
+      ]
+    },
+    {
+      "candidate_ref": "D05",
+      "coordinates": {
+        "x": 95,
+        "y": 4
+      },
+      "manhattan_distance_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_94_1",
+          "distance": 4
+        }
+      ]
+    }
+  ],
+  "allowed_feature_refs": [
+    "feature:sign_02",
+    "feature:sign_07"
+  ],
+  "allowed_landmark_refs": [
+    "landmark:node_94_1"
+  ],
+  "uses_evaluator_truth": false
+}

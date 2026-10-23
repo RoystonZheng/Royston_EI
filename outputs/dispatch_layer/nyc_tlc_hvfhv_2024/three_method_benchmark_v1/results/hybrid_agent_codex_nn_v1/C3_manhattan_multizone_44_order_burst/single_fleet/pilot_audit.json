@@ -1,0 +1,228 @@
+{
+  "schema_version": "hybrid_dispatch_pilot_audit_v1",
+  "created_date": "2026-10-22",
+  "case": "C3_manhattan_multizone_44_order_burst",
+  "fleet_id": "single_fleet",
+  "seed": 0,
+  "status": "complete_single_seed_mechanism_pilot_not_formal_performance_result",
+  "all_methods_share_identical_input_hashes": true,
+  "all_methods_share_identical_scenario_fingerprint": true,
+  "input_hashes": {
+    "D0_greedy": {
+      "scenario_json": "2b57f50f96aa2765a407a7c6ca63abfab37a3d42081f0ccd4b68751265295f16",
+      "orders_json": "bfbae3bca04c69216d7583aaddb1c71f89a673cb184059214c22f046d893f3a0",
+      "zone_od_cost_matrix": "87a2e4b0135f6159ca1b38719116b88c38b5172c6ba0f0bd1e01295ea2dfbcb0"
+    },
+    "D1_optimizer": {
+      "scenario_json": "2b57f50f96aa2765a407a7c6ca63abfab37a3d42081f0ccd4b68751265295f16",
+      "orders_json": "bfbae3bca04c69216d7583aaddb1c71f89a673cb184059214c22f046d893f3a0",
+      "zone_od_cost_matrix": "87a2e4b0135f6159ca1b38719116b88c38b5172c6ba0f0bd1e01295ea2dfbcb0"
+    },
+    "D2_agent_optimizer": {
+      "scenario_json": "2b57f50f96aa2765a407a7c6ca63abfab37a3d42081f0ccd4b68751265295f16",
+      "orders_json": "bfbae3bca04c69216d7583aaddb1c71f89a673cb184059214c22f046d893f3a0",
+      "zone_od_cost_matrix": "87a2e4b0135f6159ca1b38719116b88c38b5172c6ba0f0bd1e01295ea2dfbcb0"
+    },
+    "D5_pure_llm_direct": {
+      "scenario_json": "2b57f50f96aa2765a407a7c6ca63abfab37a3d42081f0ccd4b68751265295f16",
+      "orders_json": "bfbae3bca04c69216d7583aaddb1c71f89a673cb184059214c22f046d893f3a0",
+      "zone_od_cost_matrix": "87a2e4b0135f6159ca1b38719116b88c38b5172c6ba0f0bd1e01295ea2dfbcb0"
+    },
+    "D6_agent_codex_context_optimizer": {
+      "scenario_json": "2b57f50f96aa2765a407a7c6ca63abfab37a3d42081f0ccd4b68751265295f16",
+      "orders_json": "bfbae3bca04c69216d7583aaddb1c71f89a673cb184059214c22f046d893f3a0",
+      "zone_od_cost_matrix": "87a2e4b0135f6159ca1b38719116b88c38b5172c6ba0f0bd1e01295ea2dfbcb0"
+    }
+  },
+  "scenario_fingerprints": {
+    "D0_greedy": "b058c273877e18fdb65f38aaa203fddbbf61b559cdb516d8a103a380a61dbb25",
+    "D1_optimizer": "b058c273877e18fdb65f38aaa203fddbbf61b559cdb516d8a103a380a61dbb25",
+    "D2_agent_optimizer": "b058c273877e18fdb65f38aaa203fddbbf61b559cdb516d8a103a380a61dbb25",
+    "D5_pure_llm_direct": "b058c273877e18fdb65f38aaa203fddbbf61b559cdb516d8a103a380a61dbb25",
+    "D6_agent_codex_context_optimizer": "b058c273877e18fdb65f38aaa203fddbbf61b559cdb516d8a103a380a61dbb25"
+  },
+  "d6_run_mode": "complete_simulation",
+  "d6_round_count": 41,
+  "d6_validator_states": [
+    "valid"
+  ],
+  "d6_hard_constraint_error_count": 0,
+  "d6_commitment_violations": 0,
+  "d6_context_filter_candidate_counts": {
+    "before": 5053,
+    "after": 47
+  },
+  "d6_fallback_count": 2,
+  "codex_policy": {
+    "status": "accepted",
+    "backend": "codex_cli",
+    "model": "gpt-5.6-luna",
+    "input_policy": "current_snapshot_summary_context_policy_v1",
+    "codex_cli_version": "codex-cli 0.145.0",
+    "reasoning_effort": "low",
+    "retry_count": 0,
+    "replayed_from_existing_call": true,
+    "new_invocation_made": false,
+    "request_made": true,
+    "original_latency_ms": null,
+    "original_latency_status": "not_captured_before_initial_local_interruption",
+    "usage": {
+      "turn_started_count": 1,
+      "turn_completed_usage_count": 1,
+      "input_tokens": 13453,
+      "cached_input_tokens": 0,
+      "output_tokens": 178,
+      "reasoning_tokens": 62,
+      "total_tokens": 13631,
+      "usage_available": true,
+      "tool_usage_detected": false,
+      "tool_item_types": [],
+      "other_non_message_item_types": [
+        "error"
+      ],
+      "event_types": [
+        "thread.started",
+        "turn.started",
+        "item.completed",
+        "item.completed",
+        "turn.completed"
+      ]
+    },
+    "usage_source": "replayed_codex_exec_json_trace",
+    "cost_estimate": {
+      "pricing_config": "/Users/didi/Documents/personalcodexfile/第二次课/configs/codex_cli_pricing_2026-10-22.json",
+      "pricing_checked_date": "2026-10-22",
+      "pricing_mode": "standard",
+      "model": "gpt-5.6-luna",
+      "account_billing_amount": null,
+      "account_billing_currency": null,
+      "account_billing_status": "not_reported_by_codex_cli",
+      "codex_standard_credit_equivalent": 0.072605,
+      "api_equivalent_usd": 0.0029042000000000004,
+      "api_equivalent_is_invoice": false,
+      "calculation_status": "standard_rate_equivalent",
+      "cached_input_assumption": "reported_by_cli",
+      "codex_standard_credit_equivalent_min": 0.072605,
+      "codex_standard_credit_equivalent_max": 0.072605,
+      "api_equivalent_usd_min": 0.0029042000000000004,
+      "api_equivalent_usd_max": 0.0029042000000000004,
+      "reasoning_tokens_included_in_output_tokens": true,
+      "account_invoice_amount": null,
+      "account_invoice_status": "not_reported_by_codex_cli"
+    },
+    "account_cost_usd": null,
+    "tool_usage_detected": false,
+    "tool_item_types": [],
+    "tool_policy": {
+      "shell_tool": "disabled",
+      "unified_exec": "disabled",
+      "disabled_features": [
+        "apps",
+        "auth_elicitation",
+        "browser_use",
+        "browser_use_external",
+        "browser_use_full_cdp_access",
+        "chronicle",
+        "code_mode",
+        "code_mode_host",
+        "computer_use",
+        "goals",
+        "hooks",
+        "image_generation",
+        "in_app_browser",
+        "memories",
+        "multi_agent",
+        "plugins",
+        "remote_plugin",
+        "shell_snapshot",
+        "shell_tool",
+        "skill_mcp_dependency_install",
+        "skill_search",
+        "tool_call_mcp_elicitation",
+        "tool_suggest",
+        "unified_exec",
+        "workspace_dependencies"
+      ],
+      "user_config": "ignored",
+      "sandbox": "read-only",
+      "working_directory": "empty_temporary_directory",
+      "api_key_environment_variables_removed": [
+        "DEEPSEEK_API_KEY",
+        "DISPATCH_LLM_MODEL",
+        "DISPATCH_LLM_BASE_URL",
+        "OPENAI_API_KEY",
+        "OPENAI_BASE_URL",
+        "OPENAI_API_BASE",
+        "OPENAI_ORG_ID",
+        "OPENAI_PROJECT",
+        "CODEX_API_KEY"
+      ]
+    },
+    "jsonl_parse_errors": [],
+    "policy_parameters": {
+      "base": 210.0,
+      "weights": [
+        -8.0,
+        -10.0,
+        -6.0,
+        8.0,
+        -0.25,
+        0.0,
+        0.0
+      ]
+    },
+    "error": null,
+    "prompt_sha256": "579a6cbba6e248993af3d1998e7d136434dea597d60f2c6245466ec27bb92e49",
+    "schema_sha256": "fd1994805a4c5a8853d35240face04d208d83934d367d576d5d6e6a7902ad3a9",
+    "prompt_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/three_method_benchmark_v1/results/hybrid_agent_codex_nn_v1/C3_manhattan_multizone_44_order_burst/single_fleet/codex_context_policy_traces/context_policy_0001.prompt.txt",
+    "trace_jsonl_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/three_method_benchmark_v1/results/hybrid_agent_codex_nn_v1/C3_manhattan_multizone_44_order_burst/single_fleet/codex_context_policy_traces/context_policy_0001.jsonl",
+    "trace_jsonl_sha256": "da72720c742f2eb508df064c3ee56bf4ba61ba5ed98a6424a1884dbb8671377c",
+    "final_json_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/three_method_benchmark_v1/results/hybrid_agent_codex_nn_v1/C3_manhattan_multizone_44_order_burst/single_fleet/codex_context_policy_traces/context_policy_0001.final.json",
+    "final_json_sha256": "aef2764b5203dcf0f13da350e0ac5ca328a9f5c1c8150a3a41c381104164fb37",
+    "event_types": [
+      "thread.started",
+      "turn.started",
+      "item.completed",
+      "item.completed",
+      "turn.completed"
+    ]
+  },
+  "codex_policy_artifact_hashes": {
+    "jsonl_sha256": "da72720c742f2eb508df064c3ee56bf4ba61ba5ed98a6424a1884dbb8671377c",
+    "final_json_sha256": "aef2764b5203dcf0f13da350e0ac5ca328a9f5c1c8150a3a41c381104164fb37",
+    "prompt_sha256": "579a6cbba6e248993af3d1998e7d136434dea597d60f2c6245466ec27bb92e49"
+  },
+  "model_call_accounting": {
+    "new_codex_requests_for_completed_simulation": 0,
+    "original_codex_requests_reused": 1,
+    "input_tokens": 13453,
+    "cached_input_tokens": 0,
+    "output_tokens": 178,
+    "total_tokens": 13631,
+    "codex_standard_credit_equivalent": 0.072605,
+    "api_rate_card_equivalent_usd": 0.0029042000000000004,
+    "actual_account_charge_usd": null,
+    "codex_cli_latency_ms": null,
+    "codex_cli_latency_status": "not_captured_before_initial_local_interruption"
+  },
+  "d6_vs_d1_single_seed_delta": {
+    "served_orders_delta": 0,
+    "average_wait_sec_delta": 4.96052891945773,
+    "p95_wait_sec_delta": -12.062400979025142,
+    "empty_distance_m_delta": 396.84231355661814,
+    "energy_kwh_delta": 0.07143161644019003
+  },
+  "input_cost_limitations": {
+    "pickup": {
+      "policy_id": "synthetic_zone_centroid_pickup_proxy_v1",
+      "distance_method": "haversine between official taxi-zone polygon area centroids, multiplied by detour_factor",
+      "speed_mps": 5.0,
+      "detour_factor": 1.3,
+      "minimum_intrazonal_distance_m": 300.0,
+      "interpretation": "synthetic zone-level pickup cost for controlled method comparison; not measured street distance or ETA"
+    },
+    "ride": "direct observed training-period zone OD median proxy; not street routing"
+  },
+  "initial_execution_note": "The first local run stopped after the Codex response due to a missing CandidateDecision import. The preserved response and trace were replayed with byte-identical prompt content; no second model request was made. The initial incomplete local result is preserved as D6_agent_codex_context_optimizer_seed_0_replay_accounting_pre_fix.json.",
+  "benchmark_manifest_sha256": "5780ac717b4f6ce3f92a169b676fa5f1ed75f919a08d7c85ec3df64e1f512b71"
+}

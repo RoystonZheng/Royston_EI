@@ -1,0 +1,327 @@
+{
+  "candidate_ref_resolution": {
+    "dropoff": {
+      "D00": "node_39_42",
+      "D01": "node_40_41",
+      "D02": "node_40_42",
+      "D03": "node_40_43",
+      "D04": "node_42_43",
+      "D05": "node_44_42"
+    },
+    "pickup": {
+      "P00": "node_68_41",
+      "P01": "node_69_40",
+      "P02": "node_68_39",
+      "P03": "node_70_43",
+      "P04": "node_71_40",
+      "P05": "node_71_42",
+      "P06": "node_66_42",
+      "P07": "node_67_39"
+    }
+  },
+  "created_at_utc": "2026-10-22T09:16:00.176352+00:00",
+  "decoding": {
+    "max_tokens": 256,
+    "temperature": 0.0,
+    "thinking": false
+  },
+  "evaluation_after_inference": {
+    "both_endpoints_exact_match": false,
+    "dropoff_exact_match": false,
+    "pickup_exact_match": false,
+    "true_dropoff_node_id": "node_42_43",
+    "true_pickup_node_id": "node_25_66",
+    "truth_loaded_after_generation": true
+  },
+  "input_artifacts": {
+    "map_sha256": "bdf7da792ecf78ae393f5441055d592f3585674bea48d4f12d2d2d1ce632adbe",
+    "model_query_sha256": "8aab53b08a047c3acac25c311d927bc6b421d9d986e785f7a1b926252d145226",
+    "orders_sha256": "867d863c961406fd89a620177253cf50493b0883988069a033d147d6496e7999",
+    "prompt_sha256": "19417e65d2b5c0b57c6a45ec93d1267f3efbdd31d663bf768c0bc8cb6ed966b4",
+    "protocol_sha256": "0a244abf97977274b8ab1df899700fea0c51c762dec7d32e655960b43b8f03af"
+  },
+  "input_tokens_local_tokenizer": 1393,
+  "latency_ms": 1671.488,
+  "map_id": "grid-100x100-seed-0",
+  "map_input_mode": "graph_only",
+  "model": "mlx-community/Qwen3-4B-Instruct-2507-4bit",
+  "model_query": {
+    "allowed_feature_refs": [],
+    "allowed_landmark_refs": [
+      "landmark:node_42_42"
+    ],
+    "dropoff_candidates": [
+      {
+        "candidate_anchor_links": [
+          {
+            "anchor_ref": "landmark:node_42_42",
+            "entry_type": "landmark",
+            "name": "科技园",
+            "orientation": null,
+            "relation_to_feature": null,
+            "side_of_road": null
+          }
+        ],
+        "candidate_ref": "D00",
+        "coordinates": {
+          "x": 39,
+          "y": 42
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_42_42",
+            "distance": 3
+          }
+        ]
+      },
+      {
+        "candidate_anchor_links": [
+          {
+            "anchor_ref": "landmark:node_42_42",
+            "entry_type": "landmark",
+            "name": "科技园",
+            "orientation": null,
+            "relation_to_feature": null,
+            "side_of_road": null
+          }
+        ],
+        "candidate_ref": "D01",
+        "coordinates": {
+          "x": 40,
+          "y": 41
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_42_42",
+            "distance": 3
+          }
+        ]
+      },
+      {
+        "candidate_anchor_links": [
+          {
+            "anchor_ref": "landmark:node_42_42",
+            "entry_type": "landmark",
+            "name": "科技园",
+            "orientation": null,
+            "relation_to_feature": null,
+            "side_of_road": null
+          }
+        ],
+        "candidate_ref": "D02",
+        "coordinates": {
+          "x": 40,
+          "y": 42
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_42_42",
+            "distance": 2
+          }
+        ]
+      },
+      {
+        "candidate_anchor_links": [
+          {
+            "anchor_ref": "landmark:node_42_42",
+            "entry_type": "landmark",
+            "name": "科技园",
+            "orientation": null,
+            "relation_to_feature": null,
+            "side_of_road": null
+          }
+        ],
+        "candidate_ref": "D03",
+        "coordinates": {
+          "x": 40,
+          "y": 43
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_42_42",
+            "distance": 3
+          }
+        ]
+      },
+      {
+        "candidate_anchor_links": [
+          {
+            "anchor_ref": "landmark:node_42_42",
+            "entry_type": "landmark",
+            "name": "科技园",
+            "orientation": null,
+            "relation_to_feature": null,
+            "side_of_road": null
+          }
+        ],
+        "candidate_ref": "D04",
+        "coordinates": {
+          "x": 42,
+          "y": 43
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_42_42",
+            "distance": 1
+          }
+        ]
+      },
+      {
+        "candidate_anchor_links": [
+          {
+            "anchor_ref": "landmark:node_42_42",
+            "entry_type": "landmark",
+            "name": "科技园",
+            "orientation": null,
+            "relation_to_feature": null,
+            "side_of_road": null
+          }
+        ],
+        "candidate_ref": "D05",
+        "coordinates": {
+          "x": 44,
+          "y": 42
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_42_42",
+            "distance": 2
+          }
+        ]
+      }
+    ],
+    "dropoff_resolution_mode": "landmark_graph_candidates",
+    "dropoff_text": "请在科技园附近下车。",
+    "map_id": "grid-100x100-seed-0",
+    "map_input_mode": "graph_only",
+    "map_version": "grid-v1-100",
+    "matched_dropoff_entries": [
+      {
+        "aliases": [
+          "科技园区"
+        ],
+        "anchor_coordinates": {
+          "x": 42,
+          "y": 42
+        },
+        "entry_id": "landmark:node_42_42",
+        "entry_type": "landmark",
+        "name": "科技园"
+      }
+    ],
+    "matched_pickup_entries": [],
+    "pickup_candidates": [
+      {
+        "candidate_anchor_links": [],
+        "candidate_ref": "P00",
+        "coordinates": {
+          "x": 68,
+          "y": 41
+        },
+        "manhattan_distance_to_anchors": []
+      },
+      {
+        "candidate_anchor_links": [],
+        "candidate_ref": "P01",
+        "coordinates": {
+          "x": 69,
+          "y": 40
+        },
+        "manhattan_distance_to_anchors": []
+      },
+      {
+        "candidate_anchor_links": [],
+        "candidate_ref": "P02",
+        "coordinates": {
+          "x": 68,
+          "y": 39
+        },
+        "manhattan_distance_to_anchors": []
+      },
+      {
+        "candidate_anchor_links": [],
+        "candidate_ref": "P03",
+        "coordinates": {
+          "x": 70,
+          "y": 43
+        },
+        "manhattan_distance_to_anchors": []
+      },
+      {
+        "candidate_anchor_links": [],
+        "candidate_ref": "P04",
+        "coordinates": {
+          "x": 71,
+          "y": 40
+        },
+        "manhattan_distance_to_anchors": []
+      },
+      {
+        "candidate_anchor_links": [],
+        "candidate_ref": "P05",
+        "coordinates": {
+          "x": 71,
+          "y": 42
+        },
+        "manhattan_distance_to_anchors": []
+      },
+      {
+        "candidate_anchor_links": [],
+        "candidate_ref": "P06",
+        "coordinates": {
+          "x": 66,
+          "y": 42
+        },
+        "manhattan_distance_to_anchors": []
+      },
+      {
+        "candidate_anchor_links": [],
+        "candidate_ref": "P07",
+        "coordinates": {
+          "x": 67,
+          "y": 39
+        },
+        "manhattan_distance_to_anchors": []
+      }
+    ],
+    "pickup_resolution_mode": "graph_only_start_nearest_fallback",
+    "pickup_text": "请在公交站路牌旁、西侧的合法上车点上车。",
+    "schema_version": "route_intent_query_v2",
+    "start_node_id": "node_69_41",
+    "task_id": "task-0000-0009",
+    "task_type": "semantic_road_feature_position",
+    "uses_evaluator_truth": false
+  },
+  "model_revision": "50d427756c6b1b2fe0c0a10f67fbda1fc8e82c1b",
+  "parse_or_inference_error": "StopIteration:",
+  "parsed_intent": {
+    "confidence": 0.9,
+    "dropoff_anchor_ref": "landmark:node_42_42",
+    "dropoff_candidate_ref": "D04",
+    "feature_evidence_refs": [],
+    "pickup_anchor_ref": null,
+    "pickup_candidate_ref": "P06",
+    "relation": "near",
+    "schema_version": "route_intent_candidate_v2",
+    "side": "none",
+    "status": "resolved"
+  },
+  "prompt_version": "r4_intent_prompt_v4_candidate_feature_links",
+  "raw_response": "{\"schema_version\":\"route_intent_candidate_v2\",\"status\":\"resolved\",\"pickup_candidate_ref\":\"P06\",\"dropoff_candidate_ref\":\"D04\",\"pickup_anchor_ref\":null,\"dropoff_anchor_ref\":\"landmark:node_42_42\",\"relation\":\"near\",\"side\":\"none\",\"feature_evidence_refs\":[],\"confidence\":0.9}",
+  "resolved_intent": null,
+  "schema_version": "r4_qwen_local_intent_batch_result_v1",
+  "seed": 0,
+  "status": "invalid_intent",
+  "task_id": "task-0000-0009",
+  "task_type": "semantic_road_feature_position",
+  "usage": {
+    "actual_hardware_billing": "not_applicable_local_inference",
+    "billing": "local_inference_no_API_request",
+    "input_tokens_local_tokenizer": 1393,
+    "output_tokens": null
+  },
+  "validation": {
+    "reason": "intent_output_parse_failed",
+    "valid": false
+  }
+}

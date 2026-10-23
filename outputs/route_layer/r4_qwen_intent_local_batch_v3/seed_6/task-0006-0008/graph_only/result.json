@@ -1,0 +1,514 @@
+{
+  "candidate_ref_resolution": {
+    "dropoff": {
+      "D00": "node_77_47",
+      "D01": "node_78_44",
+      "D02": "node_79_47",
+      "D03": "node_79_49",
+      "D04": "node_80_44",
+      "D05": "node_80_48"
+    },
+    "pickup": {
+      "P00": "node_10_21",
+      "P01": "node_12_17",
+      "P02": "node_12_21",
+      "P03": "node_12_22",
+      "P04": "node_13_18",
+      "P05": "node_13_19",
+      "P06": "node_13_20",
+      "P07": "node_13_23",
+      "P08": "node_15_19",
+      "P09": "node_15_20",
+      "P10": "node_15_21",
+      "P11": "node_16_20"
+    }
+  },
+  "created_at_utc": "2026-10-22T09:21:13.602439+00:00",
+  "decoding": {
+    "max_tokens": 256,
+    "temperature": 0.0,
+    "thinking": false
+  },
+  "evaluation_after_inference": {
+    "both_endpoints_exact_match": false,
+    "dropoff_exact_match": true,
+    "pickup_exact_match": false,
+    "true_dropoff_node_id": "node_79_47",
+    "true_pickup_node_id": "node_13_19",
+    "truth_loaded_after_generation": true
+  },
+  "input_artifacts": {
+    "map_sha256": "d98f602f88f060a638b1cc8c218defda59254dd73bfecf06e0e1ee079b28779b",
+    "model_query_sha256": "6cd3cc59c9721525ffe7d429a5badd73af72d7bb997a1c8613d752bc65298295",
+    "orders_sha256": "4209b5bea5856d7c8fed1068e3ca15622112d34f0077f6ad0678be3a938c3e43",
+    "prompt_sha256": "fe7fd4da887d0177eaf11fd5c77b6ed6915fd8521fdbb09983e5a1c912a3a4d9",
+    "protocol_sha256": "7f32454956dd34dbf201f98e98578cb97309e0bf981e7389ec094705baa205bf"
+  },
+  "input_tokens_local_tokenizer": 2026,
+  "latency_ms": 2150.371,
+  "map_id": "grid-100x100-seed-6",
+  "map_input_mode": "graph_only",
+  "model": "mlx-community/Qwen3-4B-Instruct-2507-4bit",
+  "model_query": {
+    "allowed_feature_refs": [],
+    "allowed_landmark_refs": [
+      "landmark:node_13_20",
+      "landmark:node_79_46"
+    ],
+    "dropoff_candidates": [
+      {
+        "candidate_anchor_links": [
+          {
+            "anchor_ref": "landmark:node_79_46",
+            "entry_type": "landmark",
+            "name": "市民广场",
+            "orientation": null,
+            "relation_to_feature": null,
+            "side_of_road": null
+          }
+        ],
+        "candidate_ref": "D00",
+        "coordinates": {
+          "x": 77,
+          "y": 47
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_79_46",
+            "distance": 3
+          }
+        ]
+      },
+      {
+        "candidate_anchor_links": [
+          {
+            "anchor_ref": "landmark:node_79_46",
+            "entry_type": "landmark",
+            "name": "市民广场",
+            "orientation": null,
+            "relation_to_feature": null,
+            "side_of_road": null
+          }
+        ],
+        "candidate_ref": "D01",
+        "coordinates": {
+          "x": 78,
+          "y": 44
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_79_46",
+            "distance": 3
+          }
+        ]
+      },
+      {
+        "candidate_anchor_links": [
+          {
+            "anchor_ref": "landmark:node_79_46",
+            "entry_type": "landmark",
+            "name": "市民广场",
+            "orientation": null,
+            "relation_to_feature": null,
+            "side_of_road": null
+          }
+        ],
+        "candidate_ref": "D02",
+        "coordinates": {
+          "x": 79,
+          "y": 47
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_79_46",
+            "distance": 1
+          }
+        ]
+      },
+      {
+        "candidate_anchor_links": [
+          {
+            "anchor_ref": "landmark:node_79_46",
+            "entry_type": "landmark",
+            "name": "市民广场",
+            "orientation": null,
+            "relation_to_feature": null,
+            "side_of_road": null
+          }
+        ],
+        "candidate_ref": "D03",
+        "coordinates": {
+          "x": 79,
+          "y": 49
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_79_46",
+            "distance": 3
+          }
+        ]
+      },
+      {
+        "candidate_anchor_links": [
+          {
+            "anchor_ref": "landmark:node_79_46",
+            "entry_type": "landmark",
+            "name": "市民广场",
+            "orientation": null,
+            "relation_to_feature": null,
+            "side_of_road": null
+          }
+        ],
+        "candidate_ref": "D04",
+        "coordinates": {
+          "x": 80,
+          "y": 44
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_79_46",
+            "distance": 3
+          }
+        ]
+      },
+      {
+        "candidate_anchor_links": [
+          {
+            "anchor_ref": "landmark:node_79_46",
+            "entry_type": "landmark",
+            "name": "市民广场",
+            "orientation": null,
+            "relation_to_feature": null,
+            "side_of_road": null
+          }
+        ],
+        "candidate_ref": "D05",
+        "coordinates": {
+          "x": 80,
+          "y": 48
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_79_46",
+            "distance": 3
+          }
+        ]
+      }
+    ],
+    "dropoff_resolution_mode": "landmark_graph_candidates",
+    "dropoff_text": "请在市民广场附近下车。",
+    "map_id": "grid-100x100-seed-6",
+    "map_input_mode": "graph_only",
+    "map_version": "grid-v1-100",
+    "matched_dropoff_entries": [
+      {
+        "aliases": [
+          "广场"
+        ],
+        "anchor_coordinates": {
+          "x": 79,
+          "y": 46
+        },
+        "entry_id": "landmark:node_79_46",
+        "entry_type": "landmark",
+        "name": "市民广场"
+      }
+    ],
+    "matched_pickup_entries": [
+      {
+        "aliases": [
+          "车站"
+        ],
+        "anchor_coordinates": {
+          "x": 13,
+          "y": 20
+        },
+        "entry_id": "landmark:node_13_20",
+        "entry_type": "landmark",
+        "name": "火车站"
+      }
+    ],
+    "pickup_candidates": [
+      {
+        "candidate_anchor_links": [],
+        "candidate_ref": "P00",
+        "coordinates": {
+          "x": 10,
+          "y": 21
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_13_20",
+            "distance": 4
+          }
+        ]
+      },
+      {
+        "candidate_anchor_links": [],
+        "candidate_ref": "P01",
+        "coordinates": {
+          "x": 12,
+          "y": 17
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_13_20",
+            "distance": 4
+          }
+        ]
+      },
+      {
+        "candidate_anchor_links": [
+          {
+            "anchor_ref": "landmark:node_13_20",
+            "entry_type": "landmark",
+            "name": "火车站",
+            "orientation": null,
+            "relation_to_feature": null,
+            "side_of_road": null
+          }
+        ],
+        "candidate_ref": "P02",
+        "coordinates": {
+          "x": 12,
+          "y": 21
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_13_20",
+            "distance": 2
+          }
+        ]
+      },
+      {
+        "candidate_anchor_links": [
+          {
+            "anchor_ref": "landmark:node_13_20",
+            "entry_type": "landmark",
+            "name": "火车站",
+            "orientation": null,
+            "relation_to_feature": null,
+            "side_of_road": null
+          }
+        ],
+        "candidate_ref": "P03",
+        "coordinates": {
+          "x": 12,
+          "y": 22
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_13_20",
+            "distance": 3
+          }
+        ]
+      },
+      {
+        "candidate_anchor_links": [
+          {
+            "anchor_ref": "landmark:node_13_20",
+            "entry_type": "landmark",
+            "name": "火车站",
+            "orientation": null,
+            "relation_to_feature": null,
+            "side_of_road": null
+          }
+        ],
+        "candidate_ref": "P04",
+        "coordinates": {
+          "x": 13,
+          "y": 18
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_13_20",
+            "distance": 2
+          }
+        ]
+      },
+      {
+        "candidate_anchor_links": [
+          {
+            "anchor_ref": "landmark:node_13_20",
+            "entry_type": "landmark",
+            "name": "火车站",
+            "orientation": null,
+            "relation_to_feature": null,
+            "side_of_road": null
+          }
+        ],
+        "candidate_ref": "P05",
+        "coordinates": {
+          "x": 13,
+          "y": 19
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_13_20",
+            "distance": 1
+          }
+        ]
+      },
+      {
+        "candidate_anchor_links": [
+          {
+            "anchor_ref": "landmark:node_13_20",
+            "entry_type": "landmark",
+            "name": "火车站",
+            "orientation": null,
+            "relation_to_feature": null,
+            "side_of_road": null
+          }
+        ],
+        "candidate_ref": "P06",
+        "coordinates": {
+          "x": 13,
+          "y": 20
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_13_20",
+            "distance": 0
+          }
+        ]
+      },
+      {
+        "candidate_anchor_links": [],
+        "candidate_ref": "P07",
+        "coordinates": {
+          "x": 13,
+          "y": 23
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_13_20",
+            "distance": 3
+          }
+        ]
+      },
+      {
+        "candidate_anchor_links": [],
+        "candidate_ref": "P08",
+        "coordinates": {
+          "x": 15,
+          "y": 19
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_13_20",
+            "distance": 3
+          }
+        ]
+      },
+      {
+        "candidate_anchor_links": [
+          {
+            "anchor_ref": "landmark:node_13_20",
+            "entry_type": "landmark",
+            "name": "火车站",
+            "orientation": null,
+            "relation_to_feature": null,
+            "side_of_road": null
+          }
+        ],
+        "candidate_ref": "P09",
+        "coordinates": {
+          "x": 15,
+          "y": 20
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_13_20",
+            "distance": 2
+          }
+        ]
+      },
+      {
+        "candidate_anchor_links": [],
+        "candidate_ref": "P10",
+        "coordinates": {
+          "x": 15,
+          "y": 21
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_13_20",
+            "distance": 3
+          }
+        ]
+      },
+      {
+        "candidate_anchor_links": [],
+        "candidate_ref": "P11",
+        "coordinates": {
+          "x": 16,
+          "y": 20
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_13_20",
+            "distance": 3
+          }
+        ]
+      }
+    ],
+    "pickup_resolution_mode": "landmark_graph_candidates",
+    "pickup_text": "请在火车站附近的合法上车点上车。",
+    "schema_version": "route_intent_query_v2",
+    "start_node_id": "node_39_92",
+    "task_id": "task-0006-0008",
+    "task_type": "semantic_landmark_nearby",
+    "uses_evaluator_truth": false
+  },
+  "model_revision": "50d427756c6b1b2fe0c0a10f67fbda1fc8e82c1b",
+  "parse_or_inference_error": null,
+  "parsed_intent": {
+    "confidence": 0.9,
+    "dropoff_anchor_ref": "landmark:node_79_46",
+    "dropoff_candidate_ref": "D02",
+    "feature_evidence_refs": [],
+    "pickup_anchor_ref": "landmark:node_13_20",
+    "pickup_candidate_ref": "P06",
+    "relation": "near",
+    "schema_version": "route_intent_candidate_v2",
+    "side": "none",
+    "status": "resolved"
+  },
+  "prompt_version": "r4_intent_prompt_v4_candidate_feature_links",
+  "raw_response": "{\"schema_version\":\"route_intent_candidate_v2\",\"status\":\"resolved\",\"pickup_candidate_ref\":\"P06\",\"dropoff_candidate_ref\":\"D02\",\"pickup_anchor_ref\":\"landmark:node_13_20\",\"dropoff_anchor_ref\":\"landmark:node_79_46\",\"relation\":\"near\",\"side\":\"none\",\"feature_evidence_refs\":[],\"confidence\":0.9}",
+  "resolved_intent": {
+    "confidence": 0.9,
+    "dropoff_anchor_ref": "landmark:node_79_46",
+    "dropoff_node_id": "node_79_47",
+    "feature_evidence_refs": [],
+    "pickup_anchor_ref": "landmark:node_13_20",
+    "pickup_node_id": "node_13_20",
+    "relation": "near",
+    "schema_version": "route_intent_v1",
+    "side": "none",
+    "status": "resolved"
+  },
+  "schema_version": "r4_qwen_local_intent_batch_result_v1",
+  "seed": 6,
+  "status": "validated",
+  "task_id": "task-0006-0008",
+  "task_type": "semantic_landmark_nearby",
+  "usage": {
+    "actual_hardware_billing": "not_applicable_local_inference",
+    "billing": "local_inference_no_API_request",
+    "input_tokens_local_tokenizer": 2026,
+    "output_tokens": null
+  },
+  "validation": {
+    "confidence": 0.9,
+    "dropoff_anchor_ref": "landmark:node_79_46",
+    "dropoff_node_id": "node_79_47",
+    "feature_evidence_refs": [],
+    "pickup_anchor_ref": "landmark:node_13_20",
+    "pickup_node_id": "node_13_20",
+    "relation": "near",
+    "resolution_mode": "landmark_graph_candidates",
+    "side": "none",
+    "valid": true
+  }
+}

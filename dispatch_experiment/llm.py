@@ -16,7 +16,7 @@ import subprocess
 import tempfile
 import time
 from pathlib import Path
-from typing import Any, Dict, List, Sequence, Tuple
+from typing import Any, Dict, List, Optional, Sequence, Tuple
 
 from route_experiment.llm_adapter import DeepSeekClient
 from codex_cli_support import (
@@ -934,4 +934,324 @@ def default_codex_cli_direct_assignment(
     *, model: str, trace_dir: Path
 ) -> CodexCliDirectAssignment:
     return CodexCliDirectAssignment(model=model, trace_dir=trace_dir)
+
+
+class CodexCliContextPolicy(CodexCliDirectAssignment):
+    """One-call, bounded policy parameter generator for Agent + optimizer runs."""
+
+    input_policy = "current_snapshot_summary_context_policy_v1"
+
+    def __init__(
+        self,
+        *,
+        model: str,
+        trace_dir: Path,
+        replay_final_path: Path = None,
+    ):
+        super().__init__(model=model, trace_dir=trace_dir)
+        self.schema_path = (
+            Path(__file__).resolve().parent
+            / "schemas"
+            / "codex_context_policy.schema.json"
+        )
+        self.invocation_attempted = False
+        self.replay_final_path = Path(replay_final_path) if replay_final_path else None
+
+    @staticmethod
+    def _validated_parameters(parsed: Any) -> Tuple[Dict[str, Any], Optional[str]]:
+        if not isinstance(parsed, dict):
+            return {}, "final_json_parse_error"
+        base = parsed.get("base")
+        weights = parsed.get("weights")
+        if (
+            isinstance(base, bool) or not isinstance(base, (int, float))
+            or not 120.0 <= float(base) <= 300.0
+            or not isinstance(weights, list) or len(weights) != 7
+            or any(
+                isinstance(value, bool)
+                or not isinstance(value, (int, float))
+                or not -30.0 <= float(value) <= 30.0
+                for value in weights
+            )
+        ):
+            return {}, "policy_values_out_of_bounds"
+        return {"base": float(base), "weights": [float(value) for value in weights]}, None
+
+    def generate(
+        self,
+        *,
+        snapshot_time_sec: float,
+        vehicles: Sequence[Vehicle],
+        orders: Sequence[Order],
+        candidates: Sequence[Candidate],
+        max_wait_sec: float,
+    ) -> Tuple[Dict[str, Any], Dict[str, Any]]:
+        """Propose a single bounded linear filter policy; never assigns orders."""
+        if self.invocation_attempted:
+            return {}, {"status": "call_budget_already_used", "request_made": False}
+        self.invocation_attempted = True
+        self.call_count += 1
+        waiting = [
+            order for order in orders
+            if order.status == "waiting" and order.arrival_time_sec <= snapshot_time_sec
+        ]
+        feasible = [item for item in candidates if item.hard_constraint_ok]
+        idle_count = sum(1 for vehicle in vehicles if vehicle.state == "idle")
+        contested_orders: Dict[str, set] = {}
+        for item in feasible:
+            contested_orders.setdefault(item.order_id, set()).add(item.vehicle_id)
+        waits = [item.predicted_wait_sec for item in feasible if math.isfinite(item.predicted_wait_sec)]
+        etas = [item.pickup_leg.duration_sec for item in feasible if math.isfinite(item.pickup_leg.duration_sec)]
+        snapshot = {
+            "snapshot_time_sec": snapshot_time_sec,
+            "max_pickup_wait_sec": max_wait_sec,
+            "arrived_waiting_order_count": len(waiting),
+            "visible_vehicle_count": len(vehicles),
+            "idle_vehicle_count": idle_count,
+            "hard_feasible_candidate_count": len(feasible),
+            "orders_with_multiple_feasible_vehicles": sum(len(ids) > 1 for ids in contested_orders.values()),
+            "mean_feasible_pickup_wait_sec": (sum(waits) / len(waits)) if waits else None,
+            "mean_feasible_pickup_eta_sec": (sum(etas) / len(etas)) if etas else None,
+        }
+        feature_definition = {
+            "feature_order": [
+                "local_order_density", "local_idle_vehicle_density",
+                "demand_supply_ratio", "commitment_slack", "candidate_eta",
+                "time_context", "vehicle_state_code",
+            ],
+            "feature_ranges": "scaled by the deterministic candidate generator; each is bounded",
+            "policy_formula": "clip(base + sum(weight_i * feature_i), 120, 300) seconds",
+            "selection_rule": "vehicle Agent retains a hard-feasible candidate if predicted pickup wait <= threshold; optimizer then makes the global assignment",
+            "hard_constraints": [
+                "preserve existing commitments",
+                "one vehicle per order and one order per vehicle in a dispatch decision",
+                "maximum pickup wait remains enforced by code",
+                "routes must be reachable",
+            ],
+        }
+        prompt_payload = {"current_observed_snapshot": snapshot, "policy_contract": feature_definition}
+        prompt = (
+            "你是调度策略参数建议器。只根据当前已到达订单和当前车辆汇总提出候选过滤参数。"
+            "这不是最终派单：车辆 Agent 用参数筛选，数学优化器决定匹配。"
+            "不得要求改变任何硬约束，不要推断未来订单。只返回符合 JSON Schema 的 JSON。\n\n"
+            + json.dumps(prompt_payload, ensure_ascii=False, separators=(",", ":"))
+        )
+        if self.replay_final_path is not None:
+            # The replay path reuses a previously captured model response. It
+            # never starts another Codex CLI process and requires byte-identical
+            # prompt content so the decision remains paired to its input.
+            self.invocation_attempted = True
+            final_path = self.replay_final_path
+            stem = final_path.name.removesuffix(".final.json")
+            trace_path = final_path.with_name(stem + ".jsonl")
+            prompt_path = final_path.with_name(stem + ".prompt.txt")
+            if not final_path.exists() or not trace_path.exists() or not prompt_path.exists():
+                self.errors.append("codex_policy_replay_artifact_missing")
+                self.unknown_cost_count += 1
+                record = {
+                    "status": "replay_artifact_missing", "input_policy": self.input_policy,
+                    "replayed_from_existing_call": True, "new_invocation_made": False,
+                    "account_cost_usd": None,
+                }
+                self.last_record = record
+                return {}, record
+            stored_prompt = prompt_path.read_bytes()
+            prompt_bytes = prompt.encode("utf-8")
+            if stored_prompt != prompt_bytes:
+                self.errors.append("codex_policy_replay_prompt_mismatch")
+                self.unknown_cost_count += 1
+                record = {
+                    "status": "replay_prompt_mismatch", "input_policy": self.input_policy,
+                    "replayed_from_existing_call": True, "new_invocation_made": False,
+                    "expected_prompt_sha256": self._sha256(prompt_bytes),
+                    "stored_prompt_sha256": self._sha256(stored_prompt),
+                    "account_cost_usd": None,
+                }
+                self.last_record = record
+                return {}, record
+            stdout = trace_path.read_text(encoding="utf-8")
+            events, audit, parse_errors = self._audit_jsonl(stdout)
+            cost = self._record_codex_usage(audit)
+            final_text = final_path.read_text(encoding="utf-8")
+            final_bytes = final_text.encode("utf-8")
+            try:
+                parsed = json.loads(final_text)
+            except Exception:
+                parsed = None
+            parameters, validation_error = self._validated_parameters(parsed)
+            tool_used = audit["tool_usage_detected"]
+            status = "accepted"
+            if not audit["turn_started_count"]:
+                status, validation_error = "missing_model_turn", "no_turn_started_event"
+            elif tool_used:
+                status, validation_error = "tool_use_invalidated_policy", "codex_cli_tool_event_detected"
+            elif parse_errors:
+                status, validation_error = "codex_cli_event_parse_error", "jsonl_parse_error"
+            elif validation_error:
+                status = "invalid_policy_parameters"
+            if status != "accepted":
+                parameters = {}
+                self.errors.append(validation_error or status)
+            record = {
+                "status": status, "backend": self.backend, "model": self.model,
+                "input_policy": self.input_policy, "codex_cli_version": self.cli_version,
+                "reasoning_effort": self.reasoning_effort, "retry_count": 0,
+                "replayed_from_existing_call": True, "new_invocation_made": False,
+                "request_made": bool(audit["turn_started_count"]),
+                "original_latency_ms": None,
+                "original_latency_status": "not_captured_before_initial_local_interruption",
+                "usage": audit, "usage_source": "replayed_codex_exec_json_trace",
+                "cost_estimate": cost, "account_cost_usd": None,
+                "tool_usage_detected": tool_used, "tool_item_types": audit["tool_item_types"],
+                "tool_policy": self._tool_policy(), "jsonl_parse_errors": parse_errors,
+                "policy_parameters": parameters, "error": validation_error,
+                "prompt_sha256": self._sha256(prompt_bytes),
+                "schema_sha256": self._sha256(self.schema_path.read_bytes()),
+                "prompt_path": str(prompt_path), "trace_jsonl_path": str(trace_path),
+                "trace_jsonl_sha256": self._sha256(stdout.encode("utf-8")),
+                "final_json_path": str(final_path),
+                "final_json_sha256": self._sha256(final_bytes),
+                "event_types": audit["event_types"],
+            }
+            self.last_record = record
+            return parameters, record
+        call_index, paths = reserve_indexed_artifacts(
+            self.trace_dir,
+            "context_policy",
+            (".jsonl", ".final.json", ".prompt.txt"),
+            (".jsonl", ".prompt.txt"),
+            self.trace_index,
+        )
+        self.trace_index = call_index
+        trace_path = paths[".jsonl"]
+        final_path = paths[".final.json"]
+        prompt_path = paths[".prompt.txt"]
+        prompt_path.write_text(prompt, encoding="utf-8")
+        prompt_bytes = prompt.encode("utf-8")
+        schema_bytes = self.schema_path.read_bytes()
+        started = time.perf_counter()
+        stdout = ""
+        stderr = ""
+        process = None
+        try:
+            with tempfile.TemporaryDirectory(prefix="dispatch-codex-policy-") as empty_cwd:
+                command = [
+                    self.codex_executable, "exec", "--json", "--ephemeral",
+                    "--ignore-user-config", "--skip-git-repo-check", "--sandbox", "read-only",
+                    "--model", self.model, "--config",
+                    'model_reasoning_effort="{0}"'.format(self.reasoning_effort),
+                    "--output-schema", str(self.schema_path),
+                    "--output-last-message", str(final_path), "--cd", empty_cwd, "-",
+                ]
+                disable_args = [
+                    argument for feature in CODEX_DISABLED_TOOL_FEATURES
+                    for argument in ("--disable", feature)
+                ]
+                command[-1:-1] = disable_args
+                child_env = os.environ.copy()
+                for name in (
+                    "DEEPSEEK_API_KEY", "DISPATCH_LLM_MODEL", "DISPATCH_LLM_BASE_URL",
+                    "OPENAI_API_KEY", "OPENAI_BASE_URL", "OPENAI_API_BASE",
+                    "OPENAI_ORG_ID", "OPENAI_PROJECT", "CODEX_API_KEY",
+                ):
+                    child_env.pop(name, None)
+                process = subprocess.run(
+                    command, input=prompt, capture_output=True, text=True,
+                    timeout=self.timeout_sec, check=False, cwd=empty_cwd, env=child_env,
+                )
+                stdout = process.stdout or ""
+                stderr = process.stderr or ""
+        except subprocess.TimeoutExpired as error:
+            stdout = error.stdout.decode("utf-8", errors="replace") if isinstance(error.stdout, bytes) else (error.stdout or "")
+            stderr = error.stderr.decode("utf-8", errors="replace") if isinstance(error.stderr, bytes) else (error.stderr or "")
+            elapsed_ms = (time.perf_counter() - started) * 1000.0
+            self.latency_ms += elapsed_ms
+            trace_path.write_text(stdout, encoding="utf-8")
+            _, audit, parse_errors = self._audit_jsonl(stdout)
+            cost = self._record_codex_usage(audit)
+            record = {
+                "status": "codex_cli_timeout", "backend": self.backend, "model": self.model,
+                "input_policy": self.input_policy, "call_index": call_index,
+                "invocation_made": True, "request_made": bool(audit["turn_started_count"]),
+                "retry_count": 0, "latency_ms": elapsed_ms, "codex_cli_version": self.cli_version,
+                "usage": audit, "cost_estimate": cost, "account_cost_usd": None,
+                "tool_policy": self._tool_policy(), "jsonl_parse_errors": parse_errors,
+                "trace_jsonl_path": str(trace_path), "prompt_path": str(prompt_path),
+                "stderr_tail": self._safe_error(stderr),
+            }
+            self.last_record = record
+            return {}, record
+        except Exception as error:
+            elapsed_ms = (time.perf_counter() - started) * 1000.0
+            self.latency_ms += elapsed_ms
+            self.errors.append(self._safe_error(str(error)))
+            trace_path.write_text(stdout, encoding="utf-8")
+            _, audit, parse_errors = self._audit_jsonl(stdout)
+            cost = self._record_codex_usage(audit)
+            record = {
+                "status": "codex_cli_error", "backend": self.backend, "model": self.model,
+                "input_policy": self.input_policy, "call_index": call_index,
+                "invocation_made": True, "request_made": bool(audit["turn_started_count"]),
+                "retry_count": 0, "latency_ms": elapsed_ms, "codex_cli_version": self.cli_version,
+                "error": self._safe_error(str(error)), "usage": audit,
+                "cost_estimate": cost, "account_cost_usd": None,
+                "tool_policy": self._tool_policy(), "jsonl_parse_errors": parse_errors,
+                "trace_jsonl_path": str(trace_path), "prompt_path": str(prompt_path),
+                "stderr_tail": self._safe_error(stderr),
+            }
+            self.last_record = record
+            return {}, record
+
+        elapsed_ms = (time.perf_counter() - started) * 1000.0
+        self.latency_ms += elapsed_ms
+        trace_path.write_text(stdout, encoding="utf-8")
+        events, audit, parse_errors = self._audit_jsonl(stdout)
+        cost = self._record_codex_usage(audit)
+        final_text = final_path.read_text(encoding="utf-8") if final_path.exists() else ""
+        final_bytes = final_text.encode("utf-8")
+        parsed = None
+        try:
+            parsed = json.loads(final_text)
+        except Exception:
+            pass
+        tool_used = audit["tool_usage_detected"]
+        parameters: Dict[str, Any] = {}
+        error_detail = None
+        if process is None or process.returncode != 0:
+            status = "codex_cli_error"
+            error_detail = "codex_cli_nonzero_exit"
+        elif tool_used:
+            status = "tool_use_invalidated_policy"
+            error_detail = "codex_cli_tool_event_detected"
+        elif parse_errors:
+            status = "codex_cli_event_parse_error"
+            error_detail = "jsonl_parse_error"
+        elif not isinstance(parsed, dict):
+            status = "invalid_policy_json"
+            error_detail = "final_json_parse_error"
+        else:
+            parameters, error_detail = self._validated_parameters(parsed)
+            status = "invalid_policy_parameters" if error_detail else "accepted"
+        if status != "accepted":
+            self.errors.append(error_detail or status)
+        record = {
+            "status": status, "backend": self.backend, "model": self.model,
+            "input_policy": self.input_policy, "call_index": call_index,
+            "reasoning_effort": self.reasoning_effort, "codex_cli_version": self.cli_version,
+            "invocation_made": True, "request_made": bool(audit["turn_started_count"]),
+            "cli_exit_code": process.returncode if process else None, "retry_count": 0,
+            "latency_ms": elapsed_ms, "usage": audit, "usage_source": "codex_exec_json_turn_completed_event",
+            "cost_estimate": cost, "account_cost_usd": None,
+            "tool_policy": self._tool_policy(), "tool_usage_detected": tool_used,
+            "tool_item_types": audit["tool_item_types"], "jsonl_parse_errors": parse_errors,
+            "policy_parameters": parameters, "error": error_detail,
+            "prompt_sha256": self._sha256(prompt_bytes), "schema_sha256": self._sha256(schema_bytes),
+            "prompt_path": str(prompt_path), "trace_jsonl_path": str(trace_path),
+            "trace_jsonl_sha256": self._sha256(stdout.encode("utf-8")),
+            "final_json_path": str(final_path) if final_path.exists() else None,
+            "final_json_sha256": self._sha256(final_bytes) if final_path.exists() else None,
+            "stderr_tail": self._safe_error(stderr),
+        }
+        self.last_record = record
+        return parameters, record
 

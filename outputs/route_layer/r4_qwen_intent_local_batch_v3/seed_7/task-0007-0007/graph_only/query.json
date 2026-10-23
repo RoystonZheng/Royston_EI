@@ -1,0 +1,247 @@
+{
+  "schema_version": "route_intent_query_v2",
+  "task_id": "task-0007-0007",
+  "task_type": "semantic_road_feature_position",
+  "map_id": "grid-100x100-seed-7",
+  "map_version": "grid-v1-100",
+  "map_input_mode": "graph_only",
+  "start_node_id": "node_71_71",
+  "pickup_text": "请在公交站路牌旁、西侧的合法上车点上车。",
+  "dropoff_text": "请在体育馆东门附近下车。",
+  "pickup_resolution_mode": "graph_only_start_nearest_fallback",
+  "dropoff_resolution_mode": "landmark_graph_candidates",
+  "matched_pickup_entries": [],
+  "matched_dropoff_entries": [
+    {
+      "entry_id": "landmark:node_53_5",
+      "entry_type": "landmark",
+      "name": "体育馆东门",
+      "aliases": [
+        "体育馆东侧入口"
+      ],
+      "anchor_coordinates": {
+        "x": 53,
+        "y": 5
+      }
+    }
+  ],
+  "pickup_candidates": [
+    {
+      "candidate_ref": "P00",
+      "coordinates": {
+        "x": 71,
+        "y": 71
+      },
+      "manhattan_distance_to_anchors": [],
+      "candidate_anchor_links": []
+    },
+    {
+      "candidate_ref": "P01",
+      "coordinates": {
+        "x": 70,
+        "y": 71
+      },
+      "manhattan_distance_to_anchors": [],
+      "candidate_anchor_links": []
+    },
+    {
+      "candidate_ref": "P02",
+      "coordinates": {
+        "x": 72,
+        "y": 71
+      },
+      "manhattan_distance_to_anchors": [],
+      "candidate_anchor_links": []
+    },
+    {
+      "candidate_ref": "P03",
+      "coordinates": {
+        "x": 69,
+        "y": 71
+      },
+      "manhattan_distance_to_anchors": [],
+      "candidate_anchor_links": []
+    },
+    {
+      "candidate_ref": "P04",
+      "coordinates": {
+        "x": 72,
+        "y": 70
+      },
+      "manhattan_distance_to_anchors": [],
+      "candidate_anchor_links": []
+    },
+    {
+      "candidate_ref": "P05",
+      "coordinates": {
+        "x": 69,
+        "y": 72
+      },
+      "manhattan_distance_to_anchors": [],
+      "candidate_anchor_links": []
+    },
+    {
+      "candidate_ref": "P06",
+      "coordinates": {
+        "x": 70,
+        "y": 69
+      },
+      "manhattan_distance_to_anchors": [],
+      "candidate_anchor_links": []
+    },
+    {
+      "candidate_ref": "P07",
+      "coordinates": {
+        "x": 70,
+        "y": 73
+      },
+      "manhattan_distance_to_anchors": [],
+      "candidate_anchor_links": []
+    }
+  ],
+  "dropoff_candidates": [
+    {
+      "candidate_ref": "D00",
+      "coordinates": {
+        "x": 51,
+        "y": 4
+      },
+      "manhattan_distance_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_53_5",
+          "distance": 3
+        }
+      ],
+      "candidate_anchor_links": [
+        {
+          "anchor_ref": "landmark:node_53_5",
+          "entry_type": "landmark",
+          "name": "体育馆东门",
+          "side_of_road": null,
+          "orientation": null,
+          "relation_to_feature": null
+        }
+      ]
+    },
+    {
+      "candidate_ref": "D01",
+      "coordinates": {
+        "x": 52,
+        "y": 6
+      },
+      "manhattan_distance_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_53_5",
+          "distance": 2
+        }
+      ],
+      "candidate_anchor_links": [
+        {
+          "anchor_ref": "landmark:node_53_5",
+          "entry_type": "landmark",
+          "name": "体育馆东门",
+          "side_of_road": null,
+          "orientation": null,
+          "relation_to_feature": null
+        }
+      ]
+    },
+    {
+      "candidate_ref": "D02",
+      "coordinates": {
+        "x": 53,
+        "y": 2
+      },
+      "manhattan_distance_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_53_5",
+          "distance": 3
+        }
+      ],
+      "candidate_anchor_links": [
+        {
+          "anchor_ref": "landmark:node_53_5",
+          "entry_type": "landmark",
+          "name": "体育馆东门",
+          "side_of_road": null,
+          "orientation": null,
+          "relation_to_feature": null
+        }
+      ]
+    },
+    {
+      "candidate_ref": "D03",
+      "coordinates": {
+        "x": 54,
+        "y": 4
+      },
+      "manhattan_distance_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_53_5",
+          "distance": 2
+        }
+      ],
+      "candidate_anchor_links": [
+        {
+          "anchor_ref": "landmark:node_53_5",
+          "entry_type": "landmark",
+          "name": "体育馆东门",
+          "side_of_road": null,
+          "orientation": null,
+          "relation_to_feature": null
+        }
+      ]
+    },
+    {
+      "candidate_ref": "D04",
+      "coordinates": {
+        "x": 55,
+        "y": 4
+      },
+      "manhattan_distance_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_53_5",
+          "distance": 3
+        }
+      ],
+      "candidate_anchor_links": [
+        {
+          "anchor_ref": "landmark:node_53_5",
+          "entry_type": "landmark",
+          "name": "体育馆东门",
+          "side_of_road": null,
+          "orientation": null,
+          "relation_to_feature": null
+        }
+      ]
+    },
+    {
+      "candidate_ref": "D05",
+      "coordinates": {
+        "x": 55,
+        "y": 6
+      },
+      "manhattan_distance_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_53_5",
+          "distance": 3
+        }
+      ],
+      "candidate_anchor_links": [
+        {
+          "anchor_ref": "landmark:node_53_5",
+          "entry_type": "landmark",
+          "name": "体育馆东门",
+          "side_of_road": null,
+          "orientation": null,
+          "relation_to_feature": null
+        }
+      ]
+    }
+  ],
+  "allowed_feature_refs": [],
+  "allowed_landmark_refs": [
+    "landmark:node_53_5"
+  ],
+  "uses_evaluator_truth": false
+}

@@ -1,0 +1,399 @@
+{
+  "candidate_ref_resolution": {
+    "dropoff": {
+      "D00": "node_74_66",
+      "D01": "node_76_64",
+      "D02": "node_76_65",
+      "D03": "node_76_66",
+      "D04": "node_77_68",
+      "D05": "node_78_66"
+    },
+    "pickup": {
+      "P00": "node_5_80",
+      "P01": "node_6_80",
+      "P02": "node_91_31",
+      "P03": "node_92_31"
+    }
+  },
+  "created_at_utc": "2026-10-22T09:16:30.396193+00:00",
+  "decoding": {
+    "max_tokens": 256,
+    "temperature": 0.0,
+    "thinking": false
+  },
+  "evaluation_after_inference": {
+    "both_endpoints_exact_match": false,
+    "dropoff_exact_match": false,
+    "pickup_exact_match": false,
+    "true_dropoff_node_id": "node_76_66",
+    "true_pickup_node_id": "node_5_80",
+    "truth_loaded_after_generation": true
+  },
+  "input_artifacts": {
+    "map_sha256": "8230220e109467546e652245ff47429183bfb32f8a7e2c1db15d9108ac4f0152",
+    "model_query_sha256": "08b7d75971fc097436683c0d3a7da7d5a02baf97c5ca6faca3c3702b3928162c",
+    "orders_sha256": "098a937b03fb8680e2a4e6a092b103f60b4638426b557673fbc6c484b7156cf1",
+    "prompt_sha256": "d5b4933d9ba01ba88ec3429e862056b830cb38a6d41d64a7cca28b91e54f419c",
+    "protocol_sha256": "12412cdfa111a7120fe2ad8c6978e2103429b71766bc2e3b190fdc34eb66aea9"
+  },
+  "input_tokens_local_tokenizer": 1722,
+  "latency_ms": 2009.483,
+  "map_id": "grid-100x100-seed-3",
+  "map_input_mode": "road_feature_protocol_v1",
+  "model": "mlx-community/Qwen3-4B-Instruct-2507-4bit",
+  "model_query": {
+    "allowed_feature_refs": [
+      "feature:pole_05",
+      "feature:pole_10"
+    ],
+    "allowed_landmark_refs": [
+      "landmark:node_77_66"
+    ],
+    "dropoff_candidates": [
+      {
+        "candidate_anchor_links": [
+          {
+            "anchor_ref": "landmark:node_77_66",
+            "entry_type": "landmark",
+            "name": "会展中心",
+            "orientation": null,
+            "relation_to_feature": null,
+            "side_of_road": null
+          }
+        ],
+        "candidate_ref": "D00",
+        "coordinates": {
+          "x": 74,
+          "y": 66
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_77_66",
+            "distance": 3
+          }
+        ]
+      },
+      {
+        "candidate_anchor_links": [
+          {
+            "anchor_ref": "landmark:node_77_66",
+            "entry_type": "landmark",
+            "name": "会展中心",
+            "orientation": null,
+            "relation_to_feature": null,
+            "side_of_road": null
+          }
+        ],
+        "candidate_ref": "D01",
+        "coordinates": {
+          "x": 76,
+          "y": 64
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_77_66",
+            "distance": 3
+          }
+        ]
+      },
+      {
+        "candidate_anchor_links": [
+          {
+            "anchor_ref": "landmark:node_77_66",
+            "entry_type": "landmark",
+            "name": "会展中心",
+            "orientation": null,
+            "relation_to_feature": null,
+            "side_of_road": null
+          }
+        ],
+        "candidate_ref": "D02",
+        "coordinates": {
+          "x": 76,
+          "y": 65
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_77_66",
+            "distance": 2
+          }
+        ]
+      },
+      {
+        "candidate_anchor_links": [
+          {
+            "anchor_ref": "landmark:node_77_66",
+            "entry_type": "landmark",
+            "name": "会展中心",
+            "orientation": null,
+            "relation_to_feature": null,
+            "side_of_road": null
+          }
+        ],
+        "candidate_ref": "D03",
+        "coordinates": {
+          "x": 76,
+          "y": 66
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_77_66",
+            "distance": 1
+          }
+        ]
+      },
+      {
+        "candidate_anchor_links": [
+          {
+            "anchor_ref": "landmark:node_77_66",
+            "entry_type": "landmark",
+            "name": "会展中心",
+            "orientation": null,
+            "relation_to_feature": null,
+            "side_of_road": null
+          }
+        ],
+        "candidate_ref": "D04",
+        "coordinates": {
+          "x": 77,
+          "y": 68
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_77_66",
+            "distance": 2
+          }
+        ]
+      },
+      {
+        "candidate_anchor_links": [
+          {
+            "anchor_ref": "landmark:node_77_66",
+            "entry_type": "landmark",
+            "name": "会展中心",
+            "orientation": null,
+            "relation_to_feature": null,
+            "side_of_road": null
+          }
+        ],
+        "candidate_ref": "D05",
+        "coordinates": {
+          "x": 78,
+          "y": 66
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_77_66",
+            "distance": 1
+          }
+        ]
+      }
+    ],
+    "dropoff_resolution_mode": "landmark_graph_candidates",
+    "dropoff_text": "请在会展中心附近下车。",
+    "map_id": "grid-100x100-seed-3",
+    "map_input_mode": "road_feature_protocol_v1",
+    "map_version": "grid-v1-100",
+    "matched_dropoff_entries": [
+      {
+        "aliases": [
+          "展览中心"
+        ],
+        "anchor_coordinates": {
+          "x": 77,
+          "y": 66
+        },
+        "entry_id": "landmark:node_77_66",
+        "entry_type": "landmark",
+        "name": "会展中心"
+      }
+    ],
+    "matched_pickup_entries": [
+      {
+        "aliases": [
+          "E号电线杆",
+          "电杆E"
+        ],
+        "anchor_coordinates": {
+          "x": 5,
+          "y": 80
+        },
+        "entry_id": "feature:pole_05",
+        "entry_type": "utility_pole",
+        "name": "电线杆E",
+        "orientation": "toward_east",
+        "side_of_road": "west_side"
+      },
+      {
+        "aliases": [
+          "E号电线杆",
+          "电杆E"
+        ],
+        "anchor_coordinates": {
+          "x": 91,
+          "y": 31
+        },
+        "entry_id": "feature:pole_10",
+        "entry_type": "utility_pole",
+        "name": "电线杆E",
+        "orientation": "toward_east",
+        "side_of_road": "west_side"
+      }
+    ],
+    "pickup_candidates": [
+      {
+        "candidate_anchor_links": [
+          {
+            "anchor_ref": "feature:pole_05",
+            "entry_type": "utility_pole",
+            "name": "电线杆E",
+            "orientation": "toward_east",
+            "relation_to_feature": "feature_side",
+            "side_of_road": "west_side"
+          }
+        ],
+        "candidate_ref": "P00",
+        "coordinates": {
+          "x": 5,
+          "y": 80
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "feature:pole_05",
+            "distance": 0
+          },
+          {
+            "anchor_ref": "feature:pole_10",
+            "distance": 135
+          }
+        ],
+        "relation_to_feature": "feature_side"
+      },
+      {
+        "candidate_anchor_links": [
+          {
+            "anchor_ref": "feature:pole_05",
+            "entry_type": "utility_pole",
+            "name": "电线杆E",
+            "orientation": "toward_east",
+            "relation_to_feature": "opposite_side",
+            "side_of_road": "west_side"
+          }
+        ],
+        "candidate_ref": "P01",
+        "coordinates": {
+          "x": 6,
+          "y": 80
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "feature:pole_05",
+            "distance": 1
+          },
+          {
+            "anchor_ref": "feature:pole_10",
+            "distance": 134
+          }
+        ],
+        "relation_to_feature": "opposite_side"
+      },
+      {
+        "candidate_anchor_links": [
+          {
+            "anchor_ref": "feature:pole_10",
+            "entry_type": "utility_pole",
+            "name": "电线杆E",
+            "orientation": "toward_east",
+            "relation_to_feature": "feature_side",
+            "side_of_road": "west_side"
+          }
+        ],
+        "candidate_ref": "P02",
+        "coordinates": {
+          "x": 91,
+          "y": 31
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "feature:pole_05",
+            "distance": 135
+          },
+          {
+            "anchor_ref": "feature:pole_10",
+            "distance": 0
+          }
+        ],
+        "relation_to_feature": "feature_side"
+      },
+      {
+        "candidate_anchor_links": [
+          {
+            "anchor_ref": "feature:pole_10",
+            "entry_type": "utility_pole",
+            "name": "电线杆E",
+            "orientation": "toward_east",
+            "relation_to_feature": "opposite_side",
+            "side_of_road": "west_side"
+          }
+        ],
+        "candidate_ref": "P03",
+        "coordinates": {
+          "x": 92,
+          "y": 31
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "feature:pole_05",
+            "distance": 136
+          },
+          {
+            "anchor_ref": "feature:pole_10",
+            "distance": 1
+          }
+        ],
+        "relation_to_feature": "opposite_side"
+      }
+    ],
+    "pickup_resolution_mode": "road_feature_relation",
+    "pickup_text": "请在电线杆E旁、西侧的合法上车点上车。",
+    "schema_version": "route_intent_query_v2",
+    "start_node_id": "node_11_52",
+    "task_id": "task-0003-0005",
+    "task_type": "semantic_road_feature_position",
+    "uses_evaluator_truth": false
+  },
+  "model_revision": "50d427756c6b1b2fe0c0a10f67fbda1fc8e82c1b",
+  "parse_or_inference_error": null,
+  "parsed_intent": {
+    "confidence": 0.98,
+    "dropoff_anchor_ref": "landmark:node_77_66",
+    "dropoff_candidate_ref": "D03",
+    "feature_evidence_refs": [
+      "feature:pole_05"
+    ],
+    "pickup_anchor_ref": "feature:pole_05",
+    "pickup_candidate_ref": "P00",
+    "relation": "near",
+    "schema_version": "route_intent_candidate_v2",
+    "side": "none",
+    "status": "resolved"
+  },
+  "prompt_version": "r4_intent_prompt_v4_candidate_feature_links",
+  "raw_response": "{\"schema_version\":\"route_intent_candidate_v2\",\"status\":\"resolved\",\"pickup_candidate_ref\":\"P00\",\"dropoff_candidate_ref\":\"D03\",\"pickup_anchor_ref\":\"feature:pole_05\",\"dropoff_anchor_ref\":\"landmark:node_77_66\",\"relation\":\"near\",\"side\":\"none\",\"feature_evidence_refs\":[\"feature:pole_05\"],\"confidence\":0.98}",
+  "resolved_intent": null,
+  "schema_version": "r4_qwen_local_intent_batch_result_v1",
+  "seed": 3,
+  "status": "invalid_intent",
+  "task_id": "task-0003-0005",
+  "task_type": "semantic_road_feature_position",
+  "usage": {
+    "actual_hardware_billing": "not_applicable_local_inference",
+    "billing": "local_inference_no_API_request",
+    "input_tokens_local_tokenizer": 1722,
+    "output_tokens": null
+  },
+  "validation": {
+    "reason": "intent_pickup_candidate_relation_mismatch",
+    "valid": false
+  }
+}

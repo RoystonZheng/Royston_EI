@@ -1,0 +1,51 @@
+{
+  "api_calls_made_by_this_preflight": 0,
+  "authorization": "up to 8 additional sequential one-step requests; zero retry; stop on tool event, illegal action, give_up, or call error",
+  "authorization_request_limit_is_separate_from_route_action_budget": true,
+  "experiment_id": "r4_codex_independent_8x8_pilot_v2",
+  "initial_state_after_prior_run": {
+    "allowed_directions": [
+      "E"
+    ],
+    "can_complete_with_authorized_requests": false,
+    "current_node": "node_5_7",
+    "dropoff_node": "node_6_2",
+    "minimum_remaining_moves": 16,
+    "pickup_node": "node_1_2",
+    "requests_authorized_in_this_continuation": 8,
+    "route_action_budget_remaining": 23,
+    "visited_nodes": [
+      "node_0_5",
+      "node_0_6",
+      "node_1_6",
+      "node_1_7",
+      "node_2_7",
+      "node_3_7",
+      "node_4_7",
+      "node_4_6",
+      "node_5_6",
+      "node_5_7"
+    ]
+  },
+  "map_equivalence_audit": {
+    "cost_mismatches": [],
+    "expected_directed_edge_count": 205,
+    "expected_semantics_sha256": "a187b085d460ead1d47bbfbf9f57d287661863de905d7ff2928ded47326fcc6f",
+    "invalid_codes": [],
+    "missing_directed_edges": [],
+    "passed": true,
+    "recovered_directed_edge_count": 205,
+    "recovered_semantics_sha256": "a187b085d460ead1d47bbfbf9f57d287661863de905d7ff2928ded47326fcc6f",
+    "unexpected_directed_edges": []
+  },
+  "model": "gpt-5.6-luna",
+  "parent_requests_already_spent": 8,
+  "parent_run": "outputs/route_layer/r4_codex_pilot_continuation_v1",
+  "prior_smoke_result_sha256": "ef888aed348f032a691e3c4c95bb953b8dc34d86f0ab7ab3d475bf9c7d0ad84e",
+  "reasoning_effort": "low",
+  "retry_count": 0,
+  "route_action_budget_inherited_from_prior_prompt": 32,
+  "schema_version": "r4_codex_pilot_continuation_manifest_v2",
+  "source_preflight_sha256": "028b932350949c9a673730b041dc615247e87b45a9bfe2a77635dc74bb6866a0",
+  "status": "offline_preflight_passed_no_model_request"
+}

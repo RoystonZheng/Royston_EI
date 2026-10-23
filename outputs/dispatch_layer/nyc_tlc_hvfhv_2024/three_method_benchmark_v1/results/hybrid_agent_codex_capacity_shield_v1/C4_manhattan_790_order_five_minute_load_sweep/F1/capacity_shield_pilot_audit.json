@@ -1,0 +1,175 @@
+{
+  "schema_version": "dispatch_capacity_shield_pilot_audit_v1",
+  "created_date": "2026-10-23",
+  "case_id": "C4_manhattan_790_order_five_minute_load_sweep",
+  "fleet_id": "F1",
+  "seed": 0,
+  "status": "complete_single_seed_paired_mechanism_pilot_not_formal_performance_result",
+  "checks": {
+    "same_frozen_inputs": true,
+    "same_codex_prompt_hash": true,
+    "same_codex_parameters": true,
+    "D6_reused_D7_response_without_new_call": true,
+    "D7_one_live_request_no_retry": true,
+    "both_complete_simulations": true,
+    "all_round_validators_valid": true,
+    "no_hard_constraint_errors": true,
+    "D7_capacity_preserved_every_round": true,
+    "capacity_shield_activated_at_least_once": true
+  },
+  "input_hashes": {
+    "scenario_json": "f61a787ec2bb2a8d2eadb719d33755784ad868710dde3727540671e48036909e",
+    "orders_json": "b4431ba0c6c47209f4d6d0c1093e5755769402d4e0b5f0c5c4034ebdf51decc1",
+    "zone_od_cost_matrix": "c9834f243b351b9dbc1cb7e1baefeac92ec50d87aeb65f9176af6ffd02b85dd3"
+  },
+  "scenario_fingerprint_sha256": "a53d0b8bf7bb54084d976c7ee7c4e4916939a226ffa4d94f84e58855d4a9787b",
+  "round_counts": {
+    "D6": 572,
+    "D7": 571
+  },
+  "validator_invalid_rounds": {
+    "D6": 0,
+    "D7": 0
+  },
+  "hard_constraint_error_count": 0,
+  "capacity_shield": {
+    "audited_rounds": 571,
+    "capacity_loss_before_shield_rounds": 1,
+    "activated_rounds": 1,
+    "total_restored_edges": 1,
+    "activation_records": [
+      {
+        "dispatch_round_id": "round-0002",
+        "snapshot_time_sec": 2.0,
+        "enabled": true,
+        "full_hard_feasible_max_matching": 5,
+        "filtered_max_matching_before_shield": 4,
+        "max_matching_after_shield": 5,
+        "restored_candidate_count": 1,
+        "restored_candidate_ids": [
+          "round-0002__C4-F1-007__raw/fhvhv_tripdata_2024-01.parquet#12608365"
+        ],
+        "restoration_priority": [
+          "smallest_positive_wait_minus_context_threshold",
+          "predicted_wait_sec_ascending",
+          "empty_distance_m_ascending",
+          "candidate_id_ascending"
+        ],
+        "capacity_preserved": true
+      }
+    ],
+    "capacity_preserved_every_round": true,
+    "scope": "per_dispatch_snapshot_maximum_matching_cardinality_only"
+  },
+  "codex": {
+    "model": "gpt-5.6-luna",
+    "reasoning_effort": "low",
+    "new_requests_for_D7": 1,
+    "new_requests_for_D6_replay": 0,
+    "unique_new_requests_for_pair": 1,
+    "prompt_sha256_D6": "a2cb37d3049cf81714fabdefb5559228359d8b8437b23d04a4b54b543ecb5db3",
+    "prompt_sha256_D7": "a2cb37d3049cf81714fabdefb5559228359d8b8437b23d04a4b54b543ecb5db3",
+    "input_tokens": 13451,
+    "cached_input_tokens": 0,
+    "output_tokens": 210,
+    "total_tokens": 13661,
+    "standard_credit_equivalent": 0.073555,
+    "api_rate_card_equivalent_usd": 0.0029422000000000003,
+    "actual_account_charge_usd": null,
+    "tool_usage_detected": false,
+    "retry_count": 0
+  },
+  "D6_summary": {
+    "experiment_run_id": "run-seed-0",
+    "method_name": "D6_agent_codex_context_optimizer",
+    "seed": 0,
+    "map_id": "nyc_tlc_zone_od_proxy_v1",
+    "vehicle_count": 12,
+    "order_count": 790,
+    "served_orders": 13,
+    "unserved_orders": 777,
+    "cancelled_orders": 0,
+    "service_rate": 0.016455696202531647,
+    "average_pickup_wait_sec": 151.16551236782334,
+    "p95_pickup_wait_sec": 295.0,
+    "max_pickup_wait_sec": 295.0,
+    "total_empty_distance_m": 8650.758303908518,
+    "total_energy_kwh": 15.500396350063534,
+    "total_dispatch_rounds": 572,
+    "total_llm_calls": 1,
+    "total_llm_input_tokens": 13451,
+    "total_llm_cached_input_tokens": 0,
+    "total_llm_output_tokens": 210,
+    "total_llm_tokens": 13661,
+    "llm_usage_status": "available_best_effort",
+    "total_codex_cli_invocations": 1,
+    "total_api_cost": null,
+    "total_api_cost_usd": null,
+    "total_codex_standard_credit_equivalent": 0.073555,
+    "total_api_equivalent_usd": 0.0029422000000000003,
+    "codex_cost_estimate_status": "estimated_from_official_standard_rate_card",
+    "total_decision_time_ms": 17425.005796000016,
+    "optimizer_time_ms": 2.4211309999842,
+    "candidate_count_before_filter": 2043488,
+    "candidate_count_after_filter": 28,
+    "fallback_count": 5,
+    "commitment_violations": 0,
+    "status_counts": {
+      "completed": 13,
+      "unserved": 777
+    }
+  },
+  "D7_summary": {
+    "experiment_run_id": "run-seed-0",
+    "method_name": "D7_agent_codex_capacity_shield_optimizer",
+    "seed": 0,
+    "map_id": "nyc_tlc_zone_od_proxy_v1",
+    "vehicle_count": 12,
+    "order_count": 790,
+    "served_orders": 13,
+    "unserved_orders": 777,
+    "cancelled_orders": 0,
+    "service_rate": 0.016455696202531647,
+    "average_pickup_wait_sec": 163.26842117617213,
+    "p95_pickup_wait_sec": 295.0,
+    "max_pickup_wait_sec": 295.0,
+    "total_empty_distance_m": 9437.447376451188,
+    "total_energy_kwh": 15.947904490641214,
+    "total_dispatch_rounds": 571,
+    "total_llm_calls": 1,
+    "total_llm_input_tokens": 13451,
+    "total_llm_cached_input_tokens": 0,
+    "total_llm_output_tokens": 210,
+    "total_llm_tokens": 13661,
+    "llm_usage_status": "available_best_effort",
+    "total_codex_cli_invocations": 1,
+    "total_api_cost": null,
+    "total_api_cost_usd": null,
+    "total_codex_standard_credit_equivalent": 0.073555,
+    "total_api_equivalent_usd": 0.0029422000000000003,
+    "codex_cost_estimate_status": "estimated_from_official_standard_rate_card",
+    "total_decision_time_ms": 52753.30849799999,
+    "optimizer_time_ms": 3.2100479999392917,
+    "candidate_count_before_filter": 1953846,
+    "candidate_count_after_filter": 28,
+    "fallback_count": 5,
+    "commitment_violations": 0,
+    "status_counts": {
+      "completed": 13,
+      "unserved": 777
+    }
+  },
+  "artifacts": {
+    "D6_result_sha256": "856d32506159e6736dcc443580691d88d435efc15a7cd9c0cfe6fc013ca03429",
+    "D7_result_sha256": "fafd0a5033cb9584e98bf68a5bb9e113e2da135a018bc9e9826136ac8c61bbbc",
+    "Codex_prompt_sha256": "a2cb37d3049cf81714fabdefb5559228359d8b8437b23d04a4b54b543ecb5db3",
+    "Codex_trace_sha256": "036b7d162e2b09deab96943c7f0fa624ab1690c77eb3f2ebed7d96978d2dc3fa",
+    "Codex_final_response_sha256": "bbbcf86c038b8264e25f8edd050e5432d4eba996ce622dabcfa13f57f9f3bfb1"
+  },
+  "limitations": [
+    "One fixed TLC request window, one synthetic fleet configuration, and one seed do not support a performance conclusion or generalization to NYC operations.",
+    "The shield preserves maximum matching cardinality for each current dispatch snapshot; it does not guarantee end-to-end service over the full simulation horizon.",
+    "Pickup distances, vehicle positions, and energy are proxies rather than observed NYC fleet operations.",
+    "Codex JSONL usage supports a rate-card equivalent estimate, not proof of actual account billing."
+  ]
+}

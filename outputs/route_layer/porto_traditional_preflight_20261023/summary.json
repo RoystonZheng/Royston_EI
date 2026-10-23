@@ -1,0 +1,89 @@
+{
+  "status": "static_traditional_dijkstra_preflight_pilot",
+  "formal_experiment": false,
+  "created_at_local_date": "2026-10-23",
+  "algorithm": "directed Dijkstra with via-node no_*/only_* turn restrictions",
+  "candidate_link_objective": "shortest OSM segment distance",
+  "fixed_order_route_objective": "estimated free-flow time using fixed highway-class speeds",
+  "fixed_orders": {
+    "vehicles": 10,
+    "orders": 100,
+    "route_legs": 200,
+    "reachable_route_legs": 190,
+    "unreachable_or_unmatched_route_legs": 10,
+    "endpoint_snap_failures": 0,
+    "endpoint_mix": {
+      "candidate_to_candidate": 70,
+      "one_candidate_one_fuzzy": 15,
+      "two_fuzzy": 15,
+      "note": "The 30% internal split is a pilot assumption; not frozen for formal runs."
+    }
+  },
+  "candidate_links": {
+    "candidate_points": 30,
+    "ordered_pairs_including_self": 900,
+    "reachable_under_applied_restrictions": 871,
+    "unreachable_or_unmatched": 29
+  },
+  "graph": {
+    "osm_xml_nodes": 31460,
+    "osm_highway_ways": 7278,
+    "routable_ways_after_access_and_class_filter": 1406,
+    "excluded_access_ways": 8,
+    "directed_graph_nodes": 5981,
+    "directed_graph_arcs": 8531,
+    "physical_segments_in_fence": 6331,
+    "mapped_signal_nodes_in_fence": 395,
+    "mapped_signal_nodes_on_routable_graph": 385,
+    "road_feature_nodes_for_fuzzy_sampling": 1527,
+    "turn_restriction_relations": 121,
+    "supported_via_node_turn_restrictions": 98,
+    "unsupported_via_way_restrictions": 2,
+    "conditional_restriction_relations_not_applied": 0,
+    "restriction_relations_exempting_motorcar": 0,
+    "restriction_types": {
+      "no_left_turn": 50,
+      "no_right_turn": 7,
+      "no_straight_on": 1,
+      "no_u_turn": 22,
+      "only_left_turn": 5,
+      "only_right_turn": 13,
+      "only_straight_on": 23
+    }
+  },
+  "routing_restrictions": {
+    "applied_via_node_relations": 97,
+    "unsupported_via_way_relations": 2,
+    "conditional_relations_not_applied": 0,
+    "turn_restriction_relations_total": 121
+  },
+  "source_files": {
+    "package": "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/porto_hybrid_v1/map_import/porto-map-order-package-v1.json",
+    "package_sha256": "06d79a142b4d341da4569681f610bec13b32a299f883f2f60b2f5c7e72cd6103",
+    "osm": "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/porto_hybrid_v1/raw/osm/porto_candidate.osm",
+    "osm_sha256": "059375a23441dea3a24374eaa24fc73adfd15a83b0354ba72a9c8d9f327d8fa1"
+  },
+  "provenance": {
+    "demand_package_semantics": "historical_taxi_trip_proxy",
+    "demand_period": "2013-2014",
+    "orders_are_synthetic_fixed_pilot_draws_from_aggregate_heat": true,
+    "traffic_data_or_dynamic_simulation_used": false,
+    "sumo_or_traci_used": false
+  },
+  "limitations": [
+    "This run is a static algorithm preflight, not the dynamic fixed-fleet experiment.",
+    "OSM point matching uses nearest routable node within 300 m; final experiments should bind endpoints to directed links and SUMO connections.",
+    "Via-node turn restrictions are applied, but via-way turn restrictions are not enforced; routes are not certified legal.",
+    "Free-flow speed is an explicit highway-class estimate; mapped signal phase, congestion, vehicle interactions, planning delay, and actual pass-through time are absent.",
+    "The 15/15 split of the 30% fuzzy orders is a pilot assumption because the formal internal split has not been frozen.",
+    "The imported Porto package is historical aggregate taxi demand, not real-time ride-hailing orders."
+  ],
+  "output_files": [
+    "pilot_orders.json",
+    "fixed_order_route_legs.csv",
+    "candidate_pair_routes.csv",
+    "candidate_dijkstra_links.geojson",
+    "summary.json",
+    "run_notes.md"
+  ]
+}

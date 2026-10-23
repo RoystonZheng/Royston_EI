@@ -1,0 +1,422 @@
+{
+  "candidate_ref_resolution": {
+    "dropoff": {
+      "D00": "node_77_47",
+      "D01": "node_78_42",
+      "D02": "node_78_44",
+      "D03": "node_79_44",
+      "D04": "node_79_46",
+      "D05": "node_80_44"
+    },
+    "pickup": {
+      "P00": "node_12_87",
+      "P01": "node_13_87",
+      "P02": "node_49_34",
+      "P03": "node_49_35"
+    }
+  },
+  "created_at_utc": "2026-10-22T09:16:54.180177+00:00",
+  "decoding": {
+    "max_tokens": 256,
+    "temperature": 0.0,
+    "thinking": false
+  },
+  "evaluation_after_inference": {
+    "both_endpoints_exact_match": true,
+    "dropoff_exact_match": true,
+    "pickup_exact_match": true,
+    "true_dropoff_node_id": "node_78_44",
+    "true_pickup_node_id": "node_49_34",
+    "truth_loaded_after_generation": true
+  },
+  "input_artifacts": {
+    "map_sha256": "427abb25ff91080517daeec45bc3319d2e162f3752eda2f5f9022928b751a27c",
+    "model_query_sha256": "7ee49d95f55949394c113975340bbb53fd392509102a1aa80808e116ab56be9a",
+    "orders_sha256": "3a39cca00c5c5acbf96e43585203d61d34396116c04cf40efa6aa15d6af05b9b",
+    "prompt_sha256": "189464f52df3e6254013932c312f362a258a8fd2ad1fcdc85f0c506451d286c6",
+    "protocol_sha256": "6ab6df9b927ba1c58a8adf46e0bf633db25937d201e90d948a205713a7da84e0"
+  },
+  "input_tokens_local_tokenizer": 1740,
+  "latency_ms": 1992.95,
+  "map_id": "grid-100x100-seed-4",
+  "map_input_mode": "road_feature_protocol_v1",
+  "model": "mlx-community/Qwen3-4B-Instruct-2507-4bit",
+  "model_query": {
+    "allowed_feature_refs": [
+      "feature:pole_05",
+      "feature:pole_10"
+    ],
+    "allowed_landmark_refs": [
+      "landmark:node_78_45"
+    ],
+    "dropoff_candidates": [
+      {
+        "candidate_anchor_links": [
+          {
+            "anchor_ref": "landmark:node_78_45",
+            "entry_type": "landmark",
+            "name": "医院南门",
+            "orientation": null,
+            "relation_to_feature": null,
+            "side_of_road": null
+          }
+        ],
+        "candidate_ref": "D00",
+        "coordinates": {
+          "x": 77,
+          "y": 47
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_78_45",
+            "distance": 3
+          }
+        ]
+      },
+      {
+        "candidate_anchor_links": [
+          {
+            "anchor_ref": "landmark:node_78_45",
+            "entry_type": "landmark",
+            "name": "医院南门",
+            "orientation": null,
+            "relation_to_feature": null,
+            "side_of_road": null
+          }
+        ],
+        "candidate_ref": "D01",
+        "coordinates": {
+          "x": 78,
+          "y": 42
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_78_45",
+            "distance": 3
+          }
+        ]
+      },
+      {
+        "candidate_anchor_links": [
+          {
+            "anchor_ref": "landmark:node_78_45",
+            "entry_type": "landmark",
+            "name": "医院南门",
+            "orientation": null,
+            "relation_to_feature": null,
+            "side_of_road": null
+          }
+        ],
+        "candidate_ref": "D02",
+        "coordinates": {
+          "x": 78,
+          "y": 44
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_78_45",
+            "distance": 1
+          }
+        ]
+      },
+      {
+        "candidate_anchor_links": [
+          {
+            "anchor_ref": "landmark:node_78_45",
+            "entry_type": "landmark",
+            "name": "医院南门",
+            "orientation": null,
+            "relation_to_feature": null,
+            "side_of_road": null
+          }
+        ],
+        "candidate_ref": "D03",
+        "coordinates": {
+          "x": 79,
+          "y": 44
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_78_45",
+            "distance": 2
+          }
+        ]
+      },
+      {
+        "candidate_anchor_links": [
+          {
+            "anchor_ref": "landmark:node_78_45",
+            "entry_type": "landmark",
+            "name": "医院南门",
+            "orientation": null,
+            "relation_to_feature": null,
+            "side_of_road": null
+          }
+        ],
+        "candidate_ref": "D04",
+        "coordinates": {
+          "x": 79,
+          "y": 46
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_78_45",
+            "distance": 2
+          }
+        ]
+      },
+      {
+        "candidate_anchor_links": [
+          {
+            "anchor_ref": "landmark:node_78_45",
+            "entry_type": "landmark",
+            "name": "医院南门",
+            "orientation": null,
+            "relation_to_feature": null,
+            "side_of_road": null
+          }
+        ],
+        "candidate_ref": "D05",
+        "coordinates": {
+          "x": 80,
+          "y": 44
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_78_45",
+            "distance": 3
+          }
+        ]
+      }
+    ],
+    "dropoff_resolution_mode": "landmark_graph_candidates",
+    "dropoff_text": "请在医院南门附近下车。",
+    "map_id": "grid-100x100-seed-4",
+    "map_input_mode": "road_feature_protocol_v1",
+    "map_version": "grid-v1-100",
+    "matched_dropoff_entries": [
+      {
+        "aliases": [
+          "医院南侧入口"
+        ],
+        "anchor_coordinates": {
+          "x": 78,
+          "y": 45
+        },
+        "entry_id": "landmark:node_78_45",
+        "entry_type": "landmark",
+        "name": "医院南门"
+      }
+    ],
+    "matched_pickup_entries": [
+      {
+        "aliases": [
+          "E号电线杆",
+          "电杆E"
+        ],
+        "anchor_coordinates": {
+          "x": 12,
+          "y": 87
+        },
+        "entry_id": "feature:pole_05",
+        "entry_type": "utility_pole",
+        "name": "电线杆E",
+        "orientation": "toward_east",
+        "side_of_road": "west_side"
+      },
+      {
+        "aliases": [
+          "E号电线杆",
+          "电杆E"
+        ],
+        "anchor_coordinates": {
+          "x": 49,
+          "y": 34
+        },
+        "entry_id": "feature:pole_10",
+        "entry_type": "utility_pole",
+        "name": "电线杆E",
+        "orientation": "toward_north",
+        "side_of_road": "south_side"
+      }
+    ],
+    "pickup_candidates": [
+      {
+        "candidate_anchor_links": [
+          {
+            "anchor_ref": "feature:pole_05",
+            "entry_type": "utility_pole",
+            "name": "电线杆E",
+            "orientation": "toward_east",
+            "relation_to_feature": "feature_side",
+            "side_of_road": "west_side"
+          }
+        ],
+        "candidate_ref": "P00",
+        "coordinates": {
+          "x": 12,
+          "y": 87
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "feature:pole_05",
+            "distance": 0
+          },
+          {
+            "anchor_ref": "feature:pole_10",
+            "distance": 90
+          }
+        ],
+        "relation_to_feature": "feature_side"
+      },
+      {
+        "candidate_anchor_links": [
+          {
+            "anchor_ref": "feature:pole_05",
+            "entry_type": "utility_pole",
+            "name": "电线杆E",
+            "orientation": "toward_east",
+            "relation_to_feature": "opposite_side",
+            "side_of_road": "west_side"
+          }
+        ],
+        "candidate_ref": "P01",
+        "coordinates": {
+          "x": 13,
+          "y": 87
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "feature:pole_05",
+            "distance": 1
+          },
+          {
+            "anchor_ref": "feature:pole_10",
+            "distance": 89
+          }
+        ],
+        "relation_to_feature": "opposite_side"
+      },
+      {
+        "candidate_anchor_links": [
+          {
+            "anchor_ref": "feature:pole_10",
+            "entry_type": "utility_pole",
+            "name": "电线杆E",
+            "orientation": "toward_north",
+            "relation_to_feature": "feature_side",
+            "side_of_road": "south_side"
+          }
+        ],
+        "candidate_ref": "P02",
+        "coordinates": {
+          "x": 49,
+          "y": 34
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "feature:pole_05",
+            "distance": 90
+          },
+          {
+            "anchor_ref": "feature:pole_10",
+            "distance": 0
+          }
+        ],
+        "relation_to_feature": "feature_side"
+      },
+      {
+        "candidate_anchor_links": [
+          {
+            "anchor_ref": "feature:pole_10",
+            "entry_type": "utility_pole",
+            "name": "电线杆E",
+            "orientation": "toward_north",
+            "relation_to_feature": "opposite_side",
+            "side_of_road": "south_side"
+          }
+        ],
+        "candidate_ref": "P03",
+        "coordinates": {
+          "x": 49,
+          "y": 35
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "feature:pole_05",
+            "distance": 89
+          },
+          {
+            "anchor_ref": "feature:pole_10",
+            "distance": 1
+          }
+        ],
+        "relation_to_feature": "opposite_side"
+      }
+    ],
+    "pickup_resolution_mode": "road_feature_relation",
+    "pickup_text": "请在电线杆E旁、南侧的合法上车点上车。",
+    "schema_version": "route_intent_query_v2",
+    "start_node_id": "node_65_10",
+    "task_id": "task-0004-0006",
+    "task_type": "semantic_road_feature_position",
+    "uses_evaluator_truth": false
+  },
+  "model_revision": "50d427756c6b1b2fe0c0a10f67fbda1fc8e82c1b",
+  "parse_or_inference_error": null,
+  "parsed_intent": {
+    "confidence": 0.95,
+    "dropoff_anchor_ref": "landmark:node_78_45",
+    "dropoff_candidate_ref": "D02",
+    "feature_evidence_refs": [
+      "feature:pole_10"
+    ],
+    "pickup_anchor_ref": "feature:pole_10",
+    "pickup_candidate_ref": "P02",
+    "relation": "feature_side",
+    "schema_version": "route_intent_candidate_v2",
+    "side": "south",
+    "status": "resolved"
+  },
+  "prompt_version": "r4_intent_prompt_v4_candidate_feature_links",
+  "raw_response": "{\"schema_version\":\"route_intent_candidate_v2\",\"status\":\"resolved\",\"pickup_candidate_ref\":\"P02\",\"dropoff_candidate_ref\":\"D02\",\"pickup_anchor_ref\":\"feature:pole_10\",\"dropoff_anchor_ref\":\"landmark:node_78_45\",\"relation\":\"feature_side\",\"side\":\"south\",\"feature_evidence_refs\":[\"feature:pole_10\"],\"confidence\":0.95}",
+  "resolved_intent": {
+    "confidence": 0.95,
+    "dropoff_anchor_ref": "landmark:node_78_45",
+    "dropoff_node_id": "node_78_44",
+    "feature_evidence_refs": [
+      "feature:pole_10"
+    ],
+    "pickup_anchor_ref": "feature:pole_10",
+    "pickup_node_id": "node_49_34",
+    "relation": "feature_side",
+    "schema_version": "route_intent_v1",
+    "side": "south",
+    "status": "resolved"
+  },
+  "schema_version": "r4_qwen_local_intent_batch_result_v1",
+  "seed": 4,
+  "status": "validated",
+  "task_id": "task-0004-0006",
+  "task_type": "semantic_road_feature_position",
+  "usage": {
+    "actual_hardware_billing": "not_applicable_local_inference",
+    "billing": "local_inference_no_API_request",
+    "input_tokens_local_tokenizer": 1740,
+    "output_tokens": null
+  },
+  "validation": {
+    "confidence": 0.95,
+    "dropoff_anchor_ref": "landmark:node_78_45",
+    "dropoff_node_id": "node_78_44",
+    "feature_evidence_refs": [
+      "feature:pole_10"
+    ],
+    "pickup_anchor_ref": "feature:pole_10",
+    "pickup_node_id": "node_49_34",
+    "relation": "feature_side",
+    "resolution_mode": "road_feature_relation",
+    "side": "south",
+    "valid": true
+  }
+}

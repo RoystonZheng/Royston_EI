@@ -34,6 +34,14 @@ class ContextFunction:
     min_threshold_sec: float = 120.0
     max_threshold_sec: float = 300.0
 
+    def set_parameters(self, base: float, weights: Sequence[float], *, mode: str, version: str) -> None:
+        if len(weights) != len(FEATURE_NAMES):
+            raise ValueError("context_weight_count_mismatch")
+        self.base = float(base)
+        self.weights = tuple(float(value) for value in weights)
+        self.mode = mode
+        self.version = version
+
     def threshold(self, features: Dict[str, float]) -> float:
         values = [features.get(name, 0.0) for name in FEATURE_NAMES]
         raw = self.base + sum(weight * value for weight, value in zip(self.weights, values))

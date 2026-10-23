@@ -1,0 +1,60 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "action": {
+      "enum": [
+        "move"
+      ],
+      "type": "string"
+    },
+    "direction": {
+      "enum": [
+        "W",
+        "S"
+      ],
+      "type": "string"
+    },
+    "failure_reason_code": {
+      "enum": [
+        "none",
+        "unable_to_construct_route"
+      ],
+      "type": "string"
+    },
+    "self_check": {
+      "additionalProperties": false,
+      "properties": {
+        "allowed_directed_edge": {
+          "type": "boolean"
+        },
+        "inside_boundary": {
+          "type": "boolean"
+        },
+        "not_revisited": {
+          "type": "boolean"
+        },
+        "pickup_order_ok": {
+          "type": "boolean"
+        },
+        "starts_at_current": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "allowed_directed_edge",
+        "starts_at_current",
+        "inside_boundary",
+        "pickup_order_ok",
+        "not_revisited"
+      ],
+      "type": "object"
+    }
+  },
+  "required": [
+    "action",
+    "direction",
+    "self_check",
+    "failure_reason_code"
+  ],
+  "type": "object"
+}

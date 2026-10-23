@@ -1,0 +1,37 @@
+{
+  "authorized_max_requests": 8,
+  "dropoff_node_id": "node_2_3",
+  "dropoff_node_legal": true,
+  "experiment_id": "r4_codex_independent_pilot_v9",
+  "initial_allowed_directions": [
+    "E",
+    "S"
+  ],
+  "map_equivalence_audit": {
+    "cost_mismatches": [],
+    "expected_directed_edge_count": 205,
+    "expected_semantics_sha256": "a187b085d460ead1d47bbfbf9f57d287661863de905d7ff2928ded47326fcc6f",
+    "invalid_codes": [],
+    "missing_directed_edges": [],
+    "passed": true,
+    "recovered_directed_edge_count": 205,
+    "recovered_semantics_sha256": "a187b085d460ead1d47bbfbf9f57d287661863de905d7ff2928ded47326fcc6f",
+    "unexpected_directed_edges": []
+  },
+  "map_id": "grid-8x8-seed-0",
+  "map_version": "grid-v1-8",
+  "minimum_moves_from_initial_state": 5,
+  "model": "gpt-5.6-luna",
+  "pickup_node_id": "node_1_2",
+  "pickup_node_legal": true,
+  "reasoning_effort": "low",
+  "retry_limit": 0,
+  "schema_version": "r4_codex_independent_pilot_task_v1",
+  "scope": "independent short 8x8 route smoke; distinct task from v1-v8 route chain; not part of formal R4 result",
+  "source_preflight": "outputs/route_layer/r4_codex_offline_preflight_20261021/seed0_semantic_road_feature.json",
+  "source_preflight_sha256": "028b932350949c9a673730b041dc615247e87b45a9bfe2a77635dc74bb6866a0",
+  "start_node_id": "node_0_4",
+  "task_id": "codex-short-task-0001",
+  "task_semantics": "Navigate from the start node to the legal pickup node, then to the legal dropoff node using one validated directed edge per request. No node revisits.",
+  "tool_policy": "Codex CLI tool features disabled; any unexpected tool item stops run"
+}

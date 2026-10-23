@@ -1,0 +1,220 @@
+{
+  "schema_version": "route_intent_query_v2",
+  "task_id": "task-0001-0003",
+  "map_id": "grid-100x100-seed-1",
+  "map_version": "grid-v1-100",
+  "map_input_mode": "road_feature_protocol_v1",
+  "start_node_id": "node_14_1",
+  "pickup_text": "请在辅路入口路牌旁、南侧的合法上车点上车。",
+  "dropoff_text": "请在科技园附近下车。",
+  "pickup_resolution_mode": "road_feature_relation",
+  "dropoff_resolution_mode": "landmark_graph_candidates",
+  "matched_pickup_entries": [
+    {
+      "entry_id": "feature:sign_04",
+      "entry_type": "road_sign",
+      "name": "辅路入口路牌",
+      "aliases": [
+        "辅路指示牌",
+        "辅路入口"
+      ],
+      "side_of_road": "west_side",
+      "orientation": "toward_east",
+      "anchor_coordinates": {
+        "x": 2,
+        "y": 31
+      }
+    },
+    {
+      "entry_id": "feature:sign_09",
+      "entry_type": "road_sign",
+      "name": "辅路入口路牌",
+      "aliases": [
+        "辅路指示牌",
+        "辅路入口"
+      ],
+      "side_of_road": "south_side",
+      "orientation": "toward_north",
+      "anchor_coordinates": {
+        "x": 87,
+        "y": 2
+      }
+    }
+  ],
+  "matched_dropoff_entries": [
+    {
+      "entry_id": "landmark:node_41_79",
+      "entry_type": "landmark",
+      "name": "科技园",
+      "aliases": [
+        "科技园区"
+      ],
+      "anchor_coordinates": {
+        "x": 41,
+        "y": 79
+      }
+    }
+  ],
+  "pickup_candidates": [
+    {
+      "candidate_ref": "P00",
+      "coordinates": {
+        "x": 2,
+        "y": 31
+      },
+      "relation_to_feature": "feature_side",
+      "manhattan_distance_to_anchors": [
+        {
+          "anchor_ref": "feature:sign_04",
+          "distance": 0
+        },
+        {
+          "anchor_ref": "feature:sign_09",
+          "distance": 114
+        }
+      ]
+    },
+    {
+      "candidate_ref": "P01",
+      "coordinates": {
+        "x": 3,
+        "y": 31
+      },
+      "relation_to_feature": "opposite_side",
+      "manhattan_distance_to_anchors": [
+        {
+          "anchor_ref": "feature:sign_04",
+          "distance": 1
+        },
+        {
+          "anchor_ref": "feature:sign_09",
+          "distance": 113
+        }
+      ]
+    },
+    {
+      "candidate_ref": "P02",
+      "coordinates": {
+        "x": 87,
+        "y": 2
+      },
+      "relation_to_feature": "feature_side",
+      "manhattan_distance_to_anchors": [
+        {
+          "anchor_ref": "feature:sign_04",
+          "distance": 114
+        },
+        {
+          "anchor_ref": "feature:sign_09",
+          "distance": 0
+        }
+      ]
+    },
+    {
+      "candidate_ref": "P03",
+      "coordinates": {
+        "x": 87,
+        "y": 3
+      },
+      "relation_to_feature": "opposite_side",
+      "manhattan_distance_to_anchors": [
+        {
+          "anchor_ref": "feature:sign_04",
+          "distance": 113
+        },
+        {
+          "anchor_ref": "feature:sign_09",
+          "distance": 1
+        }
+      ]
+    }
+  ],
+  "dropoff_candidates": [
+    {
+      "candidate_ref": "D00",
+      "coordinates": {
+        "x": 39,
+        "y": 80
+      },
+      "manhattan_distance_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_41_79",
+          "distance": 3
+        }
+      ]
+    },
+    {
+      "candidate_ref": "D01",
+      "coordinates": {
+        "x": 40,
+        "y": 78
+      },
+      "manhattan_distance_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_41_79",
+          "distance": 2
+        }
+      ]
+    },
+    {
+      "candidate_ref": "D02",
+      "coordinates": {
+        "x": 40,
+        "y": 79
+      },
+      "manhattan_distance_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_41_79",
+          "distance": 1
+        }
+      ]
+    },
+    {
+      "candidate_ref": "D03",
+      "coordinates": {
+        "x": 40,
+        "y": 80
+      },
+      "manhattan_distance_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_41_79",
+          "distance": 2
+        }
+      ]
+    },
+    {
+      "candidate_ref": "D04",
+      "coordinates": {
+        "x": 40,
+        "y": 81
+      },
+      "manhattan_distance_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_41_79",
+          "distance": 3
+        }
+      ]
+    },
+    {
+      "candidate_ref": "D05",
+      "coordinates": {
+        "x": 41,
+        "y": 78
+      },
+      "manhattan_distance_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_41_79",
+          "distance": 1
+        }
+      ]
+    }
+  ],
+  "allowed_feature_refs": [
+    "feature:sign_04",
+    "feature:sign_09"
+  ],
+  "allowed_landmark_refs": [
+    "landmark:node_41_79"
+  ],
+  "uses_evaluator_truth": false
+}

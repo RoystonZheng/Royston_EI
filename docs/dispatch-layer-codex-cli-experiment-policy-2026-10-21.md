@@ -103,3 +103,15 @@ Codex CLI 历史用量复算覆盖调度目录下 51 条 trace，其中 50 条�
 三种方法在五个固定场景的完成订单数相同。等待、空驶和能耗的变化方向不一致，没有一致的纯 LLM 优势。18,066 轮已接纳状态/匹配校验全部通过；审计另发现 7 条模型输出因重复订单/车辆或候选不满足硬约束而被拒绝，未用于派单，无重试或回退。重复种子仍使用同一组固定需求场景，因此这些结果不代表独立 NYC 订单样本，也不能写成真实运营服务率、统计显著性或跨场景泛化结论。
 
 逐项结果见 [`comparison_report.md`](../outputs/dispatch_layer/nyc_tlc_hvfhv_2024/three_method_benchmark_v1/results/pure_llm_codex_cli_formal_v1/comparison_report.md)，机器可读配对表见 [`paired_results.csv`](../outputs/dispatch_layer/nyc_tlc_hvfhv_2024/three_method_benchmark_v1/results/pure_llm_codex_cli_formal_v1/paired_results.csv)，费用和完整性复核见 `outputs/codex_cli_audit_2026-10-21/d5_reconciliation_50_of_50_20261021.json` 与 `d5_final_integrity_50_of_50_20261021.json`。
+
+## D6：Agent + Codex 策略参数 + 数学优化器首轮 pilot（2026-10-22）
+
+D6 与 D5 分开记录：Codex 只在首个已到达订单快照上生成一次有界 `linear_clip` 情境参数，车辆 Agent 按参数筛选硬约束可行候选，数学优化器做全局匹配。C3 seed 0 的首次 CLI 返回有效参数；随后本地因缺少导入而中断。保留的 JSONL/最终响应在字节级相同 prompt 校验后被离线重放以完成仿真，没有第二次模型请求。故 token 与费率等值计入原始单次调用；首次进程耗时未能保存，D6 总决策时间不与其他方法的端到端延迟比较。
+
+该次调用使用 `gpt-5.6-luna` / low，零重试、零工具事件；输入/缓存/输出/总计为 13,453/0/178/13,631 token，按 2026-10-22 标准费率为 0.072605 credits 与 $0.00290420 API 标价等值，账号实扣未知。D6 完成 41 轮，逐轮 validator 有效、硬约束错误与承诺违约为 0、候选回退 2 次；C3 seed 0 完成 16/44，与同输入 D0/D1/D2/D5 相同。相对 D1，平均接驾等待 +4.96 秒、P95 −12.06 秒、空驶 +396.8 米、能耗代理 +0.071 kWh。单个固定案例没有性能优劣结论。
+
+结果、原始 prompt/JSONL/最终响应、输入哈希与用量审计见 `outputs/dispatch_layer/nyc_tlc_hvfhv_2024/three_method_benchmark_v1/results/hybrid_agent_codex_nn_v1/C3_manhattan_multizone_44_order_burst/single_fleet/`。完整方法与 NN 数据标签边界见 `docs/dispatch-layer-hybrid-agent-codex-nn-design-2026-10-22.md`。D7 已更新为最大匹配容量保护组，神经网络排序顺延为 D8。
+
+## D7 最大匹配容量保护配对 pilot（2026-10-23）
+
+在 C4/F1/seed 0 完成 D6/D7 完整仿真。D7 的 Codex 响应通过同 prompt SHA-256 校验后回放给 D6；唯一新调用 1 次，13,451 输入 + 210 输出 = 13,661 token，0.073555 credits / $0.00294220 标准费率等值，账户实扣未知。D7 571 轮 validator 全通过；其中 round-0002 的完整硬可行图最大匹配容量 5、筛选后 4，保护器恢复 1 条边并恢复至 5。D6/D7 均完成 13/790，单 seed 不能证明性能改善。逐轮输入、响应、用量和审计见 `outputs/dispatch_layer/nyc_tlc_hvfhv_2024/three_method_benchmark_v1/results/hybrid_agent_codex_capacity_shield_v1/C4_manhattan_790_order_five_minute_load_sweep/F1/`。

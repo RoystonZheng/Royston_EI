@@ -1,0 +1,62 @@
+{
+  "actual_frozen_map_edges": {
+    "N": {
+      "edge_id": "edge_node_0_5_node_0_6",
+      "from_node": "node_0_5",
+      "to_node": "node_0_6"
+    },
+    "S": {
+      "edge_id": "edge_node_0_5_node_0_4",
+      "from_node": "node_0_5",
+      "to_node": "node_0_4"
+    }
+  },
+  "compact_grid_cell_at_node_0_5": {
+    "row_y_5": "..34669636383348533535A63383.33F",
+    "slot_N": "3",
+    "slot_S": "4"
+  },
+  "corrected_continuation_state": {
+    "current_node": "node_0_6",
+    "edge_id": "edge_node_0_5_node_0_6",
+    "new_request_limit": 8,
+    "route_minimum_remaining_moves_at_start": 10
+  },
+  "created_at_utc": "2026-10-21T07:12:20.738957+00:00",
+  "direction_definition": {
+    "N": [
+      0,
+      1
+    ],
+    "S": [
+      0,
+      -1
+    ],
+    "compact_slot_order": "E/W/N/S"
+  },
+  "finding": "The v5 direction N was an allowed and legal action, but its local result metadata incorrectly attached the S edge to it. The action is reconciled to node_0_6 for continuation; the original v5 artifacts are left unchanged.",
+  "impact": "The old v5 posthoc reachability audit used node_0_4 as the post-action node and is superseded. Corrected state node_0_6 requires at least 10 additional moves to complete the pickup/dropoff chain on this map, so the separately authorized maximum of 8 additional requests could only yield a partial prefix.",
+  "map_equivalence_passed": true,
+  "map_semantics_sha256": "a187b085d460ead1d47bbfbf9f57d287661863de905d7ff2928ded47326fcc6f",
+  "previous_model_response": {
+    "action": "move",
+    "direction": "N",
+    "failure_reason_code": "none",
+    "self_check": {
+      "allowed_directed_edge": true,
+      "inside_boundary": true,
+      "not_revisited": true,
+      "pickup_order_ok": true,
+      "starts_at_current": true
+    }
+  },
+  "previous_reported_edge_id": "edge_node_0_5_node_0_4",
+  "schema_version": "r4_codex_prior_action_mapping_correction_v1",
+  "source_experiment": "r4_codex_single_step_no_tool_smoke_v5",
+  "source_files": {
+    "old_posthoc_audit": "outputs/route_layer/r4_codex_smoke_v5/posthoc_reachability_audit.json",
+    "preflight_map": "outputs/route_layer/r4_codex_offline_preflight_20261021/seed0_semantic_road_feature.json",
+    "request_metadata": "outputs/route_layer/r4_codex_smoke_v5/request_metadata.json",
+    "result": "outputs/route_layer/r4_codex_smoke_v5/result.json"
+  }
+}

@@ -1,0 +1,136 @@
+{
+  "status": "structural_preflight_only",
+  "candidate_fence": {
+    "west": -8.635,
+    "south": 41.138,
+    "east": -8.595,
+    "north": 41.162
+  },
+  "osm_base_timestamp": "2026-10-22T04:01:05Z",
+  "osm_sha256": "059375a23441dea3a24374eaa24fc73adfd15a83b0354ba72a9c8d9f327d8fa1",
+  "counts": {
+    "osm_nodes_in_extract": 31460,
+    "osm_ways_in_extract": 7278,
+    "highway_ways": 7278,
+    "routable_ways_after_simple_access_filter": 2179,
+    "routable_directed_graph_nodes": 9421,
+    "routable_directed_arcs": 14351,
+    "weak_components": 35,
+    "largest_weak_component_nodes": 8134,
+    "highway_traffic_signal_nodes": 418,
+    "turn_restriction_relations": 121,
+    "turn_restriction_types": {
+      "no_left_turn": 50,
+      "no_right_turn": 7,
+      "no_straight_on": 1,
+      "no_u_turn": 22,
+      "only_left_turn": 5,
+      "only_right_turn": 13,
+      "only_straight_on": 23
+    },
+    "oneway_tags_on_routable_ways": {
+      "no": 250,
+      "yes": 1145
+    },
+    "reachable_ordered_top_hotspot_pairs_before_turn_restrictions": 100,
+    "tested_ordered_top_hotspot_pairs": 100
+  },
+  "top_pickup_hotspot_node_preflight": [
+    {
+      "cell_x": -1,
+      "cell_y": -3,
+      "heat_count": 62239,
+      "center_lon": -8.611193,
+      "center_lat": 41.1455084,
+      "nearest_osm_node_id": "3130311623",
+      "nearest_node_distance_m": 29.06
+    },
+    {
+      "cell_x": -2,
+      "cell_y": -3,
+      "heat_count": 44294,
+      "center_lon": -8.613579,
+      "center_lat": 41.1455084,
+      "nearest_osm_node_id": "286969310",
+      "nearest_node_distance_m": 16.44
+    },
+    {
+      "cell_x": -5,
+      "cell_y": -2,
+      "heat_count": 43206,
+      "center_lon": -8.6207369,
+      "center_lat": 41.1473051,
+      "nearest_osm_node_id": "1684865542",
+      "nearest_node_distance_m": 10.22
+    },
+    {
+      "cell_x": -8,
+      "cell_y": 4,
+      "heat_count": 37756,
+      "center_lon": -8.6278949,
+      "center_lat": 41.1580848,
+      "nearest_osm_node_id": "9313283596",
+      "nearest_node_distance_m": 5.39
+    },
+    {
+      "cell_x": -2,
+      "cell_y": -5,
+      "heat_count": 36716,
+      "center_lon": -8.613579,
+      "center_lat": 41.1419152,
+      "nearest_osm_node_id": "12064527952",
+      "nearest_node_distance_m": 44.9
+    },
+    {
+      "cell_x": 0,
+      "cell_y": -2,
+      "heat_count": 32945,
+      "center_lon": -8.608807,
+      "center_lat": 41.1473051,
+      "nearest_osm_node_id": "3993126557",
+      "nearest_node_distance_m": 7.6
+    },
+    {
+      "cell_x": 1,
+      "cell_y": -3,
+      "heat_count": 32450,
+      "center_lon": -8.606421,
+      "center_lat": 41.1455084,
+      "nearest_osm_node_id": "10695700385",
+      "nearest_node_distance_m": 46.12
+    },
+    {
+      "cell_x": 2,
+      "cell_y": 6,
+      "heat_count": 28801,
+      "center_lon": -8.604035,
+      "center_lat": 41.161678,
+      "nearest_osm_node_id": "5284320517",
+      "nearest_node_distance_m": 11.53
+    },
+    {
+      "cell_x": -9,
+      "cell_y": 2,
+      "heat_count": 28312,
+      "center_lon": -8.6302809,
+      "center_lat": 41.1544916,
+      "nearest_osm_node_id": "129800097",
+      "nearest_node_distance_m": 36.54
+    },
+    {
+      "cell_x": -2,
+      "cell_y": -2,
+      "heat_count": 26402,
+      "center_lon": -8.613579,
+      "center_lat": 41.1473051,
+      "nearest_osm_node_id": "25620948",
+      "nearest_node_distance_m": 32.28
+    }
+  ],
+  "limitations": [
+    "OSM turn-restriction relations are counted but not enforced in the connectivity graph.",
+    "Hotspot cell centers are snapped to nearest routable OSM nodes for this preflight; this is not final point-to-directed-link binding.",
+    "Access tags are filtered with a small fixed rule set; conditional access and time-dependent restrictions are not modeled.",
+    "Signal nodes indicate mapped signal presence only; signal phases and queues are not present in the OSM snapshot."
+  ]
+}

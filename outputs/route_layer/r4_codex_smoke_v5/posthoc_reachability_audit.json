@@ -1,0 +1,29 @@
+{
+  "audit_type": "posthoc_directed_reachability_only",
+  "experiment_id": "r4_codex_single_step_no_tool_smoke_v5",
+  "map_id": "grid-8x8-seed-0",
+  "map_version": "grid-v1-8",
+  "task_id": "task-0000-0009",
+  "current_action": {
+    "from_node": "node_0_5",
+    "direction": "N",
+    "edge_id": "edge_node_0_5_node_0_4",
+    "to_node": "node_0_4"
+  },
+  "pickup_node": "node_1_2",
+  "dropoff_node": "node_6_2",
+  "directed_edge_count": 205,
+  "directed_edge_set_sha256": "a7b2971bde4b1e10e3616e694b9fa3334ecea4aea53491962001fb35eec95287",
+  "shortest_edge_counts": {
+    "start_to_pickup_shortest_edges": 4,
+    "pickup_to_dropoff_shortest_edges": 5,
+    "start_to_dropoff_via_pickup_shortest_edges": 9,
+    "after_smoke_action_to_pickup_shortest_edges": 3,
+    "after_smoke_action_to_dropoff_via_pickup_shortest_edges": 8,
+    "total_edges_including_smoke_action": 9
+  },
+  "feasible_with_stepwise_budget_9": true,
+  "remaining_calls_after_smoke_action_if_continued": 8,
+  "method": "Unweighted BFS over the frozen map directed edges, after the model response; not provided to the model and not used to repair or replace its action.",
+  "scope_limit": "Reachability and minimum edge count only; does not prove Codex will return the remaining actions, optimize travel time or energy, or complete the route."
+}

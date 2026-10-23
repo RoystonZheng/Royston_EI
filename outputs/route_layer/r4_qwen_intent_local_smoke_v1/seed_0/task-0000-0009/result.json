@@ -1,0 +1,498 @@
+{
+  "billing": "local_inference_no_API_request",
+  "created_at_utc": "2026-10-22T07:52:06.455743+00:00",
+  "decoding": {
+    "max_tokens": 256,
+    "temperature": 0.0,
+    "thinking": false
+  },
+  "evaluation_after_inference": {
+    "dropoff_exact_match": true,
+    "pickup_exact_match": true,
+    "true_dropoff_node_id": "node_42_43",
+    "true_pickup_node_id": "node_25_66",
+    "truth_loaded_after_generation": true
+  },
+  "input_artifacts": {
+    "map_sha256": "bdf7da792ecf78ae393f5441055d592f3585674bea48d4f12d2d2d1ce632adbe",
+    "prompt_sha256": "267843c316fb4c55afb03ec491d05bf995dc7b83a46b8c72ed648034b785892a",
+    "protocol_sha256": "201e3243fd27ed59a1fd4b4173329b57ed9b847181c3bd1ea08cad5da22b9b39",
+    "query_sha256": "7e1c3d02c65e03b295f5996aba234fa030c27f654d22ef77e8c05ecb6dd5ef33",
+    "tasks_sha256": "867d863c961406fd89a620177253cf50493b0883988069a033d147d6496e7999"
+  },
+  "latency_ms": 3164.393,
+  "map_id": "grid-100x100-seed-0",
+  "map_input_mode": "road_feature_protocol_v1",
+  "model": "mlx-community/Qwen3-4B-Instruct-2507-4bit",
+  "model_snapshot": "50d427756c6b1b2fe0c0a10f67fbda1fc8e82c1b",
+  "parsed_intent": {
+    "confidence": 0.95,
+    "dropoff_anchor_ref": "landmark:node_42_42",
+    "dropoff_node_id": "node_42_43",
+    "feature_evidence_refs": [
+      "feature:sign_08"
+    ],
+    "pickup_anchor_ref": "feature:sign_08",
+    "pickup_node_id": "node_25_66",
+    "relation": "feature_side",
+    "schema_version": "route_intent_v1",
+    "side": "west",
+    "status": "resolved"
+  },
+  "query": {
+    "allowed_feature_refs": [
+      "feature:sign_03",
+      "feature:sign_08"
+    ],
+    "allowed_landmark_refs": [
+      "landmark:node_42_42"
+    ],
+    "dropoff_candidates": [
+      {
+        "coordinates": {
+          "x": 39,
+          "y": 42
+        },
+        "legal_dropoff": true,
+        "node_id": "node_39_42"
+      },
+      {
+        "coordinates": {
+          "x": 40,
+          "y": 41
+        },
+        "legal_dropoff": true,
+        "node_id": "node_40_41"
+      },
+      {
+        "coordinates": {
+          "x": 40,
+          "y": 42
+        },
+        "legal_dropoff": true,
+        "node_id": "node_40_42"
+      },
+      {
+        "coordinates": {
+          "x": 40,
+          "y": 43
+        },
+        "legal_dropoff": true,
+        "node_id": "node_40_43"
+      },
+      {
+        "coordinates": {
+          "x": 42,
+          "y": 43
+        },
+        "legal_dropoff": true,
+        "node_id": "node_42_43"
+      },
+      {
+        "coordinates": {
+          "x": 44,
+          "y": 42
+        },
+        "legal_dropoff": true,
+        "node_id": "node_44_42"
+      }
+    ],
+    "dropoff_resolution_mode": "landmark_graph_candidates",
+    "dropoff_text": "请在科技园附近下车。",
+    "map_id": "grid-100x100-seed-0",
+    "map_input_mode": "road_feature_protocol_v1",
+    "map_version": "grid-v1-100",
+    "matched_dropoff_entries": [
+      {
+        "aliases": [
+          "科技园区"
+        ],
+        "anchor_coordinates": {
+          "x": 42,
+          "y": 42
+        },
+        "anchor_node_id": "node_42_42",
+        "directional_pickup_candidates": {
+          "east": [
+            {
+              "coordinates": {
+                "x": 44,
+                "y": 41
+              },
+              "legal_pickup": true,
+              "node_id": "node_44_41"
+            },
+            {
+              "coordinates": {
+                "x": 45,
+                "y": 42
+              },
+              "legal_pickup": true,
+              "node_id": "node_45_42"
+            },
+            {
+              "coordinates": {
+                "x": 45,
+                "y": 43
+              },
+              "legal_pickup": true,
+              "node_id": "node_45_43"
+            },
+            {
+              "coordinates": {
+                "x": 44,
+                "y": 39
+              },
+              "legal_pickup": true,
+              "node_id": "node_44_39"
+            }
+          ],
+          "north": [
+            {
+              "coordinates": {
+                "x": 45,
+                "y": 43
+              },
+              "legal_pickup": true,
+              "node_id": "node_45_43"
+            },
+            {
+              "coordinates": {
+                "x": 39,
+                "y": 44
+              },
+              "legal_pickup": true,
+              "node_id": "node_39_44"
+            },
+            {
+              "coordinates": {
+                "x": 41,
+                "y": 46
+              },
+              "legal_pickup": true,
+              "node_id": "node_41_46"
+            },
+            {
+              "coordinates": {
+                "x": 45,
+                "y": 44
+              },
+              "legal_pickup": true,
+              "node_id": "node_45_44"
+            }
+          ],
+          "south": [
+            {
+              "coordinates": {
+                "x": 42,
+                "y": 41
+              },
+              "legal_pickup": true,
+              "node_id": "node_42_41"
+            },
+            {
+              "coordinates": {
+                "x": 44,
+                "y": 41
+              },
+              "legal_pickup": true,
+              "node_id": "node_44_41"
+            },
+            {
+              "coordinates": {
+                "x": 40,
+                "y": 40
+              },
+              "legal_pickup": true,
+              "node_id": "node_40_40"
+            },
+            {
+              "coordinates": {
+                "x": 41,
+                "y": 39
+              },
+              "legal_pickup": true,
+              "node_id": "node_41_39"
+            }
+          ],
+          "west": [
+            {
+              "coordinates": {
+                "x": 40,
+                "y": 40
+              },
+              "legal_pickup": true,
+              "node_id": "node_40_40"
+            },
+            {
+              "coordinates": {
+                "x": 41,
+                "y": 39
+              },
+              "legal_pickup": true,
+              "node_id": "node_41_39"
+            },
+            {
+              "coordinates": {
+                "x": 39,
+                "y": 40
+              },
+              "legal_pickup": true,
+              "node_id": "node_39_40"
+            },
+            {
+              "coordinates": {
+                "x": 39,
+                "y": 44
+              },
+              "legal_pickup": true,
+              "node_id": "node_39_44"
+            }
+          ]
+        },
+        "dropoff_candidates": [
+          {
+            "coordinates": {
+              "x": 42,
+              "y": 43
+            },
+            "legal_dropoff": true,
+            "node_id": "node_42_43"
+          },
+          {
+            "coordinates": {
+              "x": 40,
+              "y": 42
+            },
+            "legal_dropoff": true,
+            "node_id": "node_40_42"
+          },
+          {
+            "coordinates": {
+              "x": 44,
+              "y": 42
+            },
+            "legal_dropoff": true,
+            "node_id": "node_44_42"
+          },
+          {
+            "coordinates": {
+              "x": 39,
+              "y": 42
+            },
+            "legal_dropoff": true,
+            "node_id": "node_39_42"
+          },
+          {
+            "coordinates": {
+              "x": 40,
+              "y": 41
+            },
+            "legal_dropoff": true,
+            "node_id": "node_40_41"
+          },
+          {
+            "coordinates": {
+              "x": 40,
+              "y": 43
+            },
+            "legal_dropoff": true,
+            "node_id": "node_40_43"
+          }
+        ],
+        "entry_id": "landmark:node_42_42",
+        "entry_type": "landmark",
+        "name": "科技园",
+        "pickup_candidates": [
+          {
+            "coordinates": {
+              "x": 42,
+              "y": 42
+            },
+            "legal_pickup": true,
+            "node_id": "node_42_42"
+          },
+          {
+            "coordinates": {
+              "x": 42,
+              "y": 41
+            },
+            "legal_pickup": true,
+            "node_id": "node_42_41"
+          },
+          {
+            "coordinates": {
+              "x": 44,
+              "y": 41
+            },
+            "legal_pickup": true,
+            "node_id": "node_44_41"
+          },
+          {
+            "coordinates": {
+              "x": 45,
+              "y": 42
+            },
+            "legal_pickup": true,
+            "node_id": "node_45_42"
+          },
+          {
+            "coordinates": {
+              "x": 40,
+              "y": 40
+            },
+            "legal_pickup": true,
+            "node_id": "node_40_40"
+          },
+          {
+            "coordinates": {
+              "x": 41,
+              "y": 39
+            },
+            "legal_pickup": true,
+            "node_id": "node_41_39"
+          }
+        ]
+      }
+    ],
+    "matched_pickup_entries": [
+      {
+        "aliases": [
+          "公交站牌",
+          "站牌"
+        ],
+        "anchor_coordinates": {
+          "x": 35,
+          "y": 67
+        },
+        "anchor_node_id": "node_35_67",
+        "entry_id": "feature:sign_03",
+        "entry_type": "road_sign",
+        "name": "公交站路牌",
+        "orientation": "toward_north",
+        "pickup_candidates": [
+          {
+            "coordinates": {
+              "x": 35,
+              "y": 67
+            },
+            "legal_pickup": true,
+            "node_id": "node_35_67",
+            "relation_to_feature": "feature_side"
+          },
+          {
+            "coordinates": {
+              "x": 35,
+              "y": 68
+            },
+            "legal_pickup": true,
+            "node_id": "node_35_68",
+            "relation_to_feature": "opposite_side"
+          }
+        ],
+        "side_of_road": "south_side"
+      },
+      {
+        "aliases": [
+          "公交站牌",
+          "站牌"
+        ],
+        "anchor_coordinates": {
+          "x": 25,
+          "y": 66
+        },
+        "anchor_node_id": "node_25_66",
+        "entry_id": "feature:sign_08",
+        "entry_type": "road_sign",
+        "name": "公交站路牌",
+        "orientation": "toward_east",
+        "pickup_candidates": [
+          {
+            "coordinates": {
+              "x": 25,
+              "y": 66
+            },
+            "legal_pickup": true,
+            "node_id": "node_25_66",
+            "relation_to_feature": "feature_side"
+          },
+          {
+            "coordinates": {
+              "x": 26,
+              "y": 66
+            },
+            "legal_pickup": true,
+            "node_id": "node_26_66",
+            "relation_to_feature": "opposite_side"
+          }
+        ],
+        "side_of_road": "west_side"
+      }
+    ],
+    "pickup_candidates": [
+      {
+        "coordinates": {
+          "x": 25,
+          "y": 66
+        },
+        "legal_pickup": true,
+        "node_id": "node_25_66",
+        "relation_to_feature": "feature_side"
+      },
+      {
+        "coordinates": {
+          "x": 26,
+          "y": 66
+        },
+        "legal_pickup": true,
+        "node_id": "node_26_66",
+        "relation_to_feature": "opposite_side"
+      },
+      {
+        "coordinates": {
+          "x": 35,
+          "y": 67
+        },
+        "legal_pickup": true,
+        "node_id": "node_35_67",
+        "relation_to_feature": "feature_side"
+      },
+      {
+        "coordinates": {
+          "x": 35,
+          "y": 68
+        },
+        "legal_pickup": true,
+        "node_id": "node_35_68",
+        "relation_to_feature": "opposite_side"
+      }
+    ],
+    "pickup_resolution_mode": "road_feature_relation",
+    "pickup_text": "请在公交站路牌旁、西侧的合法上车点上车。",
+    "road_state_version": "road-state-v1-seed-0",
+    "schema_version": "route_intent_query_v1",
+    "start_node_id": "node_69_41",
+    "task_id": "task-0000-0009",
+    "uses_evaluator_truth": false
+  },
+  "raw_response": "{\n  \"schema_version\": \"route_intent_v1\",\n  \"status\": \"resolved\",\n  \"pickup_node_id\": \"node_25_66\",\n  \"dropoff_node_id\": \"node_42_43\",\n  \"pickup_anchor_ref\": \"feature:sign_08\",\n  \"dropoff_anchor_ref\": \"landmark:node_42_42\",\n  \"relation\": \"feature_side\",\n  \"side\": \"west\",\n  \"feature_evidence_refs\": [\n    \"feature:sign_08\"\n  ],\n  \"confidence\": 0.95\n}",
+  "schema_version": "r4_qwen_local_intent_smoke_v1",
+  "started_at_utc": "2026-10-22T07:52:03.291350+00:00",
+  "status": "validated",
+  "task_id": "task-0000-0009",
+  "task_type": "semantic_road_feature_position",
+  "validation": {
+    "confidence": 0.95,
+    "dropoff_anchor_ref": "landmark:node_42_42",
+    "dropoff_node_id": "node_42_43",
+    "feature_evidence_refs": [
+      "feature:sign_08"
+    ],
+    "pickup_anchor_ref": "feature:sign_08",
+    "pickup_node_id": "node_25_66",
+    "relation": "feature_side",
+    "resolution_mode": "road_feature_relation",
+    "side": "west",
+    "valid": true
+  }
+}

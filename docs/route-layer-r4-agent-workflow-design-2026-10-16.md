@@ -1,6 +1,6 @@
 # 路线层第三组 R4：Agent 路线检索与可读地图范式
 
-**设计状态：用户已确认，2026-10-18；截至 R4 smoke v17，DeepSeek 尚未返回经过验证的路线。** v17 在确认有向可达的 8×8 任务上返回 32 个边槽，其中 10 个不在允许边集合，整条序列不连续；本地校验拒绝接纳。模型自检标记数 63 与路线步数 32 不匹配。详见 [R4 烟雾记录](route-layer-r4-smoke-test-2026-10-18.md) 与 [v17 回放](../outputs/route_layer/r4_smoke_v17_api/replay.html)。该单任务烟雾不是成功率样本；正式 R4 多种子实验未启动，100×100 预算仍待重新核算。
+**设计状态：用户已确认，2026-10-18；执行补充更新至 2026-10-22。** 后续 LLM 路线实验使用 Codex CLI，历史 DeepSeek 结果单独保留。单条 100×100 GPT-5.6 Luna 整路线检查点返回 `unable_to_construct_route`、无路线；另有 8×8 Codex 分步试跑完成合法路线，但 100×100 分步流程目前仅通过离线输入/约束预检，尚无该规模的完整路线。正式十种子 R4 及消融尚未启动。历史 DeepSeek v17 的非法提议和完整轨迹仍保留在 [R4 烟雾记录](route-layer-r4-smoke-test-2026-10-18.md) 与 [v17 回放](../outputs/route_layer/r4_smoke_v17_api/replay.html)，不可与 Codex 试跑合并。
 
 ## 1. 研究重点与边界
 
@@ -16,31 +16,34 @@ R4 只处理单个车辆—订单路线任务，不做车队派单、车辆—�
 | 组别 | 模型所见地图输入 | 地点理解 | 路线生成与检查 |
 |---|---|---|---|
 | 传统算法组 R0–R2 | 统一路线包、普通拓扑 | 固定 `graph_only` 规则解析 | Dijkstra / A*；统一程序评估 |
-| 纯 LLM 组 R3 | graph-only 有向路网输入 | DeepSeek 直接处理任务文本 | DeepSeek 单次输出；统一程序事后校验，无修复 |
-| 创新组合组 R4 | `RoadFeatureInputProtocol v1` | 本地 MLX 4-bit Qwen3-4B-Instruct-2507 结构化解析 | DeepSeek Flash 生成路线；程序校验并反馈，最多三次规划 |
+| 纯 LLM 组 R3 | graph-only 有向路网输入 | Codex CLI 直接处理任务文本；历史 DeepSeek v8 单独报告 | Codex CLI 提议路线；统一程序校验，不用传统路线补路 |
+| 创新组合组 R4 | `RoadFeatureInputProtocol v1` | 本地 MLX 4-bit Qwen3-4B-Instruct-2507 选地标/特征锚点；确定性关系模块在合法候选中落点 | Codex CLI 分步提议方向；动态 schema + 独立本地校验控制状态推进 |
 
-三组复用种子 0–9 的同一地图、道路状态、订单/正式场景、统一路线校验器、能耗模型和费用口径。R4 中 Qwen 本地推理的耗时单独统计，不计 API token；DeepSeek 调用记录实际模型标识、输入/输出 token、延迟和 API 费用。正式记录中固定具体模型 revision、提示版本、推理精度/量化、输出上限和超时配置。
+三组复用种子 0–9 的同一地图、道路状态、订单/正式场景、统一路线校验器、能耗模型和费用口径。R4 中 Qwen 本地推理耗时单独统计，不计 API token；Codex CLI 记录实际模型/CLI 标识、输入/缓存/输出/reasoning token、延迟和工具事件。历史 DeepSeek 结果不与 Codex 后端结果合并。正式记录中固定模型 revision、提示/schema 版本、推理强度、输出上限、请求上限、零重试规则和费用熔断。
 
 ## 3. 结构图
 
 ```mermaid
 flowchart TD
-    A[共享 RouteInputPackage<br/>同一地图、任务、道路状态] --> B[确定性地图适配器]
-    B --> C[RoadFeatureInputProtocol v1<br/>实体·特征·关系·约束·语义索引]
-    A --> D[自然语言上车/下车目标]
-    C --> E[本地 Hugging Face Qwen3-4B-Instruct-2507]
+    A[共享路线输入包 地图 任务 道路状态] --> B[确定性地图适配器]
+    B --> C[RoadFeatureInputProtocol v1 实体 特征 关系 约束 语义索引]
+    A --> D[自然语言上车和下车目标]
+    C --> E[本地 Qwen 结构化地点解析]
     D --> E
-    E --> F[RouteIntent JSON<br/>地标/特征引用、侧别、方向、关系、偏好、置信度]
-    F --> G[候选实体物化与合法候选过滤<br/>不读取评估器真值]
+    E --> F[意图 JSON 锚点引用 关系 方向 证据]
+    F --> G[确定性关系落点和合法候选白名单校验]
     C --> G
-    G --> H[DeepSeek Flash 路线候选生成<br/>仅输出结构化路径]
-    H --> I[独立路线验证器<br/>有向边、边界、端点、禁行边、可达性]
-    I -->|合法| J[统一路线评估器<br/>时间、距离、电耗、费用]
-    J --> K[路线结果、完整日志与可视化回放]
-    I -->|非法且未达三次| L[结构化错误反馈<br/>不含真实答案节点]
-    L --> H
-    I -->|三次后仍非法| M[结构化失败记录<br/>不调用传统算法兜底]
+    G -->|未通过，记端点失败| K[失败记录、成本和可视化]
+    G -->|通过| H[Codex CLI 单步路线提议]
+    H --> I[动态 schema 仅列当前合法有向出口]
+    I --> J[本地程序校验方向 连续性 边界 端点顺序]
+    J -->|通过，推进状态| L{是否到达下车点}
+    L -->|否且预算可用| H
+    L -->|是| M[统一评估时间、距离、电耗和费用]
     M --> K
+    J -->|拒绝，不推进状态| N[记录违规步、原因、合法前缀]
+    N -->|请求预算可用| H
+    N -->|预算耗尽| K
 ```
 
 可单独查看或用于汇报的图文件：[PNG](route-layer-r4-agent-workflow-structure.png) · [SVG](route-layer-r4-agent-workflow-structure.svg)；可编辑源文件：[Mermaid](route-layer-r4-agent-workflow-structure.mmd)。
@@ -214,4 +217,18 @@ v17 DeepSeek 用户消息为 2,539 字节：`map` 1,055 字节、`map_reading_gu
 该路线仿真 2,500 m、316.042 秒、0.46275 kWh；API 输入/输出 40,270/3,844 token，31 次调用，API 费用估算 0.132342 CNY；模型路线源为 `r4_stepwise_llm`，没有传统算法回退。API 原始捕获、独立校验审计和回放见 [v3 结果记录](../outputs/route_layer/r4_stepwise_live_v3/seed0_semantic_road_feature.json)、[原始捕获副本](../outputs/route_layer/r4_stepwise_live_v3/seed0_semantic_road_feature_raw_capture.json)、[离线路线审计](../outputs/route_layer/r4_stepwise_live_v3/posthoc_success_validation_audit.json) 和 [回放页面](../outputs/route_layer/r4_stepwise_live_v3/replay.html)。结果记录中的嵌套 `validation_status` 曾与顶层校验冲突，现已修正运行代码并通过回归测试；v3 的 API 尝试记录未更改。
 
 本次可确认：紧凑输入、LLM 分步提议和确定性程序校验组成的 R4 smoke 在这一个 8×8 任务上能够产出可接纳的路线。它不是 100×100 的正式评测，不能推出路线最优或十种子成功率。R4 十种子主组及 R4-A/R4-B 仍未开始；正式预算、地图规模和三个方法对照仍按实验方案处理。
+
+## 13. 2026-10-22 十种子预检与当前调用门槛
+
+本节覆盖旧 DeepSeek 操作细节之后的当前状态；DeepSeek smoke、v17 与纯 LLM v8 仍作为历史记录保存，不与后续 Codex CLI 条件合并。
+
+对冻结的 10 张地图、100 条订单、50 条正式场景完成无模型请求的 R4 全量输入预检。地图和订单文件与 pure LLM v8 逐字节一致，正式场景去除重复地图快照后相同。30 条语义 Qwen 查询的保存 query、原模型 query、公开任务字段及 hash 全部通过核对；Qwen 意图结果中 29 条合法候选可进入路线阶段，seed 3 `task-0003-0005` 因道路特征侧别关系冲突保留为语义失败。
+
+150 条任务分为 129 条端点有效且两段分别可达、10 条非法端点、10 条预设不可达和 1 条语义端点失败。129 个候选首步 compact map 与底层有向边/成本等价且没有评估器真值；最短动作下界中位 124、P90 198、最大 264、合计 17,072 步，均低于每任务 512 步动作上限。
+
+当前一个方向一次 Codex 请求的交互方法，至少需要 17,072 次路线模型请求才能完成这些 129 条任务；这还没有计算模型提议被拒绝后需要的额外请求。初始 prompt 中位 20,598 字节、最大 43,276 字节；以首步 prompt 字节数重复计算的总输入下界约 425 MB。字节数不能换算为 token 或费用。该请求量超出当前可接受的启动条件，因此正式批次暂不启动。
+
+可以评估的降请求方案是每个任务一次提交完整方向序列与逐步自检码，确定性 validator 逐边回放并记录所有违规；整条路线无任何违规时才接纳。这会保留逐步自检字段和硬约束，但取消请求之间的逐步反馈，并将“拒绝一个动作后继续搜索”改为“拒绝整条提议”。100×100 既有一次整路线检查点返回 `unable_to_construct_route`，因此新方案仍未通过模型验证。它是待确认的方法变更，不能直接替代当前已写明的分步 R4，也不能直接启动正式批次。
+
+全量预检明细见 [R4 150 任务预检索引](../outputs/route_layer/r4_codex_all_frozen_tasks_preflight_20261022_v2/index.html)、[机器可读结果](../outputs/route_layer/r4_codex_all_frozen_tasks_preflight_20261022_v2/summary.json) 和 [可复现脚本](../scripts/preflight_r4_codex_all_frozen_tasks.py)。全量 `unittest` 183 项通过，本次路线模型请求为 0。结论只针对冻结输入、现有端点产物和当前调用协议，不是路线质量、成功率、能耗或费用结果。
 

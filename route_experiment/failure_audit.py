@@ -19,6 +19,7 @@ _FAILURE_LABELS = {
     "llm_route_invalid": "模型返回了路线，但路线校验未通过",
     "llm_output_parse_failed": "已收到模型响应，但输出格式无法解析",
     "model_confirmed_no_directed_path": "模型报告有向图中至少一段不可达；该判断未经独立可达性验证",
+    "model_reported_no_directed_path": "模型报告无有向路径，但本地可达性预检确认任务链可达",
     "model_unable_to_construct_route": "模型未构造出完整路线，但没有报告已确认路网无路可走",
     "no_route": "模型返回了失败结果：未找到路线",
     "no_route_found": "模型返回了失败结果：未找到路线",

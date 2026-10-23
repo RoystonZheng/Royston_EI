@@ -1,0 +1,99 @@
+{
+  "schema_version": "codex_cli_100x100_full_route_cost_sensitivity_v2",
+  "checked_date": "2026-10-21",
+  "api_requests_made_for_this_projection": 0,
+  "status": "offline_low_confidence_sensitivity_not_a_budget_or_invoice",
+  "candidate_protocol": "one complete ordered route proposal per task with one structured self-check marker per edge; accept no route state until an independent local validator checks the complete route",
+  "workload": {
+    "routable_tasks_per_group": 130,
+    "full_route_prompt_plus_codex_schema_bytes_per_group": 5814814,
+    "full_route_prompt_bytes_per_group": 3289666,
+    "full_route_schema_bytes_per_group": 2525148,
+    "stepwise_prompt_plus_schema_bytes_per_group": 446197487,
+    "stepwise_central_input_token_projection_per_group": 369282201,
+    "prompt_plus_schema_byte_ratio_stepwise_to_full_route": 76.735
+  },
+  "exact_offline_schema_audit": {
+    "source": "outputs/route_layer/r4_preflight/codex_cli_full_route_schema_size_audit_20261021.json",
+    "routable_task_count": 130,
+    "tasks_per_seed": {
+      "0": 13,
+      "1": 13,
+      "2": 13,
+      "3": 13,
+      "4": 13,
+      "5": 13,
+      "6": 13,
+      "7": 13,
+      "8": 13,
+      "9": 13
+    },
+    "schema_bytes_per_group": {
+      "count": 130,
+      "max": 40287,
+      "mean": 19424.215384615385,
+      "median": 18008,
+      "min": 2993,
+      "p90": 32330,
+      "sum": 2525148
+    },
+    "prompt_plus_schema_bytes_per_group": {
+      "count": 130,
+      "max": 87119,
+      "mean": 44729.338461538464,
+      "median": 41742,
+      "min": 11421,
+      "p90": 70808,
+      "sum": 5814814
+    },
+    "note": "Frozen evaluator endpoints were used only to construct offline task packages and size schemas; truth fields were not added to the prompt."
+  },
+  "calibration": {
+    "source_runs": [
+      "outputs/route_layer/r4_codex_independent_pilot_v5/",
+      "outputs/route_layer/r4_codex_independent_pilot_v6/",
+      "outputs/route_layer/r4_codex_independent_pilot_v7/",
+      "outputs/route_layer/r4_codex_independent_pilot_v8/"
+    ],
+    "included_observed_requests": 28,
+    "mean_8x8_prompt_plus_schema_bytes": 4417.428571,
+    "mean_8x8_input_tokens": 9778.785714,
+    "observed_byte_range": [
+      4273,
+      4568
+    ],
+    "method": "For each of 130 requests, predicted input = calibrated intercept + slope * serialized prompt-plus-schema bytes; each slope is anchored to the observed mean input at the observed mean 8x8 size."
+  },
+  "input_token_sensitivity_per_group": {
+    "low": {
+      "slope_tokens_per_byte": 0.4,
+      "calibrated_intercept_tokens_per_request": 8011.814286,
+      "estimated_input_tokens_per_group": 3367461,
+      "api_price_equivalent_usd_input_only_per_group": 0.673492,
+      "codex_standard_credit_equivalent_input_only_per_group": 16.837305
+    },
+    "central": {
+      "slope_tokens_per_byte": 0.542780201,
+      "calibrated_intercept_tokens_per_request": 7381.092946,
+      "estimated_input_tokens_per_group": 4115708,
+      "api_price_equivalent_usd_input_only_per_group": 0.823142,
+      "codex_standard_credit_equivalent_input_only_per_group": 20.57854
+    },
+    "high": {
+      "slope_tokens_per_byte": 0.7,
+      "calibrated_intercept_tokens_per_request": 6686.585714,
+      "estimated_input_tokens_per_group": 4939626,
+      "api_price_equivalent_usd_input_only_per_group": 0.987925,
+      "codex_standard_credit_equivalent_input_only_per_group": 24.69813
+    }
+  },
+  "central_input_only_ratio_stepwise_to_full_route": 89.73,
+  "excluded_costs_and_unknowns": [
+    "full-route output token use and response truncation risk are not observed and are excluded",
+    "feedback/replanning calls are excluded",
+    "input-token fit is extrapolated from 8x8 requests although exact 100x100 prompt and schema bytes are now measured; it is not a tokenizer measurement or confidence interval",
+    "Codex CLI account billing/plan decrement is not reported; Standard credits and API prices are rate-card equivalents only",
+    "R4-A/R4-B may use different input schemas and payload sizes; the candidate was sized from the R4 full-route prompt/schema only"
+  ],
+  "decision_gate": "Candidate remains unapproved. Before any model request, freeze protocol, verify output bound and whole-route rejection behavior offline, and set request/token stop gates."
+}

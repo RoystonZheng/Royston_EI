@@ -1,0 +1,36 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "failure_reason_code": {
+      "enum": [
+        "none",
+        "unable_to_construct_route",
+        "no_directed_path"
+      ],
+      "type": "string"
+    },
+    "move_sequence": {
+      "pattern": "^[EWNS]{0,512}$",
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "completed",
+        "failed"
+      ],
+      "type": "string"
+    },
+    "step_check_sequence": {
+      "description": "One 1 per move, in route order, meaning the model performed its step check.",
+      "pattern": "^1{0,512}$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "status",
+    "move_sequence",
+    "step_check_sequence",
+    "failure_reason_code"
+  ],
+  "type": "object"
+}

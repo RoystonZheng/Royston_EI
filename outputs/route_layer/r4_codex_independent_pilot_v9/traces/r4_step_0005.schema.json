@@ -1,0 +1,65 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "action": {
+      "enum": [
+        "move"
+      ],
+      "type": "string"
+    },
+    "direction": {
+      "enum": [
+        "E",
+        "N"
+      ],
+      "type": "string"
+    },
+    "failure_reason_code": {
+      "enum": [
+        "none",
+        "unable_to_construct_route"
+      ],
+      "type": "string"
+    },
+    "self_check": {
+      "additionalProperties": false,
+      "properties": {
+        "allowed_directed_edge": {
+          "description": "本步的方向对应从当前位置出发且实际允许通行的有向道路边。",
+          "type": "boolean"
+        },
+        "inside_boundary": {
+          "description": "本步目标节点仍在地图边界内。",
+          "type": "boolean"
+        },
+        "pickup_order_ok": {
+          "description": "本步不会在上车前到达下车点。",
+          "type": "boolean"
+        },
+        "starts_at_current": {
+          "description": "本步有向道路边的起点就是当前节点 s.n。",
+          "type": "boolean"
+        },
+        "target_node_is_new": {
+          "description": "目标节点是首次访问的节点，尚未出现在 s.v 列表中。",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "allowed_directed_edge",
+        "starts_at_current",
+        "inside_boundary",
+        "pickup_order_ok",
+        "target_node_is_new"
+      ],
+      "type": "object"
+    }
+  },
+  "required": [
+    "action",
+    "direction",
+    "self_check",
+    "failure_reason_code"
+  ],
+  "type": "object"
+}

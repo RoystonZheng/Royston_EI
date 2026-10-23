@@ -1,0 +1,95 @@
+{
+  "dataset_id": "porto_hybrid_real_map_dispatch_v1",
+  "status": "partial_candidate_data_built",
+  "generated_at": "2026-10-22",
+  "excluded_inputs": [
+    "user-supplied fence10089 local dataset"
+  ],
+  "sources": [
+    {
+      "name": "UCI Taxi Service Trajectory - Prediction Challenge, ECML PKDD 2015",
+      "doi": "10.24432/C55W25",
+      "url": "https://archive.ics.uci.edu/dataset/339/taxi%2Bservice%2Btrajectory%2B%20prediction%2Bchallenge%2Becml%2Bpkdd%2B2015",
+      "retrieval_mirror": {
+        "citation": "Dorosti, Ali (2023). train.csv.zip. figshare. Dataset.",
+        "doi": "10.6084/m9.figshare.24796053.v1",
+        "metadata_url": "https://api.figshare.com/v2/articles/24796053",
+        "download_url": "https://ndownloader.figshare.com/files/43611822",
+        "expected_size_bytes": 540159049,
+        "expected_md5": "520c5c1b4d753e1b96e869d41a12fdda",
+        "role": "CC BY 4.0 Figshare record describing full-year Porto taxi trajectories; exact byte/content equivalence to the current UCI download has not been confirmed"
+      },
+      "license": "CC BY 4.0",
+      "file": "raw/uci/train.csv.zip",
+      "upstream_reported_size": "509.3 MB",
+      "local_status": "mirror_integrity_verified; equivalence_to_current_uci_file_pending",
+      "actual_size_bytes": 540159049,
+      "mirror_md5_verified": "520c5c1b4d753e1b96e869d41a12fdda",
+      "sha256": "4d8913eea39f5b0d0f787863df3fa2a9d3081ab5b4a5382bea7b2bbde268ba22",
+      "published_instance_count": 1710671,
+      "parsed_csv_rows": 1710670,
+      "usable_endpoint_rows": 1704759,
+      "count_discrepancy_rows": 1,
+      "role": "historical taxi trip endpoint and OD heat proxy; not online ride-hailing demand or vehicle availability"
+    },
+    {
+      "name": "OpenStreetMap Porto road-network snapshot",
+      "url": "https://www.openstreetmap.org/",
+      "retrieval_url": "https://overpass-api.de/api/interpreter",
+      "query_file": "raw/osm/porto_candidate.overpass.ql",
+      "license": "ODbL",
+      "file": "raw/osm/porto_candidate.osm",
+      "local_status": "candidate_snapshot_downloaded_preflight_passed",
+      "snapshot_timestamp": "2026-10-22T04:01:05Z",
+      "bbox_wgs84": [
+        -8.635,
+        41.138,
+        -8.595,
+        41.162
+      ],
+      "sha256": "059375a23441dea3a24374eaa24fc73adfd15a83b0354ba72a9c8d9f327d8fa1",
+      "preflight_counts": {
+        "osm_nodes": 31460,
+        "osm_ways": 7278,
+        "routable_ways_after_simple_access_filter": 2179,
+        "routable_directed_arcs": 14351,
+        "oneway_yes_ways": 1145,
+        "oneway_no_ways": 250,
+        "weak_components": 35,
+        "largest_weak_component_nodes": 8134,
+        "mapped_traffic_signal_nodes": 418,
+        "turn_restriction_relations": 121,
+        "top_10_pickup_hotspot_ordered_pairs_reachable_before_turn_restrictions": "100/100"
+      },
+      "role": "directed geographic road graph, access and turn restrictions, and mapped signal presence where available"
+    },
+    {
+      "name": "SUMO-generated traffic scenarios",
+      "url": "https://sumo.dlr.de/",
+      "license": "experiment-generated data; record software version and source inputs",
+      "file": "derived/sumo/",
+      "local_status": "not_built",
+      "role": "simulated traffic flows, signal programs, queues, and route travel times"
+    }
+  ],
+  "build": {
+    "fence": "heat_informed_candidate_pending_freeze",
+    "map_matching": "final_point_to_directed_link_binding_not_run",
+    "hotspot_aggregation": "completed; 1704759 aggregated trips; one-row metadata discrepancy recorded",
+    "osm_structural_preflight": "completed for top 10 pickup hotspot cells; turn restrictions not enforced",
+    "derived_orders": "fixed_fleet_route_v1_draft_generated_for_seeds_0_to_9; all final point-to-link matching and traditional reachability validation pending",
+    "fixed_fleet_route_scenario": "design and configuration added in derived/scenarios; 10 vehicles x 10 fixed-order tasks per seed; no dispatch; not formally validated",
+    "sumo_network": "not_built; local SUMO/netconvert/TraCI runtime unavailable at design time",
+    "sumo_simulation": "not_run",
+    "experiments": "not_run"
+  },
+  "checksums": "manifests/SHA256SUMS.txt",
+  "scenario_artifacts": {
+    "design": "fixed_fleet_route_experiment_design.md",
+    "configuration": "derived/scenarios/scenario_config.json",
+    "route_task_schema": "derived/scenarios/route_task.schema.json",
+    "draft_order_manifest": "derived/scenarios/orders_manifest.json",
+    "draft_order_status": "10 seeds generated; point-to-link matching and all route-leg reachability checks pending",
+    "formal_results": "not generated"
+  }
+}

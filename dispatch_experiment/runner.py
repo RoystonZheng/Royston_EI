@@ -17,6 +17,7 @@ from .agent import CandidateFeedback, ContextFunction, VehicleAgent, apply_feedb
 from .models import (
     Assignment,
     Candidate,
+    CandidateDecision,
     DispatchConfig,
     DispatchInput,
     DispatchOutput,
@@ -40,6 +41,31 @@ def _percentile(values: Sequence[float], percentile: float) -> Optional[float]:
     ordered = sorted(values)
     index = min(len(ordered) - 1, max(0, int(math.ceil(percentile * len(ordered))) - 1))
     return ordered[index]
+
+
+def _maximum_matching_cardinality(candidates: Sequence[Candidate]) -> int:
+    """Return maximum one-to-one vehicle/order capacity in hard-feasible edges."""
+
+    adjacency: Dict[str, set] = {}
+    for candidate in candidates:
+        if candidate.hard_constraint_ok:
+            adjacency.setdefault(candidate.vehicle_id, set()).add(candidate.order_id)
+    matched_order_to_vehicle: Dict[str, str] = {}
+
+    def augment(vehicle_id: str, seen_orders: set) -> bool:
+        for order_id in sorted(adjacency.get(vehicle_id, set())):
+            if order_id in seen_orders:
+                continue
+            seen_orders.add(order_id)
+            previous_vehicle = matched_order_to_vehicle.get(order_id)
+            if previous_vehicle is None or augment(previous_vehicle, seen_orders):
+                matched_order_to_vehicle[order_id] = vehicle_id
+                return True
+        return False
+
+    return sum(
+        1 for vehicle_id in sorted(adjacency) if augment(vehicle_id, set())
+    )
 
 
 def _hotspot_definitions(road_map) -> List[Dict[str, object]]:
@@ -159,6 +185,12 @@ def _method_options(method_name: str) -> Tuple[bool, bool, str]:
         return True, True, "agent_offline_llm_feedback_surrogate"
     if method_name == "D5_pure_llm_direct":
         return False, False, "pure_llm_direct_matching"
+    if method_name == "D6_agent_codex_context_optimizer":
+        return True, False, "agent_codex_context_policy_optimizer"
+    if method_name == "D7_agent_codex_capacity_shield_optimizer":
+        return True, False, "agent_codex_capacity_shield_optimizer"
+    if method_name == "D8_agent_codex_nn_capacity_shield_optimizer":
+        return True, False, "agent_codex_nn_capacity_shield_optimizer"
     raise ValueError("unknown dispatch method: " + method_name)
 
 
@@ -173,6 +205,7 @@ class DispatchSimulation:
         route_oracle=None,
         retain_round_records: bool = True,
         llm_trace_dir: Optional[Path] = None,
+        codex_policy_replay_path: Optional[Path] = None,
     ):
         self.config = config
         self.retain_round_records = retain_round_records
@@ -226,6 +259,20 @@ class DispatchSimulation:
         self.order_by_id = {order.order_id: order for order in self.orders}
         self.vehicle_by_id = {vehicle.vehicle_id: vehicle for vehicle in self.vehicles}
         self.method_use_context, self.method_use_feedback, self.audit_label = _method_options(config.method_name)
+        self.method_use_neural_ranker = config.method_name == "D8_agent_codex_nn_capacity_shield_optimizer"
+        self.method_use_capacity_shield = config.method_name in {
+            "D7_agent_codex_capacity_shield_optimizer",
+            "D8_agent_codex_nn_capacity_shield_optimizer",
+        }
+        self.neural_ranker = None
+        if self.method_use_neural_ranker:
+            if not config.neural_ranker_model_path:
+                raise ValueError("D8 requires neural_ranker_model_path")
+            if config.neural_ranker_top_k < 1:
+                raise ValueError("neural_ranker_top_k_must_be_positive")
+            from .neural_ranker import NeuralCandidateRanker
+
+            self.neural_ranker = NeuralCandidateRanker(config.neural_ranker_model_path)
         function_mode = "manual_linear_clip"
         if config.method_name == "D3_agent_llm_context_optimizer" or config.method_name == "D4_agent_llm_feedback_optimizer":
             function_mode = "llm_linear_clip_surrogate"
@@ -239,6 +286,7 @@ class DispatchSimulation:
                 config.feedback_mode if self.method_use_feedback else "none"
             )
         self.direct_llm = None
+        self.codex_policy = None
         if config.method_name == "D5_pure_llm_direct":
             if config.llm_backend != "codex_cli":
                 raise ValueError(
@@ -252,6 +300,23 @@ class DispatchSimulation:
                 model=config.llm_model,
                 trace_dir=llm_trace_dir,
             )
+        if config.method_name in {
+            "D6_agent_codex_context_optimizer",
+            "D7_agent_codex_capacity_shield_optimizer",
+            "D8_agent_codex_nn_capacity_shield_optimizer",
+        }:
+            if config.llm_backend != "codex_cli":
+                raise ValueError("Codex context methods require llm_backend='codex_cli'")
+            if llm_trace_dir is None:
+                raise ValueError("Codex context methods require llm_trace_dir to preserve usage traces")
+            from .llm import CodexCliContextPolicy
+
+            self.codex_policy = CodexCliContextPolicy(
+                model=config.llm_model,
+                trace_dir=llm_trace_dir,
+                replay_final_path=codex_policy_replay_path,
+            )
+            self.context_function.mode = "codex_cli_generated_linear_clip_with_manual_fallback"
         self.optimizer = DeterministicGlobalOptimizer()
         self.round_records: List[DispatchRoundRecord] = []
         self.round_audits: List[Dict[str, object]] = []
@@ -405,6 +470,18 @@ class DispatchSimulation:
         raw_candidates: List[Candidate] = []
         all_candidates: List[Candidate] = []
         all_decisions = []
+        visible_waiting_orders = [
+            order for order in self.orders
+            if order.status == "waiting" and order.arrival_time_sec <= now
+        ]
+        policy_pending = bool(
+            self.codex_policy is not None
+            and not self.codex_policy.invocation_attempted
+            and visible_waiting_orders
+        )
+        context_policy_record = None
+        capacity_shield_record = None
+        neural_ranker_record = None
         for vehicle in self.vehicles:
             agent = VehicleAgent(vehicle.vehicle_id)
             vehicle_candidates, context_candidates, decisions = agent.propose(
@@ -416,13 +493,205 @@ class DispatchSimulation:
                 oracle=self.oracle,
                 config=self.config,
                 context_function=self.context_function,
-                use_context=self.method_use_context,
+                use_context=self.method_use_context and not policy_pending,
             )
             raw_candidates.extend(vehicle_candidates)
             all_candidates.extend(
-                context_candidates if self.method_use_context else vehicle_candidates
+                context_candidates
+                if self.method_use_context and not policy_pending
+                else vehicle_candidates
             )
             all_decisions.extend(decisions)
+        if policy_pending:
+            parameters, context_policy_record = self.codex_policy.generate(
+                snapshot_time_sec=now,
+                vehicles=self.vehicles,
+                orders=self.orders,
+                candidates=raw_candidates,
+                max_wait_sec=self.config.max_pickup_wait_sec,
+            )
+            if parameters:
+                self.context_function.set_parameters(
+                    parameters["base"],
+                    parameters["weights"],
+                    mode="codex_cli_generated_linear_clip",
+                    version="codex-policy-v1",
+                )
+            all_candidates = []
+            all_decisions = []
+            vehicle_ids = sorted({candidate.vehicle_id for candidate in raw_candidates})
+            for vehicle_id in vehicle_ids:
+                vehicle_candidates = [
+                    candidate for candidate in raw_candidates
+                    if candidate.vehicle_id == vehicle_id
+                ]
+                feasible_candidates = [
+                    candidate for candidate in vehicle_candidates
+                    if candidate.hard_constraint_ok
+                ]
+                retained = []
+                decisions = []
+                for candidate in vehicle_candidates:
+                    if not candidate.hard_constraint_ok:
+                        decisions.append(CandidateDecision(
+                            candidate_id=candidate.candidate_id,
+                            agent_id=vehicle_id,
+                            filter_stage="after_hard_check",
+                            agent_decision="reject",
+                            hard_constraint_pass=False,
+                            context_threshold_sec=None,
+                            context_pass=False,
+                            reason=candidate.rejection_reason or "hard_constraint_rejected",
+                        ))
+                        continue
+                    threshold = self.context_function.threshold(candidate.feature_vector)
+                    context_pass = candidate.predicted_wait_sec <= threshold
+                    candidate.context_threshold_sec = threshold
+                    candidate.context_pass = context_pass
+                    if context_pass:
+                        retained.append(candidate)
+                    decisions.append(CandidateDecision(
+                        candidate_id=candidate.candidate_id,
+                        agent_id=vehicle_id,
+                        filter_stage="after_function",
+                        agent_decision="retain" if context_pass else "reject",
+                        hard_constraint_pass=True,
+                        context_threshold_sec=threshold,
+                        context_pass=context_pass,
+                        reason="passed_hard_and_context_checks" if context_pass else "context_threshold_rejected",
+                    ))
+                if feasible_candidates and not retained:
+                    retained = list(feasible_candidates)
+                    decisions.extend(CandidateDecision(
+                        candidate_id=candidate.candidate_id,
+                        agent_id=vehicle_id,
+                        filter_stage="fallback_retain",
+                        agent_decision="fallback_retain",
+                        hard_constraint_pass=True,
+                        context_threshold_sec=candidate.context_threshold_sec,
+                        context_pass=candidate.context_pass,
+                        fallback_used=True,
+                        fallback_reason="no_candidate_after_context_filter",
+                    ) for candidate in feasible_candidates)
+                all_candidates.extend(retained)
+                all_decisions.extend(decisions)
+        if self.neural_ranker is not None:
+            scored_candidates = [candidate for candidate in all_candidates if candidate.hard_constraint_ok]
+            scores = self.neural_ranker.score_candidates(
+                scored_candidates,
+                max_wait_sec=self.config.max_pickup_wait_sec,
+                horizon_sec=self.config.horizon_sec,
+            )
+            scored_by_vehicle: Dict[str, List[Candidate]] = {}
+            for candidate, score in zip(scored_candidates, scores):
+                candidate.neural_score = score
+                scored_by_vehicle.setdefault(candidate.vehicle_id, []).append(candidate)
+            retained_ids = set()
+            for vehicle_id, vehicle_candidates in scored_by_vehicle.items():
+                ordered = sorted(
+                    vehicle_candidates,
+                    key=lambda candidate: (
+                        -float(candidate.neural_score),
+                        candidate.candidate_id,
+                    ),
+                )
+                retained_ids.update(
+                    candidate.candidate_id
+                    for candidate in ordered[:self.config.neural_ranker_top_k]
+                )
+            previous_count = len(all_candidates)
+            all_candidates = [
+                candidate for candidate in all_candidates
+                if candidate.candidate_id in retained_ids
+            ]
+            for candidate in scored_candidates:
+                kept = candidate.candidate_id in retained_ids
+                all_decisions.append(CandidateDecision(
+                    candidate_id=candidate.candidate_id,
+                    agent_id=candidate.vehicle_id,
+                    filter_stage="nn_candidate_ranker",
+                    agent_decision="retain" if kept else "reject",
+                    hard_constraint_pass=True,
+                    context_threshold_sec=candidate.context_threshold_sec,
+                    context_pass=bool(candidate.context_pass),
+                    reason=(
+                        "selected_by_pairwise_mlp_top_k"
+                        if kept else "ranked_below_vehicle_top_k"
+                    ),
+                ))
+            neural_ranker_record = {
+                "enabled": True,
+                "model_id": self.neural_ranker.model_id,
+                "model_sha256": self.neural_ranker.checkpoint_sha256,
+                "top_k_per_vehicle": self.config.neural_ranker_top_k,
+                "scored_candidate_count": len(scored_candidates),
+                "candidate_count_before_ranker": previous_count,
+                "candidate_count_after_ranker": len(all_candidates),
+                "candidate_count_pruned": previous_count - len(all_candidates),
+                "score_min": min(scores) if scores else None,
+                "score_max": max(scores) if scores else None,
+                "label_source": self.neural_ranker.payload.get("training", {}).get("label_source"),
+            }
+        if self.method_use_capacity_shield:
+            full_cardinality = _maximum_matching_cardinality(raw_candidates)
+            filtered_cardinality = _maximum_matching_cardinality(all_candidates)
+            restored = []
+            retained_ids = {candidate.candidate_id for candidate in all_candidates}
+            rejected_feasible = [
+                candidate
+                for candidate in raw_candidates
+                if candidate.hard_constraint_ok and candidate.candidate_id not in retained_ids
+            ]
+
+            def restoration_key(candidate: Candidate):
+                threshold = candidate.context_threshold_sec
+                if threshold is None or not math.isfinite(float(threshold)):
+                    threshold = self.config.max_pickup_wait_sec
+                wait = candidate.predicted_wait_sec
+                if not math.isfinite(float(wait)):
+                    wait = float("inf")
+                return (
+                    max(0.0, float(wait) - float(threshold)),
+                    float(wait),
+                    float(candidate.empty_distance_m),
+                    candidate.candidate_id,
+                )
+
+            if filtered_cardinality < full_cardinality:
+                for candidate in sorted(rejected_feasible, key=restoration_key):
+                    all_candidates.append(candidate)
+                    restored.append(candidate)
+                    if _maximum_matching_cardinality(all_candidates) >= full_cardinality:
+                        break
+            for candidate in restored:
+                all_decisions.append(CandidateDecision(
+                    candidate_id=candidate.candidate_id,
+                    agent_id=candidate.vehicle_id,
+                    filter_stage="max_cardinality_capacity_shield",
+                    agent_decision="restore_for_capacity",
+                    hard_constraint_pass=True,
+                    context_threshold_sec=candidate.context_threshold_sec,
+                    context_pass=bool(candidate.context_pass),
+                    fallback_used=True,
+                    fallback_reason="preserve_full_hard_feasible_max_matching",
+                    reason="restored_by_frozen_capacity_shield_priority",
+                ))
+            final_cardinality = _maximum_matching_cardinality(all_candidates)
+            capacity_shield_record = {
+                "enabled": True,
+                "full_hard_feasible_max_matching": full_cardinality,
+                "filtered_max_matching_before_shield": filtered_cardinality,
+                "max_matching_after_shield": final_cardinality,
+                "restored_candidate_count": len(restored),
+                "restored_candidate_ids": [candidate.candidate_id for candidate in restored],
+                "restoration_priority": [
+                    "smallest_positive_wait_minus_context_threshold",
+                    "predicted_wait_sec_ascending",
+                    "empty_distance_m_ascending",
+                    "candidate_id_ascending",
+                ],
+                "capacity_preserved": final_cardinality == full_cardinality,
+            }
         # Full audit mode snapshots the method-neutral candidate table before
         # context filtering or feedback mutates the method's working set.
         # Compact audit mode does not retain per-round tables, avoiding several
@@ -432,6 +701,7 @@ class DispatchSimulation:
             shared_input_candidates = copy.deepcopy(raw_candidates)
             for candidate in shared_input_candidates:
                 candidate.context_threshold_sec = None
+                candidate.neural_score = None
                 candidate.context_pass = True
                 candidate.feedback_decision = None
                 candidate.feedback_risk = None
@@ -525,6 +795,9 @@ class DispatchSimulation:
                 "hard_constraint_errors": errors,
                 "one_to_one_valid": one_to_one_valid,
                 "direct_llm_assignment": direct_llm_record,
+                "codex_context_policy": context_policy_record,
+                "neural_candidate_ranker": neural_ranker_record,
+                "max_cardinality_shield": capacity_shield_record,
                 "direct_llm_error_count": (
                     len(self.direct_llm.errors) if self.direct_llm is not None else 0
                 ),
@@ -545,6 +818,7 @@ class DispatchSimulation:
             for candidate in raw_candidates:
                 row = candidate.to_dict()
                 row["context_threshold_sec"] = None
+                row["neural_score"] = None
                 row["context_pass"] = True
                 row["feedback_decision"] = None
                 row["feedback_risk"] = None
@@ -592,9 +866,13 @@ class DispatchSimulation:
                 direct_llm_record.get("latency_ms", 0.0)
                 if self.direct_llm is not None and direct_llm_record
                 else (
+                    context_policy_record.get("original_latency_ms")
+                    if context_policy_record is not None
+                    else (
                     feedback_ms
                     if self.method_use_feedback and self.feedback.is_live_llm
                     else 0.0
+                    )
                 )
             ),
             optimizer_time_ms=(0.0 if self.config.method_name == "D5_pure_llm_direct" else optimizer_ms),
@@ -602,17 +880,29 @@ class DispatchSimulation:
             llm_call_count=(
                 int(bool(direct_llm_record.get("request_made")))
                 if self.direct_llm is not None and direct_llm_record
-                else (self.feedback.call_count if self.feedback.is_live_llm else 0)
+                else (
+                    int(bool(context_policy_record.get("request_made")))
+                    if context_policy_record is not None
+                    else (self.feedback.call_count if self.feedback.is_live_llm else 0)
+                )
             ),
             input_tokens=(
                 direct_llm_record.get("input_tokens", 0)
                 if self.direct_llm is not None and direct_llm_record
-                else self.feedback.input_tokens
+                else (
+                    context_policy_record.get("usage", {}).get("input_tokens")
+                    if context_policy_record is not None
+                    else self.feedback.input_tokens
+                )
             ),
             output_tokens=(
                 direct_llm_record.get("output_tokens", 0)
                 if self.direct_llm is not None and direct_llm_record
-                else self.feedback.output_tokens
+                else (
+                    context_policy_record.get("usage", {}).get("output_tokens")
+                    if context_policy_record is not None
+                    else self.feedback.output_tokens
+                )
             ),
             api_cost=(self.feedback.api_cost if self.direct_llm is None else None),
             api_cost_usd=(
@@ -624,7 +914,7 @@ class DispatchSimulation:
                 "context_function": self.context_function.to_record(),
                 "feedback_mode": self.feedback.mode,
                 "feedback_evaluation_count": self.feedback.call_count,
-                "live_llm": self.feedback.is_live_llm or self.direct_llm is not None,
+                "live_llm": self.feedback.is_live_llm or self.direct_llm is not None or self.codex_policy is not None,
                 "llm_error_count": (
                     len(self.direct_llm.errors)
                     if self.direct_llm is not None
@@ -633,6 +923,9 @@ class DispatchSimulation:
                 "audit_label": self.audit_label,
                 "future_order_visibility": False,
                 "direct_llm_assignment": direct_llm_record,
+                "codex_context_policy": context_policy_record,
+                "neural_candidate_ranker": neural_ranker_record,
+                "max_cardinality_shield": capacity_shield_record,
                 "direct_llm_error_count": (
                     len(self.direct_llm.errors) if self.direct_llm is not None else 0
                 ),
@@ -727,6 +1020,7 @@ class DispatchSimulation:
         cancelled = sum(1 for order in self.orders if order.status == "cancelled")
         total_empty = sum(vehicle.total_empty_distance_m for vehicle in self.vehicles)
         total_energy = sum(vehicle.total_energy_kwh for vehicle in self.vehicles)
+        codex_client = self.direct_llm or self.codex_policy
         summary = ExperimentSummary(
             experiment_run_id="run-seed-{0}".format(self.config.seed),
             method_name=self.config.method_name,
@@ -745,78 +1039,78 @@ class DispatchSimulation:
             total_energy_kwh=total_energy,
             total_dispatch_rounds=self.metrics["rounds"],
             total_llm_calls=(
-                self.direct_llm.call_count
-                if self.direct_llm is not None
+                codex_client.call_count
+                if codex_client is not None
                 else (self.feedback.call_count if self.feedback.is_live_llm else 0)
             ),
             total_llm_input_tokens=(
-                self.direct_llm.input_tokens
-                if self.direct_llm is not None and self.direct_llm.input_usage_call_count == self.direct_llm.call_count
+                codex_client.input_tokens
+                if codex_client is not None and codex_client.input_usage_call_count == codex_client.call_count
                 else None
             ),
             total_llm_cached_input_tokens=(
-                self.direct_llm.cached_input_tokens
-                if self.direct_llm is not None and self.direct_llm.cached_input_usage_call_count == self.direct_llm.call_count
+                codex_client.cached_input_tokens
+                if codex_client is not None and codex_client.cached_input_usage_call_count == codex_client.call_count
                 else None
             ),
             total_llm_output_tokens=(
-                self.direct_llm.output_tokens
-                if self.direct_llm is not None and self.direct_llm.output_usage_call_count == self.direct_llm.call_count
+                codex_client.output_tokens
+                if codex_client is not None and codex_client.output_usage_call_count == codex_client.call_count
                 else None
             ),
             total_llm_tokens=(
-                self.direct_llm.input_tokens + self.direct_llm.output_tokens
-                if self.direct_llm is not None
-                and self.direct_llm.input_usage_call_count == self.direct_llm.call_count
-                and self.direct_llm.output_usage_call_count == self.direct_llm.call_count
+                codex_client.input_tokens + codex_client.output_tokens
+                if codex_client is not None
+                and codex_client.input_usage_call_count == codex_client.call_count
+                and codex_client.output_usage_call_count == codex_client.call_count
                 else None
             ),
             llm_usage_status=(
                 "available_best_effort"
-                if self.direct_llm is not None
-                and self.direct_llm.usage_call_count == self.direct_llm.call_count
-                and self.direct_llm.input_usage_call_count == self.direct_llm.call_count
-                and self.direct_llm.output_usage_call_count == self.direct_llm.call_count
-                and self.direct_llm.call_count
-                else ("missing_or_partial" if self.direct_llm is not None and self.direct_llm.call_count else "not_recorded")
+                if codex_client is not None
+                and codex_client.usage_call_count == codex_client.call_count
+                and codex_client.input_usage_call_count == codex_client.call_count
+                and codex_client.output_usage_call_count == codex_client.call_count
+                and codex_client.call_count
+                else ("missing_or_partial" if codex_client is not None and codex_client.call_count else "not_recorded")
             ),
             total_codex_cli_invocations=(
-                self.direct_llm.call_count
-                if self.direct_llm is not None and getattr(self.direct_llm, "backend", "codex_cli") == "codex_cli"
+                codex_client.call_count
+                if codex_client is not None and getattr(codex_client, "backend", "codex_cli") == "codex_cli"
                 else 0
             ),
-            total_api_cost=(self.feedback.api_cost if self.direct_llm is None else None),
+            total_api_cost=(self.feedback.api_cost if codex_client is None else None),
             total_api_cost_usd=(
                 (
                     None
-                    if self.direct_llm.unknown_cost_count
-                    else self.direct_llm.api_cost_usd
+                    if codex_client.unknown_cost_count
+                    else codex_client.api_cost_usd
                 )
-                if self.direct_llm is not None
+                if codex_client is not None
                 else None
             ),
             total_codex_standard_credit_equivalent=(
-                self.direct_llm.codex_standard_credit_equivalent
-                if self.direct_llm is not None
-                and self.direct_llm.cost_estimate_call_count == self.direct_llm.call_count
-                and self.direct_llm.call_count
+                codex_client.codex_standard_credit_equivalent
+                if codex_client is not None
+                and codex_client.cost_estimate_call_count == codex_client.call_count
+                and codex_client.call_count
                 else None
             ),
             total_api_equivalent_usd=(
-                self.direct_llm.api_equivalent_usd
-                if self.direct_llm is not None
-                and self.direct_llm.cost_estimate_call_count == self.direct_llm.call_count
-                and self.direct_llm.call_count
+                codex_client.api_equivalent_usd
+                if codex_client is not None
+                and codex_client.cost_estimate_call_count == codex_client.call_count
+                and codex_client.call_count
                 else None
             ),
             codex_cost_estimate_status=(
                 "estimated_from_official_standard_rate_card"
-                if self.direct_llm is not None
-                and self.direct_llm.cost_estimate_call_count == self.direct_llm.call_count
-                and self.direct_llm.call_count
+                if codex_client is not None
+                and codex_client.cost_estimate_call_count == codex_client.call_count
+                and codex_client.call_count
                 else (
                     "missing_or_partial"
-                    if self.direct_llm is not None and self.direct_llm.call_count
+                    if codex_client is not None and codex_client.call_count
                     else "not_recorded"
                 )
             ),

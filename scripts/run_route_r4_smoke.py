@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Run one gated R4 route-layer smoke task.
 
-The local Qwen parser and candidate checks must pass before the script can make
-one DeepSeek route-search request.  API retries are disabled by design.
+The local Qwen parser and candidate checks must pass before the selected route
+model is called. Retries are disabled by design.
 """
 
 import argparse
@@ -20,16 +20,13 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from mlx_lm import generate, load  # noqa: E402
-from mlx_lm.sample_utils import make_sampler  # noqa: E402
-
+from codex_cli_support import aggregate_codex_usage_cost  # noqa: E402
 from route_experiment.costs import calculate_resource_cost, evaluate_route_candidate  # noqa: E402
 from route_experiment.failure_audit import (  # noqa: E402
     estimate_route_proposal_energy,
     recover_partial_move_sequence,
 )
 from route_experiment.llm_adapter import (  # noqa: E402
-    DeepSeekClient,
     build_r4_route_search_messages,
     replay_move_sequence,
 )
@@ -372,21 +369,37 @@ def main():
         "--max-step-api-calls",
         type=int,
         default=32,
-        help="hard cap on total stepwise route requests for this smoke (default: 32)",
+        help="hard cap on actual stepwise model requests for this run (default: 32)",
+    )
+    parser.add_argument(
+        "--max-route-actions",
+        type=int,
+        default=None,
+        help="maximum route moves allowed; defaults to --max-step-api-calls for backward compatibility",
     )
     parser.add_argument(
         "--max-output-tokens",
         type=int,
         choices=(128, 256, 512, 1024),
         default=128,
-        help="maximum output tokens per route action (default: 128)",
+        help="DeepSeek output-token cap (default: 128); Codex CLI has no hard output-token cap",
     )
     parser.add_argument("--output", default="outputs/route_layer/r4_stepwise_offline_v2/seed0_semantic_road_feature.json")
     args = parser.parse_args()
-    if args.route_generation_mode == "stepwise" and not 1 <= args.max_step_api_calls <= 64:
-        parser.error("--max-step-api-calls must be between 1 and 64")
+    if args.route_generation_mode == "stepwise" and not 1 <= args.max_step_api_calls <= 4096:
+        parser.error("--max-step-api-calls must be between 1 and 4096")
+    if args.max_route_actions is not None and not 1 <= args.max_route_actions <= 4096:
+        parser.error("--max-route-actions must be between 1 and 4096")
+    route_action_budget = args.max_route_actions or args.max_step_api_calls
     if args.route_model_backend == "codex_cli" and args.route_generation_mode != "stepwise":
         parser.error("--route-model-backend=codex_cli currently requires --route-generation-mode=stepwise")
+    try:
+        from mlx_lm import generate, load
+        from mlx_lm.sample_utils import make_sampler
+    except ImportError as error:
+        raise SystemExit(
+            "missing_local_qwen_runtime: install mlx_lm in the Python environment used to run this smoke"
+        ) from error
     output_path = (ROOT / args.output).resolve()
     if output_path.exists():
         raise SystemExit("refusing_to_overwrite_existing_smoke_artifact")
@@ -528,6 +541,32 @@ def main():
             field not in query_json for field in ("true_pickup_node_id", "true_dropoff_node_id", "ground_truth")
         ),
     }
+    route_feature_context = {
+        "protocol": {"name": protocol.protocol_name, "version": protocol.protocol_version},
+        "pickup_reference": {
+            key: matched_feature[key]
+            for key in (
+                "entry_id", "entry_type", "name", "aliases", "side_of_road",
+                "orientation", "anchor_node_id", "pickup_candidates",
+            )
+            if key in matched_feature
+        },
+        "dropoff_reference": {
+            key: matched_landmark[key]
+            for key in (
+                "entry_id", "entry_type", "name", "aliases", "anchor_node_id",
+                "dropoff_candidates",
+            )
+            if key in matched_landmark
+        },
+        "intent": {
+            "pickup_anchor_refs": qwen_result.get("pickup", {}).get("anchor_refs", []),
+            "dropoff_anchor_refs": qwen_result.get("dropoff", {}).get("anchor_refs", []),
+            "pickup_relation": qwen_result.get("pickup", {}).get("relation"),
+            "pickup_side": qwen_result.get("pickup", {}).get("side"),
+            "feature_evidence_refs": evidence,
+        },
+    }
     route_search = None
     route_constraint = None
     route_audit_constraint = None
@@ -580,6 +619,7 @@ def main():
                     dropoff_id,
                     current_node_id=task.start_node_id,
                     visited_node_ids=[task.start_node_id],
+                    route_feature_context=route_feature_context,
                 )
                 stepwise_payload = json.loads(route_messages[-1]["content"])
                 map_equivalence_audit = audit_r4_stepwise_map_equivalence(
@@ -593,12 +633,12 @@ def main():
                     current_node_id=task.start_node_id,
                     pickup_seen=task.start_node_id == pickup_id,
                     visited_node_ids=[task.start_node_id],
-                    remaining_action_budget=args.max_step_api_calls,
+                    remaining_action_budget=route_action_budget,
                 )
-                checks["minimum_route_moves_fit_call_budget"] = (
+                checks["minimum_route_moves_fit_route_action_budget"] = (
                     route_constraint.remaining_minimum_moves is not None
                     and route_constraint.remaining_minimum_moves
-                    <= args.max_step_api_calls
+                    <= route_action_budget
                 )
             else:
                 route_messages = build_r4_route_search_messages(
@@ -701,6 +741,7 @@ def main():
                     else args.max_output_tokens * args.max_planning_attempts
                 ),
                 "max_step_api_calls": args.max_step_api_calls if args.route_generation_mode == "stepwise" else None,
+                "max_route_actions": route_action_budget if args.route_generation_mode == "stepwise" else None,
                 "retries": 0,
                 "messages": route_messages,
             }
@@ -760,7 +801,7 @@ def main():
         bypass.add(base_host)
         os.environ["NO_PROXY"] = ",".join(sorted(bypass))
         os.environ["no_proxy"] = os.environ["NO_PROXY"]
-    trace_dir = output_path.parent / (output_path.stem + "_codex_cli_traces")
+    trace_dir = output_path.parent / (output_path.stem + "_" + provider_key + "_traces")
     client = build_route_model_client(
         backend=args.route_model_backend,
         generation_mode=args.route_generation_mode,
@@ -793,6 +834,7 @@ def main():
         "route_generation_mode": args.route_generation_mode,
         "max_planning_attempts": args.max_planning_attempts if args.route_generation_mode == "whole_route" else None,
         "max_step_api_calls": args.max_step_api_calls if args.route_generation_mode == "stepwise" else None,
+        "max_route_actions": route_action_budget if args.route_generation_mode == "stepwise" else None,
         "model_requested": model_name,
         "base_host": base_host,
         "output_constraint_mode": route_search["output_constraint"]["mode"],
@@ -894,6 +936,11 @@ def main():
             if api_usage_complete and provider_key == "deepseek"
             else None
         )
+        codex_rate_card_estimate = (
+            aggregate_codex_usage_cost(attempts, model_name)
+            if provider_key == "codex_cli"
+            else None
+        )
         result["status"] = snapshot["status"]
         result["model_invocation_count"] = snapshot["api_request_count"]
         result["api_request_count"] = (
@@ -912,12 +959,15 @@ def main():
                 "validation": snapshot.get("validation"),
                 "steps": snapshot.get("steps", []),
                 "api_call_limit": snapshot.get("api_call_limit"),
+                "route_action_budget": snapshot.get("route_action_budget"),
+                "route_action_budget_mode": snapshot.get("route_action_budget_mode"),
                 "estimated_cost": {
                     "api_cost_amount": api_cost,
+                    "codex_rate_card_estimate": codex_rate_card_estimate,
                     "account_cost_status": (
                         "estimated_by_configured_api_rate"
                         if provider_key == "deepseek"
-                        else "codex_plan_or_credits_usage_not_priced_by_cli"
+                        else "actual_codex_account_invoice_or_allowance_not_reported_by_cli"
                     ),
                     "local_qwen_inference_compute_cost_amount": qwen_elapsed_ms
                     * prices.compute_price_per_ms,
@@ -941,8 +991,14 @@ def main():
                 pickup_id,
                 dropoff_id,
                 max_api_calls=args.max_step_api_calls,
+                max_route_actions=(
+                    route_action_budget
+                    if args.max_route_actions is not None
+                    else None
+                ),
                 blocked_edge_ids=package.blocked_edge_ids,
                 on_attempt=persist_attempts,
+                route_feature_context=route_feature_context,
             )
         else:
             route_search_result = run_r4_route_search(
@@ -985,8 +1041,12 @@ def main():
                 cost_dict["api_cost_amount"] = None
                 cost_dict["total_monetary_cost"] = None
                 cost_dict["account_cost_status"] = (
-                    "codex_plan_or_credits_usage_not_priced_by_cli"
+                    "actual_codex_account_invoice_or_allowance_not_reported_by_cli"
                 )
+                cost_dict["codex_rate_card_estimate"] = aggregate_codex_usage_cost(
+                    route_search_result.get("attempts", []), model_name
+                )
+                cost_dict["api_cost_amount_is_invoice"] = False
             provider_result.update(
                 {
                     "evaluation": evaluation.to_dict(),

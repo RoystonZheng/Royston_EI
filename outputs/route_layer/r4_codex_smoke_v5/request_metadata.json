@@ -1,0 +1,103 @@
+{
+  "experiment_id": "r4_codex_single_step_no_tool_smoke_v5",
+  "status": "single_step_no_tool_smoke_passed",
+  "task_id": "task-0000-0009",
+  "grid": "grid-8x8-seed-0",
+  "current_node": "node_0_5",
+  "allowed_directions": [
+    "N",
+    "S"
+  ],
+  "model": "gpt-5.6-luna",
+  "reasoning_effort": "low",
+  "cli_invocation_count": 1,
+  "retry_count": 0,
+  "turn_completed_count": 1,
+  "timeout": false,
+  "cli_exit_code": 0,
+  "latency_ms": 26350.508,
+  "codex_api_keys_removed_from_child_env": true,
+  "ephemeral": true,
+  "user_config_ignored": true,
+  "sandbox": "read-only",
+  "working_directory": "empty_temporary_directory",
+  "disabled_tool_features": [
+    "apps",
+    "auth_elicitation",
+    "browser_use",
+    "browser_use_external",
+    "browser_use_full_cdp_access",
+    "chronicle",
+    "code_mode",
+    "code_mode_host",
+    "computer_use",
+    "goals",
+    "hooks",
+    "image_generation",
+    "in_app_browser",
+    "memories",
+    "multi_agent",
+    "plugins",
+    "remote_plugin",
+    "shell_snapshot",
+    "shell_tool",
+    "skill_mcp_dependency_install",
+    "skill_search",
+    "tool_call_mcp_elicitation",
+    "tool_suggest",
+    "unified_exec",
+    "workspace_dependencies"
+  ],
+  "prompt_sha256": "7e0dd032277f2d357b4c118c9b534bd4ece1c1a3ec6055cf364f5a133bf91816",
+  "schema_sha256": "c1575665c6fe960484f671eb0aa1a990e2fe767d872f40f30328376dbc25a05d",
+  "event_line_count": 5,
+  "jsonl_parse_error_line_count": 0,
+  "tool_item_types": [],
+  "tool_usage_detected": false,
+  "usage_events": [
+    {
+      "input_tokens": 14153,
+      "cached_input_tokens": 0,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 1373,
+      "reasoning_output_tokens": 1313
+    }
+  ],
+  "output_token_hard_limit": null,
+  "account_cost": "not_reported_by_cli",
+  "response": {
+    "action": "move",
+    "direction": "N",
+    "self_check": {
+      "allowed_directed_edge": true,
+      "starts_at_current": true,
+      "inside_boundary": true,
+      "pickup_order_ok": true,
+      "not_revisited": true
+    },
+    "failure_reason_code": "none"
+  },
+  "allowed_edge_ids": [
+    "edge_node_0_5_node_0_4",
+    "edge_node_0_5_node_0_6"
+  ],
+  "selected_direction": "N",
+  "selected_edge_id": "edge_node_0_5_node_0_4",
+  "local_validation": {
+    "exact_schema_fields": true,
+    "move_action": true,
+    "direction_in_dynamic_schema": true,
+    "direction_maps_to_allowed_edge": true,
+    "all_self_checks_true": true,
+    "failure_code_none": true,
+    "same_prompt_as_frozen_single_step": true,
+    "same_schema_as_frozen_single_step": true,
+    "one_model_turn": true,
+    "zero_retries": true,
+    "zero_tool_items": true
+  },
+  "cli_nonfatal_warnings": [
+    "Skill descriptions were shortened to fit the 2% skills context budget."
+  ],
+  "interpretation": "One legal next-edge proposal was returned by Codex CLI with all tool features disabled. This is not a complete route, route optimality result, or formal R4 trial."
+}

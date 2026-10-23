@@ -1,0 +1,544 @@
+{
+  "candidate_ref_resolution": {
+    "dropoff": {
+      "D00": "node_24_39",
+      "D01": "node_25_36",
+      "D02": "node_25_40",
+      "D03": "node_25_41",
+      "D04": "node_26_37",
+      "D05": "node_27_39"
+    },
+    "pickup": {
+      "P00": "node_10_86",
+      "P01": "node_10_89",
+      "P02": "node_10_90",
+      "P03": "node_10_92",
+      "P04": "node_10_93",
+      "P05": "node_11_85",
+      "P06": "node_12_87",
+      "P07": "node_12_89",
+      "P08": "node_13_87",
+      "P09": "node_13_90",
+      "P10": "node_4_89",
+      "P11": "node_6_89",
+      "P12": "node_7_90",
+      "P13": "node_8_90"
+    }
+  },
+  "created_at_utc": "2026-10-22T09:20:40.297627+00:00",
+  "decoding": {
+    "max_tokens": 256,
+    "temperature": 0.0,
+    "thinking": false
+  },
+  "evaluation_after_inference": {
+    "both_endpoints_exact_match": false,
+    "dropoff_exact_match": true,
+    "pickup_exact_match": false,
+    "true_dropoff_node_id": "node_24_39",
+    "true_pickup_node_id": "node_12_89",
+    "truth_loaded_after_generation": true
+  },
+  "input_artifacts": {
+    "map_sha256": "427abb25ff91080517daeec45bc3319d2e162f3752eda2f5f9022928b751a27c",
+    "model_query_sha256": "7a2c7006ee85e6a6a7bd5f1b5b2370e20d41ca7935deab0c890c10f143ceca9a",
+    "orders_sha256": "3a39cca00c5c5acbf96e43585203d61d34396116c04cf40efa6aa15d6af05b9b",
+    "prompt_sha256": "8d1e640d1f1a67c7827d07f197b1ecafa62823fdeac1ad435e8153b2d5373a3a",
+    "protocol_sha256": "6ab6df9b927ba1c58a8adf46e0bf633db25937d201e90d948a205713a7da84e0"
+  },
+  "input_tokens_local_tokenizer": 2125,
+  "latency_ms": 2330.846,
+  "map_id": "grid-100x100-seed-4",
+  "map_input_mode": "graph_only",
+  "model": "mlx-community/Qwen3-4B-Instruct-2507-4bit",
+  "model_query": {
+    "allowed_feature_refs": [],
+    "allowed_landmark_refs": [
+      "landmark:node_10_89",
+      "landmark:node_25_39"
+    ],
+    "dropoff_candidates": [
+      {
+        "candidate_anchor_links": [
+          {
+            "anchor_ref": "landmark:node_25_39",
+            "entry_type": "landmark",
+            "name": "图书馆",
+            "orientation": null,
+            "relation_to_feature": null,
+            "side_of_road": null
+          }
+        ],
+        "candidate_ref": "D00",
+        "coordinates": {
+          "x": 24,
+          "y": 39
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_25_39",
+            "distance": 1
+          }
+        ]
+      },
+      {
+        "candidate_anchor_links": [
+          {
+            "anchor_ref": "landmark:node_25_39",
+            "entry_type": "landmark",
+            "name": "图书馆",
+            "orientation": null,
+            "relation_to_feature": null,
+            "side_of_road": null
+          }
+        ],
+        "candidate_ref": "D01",
+        "coordinates": {
+          "x": 25,
+          "y": 36
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_25_39",
+            "distance": 3
+          }
+        ]
+      },
+      {
+        "candidate_anchor_links": [
+          {
+            "anchor_ref": "landmark:node_25_39",
+            "entry_type": "landmark",
+            "name": "图书馆",
+            "orientation": null,
+            "relation_to_feature": null,
+            "side_of_road": null
+          }
+        ],
+        "candidate_ref": "D02",
+        "coordinates": {
+          "x": 25,
+          "y": 40
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_25_39",
+            "distance": 1
+          }
+        ]
+      },
+      {
+        "candidate_anchor_links": [
+          {
+            "anchor_ref": "landmark:node_25_39",
+            "entry_type": "landmark",
+            "name": "图书馆",
+            "orientation": null,
+            "relation_to_feature": null,
+            "side_of_road": null
+          }
+        ],
+        "candidate_ref": "D03",
+        "coordinates": {
+          "x": 25,
+          "y": 41
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_25_39",
+            "distance": 2
+          }
+        ]
+      },
+      {
+        "candidate_anchor_links": [
+          {
+            "anchor_ref": "landmark:node_25_39",
+            "entry_type": "landmark",
+            "name": "图书馆",
+            "orientation": null,
+            "relation_to_feature": null,
+            "side_of_road": null
+          }
+        ],
+        "candidate_ref": "D04",
+        "coordinates": {
+          "x": 26,
+          "y": 37
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_25_39",
+            "distance": 3
+          }
+        ]
+      },
+      {
+        "candidate_anchor_links": [
+          {
+            "anchor_ref": "landmark:node_25_39",
+            "entry_type": "landmark",
+            "name": "图书馆",
+            "orientation": null,
+            "relation_to_feature": null,
+            "side_of_road": null
+          }
+        ],
+        "candidate_ref": "D05",
+        "coordinates": {
+          "x": 27,
+          "y": 39
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_25_39",
+            "distance": 2
+          }
+        ]
+      }
+    ],
+    "dropoff_resolution_mode": "landmark_graph_candidates",
+    "dropoff_text": "请在图书馆附近下车。",
+    "map_id": "grid-100x100-seed-4",
+    "map_input_mode": "graph_only",
+    "map_version": "grid-v1-100",
+    "matched_dropoff_entries": [
+      {
+        "aliases": [
+          "图书馆入口"
+        ],
+        "anchor_coordinates": {
+          "x": 25,
+          "y": 39
+        },
+        "entry_id": "landmark:node_25_39",
+        "entry_type": "landmark",
+        "name": "图书馆"
+      }
+    ],
+    "matched_pickup_entries": [
+      {
+        "aliases": [
+          "高校区"
+        ],
+        "anchor_coordinates": {
+          "x": 10,
+          "y": 89
+        },
+        "entry_id": "landmark:node_10_89",
+        "entry_type": "landmark",
+        "name": "大学城"
+      }
+    ],
+    "pickup_candidates": [
+      {
+        "candidate_anchor_links": [
+          {
+            "anchor_ref": "landmark:node_10_89",
+            "entry_type": "landmark",
+            "name": "大学城",
+            "orientation": null,
+            "relation_to_feature": null,
+            "side_of_road": null
+          }
+        ],
+        "candidate_ref": "P00",
+        "coordinates": {
+          "x": 10,
+          "y": 86
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_10_89",
+            "distance": 3
+          }
+        ]
+      },
+      {
+        "candidate_anchor_links": [
+          {
+            "anchor_ref": "landmark:node_10_89",
+            "entry_type": "landmark",
+            "name": "大学城",
+            "orientation": null,
+            "relation_to_feature": null,
+            "side_of_road": null
+          }
+        ],
+        "candidate_ref": "P01",
+        "coordinates": {
+          "x": 10,
+          "y": 89
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_10_89",
+            "distance": 0
+          }
+        ]
+      },
+      {
+        "candidate_anchor_links": [
+          {
+            "anchor_ref": "landmark:node_10_89",
+            "entry_type": "landmark",
+            "name": "大学城",
+            "orientation": null,
+            "relation_to_feature": null,
+            "side_of_road": null
+          }
+        ],
+        "candidate_ref": "P02",
+        "coordinates": {
+          "x": 10,
+          "y": 90
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_10_89",
+            "distance": 1
+          }
+        ]
+      },
+      {
+        "candidate_anchor_links": [
+          {
+            "anchor_ref": "landmark:node_10_89",
+            "entry_type": "landmark",
+            "name": "大学城",
+            "orientation": null,
+            "relation_to_feature": null,
+            "side_of_road": null
+          }
+        ],
+        "candidate_ref": "P03",
+        "coordinates": {
+          "x": 10,
+          "y": 92
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_10_89",
+            "distance": 3
+          }
+        ]
+      },
+      {
+        "candidate_anchor_links": [],
+        "candidate_ref": "P04",
+        "coordinates": {
+          "x": 10,
+          "y": 93
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_10_89",
+            "distance": 4
+          }
+        ]
+      },
+      {
+        "candidate_anchor_links": [],
+        "candidate_ref": "P05",
+        "coordinates": {
+          "x": 11,
+          "y": 85
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_10_89",
+            "distance": 5
+          }
+        ]
+      },
+      {
+        "candidate_anchor_links": [],
+        "candidate_ref": "P06",
+        "coordinates": {
+          "x": 12,
+          "y": 87
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_10_89",
+            "distance": 4
+          }
+        ]
+      },
+      {
+        "candidate_anchor_links": [
+          {
+            "anchor_ref": "landmark:node_10_89",
+            "entry_type": "landmark",
+            "name": "大学城",
+            "orientation": null,
+            "relation_to_feature": null,
+            "side_of_road": null
+          }
+        ],
+        "candidate_ref": "P07",
+        "coordinates": {
+          "x": 12,
+          "y": 89
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_10_89",
+            "distance": 2
+          }
+        ]
+      },
+      {
+        "candidate_anchor_links": [],
+        "candidate_ref": "P08",
+        "coordinates": {
+          "x": 13,
+          "y": 87
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_10_89",
+            "distance": 5
+          }
+        ]
+      },
+      {
+        "candidate_anchor_links": [],
+        "candidate_ref": "P09",
+        "coordinates": {
+          "x": 13,
+          "y": 90
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_10_89",
+            "distance": 4
+          }
+        ]
+      },
+      {
+        "candidate_anchor_links": [],
+        "candidate_ref": "P10",
+        "coordinates": {
+          "x": 4,
+          "y": 89
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_10_89",
+            "distance": 6
+          }
+        ]
+      },
+      {
+        "candidate_anchor_links": [],
+        "candidate_ref": "P11",
+        "coordinates": {
+          "x": 6,
+          "y": 89
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_10_89",
+            "distance": 4
+          }
+        ]
+      },
+      {
+        "candidate_anchor_links": [],
+        "candidate_ref": "P12",
+        "coordinates": {
+          "x": 7,
+          "y": 90
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_10_89",
+            "distance": 4
+          }
+        ]
+      },
+      {
+        "candidate_anchor_links": [
+          {
+            "anchor_ref": "landmark:node_10_89",
+            "entry_type": "landmark",
+            "name": "大学城",
+            "orientation": null,
+            "relation_to_feature": null,
+            "side_of_road": null
+          }
+        ],
+        "candidate_ref": "P13",
+        "coordinates": {
+          "x": 8,
+          "y": 90
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_10_89",
+            "distance": 3
+          }
+        ]
+      }
+    ],
+    "pickup_resolution_mode": "landmark_graph_candidates",
+    "pickup_text": "请在大学城东侧的合法上车点上车。",
+    "schema_version": "route_intent_query_v2",
+    "start_node_id": "node_87_33",
+    "task_id": "task-0004-0001",
+    "task_type": "semantic_landmark_relative",
+    "uses_evaluator_truth": false
+  },
+  "model_revision": "50d427756c6b1b2fe0c0a10f67fbda1fc8e82c1b",
+  "parse_or_inference_error": null,
+  "parsed_intent": {
+    "confidence": 0.99,
+    "dropoff_anchor_ref": "landmark:node_25_39",
+    "dropoff_candidate_ref": "D00",
+    "feature_evidence_refs": [],
+    "pickup_anchor_ref": "landmark:node_10_89",
+    "pickup_candidate_ref": "P01",
+    "relation": "near",
+    "schema_version": "route_intent_candidate_v2",
+    "side": "none",
+    "status": "resolved"
+  },
+  "prompt_version": "r4_intent_prompt_v4_candidate_feature_links",
+  "raw_response": "{\"schema_version\":\"route_intent_candidate_v2\",\"status\":\"resolved\",\"pickup_candidate_ref\":\"P01\",\"dropoff_candidate_ref\":\"D00\",\"pickup_anchor_ref\":\"landmark:node_10_89\",\"dropoff_anchor_ref\":\"landmark:node_25_39\",\"relation\":\"near\",\"side\":\"none\",\"feature_evidence_refs\":[],\"confidence\":0.99}",
+  "resolved_intent": {
+    "confidence": 0.99,
+    "dropoff_anchor_ref": "landmark:node_25_39",
+    "dropoff_node_id": "node_24_39",
+    "feature_evidence_refs": [],
+    "pickup_anchor_ref": "landmark:node_10_89",
+    "pickup_node_id": "node_10_89",
+    "relation": "near",
+    "schema_version": "route_intent_v1",
+    "side": "none",
+    "status": "resolved"
+  },
+  "schema_version": "r4_qwen_local_intent_batch_result_v1",
+  "seed": 4,
+  "status": "validated",
+  "task_id": "task-0004-0001",
+  "task_type": "semantic_landmark_relative",
+  "usage": {
+    "actual_hardware_billing": "not_applicable_local_inference",
+    "billing": "local_inference_no_API_request",
+    "input_tokens_local_tokenizer": 2125,
+    "output_tokens": null
+  },
+  "validation": {
+    "confidence": 0.99,
+    "dropoff_anchor_ref": "landmark:node_25_39",
+    "dropoff_node_id": "node_24_39",
+    "feature_evidence_refs": [],
+    "pickup_anchor_ref": "landmark:node_10_89",
+    "pickup_node_id": "node_10_89",
+    "relation": "near",
+    "resolution_mode": "landmark_graph_candidates",
+    "side": "none",
+    "valid": true
+  }
+}

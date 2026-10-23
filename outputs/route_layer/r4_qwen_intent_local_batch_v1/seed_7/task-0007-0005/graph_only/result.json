@@ -1,0 +1,373 @@
+{
+  "candidate_ref_resolution": {
+    "dropoff": {
+      "D00": "node_85_80",
+      "D01": "node_86_77",
+      "D02": "node_87_78",
+      "D03": "node_87_80",
+      "D04": "node_87_82",
+      "D05": "node_88_77"
+    },
+    "pickup": {
+      "P00": "node_10_87",
+      "P01": "node_11_81",
+      "P02": "node_11_82",
+      "P03": "node_11_83",
+      "P04": "node_12_82",
+      "P05": "node_12_86",
+      "P06": "node_12_87",
+      "P07": "node_13_88",
+      "P08": "node_7_87",
+      "P09": "node_9_85",
+      "P10": "node_9_87"
+    }
+  },
+  "created_at_utc": "2026-10-22T09:11:24.157659+00:00",
+  "decoding": {
+    "max_tokens": 256,
+    "temperature": 0.0,
+    "thinking": false
+  },
+  "evaluation_after_inference": {
+    "both_endpoints_exact_match": true,
+    "dropoff_exact_match": true,
+    "pickup_exact_match": true,
+    "true_dropoff_node_id": "node_87_78",
+    "true_pickup_node_id": "node_12_86",
+    "truth_loaded_after_generation": true
+  },
+  "input_artifacts": {
+    "map_sha256": "6a78bfe44285f5bdef00da04462909fb52dc9f4464124bcad91d617265e5bd19",
+    "orders_sha256": "bade834ed5a7e6cccd751c3862826cc5c33890f9e3d088b82475bd7280871158",
+    "prompt_sha256": "9404b3f52106d1a57e863d8b461c387fc64e50fb45f578b8c3932e225042e06a",
+    "protocol_sha256": "a17654017206d927ef95f6f61cc440fd47a989e097f014a3a4e5c8adcfaf49bc",
+    "query_sha256": "5f42c1b29df5c996d660c39b1971c5a5d6ac67492bfe0bbdc173161a7a794118"
+  },
+  "input_tokens_local_tokenizer": 1344,
+  "latency_ms": 1625.576,
+  "map_id": "grid-100x100-seed-7",
+  "map_input_mode": "graph_only",
+  "model": "mlx-community/Qwen3-4B-Instruct-2507-4bit",
+  "model_query": {
+    "allowed_feature_refs": [],
+    "allowed_landmark_refs": [
+      "landmark:node_11_86",
+      "landmark:node_87_79"
+    ],
+    "dropoff_candidates": [
+      {
+        "candidate_ref": "D00",
+        "coordinates": {
+          "x": 85,
+          "y": 80
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_87_79",
+            "distance": 3
+          }
+        ]
+      },
+      {
+        "candidate_ref": "D01",
+        "coordinates": {
+          "x": 86,
+          "y": 77
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_87_79",
+            "distance": 3
+          }
+        ]
+      },
+      {
+        "candidate_ref": "D02",
+        "coordinates": {
+          "x": 87,
+          "y": 78
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_87_79",
+            "distance": 1
+          }
+        ]
+      },
+      {
+        "candidate_ref": "D03",
+        "coordinates": {
+          "x": 87,
+          "y": 80
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_87_79",
+            "distance": 1
+          }
+        ]
+      },
+      {
+        "candidate_ref": "D04",
+        "coordinates": {
+          "x": 87,
+          "y": 82
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_87_79",
+            "distance": 3
+          }
+        ]
+      },
+      {
+        "candidate_ref": "D05",
+        "coordinates": {
+          "x": 88,
+          "y": 77
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_87_79",
+            "distance": 3
+          }
+        ]
+      }
+    ],
+    "dropoff_resolution_mode": "landmark_graph_candidates",
+    "dropoff_text": "请在图书馆附近下车。",
+    "map_id": "grid-100x100-seed-7",
+    "map_input_mode": "graph_only",
+    "map_version": "grid-v1-100",
+    "matched_dropoff_entries": [
+      {
+        "aliases": [
+          "图书馆入口"
+        ],
+        "anchor_coordinates": {
+          "x": 87,
+          "y": 79
+        },
+        "entry_id": "landmark:node_87_79",
+        "entry_type": "landmark",
+        "name": "图书馆"
+      }
+    ],
+    "matched_pickup_entries": [
+      {
+        "aliases": [
+          "医院南侧入口"
+        ],
+        "anchor_coordinates": {
+          "x": 11,
+          "y": 86
+        },
+        "entry_id": "landmark:node_11_86",
+        "entry_type": "landmark",
+        "name": "医院南门"
+      }
+    ],
+    "pickup_candidates": [
+      {
+        "candidate_ref": "P00",
+        "coordinates": {
+          "x": 10,
+          "y": 87
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_11_86",
+            "distance": 2
+          }
+        ]
+      },
+      {
+        "candidate_ref": "P01",
+        "coordinates": {
+          "x": 11,
+          "y": 81
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_11_86",
+            "distance": 5
+          }
+        ]
+      },
+      {
+        "candidate_ref": "P02",
+        "coordinates": {
+          "x": 11,
+          "y": 82
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_11_86",
+            "distance": 4
+          }
+        ]
+      },
+      {
+        "candidate_ref": "P03",
+        "coordinates": {
+          "x": 11,
+          "y": 83
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_11_86",
+            "distance": 3
+          }
+        ]
+      },
+      {
+        "candidate_ref": "P04",
+        "coordinates": {
+          "x": 12,
+          "y": 82
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_11_86",
+            "distance": 5
+          }
+        ]
+      },
+      {
+        "candidate_ref": "P05",
+        "coordinates": {
+          "x": 12,
+          "y": 86
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_11_86",
+            "distance": 1
+          }
+        ]
+      },
+      {
+        "candidate_ref": "P06",
+        "coordinates": {
+          "x": 12,
+          "y": 87
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_11_86",
+            "distance": 2
+          }
+        ]
+      },
+      {
+        "candidate_ref": "P07",
+        "coordinates": {
+          "x": 13,
+          "y": 88
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_11_86",
+            "distance": 4
+          }
+        ]
+      },
+      {
+        "candidate_ref": "P08",
+        "coordinates": {
+          "x": 7,
+          "y": 87
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_11_86",
+            "distance": 5
+          }
+        ]
+      },
+      {
+        "candidate_ref": "P09",
+        "coordinates": {
+          "x": 9,
+          "y": 85
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_11_86",
+            "distance": 3
+          }
+        ]
+      },
+      {
+        "candidate_ref": "P10",
+        "coordinates": {
+          "x": 9,
+          "y": 87
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_11_86",
+            "distance": 3
+          }
+        ]
+      }
+    ],
+    "pickup_resolution_mode": "landmark_graph_candidates",
+    "pickup_text": "请在医院南门附近的合法上车点上车。",
+    "schema_version": "route_intent_query_v2",
+    "start_node_id": "node_69_0",
+    "task_id": "task-0007-0005",
+    "uses_evaluator_truth": false
+  },
+  "model_revision": "50d427756c6b1b2fe0c0a10f67fbda1fc8e82c1b",
+  "parse_or_inference_error": null,
+  "parsed_intent": {
+    "confidence": 0.95,
+    "dropoff_anchor_ref": "landmark:node_87_79",
+    "dropoff_candidate_ref": "D02",
+    "feature_evidence_refs": [],
+    "pickup_anchor_ref": "landmark:node_11_86",
+    "pickup_candidate_ref": "P05",
+    "relation": "near",
+    "schema_version": "route_intent_candidate_v2",
+    "side": "none",
+    "status": "resolved"
+  },
+  "prompt_version": "r4_intent_prompt_v3_opaque_candidate_refs",
+  "raw_response": "{\"schema_version\":\"route_intent_candidate_v2\",\"status\":\"resolved\",\"pickup_candidate_ref\":\"P05\",\"dropoff_candidate_ref\":\"D02\",\"pickup_anchor_ref\":\"landmark:node_11_86\",\"dropoff_anchor_ref\":\"landmark:node_87_79\",\"relation\":\"near\",\"side\":\"none\",\"feature_evidence_refs\":[],\"confidence\":0.95}",
+  "resolved_intent": {
+    "confidence": 0.95,
+    "dropoff_anchor_ref": "landmark:node_87_79",
+    "dropoff_node_id": "node_87_78",
+    "feature_evidence_refs": [],
+    "pickup_anchor_ref": "landmark:node_11_86",
+    "pickup_node_id": "node_12_86",
+    "relation": "near",
+    "schema_version": "route_intent_v1",
+    "side": "none",
+    "status": "resolved"
+  },
+  "schema_version": "r4_qwen_local_intent_batch_result_v1",
+  "seed": 7,
+  "status": "validated",
+  "task_id": "task-0007-0005",
+  "task_type": "semantic_landmark_nearby",
+  "usage": {
+    "actual_hardware_billing": "not_applicable_local_inference",
+    "billing": "local_inference_no_API_request",
+    "input_tokens_local_tokenizer": 1344,
+    "output_tokens": null
+  },
+  "validation": {
+    "confidence": 0.95,
+    "dropoff_anchor_ref": "landmark:node_87_79",
+    "dropoff_node_id": "node_87_78",
+    "feature_evidence_refs": [],
+    "pickup_anchor_ref": "landmark:node_11_86",
+    "pickup_node_id": "node_12_86",
+    "relation": "near",
+    "resolution_mode": "landmark_graph_candidates",
+    "side": "none",
+    "valid": true
+  }
+}

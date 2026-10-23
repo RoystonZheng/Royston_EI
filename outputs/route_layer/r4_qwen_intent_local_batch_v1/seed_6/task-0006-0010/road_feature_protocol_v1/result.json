@@ -1,0 +1,321 @@
+{
+  "candidate_ref_resolution": {
+    "dropoff": {
+      "D00": "node_90_1",
+      "D01": "node_91_0",
+      "D02": "node_91_1",
+      "D03": "node_93_4",
+      "D04": "node_94_1",
+      "D05": "node_95_4"
+    },
+    "pickup": {
+      "P00": "node_18_15",
+      "P01": "node_19_15",
+      "P02": "node_4_11",
+      "P03": "node_5_11"
+    }
+  },
+  "created_at_utc": "2026-10-22T09:11:14.933904+00:00",
+  "decoding": {
+    "max_tokens": 256,
+    "temperature": 0.0,
+    "thinking": false
+  },
+  "evaluation_after_inference": {
+    "both_endpoints_exact_match": true,
+    "dropoff_exact_match": true,
+    "pickup_exact_match": true,
+    "true_dropoff_node_id": "node_94_1",
+    "true_pickup_node_id": "node_4_11",
+    "truth_loaded_after_generation": true
+  },
+  "input_artifacts": {
+    "map_sha256": "d98f602f88f060a638b1cc8c218defda59254dd73bfecf06e0e1ee079b28779b",
+    "orders_sha256": "4209b5bea5856d7c8fed1068e3ca15622112d34f0077f6ad0678be3a938c3e43",
+    "prompt_sha256": "362cbfa9f091c8c0bdd49172fc24c55e8209960a45bd896661c7e1f28a273481",
+    "protocol_sha256": "7f32454956dd34dbf201f98e98578cb97309e0bf981e7389ec094705baa205bf",
+    "query_sha256": "1f1e9f0e3196f11e4df4132550e839ef0d815c6901e839de8a9e05fcdc3493cf"
+  },
+  "input_tokens_local_tokenizer": 1184,
+  "latency_ms": 1576.522,
+  "map_id": "grid-100x100-seed-6",
+  "map_input_mode": "road_feature_protocol_v1",
+  "model": "mlx-community/Qwen3-4B-Instruct-2507-4bit",
+  "model_query": {
+    "allowed_feature_refs": [
+      "feature:sign_02",
+      "feature:sign_07"
+    ],
+    "allowed_landmark_refs": [
+      "landmark:node_94_1"
+    ],
+    "dropoff_candidates": [
+      {
+        "candidate_ref": "D00",
+        "coordinates": {
+          "x": 90,
+          "y": 1
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_94_1",
+            "distance": 4
+          }
+        ]
+      },
+      {
+        "candidate_ref": "D01",
+        "coordinates": {
+          "x": 91,
+          "y": 0
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_94_1",
+            "distance": 4
+          }
+        ]
+      },
+      {
+        "candidate_ref": "D02",
+        "coordinates": {
+          "x": 91,
+          "y": 1
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_94_1",
+            "distance": 3
+          }
+        ]
+      },
+      {
+        "candidate_ref": "D03",
+        "coordinates": {
+          "x": 93,
+          "y": 4
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_94_1",
+            "distance": 4
+          }
+        ]
+      },
+      {
+        "candidate_ref": "D04",
+        "coordinates": {
+          "x": 94,
+          "y": 1
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_94_1",
+            "distance": 0
+          }
+        ]
+      },
+      {
+        "candidate_ref": "D05",
+        "coordinates": {
+          "x": 95,
+          "y": 4
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_94_1",
+            "distance": 4
+          }
+        ]
+      }
+    ],
+    "dropoff_resolution_mode": "landmark_graph_candidates",
+    "dropoff_text": "请在体育馆东门附近下车。",
+    "map_id": "grid-100x100-seed-6",
+    "map_input_mode": "road_feature_protocol_v1",
+    "map_version": "grid-v1-100",
+    "matched_dropoff_entries": [
+      {
+        "aliases": [
+          "体育馆东侧入口"
+        ],
+        "anchor_coordinates": {
+          "x": 94,
+          "y": 1
+        },
+        "entry_id": "landmark:node_94_1",
+        "entry_type": "landmark",
+        "name": "体育馆东门"
+      }
+    ],
+    "matched_pickup_entries": [
+      {
+        "aliases": [
+          "北门指示牌",
+          "北侧入口"
+        ],
+        "anchor_coordinates": {
+          "x": 18,
+          "y": 15
+        },
+        "entry_id": "feature:sign_02",
+        "entry_type": "road_sign",
+        "name": "北侧入口指示牌",
+        "orientation": "toward_east",
+        "side_of_road": "west_side"
+      },
+      {
+        "aliases": [
+          "北门指示牌",
+          "北侧入口"
+        ],
+        "anchor_coordinates": {
+          "x": 4,
+          "y": 11
+        },
+        "entry_id": "feature:sign_07",
+        "entry_type": "road_sign",
+        "name": "北侧入口指示牌",
+        "orientation": "toward_east",
+        "side_of_road": "west_side"
+      }
+    ],
+    "pickup_candidates": [
+      {
+        "candidate_ref": "P00",
+        "coordinates": {
+          "x": 18,
+          "y": 15
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "feature:sign_02",
+            "distance": 0
+          },
+          {
+            "anchor_ref": "feature:sign_07",
+            "distance": 18
+          }
+        ],
+        "relation_to_feature": "feature_side"
+      },
+      {
+        "candidate_ref": "P01",
+        "coordinates": {
+          "x": 19,
+          "y": 15
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "feature:sign_02",
+            "distance": 1
+          },
+          {
+            "anchor_ref": "feature:sign_07",
+            "distance": 19
+          }
+        ],
+        "relation_to_feature": "opposite_side"
+      },
+      {
+        "candidate_ref": "P02",
+        "coordinates": {
+          "x": 4,
+          "y": 11
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "feature:sign_02",
+            "distance": 18
+          },
+          {
+            "anchor_ref": "feature:sign_07",
+            "distance": 0
+          }
+        ],
+        "relation_to_feature": "feature_side"
+      },
+      {
+        "candidate_ref": "P03",
+        "coordinates": {
+          "x": 5,
+          "y": 11
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "feature:sign_02",
+            "distance": 17
+          },
+          {
+            "anchor_ref": "feature:sign_07",
+            "distance": 1
+          }
+        ],
+        "relation_to_feature": "opposite_side"
+      }
+    ],
+    "pickup_resolution_mode": "road_feature_relation",
+    "pickup_text": "请在北侧入口指示牌旁、西侧的合法上车点上车。",
+    "schema_version": "route_intent_query_v2",
+    "start_node_id": "node_84_57",
+    "task_id": "task-0006-0010",
+    "uses_evaluator_truth": false
+  },
+  "model_revision": "50d427756c6b1b2fe0c0a10f67fbda1fc8e82c1b",
+  "parse_or_inference_error": null,
+  "parsed_intent": {
+    "confidence": 0.95,
+    "dropoff_anchor_ref": "landmark:node_94_1",
+    "dropoff_candidate_ref": "D04",
+    "feature_evidence_refs": [
+      "feature:sign_07"
+    ],
+    "pickup_anchor_ref": "feature:sign_07",
+    "pickup_candidate_ref": "P02",
+    "relation": "near",
+    "schema_version": "route_intent_candidate_v2",
+    "side": "east",
+    "status": "resolved"
+  },
+  "prompt_version": "r4_intent_prompt_v3_opaque_candidate_refs",
+  "raw_response": "{\"schema_version\":\"route_intent_candidate_v2\",\"status\":\"resolved\",\"pickup_candidate_ref\":\"P02\",\"dropoff_candidate_ref\":\"D04\",\"pickup_anchor_ref\":\"feature:sign_07\",\"dropoff_anchor_ref\":\"landmark:node_94_1\",\"relation\":\"near\",\"side\":\"east\",\"feature_evidence_refs\":[\"feature:sign_07\"],\"confidence\":0.95}",
+  "resolved_intent": {
+    "confidence": 0.95,
+    "dropoff_anchor_ref": "landmark:node_94_1",
+    "dropoff_node_id": "node_94_1",
+    "feature_evidence_refs": [
+      "feature:sign_07"
+    ],
+    "pickup_anchor_ref": "feature:sign_07",
+    "pickup_node_id": "node_4_11",
+    "relation": "near",
+    "schema_version": "route_intent_v1",
+    "side": "east",
+    "status": "resolved"
+  },
+  "schema_version": "r4_qwen_local_intent_batch_result_v1",
+  "seed": 6,
+  "status": "validated",
+  "task_id": "task-0006-0010",
+  "task_type": "semantic_road_feature_position",
+  "usage": {
+    "actual_hardware_billing": "not_applicable_local_inference",
+    "billing": "local_inference_no_API_request",
+    "input_tokens_local_tokenizer": 1184,
+    "output_tokens": null
+  },
+  "validation": {
+    "confidence": 0.95,
+    "dropoff_anchor_ref": "landmark:node_94_1",
+    "dropoff_node_id": "node_94_1",
+    "feature_evidence_refs": [
+      "feature:sign_07"
+    ],
+    "pickup_anchor_ref": "feature:sign_07",
+    "pickup_node_id": "node_4_11",
+    "relation": "near",
+    "resolution_mode": "road_feature_relation",
+    "side": "east",
+    "valid": true
+  }
+}

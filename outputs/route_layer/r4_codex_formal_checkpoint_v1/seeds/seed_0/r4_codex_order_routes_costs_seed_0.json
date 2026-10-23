@@ -1,0 +1,181 @@
+{
+  "input_type": "frozen_traditional_experiment_v1_seed_0",
+  "map_id": "grid-100x100-seed-0",
+  "map_version": "grid-v1-100",
+  "methods": [
+    "r4_codex_cli"
+  ],
+  "random_seed": 0,
+  "results": [
+    {
+      "methods": [
+        {
+          "best_route_id": null,
+          "evaluation": null,
+          "failure_reason": "model_unable_to_construct_route",
+          "invalid_route_count": 0,
+          "metadata": {
+            "account_billing_status": "not_reported_by_codex_cli",
+            "codex_usage_cost_estimate": {
+              "account_billing_amount": null,
+              "account_billing_currency": null,
+              "account_billing_status": "not_reported_by_codex_cli",
+              "account_invoice_amount": null,
+              "account_invoice_status": "not_reported_by_codex_cli",
+              "api_equivalent_is_invoice": false,
+              "api_equivalent_usd": 0.0032454000000000003,
+              "api_equivalent_usd_max": 0.0032454000000000003,
+              "api_equivalent_usd_min": 0.0032454000000000003,
+              "cached_input_assumption": "reported_by_cli",
+              "calculation_status": "standard_rate_equivalent",
+              "codex_standard_credit_equivalent": 0.081135,
+              "codex_standard_credit_equivalent_max": 0.081135,
+              "codex_standard_credit_equivalent_min": 0.081135,
+              "model": "gpt-5.6-luna",
+              "pricing_checked_date": "2026-10-22",
+              "pricing_config": "/Users/didi/Documents/personalcodexfile/第二次课/configs/codex_cli_pricing_2026-10-22.json",
+              "pricing_mode": "standard",
+              "reasoning_tokens_included_in_output_tokens": true
+            },
+            "compute_time_ms": null,
+            "cost_status": "route_energy_not_evaluated",
+            "electricity_price_cny_per_kwh": 2.29,
+            "failure_detail_zh": "模型未构造出完整路线，但没有报告已确认路网无路可走。原始原因：model_unable_to_construct_route",
+            "llm_response_received": true,
+            "output_size_bound": "strict schema: at most 512 moves plus 512 aligned self-check markers",
+            "output_token_hard_limit": null,
+            "price_source": "Tesla China official Supercharger station reference",
+            "price_source_url": "https://www.tesla.cn/findus/location/supercharger/cnsc9691?region=CN",
+            "proposal_energy_audit": {
+              "energy_model_version": "energy_v1",
+              "estimated_route_distance_m": null,
+              "exact_edge_moves": 0,
+              "fallback_congestion_level": 0.0,
+              "fallback_length_m": 100.0,
+              "fallback_signal_delay_sec": 0.0,
+              "interpretation": "模型返回失败且没有移动序列；行驶能耗未评估，不能解释为零能耗。",
+              "proposed_move_count": 0,
+              "proxy_edge_moves": 0,
+              "reverse_edge_inferred_moves": 0,
+              "route_energy_estimate_kwh": null,
+              "status": "no_route_proposed",
+              "validated_prefix_energy_estimate_kwh": null,
+              "validated_prefix_move_count": 0
+            },
+            "qwen_intent_latency_ms": 3164.393,
+            "qwen_local_token_usage": "not_reported_by_local_runner",
+            "request_attempt": 1,
+            "request_retry_count": 0,
+            "route_backend": "Codex CLI account; no provider API key passed",
+            "route_intent": {
+              "dropoff_anchor_ref": "landmark:node_42_42",
+              "feature_evidence_refs": [
+                "feature:sign_08"
+              ],
+              "pickup_anchor_ref": "feature:sign_08",
+              "relation": "feature_side",
+              "resolution_mode": "road_feature_relation",
+              "side": "west"
+            },
+            "route_proposal": {
+              "failure_reason_code": "unable_to_construct_route",
+              "move_sequence": "",
+              "status": "failed",
+              "step_check_sequence": ""
+            },
+            "route_validator_audit": {
+              "accepted": false,
+              "failure_reason_code": "unable_to_construct_route",
+              "route_edge_sequence": [],
+              "route_node_sequence": [
+                "node_69_41"
+              ],
+              "schema_version": "r4_compact_route_validation_v1",
+              "status": "model_failed",
+              "steps": [],
+              "validated_prefix_edge_sequence": [],
+              "validated_prefix_node_sequence": [
+                "node_69_41"
+              ],
+              "violations": []
+            },
+            "search_trace": {
+              "algorithm": "llm",
+              "attempted_move_sequence": "",
+              "attempted_route_edge_sequence": [],
+              "attempted_route_node_sequence": [],
+              "expanded_nodes": null,
+              "failure_reason": "model_unable_to_construct_route",
+              "first_violation_step": null,
+              "legs": [
+                {
+                  "expanded_events": [],
+                  "expanded_node_ids": [],
+                  "source_node_id": "node_69_41",
+                  "status": "not_completed",
+                  "target_node_id": "node_25_66"
+                },
+                {
+                  "expanded_events": [],
+                  "expanded_node_ids": [],
+                  "source_node_id": "node_25_66",
+                  "status": "not_completed",
+                  "target_node_id": "node_42_43"
+                }
+              ],
+              "method_name": "r4_codex_cli",
+              "model_self_check_all_pass": null,
+              "move_count": 0,
+              "move_violations": [],
+              "r4_step_audit": [],
+              "route_edge_sequence": [],
+              "route_node_sequence": [],
+              "schema_version": "route_search_trace_v1",
+              "status": "failed",
+              "validated_prefix_edge_sequence": [],
+              "validated_prefix_node_sequence": [
+                "node_69_41"
+              ]
+            }
+          },
+          "method_name": "r4_codex_cli",
+          "monetary_cost": {
+            "api_cost_amount": null,
+            "compute_cost_amount": null,
+            "currency": "CNY",
+            "electricity_cost_amount": null,
+            "total_monetary_cost": null
+          },
+          "raw_output": {
+            "failure_reason_code": "unable_to_construct_route",
+            "move_sequence": "",
+            "status": "failed",
+            "step_check_sequence": ""
+          },
+          "resources": {
+            "compute_time_ms": null,
+            "energy_kwh": null,
+            "input_tokens": 15567,
+            "llm_calls": 1,
+            "llm_latency_ms": 7146.893667,
+            "output_tokens": 110
+          },
+          "routes": [],
+          "status": "failed",
+          "task_id": "task-0000-0009",
+          "valid_route_count": 0,
+          "validation": {
+            "direction_valid": true,
+            "errors": [],
+            "status": "model_failed",
+            "valid": false
+          }
+        }
+      ],
+      "task_id": "task-0000-0009",
+      "task_type": "semantic_road_feature_position"
+    }
+  ],
+  "run_type": "single_formal_checkpoint_not_batch",
+  "schema_version": "r4_codex_formal_single_task_results_v1"
+}

@@ -1,0 +1,328 @@
+{
+  "api_requests": 0,
+  "completed_samples": 60,
+  "created_at_utc": "2026-10-22T09:11:50.731189+00:00",
+  "expected_samples": 60,
+  "experiment_scope": "paired_local_endpoint_intent_audit_only_no_route_generation",
+  "hosted_inference_requests": 0,
+  "limitations": [
+    "This paired audit measures endpoint intent resolution, not route construction or route quality.",
+    "Exact endpoint match is reported separately from candidate-whitelist validity.",
+    "Local tokenizer counts are not API tokens, billing, or a Codex/DeepSeek usage estimate.",
+    "A 30-task semantic subset is a controlled task sample, not a broad language benchmark."
+  ],
+  "model": "mlx-community/Qwen3-4B-Instruct-2507-4bit",
+  "model_revision": "50d427756c6b1b2fe0c0a10f67fbda1fc8e82c1b",
+  "results": {
+    "graph_only": {
+      "both_endpoint_exact_match_count": 7,
+      "both_endpoint_exact_match_rate_over_all_tasks": 0.23333333333333334,
+      "both_endpoint_exact_match_rate_over_validated": 0.25,
+      "by_task_type": {
+        "semantic_landmark_nearby": {
+          "both_endpoints_exact_match": 6,
+          "count": 10,
+          "validated": 10
+        },
+        "semantic_landmark_relative": {
+          "both_endpoints_exact_match": 1,
+          "count": 10,
+          "validated": 10
+        },
+        "semantic_road_feature_position": {
+          "both_endpoints_exact_match": 0,
+          "count": 10,
+          "validated": 8
+        }
+      },
+      "input_tokens_local_tokenizer_total": 37305,
+      "invalid_or_failed_count": 2,
+      "mean_latency_ms": 1557.7157333333334,
+      "median_latency_ms": 1626.8725,
+      "task_count": 30,
+      "validated_count": 28
+    },
+    "paired_comparison": {
+      "both_exact_match_count": 7,
+      "graph_only_only_exact_match_count": 0,
+      "neither_exact_match_count": 18,
+      "paired_task_count": 30,
+      "road_feature_only_exact_match_count": 5,
+      "rows": [
+        {
+          "feature_mode_exact": true,
+          "feature_mode_valid": true,
+          "graph_only_exact": true,
+          "graph_only_valid": true,
+          "seed": 0,
+          "task_id": "task-0000-0001"
+        },
+        {
+          "feature_mode_exact": false,
+          "feature_mode_valid": true,
+          "graph_only_exact": false,
+          "graph_only_valid": true,
+          "seed": 0,
+          "task_id": "task-0000-0002"
+        },
+        {
+          "feature_mode_exact": false,
+          "feature_mode_valid": true,
+          "graph_only_exact": false,
+          "graph_only_valid": true,
+          "seed": 0,
+          "task_id": "task-0000-0009"
+        },
+        {
+          "feature_mode_exact": false,
+          "feature_mode_valid": true,
+          "graph_only_exact": false,
+          "graph_only_valid": true,
+          "seed": 1,
+          "task_id": "task-0001-0002"
+        },
+        {
+          "feature_mode_exact": true,
+          "feature_mode_valid": true,
+          "graph_only_exact": false,
+          "graph_only_valid": true,
+          "seed": 1,
+          "task_id": "task-0001-0003"
+        },
+        {
+          "feature_mode_exact": true,
+          "feature_mode_valid": true,
+          "graph_only_exact": true,
+          "graph_only_valid": true,
+          "seed": 1,
+          "task_id": "task-0001-0004"
+        },
+        {
+          "feature_mode_exact": false,
+          "feature_mode_valid": true,
+          "graph_only_exact": false,
+          "graph_only_valid": true,
+          "seed": 2,
+          "task_id": "task-0002-0002"
+        },
+        {
+          "feature_mode_exact": false,
+          "feature_mode_valid": true,
+          "graph_only_exact": false,
+          "graph_only_valid": true,
+          "seed": 2,
+          "task_id": "task-0002-0006"
+        },
+        {
+          "feature_mode_exact": false,
+          "feature_mode_valid": true,
+          "graph_only_exact": false,
+          "graph_only_valid": true,
+          "seed": 2,
+          "task_id": "task-0002-0008"
+        },
+        {
+          "feature_mode_exact": true,
+          "feature_mode_valid": true,
+          "graph_only_exact": false,
+          "graph_only_valid": true,
+          "seed": 3,
+          "task_id": "task-0003-0005"
+        },
+        {
+          "feature_mode_exact": true,
+          "feature_mode_valid": true,
+          "graph_only_exact": true,
+          "graph_only_valid": true,
+          "seed": 3,
+          "task_id": "task-0003-0007"
+        },
+        {
+          "feature_mode_exact": false,
+          "feature_mode_valid": true,
+          "graph_only_exact": false,
+          "graph_only_valid": true,
+          "seed": 3,
+          "task_id": "task-0003-0009"
+        },
+        {
+          "feature_mode_exact": false,
+          "feature_mode_valid": true,
+          "graph_only_exact": false,
+          "graph_only_valid": true,
+          "seed": 4,
+          "task_id": "task-0004-0001"
+        },
+        {
+          "feature_mode_exact": false,
+          "feature_mode_valid": true,
+          "graph_only_exact": false,
+          "graph_only_valid": true,
+          "seed": 4,
+          "task_id": "task-0004-0004"
+        },
+        {
+          "feature_mode_exact": false,
+          "feature_mode_valid": true,
+          "graph_only_exact": false,
+          "graph_only_valid": false,
+          "seed": 4,
+          "task_id": "task-0004-0006"
+        },
+        {
+          "feature_mode_exact": false,
+          "feature_mode_valid": true,
+          "graph_only_exact": false,
+          "graph_only_valid": true,
+          "seed": 5,
+          "task_id": "task-0005-0005"
+        },
+        {
+          "feature_mode_exact": false,
+          "feature_mode_valid": true,
+          "graph_only_exact": false,
+          "graph_only_valid": true,
+          "seed": 5,
+          "task_id": "task-0005-0006"
+        },
+        {
+          "feature_mode_exact": true,
+          "feature_mode_valid": true,
+          "graph_only_exact": false,
+          "graph_only_valid": true,
+          "seed": 5,
+          "task_id": "task-0005-0010"
+        },
+        {
+          "feature_mode_exact": false,
+          "feature_mode_valid": true,
+          "graph_only_exact": false,
+          "graph_only_valid": true,
+          "seed": 6,
+          "task_id": "task-0006-0002"
+        },
+        {
+          "feature_mode_exact": false,
+          "feature_mode_valid": true,
+          "graph_only_exact": false,
+          "graph_only_valid": true,
+          "seed": 6,
+          "task_id": "task-0006-0008"
+        },
+        {
+          "feature_mode_exact": true,
+          "feature_mode_valid": true,
+          "graph_only_exact": false,
+          "graph_only_valid": true,
+          "seed": 6,
+          "task_id": "task-0006-0010"
+        },
+        {
+          "feature_mode_exact": true,
+          "feature_mode_valid": true,
+          "graph_only_exact": true,
+          "graph_only_valid": true,
+          "seed": 7,
+          "task_id": "task-0007-0001"
+        },
+        {
+          "feature_mode_exact": true,
+          "feature_mode_valid": true,
+          "graph_only_exact": true,
+          "graph_only_valid": true,
+          "seed": 7,
+          "task_id": "task-0007-0005"
+        },
+        {
+          "feature_mode_exact": false,
+          "feature_mode_valid": true,
+          "graph_only_exact": false,
+          "graph_only_valid": true,
+          "seed": 7,
+          "task_id": "task-0007-0007"
+        },
+        {
+          "feature_mode_exact": false,
+          "feature_mode_valid": true,
+          "graph_only_exact": false,
+          "graph_only_valid": true,
+          "seed": 8,
+          "task_id": "task-0008-0001"
+        },
+        {
+          "feature_mode_exact": false,
+          "feature_mode_valid": true,
+          "graph_only_exact": false,
+          "graph_only_valid": true,
+          "seed": 8,
+          "task_id": "task-0008-0003"
+        },
+        {
+          "feature_mode_exact": true,
+          "feature_mode_valid": true,
+          "graph_only_exact": true,
+          "graph_only_valid": true,
+          "seed": 8,
+          "task_id": "task-0008-0006"
+        },
+        {
+          "feature_mode_exact": true,
+          "feature_mode_valid": true,
+          "graph_only_exact": false,
+          "graph_only_valid": false,
+          "seed": 9,
+          "task_id": "task-0009-0001"
+        },
+        {
+          "feature_mode_exact": false,
+          "feature_mode_valid": true,
+          "graph_only_exact": false,
+          "graph_only_valid": true,
+          "seed": 9,
+          "task_id": "task-0009-0002"
+        },
+        {
+          "feature_mode_exact": true,
+          "feature_mode_valid": true,
+          "graph_only_exact": true,
+          "graph_only_valid": true,
+          "seed": 9,
+          "task_id": "task-0009-0010"
+        }
+      ]
+    },
+    "road_feature_protocol_v1": {
+      "both_endpoint_exact_match_count": 12,
+      "both_endpoint_exact_match_rate_over_all_tasks": 0.4,
+      "both_endpoint_exact_match_rate_over_validated": 0.4,
+      "by_task_type": {
+        "semantic_landmark_nearby": {
+          "both_endpoints_exact_match": 6,
+          "count": 10,
+          "validated": 10
+        },
+        "semantic_landmark_relative": {
+          "both_endpoints_exact_match": 1,
+          "count": 10,
+          "validated": 10
+        },
+        "semantic_road_feature_position": {
+          "both_endpoints_exact_match": 5,
+          "count": 10,
+          "validated": 10
+        }
+      },
+      "input_tokens_local_tokenizer_total": 39045,
+      "invalid_or_failed_count": 0,
+      "mean_latency_ms": 1649.3311666666666,
+      "median_latency_ms": 1638.187,
+      "task_count": 30,
+      "validated_count": 30
+    }
+  },
+  "schema_version": "r4_qwen_local_intent_batch_summary_v1",
+  "shared_input_audit": {
+    "passed": true,
+    "seed_count": 10
+  }
+}

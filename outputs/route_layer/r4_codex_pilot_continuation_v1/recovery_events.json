@@ -1,0 +1,14 @@
+[
+  {
+    "actual_model_requests_before_recovery": 1,
+    "api_usage": null,
+    "attempt_log_index": 2,
+    "event": "local_trace_filename_collision_before_model_request",
+    "evidence": "attempt_02.json records provider status not_called; no r4_step_0002 trace files exist.",
+    "model_request_made": false,
+    "planned_model_request_number": 2,
+    "repair": "Continue trace counter from persisted actual model request count; use separate monotonic attempt log index.",
+    "retry_count": 0,
+    "root_cause": "Codex client trace counter restarted at 1 in each one-step process."
+  }
+]

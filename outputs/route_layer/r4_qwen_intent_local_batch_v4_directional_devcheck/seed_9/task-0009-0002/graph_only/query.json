@@ -1,0 +1,519 @@
+{
+  "schema_version": "route_intent_query_v2",
+  "task_id": "task-0009-0002",
+  "task_type": "semantic_landmark_relative",
+  "map_id": "grid-100x100-seed-9",
+  "map_version": "grid-v1-100",
+  "map_input_mode": "graph_only",
+  "start_node_id": "node_77_14",
+  "pickup_text": "请在商业街南侧的合法上车点上车。",
+  "dropoff_text": "请在机场接驳点附近下车。",
+  "pickup_resolution_mode": "landmark_graph_candidates",
+  "dropoff_resolution_mode": "landmark_graph_candidates",
+  "matched_pickup_entries": [
+    {
+      "entry_id": "landmark:node_75_97",
+      "entry_type": "landmark",
+      "name": "商业街",
+      "aliases": [
+        "步行街"
+      ],
+      "anchor_coordinates": {
+        "x": 75,
+        "y": 97
+      }
+    }
+  ],
+  "matched_dropoff_entries": [
+    {
+      "entry_id": "landmark:node_99_7",
+      "entry_type": "landmark",
+      "name": "机场接驳点",
+      "aliases": [
+        "机场站"
+      ],
+      "anchor_coordinates": {
+        "x": 99,
+        "y": 7
+      }
+    }
+  ],
+  "pickup_candidates": [
+    {
+      "candidate_ref": "P00",
+      "coordinates": {
+        "x": 70,
+        "y": 97
+      },
+      "manhattan_distance_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_75_97",
+          "distance": 5
+        }
+      ],
+      "relative_direction_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_75_97",
+          "direction": "west"
+        }
+      ],
+      "candidate_anchor_links": []
+    },
+    {
+      "candidate_ref": "P01",
+      "coordinates": {
+        "x": 72,
+        "y": 98
+      },
+      "manhattan_distance_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_75_97",
+          "distance": 4
+        }
+      ],
+      "relative_direction_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_75_97",
+          "direction": "west"
+        }
+      ],
+      "candidate_anchor_links": [
+        {
+          "anchor_ref": "landmark:node_75_97",
+          "entry_type": "landmark",
+          "name": "商业街",
+          "side_of_road": null,
+          "orientation": null,
+          "relation_to_feature": null
+        }
+      ]
+    },
+    {
+      "candidate_ref": "P02",
+      "coordinates": {
+        "x": 74,
+        "y": 95
+      },
+      "manhattan_distance_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_75_97",
+          "distance": 3
+        }
+      ],
+      "relative_direction_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_75_97",
+          "direction": "south"
+        }
+      ],
+      "candidate_anchor_links": [
+        {
+          "anchor_ref": "landmark:node_75_97",
+          "entry_type": "landmark",
+          "name": "商业街",
+          "side_of_road": null,
+          "orientation": null,
+          "relation_to_feature": null
+        }
+      ]
+    },
+    {
+      "candidate_ref": "P03",
+      "coordinates": {
+        "x": 74,
+        "y": 99
+      },
+      "manhattan_distance_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_75_97",
+          "distance": 3
+        }
+      ],
+      "relative_direction_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_75_97",
+          "direction": "north"
+        }
+      ],
+      "candidate_anchor_links": [
+        {
+          "anchor_ref": "landmark:node_75_97",
+          "entry_type": "landmark",
+          "name": "商业街",
+          "side_of_road": null,
+          "orientation": null,
+          "relation_to_feature": null
+        }
+      ]
+    },
+    {
+      "candidate_ref": "P04",
+      "coordinates": {
+        "x": 75,
+        "y": 94
+      },
+      "manhattan_distance_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_75_97",
+          "distance": 3
+        }
+      ],
+      "relative_direction_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_75_97",
+          "direction": "south"
+        }
+      ],
+      "candidate_anchor_links": [
+        {
+          "anchor_ref": "landmark:node_75_97",
+          "entry_type": "landmark",
+          "name": "商业街",
+          "side_of_road": null,
+          "orientation": null,
+          "relation_to_feature": null
+        }
+      ]
+    },
+    {
+      "candidate_ref": "P05",
+      "coordinates": {
+        "x": 75,
+        "y": 95
+      },
+      "manhattan_distance_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_75_97",
+          "distance": 2
+        }
+      ],
+      "relative_direction_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_75_97",
+          "direction": "south"
+        }
+      ],
+      "candidate_anchor_links": [
+        {
+          "anchor_ref": "landmark:node_75_97",
+          "entry_type": "landmark",
+          "name": "商业街",
+          "side_of_road": null,
+          "orientation": null,
+          "relation_to_feature": null
+        }
+      ]
+    },
+    {
+      "candidate_ref": "P06",
+      "coordinates": {
+        "x": 76,
+        "y": 93
+      },
+      "manhattan_distance_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_75_97",
+          "distance": 5
+        }
+      ],
+      "relative_direction_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_75_97",
+          "direction": "south"
+        }
+      ],
+      "candidate_anchor_links": []
+    },
+    {
+      "candidate_ref": "P07",
+      "coordinates": {
+        "x": 77,
+        "y": 95
+      },
+      "manhattan_distance_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_75_97",
+          "distance": 4
+        }
+      ],
+      "relative_direction_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_75_97",
+          "direction": "east"
+        }
+      ],
+      "candidate_anchor_links": []
+    },
+    {
+      "candidate_ref": "P08",
+      "coordinates": {
+        "x": 77,
+        "y": 97
+      },
+      "manhattan_distance_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_75_97",
+          "distance": 2
+        }
+      ],
+      "relative_direction_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_75_97",
+          "direction": "east"
+        }
+      ],
+      "candidate_anchor_links": [
+        {
+          "anchor_ref": "landmark:node_75_97",
+          "entry_type": "landmark",
+          "name": "商业街",
+          "side_of_road": null,
+          "orientation": null,
+          "relation_to_feature": null
+        }
+      ]
+    },
+    {
+      "candidate_ref": "P09",
+      "coordinates": {
+        "x": 79,
+        "y": 97
+      },
+      "manhattan_distance_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_75_97",
+          "distance": 4
+        }
+      ],
+      "relative_direction_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_75_97",
+          "direction": "east"
+        }
+      ],
+      "candidate_anchor_links": []
+    },
+    {
+      "candidate_ref": "P10",
+      "coordinates": {
+        "x": 81,
+        "y": 99
+      },
+      "manhattan_distance_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_75_97",
+          "distance": 8
+        }
+      ],
+      "relative_direction_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_75_97",
+          "direction": "east"
+        }
+      ],
+      "candidate_anchor_links": []
+    },
+    {
+      "candidate_ref": "P11",
+      "coordinates": {
+        "x": 82,
+        "y": 98
+      },
+      "manhattan_distance_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_75_97",
+          "distance": 8
+        }
+      ],
+      "relative_direction_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_75_97",
+          "direction": "east"
+        }
+      ],
+      "candidate_anchor_links": []
+    }
+  ],
+  "dropoff_candidates": [
+    {
+      "candidate_ref": "D00",
+      "coordinates": {
+        "x": 96,
+        "y": 6
+      },
+      "manhattan_distance_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_99_7",
+          "distance": 4
+        }
+      ],
+      "relative_direction_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_99_7",
+          "direction": "west"
+        }
+      ],
+      "candidate_anchor_links": [
+        {
+          "anchor_ref": "landmark:node_99_7",
+          "entry_type": "landmark",
+          "name": "机场接驳点",
+          "side_of_road": null,
+          "orientation": null,
+          "relation_to_feature": null
+        }
+      ]
+    },
+    {
+      "candidate_ref": "D01",
+      "coordinates": {
+        "x": 98,
+        "y": 5
+      },
+      "manhattan_distance_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_99_7",
+          "distance": 3
+        }
+      ],
+      "relative_direction_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_99_7",
+          "direction": "south"
+        }
+      ],
+      "candidate_anchor_links": [
+        {
+          "anchor_ref": "landmark:node_99_7",
+          "entry_type": "landmark",
+          "name": "机场接驳点",
+          "side_of_road": null,
+          "orientation": null,
+          "relation_to_feature": null
+        }
+      ]
+    },
+    {
+      "candidate_ref": "D02",
+      "coordinates": {
+        "x": 98,
+        "y": 6
+      },
+      "manhattan_distance_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_99_7",
+          "distance": 2
+        }
+      ],
+      "relative_direction_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_99_7",
+          "direction": "west"
+        }
+      ],
+      "candidate_anchor_links": [
+        {
+          "anchor_ref": "landmark:node_99_7",
+          "entry_type": "landmark",
+          "name": "机场接驳点",
+          "side_of_road": null,
+          "orientation": null,
+          "relation_to_feature": null
+        }
+      ]
+    },
+    {
+      "candidate_ref": "D03",
+      "coordinates": {
+        "x": 98,
+        "y": 7
+      },
+      "manhattan_distance_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_99_7",
+          "distance": 1
+        }
+      ],
+      "relative_direction_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_99_7",
+          "direction": "west"
+        }
+      ],
+      "candidate_anchor_links": [
+        {
+          "anchor_ref": "landmark:node_99_7",
+          "entry_type": "landmark",
+          "name": "机场接驳点",
+          "side_of_road": null,
+          "orientation": null,
+          "relation_to_feature": null
+        }
+      ]
+    },
+    {
+      "candidate_ref": "D04",
+      "coordinates": {
+        "x": 99,
+        "y": 4
+      },
+      "manhattan_distance_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_99_7",
+          "distance": 3
+        }
+      ],
+      "relative_direction_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_99_7",
+          "direction": "south"
+        }
+      ],
+      "candidate_anchor_links": [
+        {
+          "anchor_ref": "landmark:node_99_7",
+          "entry_type": "landmark",
+          "name": "机场接驳点",
+          "side_of_road": null,
+          "orientation": null,
+          "relation_to_feature": null
+        }
+      ]
+    },
+    {
+      "candidate_ref": "D05",
+      "coordinates": {
+        "x": 99,
+        "y": 6
+      },
+      "manhattan_distance_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_99_7",
+          "distance": 1
+        }
+      ],
+      "relative_direction_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_99_7",
+          "direction": "south"
+        }
+      ],
+      "candidate_anchor_links": [
+        {
+          "anchor_ref": "landmark:node_99_7",
+          "entry_type": "landmark",
+          "name": "机场接驳点",
+          "side_of_road": null,
+          "orientation": null,
+          "relation_to_feature": null
+        }
+      ]
+    }
+  ],
+  "allowed_feature_refs": [],
+  "allowed_landmark_refs": [
+    "landmark:node_75_97",
+    "landmark:node_99_7"
+  ],
+  "uses_evaluator_truth": false
+}

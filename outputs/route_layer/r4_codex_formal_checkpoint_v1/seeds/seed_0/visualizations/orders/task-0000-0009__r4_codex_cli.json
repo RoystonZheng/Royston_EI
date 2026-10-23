@@ -1,0 +1,108 @@
+{
+  "failure_detail_zh": "模型未构造出完整路线，但没有报告已确认路网无路可走。原始原因：model_unable_to_construct_route",
+  "failure_reason": "model_unable_to_construct_route",
+  "geometry": {
+    "attempted_route_edge_ids": [],
+    "attempted_route_node_ids": [],
+    "boundary": {
+      "max_x": 99,
+      "max_y": 99,
+      "min_x": 0,
+      "min_y": 0
+    },
+    "endpoint_node_ids": [
+      "node_69_41",
+      "node_25_66",
+      "node_42_43"
+    ],
+    "expanded_events": [],
+    "first_violation_step": null,
+    "map_id": "grid-100x100-seed-0",
+    "map_size": 100,
+    "move_count": 0,
+    "move_violations": [],
+    "nodes": [
+      {
+        "node_id": "node_69_41",
+        "x": 69,
+        "y": 41
+      }
+    ],
+    "road_context_edges": [],
+    "route_edges": [],
+    "route_node_ids": [],
+    "validated_prefix_node_ids": [
+      "node_69_41"
+    ]
+  },
+  "llm_response_received": true,
+  "map_id": "grid-100x100-seed-0",
+  "method_name": "r4_codex_cli",
+  "proposal_energy_audit": {
+    "energy_model_version": "energy_v1",
+    "estimated_route_distance_m": null,
+    "exact_edge_moves": 0,
+    "fallback_congestion_level": 0.0,
+    "fallback_length_m": 100.0,
+    "fallback_signal_delay_sec": 0.0,
+    "interpretation": "模型返回失败且没有移动序列；行驶能耗未评估，不能解释为零能耗。",
+    "proposed_move_count": 0,
+    "proxy_edge_moves": 0,
+    "reverse_edge_inferred_moves": 0,
+    "route_energy_estimate_kwh": null,
+    "status": "no_route_proposed",
+    "validated_prefix_energy_estimate_kwh": null,
+    "validated_prefix_move_count": 0
+  },
+  "scenario_id": null,
+  "scenario_type": null,
+  "schema_version": "route_trace_visual_record_v1",
+  "status": "failed",
+  "task_id": "task-0000-0009",
+  "task_type": "semantic_road_feature_position",
+  "trace": {
+    "algorithm": "llm",
+    "attempted_move_sequence": "",
+    "attempted_route_edge_sequence": [],
+    "attempted_route_node_sequence": [],
+    "expanded_nodes": null,
+    "failure_reason": "model_unable_to_construct_route",
+    "first_violation_step": null,
+    "legs": [
+      {
+        "expanded_events": [],
+        "expanded_node_ids": [],
+        "source_node_id": "node_69_41",
+        "status": "not_completed",
+        "target_node_id": "node_25_66"
+      },
+      {
+        "expanded_events": [],
+        "expanded_node_ids": [],
+        "source_node_id": "node_25_66",
+        "status": "not_completed",
+        "target_node_id": "node_42_43"
+      }
+    ],
+    "method_name": "r4_codex_cli",
+    "model_self_check_all_pass": null,
+    "move_count": 0,
+    "move_violations": [],
+    "r4_step_audit": [],
+    "route_edge_sequence": [],
+    "route_node_sequence": [],
+    "schema_version": "route_search_trace_v1",
+    "status": "failed",
+    "validated_prefix_edge_sequence": [],
+    "validated_prefix_node_sequence": [
+      "node_69_41"
+    ]
+  },
+  "trace_id": "task-0000-0009__r4_codex_cli",
+  "validation": {
+    "direction_valid": true,
+    "errors": [],
+    "status": "model_failed",
+    "valid": false
+  }
+}

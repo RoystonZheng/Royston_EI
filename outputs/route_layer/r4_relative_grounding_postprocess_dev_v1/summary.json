@@ -1,0 +1,95 @@
+{
+  "schema_version": "r4_relative_grounding_postprocess_dev_summary_v1",
+  "created_at_utc": "2026-10-22T09:37:37.040172+00:00",
+  "scope": "retrospective_local_postprocess_of_existing_qwen_outputs_no_route_generation",
+  "api_requests": 0,
+  "hosted_inference_requests": 0,
+  "rows": 60,
+  "paired_task_count": 30,
+  "by_mode": {
+    "road_feature_protocol_v1": {
+      "task_count": 30,
+      "raw_exact_match_count": 14,
+      "postprocess_pickup_exact_count": 24,
+      "postprocess_dropoff_exact_count": 27,
+      "postprocess_exact_match_count": 22,
+      "postprocess_valid_count": 29,
+      "by_task_type": {
+        "semantic_landmark_nearby": {
+          "count": 10,
+          "raw_exact": 6,
+          "postprocess_pickup_exact": 6,
+          "postprocess_dropoff_exact": 10,
+          "postprocess_exact": 6,
+          "postprocess_valid": 10
+        },
+        "semantic_landmark_relative": {
+          "count": 10,
+          "raw_exact": 0,
+          "postprocess_pickup_exact": 10,
+          "postprocess_dropoff_exact": 8,
+          "postprocess_exact": 8,
+          "postprocess_valid": 10
+        },
+        "semantic_road_feature_position": {
+          "count": 10,
+          "raw_exact": 8,
+          "postprocess_pickup_exact": 8,
+          "postprocess_dropoff_exact": 9,
+          "postprocess_exact": 8,
+          "postprocess_valid": 9
+        }
+      }
+    },
+    "graph_only": {
+      "task_count": 30,
+      "raw_exact_match_count": 6,
+      "postprocess_pickup_exact_count": 16,
+      "postprocess_dropoff_exact_count": 28,
+      "postprocess_exact_match_count": 14,
+      "postprocess_valid_count": 30,
+      "by_task_type": {
+        "semantic_landmark_nearby": {
+          "count": 10,
+          "raw_exact": 6,
+          "postprocess_pickup_exact": 6,
+          "postprocess_dropoff_exact": 10,
+          "postprocess_exact": 6,
+          "postprocess_valid": 10
+        },
+        "semantic_landmark_relative": {
+          "count": 10,
+          "raw_exact": 0,
+          "postprocess_pickup_exact": 10,
+          "postprocess_dropoff_exact": 8,
+          "postprocess_exact": 8,
+          "postprocess_valid": 10
+        },
+        "semantic_road_feature_position": {
+          "count": 10,
+          "raw_exact": 0,
+          "postprocess_pickup_exact": 0,
+          "postprocess_dropoff_exact": 10,
+          "postprocess_exact": 0,
+          "postprocess_valid": 10
+        }
+      }
+    }
+  },
+  "paired_postprocess_exact_comparison": {
+    "road_feature_only_exact": 8,
+    "graph_only_only_exact": 0,
+    "both_exact": 14,
+    "neither_exact": 8,
+    "exact_two_sided_mcnemar_p_exploratory": 0.0078125
+  },
+  "limitations": [
+    "This is a post-hoc development replay on the same 30 semantic tasks already inspected; it is not an independent held-out evaluation.",
+    "It changes the endpoint-resolution pipeline by using explicit Chinese cardinal-direction words and public candidate geometry after model anchor selection.",
+    "The deterministic resolver only covers the four explicit cardinal directions represented in this synthetic task generator; it does not establish general natural-language understanding.",
+    "No route was proposed, validated, costed, or energy-scored by this replay."
+  ],
+  "source": "outputs/route_layer/r4_qwen_intent_local_batch_v3",
+  "source_summary_sha256": "ea918731b945915e753568c4d08b7c522bd4c20befc20870188fec8270ed8226",
+  "source_shared_input_audit_passed": true
+}

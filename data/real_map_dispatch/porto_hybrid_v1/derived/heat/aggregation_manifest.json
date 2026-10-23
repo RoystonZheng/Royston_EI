@@ -1,0 +1,46 @@
+{
+  "source_archive": "train.csv.zip",
+  "grid": {
+    "projection": "local equirectangular approximation centered near Porto",
+    "reference_lon": -8.61,
+    "reference_lat": 41.15,
+    "cell_size_m": 200.0
+  },
+  "endpoint_semantics": "trip start/end GPS points from completed taxi trajectories; proxies only",
+  "time_semantics": "UTC hour bins derived from trip start timestamp; not local service-hour truth",
+  "privacy": "trip and taxi identifiers are not written to derived outputs",
+  "counts": {
+    "empty_polyline_rows": 5901,
+    "missing_data_rows": 10,
+    "rows_seen": 1710670,
+    "trips_aggregated": 1704759,
+    "utc_hour_00": 49090,
+    "utc_hour_01": 48542,
+    "utc_hour_02": 48252,
+    "utc_hour_03": 55147,
+    "utc_hour_04": 58300,
+    "utc_hour_05": 53499,
+    "utc_hour_06": 53014,
+    "utc_hour_07": 68795,
+    "utc_hour_08": 92704,
+    "utc_hour_09": 98243,
+    "utc_hour_10": 91348,
+    "utc_hour_11": 85709,
+    "utc_hour_12": 83102,
+    "utc_hour_13": 88326,
+    "utc_hour_14": 92251,
+    "utc_hour_15": 90632,
+    "utc_hour_16": 88074,
+    "utc_hour_17": 83809,
+    "utc_hour_18": 78117,
+    "utc_hour_19": 70794,
+    "utc_hour_20": 67153,
+    "utc_hour_21": 59300,
+    "utc_hour_22": 51978,
+    "utc_hour_23": 48580
+  },
+  "outputs": [
+    "porto_hotspot_cells_200m.csv",
+    "porto_od_grid_counts_200m.csv"
+  ]
+}

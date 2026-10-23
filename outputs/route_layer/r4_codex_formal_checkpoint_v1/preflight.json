@@ -1,0 +1,43 @@
+{
+  "created_at_utc": "2026-10-22T07:57:50.545816+00:00",
+  "evaluator_truth_in_route_prompt": false,
+  "formal_batch_started": false,
+  "intent_result_sha256": "530babdd0f358149d6c843ddc39b6bbd64241e8efdf0667785f8cf73d8a24f2b",
+  "map_id": "grid-100x100-seed-0",
+  "map_sha256": "bdf7da792ecf78ae393f5441055d592f3585674bea48d4f12d2d2d1ce632adbe",
+  "max_route_edges": 512,
+  "maximum_model_requests": 1,
+  "model": "gpt-5.6-luna",
+  "order_tasks_sha256": "867d863c961406fd89a620177253cf50493b0883988069a033d147d6496e7999",
+  "reasoning_effort": "low",
+  "result_scope": "one frozen semantic order checkpoint; not a multi-seed result",
+  "retry_count": 0,
+  "route_chain_reachability": {
+    "chain_reachable": true,
+    "pickup_to_dropoff": true,
+    "start_to_pickup": true
+  },
+  "route_input_directed_edges": 10853,
+  "route_input_nodes": 2990,
+  "route_input_package_id": "package-grid-100x100-seed-0-task-0000-0009",
+  "route_intent": {
+    "dropoff_anchor_ref": "landmark:node_42_42",
+    "feature_evidence_refs": [
+      "feature:sign_08"
+    ],
+    "pickup_anchor_ref": "feature:sign_08",
+    "relation": "feature_side",
+    "resolution_mode": "road_feature_relation",
+    "side": "west"
+  },
+  "route_prompt_bytes": 16428,
+  "route_prompt_sha256": "17b10cff5c5f4ff36555d123e9d31199943035858b8b75a851c5647b1ba46787",
+  "route_schema_bytes": 738,
+  "route_schema_sha256": "9d2981bbbef9dfe9b0a9f749c3d15083145fd332b9836f8d13fd902fce61ad09",
+  "schema_version": "r4_codex_formal_single_task_preflight_v1",
+  "status": "offline_preflight_passed_no_route_request",
+  "task_id": "task-0000-0009",
+  "task_type": "semantic_road_feature_position",
+  "tool_events_allowed": false,
+  "validator": "validate every proposed move against the full frozen directed map; reject the entire route on any violation"
+}

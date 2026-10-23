@@ -1,0 +1,28 @@
+{
+  "schema_version": "r4_qwen_local_intent_development_attempt_v1",
+  "attempt": 1,
+  "status": "invalid_intent",
+  "model": "mlx-community/Qwen3-4B-Instruct-2507-4bit",
+  "generation_latency_ms": 3322.681,
+  "billing": "local_inference_no_API_request",
+  "parsed_output": {
+    "schema_version": "route_intent_query_v1",
+    "status": "success",
+    "pickup_node_id": "node_26_66",
+    "dropoff_node_id": "node_42_43",
+    "pickup_anchor_ref": "feature:sign_08",
+    "dropoff_anchor_ref": "landmark:node_42_42",
+    "relation": "west_side",
+    "side": "west",
+    "feature_evidence_refs": [
+      "feature:sign_08"
+    ],
+    "confidence": 0.95
+  },
+  "validation": {
+    "valid": false,
+    "reason": "intent_schema_version_invalid"
+  },
+  "resolution": "Prompt clarified the distinct query/output schema versions and the feature-side meaning before the next local run.",
+  "prompt_sha256": "not_recorded_before_overwrite"
+}

@@ -1,0 +1,76 @@
+{
+  "api_requests": 0,
+  "completed_samples": 2,
+  "created_at_utc": "2026-10-22T09:09:46.013670+00:00",
+  "expected_samples": 2,
+  "experiment_scope": "paired_local_endpoint_intent_audit_only_no_route_generation",
+  "hosted_inference_requests": 0,
+  "limitations": [
+    "This paired audit measures endpoint intent resolution, not route construction or route quality.",
+    "Exact endpoint match is reported separately from candidate-whitelist validity.",
+    "Local tokenizer counts are not API tokens, billing, or a Codex/DeepSeek usage estimate.",
+    "A 30-task semantic subset is a controlled task sample, not a broad language benchmark."
+  ],
+  "model": "mlx-community/Qwen3-4B-Instruct-2507-4bit",
+  "model_revision": "50d427756c6b1b2fe0c0a10f67fbda1fc8e82c1b",
+  "results": {
+    "graph_only": {
+      "both_endpoint_exact_match_count": 1,
+      "both_endpoint_exact_match_rate_over_all_tasks": 1.0,
+      "both_endpoint_exact_match_rate_over_validated": 1.0,
+      "by_task_type": {
+        "semantic_landmark_nearby": {
+          "both_endpoints_exact_match": 1,
+          "count": 1,
+          "validated": 1
+        }
+      },
+      "input_tokens_local_tokenizer_total": 1393,
+      "invalid_or_failed_count": 0,
+      "mean_latency_ms": 1493.646,
+      "median_latency_ms": 1493.646,
+      "task_count": 1,
+      "validated_count": 1
+    },
+    "paired_comparison": {
+      "both_exact_match_count": 1,
+      "graph_only_only_exact_match_count": 0,
+      "neither_exact_match_count": 0,
+      "paired_task_count": 1,
+      "road_feature_only_exact_match_count": 0,
+      "rows": [
+        {
+          "feature_mode_exact": true,
+          "feature_mode_valid": true,
+          "graph_only_exact": true,
+          "graph_only_valid": true,
+          "seed": 0,
+          "task_id": "task-0000-0001"
+        }
+      ]
+    },
+    "road_feature_protocol_v1": {
+      "both_endpoint_exact_match_count": 1,
+      "both_endpoint_exact_match_rate_over_all_tasks": 1.0,
+      "both_endpoint_exact_match_rate_over_validated": 1.0,
+      "by_task_type": {
+        "semantic_landmark_nearby": {
+          "both_endpoints_exact_match": 1,
+          "count": 1,
+          "validated": 1
+        }
+      },
+      "input_tokens_local_tokenizer_total": 1396,
+      "invalid_or_failed_count": 0,
+      "mean_latency_ms": 1834.145,
+      "median_latency_ms": 1834.145,
+      "task_count": 1,
+      "validated_count": 1
+    }
+  },
+  "schema_version": "r4_qwen_local_intent_batch_summary_v1",
+  "shared_input_audit": {
+    "passed": true,
+    "seed_count": 10
+  }
+}

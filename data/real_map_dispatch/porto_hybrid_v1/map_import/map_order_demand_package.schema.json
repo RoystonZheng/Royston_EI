@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:porto-map-order-demand-package-v1",
+  "title": "Map order and demand import package v1",
+  "type": "object",
+  "required": ["package_type", "schema_version", "metadata", "pickup_points", "dropoff_points"],
+  "properties": {
+    "package_type": {"const": "map_order_demand_package"},
+    "schema_version": {"const": 1},
+    "package_id": {"type": "string"},
+    "metadata": {"type": "object", "required": ["name", "source_type"], "properties": {"name": {"type": "string"}, "source_type": {"type": "string"}, "source": {"type": "string"}, "source_period": {"type": "string"}, "trip_count_semantics": {"type": "string"}}},
+    "pickup_points": {"type": "array", "items": {"$ref": "#/$defs/point"}},
+    "dropoff_points": {"type": "array", "items": {"$ref": "#/$defs/point"}},
+    "demand_nodes": {"type": "array", "items": {"$ref": "#/$defs/node"}},
+    "demand_pairs": {"type": "array", "items": {"$ref": "#/$defs/demandPair"}},
+    "orders": {"type": "array", "items": {"$ref": "#/$defs/order"}}
+  },
+  "anyOf": [{"required": ["demand_pairs"]}, {"required": ["orders"]}],
+  "$defs": {
+    "point": {"type": "object", "required": ["lon", "lat", "count"], "properties": {"point_id": {"type": "string"}, "lon": {"type": "number", "minimum": -180, "maximum": 180}, "lat": {"type": "number", "minimum": -90, "maximum": 90}, "count": {"type": "number", "minimum": 0}}},
+    "node": {"type": "object", "required": ["node_id", "lon", "lat"], "properties": {"node_id": {"type": "string"}, "lon": {"type": "number", "minimum": -180, "maximum": 180}, "lat": {"type": "number", "minimum": -90, "maximum": 90}}},
+    "demandPair": {"type": "object", "required": ["origin_node_id", "destination_node_id", "order_count"], "properties": {"origin_node_id": {"type": "string"}, "destination_node_id": {"type": "string"}, "order_count": {"type": "number", "exclusiveMinimum": 0}}},
+    "order": {"type": "object", "required": ["order_id", "pickup", "dropoff"], "properties": {"order_id": {"type": "string"}, "pickup": {"$ref": "#/$defs/point"}, "dropoff": {"$ref": "#/$defs/point"}, "order_count": {"type": "number", "exclusiveMinimum": 0}}}
+  }
+}

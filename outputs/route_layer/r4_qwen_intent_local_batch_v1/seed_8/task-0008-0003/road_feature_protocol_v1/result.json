@@ -1,0 +1,321 @@
+{
+  "candidate_ref_resolution": {
+    "dropoff": {
+      "D00": "node_17_67",
+      "D01": "node_17_68",
+      "D02": "node_17_69",
+      "D03": "node_19_69",
+      "D04": "node_20_68",
+      "D05": "node_21_67"
+    },
+    "pickup": {
+      "P00": "node_49_66",
+      "P01": "node_50_66",
+      "P02": "node_56_73",
+      "P03": "node_57_73"
+    }
+  },
+  "created_at_utc": "2026-10-22T09:11:33.405980+00:00",
+  "decoding": {
+    "max_tokens": 256,
+    "temperature": 0.0,
+    "thinking": false
+  },
+  "evaluation_after_inference": {
+    "both_endpoints_exact_match": false,
+    "dropoff_exact_match": true,
+    "pickup_exact_match": false,
+    "true_dropoff_node_id": "node_19_69",
+    "true_pickup_node_id": "node_49_66",
+    "truth_loaded_after_generation": true
+  },
+  "input_artifacts": {
+    "map_sha256": "73f75f0440a9c5321f36769d6f0977b6e55536e18acc4f6ec53d304c492a477d",
+    "orders_sha256": "e871e414a4da54a6e430eed1d6140129664a9556b035170e85b94b3a5245c5b7",
+    "prompt_sha256": "74b330afdd31b19fffdcc041ed62a538fd557f3ddbf3dc260c544674700dec30",
+    "protocol_sha256": "6cd43aad99620cec07e2c988027f6e8324fa53b5609e0deafe7c5499d41e8355",
+    "query_sha256": "b0a5d9ce0b515d899060294f0b106b5e957409d802e2a7b5420df0d50b1a1871"
+  },
+  "input_tokens_local_tokenizer": 1192,
+  "latency_ms": 1603.837,
+  "map_id": "grid-100x100-seed-8",
+  "map_input_mode": "road_feature_protocol_v1",
+  "model": "mlx-community/Qwen3-4B-Instruct-2507-4bit",
+  "model_query": {
+    "allowed_feature_refs": [
+      "feature:pole_02",
+      "feature:pole_07"
+    ],
+    "allowed_landmark_refs": [
+      "landmark:node_20_69"
+    ],
+    "dropoff_candidates": [
+      {
+        "candidate_ref": "D00",
+        "coordinates": {
+          "x": 17,
+          "y": 67
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_20_69",
+            "distance": 5
+          }
+        ]
+      },
+      {
+        "candidate_ref": "D01",
+        "coordinates": {
+          "x": 17,
+          "y": 68
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_20_69",
+            "distance": 4
+          }
+        ]
+      },
+      {
+        "candidate_ref": "D02",
+        "coordinates": {
+          "x": 17,
+          "y": 69
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_20_69",
+            "distance": 3
+          }
+        ]
+      },
+      {
+        "candidate_ref": "D03",
+        "coordinates": {
+          "x": 19,
+          "y": 69
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_20_69",
+            "distance": 1
+          }
+        ]
+      },
+      {
+        "candidate_ref": "D04",
+        "coordinates": {
+          "x": 20,
+          "y": 68
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_20_69",
+            "distance": 1
+          }
+        ]
+      },
+      {
+        "candidate_ref": "D05",
+        "coordinates": {
+          "x": 21,
+          "y": 67
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "landmark:node_20_69",
+            "distance": 3
+          }
+        ]
+      }
+    ],
+    "dropoff_resolution_mode": "landmark_graph_candidates",
+    "dropoff_text": "请在科技园附近下车。",
+    "map_id": "grid-100x100-seed-8",
+    "map_input_mode": "road_feature_protocol_v1",
+    "map_version": "grid-v1-100",
+    "matched_dropoff_entries": [
+      {
+        "aliases": [
+          "科技园区"
+        ],
+        "anchor_coordinates": {
+          "x": 20,
+          "y": 69
+        },
+        "entry_id": "landmark:node_20_69",
+        "entry_type": "landmark",
+        "name": "科技园"
+      }
+    ],
+    "matched_pickup_entries": [
+      {
+        "aliases": [
+          "B号电线杆",
+          "电杆B"
+        ],
+        "anchor_coordinates": {
+          "x": 56,
+          "y": 73
+        },
+        "entry_id": "feature:pole_02",
+        "entry_type": "utility_pole",
+        "name": "电线杆B",
+        "orientation": "toward_east",
+        "side_of_road": "west_side"
+      },
+      {
+        "aliases": [
+          "B号电线杆",
+          "电杆B"
+        ],
+        "anchor_coordinates": {
+          "x": 49,
+          "y": 66
+        },
+        "entry_id": "feature:pole_07",
+        "entry_type": "utility_pole",
+        "name": "电线杆B",
+        "orientation": "toward_east",
+        "side_of_road": "west_side"
+      }
+    ],
+    "pickup_candidates": [
+      {
+        "candidate_ref": "P00",
+        "coordinates": {
+          "x": 49,
+          "y": 66
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "feature:pole_02",
+            "distance": 14
+          },
+          {
+            "anchor_ref": "feature:pole_07",
+            "distance": 0
+          }
+        ],
+        "relation_to_feature": "feature_side"
+      },
+      {
+        "candidate_ref": "P01",
+        "coordinates": {
+          "x": 50,
+          "y": 66
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "feature:pole_02",
+            "distance": 13
+          },
+          {
+            "anchor_ref": "feature:pole_07",
+            "distance": 1
+          }
+        ],
+        "relation_to_feature": "opposite_side"
+      },
+      {
+        "candidate_ref": "P02",
+        "coordinates": {
+          "x": 56,
+          "y": 73
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "feature:pole_02",
+            "distance": 0
+          },
+          {
+            "anchor_ref": "feature:pole_07",
+            "distance": 14
+          }
+        ],
+        "relation_to_feature": "feature_side"
+      },
+      {
+        "candidate_ref": "P03",
+        "coordinates": {
+          "x": 57,
+          "y": 73
+        },
+        "manhattan_distance_to_anchors": [
+          {
+            "anchor_ref": "feature:pole_02",
+            "distance": 1
+          },
+          {
+            "anchor_ref": "feature:pole_07",
+            "distance": 15
+          }
+        ],
+        "relation_to_feature": "opposite_side"
+      }
+    ],
+    "pickup_resolution_mode": "road_feature_relation",
+    "pickup_text": "请在电线杆B旁、西侧的合法上车点上车。",
+    "schema_version": "route_intent_query_v2",
+    "start_node_id": "node_81_53",
+    "task_id": "task-0008-0003",
+    "uses_evaluator_truth": false
+  },
+  "model_revision": "50d427756c6b1b2fe0c0a10f67fbda1fc8e82c1b",
+  "parse_or_inference_error": null,
+  "parsed_intent": {
+    "confidence": 0.97,
+    "dropoff_anchor_ref": "landmark:node_20_69",
+    "dropoff_candidate_ref": "D03",
+    "feature_evidence_refs": [
+      "feature:pole_07"
+    ],
+    "pickup_anchor_ref": "feature:pole_07",
+    "pickup_candidate_ref": "P02",
+    "relation": "near",
+    "schema_version": "route_intent_candidate_v2",
+    "side": "none",
+    "status": "resolved"
+  },
+  "prompt_version": "r4_intent_prompt_v3_opaque_candidate_refs",
+  "raw_response": "{\"schema_version\":\"route_intent_candidate_v2\",\"status\":\"resolved\",\"pickup_candidate_ref\":\"P02\",\"dropoff_candidate_ref\":\"D03\",\"pickup_anchor_ref\":\"feature:pole_07\",\"dropoff_anchor_ref\":\"landmark:node_20_69\",\"relation\":\"near\",\"side\":\"none\",\"feature_evidence_refs\":[\"feature:pole_07\"],\"confidence\":0.97}",
+  "resolved_intent": {
+    "confidence": 0.97,
+    "dropoff_anchor_ref": "landmark:node_20_69",
+    "dropoff_node_id": "node_19_69",
+    "feature_evidence_refs": [
+      "feature:pole_07"
+    ],
+    "pickup_anchor_ref": "feature:pole_07",
+    "pickup_node_id": "node_56_73",
+    "relation": "near",
+    "schema_version": "route_intent_v1",
+    "side": "none",
+    "status": "resolved"
+  },
+  "schema_version": "r4_qwen_local_intent_batch_result_v1",
+  "seed": 8,
+  "status": "validated",
+  "task_id": "task-0008-0003",
+  "task_type": "semantic_road_feature_position",
+  "usage": {
+    "actual_hardware_billing": "not_applicable_local_inference",
+    "billing": "local_inference_no_API_request",
+    "input_tokens_local_tokenizer": 1192,
+    "output_tokens": null
+  },
+  "validation": {
+    "confidence": 0.97,
+    "dropoff_anchor_ref": "landmark:node_20_69",
+    "dropoff_node_id": "node_19_69",
+    "feature_evidence_refs": [
+      "feature:pole_07"
+    ],
+    "pickup_anchor_ref": "feature:pole_07",
+    "pickup_node_id": "node_56_73",
+    "relation": "near",
+    "resolution_mode": "road_feature_relation",
+    "side": "none",
+    "valid": true
+  }
+}

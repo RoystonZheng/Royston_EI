@@ -1,0 +1,3689 @@
+{
+  "scenario_id": "porto_static_traditional_pilot_seed_0",
+  "status": "pilot_static_preflight_only",
+  "formal_experiment": false,
+  "seed": 0,
+  "fleet_size": 10,
+  "orders_per_vehicle": 10,
+  "endpoint_mix": {
+    "candidate_to_candidate": 70,
+    "one_candidate_one_fuzzy": 15,
+    "two_fuzzy": 15,
+    "note": "The 30% internal split is a pilot assumption; not frozen for formal runs."
+  },
+  "vehicle_order_policy": "fixed per vehicle; no assignment, dispatch, reassignment, or sequence optimization",
+  "vehicles": [
+    {
+      "vehicle_id": "veh_01",
+      "initial_position": {
+        "point_id": "pickup_0762",
+        "lon": -8.609404,
+        "lat": 41.160331,
+        "count": 9940,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "7057137055",
+          "distance_m": 29.56,
+          "max_snap_m": 300.0
+        }
+      },
+      "fixed_order_sequence": [
+        "ord_0001",
+        "ord_0011",
+        "ord_0021",
+        "ord_0031",
+        "ord_0041",
+        "ord_0051",
+        "ord_0061",
+        "ord_0071",
+        "ord_0081",
+        "ord_0091"
+      ]
+    },
+    {
+      "vehicle_id": "veh_02",
+      "initial_position": {
+        "point_id": "pickup_0377",
+        "lon": -8.598667,
+        "lat": 41.149551,
+        "count": 13147,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "5305698011",
+          "distance_m": 16.75,
+          "max_snap_m": 300.0
+        }
+      },
+      "fixed_order_sequence": [
+        "ord_0002",
+        "ord_0012",
+        "ord_0022",
+        "ord_0032",
+        "ord_0042",
+        "ord_0052",
+        "ord_0062",
+        "ord_0072",
+        "ord_0082",
+        "ord_0092"
+      ]
+    },
+    {
+      "vehicle_id": "veh_03",
+      "initial_position": {
+        "point_id": "pickup_0550",
+        "lon": -8.630877,
+        "lat": 41.154941,
+        "count": 23906,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "129795309",
+          "distance_m": 18.68,
+          "max_snap_m": 300.0
+        }
+      },
+      "fixed_order_sequence": [
+        "ord_0003",
+        "ord_0013",
+        "ord_0023",
+        "ord_0033",
+        "ord_0043",
+        "ord_0053",
+        "ord_0063",
+        "ord_0073",
+        "ord_0083",
+        "ord_0093"
+      ]
+    },
+    {
+      "vehicle_id": "veh_04",
+      "initial_position": {
+        "point_id": "pickup_0082",
+        "lon": -8.614175,
+        "lat": 41.141466,
+        "count": 33920,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "2356335549",
+          "distance_m": 29.44,
+          "max_snap_m": 300.0
+        }
+      },
+      "fixed_order_sequence": [
+        "ord_0004",
+        "ord_0014",
+        "ord_0024",
+        "ord_0034",
+        "ord_0044",
+        "ord_0054",
+        "ord_0064",
+        "ord_0074",
+        "ord_0084",
+        "ord_0094"
+      ]
+    },
+    {
+      "vehicle_id": "veh_05",
+      "initial_position": {
+        "point_id": "pickup_0206",
+        "lon": -8.607018,
+        "lat": 41.145059,
+        "count": 22184,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "5849847839",
+          "distance_m": 10.71,
+          "max_snap_m": 300.0
+        }
+      },
+      "fixed_order_sequence": [
+        "ord_0005",
+        "ord_0015",
+        "ord_0025",
+        "ord_0035",
+        "ord_0045",
+        "ord_0055",
+        "ord_0065",
+        "ord_0075",
+        "ord_0085",
+        "ord_0095"
+      ]
+    },
+    {
+      "vehicle_id": "veh_06",
+      "initial_position": {
+        "point_id": "pickup_0550",
+        "lon": -8.630877,
+        "lat": 41.154941,
+        "count": 23906,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "129795309",
+          "distance_m": 18.68,
+          "max_snap_m": 300.0
+        }
+      },
+      "fixed_order_sequence": [
+        "ord_0006",
+        "ord_0016",
+        "ord_0026",
+        "ord_0036",
+        "ord_0046",
+        "ord_0056",
+        "ord_0066",
+        "ord_0076",
+        "ord_0086",
+        "ord_0096"
+      ]
+    },
+    {
+      "vehicle_id": "veh_07",
+      "initial_position": {
+        "point_id": "pickup_0262",
+        "lon": -8.614175,
+        "lat": 41.146856,
+        "count": 13098,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "8674229741",
+          "distance_m": 45.35,
+          "max_snap_m": 300.0
+        }
+      },
+      "fixed_order_sequence": [
+        "ord_0007",
+        "ord_0017",
+        "ord_0027",
+        "ord_0037",
+        "ord_0047",
+        "ord_0057",
+        "ord_0067",
+        "ord_0077",
+        "ord_0087",
+        "ord_0097"
+      ]
+    },
+    {
+      "vehicle_id": "veh_08",
+      "initial_position": {
+        "point_id": "pickup_0650",
+        "lon": -8.628491,
+        "lat": 41.157636,
+        "count": 27461,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "112675715",
+          "distance_m": 39.06,
+          "max_snap_m": 300.0
+        }
+      },
+      "fixed_order_sequence": [
+        "ord_0008",
+        "ord_0018",
+        "ord_0028",
+        "ord_0038",
+        "ord_0048",
+        "ord_0058",
+        "ord_0068",
+        "ord_0078",
+        "ord_0088",
+        "ord_0098"
+      ]
+    },
+    {
+      "vehicle_id": "veh_09",
+      "initial_position": {
+        "point_id": "pickup_0206",
+        "lon": -8.607018,
+        "lat": 41.145059,
+        "count": 22184,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "5849847839",
+          "distance_m": 10.71,
+          "max_snap_m": 300.0
+        }
+      },
+      "fixed_order_sequence": [
+        "ord_0009",
+        "ord_0019",
+        "ord_0029",
+        "ord_0039",
+        "ord_0049",
+        "ord_0059",
+        "ord_0069",
+        "ord_0079",
+        "ord_0089",
+        "ord_0099"
+      ]
+    },
+    {
+      "vehicle_id": "veh_10",
+      "initial_position": {
+        "point_id": "pickup_0404",
+        "lon": -8.607018,
+        "lat": 41.150449,
+        "count": 19996,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "4529952469",
+          "distance_m": 21.93,
+          "max_snap_m": 300.0
+        }
+      },
+      "fixed_order_sequence": [
+        "ord_0010",
+        "ord_0020",
+        "ord_0030",
+        "ord_0040",
+        "ord_0050",
+        "ord_0060",
+        "ord_0070",
+        "ord_0080",
+        "ord_0090",
+        "ord_0100"
+      ]
+    }
+  ],
+  "orders": [
+    {
+      "order_id": "ord_0001",
+      "vehicle_id": "veh_01",
+      "sequence_index": 0,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0060",
+        "lon": -8.615368,
+        "lat": 41.140568,
+        "count": 23564,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "286970022",
+          "distance_m": 19.43,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0367",
+        "lon": -8.610596,
+        "lat": 41.149551,
+        "count": 17483,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "2261413157",
+          "distance_m": 30.0,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0002",
+      "vehicle_id": "veh_02",
+      "sequence_index": 0,
+      "order_kind": "two_fuzzy",
+      "pickup": {
+        "point_id": "fuzzy_001",
+        "point_kind": "fuzzy_road_feature",
+        "lon": -8.600109015304074,
+        "lat": 41.16133991275166,
+        "uncertainty_radius_m": 35,
+        "feature_hint": "mapped_traffic_signal",
+        "source_feature_node_id": "12455973434",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "12455973434",
+          "distance_m": 3.43,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "fuzzy_002",
+        "point_kind": "fuzzy_road_feature",
+        "lon": -8.596017627214405,
+        "lat": 41.153953881215465,
+        "uncertainty_radius_m": 35,
+        "feature_hint": "shared_road_vertex",
+        "source_feature_node_id": "4751728984",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "9922215307",
+          "distance_m": 6.78,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0003",
+      "vehicle_id": "veh_03",
+      "sequence_index": 0,
+      "order_kind": "two_fuzzy",
+      "pickup": {
+        "point_id": "fuzzy_003",
+        "point_kind": "fuzzy_road_feature",
+        "lon": -8.62398629995177,
+        "lat": 41.14571006661722,
+        "uncertainty_radius_m": 35,
+        "feature_hint": "mapped_traffic_signal",
+        "source_feature_node_id": "138218140",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "2616079110",
+          "distance_m": 0.37,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "fuzzy_004",
+        "point_kind": "fuzzy_road_feature",
+        "lon": -8.618312354000148,
+        "lat": 41.14477732200284,
+        "uncertainty_radius_m": 35,
+        "feature_hint": "shared_road_vertex",
+        "source_feature_node_id": "2255075997",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "4529953571",
+          "distance_m": 1.39,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0004",
+      "vehicle_id": "veh_04",
+      "sequence_index": 0,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0291",
+        "lon": -8.62014,
+        "lat": 41.147754,
+        "count": 35837,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "2413940893",
+          "distance_m": 2.71,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0231",
+        "lon": -8.612982,
+        "lat": 41.145958,
+        "count": 35700,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "2214758559",
+          "distance_m": 34.5,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0005",
+      "vehicle_id": "veh_05",
+      "sequence_index": 0,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0606",
+        "lon": -8.602246,
+        "lat": 41.155839,
+        "count": 12401,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "4241285268",
+          "distance_m": 21.69,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0650",
+        "lon": -8.628491,
+        "lat": 41.157636,
+        "count": 27461,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "112675715",
+          "distance_m": 39.06,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0006",
+      "vehicle_id": "veh_06",
+      "sequence_index": 0,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0176",
+        "lon": -8.607018,
+        "lat": 41.144161,
+        "count": 10462,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "4744083580",
+          "distance_m": 33.06,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0291",
+        "lon": -8.62014,
+        "lat": 41.147754,
+        "count": 35837,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "2413940893",
+          "distance_m": 2.71,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0007",
+      "vehicle_id": "veh_07",
+      "sequence_index": 0,
+      "order_kind": "one_candidate_one_fuzzy",
+      "pickup": {
+        "point_id": "fuzzy_005",
+        "point_kind": "fuzzy_road_feature",
+        "lon": -8.631445225823404,
+        "lat": 41.15664871304178,
+        "uncertainty_radius_m": 35,
+        "feature_hint": "shared_road_vertex",
+        "source_feature_node_id": "3800017852",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "4737130618",
+          "distance_m": 0.33,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0176",
+        "lon": -8.607018,
+        "lat": 41.144161,
+        "count": 10462,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "4744083580",
+          "distance_m": 33.06,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0008",
+      "vehicle_id": "veh_08",
+      "sequence_index": 0,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0300",
+        "lon": -8.609404,
+        "lat": 41.147754,
+        "count": 8934,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "3993126224",
+          "distance_m": 22.14,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0436",
+        "lon": -8.609404,
+        "lat": 41.151347,
+        "count": 18380,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "2904498647",
+          "distance_m": 12.46,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0009",
+      "vehicle_id": "veh_09",
+      "sequence_index": 0,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0233",
+        "lon": -8.610596,
+        "lat": 41.145958,
+        "count": 47967,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "10581945345",
+          "distance_m": 11.64,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0291",
+        "lon": -8.62014,
+        "lat": 41.147754,
+        "count": 35837,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "2413940893",
+          "distance_m": 2.71,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0010",
+      "vehicle_id": "veh_10",
+      "sequence_index": 0,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0231",
+        "lon": -8.612982,
+        "lat": 41.145958,
+        "count": 35700,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "2214758559",
+          "distance_m": 34.5,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0176",
+        "lon": -8.607018,
+        "lat": 41.144161,
+        "count": 10462,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "4744083580",
+          "distance_m": 33.06,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0011",
+      "vehicle_id": "veh_01",
+      "sequence_index": 1,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0291",
+        "lon": -8.62014,
+        "lat": 41.147754,
+        "count": 35837,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "2413940893",
+          "distance_m": 2.71,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0291",
+        "lon": -8.62014,
+        "lat": 41.147754,
+        "count": 35837,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "2413940893",
+          "distance_m": 2.71,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0012",
+      "vehicle_id": "veh_02",
+      "sequence_index": 1,
+      "order_kind": "two_fuzzy",
+      "pickup": {
+        "point_id": "fuzzy_006",
+        "point_kind": "fuzzy_road_feature",
+        "lon": -8.595439402615861,
+        "lat": 41.14885995341729,
+        "uncertainty_radius_m": 35,
+        "feature_hint": "shared_road_vertex",
+        "source_feature_node_id": "138246839",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "138246839",
+          "distance_m": 22.38,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "fuzzy_007",
+        "point_kind": "fuzzy_road_feature",
+        "lon": -8.599288834102534,
+        "lat": 41.149251849817546,
+        "uncertainty_radius_m": 35,
+        "feature_hint": "shared_road_vertex",
+        "source_feature_node_id": "423185164",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "4708680492",
+          "distance_m": 8.86,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0013",
+      "vehicle_id": "veh_03",
+      "sequence_index": 1,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0206",
+        "lon": -8.607018,
+        "lat": 41.145059,
+        "count": 22184,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "5849847839",
+          "distance_m": 10.71,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0533",
+        "lon": -8.612982,
+        "lat": 41.154042,
+        "count": 13212,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "25632285",
+          "distance_m": 32.39,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0014",
+      "vehicle_id": "veh_04",
+      "sequence_index": 1,
+      "order_kind": "one_candidate_one_fuzzy",
+      "pickup": {
+        "point_id": "pickup_0550",
+        "lon": -8.630877,
+        "lat": 41.154941,
+        "count": 23906,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "129795309",
+          "distance_m": 18.68,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "fuzzy_008",
+        "point_kind": "fuzzy_road_feature",
+        "lon": -8.631085503646226,
+        "lat": 41.15454339639457,
+        "uncertainty_radius_m": 35,
+        "feature_hint": "shared_road_vertex",
+        "source_feature_node_id": "129800102",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "129800102",
+          "distance_m": 3.73,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0015",
+      "vehicle_id": "veh_05",
+      "sequence_index": 1,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0082",
+        "lon": -8.614175,
+        "lat": 41.141466,
+        "count": 33920,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "2356335549",
+          "distance_m": 29.44,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0082",
+        "lon": -8.614175,
+        "lat": 41.141466,
+        "count": 33920,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "2356335549",
+          "distance_m": 29.44,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0016",
+      "vehicle_id": "veh_06",
+      "sequence_index": 1,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0301",
+        "lon": -8.608211,
+        "lat": 41.147754,
+        "count": 18360,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "10914702358",
+          "distance_m": 18.24,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0800",
+        "lon": -8.604632,
+        "lat": 41.161229,
+        "count": 27302,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "6924815714",
+          "distance_m": 13.02,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0017",
+      "vehicle_id": "veh_07",
+      "sequence_index": 1,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0231",
+        "lon": -8.612982,
+        "lat": 41.145958,
+        "count": 35700,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "2214758559",
+          "distance_m": 34.5,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0206",
+        "lon": -8.607018,
+        "lat": 41.145059,
+        "count": 22184,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "5849847839",
+          "distance_m": 10.71,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0018",
+      "vehicle_id": "veh_08",
+      "sequence_index": 1,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0233",
+        "lon": -8.610596,
+        "lat": 41.145958,
+        "count": 47967,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "10581945345",
+          "distance_m": 11.64,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0291",
+        "lon": -8.62014,
+        "lat": 41.147754,
+        "count": 35837,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "2413940893",
+          "distance_m": 2.71,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0019",
+      "vehicle_id": "veh_09",
+      "sequence_index": 1,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0298",
+        "lon": -8.611789,
+        "lat": 41.147754,
+        "count": 8199,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "12456240955",
+          "distance_m": 28.26,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0231",
+        "lon": -8.612982,
+        "lat": 41.145958,
+        "count": 35700,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "2214758559",
+          "distance_m": 34.5,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0020",
+      "vehicle_id": "veh_10",
+      "sequence_index": 1,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0800",
+        "lon": -8.604632,
+        "lat": 41.161229,
+        "count": 27302,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "6924815714",
+          "distance_m": 13.02,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0533",
+        "lon": -8.612982,
+        "lat": 41.154042,
+        "count": 13212,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "25632285",
+          "distance_m": 32.39,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0021",
+      "vehicle_id": "veh_01",
+      "sequence_index": 2,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0762",
+        "lon": -8.609404,
+        "lat": 41.160331,
+        "count": 9940,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "7057137055",
+          "distance_m": 29.56,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0454",
+        "lon": -8.627298,
+        "lat": 41.152246,
+        "count": 8985,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "3092699109",
+          "distance_m": 14.78,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0022",
+      "vehicle_id": "veh_02",
+      "sequence_index": 2,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0231",
+        "lon": -8.612982,
+        "lat": 41.145958,
+        "count": 35700,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "2214758559",
+          "distance_m": 34.5,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0367",
+        "lon": -8.610596,
+        "lat": 41.149551,
+        "count": 17483,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "2261413157",
+          "distance_m": 30.0,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0023",
+      "vehicle_id": "veh_03",
+      "sequence_index": 2,
+      "order_kind": "two_fuzzy",
+      "pickup": {
+        "point_id": "fuzzy_009",
+        "point_kind": "fuzzy_road_feature",
+        "lon": -8.632315637815466,
+        "lat": 41.15266137873964,
+        "uncertainty_radius_m": 35,
+        "feature_hint": "shared_road_vertex",
+        "source_feature_node_id": "124384925",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "12147902756",
+          "distance_m": 0.76,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "fuzzy_010",
+        "point_kind": "fuzzy_road_feature",
+        "lon": -8.623950817906051,
+        "lat": 41.150049492046065,
+        "uncertainty_radius_m": 35,
+        "feature_hint": "shared_road_vertex",
+        "source_feature_node_id": "1422563112",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "1422563112",
+          "distance_m": 6.63,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0024",
+      "vehicle_id": "veh_04",
+      "sequence_index": 2,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0436",
+        "lon": -8.609404,
+        "lat": 41.151347,
+        "count": 18380,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "2904498647",
+          "distance_m": 12.46,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0060",
+        "lon": -8.615368,
+        "lat": 41.140568,
+        "count": 23564,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "286970022",
+          "distance_m": 19.43,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0025",
+      "vehicle_id": "veh_05",
+      "sequence_index": 2,
+      "order_kind": "two_fuzzy",
+      "pickup": {
+        "point_id": "fuzzy_011",
+        "point_kind": "fuzzy_road_feature",
+        "lon": -8.619430710070228,
+        "lat": 41.155300002327586,
+        "uncertainty_radius_m": 35,
+        "feature_hint": "mapped_traffic_signal",
+        "source_feature_node_id": "5494270496",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "1419645378",
+          "distance_m": 11.53,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "fuzzy_012",
+        "point_kind": "fuzzy_road_feature",
+        "lon": -8.61217438693265,
+        "lat": 41.14393313460465,
+        "uncertainty_radius_m": 35,
+        "feature_hint": "shared_road_vertex",
+        "source_feature_node_id": "2206008341",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "3387597077",
+          "distance_m": 5.43,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0026",
+      "vehicle_id": "veh_06",
+      "sequence_index": 2,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0550",
+        "lon": -8.630877,
+        "lat": 41.154941,
+        "count": 23906,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "129795309",
+          "distance_m": 18.68,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0367",
+        "lon": -8.610596,
+        "lat": 41.149551,
+        "count": 17483,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "2261413157",
+          "distance_m": 30.0,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0027",
+      "vehicle_id": "veh_07",
+      "sequence_index": 2,
+      "order_kind": "one_candidate_one_fuzzy",
+      "pickup": {
+        "point_id": "pickup_0060",
+        "lon": -8.615368,
+        "lat": 41.140568,
+        "count": 23564,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "286970022",
+          "distance_m": 19.43,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "fuzzy_013",
+        "point_kind": "fuzzy_road_feature",
+        "lon": -8.630159951719277,
+        "lat": 41.15907328809485,
+        "uncertainty_radius_m": 35,
+        "feature_hint": "shared_road_vertex",
+        "source_feature_node_id": "335562324",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "5494272525",
+          "distance_m": 6.28,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0028",
+      "vehicle_id": "veh_08",
+      "sequence_index": 2,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0533",
+        "lon": -8.612982,
+        "lat": 41.154042,
+        "count": 13212,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "25632285",
+          "distance_m": 32.39,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0227",
+        "lon": -8.617754,
+        "lat": 41.145958,
+        "count": 21228,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "10804032079",
+          "distance_m": 40.16,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0029",
+      "vehicle_id": "veh_09",
+      "sequence_index": 2,
+      "order_kind": "two_fuzzy",
+      "pickup": {
+        "point_id": "fuzzy_014",
+        "point_kind": "fuzzy_road_feature",
+        "lon": -8.634112106225011,
+        "lat": 41.14936782645779,
+        "uncertainty_radius_m": 35,
+        "feature_hint": "shared_road_vertex",
+        "source_feature_node_id": "1594649037",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "5297676279",
+          "distance_m": 0.4,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "fuzzy_015",
+        "point_kind": "fuzzy_road_feature",
+        "lon": -8.630469665062952,
+        "lat": 41.14568485719947,
+        "uncertainty_radius_m": 35,
+        "feature_hint": "shared_road_vertex",
+        "source_feature_node_id": "478645996",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "3391597683",
+          "distance_m": 0.1,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0030",
+      "vehicle_id": "veh_10",
+      "sequence_index": 2,
+      "order_kind": "one_candidate_one_fuzzy",
+      "pickup": {
+        "point_id": "fuzzy_016",
+        "point_kind": "fuzzy_road_feature",
+        "lon": -8.623754308310188,
+        "lat": 41.150069247501555,
+        "uncertainty_radius_m": 35,
+        "feature_hint": "shared_road_vertex",
+        "source_feature_node_id": "4737140195",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "4737140198",
+          "distance_m": 0.78,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0651",
+        "lon": -8.627298,
+        "lat": 41.157636,
+        "count": 8990,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "5494274791",
+          "distance_m": 8.67,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0031",
+      "vehicle_id": "veh_01",
+      "sequence_index": 3,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0291",
+        "lon": -8.62014,
+        "lat": 41.147754,
+        "count": 35837,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "2413940893",
+          "distance_m": 2.71,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0650",
+        "lon": -8.628491,
+        "lat": 41.157636,
+        "count": 27461,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "112675715",
+          "distance_m": 39.06,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0032",
+      "vehicle_id": "veh_02",
+      "sequence_index": 3,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0377",
+        "lon": -8.598667,
+        "lat": 41.149551,
+        "count": 13147,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "5305698011",
+          "distance_m": 16.75,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0176",
+        "lon": -8.607018,
+        "lat": 41.144161,
+        "count": 10462,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "4744083580",
+          "distance_m": 33.06,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0033",
+      "vehicle_id": "veh_03",
+      "sequence_index": 3,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0233",
+        "lon": -8.610596,
+        "lat": 41.145958,
+        "count": 47967,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "10581945345",
+          "distance_m": 11.64,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0436",
+        "lon": -8.609404,
+        "lat": 41.151347,
+        "count": 18380,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "2904498647",
+          "distance_m": 12.46,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0034",
+      "vehicle_id": "veh_04",
+      "sequence_index": 3,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0780",
+        "lon": -8.628491,
+        "lat": 41.161229,
+        "count": 16933,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "9135301947",
+          "distance_m": 45.25,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0231",
+        "lon": -8.612982,
+        "lat": 41.145958,
+        "count": 35700,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "2214758559",
+          "distance_m": 34.5,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0035",
+      "vehicle_id": "veh_05",
+      "sequence_index": 3,
+      "order_kind": "one_candidate_one_fuzzy",
+      "pickup": {
+        "point_id": "fuzzy_017",
+        "point_kind": "fuzzy_road_feature",
+        "lon": -8.616713340995512,
+        "lat": 41.16114192034021,
+        "uncertainty_radius_m": 35,
+        "feature_hint": "shared_road_vertex",
+        "source_feature_node_id": "474546987",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "474546987",
+          "distance_m": 13.56,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0203",
+        "lon": -8.610596,
+        "lat": 41.145059,
+        "count": 9577,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "9727456826",
+          "distance_m": 12.46,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0036",
+      "vehicle_id": "veh_06",
+      "sequence_index": 3,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0550",
+        "lon": -8.630877,
+        "lat": 41.154941,
+        "count": 23906,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "129795309",
+          "distance_m": 18.68,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0550",
+        "lon": -8.630877,
+        "lat": 41.154941,
+        "count": 23906,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "129795309",
+          "distance_m": 18.68,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0037",
+      "vehicle_id": "veh_07",
+      "sequence_index": 3,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0780",
+        "lon": -8.628491,
+        "lat": 41.161229,
+        "count": 16933,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "9135301947",
+          "distance_m": 45.25,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0550",
+        "lon": -8.630877,
+        "lat": 41.154941,
+        "count": 23906,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "129795309",
+          "distance_m": 18.68,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0038",
+      "vehicle_id": "veh_08",
+      "sequence_index": 3,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0367",
+        "lon": -8.610596,
+        "lat": 41.149551,
+        "count": 17483,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "2261413157",
+          "distance_m": 30.0,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0233",
+        "lon": -8.610596,
+        "lat": 41.145958,
+        "count": 47967,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "10581945345",
+          "distance_m": 11.64,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0039",
+      "vehicle_id": "veh_09",
+      "sequence_index": 3,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0060",
+        "lon": -8.615368,
+        "lat": 41.140568,
+        "count": 23564,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "286970022",
+          "distance_m": 19.43,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0082",
+        "lon": -8.614175,
+        "lat": 41.141466,
+        "count": 33920,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "2356335549",
+          "distance_m": 29.44,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0040",
+      "vehicle_id": "veh_10",
+      "sequence_index": 3,
+      "order_kind": "one_candidate_one_fuzzy",
+      "pickup": {
+        "point_id": "fuzzy_018",
+        "point_kind": "fuzzy_road_feature",
+        "lon": -8.60418155421429,
+        "lat": 41.16184639068545,
+        "uncertainty_radius_m": 35,
+        "feature_hint": "shared_road_vertex",
+        "source_feature_node_id": "5284320721",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "299611700",
+          "distance_m": 7.66,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0206",
+        "lon": -8.607018,
+        "lat": 41.145059,
+        "count": 22184,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "5849847839",
+          "distance_m": 10.71,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0041",
+      "vehicle_id": "veh_01",
+      "sequence_index": 4,
+      "order_kind": "two_fuzzy",
+      "pickup": {
+        "point_id": "fuzzy_019",
+        "point_kind": "fuzzy_road_feature",
+        "lon": -8.611317153720519,
+        "lat": 41.14935266209702,
+        "uncertainty_radius_m": 35,
+        "feature_hint": "shared_road_vertex",
+        "source_feature_node_id": "12241567151",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "12456240964",
+          "distance_m": 7.71,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "fuzzy_020",
+        "point_kind": "fuzzy_road_feature",
+        "lon": -8.628379774716281,
+        "lat": 41.138206920384135,
+        "uncertainty_radius_m": 35,
+        "feature_hint": "shared_road_vertex",
+        "source_feature_node_id": "14088885819",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "14088885818",
+          "distance_m": 2.29,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0042",
+      "vehicle_id": "veh_02",
+      "sequence_index": 4,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0176",
+        "lon": -8.607018,
+        "lat": 41.144161,
+        "count": 10462,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "4744083580",
+          "distance_m": 33.06,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0230",
+        "lon": -8.614175,
+        "lat": 41.145958,
+        "count": 8253,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "2086440304",
+          "distance_m": 0.45,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0043",
+      "vehicle_id": "veh_03",
+      "sequence_index": 4,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0550",
+        "lon": -8.630877,
+        "lat": 41.154941,
+        "count": 23906,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "129795309",
+          "distance_m": 18.68,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0227",
+        "lon": -8.617754,
+        "lat": 41.145958,
+        "count": 21228,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "10804032079",
+          "distance_m": 40.16,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0044",
+      "vehicle_id": "veh_04",
+      "sequence_index": 4,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0260",
+        "lon": -8.616561,
+        "lat": 41.146856,
+        "count": 8296,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "2086432785",
+          "distance_m": 37.86,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0230",
+        "lon": -8.614175,
+        "lat": 41.145958,
+        "count": 8253,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "2086440304",
+          "distance_m": 0.45,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0045",
+      "vehicle_id": "veh_05",
+      "sequence_index": 4,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0762",
+        "lon": -8.609404,
+        "lat": 41.160331,
+        "count": 9940,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "7057137055",
+          "distance_m": 29.56,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0291",
+        "lon": -8.62014,
+        "lat": 41.147754,
+        "count": 35837,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "2413940893",
+          "distance_m": 2.71,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0046",
+      "vehicle_id": "veh_06",
+      "sequence_index": 4,
+      "order_kind": "two_fuzzy",
+      "pickup": {
+        "point_id": "fuzzy_021",
+        "point_kind": "fuzzy_road_feature",
+        "lon": -8.621177298214752,
+        "lat": 41.15659663996331,
+        "uncertainty_radius_m": 35,
+        "feature_hint": "shared_road_vertex",
+        "source_feature_node_id": "129953504",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "455341194",
+          "distance_m": 8.0,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "fuzzy_022",
+        "point_kind": "fuzzy_road_feature",
+        "lon": -8.60663878392565,
+        "lat": 41.15342854203297,
+        "uncertainty_radius_m": 35,
+        "feature_hint": "shared_road_vertex",
+        "source_feature_node_id": "452682212",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "452682212",
+          "distance_m": 3.02,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0047",
+      "vehicle_id": "veh_07",
+      "sequence_index": 4,
+      "order_kind": "one_candidate_one_fuzzy",
+      "pickup": {
+        "point_id": "fuzzy_023",
+        "point_kind": "fuzzy_road_feature",
+        "lon": -8.620271854696904,
+        "lat": 41.15645042722035,
+        "uncertainty_radius_m": 35,
+        "feature_hint": "mapped_traffic_signal",
+        "source_feature_node_id": "5902247588",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "5902247588",
+          "distance_m": 34.37,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0367",
+        "lon": -8.610596,
+        "lat": 41.149551,
+        "count": 17483,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "2261413157",
+          "distance_m": 30.0,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0048",
+      "vehicle_id": "veh_08",
+      "sequence_index": 4,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0231",
+        "lon": -8.612982,
+        "lat": 41.145958,
+        "count": 35700,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "2214758559",
+          "distance_m": 34.5,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0436",
+        "lon": -8.609404,
+        "lat": 41.151347,
+        "count": 18380,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "2904498647",
+          "distance_m": 12.46,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0049",
+      "vehicle_id": "veh_09",
+      "sequence_index": 4,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0231",
+        "lon": -8.612982,
+        "lat": 41.145958,
+        "count": 35700,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "2214758559",
+          "distance_m": 34.5,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0650",
+        "lon": -8.628491,
+        "lat": 41.157636,
+        "count": 27461,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "112675715",
+          "distance_m": 39.06,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0050",
+      "vehicle_id": "veh_10",
+      "sequence_index": 4,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0367",
+        "lon": -8.610596,
+        "lat": 41.149551,
+        "count": 17483,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "2261413157",
+          "distance_m": 30.0,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0231",
+        "lon": -8.612982,
+        "lat": 41.145958,
+        "count": 35700,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "2214758559",
+          "distance_m": 34.5,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0051",
+      "vehicle_id": "veh_01",
+      "sequence_index": 5,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0206",
+        "lon": -8.607018,
+        "lat": 41.145059,
+        "count": 22184,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "5849847839",
+          "distance_m": 10.71,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0300",
+        "lon": -8.609404,
+        "lat": 41.147754,
+        "count": 8934,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "3993126224",
+          "distance_m": 22.14,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0052",
+      "vehicle_id": "veh_02",
+      "sequence_index": 5,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0301",
+        "lon": -8.608211,
+        "lat": 41.147754,
+        "count": 18360,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "10914702358",
+          "distance_m": 18.24,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0233",
+        "lon": -8.610596,
+        "lat": 41.145958,
+        "count": 47967,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "10581945345",
+          "distance_m": 11.64,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0053",
+      "vehicle_id": "veh_03",
+      "sequence_index": 5,
+      "order_kind": "two_fuzzy",
+      "pickup": {
+        "point_id": "fuzzy_024",
+        "point_kind": "fuzzy_road_feature",
+        "lon": -8.608585764168652,
+        "lat": 41.15355540397493,
+        "uncertainty_radius_m": 35,
+        "feature_hint": "shared_road_vertex",
+        "source_feature_node_id": "1110698243",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "452682282",
+          "distance_m": 2.3,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "fuzzy_025",
+        "point_kind": "fuzzy_road_feature",
+        "lon": -8.614545785904404,
+        "lat": 41.141479287351125,
+        "uncertainty_radius_m": 35,
+        "feature_hint": "mapped_traffic_signal",
+        "source_feature_node_id": "111481561",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "3392710685",
+          "distance_m": 10.98,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0054",
+      "vehicle_id": "veh_04",
+      "sequence_index": 5,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0301",
+        "lon": -8.608211,
+        "lat": 41.147754,
+        "count": 18360,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "10914702358",
+          "distance_m": 18.24,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0800",
+        "lon": -8.604632,
+        "lat": 41.161229,
+        "count": 27302,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "6924815714",
+          "distance_m": 13.02,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0055",
+      "vehicle_id": "veh_05",
+      "sequence_index": 5,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0203",
+        "lon": -8.610596,
+        "lat": 41.145059,
+        "count": 9577,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "9727456826",
+          "distance_m": 12.46,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0082",
+        "lon": -8.614175,
+        "lat": 41.141466,
+        "count": 33920,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "2356335549",
+          "distance_m": 29.44,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0056",
+      "vehicle_id": "veh_06",
+      "sequence_index": 5,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0233",
+        "lon": -8.610596,
+        "lat": 41.145958,
+        "count": 47967,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "10581945345",
+          "distance_m": 11.64,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0233",
+        "lon": -8.610596,
+        "lat": 41.145958,
+        "count": 47967,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "10581945345",
+          "distance_m": 11.64,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0057",
+      "vehicle_id": "veh_07",
+      "sequence_index": 5,
+      "order_kind": "two_fuzzy",
+      "pickup": {
+        "point_id": "fuzzy_026",
+        "point_kind": "fuzzy_road_feature",
+        "lon": -8.603628526079177,
+        "lat": 41.14607523607791,
+        "uncertainty_radius_m": 35,
+        "feature_hint": "shared_road_vertex",
+        "source_feature_node_id": "137955522",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "137955522",
+          "distance_m": 20.87,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "fuzzy_027",
+        "point_kind": "fuzzy_road_feature",
+        "lon": -8.617864754357532,
+        "lat": 41.15605471700226,
+        "uncertainty_radius_m": 35,
+        "feature_hint": "shared_road_vertex",
+        "source_feature_node_id": "1788787223",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "11042649002",
+          "distance_m": 1.01,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0058",
+      "vehicle_id": "veh_08",
+      "sequence_index": 5,
+      "order_kind": "one_candidate_one_fuzzy",
+      "pickup": {
+        "point_id": "fuzzy_028",
+        "point_kind": "fuzzy_road_feature",
+        "lon": -8.616103597257107,
+        "lat": 41.14051360901164,
+        "uncertainty_radius_m": 35,
+        "feature_hint": "shared_road_vertex",
+        "source_feature_node_id": "111479509",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "9291072845",
+          "distance_m": 1.87,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0651",
+        "lon": -8.627298,
+        "lat": 41.157636,
+        "count": 8990,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "5494274791",
+          "distance_m": 8.67,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0059",
+      "vehicle_id": "veh_09",
+      "sequence_index": 5,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0800",
+        "lon": -8.604632,
+        "lat": 41.161229,
+        "count": 27302,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "6924815714",
+          "distance_m": 13.02,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0227",
+        "lon": -8.617754,
+        "lat": 41.145958,
+        "count": 21228,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "10804032079",
+          "distance_m": 40.16,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0060",
+      "vehicle_id": "veh_10",
+      "sequence_index": 5,
+      "order_kind": "two_fuzzy",
+      "pickup": {
+        "point_id": "fuzzy_029",
+        "point_kind": "fuzzy_road_feature",
+        "lon": -8.60766047748515,
+        "lat": 41.15552064580808,
+        "uncertainty_radius_m": 35,
+        "feature_hint": "shared_road_vertex",
+        "source_feature_node_id": "501252536",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "129552044",
+          "distance_m": 9.47,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "fuzzy_030",
+        "point_kind": "fuzzy_road_feature",
+        "lon": -8.618025840509977,
+        "lat": 41.152489541752836,
+        "uncertainty_radius_m": 35,
+        "feature_hint": "shared_road_vertex",
+        "source_feature_node_id": "25632278",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "25632278",
+          "distance_m": 3.65,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0061",
+      "vehicle_id": "veh_01",
+      "sequence_index": 6,
+      "order_kind": "one_candidate_one_fuzzy",
+      "pickup": {
+        "point_id": "pickup_0780",
+        "lon": -8.628491,
+        "lat": 41.161229,
+        "count": 16933,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "9135301947",
+          "distance_m": 45.25,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "fuzzy_031",
+        "point_kind": "fuzzy_road_feature",
+        "lon": -8.620859895801798,
+        "lat": 41.15573275211869,
+        "uncertainty_radius_m": 35,
+        "feature_hint": "shared_road_vertex",
+        "source_feature_node_id": "1417693658",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "4612022404",
+          "distance_m": 3.19,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0062",
+      "vehicle_id": "veh_02",
+      "sequence_index": 6,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0436",
+        "lon": -8.609404,
+        "lat": 41.151347,
+        "count": 18380,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "2904498647",
+          "distance_m": 12.46,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0233",
+        "lon": -8.610596,
+        "lat": 41.145958,
+        "count": 47967,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "10581945345",
+          "distance_m": 11.64,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0063",
+      "vehicle_id": "veh_03",
+      "sequence_index": 6,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0231",
+        "lon": -8.612982,
+        "lat": 41.145958,
+        "count": 35700,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "2214758559",
+          "distance_m": 34.5,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0230",
+        "lon": -8.614175,
+        "lat": 41.145958,
+        "count": 8253,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "2086440304",
+          "distance_m": 0.45,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0064",
+      "vehicle_id": "veh_04",
+      "sequence_index": 6,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0650",
+        "lon": -8.628491,
+        "lat": 41.157636,
+        "count": 27461,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "112675715",
+          "distance_m": 39.06,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0550",
+        "lon": -8.630877,
+        "lat": 41.154941,
+        "count": 23906,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "129795309",
+          "distance_m": 18.68,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0065",
+      "vehicle_id": "veh_05",
+      "sequence_index": 6,
+      "order_kind": "one_candidate_one_fuzzy",
+      "pickup": {
+        "point_id": "pickup_0206",
+        "lon": -8.607018,
+        "lat": 41.145059,
+        "count": 22184,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "5849847839",
+          "distance_m": 10.71,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "fuzzy_032",
+        "point_kind": "fuzzy_road_feature",
+        "lon": -8.611158831640152,
+        "lat": 41.1467646305874,
+        "uncertainty_radius_m": 35,
+        "feature_hint": "mapped_traffic_signal",
+        "source_feature_node_id": "12456240948",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "2245520905",
+          "distance_m": 4.36,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0066",
+      "vehicle_id": "veh_06",
+      "sequence_index": 6,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0233",
+        "lon": -8.610596,
+        "lat": 41.145958,
+        "count": 47967,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "10581945345",
+          "distance_m": 11.64,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0231",
+        "lon": -8.612982,
+        "lat": 41.145958,
+        "count": 35700,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "2214758559",
+          "distance_m": 34.5,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0067",
+      "vehicle_id": "veh_07",
+      "sequence_index": 6,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0227",
+        "lon": -8.617754,
+        "lat": 41.145958,
+        "count": 21228,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "10804032079",
+          "distance_m": 40.16,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0233",
+        "lon": -8.610596,
+        "lat": 41.145958,
+        "count": 47967,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "10581945345",
+          "distance_m": 11.64,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0068",
+      "vehicle_id": "veh_08",
+      "sequence_index": 6,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0550",
+        "lon": -8.630877,
+        "lat": 41.154941,
+        "count": 23906,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "129795309",
+          "distance_m": 18.68,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0650",
+        "lon": -8.628491,
+        "lat": 41.157636,
+        "count": 27461,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "112675715",
+          "distance_m": 39.06,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0069",
+      "vehicle_id": "veh_09",
+      "sequence_index": 6,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0550",
+        "lon": -8.630877,
+        "lat": 41.154941,
+        "count": 23906,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "129795309",
+          "distance_m": 18.68,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0291",
+        "lon": -8.62014,
+        "lat": 41.147754,
+        "count": 35837,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "2413940893",
+          "distance_m": 2.71,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0070",
+      "vehicle_id": "veh_10",
+      "sequence_index": 6,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0454",
+        "lon": -8.627298,
+        "lat": 41.152246,
+        "count": 8985,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "3092699109",
+          "distance_m": 14.78,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0206",
+        "lon": -8.607018,
+        "lat": 41.145059,
+        "count": 22184,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "5849847839",
+          "distance_m": 10.71,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0071",
+      "vehicle_id": "veh_01",
+      "sequence_index": 7,
+      "order_kind": "one_candidate_one_fuzzy",
+      "pickup": {
+        "point_id": "pickup_0780",
+        "lon": -8.628491,
+        "lat": 41.161229,
+        "count": 16933,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "9135301947",
+          "distance_m": 45.25,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "fuzzy_033",
+        "point_kind": "fuzzy_road_feature",
+        "lon": -8.62302951751348,
+        "lat": 41.15005558488702,
+        "uncertainty_radius_m": 35,
+        "feature_hint": "shared_road_vertex",
+        "source_feature_node_id": "25632228",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "25632228",
+          "distance_m": 18.33,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0072",
+      "vehicle_id": "veh_02",
+      "sequence_index": 7,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0650",
+        "lon": -8.628491,
+        "lat": 41.157636,
+        "count": 27461,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "112675715",
+          "distance_m": 39.06,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0533",
+        "lon": -8.612982,
+        "lat": 41.154042,
+        "count": 13212,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "25632285",
+          "distance_m": 32.39,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0073",
+      "vehicle_id": "veh_03",
+      "sequence_index": 7,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0651",
+        "lon": -8.627298,
+        "lat": 41.157636,
+        "count": 8990,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "5494274791",
+          "distance_m": 8.67,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0454",
+        "lon": -8.627298,
+        "lat": 41.152246,
+        "count": 8985,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "3092699109",
+          "distance_m": 14.78,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0074",
+      "vehicle_id": "veh_04",
+      "sequence_index": 7,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0301",
+        "lon": -8.608211,
+        "lat": 41.147754,
+        "count": 18360,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "10914702358",
+          "distance_m": 18.24,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0800",
+        "lon": -8.604632,
+        "lat": 41.161229,
+        "count": 27302,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "6924815714",
+          "distance_m": 13.02,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0075",
+      "vehicle_id": "veh_05",
+      "sequence_index": 7,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0230",
+        "lon": -8.614175,
+        "lat": 41.145958,
+        "count": 8253,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "2086440304",
+          "distance_m": 0.45,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0301",
+        "lon": -8.608211,
+        "lat": 41.147754,
+        "count": 18360,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "10914702358",
+          "distance_m": 18.24,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0076",
+      "vehicle_id": "veh_06",
+      "sequence_index": 7,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0233",
+        "lon": -8.610596,
+        "lat": 41.145958,
+        "count": 47967,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "10581945345",
+          "distance_m": 11.64,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0233",
+        "lon": -8.610596,
+        "lat": 41.145958,
+        "count": 47967,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "10581945345",
+          "distance_m": 11.64,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0077",
+      "vehicle_id": "veh_07",
+      "sequence_index": 7,
+      "order_kind": "one_candidate_one_fuzzy",
+      "pickup": {
+        "point_id": "fuzzy_034",
+        "point_kind": "fuzzy_road_feature",
+        "lon": -8.620921803505935,
+        "lat": 41.16108485986758,
+        "uncertainty_radius_m": 35,
+        "feature_hint": "shared_road_vertex",
+        "source_feature_node_id": "474552495",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "474552495",
+          "distance_m": 15.31,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0291",
+        "lon": -8.62014,
+        "lat": 41.147754,
+        "count": 35837,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "2413940893",
+          "distance_m": 2.71,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0078",
+      "vehicle_id": "veh_08",
+      "sequence_index": 7,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0650",
+        "lon": -8.628491,
+        "lat": 41.157636,
+        "count": 27461,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "112675715",
+          "distance_m": 39.06,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0454",
+        "lon": -8.627298,
+        "lat": 41.152246,
+        "count": 8985,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "3092699109",
+          "distance_m": 14.78,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0079",
+      "vehicle_id": "veh_09",
+      "sequence_index": 7,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0262",
+        "lon": -8.614175,
+        "lat": 41.146856,
+        "count": 13098,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "8674229741",
+          "distance_m": 45.35,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0780",
+        "lon": -8.628491,
+        "lat": 41.161229,
+        "count": 16933,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "9135301947",
+          "distance_m": 45.25,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0080",
+      "vehicle_id": "veh_10",
+      "sequence_index": 7,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0231",
+        "lon": -8.612982,
+        "lat": 41.145958,
+        "count": 35700,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "2214758559",
+          "distance_m": 34.5,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0233",
+        "lon": -8.610596,
+        "lat": 41.145958,
+        "count": 47967,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "10581945345",
+          "distance_m": 11.64,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0081",
+      "vehicle_id": "veh_01",
+      "sequence_index": 8,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0231",
+        "lon": -8.612982,
+        "lat": 41.145958,
+        "count": 35700,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "2214758559",
+          "distance_m": 34.5,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0298",
+        "lon": -8.611789,
+        "lat": 41.147754,
+        "count": 8199,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "12456240955",
+          "distance_m": 28.26,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0082",
+      "vehicle_id": "veh_02",
+      "sequence_index": 8,
+      "order_kind": "two_fuzzy",
+      "pickup": {
+        "point_id": "fuzzy_035",
+        "point_kind": "fuzzy_road_feature",
+        "lon": -8.633877527442934,
+        "lat": 41.14748340542929,
+        "uncertainty_radius_m": 35,
+        "feature_hint": "mapped_traffic_signal",
+        "source_feature_node_id": "12104435023",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "1296455375",
+          "distance_m": 0.67,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "fuzzy_036",
+        "point_kind": "fuzzy_road_feature",
+        "lon": -8.632261485304749,
+        "lat": 41.152864981032906,
+        "uncertainty_radius_m": 35,
+        "feature_hint": "shared_road_vertex",
+        "source_feature_node_id": "1418798472",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "1418798472",
+          "distance_m": 3.29,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0083",
+      "vehicle_id": "veh_03",
+      "sequence_index": 8,
+      "order_kind": "one_candidate_one_fuzzy",
+      "pickup": {
+        "point_id": "fuzzy_037",
+        "point_kind": "fuzzy_road_feature",
+        "lon": -8.59765975988826,
+        "lat": 41.16102590546127,
+        "uncertainty_radius_m": 35,
+        "feature_hint": "mapped_traffic_signal",
+        "source_feature_node_id": "12455973422",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "404785592",
+          "distance_m": 26.59,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0060",
+        "lon": -8.615368,
+        "lat": 41.140568,
+        "count": 23564,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "286970022",
+          "distance_m": 19.43,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0084",
+      "vehicle_id": "veh_04",
+      "sequence_index": 8,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0291",
+        "lon": -8.62014,
+        "lat": 41.147754,
+        "count": 35837,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "2413940893",
+          "distance_m": 2.71,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0550",
+        "lon": -8.630877,
+        "lat": 41.154941,
+        "count": 23906,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "129795309",
+          "distance_m": 18.68,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0085",
+      "vehicle_id": "veh_05",
+      "sequence_index": 8,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0231",
+        "lon": -8.612982,
+        "lat": 41.145958,
+        "count": 35700,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "2214758559",
+          "distance_m": 34.5,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0233",
+        "lon": -8.610596,
+        "lat": 41.145958,
+        "count": 47967,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "10581945345",
+          "distance_m": 11.64,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0086",
+      "vehicle_id": "veh_06",
+      "sequence_index": 8,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0786",
+        "lon": -8.621333,
+        "lat": 41.161229,
+        "count": 8552,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "474552495",
+          "distance_m": 23.45,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0231",
+        "lon": -8.612982,
+        "lat": 41.145958,
+        "count": 35700,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "2214758559",
+          "distance_m": 34.5,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0087",
+      "vehicle_id": "veh_07",
+      "sequence_index": 8,
+      "order_kind": "two_fuzzy",
+      "pickup": {
+        "point_id": "fuzzy_038",
+        "point_kind": "fuzzy_road_feature",
+        "lon": -8.631436895722118,
+        "lat": 41.156686298926935,
+        "uncertainty_radius_m": 35,
+        "feature_hint": "shared_road_vertex",
+        "source_feature_node_id": "3800017852",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "12462737072",
+          "distance_m": 0.1,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "fuzzy_039",
+        "point_kind": "fuzzy_road_feature",
+        "lon": -8.630139905161029,
+        "lat": 41.16154476747335,
+        "uncertainty_radius_m": 35,
+        "feature_hint": "shared_road_vertex",
+        "source_feature_node_id": "1866347299",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "1866347287",
+          "distance_m": 4.92,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0088",
+      "vehicle_id": "veh_08",
+      "sequence_index": 8,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0291",
+        "lon": -8.62014,
+        "lat": 41.147754,
+        "count": 35837,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "2413940893",
+          "distance_m": 2.71,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0298",
+        "lon": -8.611789,
+        "lat": 41.147754,
+        "count": 8199,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "12456240955",
+          "distance_m": 28.26,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0089",
+      "vehicle_id": "veh_09",
+      "sequence_index": 8,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0230",
+        "lon": -8.614175,
+        "lat": 41.145958,
+        "count": 8253,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "2086440304",
+          "distance_m": 0.45,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0291",
+        "lon": -8.62014,
+        "lat": 41.147754,
+        "count": 35837,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "2413940893",
+          "distance_m": 2.71,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0090",
+      "vehicle_id": "veh_10",
+      "sequence_index": 8,
+      "order_kind": "one_candidate_one_fuzzy",
+      "pickup": {
+        "point_id": "pickup_0203",
+        "lon": -8.610596,
+        "lat": 41.145059,
+        "count": 9577,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "9727456826",
+          "distance_m": 12.46,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "fuzzy_040",
+        "point_kind": "fuzzy_road_feature",
+        "lon": -8.609177033837291,
+        "lat": 41.14277963296898,
+        "uncertainty_radius_m": 35,
+        "feature_hint": "shared_road_vertex",
+        "source_feature_node_id": "1548165659",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "2204210208",
+          "distance_m": 6.1,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0091",
+      "vehicle_id": "veh_01",
+      "sequence_index": 9,
+      "order_kind": "two_fuzzy",
+      "pickup": {
+        "point_id": "fuzzy_041",
+        "point_kind": "fuzzy_road_feature",
+        "lon": -8.60935633681187,
+        "lat": 41.14914949063781,
+        "uncertainty_radius_m": 35,
+        "feature_hint": "shared_road_vertex",
+        "source_feature_node_id": "2366098499",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "1278184331",
+          "distance_m": 0.01,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "fuzzy_042",
+        "point_kind": "fuzzy_road_feature",
+        "lon": -8.609735063280947,
+        "lat": 41.14270676405308,
+        "uncertainty_radius_m": 35,
+        "feature_hint": "shared_road_vertex",
+        "source_feature_node_id": "3392939428",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "2927076257",
+          "distance_m": 8.08,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0092",
+      "vehicle_id": "veh_02",
+      "sequence_index": 9,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0300",
+        "lon": -8.609404,
+        "lat": 41.147754,
+        "count": 8934,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "3993126224",
+          "distance_m": 22.14,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0233",
+        "lon": -8.610596,
+        "lat": 41.145958,
+        "count": 47967,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "10581945345",
+          "distance_m": 11.64,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0093",
+      "vehicle_id": "veh_03",
+      "sequence_index": 9,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0780",
+        "lon": -8.628491,
+        "lat": 41.161229,
+        "count": 16933,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "9135301947",
+          "distance_m": 45.25,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0377",
+        "lon": -8.598667,
+        "lat": 41.149551,
+        "count": 13147,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "5305698011",
+          "distance_m": 16.75,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0094",
+      "vehicle_id": "veh_04",
+      "sequence_index": 9,
+      "order_kind": "one_candidate_one_fuzzy",
+      "pickup": {
+        "point_id": "pickup_0291",
+        "lon": -8.62014,
+        "lat": 41.147754,
+        "count": 35837,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "2413940893",
+          "distance_m": 2.71,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "fuzzy_043",
+        "point_kind": "fuzzy_road_feature",
+        "lon": -8.625713297121642,
+        "lat": 41.15539753656868,
+        "uncertainty_radius_m": 35,
+        "feature_hint": "shared_road_vertex",
+        "source_feature_node_id": "1252543236",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "1252543236",
+          "distance_m": 3.53,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0095",
+      "vehicle_id": "veh_05",
+      "sequence_index": 9,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0262",
+        "lon": -8.614175,
+        "lat": 41.146856,
+        "count": 13098,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "8674229741",
+          "distance_m": 45.35,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0762",
+        "lon": -8.609404,
+        "lat": 41.160331,
+        "count": 9940,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "7057137055",
+          "distance_m": 29.56,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0096",
+      "vehicle_id": "veh_06",
+      "sequence_index": 9,
+      "order_kind": "two_fuzzy",
+      "pickup": {
+        "point_id": "fuzzy_044",
+        "point_kind": "fuzzy_road_feature",
+        "lon": -8.596564789567077,
+        "lat": 41.1416990347866,
+        "uncertainty_radius_m": 35,
+        "feature_hint": "shared_road_vertex",
+        "source_feature_node_id": "1548165946",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "3385332312",
+          "distance_m": 16.97,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "fuzzy_045",
+        "point_kind": "fuzzy_road_feature",
+        "lon": -8.607888748350675,
+        "lat": 41.14871103461723,
+        "uncertainty_radius_m": 35,
+        "feature_hint": "shared_road_vertex",
+        "source_feature_node_id": "2352603829",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "12458783094",
+          "distance_m": 0.76,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0097",
+      "vehicle_id": "veh_07",
+      "sequence_index": 9,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0227",
+        "lon": -8.617754,
+        "lat": 41.145958,
+        "count": 21228,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "10804032079",
+          "distance_m": 40.16,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0454",
+        "lon": -8.627298,
+        "lat": 41.152246,
+        "count": 8985,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "3092699109",
+          "distance_m": 14.78,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0098",
+      "vehicle_id": "veh_08",
+      "sequence_index": 9,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0233",
+        "lon": -8.610596,
+        "lat": 41.145958,
+        "count": 47967,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "10581945345",
+          "distance_m": 11.64,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0291",
+        "lon": -8.62014,
+        "lat": 41.147754,
+        "count": 35837,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "2413940893",
+          "distance_m": 2.71,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0099",
+      "vehicle_id": "veh_09",
+      "sequence_index": 9,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0650",
+        "lon": -8.628491,
+        "lat": 41.157636,
+        "count": 27461,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "112675715",
+          "distance_m": 39.06,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0377",
+        "lon": -8.598667,
+        "lat": 41.149551,
+        "count": 13147,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "5305698011",
+          "distance_m": 16.75,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    },
+    {
+      "order_id": "ord_0100",
+      "vehicle_id": "veh_10",
+      "sequence_index": 9,
+      "order_kind": "candidate_to_candidate",
+      "pickup": {
+        "point_id": "pickup_0060",
+        "lon": -8.615368,
+        "lat": 41.140568,
+        "count": 23564,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "286970022",
+          "distance_m": 19.43,
+          "max_snap_m": 300.0
+        }
+      },
+      "dropoff": {
+        "point_id": "pickup_0649",
+        "lon": -8.629684,
+        "lat": 41.157636,
+        "count": 9607,
+        "point_kind": "candidate_pickup",
+        "map_match": {
+          "status": "matched",
+          "osm_node_id": "4468690328",
+          "distance_m": 50.52,
+          "max_snap_m": 300.0
+        }
+      },
+      "release_rule": "start planning after this vehicle completes the previous order"
+    }
+  ]
+}

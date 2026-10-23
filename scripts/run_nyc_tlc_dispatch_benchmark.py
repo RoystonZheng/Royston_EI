@@ -30,6 +30,9 @@ METHODS = [
     "D3_agent_llm_context_optimizer",
     "D4_agent_llm_feedback_optimizer",
     "D5_pure_llm_direct",
+    "D6_agent_codex_context_optimizer",
+    "D7_agent_codex_capacity_shield_optimizer",
+    "D8_agent_codex_nn_capacity_shield_optimizer",
 ]
 
 
@@ -59,8 +62,11 @@ def main() -> None:
     )
     parser.add_argument("--output-dir", default="outputs/dispatch_layer/nyc_tlc_hvfhv_2024/three_method_benchmark_v1/results")
     parser.add_argument("--feedback-mode", choices=["offline_rule", "none", "deepseek"], default="offline_rule")
-    parser.add_argument("--allow-live-api", action="store_true", help="required for live D5 Codex CLI, or D4 with feedback-mode=deepseek")
+    parser.add_argument("--allow-live-api", action="store_true", help="required for live D5/D6/D7/D8 Codex CLI, or D4 with feedback-mode=deepseek")
     parser.add_argument("--codex-model", default=os.environ.get("DISPATCH_CODEX_MODEL", "gpt-5.6-luna"))
+    parser.add_argument("--codex-policy-replay", default=None, help="reuse a previously captured D6/D7/D8-compatible context-policy response without a new model call")
+    parser.add_argument("--nn-ranker-model", default=None, help="trained JSON checkpoint required by the integrated D8 method")
+    parser.add_argument("--nn-top-k", type=int, default=8, help="maximum candidates retained per vehicle after neural scoring")
     args = parser.parse_args()
 
     package = (ROOT / args.package).resolve()
@@ -75,16 +81,42 @@ def main() -> None:
         raise SystemExit("unknown case; choose one of: " + ", ".join(manifest["cases"]))
     if "D5_pure_llm_direct" in args.methods and not args.allow_live_api:
         raise SystemExit("D5 performs live Codex CLI model calls; pass --allow-live-api after explicitly approving the run")
+    codex_context_methods = {
+        "D6_agent_codex_context_optimizer",
+        "D7_agent_codex_capacity_shield_optimizer",
+        "D8_agent_codex_nn_capacity_shield_optimizer",
+    }
+    selected_context_methods = codex_context_methods.intersection(args.methods)
+    if selected_context_methods and not args.codex_policy_replay and not args.allow_live_api:
+        raise SystemExit("D6/D7/D8 perform a live Codex CLI model call; pass --allow-live-api after explicitly approving the run")
     if "D4_agent_llm_feedback_optimizer" in args.methods and args.feedback_mode == "deepseek" and not args.allow_live_api:
         raise SystemExit("D4 deepseek feedback performs live calls; pass --allow-live-api after explicitly approving the run")
     if args.compact_records and any(
-        method not in {"D0_greedy", "D1_optimizer", "D5_pure_llm_direct"}
+        method not in {
+            "D0_greedy",
+            "D1_optimizer",
+            "D5_pure_llm_direct",
+            "D6_agent_codex_context_optimizer",
+            "D7_agent_codex_capacity_shield_optimizer",
+            "D8_agent_codex_nn_capacity_shield_optimizer",
+        }
         for method in args.methods
     ):
-        raise SystemExit("--compact-records is supported for D0/D1 and Codex CLI D5 runs")
+        raise SystemExit("--compact-records is supported for D0/D1/D5 and Codex CLI D6/D7/D8 runs")
     needs_live_api = "D4_agent_llm_feedback_optimizer" in args.methods and args.feedback_mode == "deepseek"
-    if "D5_pure_llm_direct" in args.methods and not shutil.which("codex"):
+    if (
+        ("D5_pure_llm_direct" in args.methods or (selected_context_methods and not args.codex_policy_replay))
+        and not shutil.which("codex")
+    ):
         raise SystemExit("codex CLI not found; no run was started")
+    if args.codex_policy_replay and not Path(args.codex_policy_replay).is_file():
+        raise SystemExit("Codex policy replay JSON does not exist; no run was started")
+    if args.codex_policy_replay and not selected_context_methods:
+        raise SystemExit("--codex-policy-replay is only valid with a D6/D7/D8 Codex context method")
+    if "D8_agent_codex_nn_capacity_shield_optimizer" in args.methods and not args.nn_ranker_model:
+        raise SystemExit("D8 requires --nn-ranker-model")
+    if args.nn_top_k < 1:
+        raise SystemExit("--nn-top-k must be positive")
     if needs_live_api and not os.environ.get("DEEPSEEK_API_KEY"):
         raise SystemExit("DEEPSEEK_API_KEY is not set; no run was started")
 
@@ -111,8 +143,15 @@ def main() -> None:
             passenger_no_show_rate=float(controls.get("passenger_no_show_rate", 0.0)),
             method_name=method_name,
             feedback_mode=feedback_mode,
+            context_function_mode=(
+                "codex_cli_generated_linear_clip_with_manual_fallback"
+                if method_name in codex_context_methods
+                else "manual_linear_clip"
+            ),
             llm_backend="codex_cli",
             llm_model=args.codex_model,
+            neural_ranker_model_path=args.nn_ranker_model,
+            neural_ranker_top_k=args.nn_top_k,
             seed=args.seed,
         )
         simulation = DispatchSimulation(
@@ -129,7 +168,16 @@ def main() -> None:
                 detour_factor=float(pickup_policy["detour_factor"]),
                 minimum_intrazonal_distance_m=float(pickup_policy["minimum_intrazonal_distance_m"]),
             ),
-            llm_trace_dir=(output_dir / "codex_cli_traces") if method_name == "D5_pure_llm_direct" else None,
+            llm_trace_dir=(
+                output_dir / ("codex_context_policy_traces" if method_name in codex_context_methods else "codex_cli_traces")
+                if method_name in {"D5_pure_llm_direct", *codex_context_methods}
+                else None
+            ),
+            codex_policy_replay_path=(
+                Path(args.codex_policy_replay)
+                if method_name in codex_context_methods and args.codex_policy_replay
+                else None
+            ),
         )
         summary, rounds = simulation.run(max_dispatch_rounds=1 if args.single_round_smoke else None)
         payload = {
@@ -147,8 +195,8 @@ def main() -> None:
             "scenario_id": loaded["scenario"]["scenario_id"],
             "fleet_id": loaded["fleet"]["fleet_id"],
             "method_name": method_name,
-            "llm_backend": config.llm_backend if method_name == "D5_pure_llm_direct" else None,
-            "llm_model": config.llm_model if method_name == "D5_pure_llm_direct" else None,
+            "llm_backend": config.llm_backend if method_name in {"D5_pure_llm_direct", *codex_context_methods} else None,
+            "llm_model": config.llm_model if method_name in {"D5_pure_llm_direct", *codex_context_methods} else None,
             "llm_input_protocol": (
                 CODEX_DIRECT_ASSIGNMENT_INPUT_POLICY
                 if method_name == "D5_pure_llm_direct"

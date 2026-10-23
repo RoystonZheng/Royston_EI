@@ -1,0 +1,499 @@
+{
+  "schema_version": "route_intent_query_v2",
+  "task_id": "task-0005-0005",
+  "task_type": "semantic_landmark_relative",
+  "map_id": "grid-100x100-seed-5",
+  "map_version": "grid-v1-100",
+  "map_input_mode": "graph_only",
+  "start_node_id": "node_33_21",
+  "pickup_text": "请在会展中心东侧的合法上车点上车。",
+  "dropoff_text": "请在火车站附近下车。",
+  "pickup_resolution_mode": "landmark_graph_candidates",
+  "dropoff_resolution_mode": "landmark_graph_candidates",
+  "matched_pickup_entries": [
+    {
+      "entry_id": "landmark:node_8_49",
+      "entry_type": "landmark",
+      "name": "会展中心",
+      "aliases": [
+        "展览中心"
+      ],
+      "anchor_coordinates": {
+        "x": 8,
+        "y": 49
+      }
+    }
+  ],
+  "matched_dropoff_entries": [
+    {
+      "entry_id": "landmark:node_58_74",
+      "entry_type": "landmark",
+      "name": "火车站",
+      "aliases": [
+        "车站"
+      ],
+      "anchor_coordinates": {
+        "x": 58,
+        "y": 74
+      }
+    }
+  ],
+  "pickup_candidates": [
+    {
+      "candidate_ref": "P00",
+      "coordinates": {
+        "x": 10,
+        "y": 52
+      },
+      "manhattan_distance_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_8_49",
+          "distance": 5
+        }
+      ],
+      "relative_direction_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_8_49",
+          "direction": "north"
+        }
+      ],
+      "candidate_anchor_links": []
+    },
+    {
+      "candidate_ref": "P01",
+      "coordinates": {
+        "x": 11,
+        "y": 47
+      },
+      "manhattan_distance_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_8_49",
+          "distance": 5
+        }
+      ],
+      "relative_direction_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_8_49",
+          "direction": "east"
+        }
+      ],
+      "candidate_anchor_links": []
+    },
+    {
+      "candidate_ref": "P02",
+      "coordinates": {
+        "x": 7,
+        "y": 45
+      },
+      "manhattan_distance_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_8_49",
+          "distance": 5
+        }
+      ],
+      "relative_direction_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_8_49",
+          "direction": "south"
+        }
+      ],
+      "candidate_anchor_links": []
+    },
+    {
+      "candidate_ref": "P03",
+      "coordinates": {
+        "x": 7,
+        "y": 47
+      },
+      "manhattan_distance_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_8_49",
+          "distance": 3
+        }
+      ],
+      "relative_direction_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_8_49",
+          "direction": "south"
+        }
+      ],
+      "candidate_anchor_links": [
+        {
+          "anchor_ref": "landmark:node_8_49",
+          "entry_type": "landmark",
+          "name": "会展中心",
+          "side_of_road": null,
+          "orientation": null,
+          "relation_to_feature": null
+        }
+      ]
+    },
+    {
+      "candidate_ref": "P04",
+      "coordinates": {
+        "x": 7,
+        "y": 49
+      },
+      "manhattan_distance_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_8_49",
+          "distance": 1
+        }
+      ],
+      "relative_direction_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_8_49",
+          "direction": "west"
+        }
+      ],
+      "candidate_anchor_links": [
+        {
+          "anchor_ref": "landmark:node_8_49",
+          "entry_type": "landmark",
+          "name": "会展中心",
+          "side_of_road": null,
+          "orientation": null,
+          "relation_to_feature": null
+        }
+      ]
+    },
+    {
+      "candidate_ref": "P05",
+      "coordinates": {
+        "x": 7,
+        "y": 50
+      },
+      "manhattan_distance_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_8_49",
+          "distance": 2
+        }
+      ],
+      "relative_direction_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_8_49",
+          "direction": "west"
+        }
+      ],
+      "candidate_anchor_links": [
+        {
+          "anchor_ref": "landmark:node_8_49",
+          "entry_type": "landmark",
+          "name": "会展中心",
+          "side_of_road": null,
+          "orientation": null,
+          "relation_to_feature": null
+        }
+      ]
+    },
+    {
+      "candidate_ref": "P06",
+      "coordinates": {
+        "x": 7,
+        "y": 51
+      },
+      "manhattan_distance_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_8_49",
+          "distance": 3
+        }
+      ],
+      "relative_direction_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_8_49",
+          "direction": "north"
+        }
+      ],
+      "candidate_anchor_links": [
+        {
+          "anchor_ref": "landmark:node_8_49",
+          "entry_type": "landmark",
+          "name": "会展中心",
+          "side_of_road": null,
+          "orientation": null,
+          "relation_to_feature": null
+        }
+      ]
+    },
+    {
+      "candidate_ref": "P07",
+      "coordinates": {
+        "x": 8,
+        "y": 48
+      },
+      "manhattan_distance_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_8_49",
+          "distance": 1
+        }
+      ],
+      "relative_direction_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_8_49",
+          "direction": "south"
+        }
+      ],
+      "candidate_anchor_links": [
+        {
+          "anchor_ref": "landmark:node_8_49",
+          "entry_type": "landmark",
+          "name": "会展中心",
+          "side_of_road": null,
+          "orientation": null,
+          "relation_to_feature": null
+        }
+      ]
+    },
+    {
+      "candidate_ref": "P08",
+      "coordinates": {
+        "x": 9,
+        "y": 49
+      },
+      "manhattan_distance_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_8_49",
+          "distance": 1
+        }
+      ],
+      "relative_direction_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_8_49",
+          "direction": "east"
+        }
+      ],
+      "candidate_anchor_links": [
+        {
+          "anchor_ref": "landmark:node_8_49",
+          "entry_type": "landmark",
+          "name": "会展中心",
+          "side_of_road": null,
+          "orientation": null,
+          "relation_to_feature": null
+        }
+      ]
+    },
+    {
+      "candidate_ref": "P09",
+      "coordinates": {
+        "x": 9,
+        "y": 51
+      },
+      "manhattan_distance_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_8_49",
+          "distance": 3
+        }
+      ],
+      "relative_direction_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_8_49",
+          "direction": "north"
+        }
+      ],
+      "candidate_anchor_links": []
+    },
+    {
+      "candidate_ref": "P10",
+      "coordinates": {
+        "x": 9,
+        "y": 52
+      },
+      "manhattan_distance_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_8_49",
+          "distance": 4
+        }
+      ],
+      "relative_direction_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_8_49",
+          "direction": "north"
+        }
+      ],
+      "candidate_anchor_links": []
+    }
+  ],
+  "dropoff_candidates": [
+    {
+      "candidate_ref": "D00",
+      "coordinates": {
+        "x": 55,
+        "y": 73
+      },
+      "manhattan_distance_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_58_74",
+          "distance": 4
+        }
+      ],
+      "relative_direction_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_58_74",
+          "direction": "west"
+        }
+      ],
+      "candidate_anchor_links": [
+        {
+          "anchor_ref": "landmark:node_58_74",
+          "entry_type": "landmark",
+          "name": "火车站",
+          "side_of_road": null,
+          "orientation": null,
+          "relation_to_feature": null
+        }
+      ]
+    },
+    {
+      "candidate_ref": "D01",
+      "coordinates": {
+        "x": 56,
+        "y": 72
+      },
+      "manhattan_distance_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_58_74",
+          "distance": 4
+        }
+      ],
+      "relative_direction_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_58_74",
+          "direction": "west"
+        }
+      ],
+      "candidate_anchor_links": [
+        {
+          "anchor_ref": "landmark:node_58_74",
+          "entry_type": "landmark",
+          "name": "火车站",
+          "side_of_road": null,
+          "orientation": null,
+          "relation_to_feature": null
+        }
+      ]
+    },
+    {
+      "candidate_ref": "D02",
+      "coordinates": {
+        "x": 56,
+        "y": 73
+      },
+      "manhattan_distance_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_58_74",
+          "distance": 3
+        }
+      ],
+      "relative_direction_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_58_74",
+          "direction": "west"
+        }
+      ],
+      "candidate_anchor_links": [
+        {
+          "anchor_ref": "landmark:node_58_74",
+          "entry_type": "landmark",
+          "name": "火车站",
+          "side_of_road": null,
+          "orientation": null,
+          "relation_to_feature": null
+        }
+      ]
+    },
+    {
+      "candidate_ref": "D03",
+      "coordinates": {
+        "x": 58,
+        "y": 71
+      },
+      "manhattan_distance_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_58_74",
+          "distance": 3
+        }
+      ],
+      "relative_direction_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_58_74",
+          "direction": "south"
+        }
+      ],
+      "candidate_anchor_links": [
+        {
+          "anchor_ref": "landmark:node_58_74",
+          "entry_type": "landmark",
+          "name": "火车站",
+          "side_of_road": null,
+          "orientation": null,
+          "relation_to_feature": null
+        }
+      ]
+    },
+    {
+      "candidate_ref": "D04",
+      "coordinates": {
+        "x": 59,
+        "y": 75
+      },
+      "manhattan_distance_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_58_74",
+          "distance": 2
+        }
+      ],
+      "relative_direction_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_58_74",
+          "direction": "east"
+        }
+      ],
+      "candidate_anchor_links": [
+        {
+          "anchor_ref": "landmark:node_58_74",
+          "entry_type": "landmark",
+          "name": "火车站",
+          "side_of_road": null,
+          "orientation": null,
+          "relation_to_feature": null
+        }
+      ]
+    },
+    {
+      "candidate_ref": "D05",
+      "coordinates": {
+        "x": 60,
+        "y": 73
+      },
+      "manhattan_distance_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_58_74",
+          "distance": 3
+        }
+      ],
+      "relative_direction_to_anchors": [
+        {
+          "anchor_ref": "landmark:node_58_74",
+          "direction": "east"
+        }
+      ],
+      "candidate_anchor_links": [
+        {
+          "anchor_ref": "landmark:node_58_74",
+          "entry_type": "landmark",
+          "name": "火车站",
+          "side_of_road": null,
+          "orientation": null,
+          "relation_to_feature": null
+        }
+      ]
+    }
+  ],
+  "allowed_feature_refs": [],
+  "allowed_landmark_refs": [
+    "landmark:node_8_49",
+    "landmark:node_58_74"
+  ],
+  "uses_evaluator_truth": false
+}

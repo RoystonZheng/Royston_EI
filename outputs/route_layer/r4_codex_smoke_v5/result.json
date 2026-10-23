@@ -1,0 +1,70 @@
+{
+  "experiment_id": "r4_codex_single_step_no_tool_smoke_v5",
+  "status": "single_step_no_tool_smoke_passed",
+  "task_id": "task-0000-0009",
+  "map_id": "grid-8x8-seed-0",
+  "current_node_id": "node_0_5",
+  "model": "gpt-5.6-luna",
+  "reasoning_effort": "low",
+  "cli_invocation_count": 1,
+  "retry_count": 0,
+  "allowed_directions": [
+    "N",
+    "S"
+  ],
+  "allowed_edge_ids": [
+    "edge_node_0_5_node_0_4",
+    "edge_node_0_5_node_0_6"
+  ],
+  "response": {
+    "action": "move",
+    "direction": "N",
+    "self_check": {
+      "allowed_directed_edge": true,
+      "starts_at_current": true,
+      "inside_boundary": true,
+      "pickup_order_ok": true,
+      "not_revisited": true
+    },
+    "failure_reason_code": "none"
+  },
+  "selected_edge_id": "edge_node_0_5_node_0_4",
+  "local_validation": {
+    "exact_schema_fields": true,
+    "move_action": true,
+    "direction_in_dynamic_schema": true,
+    "direction_maps_to_allowed_edge": true,
+    "all_self_checks_true": true,
+    "failure_code_none": true,
+    "same_prompt_as_frozen_single_step": true,
+    "same_schema_as_frozen_single_step": true,
+    "one_model_turn": true,
+    "zero_retries": true,
+    "zero_tool_items": true
+  },
+  "tool_item_types": [],
+  "tool_usage_detected": false,
+  "usage": {
+    "input_tokens": 14153,
+    "cached_input_tokens": 0,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 1373,
+    "reasoning_output_tokens": 1313
+  },
+  "latency_ms": 26350.508,
+  "api_key_used": false,
+  "output_token_hard_limit": null,
+  "account_cost": "not_reported_by_cli",
+  "nonfatal_cli_warning": "Skill descriptions were shortened to fit the 2% skills context budget.",
+  "interpretation": "One legal next-edge proposal was returned by Codex CLI with all tool features disabled. This is not a complete route, route optimality result, or formal R4 trial.",
+  "evidence_files": [
+    "prompt.txt",
+    "schema.json",
+    "cli_events.jsonl",
+    "cli_stderr.log",
+    "model_response.json",
+    "request_metadata.json"
+  ],
+  "posthoc_reachability_audit": "posthoc_reachability_audit.json",
+  "continuation_feasible_with_9_step_budget": true
+}
