@@ -1,0 +1,1 @@
+Partial NYC checkpoint for completed F2 D5 live and D6/D7 replay outputs. D6/D7 are replay records, not independent live results. F4 D0/D1 was active at cutoff and is excluded. This is not the complete multi-month batch or an aggregate performance comparison.
