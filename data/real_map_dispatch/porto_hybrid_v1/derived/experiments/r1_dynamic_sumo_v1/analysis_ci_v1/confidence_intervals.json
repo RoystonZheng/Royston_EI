@@ -1,0 +1,75 @@
+{
+  "analysis_id": "porto_r1_v3_paired_intervals_v1",
+  "source": "formal_v3_fixed_delay; source files are not modified",
+  "interval_method": "two-sided 95% paired Student-t interval; df=8; t*=2.306004135204166",
+  "paired_seed_set": [
+    0,
+    1,
+    2,
+    3,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "interpretation": "Intervals describe variability across the nine paired completed simulation seeds only; they are not evidence about real Porto operations or a population of real trips.",
+  "completion_rate_wilson_95": {
+    "FASTEST": {
+      "successes": 9,
+      "trials": 10,
+      "estimate": 0.9,
+      "lower": 0.5958499732047615,
+      "upper": 0.9821237869049271
+    },
+    "LOWEST_ENERGY": {
+      "successes": 10,
+      "trials": 10,
+      "estimate": 1.0,
+      "lower": 0.7224672001371107,
+      "upper": 0.9999999999999999
+    }
+  },
+  "paired_metrics": [
+    {
+      "metric": "elapsed_completion_time_s",
+      "label": "Fleet makespan (s)",
+      "n_paired_seeds": 9,
+      "mean_delta_LOWEST_ENERGY_minus_FASTEST": 1100.1314444444442,
+      "sd_paired_delta": 282.6278837292559,
+      "ci95_lower": 882.8844215765555,
+      "ci95_upper": 1317.378467312333,
+      "ci_method": "paired t interval, df=8"
+    },
+    {
+      "metric": "sum_actual_energy_net_kwh",
+      "label": "Net simulated energy (kWh)",
+      "n_paired_seeds": 9,
+      "mean_delta_LOWEST_ENERGY_minus_FASTEST": -14.349606666666666,
+      "sd_paired_delta": 1.0894154803150162,
+      "ci95_lower": -15.187005534187286,
+      "ci95_upper": -13.512207799146047,
+      "ci_method": "paired t interval, df=8"
+    },
+    {
+      "metric": "sum_actual_waiting_time_s",
+      "label": "Actual waiting time sum (s)",
+      "n_paired_seeds": 9,
+      "mean_delta_LOWEST_ENERGY_minus_FASTEST": 1272.4555555555555,
+      "sd_paired_delta": 458.1524421824877,
+      "ci95_lower": 920.2884134799874,
+      "ci95_upper": 1624.6226976311236,
+      "ci_method": "paired t interval, df=8"
+    },
+    {
+      "metric": "sum_actual_distance_km",
+      "label": "Actual distance (km)",
+      "n_paired_seeds": 9,
+      "mean_delta_LOWEST_ENERGY_minus_FASTEST": -15.202555555555566,
+      "sd_paired_delta": 2.309550719897229,
+      "ci95_lower": -16.977833392404488,
+      "ci95_upper": -13.427277718706643,
+      "ci_method": "paired t interval, df=8"
+    }
+  ]
+}

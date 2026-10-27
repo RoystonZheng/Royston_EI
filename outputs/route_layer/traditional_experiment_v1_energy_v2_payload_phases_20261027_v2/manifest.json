@@ -1,0 +1,84 @@
+{
+  "schema_version": "traditional_grid_ev_v2_payload_phase_recalculation_v1",
+  "status": "passed",
+  "created_at_utc": "2026-10-27T07:43:56.187252+00:00",
+  "source_root": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/traditional_experiment_v1",
+  "energy_v2_root": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/traditional_experiment_v1_energy_v2",
+  "source_manifest_sha256": "57f012f3004757f39a42ea6326cb87ba15a5fe1cc31d769ada840729ffbbf5bf",
+  "energy_v2_manifest_sha256": "c3c5ef3181e9a014c642ea4f49603448bdb9f1b042b255783cba5149f0661d75",
+  "route_algorithm_rerun": false,
+  "frozen_route_choices_changed": false,
+  "model_calls": 0,
+  "energy_model": {
+    "model_version": "ev_longitudinal_v2",
+    "profile_id": "generic_reference_ev_v1",
+    "profile": {
+      "profile_id": "generic_reference_ev_v1",
+      "curb_mass_kg": 1900.0,
+      "passenger_load_kg": 75.0,
+      "rotating_mass_kg": 50.0,
+      "rolling_resistance_coefficient": 0.009,
+      "drag_coefficient": 0.26,
+      "frontal_area_m2": 2.35,
+      "air_density_kg_m3": 1.225,
+      "propulsion_efficiency": 0.9,
+      "regenerative_efficiency": 0.65,
+      "auxiliary_power_w": 800.0,
+      "max_acceleration_mps2": 1.2,
+      "max_deceleration_mps2": 2.0,
+      "regenerative_power_cap_w": 50000.0,
+      "gravity_mps2": 9.80665,
+      "model_version": "ev_longitudinal_v2"
+    },
+    "profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee",
+    "equations": {
+      "wheel_force": "(m + rotating_mass)*acceleration + 0.5*rho*Cd*A*v^2 + Crr*m*g*cos(slope) + m*g*sin(slope)",
+      "positive_wheel_power": "wheel_power / propulsion_efficiency",
+      "negative_wheel_power": "min(-wheel_power * regenerative_efficiency, regenerative_power_cap)",
+      "net_battery_energy": "propulsion_draw - regenerated_energy + auxiliary_energy"
+    }
+  },
+  "profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee",
+  "payload_phases": {
+    "empty_kg": 0.0,
+    "passenger_kg": 75.0
+  },
+  "expected_task_method_slots": 450,
+  "completed_route_recalculation_count": 390,
+  "noncompleted_or_no_valid_route_slots": 60,
+  "index_path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/traditional_experiment_v1_energy_v2_payload_phases_20261027_v2/phase_energy_index.jsonl",
+  "index_sha256": "ebd14d19e5a9ea590f1d1d29a74f8340139a0d57ebc6641b532dee5ba439e083",
+  "summary_by_method": {
+    "full_map_dijkstra": {
+      "expected_slots": 150,
+      "recalculated_routes": 130,
+      "not_estimable_or_not_completed": 20,
+      "signed_net_energy_kwh": 188.39376105967077,
+      "billable_energy_kwh": 188.39376105967077,
+      "electricity_cost": 431.421712826646
+    },
+    "local_dijkstra": {
+      "expected_slots": 150,
+      "recalculated_routes": 130,
+      "not_estimable_or_not_completed": 20,
+      "signed_net_energy_kwh": 188.39376105967077,
+      "billable_energy_kwh": 188.39376105967077,
+      "electricity_cost": 431.421712826646
+    },
+    "local_a_star": {
+      "expected_slots": 150,
+      "recalculated_routes": 130,
+      "not_estimable_or_not_completed": 20,
+      "signed_net_energy_kwh": 188.40454572313078,
+      "billable_energy_kwh": 188.40454572313078,
+      "electricity_cost": 431.4464097059695
+    }
+  },
+  "error_count": 0,
+  "errors": [],
+  "limitations": [
+    "EV v2 route-phase values are simulation estimates from saved edge conditions, not measured vehicle telemetry.",
+    "This sidecar changes reporting/accounting only; the historical route selection used its original objective.",
+    "Energy and electricity cost for incomplete or unestimable routes remain null, never zero."
+  ]
+}

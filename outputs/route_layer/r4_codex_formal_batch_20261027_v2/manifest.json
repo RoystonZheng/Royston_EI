@@ -2735,7 +2735,7 @@
   "experiment_id": "r4_codex_formal_batch_v2",
   "frozen_task_count": 150,
   "minimum_model_request_lower_bound": 17072,
-  "model_requests_used": 1224,
+  "model_requests_used": 1926,
   "parallel_execution": {
     "aggregator_pid": 14318,
     "authorized_unknown_recoveries": [
@@ -2870,6 +2870,7 @@
     ],
     "batch_root": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2",
     "created_at_utc": "2026-10-27T05:55:51.543021+00:00",
+    "duplicate_suppressed_request_count": 0,
     "events": [
       {
         "at_utc": "2026-10-27T06:21:04.801800+00:00",
@@ -2934,18 +2935,25 @@
     ],
     "in_flight": [
       {
-        "expected_request_number": 193,
-        "started_at_utc": "2026-10-27T07:15:21.379033+00:00",
-        "task_id": "task-0006-0008",
-        "task_requests_used_before": 192,
+        "expected_request_number": 115,
+        "started_at_utc": "2026-10-27T08:12:36.481984+00:00",
+        "task_id": "task-0009-0005",
+        "task_requests_used_before": 114,
         "worker_id": "worker_00"
       },
       {
-        "expected_request_number": 27,
-        "started_at_utc": "2026-10-27T07:15:23.392121+00:00",
+        "expected_request_number": 206,
+        "started_at_utc": "2026-10-27T08:12:26.981636+00:00",
         "task_id": "formal-task-0001-feasible",
-        "task_requests_used_before": 26,
+        "task_requests_used_before": 205,
         "worker_id": "worker_01"
+      },
+      {
+        "expected_request_number": 208,
+        "started_at_utc": "2026-10-27T08:12:26.949295+00:00",
+        "task_id": "task-0003-0009",
+        "task_requests_used_before": 207,
+        "worker_id": "worker_03"
       }
     ],
     "last_cycle_max_new_requests_per_invocation": 1,
@@ -2972,7 +2980,7 @@
     "scheduling_change_only": true,
     "schema_version": "r4_formal_parallel_execution_v1",
     "session_policy": "one isolated Codex CLI request per route action; each prompt repeats the compact map, current route state, feature context, and v3 cost-to-go guidance",
-    "snapshot_at_utc": "2026-10-27T07:15:29.841030+00:00",
+    "snapshot_at_utc": "2026-10-27T08:12:36.871328+00:00",
     "source_manifest": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_batch_preflights_20261024_v1/manifest.json",
     "source_manifest_sha256": "ed24fa6428deb3a02a3390444d806df9614715fd6992b2bb4385514faaf1cc9b",
     "started_at_utc": "2026-10-27T05:56:00.490148+00:00",
@@ -2989,37 +2997,37 @@
     "worker_count": 4,
     "worker_snapshots": [
       {
-        "current_task_id": "task-0006-0008",
-        "model_requests_used": 219,
-        "pending_tasks": 24,
+        "current_task_id": "task-0009-0005",
+        "model_requests_used": 384,
+        "pending_tasks": 23,
         "status": "running",
         "worker_id": "worker_00"
       },
       {
         "current_task_id": "formal-task-0001-feasible",
-        "model_requests_used": 213,
+        "model_requests_used": 392,
         "pending_tasks": 24,
         "status": "running",
         "worker_id": "worker_01"
       },
       {
         "current_task_id": "formal-task-0006-boundary",
-        "model_requests_used": 213,
+        "model_requests_used": 391,
         "pending_tasks": 26,
-        "status": "running",
+        "status": "paused_at_request_chunk_limit",
         "worker_id": "worker_02"
       },
       {
         "current_task_id": "task-0003-0009",
-        "model_requests_used": 220,
+        "model_requests_used": 400,
         "pending_tasks": 28,
-        "status": "paused_at_request_chunk_limit",
+        "status": "running",
         "worker_id": "worker_03"
       }
     ],
     "workers": [
       {
-        "current_task_id": "task-0006-0008",
+        "current_task_id": "task-0009-0005",
         "cycles": [
           {
             "cycle": 1,
@@ -3032,7 +3040,7 @@
         ],
         "log_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/logs/worker_00.log",
         "minimum_route_actions_lower_bound": 3825,
-        "model_requests_used": 219,
+        "model_requests_used": 384,
         "pid": 14310,
         "relative_root": "parallel_workers/worker_00",
         "request_limit": 14848,
@@ -3087,7 +3095,7 @@
         ],
         "log_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/logs/worker_01.log",
         "minimum_route_actions_lower_bound": 3823,
-        "model_requests_used": 213,
+        "model_requests_used": 392,
         "pid": 14311,
         "relative_root": "parallel_workers/worker_01",
         "request_limit": 14848,
@@ -3142,13 +3150,13 @@
         ],
         "log_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/logs/worker_02.log",
         "minimum_route_actions_lower_bound": 3808,
-        "model_requests_used": 213,
+        "model_requests_used": 391,
         "pid": 14312,
         "relative_root": "parallel_workers/worker_02",
         "request_limit": 14848,
         "source_manifest": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_02_source_manifest.json",
         "source_manifest_sha256": "d27b6404c79a7c44d702e7c2b48e83f40e1b62add3358a8b494ef86ad62bde1d",
-        "status": "running",
+        "status": "paused_at_request_chunk_limit",
         "task_count": 29,
         "task_ids": [
           "formal-task-0006-boundary",
@@ -3197,13 +3205,13 @@
         ],
         "log_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/logs/worker_03.log",
         "minimum_route_actions_lower_bound": 3828,
-        "model_requests_used": 220,
+        "model_requests_used": 400,
         "pid": 14314,
         "relative_root": "parallel_workers/worker_03",
         "request_limit": 15360,
         "source_manifest": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_03_source_manifest.json",
         "source_manifest_sha256": "2de7d0cf4774c162cbdb68f807ae500a514f5d2d40cbb056f340a99c081422fe",
-        "status": "paused_at_request_chunk_limit",
+        "status": "running",
         "task_count": 30,
         "task_ids": [
           "task-0003-0009",
@@ -4105,13 +4113,13 @@
       "preflight_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_batch_preflights_20261024_v1/tasks/seed_1/formal-task-0001-feasible/preflight.json",
       "preflight_sha256": "9631ae09233338af58b749c45c52bf42673c7158c5d29b5bbf9d4f8e89d3e839",
       "replay_path": "parallel_workers/worker_01/tasks/seed_1/formal-task-0001-feasible/run_000/replay.html",
-      "requests_used": 26,
+      "requests_used": 205,
       "runs": [
         {
           "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_01/tasks/seed_1/formal-task-0001-feasible/run_000",
           "parent_run": null,
           "request_limit": 512,
-          "requests_used": 26
+          "requests_used": 205
         }
       ],
       "sample_group": "formal_scenarios",
@@ -4581,7 +4589,7 @@
       "task_id": "task-0003-0008"
     },
     {
-      "active_run_requests_recorded": 1,
+      "active_run_requests_recorded": 0,
       "error": null,
       "final_audit_path": "parallel_workers/worker_03/tasks/seed_3/task-0003-0009/run_000/final_audit.json",
       "minimum_route_actions_lower_bound": 236,
@@ -4589,18 +4597,18 @@
       "preflight_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_batch_preflights_20261024_v1/tasks/seed_3/task-0003-0009/preflight.json",
       "preflight_sha256": "37a98fa62abdd54a79390c87991d19b3c42d56923b15d7b6710847032e9c4208",
       "replay_path": "parallel_workers/worker_03/tasks/seed_3/task-0003-0009/run_000/replay.html",
-      "requests_used": 27,
+      "requests_used": 207,
       "runs": [
         {
           "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_03/tasks/seed_3/task-0003-0009/run_000",
           "parent_run": null,
           "request_limit": 512,
-          "requests_used": 27
+          "requests_used": 207
         }
       ],
       "sample_group": "orders",
       "seed": 3,
-      "status": "ready",
+      "status": "active",
       "task_id": "task-0003-0009"
     },
     {
@@ -5149,7 +5157,7 @@
       "task_id": "task-0006-0007"
     },
     {
-      "active_run_requests_recorded": 0,
+      "active_run_requests_recorded": 1,
       "error": null,
       "final_audit_path": "parallel_workers/worker_00/tasks/seed_6/task-0006-0008/run_000/final_audit.json",
       "minimum_route_actions_lower_bound": 193,
@@ -5157,18 +5165,18 @@
       "preflight_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_batch_preflights_20261024_v1/tasks/seed_6/task-0006-0008/preflight.json",
       "preflight_sha256": "c4271b8df8725b724d1d8ae0044684a990161d8185ddc2744bbd318890cc38bd",
       "replay_path": "parallel_workers/worker_00/tasks/seed_6/task-0006-0008/run_000/replay.html",
-      "requests_used": 192,
+      "requests_used": 243,
       "runs": [
         {
           "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_6/task-0006-0008/run_000",
           "parent_run": null,
           "request_limit": 512,
-          "requests_used": 192
+          "requests_used": 243
         }
       ],
       "sample_group": "orders",
       "seed": 6,
-      "status": "active",
+      "status": "route_complete",
       "task_id": "task-0006-0008"
     },
     {
@@ -5231,18 +5239,18 @@
       "preflight_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_batch_preflights_20261024_v1/tasks/seed_6/formal-task-0006-boundary/preflight.json",
       "preflight_sha256": "8b39288b2ecfe1bd9902ea4f24cc7b5cfcbab389cd5716a024421cb3feff6018",
       "replay_path": "parallel_workers/worker_02/tasks/seed_6/formal-task-0006-boundary/run_000/replay.html",
-      "requests_used": 27,
+      "requests_used": 204,
       "runs": [
         {
           "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_02/tasks/seed_6/formal-task-0006-boundary/run_000",
           "parent_run": null,
           "request_limit": 512,
-          "requests_used": 27
+          "requests_used": 204
         }
       ],
       "sample_group": "formal_scenarios",
       "seed": 6,
-      "status": "active",
+      "status": "ready",
       "task_id": "formal-task-0006-boundary"
     },
     {
@@ -5325,26 +5333,26 @@
       "task_id": "task-0007-0004"
     },
     {
-      "active_run_requests_recorded": 0,
-      "error": "request_interrupted_without_terminal_response_or_usage; preserved_without_automatic_replay",
+      "active_run_requests_recorded": 25,
+      "error": null,
       "final_audit_path": "parallel_workers/worker_02/tasks/seed_7/task-0007-0005/run_000/final_audit.json",
       "minimum_route_actions_lower_bound": 226,
       "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_02/tasks/seed_7/task-0007-0005/run_000",
       "preflight_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_batch_preflights_20261024_v1/tasks/seed_7/task-0007-0005/preflight.json",
       "preflight_sha256": "dfb26e18be25598ab703164f6225bec1bf7daa6ee4ff2d44a370cae425bb0df4",
       "replay_path": "parallel_workers/worker_02/tasks/seed_7/task-0007-0005/run_000/replay.html",
-      "requests_used": 24,
+      "requests_used": 25,
       "runs": [
         {
           "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_02/tasks/seed_7/task-0007-0005/run_000",
           "parent_run": null,
           "request_limit": 512,
-          "requests_used": 24
+          "requests_used": 25
         }
       ],
       "sample_group": "orders",
       "seed": 7,
-      "status": "outcome_unknown",
+      "status": "ready",
       "task_id": "task-0007-0005"
     },
     {
@@ -5707,17 +5715,26 @@
       "task_id": "task-0009-0004"
     },
     {
+      "active_run_requests_recorded": 0,
       "error": null,
-      "final_audit_path": null,
+      "final_audit_path": "parallel_workers/worker_00/tasks/seed_9/task-0009-0005/run_000/final_audit.json",
       "minimum_route_actions_lower_bound": 176,
-      "output_dir": null,
+      "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_9/task-0009-0005/run_000",
       "preflight_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_batch_preflights_20261024_v1/tasks/seed_9/task-0009-0005/preflight.json",
       "preflight_sha256": "58c85f8b12e123df33641dfc912cf33b174004c2d664525785c1fd58d2eaa1b5",
-      "replay_path": null,
-      "requests_used": 0,
+      "replay_path": "parallel_workers/worker_00/tasks/seed_9/task-0009-0005/run_000/replay.html",
+      "requests_used": 114,
+      "runs": [
+        {
+          "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_9/task-0009-0005/run_000",
+          "parent_run": null,
+          "request_limit": 512,
+          "requests_used": 114
+        }
+      ],
       "sample_group": "orders",
       "seed": 9,
-      "status": "pending",
+      "status": "active",
       "task_id": "task-0009-0005"
     },
     {
@@ -6120,7 +6137,7 @@
       "worker_id": "worker_02"
     }
   ],
-  "updated_at_utc": "2026-10-27T07:15:30.022921+00:00",
+  "updated_at_utc": "2026-10-27T08:12:37.055327+00:00",
   "usage_guard": {
     "baseline_weekly_used_percent": 39,
     "checked_at_utc": "2026-10-27T05:55:22.203534+00:00",

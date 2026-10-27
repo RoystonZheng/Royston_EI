@@ -116,6 +116,37 @@ def _json_safe_provider(record: Any) -> Dict[str, Any]:
     return record if isinstance(record, dict) else {}
 
 
+def _update_state_after_attempt(state: Dict[str, Any], attempt: Dict[str, Any]) -> None:
+    """Move a request out of the in-progress state once its outcome is recorded."""
+    audit = attempt.get("audit") or {}
+    if audit.get("accepted"):
+        state["accepted_action_count"] = int(state.get("accepted_action_count", 0)) + len(
+            audit.get("committed_direction_sequence", [])
+        )
+        state["current_node_id"] = audit.get("current_node_after_segment", state["current_node_id"])
+        state["pickup_seen"] = audit.get("pickup_seen_after_segment", state["pickup_seen"])
+        state["visited_node_ids"] = list(state.get("visited_node_ids") or []) + list(
+            audit.get("committed_node_sequence", [])
+        )
+    state.pop("request_in_progress", None)
+    state.update(
+        {
+            "status": "response_recorded" if attempt.get("status") == "response_received" else "request_error_no_retry",
+            "model_requests_completed": int(attempt["request_number"]),
+            "last_request_status": attempt.get("status"),
+            "last_request_usage": attempt.get("usage"),
+            "unresolved_cli_invocation": None
+            if attempt.get("status") == "response_received"
+            else {
+                "request_number": attempt["request_number"],
+                "status": "delivery_and_usage_unknown",
+                "provider_audit": _json_safe_provider(attempt.get("provider_audit")),
+            },
+            "updated_at_utc": datetime.now(timezone.utc).isoformat(),
+        }
+    )
+
+
 def _attempted_prefix_energy(item: Dict[str, Any], attempt: Dict[str, Any]) -> Dict[str, Any]:
     audit = attempt.get("audit") or {}
     edge_ids = list(audit.get("attempted_edge_sequence") or [])
@@ -609,26 +640,7 @@ def run(
             "delivery_status": "response_received" if attempt.get("status") == "response_received" else "unknown_or_error",
         }
         _write_json_durable(attempt_path, finalized)
-        audit = attempt.get("audit") or {}
-        if audit.get("accepted"):
-            state["accepted_action_count"] = int(state.get("accepted_action_count", 0)) + len(audit.get("committed_direction_sequence", []))
-            state["current_node_id"] = audit.get("current_node_after_segment", state["current_node_id"])
-            state["pickup_seen"] = audit.get("pickup_seen_after_segment", state["pickup_seen"])
-            state["visited_node_ids"] = list(state.get("visited_node_ids") or []) + list(
-                audit.get("committed_node_sequence", [])
-            )
-        state.update({
-            "status": "response_recorded" if attempt.get("status") == "response_received" else "request_error_no_retry",
-            "model_requests_completed": number,
-            "last_request_status": attempt.get("status"),
-            "last_request_usage": attempt.get("usage"),
-            "unresolved_cli_invocation": None if attempt.get("status") == "response_received" else {
-                "request_number": number,
-                "status": "delivery_and_usage_unknown",
-                "provider_audit": _json_safe_provider(attempt.get("provider_audit")),
-            },
-            "updated_at_utc": datetime.now(timezone.utc).isoformat(),
-        })
+        _update_state_after_attempt(state, attempt)
         _write_json_durable(state_path, state)
 
     search = run_r4_segment_route_search(
@@ -777,6 +789,20 @@ def run(
     }
     _write_json_durable(output_dir / "search_result.json", search)
     _write_json_durable(output_dir / "final_audit.json", final_audit)
+    manifest_path = output_dir / "manifest.json"
+    manifest["launch_status"] = manifest.get("status")
+    manifest.update(
+        {
+            "status": search["status"],
+            "route_complete": bool(search["route_complete"]),
+            "finished_at_utc": final_audit["finished_at_utc"],
+            "model_requests_started": int(state.get("model_requests_started", 0)),
+            "model_requests_completed": int(state.get("model_requests_completed", 0)),
+            "accepted_action_count": int(search["route"].get("move_count", 0)),
+            "final_audit_sha256": _sha256((output_dir / "final_audit.json").read_bytes()),
+        }
+    )
+    _write_json_durable(manifest_path, manifest)
     _write_json_durable(output_dir / "state.json", {
         **state,
         "status": search["status"],

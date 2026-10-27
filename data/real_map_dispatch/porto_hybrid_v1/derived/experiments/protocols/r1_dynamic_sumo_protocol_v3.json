@@ -1,0 +1,67 @@
+{
+  "protocol_id": "porto_r1_dynamic_sumo_v3_fixed_planning_delay",
+  "protocol_version": 3,
+  "date_frozen": "2026-10-24",
+  "status": "frozen_for_formal_rerun",
+  "supersedes_for_reproducible_rerun": "r1_dynamic_sumo_protocol_v2.json",
+  "reason_for_revision": "Repeated v2 FASTEST runs with the same seed, map, order files, route paths, SUMO seed, and protocol produced different traffic-state timestamps and completion outcomes. V3 freezes previously measured per-order route-planning delays and replays them on the SUMO clock, while separately recording live planner wall time.",
+  "frozen_inputs": {
+    "scenario_manifest": "derived/scenarios/v3_3/frozen_inputs_v1_3/manifest_v3_3.json",
+    "scenario_manifest_sha256": "846e01d17dadf41eba1284ddd26311c382d9b38af745ad7c1cfc4c00c46db898",
+    "network": "derived/sumo/v1.28.0/porto.net.xml",
+    "network_sha256": "9481618cfdc0f0fa2a4300a38db6fe7f13321dfc22c554feb1cf91b4f8aa7387",
+    "latency_trace_manifest": "derived/experiments/r1_dynamic_sumo_v1/planning_latency_traces_v1/manifest.json",
+    "latency_trace_manifest_sha256": "03f47f0c3eb412fe6a98eaa17349594f1e267fb6a0b38ef8342b88cff12e8824"
+  },
+  "implementation": {
+    "runner": "scripts/run_porto_r1_dynamic_sumo_v3.py",
+    "runner_sha256": "45e49f6e3cab5f8a14a5469d0b6f4228f717751a21beafff5a7effcfa6f8c7e6",
+    "trace_builder": "scripts/build_porto_r1_latency_traces_v1.py",
+    "trace_builder_sha256": "2f24d5d15c53a63db5ba3a83cebf25fa24a3a1f6f5e5c0c73456cb1a63fc9fb3",
+    "sumo_version": "1.28.0",
+    "simulation_step_s": 0.1,
+    "vehicle_class": "passenger",
+    "teleport_after_gridlock": false
+  },
+  "scenario": {
+    "fixed_vehicles_per_seed": 10,
+    "fixed_orders_per_vehicle": 10,
+    "fixed_orders_per_seed": 100,
+    "seeds": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+    "dispatch_or_reassignment": false,
+    "background_flow_per_hour": 90,
+    "background_flow_duration_hours": 2,
+    "background_flow_vehicle_count": 180,
+    "background_flow_is_synthetic": true,
+    "max_simulated_time_s": 86400
+  },
+  "route_objectives": ["FASTEST", "LOWEST_ENERGY"],
+  "planning_delay": {
+    "mode": "frozen_measured_per_order_replay",
+    "trace_selection": "planning_latency_traces_v1/seed_<seed>/<objective>.json",
+    "definition": "For each order, apply its frozen measured planner_wall_time_s from the source R1 run as virtual route-planning delay. SUMO signals, background traffic, and other active vehicles continue during this delay; the logical vehicle waits until the delay has elapsed before it departs.",
+    "live_wall_time_recorded_separately": true,
+    "live_wall_time_drives_simulation_clock": false,
+    "reason": "Keep planning time in simulated completion time while preventing host-load variation in a live perf_counter measurement from changing signal phases and traffic interactions across repeats."
+  },
+  "cost_model": {
+    "sumo_energy_model": "Energy/unknown",
+    "vehicle_proxy": "Kia Soul EV 2020",
+    "calibrated_to_porto_vehicle": false,
+    "currency_cost_claim": false
+  },
+  "formal_matrix": {
+    "runs": 20,
+    "output_root": "derived/experiments/r1_dynamic_sumo_v1/formal_v3_fixed_delay/",
+    "must_not_overwrite": [
+      "derived/experiments/r1_dynamic_sumo_v1/formal_v2/",
+      "derived/experiments/r1_dynamic_sumo_v1/diagnostics_v1/"
+    ]
+  },
+  "interpretation_limits": [
+    "Traffic, signal phases, and energy remain SUMO simulation outputs; they are not observed Porto real-time states.",
+    "The frozen planning delays are measured R1 latencies replayed as virtual delay. Live wall time is separately reported and is not used to advance SUMO in v3.",
+    "The 90 vehicles/hour background flow is a synthetic stress assumption shaped by historical taxi hotspot weights.",
+    "A completed R1 v3 matrix will not by itself establish an AI map-readability effect; LLM and representation-control runs are separate and pending."
+  ]
+}

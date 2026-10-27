@@ -16,6 +16,38 @@ import preflight_r4_codex_segment_task9 as segment_preflight
 
 
 class R4CodexSegmentRunnerTests(unittest.TestCase):
+    def test_recorded_attempt_clears_stale_in_progress_snapshot(self):
+        state = {
+            "request_in_progress": {"request_number": 4, "status": "request_in_progress"},
+            "unresolved_cli_invocation": {"request_number": 4},
+            "accepted_action_count": 8,
+            "current_node_id": "n8",
+            "pickup_seen": False,
+            "visited_node_ids": ["n0", "n8"],
+        }
+
+        segment_runner._update_state_after_attempt(
+            state,
+            {
+                "request_number": 4,
+                "status": "response_received",
+                "usage": {"input_tokens": 123},
+                "audit": {
+                    "accepted": True,
+                    "committed_direction_sequence": ["E", "N"],
+                    "current_node_after_segment": "n10",
+                    "pickup_seen_after_segment": True,
+                    "committed_node_sequence": ["n9", "n10"],
+                },
+            },
+        )
+
+        self.assertNotIn("request_in_progress", state)
+        self.assertIsNone(state["unresolved_cli_invocation"])
+        self.assertEqual(state["accepted_action_count"], 10)
+        self.assertEqual(state["current_node_id"], "n10")
+        self.assertEqual(state["model_requests_completed"], 4)
+
     def test_recovery_feedback_comes_only_from_the_latest_attempt(self):
         rejected = {"request_number": 4, "audit": {"violations": [{"kind": "one_way_direction"}]}}
         accepted = {"request_number": 5, "audit": {"accepted": True, "violations": []}}

@@ -1,0 +1,28 @@
+{
+  "experiment_id": "porto_r1_dynamic_sumo_v3_fixed_delay",
+  "protocol": "derived/experiments/protocols/r1_dynamic_sumo_protocol_v3.json",
+  "protocol_sha256": "4c00711cc7fd2d29aa4c259dcb683167606646f8293c8f2e93a99e6b6df19cd1",
+  "runner": "scripts/run_porto_r1_dynamic_sumo_v3.py",
+  "runner_sha256": "45e49f6e3cab5f8a14a5469d0b6f4228f717751a21beafff5a7effcfa6f8c7e6",
+  "latency_trace_manifest": "derived/experiments/r1_dynamic_sumo_v1/planning_latency_traces_v1/manifest.json",
+  "latency_trace_manifest_sha256": "03f47f0c3eb412fe6a98eaa17349594f1e267fb6a0b38ef8342b88cff12e8824",
+  "planned_cells": 20,
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "objectives": [
+    "FASTEST",
+    "LOWEST_ENERGY"
+  ],
+  "no_retries": true,
+  "outputs": "Each seed/objective is written once below seed_<n>/<objective>; failed runs remain in the denominator."
+}

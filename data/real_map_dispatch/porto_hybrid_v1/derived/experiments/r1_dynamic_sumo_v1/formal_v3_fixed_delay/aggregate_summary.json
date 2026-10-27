@@ -1,0 +1,518 @@
+{
+  "experiment_id": "porto_r1_dynamic_sumo_v3_fixed_delay_v3_3",
+  "status": "completed_with_incomplete_runs",
+  "input_freeze": "derived/scenarios/v3_3/frozen_inputs_v1_3/manifest_v3_3.json",
+  "protocol": "derived/experiments/protocols/r1_dynamic_sumo_protocol_v3.json",
+  "latency_trace_manifest": "derived/experiments/r1_dynamic_sumo_v1/planning_latency_traces_v1/manifest.json",
+  "simulation": {
+    "sumo_version": "1.28.0",
+    "simulation_step_s": 0.1,
+    "background_flow_per_hour": 90,
+    "background_flow_hours": 2,
+    "background_flow_is_synthetic": true,
+    "max_simulated_time_s": 86400,
+    "vehicle_count": 10,
+    "fixed_orders_per_seed": 100,
+    "seeds": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "dispatch_or_reassignment": false
+  },
+  "planning_delay": "Frozen measured per-order R1 latency replayed on the SUMO clock; live wall time recorded separately.",
+  "run_status_counts": {
+    "FASTEST": {
+      "COMPLETED": 9,
+      "FAILED_EXIT_1": 1
+    },
+    "LOWEST_ENERGY": {
+      "COMPLETED": 10
+    }
+  },
+  "objective_stats_on_completed_runs": {
+    "FASTEST": {
+      "completed_seed_ids": [
+        0,
+        1,
+        2,
+        3,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "completed_runs": 9,
+      "planned_runs": 10,
+      "completion_rate": 0.9,
+      "successful_run_metrics": {
+        "elapsed_completion_time_s": {
+          "n": 9,
+          "mean": 4341.072444444445,
+          "sd_sample": 355.1961410569908,
+          "median": 4228.078,
+          "min": 4025.353,
+          "max": 5133.655
+        },
+        "sum_experimental_vehicle_operating_time_s": {
+          "n": 9,
+          "mean": 36148.41111111111,
+          "sd_sample": 1383.1709361503774,
+          "median": 35996.0,
+          "min": 34478.1,
+          "max": 38570.4
+        },
+        "sum_actual_waiting_time_s": {
+          "n": 9,
+          "mean": 2680.9444444444443,
+          "sd_sample": 398.8838054844766,
+          "median": 2715.4,
+          "min": 2042.5,
+          "max": 3280.2
+        },
+        "sum_actual_distance_km": {
+          "n": 9,
+          "mean": 447.57155555555556,
+          "sd_sample": 12.674125256907397,
+          "median": 446.884,
+          "min": 423.9,
+          "max": 466.845
+        },
+        "sum_actual_energy_gross_kwh": {
+          "n": 9,
+          "mean": 233.19078777777779,
+          "sd_sample": 6.91471067830169,
+          "median": 234.08868,
+          "min": 220.42491,
+          "max": 241.86463
+        },
+        "sum_actual_energy_regenerated_kwh": {
+          "n": 9,
+          "mean": 146.77276111111112,
+          "sd_sample": 3.8594463393939136,
+          "median": 147.14677,
+          "min": 139.44111,
+          "max": 151.49021
+        },
+        "sum_actual_energy_net_kwh": {
+          "n": 9,
+          "mean": 86.41802666666666,
+          "sd_sample": 3.1079921647102,
+          "median": 86.94191,
+          "min": 80.9838,
+          "max": 90.37442
+        },
+        "sum_route_planning_wall_time_s": {
+          "n": 9,
+          "mean": 3.1399395555555554,
+          "sd_sample": 0.09898010418653738,
+          "median": 3.107624,
+          "min": 3.014672,
+          "max": 3.331948
+        },
+        "mean_planner_wall_time_ms": {
+          "n": 9,
+          "mean": 31.399444444444445,
+          "sd_sample": 0.9896917589723475,
+          "median": 31.076,
+          "min": 30.147,
+          "max": 33.319
+        },
+        "synthetic_background_vehicles_arrived_by_finish": {
+          "n": 9,
+          "mean": 108.55555555555556,
+          "sd_sample": 9.056918779462348,
+          "median": 106.0,
+          "min": 100.0,
+          "max": 129.0
+        },
+        "edge_pass_events": {
+          "n": 9,
+          "mean": 12600.444444444445,
+          "sd_sample": 345.38352273636013,
+          "median": 12596.0,
+          "min": 12102.0,
+          "max": 13188.0
+        }
+      }
+    },
+    "LOWEST_ENERGY": {
+      "completed_seed_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "completed_runs": 10,
+      "planned_runs": 10,
+      "completion_rate": 1.0,
+      "successful_run_metrics": {
+        "elapsed_completion_time_s": {
+          "n": 10,
+          "mean": 5400.2895,
+          "sd_sample": 460.3296541089391,
+          "median": 5336.058,
+          "min": 4812.024,
+          "max": 6353.509
+        },
+        "sum_experimental_vehicle_operating_time_s": {
+          "n": 10,
+          "mean": 43750.51,
+          "sd_sample": 1302.3652222441729,
+          "median": 43578.95,
+          "min": 41905.6,
+          "max": 46747.4
+        },
+        "sum_actual_waiting_time_s": {
+          "n": 10,
+          "mean": 3951.82,
+          "sd_sample": 369.1377033032524,
+          "median": 3928.35,
+          "min": 3392.8,
+          "max": 4454.3
+        },
+        "sum_actual_distance_km": {
+          "n": 10,
+          "mean": 432.0589,
+          "sd_sample": 11.948897163894815,
+          "median": 431.755,
+          "min": 408.078,
+          "max": 448.86
+        },
+        "sum_actual_energy_gross_kwh": {
+          "n": 10,
+          "mean": 196.29427,
+          "sd_sample": 5.484612881586689,
+          "median": 196.33732500000002,
+          "min": 186.12186,
+          "max": 204.91045
+        },
+        "sum_actual_energy_regenerated_kwh": {
+          "n": 10,
+          "mean": 124.347393,
+          "sd_sample": 3.5698793782393987,
+          "median": 123.852345,
+          "min": 117.71296,
+          "max": 129.95614
+        },
+        "sum_actual_energy_net_kwh": {
+          "n": 10,
+          "mean": 71.946877,
+          "sd_sample": 2.1133650048207717,
+          "median": 72.23527,
+          "min": 68.4089,
+          "max": 75.31397
+        },
+        "sum_route_planning_wall_time_s": {
+          "n": 10,
+          "mean": 3.4113617,
+          "sd_sample": 0.1385778151990586,
+          "median": 3.4387860000000003,
+          "min": 3.165633,
+          "max": 3.655834
+        },
+        "mean_planner_wall_time_ms": {
+          "n": 10,
+          "mean": 34.1136,
+          "sd_sample": 1.3857933307515797,
+          "median": 34.388,
+          "min": 31.656,
+          "max": 36.558
+        },
+        "synthetic_background_vehicles_arrived_by_finish": {
+          "n": 10,
+          "mean": 135.2,
+          "sd_sample": 11.48719093406023,
+          "median": 133.5,
+          "min": 121.0,
+          "max": 159.0
+        },
+        "edge_pass_events": {
+          "n": 10,
+          "mean": 12015.5,
+          "sd_sample": 333.2193971945011,
+          "median": 11980.5,
+          "min": 11319.0,
+          "max": 12457.0
+        }
+      }
+    }
+  },
+  "paired_success_only_comparison": {
+    "paired_success_seeds": [
+      0,
+      1,
+      2,
+      3,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "n": 9,
+    "interpretation": "Descriptive paired outcomes among seeds completed by both objectives; always read with completion rates and retained capped runs.",
+    "metrics": {
+      "elapsed_completion_time_s": {
+        "n": 9,
+        "seed_ids": [
+          0,
+          1,
+          2,
+          3,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "FASTEST_mean": 4341.072444444445,
+        "LOWEST_ENERGY_mean": 5441.203888888889,
+        "mean_paired_delta_LOWEST_minus_FASTEST": 1100.1314444444442,
+        "mean_of_seed_level_change_pct": 25.462038708529285,
+        "median_paired_delta": 1155.4030000000002
+      },
+      "sum_experimental_vehicle_operating_time_s": {
+        "n": 9,
+        "seed_ids": [
+          0,
+          1,
+          2,
+          3,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "FASTEST_mean": 36148.41111111111,
+        "LOWEST_ENERGY_mean": 43738.48888888889,
+        "mean_paired_delta_LOWEST_minus_FASTEST": 7590.077777777778,
+        "mean_of_seed_level_change_pct": 21.04079999162476,
+        "median_paired_delta": 7581.299999999996
+      },
+      "sum_actual_waiting_time_s": {
+        "n": 9,
+        "seed_ids": [
+          0,
+          1,
+          2,
+          3,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "FASTEST_mean": 2680.9444444444443,
+        "LOWEST_ENERGY_mean": 3953.4,
+        "mean_paired_delta_LOWEST_minus_FASTEST": 1272.4555555555555,
+        "mean_of_seed_level_change_pct": 49.812901018867244,
+        "median_paired_delta": 1310.0
+      },
+      "sum_actual_distance_km": {
+        "n": 9,
+        "seed_ids": [
+          0,
+          1,
+          2,
+          3,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "FASTEST_mean": 447.57155555555556,
+        "LOWEST_ENERGY_mean": 432.36899999999997,
+        "mean_paired_delta_LOWEST_minus_FASTEST": -15.202555555555566,
+        "mean_of_seed_level_change_pct": -3.397846455831602,
+        "median_paired_delta": -15.230000000000018
+      },
+      "sum_actual_energy_gross_kwh": {
+        "n": 9,
+        "seed_ids": [
+          0,
+          1,
+          2,
+          3,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "FASTEST_mean": 233.19078777777779,
+        "LOWEST_ENERGY_mean": 196.51900111111112,
+        "mean_paired_delta_LOWEST_minus_FASTEST": -36.67178666666667,
+        "mean_of_seed_level_change_pct": -15.722582348921675,
+        "median_paired_delta": -36.95418000000001
+      },
+      "sum_actual_energy_regenerated_kwh": {
+        "n": 9,
+        "seed_ids": [
+          0,
+          1,
+          2,
+          3,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "FASTEST_mean": 146.77276111111112,
+        "LOWEST_ENERGY_mean": 124.45058111111112,
+        "mean_paired_delta_LOWEST_minus_FASTEST": -22.322179999999996,
+        "mean_of_seed_level_change_pct": -15.212622281956888,
+        "median_paired_delta": -23.07260000000001
+      },
+      "sum_actual_energy_net_kwh": {
+        "n": 9,
+        "seed_ids": [
+          0,
+          1,
+          2,
+          3,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "FASTEST_mean": 86.41802666666666,
+        "LOWEST_ENERGY_mean": 72.06842,
+        "mean_paired_delta_LOWEST_minus_FASTEST": -14.349606666666666,
+        "mean_of_seed_level_change_pct": -16.58771393036112,
+        "median_paired_delta": -14.722189999999998
+      },
+      "sum_route_planning_wall_time_s": {
+        "n": 9,
+        "seed_ids": [
+          0,
+          1,
+          2,
+          3,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "FASTEST_mean": 3.1399395555555554,
+        "LOWEST_ENERGY_mean": 3.4057530000000003,
+        "mean_paired_delta_LOWEST_minus_FASTEST": 0.2658134444444445,
+        "mean_of_seed_level_change_pct": 8.515208026794987,
+        "median_paired_delta": 0.3238859999999999
+      },
+      "mean_planner_wall_time_ms": {
+        "n": 9,
+        "seed_ids": [
+          0,
+          1,
+          2,
+          3,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "FASTEST_mean": 31.399444444444445,
+        "LOWEST_ENERGY_mean": 34.05755555555555,
+        "mean_paired_delta_LOWEST_minus_FASTEST": 2.6581111111111104,
+        "mean_of_seed_level_change_pct": 8.515116635179707,
+        "median_paired_delta": 3.238999999999997
+      },
+      "synthetic_background_vehicles_arrived_by_finish": {
+        "n": 9,
+        "seed_ids": [
+          0,
+          1,
+          2,
+          3,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "FASTEST_mean": 108.55555555555556,
+        "LOWEST_ENERGY_mean": 136.22222222222223,
+        "mean_paired_delta_LOWEST_minus_FASTEST": 27.666666666666668,
+        "mean_of_seed_level_change_pct": 25.618487295934628,
+        "median_paired_delta": 29.0
+      },
+      "edge_pass_events": {
+        "n": 9,
+        "seed_ids": [
+          0,
+          1,
+          2,
+          3,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "FASTEST_mean": 12600.444444444445,
+        "LOWEST_ENERGY_mean": 12029.555555555555,
+        "mean_paired_delta_LOWEST_minus_FASTEST": -570.8888888888889,
+        "mean_of_seed_level_change_pct": -4.526420356435893,
+        "median_paired_delta": -540.0
+      }
+    }
+  },
+  "failed_run_details": [
+    {
+      "seed": 4,
+      "objective": "FASTEST",
+      "batch_status": "FAILED_EXIT_1",
+      "tripinfo_present": true,
+      "tripinfo_rows": 328,
+      "experimental_tripinfo_rows": 148,
+      "experimental_trip_arrivals": 144,
+      "passenger_trip_arrivals": 71,
+      "unfinished_trip_rows": 6,
+      "unfinished_experimental_trip_rows": 4,
+      "unfinished_trip_ids": [
+        "bg_s4_0028",
+        "bg_s4_0032",
+        "exp_veh_01_ord_0003_passenger",
+        "exp_veh_05_ord_0043_deadhead",
+        "exp_veh_02_ord_0014_passenger",
+        "exp_veh_06_ord_0055_passenger"
+      ],
+      "unfinished_experimental_trip_ids": [
+        "exp_veh_01_ord_0003_passenger",
+        "exp_veh_05_ord_0043_deadhead",
+        "exp_veh_02_ord_0014_passenger",
+        "exp_veh_06_ord_0055_passenger"
+      ],
+      "24h_cap_s": 86400
+    }
+  ],
+  "limitations": [
+    "OSM roads are real map geometry; SUMO signals and traffic are simulated, not observed Porto states.",
+    "The 90 vehicles/hour background flow is a synthetic stress assumption shaped by historical taxi hotspot weights.",
+    "Net kWh uses SUMO Energy/unknown with a frozen Kia Soul EV proxy; it is not calibrated to Porto vehicles or a currency bill.",
+    "Frozen planner delays replay measured v2 wall times as virtual delays; live planner wall time is reported separately.",
+    "Capped runs remain in each objective's planned-seed denominator; successful-run averages are not full-matrix averages.",
+    "R1 outcomes do not establish an AI map-readability effect; LLM and representation-control comparisons remain separate."
+  ]
+}
