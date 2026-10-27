@@ -1,0 +1,45 @@
+{
+  "model_version": "route_time_money_segment_v3_billable_net_energy",
+  "status": "current_specification; scenario pricing and candidate completeness remain required",
+  "profiles": {
+    "time_priority_0_6_0_4": {
+      "time_weight": 0.6,
+      "money_weight": 0.4
+    },
+    "money_priority_0_4_0_6": {
+      "time_weight": 0.4,
+      "money_weight": 0.6
+    }
+  },
+  "weight_mapping_basis": "User-approved time-versus-money experiment design; not a claim that the transcript states these exact dimensions.",
+  "score": "time_weight * normalized_travel_time + money_weight * normalized_net_economic_cost",
+  "normalization": "Min-max within the same feasible candidate set for one decision scenario.",
+  "lower_score_is_better": true,
+  "hard_constraints": "Exclude unreachable, invalid, illegal, or incomplete routes before scoring.",
+  "tie_break": [
+    "lower unnormalized travel time",
+    "lower unnormalized net economic cost",
+    "lexicographically lower candidate ID"
+  ],
+  "segment_accounting": {
+    "energy": "Retain signed EV v2 energy per ordered road Link and journey segment.",
+    "electricity_billing": "Sum signed Link net energy at the journey-segment boundary; bill max(segment_net_kWh, 0) times an explicit electricity rate.",
+    "fare_attribution": "Deadhead revenue is known zero. Record observed passenger fare once on the passenger segment; allocate per Link only under an explicit per-kilometre fare schedule.",
+    "net_cost": "Sum priced costs in the declared scope minus known segment fare revenue.",
+    "api_compute": "Record measured usage and matching rates separately at decision or method level; never duplicate a shared charge across route candidates or Links.",
+    "unknown_value_policy": "Keep unknown fare, tariff, usage, and rate as null. Block net-cost scoring when required inputs for the declared scope are missing or incomparable.",
+    "scope_policy": "A vehicle-operating-cost score excludes API and compute cost explicitly; do not label it full experiment economic cost or profit."
+  },
+  "meeting_transcript_context": {
+    "meeting_url": "https://meeting.tencent.com/cw/2q8pQndO0b",
+    "discussion_window": "approximately 00:50-00:55",
+    "existing_project_interpretation": "Distance-based fare revenue was discussed against electricity and token/API expense; the weight pairs in that passage were not unambiguously time-versus-money weights.",
+    "fare_rate_examples_cny_per_km": [3, 4],
+    "fare_rate_status": "Illustrative only; not a frozen tariff or default."
+  },
+  "reporting_limits": [
+    "A single feasible candidate cannot establish a weight-driven route-choice change.",
+    "Full profitability is not established without depreciation, maintenance, insurance, tolls, taxes, and all other in-scope costs.",
+    "Energy is simulated unless supported by vehicle telemetry."
+  ]
+}

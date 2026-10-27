@@ -1,0 +1,187 @@
+{
+  "capture_time_local": "2026-10-27T17:53:10+08:00",
+  "source_manifest_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/manifest.json",
+  "source_manifest_mtime_local": "2026-10-27T17:52:58+08:00",
+  "source_manifest_sha256": "a5b6ca1d542368ee26712805a02e8264dd338068f21bf7c6d57477fabe69f65f",
+  "status": "running",
+  "model_requests_used": 4326,
+  "requests_with_unknown_delivery": 19,
+  "task_count": 129,
+  "task_status_counts": {
+    "active": 6,
+    "pending": 97,
+    "ready": 11,
+    "route_complete": 15
+  },
+  "lock_file_present": true,
+  "lock_pid": "13960",
+  "lock_pid_alive_at_check": false,
+  "workers": [
+    {
+      "worker": "worker_00",
+      "status": "paused_at_request_chunk_limit",
+      "model_requests_used": 682,
+      "requests_with_unknown_delivery": 4,
+      "task_status_counts": {
+        "outcome_unknown": 4,
+        "pending": 21,
+        "ready": 1,
+        "route_complete": 3
+      },
+      "manifest_mtime_local": "2026-10-27T17:53:02+08:00",
+      "manifest_sha256": "749e4a2095464a88dd4b4896a19bb2140b0f67411ac79e6efa984b944ab2af11"
+    },
+    {
+      "worker": "worker_01",
+      "status": "paused_at_request_chunk_limit",
+      "model_requests_used": 687,
+      "requests_with_unknown_delivery": 4,
+      "task_status_counts": {
+        "outcome_unknown": 3,
+        "pending": 23,
+        "ready": 1,
+        "route_complete": 2
+      },
+      "manifest_mtime_local": "2026-10-27T17:53:07+08:00",
+      "manifest_sha256": "b3258585153940e99c3ab7b554bf0673986221bf563f10e46e7cfc9b8a7c8443"
+    },
+    {
+      "worker": "worker_02",
+      "status": "paused_at_request_chunk_limit",
+      "model_requests_used": 672,
+      "requests_with_unknown_delivery": 1,
+      "task_status_counts": {
+        "pending": 26,
+        "ready": 1,
+        "route_complete": 2
+      },
+      "manifest_mtime_local": "2026-10-27T17:53:05+08:00",
+      "manifest_sha256": "76a78e85d9aba2d649c5fcffeb03b70384d4de5773cdb52a48b2a042c815d616"
+    },
+    {
+      "worker": "worker_03",
+      "status": "running",
+      "model_requests_used": 680,
+      "requests_with_unknown_delivery": 1,
+      "task_status_counts": {
+        "active": 1,
+        "pending": 27,
+        "route_complete": 2
+      },
+      "manifest_mtime_local": "2026-10-27T17:53:09+08:00",
+      "manifest_sha256": "6c9950b7408c3c90e03c4542ba8c48b5c93906ef21cb14a04e7020e548f84b69"
+    },
+    {
+      "worker": "worker_recovery",
+      "status": "running",
+      "model_requests_used": 711,
+      "requests_with_unknown_delivery": 3,
+      "task_status_counts": {
+        "active": 1,
+        "duplicate_suppressed": 3,
+        "outcome_unknown": 3,
+        "ready": 7,
+        "route_complete": 2
+      },
+      "manifest_mtime_local": "2026-10-27T17:53:09+08:00",
+      "manifest_sha256": "925870375a27372b6a3a0351edc42f4a5e4930e46aea0280f1de8c128475f3e8"
+    },
+    {
+      "worker": "worker_recovery_addendum",
+      "status": "running",
+      "model_requests_used": 472,
+      "requests_with_unknown_delivery": 3,
+      "task_status_counts": {
+        "active": 1,
+        "ready": 1,
+        "route_complete": 2
+      },
+      "manifest_mtime_local": "2026-10-27T17:53:00+08:00",
+      "manifest_sha256": "1ea73cc37a1a38402094fe274347ed8fa3ce5940e96415be06a97e119052ebcf"
+    },
+    {
+      "worker": "worker_recovery_addendum2",
+      "status": "paused_at_request_chunk_limit",
+      "model_requests_used": 68,
+      "requests_with_unknown_delivery": null,
+      "task_status_counts": {
+        "ready": 3
+      },
+      "manifest_mtime_local": "2026-10-27T17:53:08+08:00",
+      "manifest_sha256": "b6e1084f2b9ae5a53baa82aab4780409544d197285d70752c16721f747ecb177"
+    }
+  ],
+  "observed_manifest_versions": [
+    {
+      "observed_at_local": "2026-10-27T17:46:32+08:00",
+      "source_mtime_local": "2026-10-27T13:57:25+08:00",
+      "sha256": "489f86588fe7e1bb5732c180bb8b3209b91d8e14e236a31fbd39a41ce17eb267",
+      "requests": 379,
+      "unknown": 10,
+      "counts": {
+        "outcome_unknown": 10,
+        "pending": 113,
+        "ready": 4,
+        "route_complete": 2
+      },
+      "classification": "older-mtime version; observed twice"
+    },
+    {
+      "observed_at_local": "2026-10-27T17:48:13+08:00",
+      "source_mtime_local": "2026-10-27T17:48:10+08:00",
+      "sha256": "59cae312d3f24d583e75a32a7fff839d18b5e22f0407e45ee336508192ca7308",
+      "requests": 4226,
+      "unknown": 19,
+      "counts": {
+        "route_complete": 14,
+        "active": 6,
+        "ready": 12,
+        "pending": 97
+      },
+      "classification": "newer-mtime version; later replaced by both older and newer versions"
+    },
+    {
+      "observed_at_local": "2026-10-27T17:50:57+08:00",
+      "source_mtime_local": "2026-10-27T13:57:25+08:00",
+      "sha256": "489f86588fe7e1bb5732c180bb8b3209b91d8e14e236a31fbd39a41ce17eb267",
+      "requests": 379,
+      "unknown": 10,
+      "counts": {
+        "outcome_unknown": 10,
+        "pending": 113,
+        "ready": 4,
+        "route_complete": 2
+      },
+      "classification": "older-mtime version reappeared"
+    },
+    {
+      "observed_at_local": "2026-10-27T17:51:35+08:00",
+      "source_mtime_local": "2026-10-27T17:51:35+08:00",
+      "sha256": "9d3a3c6cb8ac284f7902c301663179857b453b28217b6ab50bc924ccac7ae944",
+      "requests": 4300,
+      "unknown": 19,
+      "counts": {
+        "route_complete": 15,
+        "active": 6,
+        "ready": 11,
+        "pending": 97
+      },
+      "classification": "newer-mtime version following the reappeared older version"
+    },
+    {
+      "observed_at_local": "2026-10-27T17:52:24+08:00",
+      "source_mtime_local": "2026-10-27T17:52:16+08:00",
+      "sha256": "54a1cee7ac7205c6c008aa42db35bd760d11b9e73592a8deab5ab4e613208655",
+      "requests": 4311,
+      "unknown": 19,
+      "counts": {
+        "route_complete": 15,
+        "active": 7,
+        "ready": 10,
+        "pending": 97
+      },
+      "classification": "freshly updating version preceding this bundle"
+    }
+  ],
+  "interpretation": "the external root path has returned manifest versions with older mtimes/lower counts between newer versions; counts are not assumed monotonic and running status is not terminal. Continue checking the exact path."
+}

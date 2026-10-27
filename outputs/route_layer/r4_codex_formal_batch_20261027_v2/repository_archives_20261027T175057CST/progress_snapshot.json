@@ -1,0 +1,76 @@
+{
+  "capture_time_local": "2026-10-27T17:50:57+08:00",
+  "source_manifest_path": "outputs/route_layer/r4_codex_formal_batch_20261027_v2/manifest.json",
+  "source_manifest_mtime_local": "2026-10-27T13:57:25+08:00",
+  "source_manifest_sha256": "489f86588fe7e1bb5732c180bb8b3209b91d8e14e236a31fbd39a41ce17eb267",
+  "status": "running",
+  "model_requests_used": 379,
+  "requests_with_unknown_delivery": 10,
+  "task_count": 129,
+  "task_status_counts": {
+    "outcome_unknown": 10,
+    "pending": 113,
+    "ready": 4,
+    "route_complete": 2
+  },
+  "lock_file_present": true,
+  "lock_pid_present": true,
+  "lock_pid_alive": false,
+  "worker_manifest_snapshots": [
+    {
+      "worker": "worker_00",
+      "status": "running",
+      "task_status_counts": {
+        "active": 1,
+        "pending": 28
+      },
+      "manifest_mtime_local": "2026-10-27T13:57:25+08:00"
+    },
+    {
+      "worker": "worker_01",
+      "status": "running",
+      "task_status_counts": {
+        "active": 1,
+        "pending": 28
+      },
+      "manifest_mtime_local": "2026-10-27T13:57:25+08:00"
+    },
+    {
+      "worker": "worker_02",
+      "status": "running",
+      "task_status_counts": {
+        "active": 1,
+        "pending": 28
+      },
+      "manifest_mtime_local": "2026-10-27T13:57:25+08:00"
+    },
+    {
+      "worker": "worker_03",
+      "status": "running",
+      "task_status_counts": {
+        "active": 1,
+        "pending": 29
+      },
+      "manifest_mtime_local": "2026-10-27T13:57:25+08:00"
+    }
+  ],
+  "previous_manifest_version_anomaly": {
+    "capture_time_local": "2026-10-27T17:46:32+08:00",
+    "source_manifest_mtime_local": "2026-10-27T13:57:25+08:00",
+    "source_manifest_sha256": "489f86588fe7e1bb5732c180bb8b3209b91d8e14e236a31fbd39a41ce17eb267",
+    "status": "running",
+    "model_requests_used": 379,
+    "requests_with_unknown_delivery": 10,
+    "task_status_counts": {
+      "outcome_unknown": 10,
+      "pending": 113,
+      "ready": 4,
+      "route_complete": 2
+    },
+    "interpretation": "A version with this older source mtime and lower cumulative counts was read at the stated time; subsequent current root and worker manifests advanced. Retained as an observed stale-version anomaly, not a current baseline."
+  },
+  "interpretation": "timepoint progress only; no active/ready/pending/outcome-unknown task is a terminal route result",
+  "observation_class": "stale_manifest_version_observed_not_current",
+  "current_baseline": false,
+  "followup_observation": "2026-10-27T17:52:16+08:00 external root returned a newer-mtime manifest with higher cumulative counts; see the 17:52 observation bundle"
+}

@@ -1,5 +1,7 @@
 # Route time and money decision model v2
 
+> Historical specification. The current implementation is `route_time_money_segment_v3_billable_net_energy`; use [the v3 specification](route-time-money-segment-v3.md) for new work. This v2 text is retained to preserve the earlier design record.
+
 ## Decision rule
 
 For each task, first remove routes that fail reachability, endpoint, legality, or route validation. For each remaining candidate, retain an itemized ledger for its journey segment(s): vehicle-to-pickup deadhead, passenger service, or any separately modeled leg. Each journey segment carries its ordered road-Link energy breakdown. Energy/electricity cost is charged once per Link; fare is credited once at the journey-segment level when observed, or per Link only when an explicit per-km fare schedule is configured. The route-level net cost is the sum of its priced journey segments. Then calculate:

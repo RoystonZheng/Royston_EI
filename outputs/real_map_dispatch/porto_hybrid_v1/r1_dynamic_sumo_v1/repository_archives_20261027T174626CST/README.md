@@ -1,0 +1,7 @@
+# Porto R1 v5 terminal checkpoint — 20261027T174626CST
+
+The frozen batch manifest reports `completed_with_gaps`: 19 of 20 tasks completed and one failed (`seed_02_fastest`). This checkpoint adds only the six completed task outputs absent from earlier repository archives. The prior failure diagnostic remains in the earlier checkpoint.
+
+The separate full endpoint preflight completed and passed before this archive was finalized; its raw per-query records and audit are preserved under `data/real_map_dispatch/porto_hybrid_v1/derived/experiments/r1_dynamic_sumo_v1/formal_v5_energy_v2/full_endpoint_preflight_v1/`. The R1 segment economics v3 sidecar is preserved separately under `data/real_map_dispatch/porto_hybrid_v1/derived/experiments/r1_dynamic_sumo_v1/formal_v5_energy_v2/segment_economics_v3_sidecar_20261027T1744CST/`; it has 3,800 segment rows but leaves net economics blocked because fares, tariff and alternatives are missing. The 19 completed task runs are simulation outputs; these artifacts do not claim a validated overall effect or real-vehicle performance.
+
+Each task is a losslessly compressed tar archive. `ARCHIVE_MEMBERS.tsv` and `ALL_FILES.tsv` record original relative paths, byte counts and SHA-256 values. `ARCHIVE_SUMS.tsv` records archive SHA-256 values. `batch_manifest_snapshot.json` is an exact source-manifest copy (SHA-256 `bd00acdbafaf0d4df8260ab5111b89ca693f0ef8982e01241c7f5863647c9474`).

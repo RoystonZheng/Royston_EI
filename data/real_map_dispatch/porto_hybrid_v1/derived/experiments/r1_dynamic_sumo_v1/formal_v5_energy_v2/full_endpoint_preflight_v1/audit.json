@@ -1,0 +1,27 @@
+{
+  "audit_id": "r1_v5_ev2_full_endpoint_preflight_v1",
+  "status": "passed",
+  "zero_model_calls": true,
+  "full_frozen_od_leg_count": 2000,
+  "previous_sampled_od_leg_count": 100,
+  "newly_checked_od_leg_count": 1900,
+  "new_route_queries": 3800,
+  "previous_sample_route_queries": 200,
+  "total_population_route_queries_including_sample": 4000,
+  "route_counts_for_remaining_population": {
+    "FASTEST:ok": 1900,
+    "LOWEST_ENERGY:ok": 1900
+  },
+  "error_count_remaining_population": 0,
+  "errors": [],
+  "mean_query_wall_s": 0.24075336736842104,
+  "total_wall_s": 914.999,
+  "sample_preflight_path": "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/porto_hybrid_v1/derived/experiments/r1_dynamic_sumo_v1/formal_v5_energy_v2/zero_call_route_preflight_v5.json",
+  "sample_preflight_sha256": "842af0915a2aa4d32df4eb34ad4739a17b9ecb05fe99113e75425377f84d9df1",
+  "runner_sha256": "dda71ccc0ea75c08d12a29968870a99dfad3cbf491786fe4acd43bbef05b2e05",
+  "network_sha256": "9481618cfdc0f0fa2a4300a38db6fe7f13321dfc22c554feb1cf91b4f8aa7387",
+  "scenario_manifest_sha256": "846e01d17dadf41eba1284ddd26311c382d9b38af745ad7c1cfc4c00c46db898",
+  "traffic_snapshot": "same deterministic 80-edge synthetic queue snapshot used in sample preflight; it is a route-algorithm gate, not a SUMO performance outcome",
+  "signal_snapshot": "phase 0 frozen; route reachability is checked offline and does not claim live signal prediction accuracy",
+  "scope_note": "The previous 100-leg sample is reused from its passed audit and not queried again; this file stores every remaining leg/objective query."
+}
