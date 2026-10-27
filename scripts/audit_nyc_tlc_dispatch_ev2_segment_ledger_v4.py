@@ -236,6 +236,8 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--package", default=str(DEFAULT_PACKAGE))
     parser.add_argument("--seed-root", default=str(DEFAULT_SEED_ROOT))
+    parser.add_argument("--methods", nargs="+", choices=METHODS, default=METHODS,
+                        help="method subset to audit; by default audit the complete seven-method matrix")
     parser.add_argument("--output", default=None, help="audit JSON output path")
     args = parser.parse_args()
 
@@ -246,11 +248,12 @@ def main() -> int:
     if not manifest:
         raise FileNotFoundError(package_dir / "benchmark_manifest.json")
     case_ids = manifest.get("evaluation_case_ids", [])
+    selected_methods = list(args.methods)
     results = []
     missing = []
     for case_id in case_ids:
         for fleet in FLEETS:
-            for method in METHODS:
+            for method in selected_methods:
                 path = seed_root / "evaluation" / case_id / fleet / (method + "_seed_0.json")
                 payload = load_json(path)
                 if payload is None:
@@ -258,7 +261,7 @@ def main() -> int:
                     continue
                 results.append(audit_result(payload, path, {"case_id": case_id, "fleet_id": fleet, "method_name": method}))
 
-    expected_count = len(case_ids) * len(FLEETS) * len(METHODS)
+    expected_count = len(case_ids) * len(FLEETS) * len(selected_methods)
     failed = [row for row in results if not row["complete"]]
     usage_by_method: Dict[str, Dict[str, Any]] = {}
     for row in results:
@@ -295,6 +298,7 @@ def main() -> int:
         "experiment_manifest_sha256": sha256(seed_root / "experiment_manifest.json")
             if (seed_root / "experiment_manifest.json").is_file() else None,
         "seed": 0,
+        "audited_methods": selected_methods,
         "expected_method_runs": expected_count,
         "present_method_runs": len(results),
         "missing_method_runs": missing,
