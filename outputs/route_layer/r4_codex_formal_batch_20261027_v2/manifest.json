@@ -5,9 +5,32 @@
       "recorded_at_utc": "2026-10-27T04:16:20.199764+00:00",
       "usage_baseline_percent": 38,
       "usage_stop_percent": 100
+    },
+    {
+      "authorized_cumulative_request_limit": null,
+      "no_project_level_cumulative_cap": true,
+      "prior_cumulative_request_limit": 66048,
+      "recorded_at_utc": "2026-10-27T08:15:18.917688+00:00",
+      "usage_stop_percent": null,
+      "user_direction": "Continue R4 without an artificial request/credit cap; optimize completion efficiency."
+    },
+    {
+      "at_utc": "2026-10-27T08:37:17.648837+00:00",
+      "effective_request_limit": null,
+      "effective_usage_stop_percent": null,
+      "event": "local_usage_stop_disabled_by_latest_user_instruction",
+      "instruction": "Continue R4 with no artificial request or fee cap; maximize efficiency.",
+      "provider_enforced_limits_bypassed": false,
+      "superseded_usage_guard": {
+        "baseline_weekly_used_percent": 39,
+        "checked_at_utc": "2026-10-27T05:55:22.203534+00:00",
+        "max_new_requests_per_invocation": 1,
+        "mechanism": "caller supplies a fresh account snapshot before each invocation; this process can pause after a bounded number of requests but cannot query account usage MCP itself",
+        "stop_threshold_percent": 100
+      }
     }
   ],
-  "authorized_request_limit": 66048,
+  "authorized_request_limit": null,
   "codex_cli_session_mode": "ephemeral_per_request",
   "created_at_utc": "2026-10-27T04:15:36.511871+00:00",
   "current_task_id": "task-0000-0003",
@@ -2730,12 +2753,31 @@
       "event": "user_authorized_recovery_shard_restored_to_primary_aggregation",
       "recovery_model_requests_issued": 0,
       "task_count": 16
+    },
+    {
+      "at_utc": "2026-10-27T08:15:18.917690+00:00",
+      "event": "project_cumulative_request_and_local_usage_stops_disabled_at_user_direction",
+      "in_flight_requests_at_transition": 0,
+      "model_requests_during_transition": 0,
+      "prior_master_request_limit": 66048,
+      "prior_worker_request_limits": {
+        "worker_00": 14848,
+        "worker_01": 14848,
+        "worker_02": 14848,
+        "worker_03": 15360
+      }
+    },
+    {
+      "at_utc": "2026-10-27T08:21:18.470647+00:00",
+      "event": "independent_route_tasks_started_in_parallel",
+      "route_input_protocol": "r4-step-v3",
+      "worker_count": 6
     }
   ],
   "experiment_id": "r4_codex_formal_batch_v2",
   "frozen_task_count": 150,
   "minimum_model_request_lower_bound": 17072,
-  "model_requests_used": 1926,
+  "model_requests_used": 3242,
   "parallel_execution": {
     "aggregator_pid": 14318,
     "authorized_unknown_recoveries": [
@@ -2870,7 +2912,7 @@
     ],
     "batch_root": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2",
     "created_at_utc": "2026-10-27T05:55:51.543021+00:00",
-    "duplicate_suppressed_request_count": 0,
+    "duplicate_suppressed_request_count": 15,
     "events": [
       {
         "at_utc": "2026-10-27T06:21:04.801800+00:00",
@@ -2880,7 +2922,7 @@
         "worker_id": "worker_recovery"
       },
       {
-        "at_utc": "2026-10-27T06:28:37.396243+00:00",
+        "at_utc": "2026-10-27T06:28:37.396234+00:00",
         "authorization": "direct current user authorization for all current recovery calls",
         "event": "authorized_recovery_shard_reinstated_in_active_aggregation",
         "frozen_denominator_changed": false,
@@ -2935,31 +2977,40 @@
     ],
     "in_flight": [
       {
-        "expected_request_number": 115,
-        "started_at_utc": "2026-10-27T08:12:36.481984+00:00",
-        "task_id": "task-0009-0005",
-        "task_requests_used_before": 114,
-        "worker_id": "worker_00"
-      },
-      {
-        "expected_request_number": 206,
-        "started_at_utc": "2026-10-27T08:12:26.981636+00:00",
-        "task_id": "formal-task-0001-feasible",
-        "task_requests_used_before": 205,
+        "expected_request_number": 204,
+        "started_at_utc": "2026-10-27T08:57:03.755546+00:00",
+        "task_id": "task-0004-0001",
+        "task_requests_used_before": 203,
         "worker_id": "worker_01"
       },
       {
-        "expected_request_number": 208,
-        "started_at_utc": "2026-10-27T08:12:26.949295+00:00",
-        "task_id": "task-0003-0009",
-        "task_requests_used_before": 207,
-        "worker_id": "worker_03"
+        "expected_request_number": 82,
+        "started_at_utc": "2026-10-27T08:57:08.319654+00:00",
+        "task_id": "task-0007-0005",
+        "task_requests_used_before": 81,
+        "worker_id": "worker_02"
+      },
+      {
+        "expected_request_number": 194,
+        "started_at_utc": "2026-10-27T08:57:08.970192+00:00",
+        "task_id": "task-0000-0007",
+        "task_requests_used_before": 193,
+        "worker_id": "worker_recovery"
+      },
+      {
+        "expected_request_number": 82,
+        "started_at_utc": "2026-10-27T08:57:01.567423+00:00",
+        "task_id": "task-0007-0001",
+        "task_requests_used_before": 81,
+        "worker_id": "worker_recovery_addendum"
       }
     ],
     "last_cycle_max_new_requests_per_invocation": 1,
     "model_requests_during_prepare": 0,
     "parent_manifest_sha256_at_prepare": "fe545a19f7b37f7e0cc9aa94e248b022f15e04f7d83d339a805983c0d4a1da48",
+    "per_task_resumable_slice_limit": 512,
     "pilot_audit_sha256": "b7a510fbf9b848a3d6b34174256fa1741402376dc988bf87fe4d8113f7e8362c",
+    "prepared_at_safe_checkpoint_utc": "2026-10-27T08:15:18.917467+00:00",
     "prior_excluded_unknown_task_ids_before_user_authorized_recovery": [
       "formal-task-0000-boundary",
       "formal-task-0000-feasible",
@@ -2976,14 +3027,15 @@
     "recovery_authorization_recorded_at_utc": "2026-10-27T06:06:20.497921+00:00",
     "recovery_authorized_by_user": true,
     "recovery_policy": "Preserve original unknown attempts; one separately authorized same-task recovery shard carries accepted prefixes; unresolved recovery attempts remain unknown.",
+    "request_limit_policy": "no_project_level_cumulative_cap_user_authorized",
     "route_input_protocol": "r4-step-v3",
     "scheduling_change_only": true,
     "schema_version": "r4_formal_parallel_execution_v1",
     "session_policy": "one isolated Codex CLI request per route action; each prompt repeats the compact map, current route state, feature context, and v3 cost-to-go guidance",
-    "snapshot_at_utc": "2026-10-27T08:12:36.871328+00:00",
+    "snapshot_at_utc": "2026-10-27T08:57:09.474444+00:00",
     "source_manifest": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_batch_preflights_20261024_v1/manifest.json",
     "source_manifest_sha256": "ed24fa6428deb3a02a3390444d806df9614715fd6992b2bb4385514faaf1cc9b",
-    "started_at_utc": "2026-10-27T05:56:00.490148+00:00",
+    "started_at_utc": "2026-10-27T08:21:18.468653+00:00",
     "tasks_already_terminal": [
       "task-0000-0001",
       "task-0000-0002"
@@ -2991,43 +3043,58 @@
     "tasks_explicitly_excluded": [],
     "unknown_task_exclusion_reason": "Original request deliveries with no terminal response stay in the frozen 129-task denominator and are not replayed.",
     "unknown_task_exclusion_updated_at_utc": "2026-10-27T06:23:14.955820+00:00",
-    "updated_at_utc": "2026-10-27T06:28:37.396246+00:00",
-    "usage_baseline_percent": 39,
-    "usage_stop_percent": 100,
-    "worker_count": 4,
+    "updated_at_utc": "2026-10-27T06:28:37.396247+00:00",
+    "usage_baseline_percent": 52,
+    "usage_limit_policy": "local_usage_stop_disabled_by_user_instruction; provider_limits_not_bypassed",
+    "usage_stop_percent": null,
+    "worker_count": 6,
     "worker_snapshots": [
       {
-        "current_task_id": "task-0009-0005",
-        "model_requests_used": 384,
-        "pending_tasks": 23,
-        "status": "running",
+        "current_task_id": "task-0004-0002",
+        "model_requests_used": 511,
+        "pending_tasks": 22,
+        "status": "paused_at_request_chunk_limit",
         "worker_id": "worker_00"
       },
       {
-        "current_task_id": "formal-task-0001-feasible",
-        "model_requests_used": 392,
+        "current_task_id": "task-0004-0001",
+        "model_requests_used": 511,
         "pending_tasks": 24,
         "status": "running",
         "worker_id": "worker_01"
       },
       {
-        "current_task_id": "formal-task-0006-boundary",
-        "model_requests_used": 391,
+        "current_task_id": "task-0007-0005",
+        "model_requests_used": 505,
         "pending_tasks": 26,
-        "status": "paused_at_request_chunk_limit",
+        "status": "running",
         "worker_id": "worker_02"
       },
       {
         "current_task_id": "task-0003-0009",
-        "model_requests_used": 400,
+        "model_requests_used": 515,
         "pending_tasks": 28,
         "status": "running",
         "worker_id": "worker_03"
+      },
+      {
+        "current_task_id": "task-0000-0007",
+        "model_requests_used": 534,
+        "pending_tasks": 0,
+        "status": "running",
+        "worker_id": "worker_recovery"
+      },
+      {
+        "current_task_id": "task-0007-0001",
+        "model_requests_used": 307,
+        "pending_tasks": 0,
+        "status": "running",
+        "worker_id": "worker_recovery_addendum"
       }
     ],
     "workers": [
       {
-        "current_task_id": "task-0009-0005",
+        "current_task_id": "task-0004-0002",
         "cycles": [
           {
             "cycle": 1,
@@ -3040,13 +3107,16 @@
         ],
         "log_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/logs/worker_00.log",
         "minimum_route_actions_lower_bound": 3825,
-        "model_requests_used": 384,
+        "model_requests_used": 511,
+        "per_task_resumable_slice_limit": 512,
         "pid": 14310,
         "relative_root": "parallel_workers/worker_00",
-        "request_limit": 14848,
+        "request_limit": null,
+        "request_limit_policy": "no_project_level_cumulative_cap_user_authorized",
+        "service_label": "local.codex.r4-formal-20261027-worker_00",
         "source_manifest": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00_source_manifest.json",
         "source_manifest_sha256": "5a63fb1ec6dc1a82013bfc850799a99e10a0b0f1f2e80e3ce2cb0e6c3a61a6f8",
-        "status": "running",
+        "status": "paused_at_request_chunk_limit",
         "task_count": 29,
         "task_ids": [
           "formal-task-0006-feasible",
@@ -3082,7 +3152,7 @@
         "worker_id": "worker_00"
       },
       {
-        "current_task_id": "formal-task-0001-feasible",
+        "current_task_id": "task-0004-0001",
         "cycles": [
           {
             "cycle": 1,
@@ -3095,10 +3165,13 @@
         ],
         "log_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/logs/worker_01.log",
         "minimum_route_actions_lower_bound": 3823,
-        "model_requests_used": 392,
+        "model_requests_used": 511,
+        "per_task_resumable_slice_limit": 512,
         "pid": 14311,
         "relative_root": "parallel_workers/worker_01",
-        "request_limit": 14848,
+        "request_limit": null,
+        "request_limit_policy": "no_project_level_cumulative_cap_user_authorized",
+        "service_label": "local.codex.r4-formal-20261027-worker_01",
         "source_manifest": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_01_source_manifest.json",
         "source_manifest_sha256": "f0d9595054a1c0f98c63d3d1979511a5bb1250bbef731d3987d7bcf6c2bfcb67",
         "status": "running",
@@ -3137,7 +3210,7 @@
         "worker_id": "worker_01"
       },
       {
-        "current_task_id": "formal-task-0006-boundary",
+        "current_task_id": "task-0007-0005",
         "cycles": [
           {
             "cycle": 1,
@@ -3146,17 +3219,29 @@
             "started_at_utc": "2026-10-27T05:56:00.488120+00:00",
             "usage_baseline_percent": 39,
             "usage_stop_percent": 100
+          },
+          {
+            "cycle": 2,
+            "max_new_requests_per_invocation": 1,
+            "service_label": "local.codex.r4-formal-20261027-worker_02",
+            "started_at_utc": "2026-10-27T08:19:48.045318+00:00",
+            "usage_baseline_percent": 52,
+            "usage_stop_percent": null
           }
         ],
+        "launch_agent_plist": "/Users/didi/Library/LaunchAgents/local.codex.r4-formal-20261027-worker_02.plist",
         "log_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/logs/worker_02.log",
         "minimum_route_actions_lower_bound": 3808,
-        "model_requests_used": 391,
-        "pid": 14312,
+        "model_requests_used": 505,
+        "per_task_resumable_slice_limit": 512,
+        "pid": null,
         "relative_root": "parallel_workers/worker_02",
-        "request_limit": 14848,
+        "request_limit": null,
+        "request_limit_policy": "no_project_level_cumulative_cap_user_authorized",
+        "service_label": "local.codex.r4-formal-20261027-worker_02",
         "source_manifest": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_02_source_manifest.json",
         "source_manifest_sha256": "d27b6404c79a7c44d702e7c2b48e83f40e1b62add3358a8b494ef86ad62bde1d",
-        "status": "paused_at_request_chunk_limit",
+        "status": "running",
         "task_count": 29,
         "task_ids": [
           "formal-task-0006-boundary",
@@ -3201,14 +3286,26 @@
             "started_at_utc": "2026-10-27T05:56:00.490114+00:00",
             "usage_baseline_percent": 39,
             "usage_stop_percent": 100
+          },
+          {
+            "cycle": 2,
+            "max_new_requests_per_invocation": 1,
+            "service_label": "local.codex.r4-formal-20261027-worker_03",
+            "started_at_utc": "2026-10-27T08:20:18.186526+00:00",
+            "usage_baseline_percent": 52,
+            "usage_stop_percent": null
           }
         ],
+        "launch_agent_plist": "/Users/didi/Library/LaunchAgents/local.codex.r4-formal-20261027-worker_03.plist",
         "log_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/logs/worker_03.log",
         "minimum_route_actions_lower_bound": 3828,
-        "model_requests_used": 400,
-        "pid": 14314,
+        "model_requests_used": 515,
+        "per_task_resumable_slice_limit": 512,
+        "pid": null,
         "relative_root": "parallel_workers/worker_03",
-        "request_limit": 15360,
+        "request_limit": null,
+        "request_limit_policy": "no_project_level_cumulative_cap_user_authorized",
+        "service_label": "local.codex.r4-formal-20261027-worker_03",
         "source_manifest": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_03_source_manifest.json",
         "source_manifest_sha256": "2de7d0cf4774c162cbdb68f807ae500a514f5d2d40cbb056f340a99c081422fe",
         "status": "running",
@@ -3246,6 +3343,87 @@
           "task-0005-0009"
         ],
         "worker_id": "worker_03"
+      },
+      {
+        "aggregation_mode": "append_recovery_run",
+        "current_task_id": "task-0000-0007",
+        "cycles": [
+          {
+            "cycle": 1,
+            "max_new_requests_per_invocation": 1,
+            "service_label": "local.codex.r4-formal-20261027-worker_recovery",
+            "started_at_utc": "2026-10-27T08:20:48.322535+00:00",
+            "usage_baseline_percent": 52,
+            "usage_stop_percent": null
+          }
+        ],
+        "known_worker_request_count": 425,
+        "launch_agent_plist": "/Users/didi/Library/LaunchAgents/local.codex.r4-formal-20261027-worker_recovery.plist",
+        "log_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/logs/worker_recovery.log",
+        "minimum_route_actions_lower_bound": 2239,
+        "model_requests_used": 534,
+        "per_task_resumable_slice_limit": 512,
+        "pid": null,
+        "relative_root": "parallel_workers/worker_recovery",
+        "request_limit": null,
+        "request_limit_policy": "no_project_level_cumulative_cap_user_authorized",
+        "service_label": "local.codex.r4-formal-20261027-worker_recovery",
+        "source_manifest": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/authorized_recovery_source_manifest.json",
+        "source_manifest_sha256": "23ab50d67f847631ee27af769a37475448d72c04d9b4178c43187b800d952f04",
+        "status": "running",
+        "task_count": 13,
+        "task_ids": [
+          "task-0000-0003",
+          "task-0000-0004",
+          "task-0000-0005",
+          "task-0000-0006",
+          "task-0000-0007",
+          "task-0000-0008",
+          "task-0000-0009",
+          "task-0000-0010",
+          "formal-task-0000-feasible",
+          "formal-task-0000-boundary",
+          "task-0002-0010",
+          "task-0005-0004",
+          "formal-task-0006-feasible"
+        ],
+        "worker_id": "worker_recovery"
+      },
+      {
+        "aggregation_mode": "append_recovery_run",
+        "current_task_id": "task-0007-0001",
+        "cycles": [
+          {
+            "cycle": 1,
+            "max_new_requests_per_invocation": 1,
+            "service_label": "local.codex.r4-formal-20261027-worker_recovery_addendum",
+            "started_at_utc": "2026-10-27T08:21:18.468629+00:00",
+            "usage_baseline_percent": 52,
+            "usage_stop_percent": null
+          }
+        ],
+        "known_worker_request_count": 196,
+        "launch_agent_plist": "/Users/didi/Library/LaunchAgents/local.codex.r4-formal-20261027-worker_recovery_addendum.plist",
+        "log_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/logs/worker_recovery_addendum.log",
+        "minimum_route_actions_lower_bound": 798,
+        "model_requests_used": 307,
+        "per_task_resumable_slice_limit": 512,
+        "pid": null,
+        "relative_root": "parallel_workers/worker_recovery_addendum",
+        "request_limit": null,
+        "request_limit_policy": "no_project_level_cumulative_cap_user_authorized",
+        "service_label": "local.codex.r4-formal-20261027-worker_recovery_addendum",
+        "source_manifest": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/authorized_recovery_source_manifest.json",
+        "source_manifest_sha256": "23ab50d67f847631ee27af769a37475448d72c04d9b4178c43187b800d952f04",
+        "status": "running",
+        "task_count": 4,
+        "task_ids": [
+          "task-0001-0003",
+          "task-0007-0001",
+          "task-0009-0002",
+          "task-0009-0008"
+        ],
+        "worker_id": "worker_recovery_addendum"
       }
     ]
   },
@@ -3287,8 +3465,10 @@
     "start_node_id": "node_69_41",
     "task_id": "task-0000-0009"
   },
-  "request_budget_allocation": "reserve each pending task shortest-path lower bound; distribute any additional authorized requests evenly across remaining tasks; maximum 512 requests per task continuation",
-  "requests_with_unknown_delivery": 21,
+  "request_budget_allocation": "No project-level cumulative request cap. Each route task continues in resumable slices of at most 512 responses; zero automatic retries.",
+  "request_limit_display": "无项目累计请求上限",
+  "request_limit_policy": "no_project_level_cumulative_cap_user_authorized",
+  "requests_with_unknown_delivery": 23,
   "retry_policy": "zero_retries; interrupted in-flight outcome is unknown and never automatically replayed",
   "route_input_protocol": "r4-step-v3",
   "routeable_task_count": 129,
@@ -3582,13 +3762,15 @@
       "task_id": "task-0000-0002"
     },
     {
-      "error": "request_15_interrupted_without_terminal_response_or_usage; preserved without automatic replay",
+      "active_run_requests_recorded": 0,
+      "error": "request_interrupted_without_terminal_response_or_usage; preserved_without_automatic_replay",
+      "final_audit_path": "parallel_workers/worker_recovery/tasks/seed_0/task-0000-0003/run_001/final_audit.json",
       "minimum_route_actions_lower_bound": 101,
-      "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/tasks/seed_0/task-0000-0003/run_001",
+      "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/task-0000-0003/run_001",
       "preflight_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_batch_preflights_20261024_v1/tasks/seed_0/task-0000-0003/preflight.json",
       "preflight_sha256": "5beef84b284eb71a202f982a39315c589ef4090db8f5fc1a1a813dc3f1dd3df0",
-      "replay_path": "tasks/seed_0/task-0000-0003/run_001/replay.html",
-      "requests_used": 14,
+      "replay_path": "parallel_workers/worker_recovery/tasks/seed_0/task-0000-0003/run_001/replay.html",
+      "requests_used": 32,
       "runs": [
         {
           "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/tasks/seed_0/task-0000-0003/run_000",
@@ -3601,6 +3783,13 @@
           "parent_run": null,
           "request_limit": 486,
           "requests_used": 14
+        },
+        {
+          "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/task-0000-0003/run_001",
+          "parent_run": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/tasks/seed_0/task-0000-0003/run_001",
+          "request_limit": 512,
+          "requests_used": 18,
+          "run_type": "user_authorized_same_position_recovery"
         }
       ],
       "sample_group": "orders",
@@ -3609,13 +3798,15 @@
       "task_id": "task-0000-0003"
     },
     {
-      "error": "request_03_interrupted_without_terminal_response_or_usage; preserved without automatic replay",
+      "active_run_requests_recorded": 0,
+      "error": "request_interrupted_without_terminal_response_or_usage; preserved_without_automatic_replay",
+      "final_audit_path": "parallel_workers/worker_recovery/tasks/seed_0/task-0000-0004/run_001/final_audit.json",
       "minimum_route_actions_lower_bound": 89,
-      "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/tasks/seed_0/task-0000-0004/run_001",
+      "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/task-0000-0004/run_001",
       "preflight_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_batch_preflights_20261024_v1/tasks/seed_0/task-0000-0004/preflight.json",
       "preflight_sha256": "ac5135bb102c998dad776b00feab527919548ccfe318a1e9d3f13255a02c2646",
-      "replay_path": "tasks/seed_0/task-0000-0004/run_000/replay.html",
-      "requests_used": 2,
+      "replay_path": "parallel_workers/worker_recovery/tasks/seed_0/task-0000-0004/run_001/replay.html",
+      "requests_used": 12,
       "runs": [
         {
           "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/tasks/seed_0/task-0000-0004/run_000",
@@ -3628,6 +3819,13 @@
           "parent_run": null,
           "request_limit": 477,
           "requests_used": 2
+        },
+        {
+          "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/task-0000-0004/run_001",
+          "parent_run": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/tasks/seed_0/task-0000-0004/run_001",
+          "request_limit": 512,
+          "requests_used": 10,
+          "run_type": "user_authorized_same_position_recovery"
         }
       ],
       "sample_group": "orders",
@@ -3636,13 +3834,15 @@
       "task_id": "task-0000-0004"
     },
     {
-      "error": "request_06_interrupted_without_terminal_response_or_usage; preserved without automatic replay",
+      "active_run_requests_recorded": 0,
+      "error": "request_interrupted_without_terminal_response_or_usage; preserved_without_automatic_replay",
+      "final_audit_path": "parallel_workers/worker_recovery/tasks/seed_0/task-0000-0005/run_001/final_audit.json",
       "minimum_route_actions_lower_bound": 179,
-      "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/tasks/seed_0/task-0000-0005/run_001",
+      "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/task-0000-0005/run_001",
       "preflight_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_batch_preflights_20261024_v1/tasks/seed_0/task-0000-0005/preflight.json",
       "preflight_sha256": "a0efe09a051bdb82a964d1fc01a9ad45dac2e322c2b415b44f88cc28c5d07eb6",
-      "replay_path": "tasks/seed_0/task-0000-0005/run_000/replay.html",
-      "requests_used": 5,
+      "replay_path": "parallel_workers/worker_recovery/tasks/seed_0/task-0000-0005/run_001/replay.html",
+      "requests_used": 28,
       "runs": [
         {
           "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/tasks/seed_0/task-0000-0005/run_000",
@@ -3655,6 +3855,13 @@
           "parent_run": null,
           "request_limit": 512,
           "requests_used": 5
+        },
+        {
+          "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/task-0000-0005/run_001",
+          "parent_run": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/tasks/seed_0/task-0000-0005/run_001",
+          "request_limit": 512,
+          "requests_used": 23,
+          "run_type": "user_authorized_same_position_recovery"
         }
       ],
       "sample_group": "orders",
@@ -3663,13 +3870,15 @@
       "task_id": "task-0000-0005"
     },
     {
-      "error": "request_09_interrupted_without_terminal_response_or_usage; preserved without automatic replay",
+      "active_run_requests_recorded": 1,
+      "error": null,
+      "final_audit_path": "parallel_workers/worker_recovery/tasks/seed_0/task-0000-0006/run_001/final_audit.json",
       "minimum_route_actions_lower_bound": 178,
-      "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/tasks/seed_0/task-0000-0006/run_001",
+      "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/task-0000-0006/run_001",
       "preflight_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_batch_preflights_20261024_v1/tasks/seed_0/task-0000-0006/preflight.json",
       "preflight_sha256": "805669fd400d964fdf4ad9b29849fde1431e9e87bbeb042b1d0c5fef07e6a3af",
-      "replay_path": "tasks/seed_0/task-0000-0006/run_001/replay.html",
-      "requests_used": 8,
+      "replay_path": "parallel_workers/worker_recovery/tasks/seed_0/task-0000-0006/run_001/replay.html",
+      "requests_used": 238,
       "runs": [
         {
           "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/tasks/seed_0/task-0000-0006/run_000",
@@ -3682,21 +3891,30 @@
           "parent_run": null,
           "request_limit": 512,
           "requests_used": 8
+        },
+        {
+          "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/task-0000-0006/run_001",
+          "parent_run": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/tasks/seed_0/task-0000-0006/run_001",
+          "request_limit": 512,
+          "requests_used": 230,
+          "run_type": "user_authorized_same_position_recovery"
         }
       ],
       "sample_group": "orders",
       "seed": 0,
-      "status": "outcome_unknown",
+      "status": "route_complete",
       "task_id": "task-0000-0006"
     },
     {
-      "error": "request_09_interrupted_without_terminal_response_or_usage; preserved without automatic replay",
+      "active_run_requests_recorded": 0,
+      "error": null,
+      "final_audit_path": "parallel_workers/worker_recovery/tasks/seed_0/task-0000-0007/run_001/final_audit.json",
       "minimum_route_actions_lower_bound": 220,
-      "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/tasks/seed_0/task-0000-0007/run_001",
+      "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/task-0000-0007/run_001",
       "preflight_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_batch_preflights_20261024_v1/tasks/seed_0/task-0000-0007/preflight.json",
       "preflight_sha256": "737424eb7f8a86e3b94a5119b25ad4e34e48aad5c9eb54d8223adda7d047235a",
-      "replay_path": "tasks/seed_0/task-0000-0007/run_000/replay.html",
-      "requests_used": 8,
+      "replay_path": "parallel_workers/worker_recovery/tasks/seed_0/task-0000-0007/run_001/replay.html",
+      "requests_used": 201,
       "runs": [
         {
           "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/tasks/seed_0/task-0000-0007/run_000",
@@ -3709,21 +3927,30 @@
           "parent_run": null,
           "request_limit": 512,
           "requests_used": 8
+        },
+        {
+          "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/task-0000-0007/run_001",
+          "parent_run": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/tasks/seed_0/task-0000-0007/run_001",
+          "request_limit": 512,
+          "requests_used": 193,
+          "run_type": "user_authorized_same_position_recovery"
         }
       ],
       "sample_group": "orders",
       "seed": 0,
-      "status": "outcome_unknown",
+      "status": "active",
       "task_id": "task-0000-0007"
     },
     {
-      "error": "request_02_interrupted_without_terminal_response_or_usage; preserved without automatic replay",
+      "active_run_requests_recorded": 0,
+      "error": null,
+      "final_audit_path": null,
       "minimum_route_actions_lower_bound": 121,
-      "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/tasks/seed_0/task-0000-0008/run_001",
+      "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/task-0000-0008/run_001",
       "preflight_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_batch_preflights_20261024_v1/tasks/seed_0/task-0000-0008/preflight.json",
       "preflight_sha256": "b39833fa1fa0cb0121e99630a3715e4fcae7ffcae4ef8fcdb0c53149dd168d89",
-      "replay_path": "tasks/seed_0/task-0000-0008/run_000/replay.html",
-      "requests_used": 1,
+      "replay_path": null,
+      "requests_used": 2,
       "runs": [
         {
           "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/tasks/seed_0/task-0000-0008/run_000",
@@ -3736,21 +3963,30 @@
           "parent_run": null,
           "request_limit": 512,
           "requests_used": 1
+        },
+        {
+          "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/task-0000-0008/run_001",
+          "parent_run": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/tasks/seed_0/task-0000-0008/run_001",
+          "request_limit": 512,
+          "requests_used": 1,
+          "run_type": "user_authorized_same_position_recovery"
         }
       ],
       "sample_group": "orders",
       "seed": 0,
-      "status": "outcome_unknown",
+      "status": "ready",
       "task_id": "task-0000-0008"
     },
     {
-      "error": "request_04_interrupted_without_terminal_response_or_usage; preserved without automatic replay",
+      "active_run_requests_recorded": 0,
+      "error": null,
+      "final_audit_path": null,
       "minimum_route_actions_lower_bound": 109,
-      "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/tasks/seed_0/task-0000-0009/run_001",
+      "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/task-0000-0009/run_001",
       "preflight_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_batch_preflights_20261024_v1/tasks/seed_0/task-0000-0009/preflight.json",
       "preflight_sha256": "c977a210d9c5e94f2d90e42d92a3dd458b950199566c3ee5d0fc3306c0c07b28",
-      "replay_path": "tasks/seed_0/task-0000-0009/run_000/replay.html",
-      "requests_used": 3,
+      "replay_path": null,
+      "requests_used": 6,
       "runs": [
         {
           "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/tasks/seed_0/task-0000-0009/run_000",
@@ -3763,21 +3999,30 @@
           "parent_run": null,
           "request_limit": 512,
           "requests_used": 3
+        },
+        {
+          "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/task-0000-0009/run_001",
+          "parent_run": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/tasks/seed_0/task-0000-0009/run_001",
+          "request_limit": 512,
+          "requests_used": 3,
+          "run_type": "user_authorized_same_position_recovery"
         }
       ],
       "sample_group": "orders",
       "seed": 0,
-      "status": "outcome_unknown",
+      "status": "ready",
       "task_id": "task-0000-0009"
     },
     {
-      "error": "request_06_interrupted_without_terminal_response_or_usage; preserved without automatic replay",
+      "active_run_requests_recorded": 0,
+      "error": null,
+      "final_audit_path": null,
       "minimum_route_actions_lower_bound": 170,
-      "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/tasks/seed_0/task-0000-0010/run_001",
+      "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/task-0000-0010/run_001",
       "preflight_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_batch_preflights_20261024_v1/tasks/seed_0/task-0000-0010/preflight.json",
       "preflight_sha256": "561efc6cd45ca92730d3d105d18bf6674ffe76aea7c9e86aa7cc998b433d4a74",
-      "replay_path": "tasks/seed_0/task-0000-0010/run_000/replay.html",
-      "requests_used": 5,
+      "replay_path": null,
+      "requests_used": 10,
       "runs": [
         {
           "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/tasks/seed_0/task-0000-0010/run_000",
@@ -3790,21 +4035,30 @@
           "parent_run": null,
           "request_limit": 512,
           "requests_used": 5
+        },
+        {
+          "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/task-0000-0010/run_001",
+          "parent_run": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/tasks/seed_0/task-0000-0010/run_001",
+          "request_limit": 512,
+          "requests_used": 5,
+          "run_type": "user_authorized_same_position_recovery"
         }
       ],
       "sample_group": "orders",
       "seed": 0,
-      "status": "outcome_unknown",
+      "status": "ready",
       "task_id": "task-0000-0010"
     },
     {
-      "error": "request_08_interrupted_without_terminal_response_or_usage; preserved without automatic replay",
+      "active_run_requests_recorded": 0,
+      "error": null,
+      "final_audit_path": null,
       "minimum_route_actions_lower_bound": 238,
-      "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/tasks/seed_0/formal-task-0000-feasible/run_001",
+      "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/formal-task-0000-feasible/run_001",
       "preflight_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_batch_preflights_20261024_v1/tasks/seed_0/formal-task-0000-feasible/preflight.json",
       "preflight_sha256": "11e62075f99c21a5c3e08e9cf7554e57986be93b29f8e0851c60249074a494f8",
-      "replay_path": "tasks/seed_0/formal-task-0000-feasible/run_000/replay.html",
-      "requests_used": 7,
+      "replay_path": null,
+      "requests_used": 14,
       "runs": [
         {
           "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/tasks/seed_0/formal-task-0000-feasible/run_000",
@@ -3817,21 +4071,30 @@
           "parent_run": null,
           "request_limit": 512,
           "requests_used": 7
+        },
+        {
+          "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/formal-task-0000-feasible/run_001",
+          "parent_run": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/tasks/seed_0/formal-task-0000-feasible/run_001",
+          "request_limit": 512,
+          "requests_used": 7,
+          "run_type": "user_authorized_same_position_recovery"
         }
       ],
       "sample_group": "formal_scenarios",
       "seed": 0,
-      "status": "outcome_unknown",
+      "status": "ready",
       "task_id": "formal-task-0000-feasible"
     },
     {
-      "error": "request_18_interrupted_without_terminal_response_or_usage; preserved without automatic replay",
+      "active_run_requests_recorded": 0,
+      "error": null,
+      "final_audit_path": null,
       "minimum_route_actions_lower_bound": 146,
-      "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/tasks/seed_0/formal-task-0000-boundary/run_001",
+      "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/formal-task-0000-boundary/run_001",
       "preflight_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_batch_preflights_20261024_v1/tasks/seed_0/formal-task-0000-boundary/preflight.json",
       "preflight_sha256": "4fd08c4c096f34029ac2d20406b4e923875353bc45fbfdb7b3b6b3ecfdd5af90",
-      "replay_path": "tasks/seed_0/formal-task-0000-boundary/run_000/replay.html",
-      "requests_used": 17,
+      "replay_path": null,
+      "requests_used": 34,
       "runs": [
         {
           "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/tasks/seed_0/formal-task-0000-boundary/run_000",
@@ -3844,11 +4107,18 @@
           "parent_run": null,
           "request_limit": 512,
           "requests_used": 17
+        },
+        {
+          "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/formal-task-0000-boundary/run_001",
+          "parent_run": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/tasks/seed_0/formal-task-0000-boundary/run_001",
+          "request_limit": 512,
+          "requests_used": 17,
+          "run_type": "user_authorized_same_position_recovery"
         }
       ],
       "sample_group": "formal_scenarios",
       "seed": 0,
-      "status": "outcome_unknown",
+      "status": "ready",
       "task_id": "formal-task-0000-boundary"
     },
     {
@@ -3921,26 +4191,33 @@
       "task_id": "task-0001-0002"
     },
     {
-      "active_run_requests_recorded": 0,
-      "error": "request_interrupted_without_terminal_response_or_usage; preserved_without_automatic_replay",
-      "final_audit_path": "parallel_workers/worker_01/tasks/seed_1/task-0001-0003/run_000/final_audit.json",
+      "active_run_requests_recorded": 1,
+      "error": null,
+      "final_audit_path": "parallel_workers/worker_recovery_addendum/tasks/seed_1/task-0001-0003/run_001/final_audit.json",
       "minimum_route_actions_lower_bound": 198,
-      "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_01/tasks/seed_1/task-0001-0003/run_000",
+      "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery_addendum/tasks/seed_1/task-0001-0003/run_001",
       "preflight_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_batch_preflights_20261024_v1/tasks/seed_1/task-0001-0003/preflight.json",
       "preflight_sha256": "7743807722580a95aa2d9727d9452d5c566acb48dee2d9b778eabc8e0d713a97",
-      "replay_path": "parallel_workers/worker_01/tasks/seed_1/task-0001-0003/run_000/replay.html",
-      "requests_used": 17,
+      "replay_path": "parallel_workers/worker_recovery_addendum/tasks/seed_1/task-0001-0003/run_001/replay.html",
+      "requests_used": 225,
       "runs": [
         {
           "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_01/tasks/seed_1/task-0001-0003/run_000",
           "parent_run": null,
           "request_limit": 512,
           "requests_used": 17
+        },
+        {
+          "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery_addendum/tasks/seed_1/task-0001-0003/run_001",
+          "parent_run": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_01/tasks/seed_1/task-0001-0003/run_000",
+          "request_limit": 512,
+          "requests_used": 208,
+          "run_type": "user_authorized_same_position_recovery"
         }
       ],
       "sample_group": "orders",
       "seed": 1,
-      "status": "outcome_unknown",
+      "status": "route_complete",
       "task_id": "task-0001-0003"
     },
     {
@@ -4105,7 +4382,7 @@
       "task_id": "task-0001-0010"
     },
     {
-      "active_run_requests_recorded": 0,
+      "active_run_requests_recorded": 1,
       "error": null,
       "final_audit_path": "parallel_workers/worker_01/tasks/seed_1/formal-task-0001-feasible/run_000/final_audit.json",
       "minimum_route_actions_lower_bound": 263,
@@ -4113,18 +4390,18 @@
       "preflight_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_batch_preflights_20261024_v1/tasks/seed_1/formal-task-0001-feasible/preflight.json",
       "preflight_sha256": "9631ae09233338af58b749c45c52bf42673c7158c5d29b5bbf9d4f8e89d3e839",
       "replay_path": "parallel_workers/worker_01/tasks/seed_1/formal-task-0001-feasible/run_000/replay.html",
-      "requests_used": 205,
+      "requests_used": 283,
       "runs": [
         {
           "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_01/tasks/seed_1/formal-task-0001-feasible/run_000",
           "parent_run": null,
           "request_limit": 512,
-          "requests_used": 205
+          "requests_used": 283
         }
       ],
       "sample_group": "formal_scenarios",
       "seed": 1,
-      "status": "active",
+      "status": "route_complete",
       "task_id": "formal-task-0001-feasible"
     },
     {
@@ -4382,25 +4659,32 @@
     },
     {
       "active_run_requests_recorded": 0,
-      "error": "request_interrupted_without_terminal_response_or_usage; preserved_without_automatic_replay",
-      "final_audit_path": "parallel_workers/worker_01/tasks/seed_2/task-0002-0010/run_000/final_audit.json",
+      "error": null,
+      "final_audit_path": null,
       "minimum_route_actions_lower_bound": 215,
-      "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_01/tasks/seed_2/task-0002-0010/run_000",
+      "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_2/task-0002-0010/run_001",
       "preflight_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_batch_preflights_20261024_v1/tasks/seed_2/task-0002-0010/preflight.json",
       "preflight_sha256": "c2614187a508426b5c7b31814fd2e64f8f2f9f157702cbfac96fa3dd2770d3b4",
-      "replay_path": "parallel_workers/worker_01/tasks/seed_2/task-0002-0010/run_000/replay.html",
-      "requests_used": 3,
+      "replay_path": null,
+      "requests_used": 6,
       "runs": [
         {
           "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_01/tasks/seed_2/task-0002-0010/run_000",
           "parent_run": null,
           "request_limit": 512,
           "requests_used": 3
+        },
+        {
+          "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_2/task-0002-0010/run_001",
+          "parent_run": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_01/tasks/seed_2/task-0002-0010/run_000",
+          "request_limit": 512,
+          "requests_used": 3,
+          "run_type": "user_authorized_same_position_recovery"
         }
       ],
       "sample_group": "orders",
       "seed": 2,
-      "status": "outcome_unknown",
+      "status": "ready",
       "task_id": "task-0002-0010"
     },
     {
@@ -4527,6 +4811,7 @@
       "preflight_sha256": "ca47d65bcc7947c6273d55072a1f61599abff8119e9ff17dadfd064802687b03",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "orders",
       "seed": 3,
       "status": "pending",
@@ -4541,6 +4826,7 @@
       "preflight_sha256": "6ef888bc68e1fccc23a67c90fc719b9f5c9b3a0cc6781a796a3719dd13f4e1de",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "orders",
       "seed": 3,
       "status": "pending",
@@ -4555,6 +4841,7 @@
       "preflight_sha256": "26d3364d56d90a39689d5a5551d7b6699c1683e71f6ad17357a0fa929d7a2ad1",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "orders",
       "seed": 3,
       "status": "pending",
@@ -4569,6 +4856,7 @@
       "preflight_sha256": "2f63ff48a6955c0c282977017ca71bdb9c50a9d34409ba690f172bb9201eb350",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "orders",
       "seed": 3,
       "status": "pending",
@@ -4583,13 +4871,14 @@
       "preflight_sha256": "c6fc030e419b0c228d6d92314c7c4109d234ac6b60ce9e1c98ced25ca00bc1fd",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "orders",
       "seed": 3,
       "status": "pending",
       "task_id": "task-0003-0008"
     },
     {
-      "active_run_requests_recorded": 0,
+      "active_run_requests_recorded": 1,
       "error": null,
       "final_audit_path": "parallel_workers/worker_03/tasks/seed_3/task-0003-0009/run_000/final_audit.json",
       "minimum_route_actions_lower_bound": 236,
@@ -4597,13 +4886,13 @@
       "preflight_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_batch_preflights_20261024_v1/tasks/seed_3/task-0003-0009/preflight.json",
       "preflight_sha256": "37a98fa62abdd54a79390c87991d19b3c42d56923b15d7b6710847032e9c4208",
       "replay_path": "parallel_workers/worker_03/tasks/seed_3/task-0003-0009/run_000/replay.html",
-      "requests_used": 207,
+      "requests_used": 322,
       "runs": [
         {
           "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_03/tasks/seed_3/task-0003-0009/run_000",
           "parent_run": null,
           "request_limit": 512,
-          "requests_used": 207
+          "requests_used": 322
         }
       ],
       "sample_group": "orders",
@@ -4620,6 +4909,7 @@
       "preflight_sha256": "a1d3923f2b687719d712fac671ccf2f97a29f7f6257dff5c946262880729387e",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "orders",
       "seed": 3,
       "status": "pending",
@@ -4634,6 +4924,7 @@
       "preflight_sha256": "700ac0a5e8e87bee321e946c09005d9ae078760df8992b4edd4f8548a0b3b44b",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "formal_scenarios",
       "seed": 3,
       "status": "pending",
@@ -4648,6 +4939,7 @@
       "preflight_sha256": "b76a9e92063d9fbd26359e5608cddcfadfe51b82587d45969731c66552911295",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "formal_scenarios",
       "seed": 3,
       "status": "pending",
@@ -4662,13 +4954,14 @@
       "preflight_sha256": "e05b07667a7691c0aeed9fa9421ae9cd175645ad7130809c42bfb0f7a0edb7a0",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "formal_scenarios",
       "seed": 3,
       "status": "pending",
       "task_id": "formal-task-0003-detour"
     },
     {
-      "active_run_requests_recorded": 1,
+      "active_run_requests_recorded": 0,
       "error": null,
       "final_audit_path": "parallel_workers/worker_01/tasks/seed_4/task-0004-0001/run_000/final_audit.json",
       "minimum_route_actions_lower_bound": 193,
@@ -4676,32 +4969,41 @@
       "preflight_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_batch_preflights_20261024_v1/tasks/seed_4/task-0004-0001/preflight.json",
       "preflight_sha256": "a0998b03a6bb5044a5a4172badc5f2886f05f63b140ebbb274b32016fb305e93",
       "replay_path": "parallel_workers/worker_01/tasks/seed_4/task-0004-0001/run_000/replay.html",
-      "requests_used": 162,
+      "requests_used": 203,
       "runs": [
         {
           "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_01/tasks/seed_4/task-0004-0001/run_000",
           "parent_run": null,
           "request_limit": 512,
-          "requests_used": 162
+          "requests_used": 203
+        }
+      ],
+      "sample_group": "orders",
+      "seed": 4,
+      "status": "active",
+      "task_id": "task-0004-0001"
+    },
+    {
+      "active_run_requests_recorded": 1,
+      "error": null,
+      "final_audit_path": "parallel_workers/worker_00/tasks/seed_4/task-0004-0002/run_000/final_audit.json",
+      "minimum_route_actions_lower_bound": 168,
+      "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_4/task-0004-0002/run_000",
+      "preflight_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_batch_preflights_20261024_v1/tasks/seed_4/task-0004-0002/preflight.json",
+      "preflight_sha256": "d220bd5d98a12a14d0ae8442ff579c6ee236c1124240eb9ce33caab12fda5bb0",
+      "replay_path": "parallel_workers/worker_00/tasks/seed_4/task-0004-0002/run_000/replay.html",
+      "requests_used": 39,
+      "runs": [
+        {
+          "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_4/task-0004-0002/run_000",
+          "parent_run": null,
+          "request_limit": 512,
+          "requests_used": 39
         }
       ],
       "sample_group": "orders",
       "seed": 4,
       "status": "ready",
-      "task_id": "task-0004-0001"
-    },
-    {
-      "error": null,
-      "final_audit_path": null,
-      "minimum_route_actions_lower_bound": 168,
-      "output_dir": null,
-      "preflight_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_batch_preflights_20261024_v1/tasks/seed_4/task-0004-0002/preflight.json",
-      "preflight_sha256": "d220bd5d98a12a14d0ae8442ff579c6ee236c1124240eb9ce33caab12fda5bb0",
-      "replay_path": null,
-      "requests_used": 0,
-      "sample_group": "orders",
-      "seed": 4,
-      "status": "pending",
       "task_id": "task-0004-0002"
     },
     {
@@ -4713,6 +5015,7 @@
       "preflight_sha256": "16f182d17bc2c771067c270ce9aa7caf462771f99d5dfdae624e13beb0013a43",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "orders",
       "seed": 4,
       "status": "pending",
@@ -4727,6 +5030,7 @@
       "preflight_sha256": "972e5d2d0db96995dc3b42f0614d2cdd6f9b1bfdc09e7eb399111c97fca2ef56",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "orders",
       "seed": 4,
       "status": "pending",
@@ -4741,6 +5045,7 @@
       "preflight_sha256": "9f75550c0897d2c527f5365be654ee03ed9054235862c5263e450e76bd52d455",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "orders",
       "seed": 4,
       "status": "pending",
@@ -4755,6 +5060,7 @@
       "preflight_sha256": "02f5ffb8d90c9f38cff2b6b36d65b170311f4937c8eb70b7ae17f1a72557ce7e",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "orders",
       "seed": 4,
       "status": "pending",
@@ -4769,6 +5075,7 @@
       "preflight_sha256": "fab0094409535f47bb5f650c51e9c291d001272e39980dfac6fb6094e7dfbfa9",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "orders",
       "seed": 4,
       "status": "pending",
@@ -4783,6 +5090,7 @@
       "preflight_sha256": "642ec584ae05980f103514940d48254131d978241b8bf9f98a2e22c3d1595820",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "orders",
       "seed": 4,
       "status": "pending",
@@ -4797,6 +5105,7 @@
       "preflight_sha256": "5513c92a259f5a9e2e8bfcdce0dffc8a0c6a7459c253d993d2abccd57d8a84e0",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "orders",
       "seed": 4,
       "status": "pending",
@@ -4811,6 +5120,7 @@
       "preflight_sha256": "bc63e93ed1f5f9e6fa8b019be223b6c2a86bde5ea731995d0e464089ff956b8a",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "orders",
       "seed": 4,
       "status": "pending",
@@ -4825,6 +5135,7 @@
       "preflight_sha256": "12dcb8d02a50f1e60743436a3baacd62ff803e3b3c1b5e9efef441480b26cbda",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "formal_scenarios",
       "seed": 4,
       "status": "pending",
@@ -4839,6 +5150,7 @@
       "preflight_sha256": "5ec35988454192ffc78ab510a840b9c971d2b22149df343ef8fd2e064ac6608e",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "formal_scenarios",
       "seed": 4,
       "status": "pending",
@@ -4853,6 +5165,7 @@
       "preflight_sha256": "b4ed9e786de0da47c693f4fbc042ebcbed3070c296eb4bc9d3001a095e39555e",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "formal_scenarios",
       "seed": 4,
       "status": "pending",
@@ -4867,6 +5180,7 @@
       "preflight_sha256": "8e1629adf94ce1a2252b65fbe2f0b866d1c49e5027ed3d8dc7506a359a44fef2",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "orders",
       "seed": 5,
       "status": "pending",
@@ -4881,6 +5195,7 @@
       "preflight_sha256": "798392a156f7bf91563d1a89d607d0dae77052a9363f27ca5fbcc15e9a62366d",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "orders",
       "seed": 5,
       "status": "pending",
@@ -4895,6 +5210,7 @@
       "preflight_sha256": "988eda0c0b67c99107028bc213dd275553494f652a51e74fc547d65834cbec5c",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "orders",
       "seed": 5,
       "status": "pending",
@@ -4902,25 +5218,32 @@
     },
     {
       "active_run_requests_recorded": 0,
-      "error": "request_interrupted_without_terminal_response_or_usage; preserved_without_automatic_replay",
-      "final_audit_path": "parallel_workers/worker_00/tasks/seed_5/task-0005-0004/run_000/final_audit.json",
+      "error": null,
+      "final_audit_path": null,
       "minimum_route_actions_lower_bound": 209,
-      "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_5/task-0005-0004/run_000",
+      "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_5/task-0005-0004/run_001",
       "preflight_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_batch_preflights_20261024_v1/tasks/seed_5/task-0005-0004/preflight.json",
       "preflight_sha256": "84929e52674d8c3fad82cb8181f7e314f921516975ce725a5a1edee477d4d906",
-      "replay_path": "parallel_workers/worker_00/tasks/seed_5/task-0005-0004/run_000/replay.html",
-      "requests_used": 4,
+      "replay_path": null,
+      "requests_used": 8,
       "runs": [
         {
           "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_5/task-0005-0004/run_000",
           "parent_run": null,
           "request_limit": 512,
           "requests_used": 4
+        },
+        {
+          "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_5/task-0005-0004/run_001",
+          "parent_run": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_5/task-0005-0004/run_000",
+          "request_limit": 512,
+          "requests_used": 4,
+          "run_type": "user_authorized_same_position_recovery"
         }
       ],
       "sample_group": "orders",
       "seed": 5,
-      "status": "outcome_unknown",
+      "status": "ready",
       "task_id": "task-0005-0004"
     },
     {
@@ -4932,6 +5255,7 @@
       "preflight_sha256": "c3ff26ec5c5c2c2c1e80da6a77fc3c66d0f815372f3af52d4562f4f2f78d35c5",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "orders",
       "seed": 5,
       "status": "pending",
@@ -4946,6 +5270,7 @@
       "preflight_sha256": "3d901caf1b9c617a3154e696d7e02a5b746dbc4c79b541920fd5e08aef8c7c1b",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "orders",
       "seed": 5,
       "status": "pending",
@@ -4960,6 +5285,7 @@
       "preflight_sha256": "221a589e13dc55dab5b156c8737a5b727dd312224250464074160f9f5dbecb3f",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "orders",
       "seed": 5,
       "status": "pending",
@@ -4974,6 +5300,7 @@
       "preflight_sha256": "1956ab1b3848a9b0e237406c40338122615375742dcc2ed9426075cd0e3486bf",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "orders",
       "seed": 5,
       "status": "pending",
@@ -4988,6 +5315,7 @@
       "preflight_sha256": "d025cb5098ec625eddc608fd0d445afac4c564333114519dab4a0edfa4963075",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "orders",
       "seed": 5,
       "status": "pending",
@@ -5002,6 +5330,7 @@
       "preflight_sha256": "143c18c835465d84053c4e631ce91daf2371c7726eccf303fa2a9b493f754712",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "orders",
       "seed": 5,
       "status": "pending",
@@ -5016,6 +5345,7 @@
       "preflight_sha256": "88077e4c3290db3800cbfa68a71ea58265a6ec4841e99c29984d451227e34add",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "formal_scenarios",
       "seed": 5,
       "status": "pending",
@@ -5053,6 +5383,7 @@
       "preflight_sha256": "28b3ef2f12c02854a645b239afdfac09d70139d8cd68ddc007e6fcd25ce1238a",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "formal_scenarios",
       "seed": 5,
       "status": "pending",
@@ -5067,6 +5398,7 @@
       "preflight_sha256": "58b2730f61babdcab7f219f9452f62b19fbb77f46074f2026d4f61754e2b14f9",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "orders",
       "seed": 6,
       "status": "pending",
@@ -5081,6 +5413,7 @@
       "preflight_sha256": "d254c7af9b7f7958caf1c405c6e55fc4afdd1936b02447f94c72b6e1fe1830e5",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "orders",
       "seed": 6,
       "status": "pending",
@@ -5095,6 +5428,7 @@
       "preflight_sha256": "cc9e85fb8cacb54f7cc76b05cc83f8bb5f56112b18b60af004ab622ad0c08078",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "orders",
       "seed": 6,
       "status": "pending",
@@ -5109,6 +5443,7 @@
       "preflight_sha256": "f4e7bd8ba735823262d23e0c412d44148e6e8493224c0af6289b821c5c8c0db1",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "orders",
       "seed": 6,
       "status": "pending",
@@ -5123,6 +5458,7 @@
       "preflight_sha256": "569ded562d3c4acbb45a5ce6d1df24a8b192f7b2da7b2305ed7e9343650609d5",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "orders",
       "seed": 6,
       "status": "pending",
@@ -5137,6 +5473,7 @@
       "preflight_sha256": "00fe54fe4982822c5e2ca7e1ea687c9ae82d1df4d048da41d50ccf2e5655efa8",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "orders",
       "seed": 6,
       "status": "pending",
@@ -5151,6 +5488,7 @@
       "preflight_sha256": "ee5389da8eb3efe5f1c77545db8b9531880ac5d80032832300b54016b33345a6",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "orders",
       "seed": 6,
       "status": "pending",
@@ -5188,6 +5526,7 @@
       "preflight_sha256": "5efaf0e3115f82e87e7e3ff7e633d4b0f17cca8800a349fcc0405fa194b43c14",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "orders",
       "seed": 6,
       "status": "pending",
@@ -5202,6 +5541,7 @@
       "preflight_sha256": "066aa2d7bc840c47dc755f5d7e3b09f7308df53f7d28b615ce3f5943d6d9b339",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "orders",
       "seed": 6,
       "status": "pending",
@@ -5209,25 +5549,32 @@
     },
     {
       "active_run_requests_recorded": 0,
-      "error": "request_interrupted_without_terminal_response_or_usage; preserved_without_automatic_replay",
-      "final_audit_path": "parallel_workers/worker_00/tasks/seed_6/formal-task-0006-feasible/run_000/final_audit.json",
+      "error": null,
+      "final_audit_path": null,
       "minimum_route_actions_lower_bound": 264,
-      "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_6/formal-task-0006-feasible/run_000",
+      "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_6/formal-task-0006-feasible/run_001",
       "preflight_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_batch_preflights_20261024_v1/tasks/seed_6/formal-task-0006-feasible/preflight.json",
       "preflight_sha256": "a6ec4b926cab32d0cfbc6497681fb9d9889af249faeb8bc9a2ccea0bec8a5986",
-      "replay_path": "parallel_workers/worker_00/tasks/seed_6/formal-task-0006-feasible/run_000/replay.html",
-      "requests_used": 5,
+      "replay_path": null,
+      "requests_used": 10,
       "runs": [
         {
           "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_6/formal-task-0006-feasible/run_000",
           "parent_run": null,
           "request_limit": 512,
           "requests_used": 5
+        },
+        {
+          "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_6/formal-task-0006-feasible/run_001",
+          "parent_run": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_6/formal-task-0006-feasible/run_000",
+          "request_limit": 512,
+          "requests_used": 5,
+          "run_type": "user_authorized_same_position_recovery"
         }
       ],
       "sample_group": "formal_scenarios",
       "seed": 6,
-      "status": "outcome_unknown",
+      "status": "ready",
       "task_id": "formal-task-0006-feasible"
     },
     {
@@ -5239,18 +5586,18 @@
       "preflight_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_batch_preflights_20261024_v1/tasks/seed_6/formal-task-0006-boundary/preflight.json",
       "preflight_sha256": "8b39288b2ecfe1bd9902ea4f24cc7b5cfcbab389cd5716a024421cb3feff6018",
       "replay_path": "parallel_workers/worker_02/tasks/seed_6/formal-task-0006-boundary/run_000/replay.html",
-      "requests_used": 204,
+      "requests_used": 262,
       "runs": [
         {
           "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_02/tasks/seed_6/formal-task-0006-boundary/run_000",
           "parent_run": null,
           "request_limit": 512,
-          "requests_used": 204
+          "requests_used": 262
         }
       ],
       "sample_group": "formal_scenarios",
       "seed": 6,
-      "status": "ready",
+      "status": "route_complete",
       "task_id": "formal-task-0006-boundary"
     },
     {
@@ -5262,6 +5609,7 @@
       "preflight_sha256": "b985d40f1f548a37b8a86ea0c6dbc38703b1ba6f61da36fcd2f94b3ca70dc78c",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "formal_scenarios",
       "seed": 6,
       "status": "pending",
@@ -5269,25 +5617,32 @@
     },
     {
       "active_run_requests_recorded": 0,
-      "error": "request_interrupted_without_terminal_response_or_usage; preserved_without_automatic_replay",
-      "final_audit_path": "parallel_workers/worker_01/tasks/seed_7/task-0007-0001/run_000/final_audit.json",
+      "error": null,
+      "final_audit_path": "parallel_workers/worker_recovery_addendum/tasks/seed_7/task-0007-0001/run_001/final_audit.json",
       "minimum_route_actions_lower_bound": 196,
-      "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_01/tasks/seed_7/task-0007-0001/run_000",
+      "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery_addendum/tasks/seed_7/task-0007-0001/run_001",
       "preflight_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_batch_preflights_20261024_v1/tasks/seed_7/task-0007-0001/preflight.json",
       "preflight_sha256": "2566ed10ec3ecaedd7fd841475143ba4ccafa855d8d0a0c5d04a451bc4ea1d47",
-      "replay_path": "parallel_workers/worker_01/tasks/seed_7/task-0007-0001/run_000/replay.html",
-      "requests_used": 5,
+      "replay_path": "parallel_workers/worker_recovery_addendum/tasks/seed_7/task-0007-0001/run_001/replay.html",
+      "requests_used": 86,
       "runs": [
         {
           "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_01/tasks/seed_7/task-0007-0001/run_000",
           "parent_run": null,
           "request_limit": 512,
           "requests_used": 5
+        },
+        {
+          "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery_addendum/tasks/seed_7/task-0007-0001/run_001",
+          "parent_run": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_01/tasks/seed_7/task-0007-0001/run_000",
+          "request_limit": 512,
+          "requests_used": 81,
+          "run_type": "user_authorized_same_position_recovery"
         }
       ],
       "sample_group": "orders",
       "seed": 7,
-      "status": "outcome_unknown",
+      "status": "active",
       "task_id": "task-0007-0001"
     },
     {
@@ -5299,6 +5654,7 @@
       "preflight_sha256": "ced78f5f0154eab521a98a97d684e963878d79a38c09a821e186413ad9b0dbf6",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "orders",
       "seed": 7,
       "status": "pending",
@@ -5313,6 +5669,7 @@
       "preflight_sha256": "45a34c5e547f9f7fdf53de5e862c5d676d59e68f4ae289d6cb46c4cf924776fd",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "orders",
       "seed": 7,
       "status": "pending",
@@ -5327,13 +5684,14 @@
       "preflight_sha256": "507aeeb2c67d3b6f46a25e2d1206c18d32c41742d6952743e4ff2a7a42252b41",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "orders",
       "seed": 7,
       "status": "pending",
       "task_id": "task-0007-0004"
     },
     {
-      "active_run_requests_recorded": 25,
+      "active_run_requests_recorded": 0,
       "error": null,
       "final_audit_path": "parallel_workers/worker_02/tasks/seed_7/task-0007-0005/run_000/final_audit.json",
       "minimum_route_actions_lower_bound": 226,
@@ -5341,18 +5699,18 @@
       "preflight_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_batch_preflights_20261024_v1/tasks/seed_7/task-0007-0005/preflight.json",
       "preflight_sha256": "dfb26e18be25598ab703164f6225bec1bf7daa6ee4ff2d44a370cae425bb0df4",
       "replay_path": "parallel_workers/worker_02/tasks/seed_7/task-0007-0005/run_000/replay.html",
-      "requests_used": 25,
+      "requests_used": 81,
       "runs": [
         {
           "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_02/tasks/seed_7/task-0007-0005/run_000",
           "parent_run": null,
           "request_limit": 512,
-          "requests_used": 25
+          "requests_used": 81
         }
       ],
       "sample_group": "orders",
       "seed": 7,
-      "status": "ready",
+      "status": "active",
       "task_id": "task-0007-0005"
     },
     {
@@ -5364,6 +5722,7 @@
       "preflight_sha256": "1f2d727cc7268d54019d46dc50258fec8ae265e0e95611aaee23317f63105a39",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "orders",
       "seed": 7,
       "status": "pending",
@@ -5378,6 +5737,7 @@
       "preflight_sha256": "0a12fe16f28e158fe50ba8e09a10746e634ed15c5fed201c46990d3dd87aa1ce",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "orders",
       "seed": 7,
       "status": "pending",
@@ -5392,6 +5752,7 @@
       "preflight_sha256": "a23fa1356f8b4fa4530be5a259f55c0c1ed95c0577a637a3d471b0278dbb4cdc",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "orders",
       "seed": 7,
       "status": "pending",
@@ -5406,6 +5767,7 @@
       "preflight_sha256": "6e46bc3793bc1044c9b30ec3542e5b94a8df0c491543011ff6b495d7069ae1aa",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "orders",
       "seed": 7,
       "status": "pending",
@@ -5420,6 +5782,7 @@
       "preflight_sha256": "f7b1bf401d21ce1cbe9806016fe5d4da5760042d9c09e0abd40f222bb0fc6bd1",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "orders",
       "seed": 7,
       "status": "pending",
@@ -5434,6 +5797,7 @@
       "preflight_sha256": "831b2dfc3ac3b1967ae3edf17562a98dc6a46a8e4876c3ec14f203b24ed9a708",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "formal_scenarios",
       "seed": 7,
       "status": "pending",
@@ -5448,6 +5812,7 @@
       "preflight_sha256": "deef039974abdc7f5d276a59af13860e28fe7051336ac922e92677a7720c6da5",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "formal_scenarios",
       "seed": 7,
       "status": "pending",
@@ -5462,6 +5827,7 @@
       "preflight_sha256": "e3df1a5405a3c620766695af8b6a7f941a4e13f6818fef057a84eb42ac0c9a7a",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "formal_scenarios",
       "seed": 7,
       "status": "pending",
@@ -5476,6 +5842,7 @@
       "preflight_sha256": "396ce7de446288dea3783972ab40934511f16899af63dd9b10c8c4f47a73bbd0",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "orders",
       "seed": 8,
       "status": "pending",
@@ -5490,6 +5857,7 @@
       "preflight_sha256": "080133e8dda93f32de7d67286028e9a53f597380f0042980957b77170819baf0",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "orders",
       "seed": 8,
       "status": "pending",
@@ -5504,6 +5872,7 @@
       "preflight_sha256": "9ceaa8c058aff372e5c0244d0b9c4850dc726ee04b6834c04a7ed821fa628b7a",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "orders",
       "seed": 8,
       "status": "pending",
@@ -5518,6 +5887,7 @@
       "preflight_sha256": "9d3fe90f59034fa49a975b48a0ad7c38f84b95c3d2cee7c2c9b889a7c50d3df5",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "orders",
       "seed": 8,
       "status": "pending",
@@ -5532,6 +5902,7 @@
       "preflight_sha256": "9141456b01a69d6f35aabae927510908c18bafffd89232347c0535c89ec7a03c",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "orders",
       "seed": 8,
       "status": "pending",
@@ -5546,6 +5917,7 @@
       "preflight_sha256": "3fb594d68184f97d60149e79c55279ce7ed8f9033f486b0baf32278330c7ccdc",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "orders",
       "seed": 8,
       "status": "pending",
@@ -5560,6 +5932,7 @@
       "preflight_sha256": "907f9d2b9b458d47bee7181813966b7aa9d8c8ee5978447c9c1738e6702cd9e6",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "orders",
       "seed": 8,
       "status": "pending",
@@ -5574,6 +5947,7 @@
       "preflight_sha256": "a76f4f75d0100bc76735859e66477218b729b8ae300715eeb667f2990bfc98b5",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "orders",
       "seed": 8,
       "status": "pending",
@@ -5588,6 +5962,7 @@
       "preflight_sha256": "e5d1316821ff4fb6b4ce6a79333c99581b6dff2024642456cc8846303f835dd5",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "orders",
       "seed": 8,
       "status": "pending",
@@ -5602,6 +5977,7 @@
       "preflight_sha256": "5c22d5bb285b0452cd9348073cb2264d66d38d45b394177b63bcf3f4a77d9a88",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "orders",
       "seed": 8,
       "status": "pending",
@@ -5616,6 +5992,7 @@
       "preflight_sha256": "784fd11943b41dd683ceea7a5b78275ecc3c4bcef4b99912028c863a1077ae41",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "formal_scenarios",
       "seed": 8,
       "status": "pending",
@@ -5630,6 +6007,7 @@
       "preflight_sha256": "cef67fef6b06e26669b15bb4a984077a034b901230eb047fe980cbc15d73c475",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "formal_scenarios",
       "seed": 8,
       "status": "pending",
@@ -5644,6 +6022,7 @@
       "preflight_sha256": "2734bc90874e287f04fccee33653b6dfa1b3f9727582135e3524a5e8879231db",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "formal_scenarios",
       "seed": 8,
       "status": "pending",
@@ -5658,6 +6037,7 @@
       "preflight_sha256": "943727b9bfd094395d5eb7708aa5cb8f39a22d0cb691f9570810dcd831b6297d",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "orders",
       "seed": 9,
       "status": "pending",
@@ -5665,25 +6045,32 @@
     },
     {
       "active_run_requests_recorded": 0,
-      "error": "request_interrupted_without_terminal_response_or_usage; preserved_without_automatic_replay",
-      "final_audit_path": "parallel_workers/worker_00/tasks/seed_9/task-0009-0002/run_000/final_audit.json",
+      "error": null,
+      "final_audit_path": "parallel_workers/worker_recovery_addendum/tasks/seed_9/task-0009-0002/run_001/final_audit.json",
       "minimum_route_actions_lower_bound": 196,
-      "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_9/task-0009-0002/run_000",
+      "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery_addendum/tasks/seed_9/task-0009-0002/run_001",
       "preflight_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_batch_preflights_20261024_v1/tasks/seed_9/task-0009-0002/preflight.json",
       "preflight_sha256": "88e247be7d64f11c63c1d182cf3d3e914e5efce4d674bccd538cde509c53bcca",
-      "replay_path": "parallel_workers/worker_00/tasks/seed_9/task-0009-0002/run_000/replay.html",
-      "requests_used": 2,
+      "replay_path": "parallel_workers/worker_recovery_addendum/tasks/seed_9/task-0009-0002/run_001/replay.html",
+      "requests_used": 4,
       "runs": [
         {
           "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_9/task-0009-0002/run_000",
           "parent_run": null,
           "request_limit": 512,
           "requests_used": 2
+        },
+        {
+          "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery_addendum/tasks/seed_9/task-0009-0002/run_001",
+          "parent_run": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_9/task-0009-0002/run_000",
+          "request_limit": 512,
+          "requests_used": 2,
+          "run_type": "user_authorized_same_position_recovery"
         }
       ],
       "sample_group": "orders",
       "seed": 9,
-      "status": "outcome_unknown",
+      "status": "ready",
       "task_id": "task-0009-0002"
     },
     {
@@ -5695,6 +6082,7 @@
       "preflight_sha256": "ebf429447a47fdb05e37831e80eb52b1aab30bbc6111b3697fb808c8244f78da",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "orders",
       "seed": 9,
       "status": "pending",
@@ -5709,13 +6097,14 @@
       "preflight_sha256": "d74b341b379e52d1813374534d0c2aa4eebf5319d125138988c29c02f66b2b61",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "orders",
       "seed": 9,
       "status": "pending",
       "task_id": "task-0009-0004"
     },
     {
-      "active_run_requests_recorded": 0,
+      "active_run_requests_recorded": 1,
       "error": null,
       "final_audit_path": "parallel_workers/worker_00/tasks/seed_9/task-0009-0005/run_000/final_audit.json",
       "minimum_route_actions_lower_bound": 176,
@@ -5723,18 +6112,18 @@
       "preflight_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_batch_preflights_20261024_v1/tasks/seed_9/task-0009-0005/preflight.json",
       "preflight_sha256": "58c85f8b12e123df33641dfc912cf33b174004c2d664525785c1fd58d2eaa1b5",
       "replay_path": "parallel_workers/worker_00/tasks/seed_9/task-0009-0005/run_000/replay.html",
-      "requests_used": 114,
+      "requests_used": 202,
       "runs": [
         {
           "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_9/task-0009-0005/run_000",
           "parent_run": null,
           "request_limit": 512,
-          "requests_used": 114
+          "requests_used": 202
         }
       ],
       "sample_group": "orders",
       "seed": 9,
-      "status": "active",
+      "status": "route_complete",
       "task_id": "task-0009-0005"
     },
     {
@@ -5746,6 +6135,7 @@
       "preflight_sha256": "683954acd53394855a840f9f4f1b8cbd7fd03be013c90b21ee637d48df340f65",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "orders",
       "seed": 9,
       "status": "pending",
@@ -5760,6 +6150,7 @@
       "preflight_sha256": "d8ee83483eb60d2efa3d3c0a5fafeb2d05942a4f751fe0bd4b1dde9e1b49f966",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "orders",
       "seed": 9,
       "status": "pending",
@@ -5767,25 +6158,32 @@
     },
     {
       "active_run_requests_recorded": 0,
-      "error": "request_interrupted_without_terminal_response_or_usage; preserved_without_automatic_replay",
-      "final_audit_path": "parallel_workers/worker_00/tasks/seed_9/task-0009-0008/run_000/final_audit.json",
+      "error": null,
+      "final_audit_path": "parallel_workers/worker_recovery_addendum/tasks/seed_9/task-0009-0008/run_001/final_audit.json",
       "minimum_route_actions_lower_bound": 208,
-      "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_9/task-0009-0008/run_000",
+      "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery_addendum/tasks/seed_9/task-0009-0008/run_001",
       "preflight_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_batch_preflights_20261024_v1/tasks/seed_9/task-0009-0008/preflight.json",
       "preflight_sha256": "1591c156163f37230c241c584a279e0f43f9edbb0ebd8401f021d7d822e6f74b",
-      "replay_path": "parallel_workers/worker_00/tasks/seed_9/task-0009-0008/run_000/replay.html",
-      "requests_used": 16,
+      "replay_path": "parallel_workers/worker_recovery_addendum/tasks/seed_9/task-0009-0008/run_001/replay.html",
+      "requests_used": 32,
       "runs": [
         {
           "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_9/task-0009-0008/run_000",
           "parent_run": null,
           "request_limit": 512,
           "requests_used": 16
+        },
+        {
+          "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery_addendum/tasks/seed_9/task-0009-0008/run_001",
+          "parent_run": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_9/task-0009-0008/run_000",
+          "request_limit": 512,
+          "requests_used": 16,
+          "run_type": "user_authorized_same_position_recovery"
         }
       ],
       "sample_group": "orders",
       "seed": 9,
-      "status": "outcome_unknown",
+      "status": "ready",
       "task_id": "task-0009-0008"
     },
     {
@@ -5797,6 +6195,7 @@
       "preflight_sha256": "67f81029ba2d6e03fda6a5dcc0ffa5eebc32be4c29702a5d332f250417fcb6c6",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "orders",
       "seed": 9,
       "status": "pending",
@@ -5811,6 +6210,7 @@
       "preflight_sha256": "c94d77238be5cd0476ab8650577f2d922fe3fcdc062ab2c4d962741675368d33",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "orders",
       "seed": 9,
       "status": "pending",
@@ -5825,6 +6225,7 @@
       "preflight_sha256": "83e4aebc0f6e23e8eca9a6c7d40df30c7bd6c9fdf11853ebd676fd450913c7c2",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "formal_scenarios",
       "seed": 9,
       "status": "pending",
@@ -5839,6 +6240,7 @@
       "preflight_sha256": "3fabb095a16728f0923e0c8e545ff3dbe8cb71faa2bd8a48afdac4301d807351",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "formal_scenarios",
       "seed": 9,
       "status": "pending",
@@ -5853,6 +6255,7 @@
       "preflight_sha256": "2d861e64d3108e891c852dba3e20953d0fbe04c33be4e6b1f20e860d483c2537",
       "replay_path": null,
       "requests_used": 0,
+      "runs": [],
       "sample_group": "formal_scenarios",
       "seed": 9,
       "status": "pending",
@@ -6124,26 +6527,59 @@
     },
     {
       "attempt_artifact_exists_without_state_commit": false,
-      "expected_request_number": 25,
-      "final_artifact_exists_without_state_commit": true,
+      "expected_request_number": 19,
+      "final_artifact_exists_without_state_commit": false,
       "provider_usage_available": false,
-      "recorded_successful_requests": 29,
-      "started_at_utc": "2026-10-27T06:15:29.845166+00:00",
+      "recorded_successful_requests": 101,
+      "started_at_utc": "2026-10-27T06:11:34.778013+00:00",
       "status": "outcome_unknown_no_retry",
-      "task_id": "task-0007-0005",
-      "task_requests_used_before": 24,
-      "trace_path": "parallel_workers/worker_02/tasks/seed_7/task-0007-0005/run_000/traces/r4_step_0025.jsonl",
-      "trace_sha256": "a0cdd53c52edc57e17ffd7137c37494bf3fe3fd0be699fbe2957f0620b2d1016",
-      "worker_id": "worker_02"
+      "task_id": "task-0000-0003",
+      "task_requests_used_before": 18,
+      "trace_path": "parallel_workers/worker_recovery/tasks/seed_0/task-0000-0003/run_001/traces/r4_step_0019.jsonl",
+      "trace_sha256": "40e25d3dbcdbb0e2ab5bed183fa99842370287ef57808bd18b0c92a4ff1645c6",
+      "worker_id": "worker_recovery"
+    },
+    {
+      "attempt_artifact_exists_without_state_commit": false,
+      "expected_request_number": 11,
+      "final_artifact_exists_without_state_commit": false,
+      "provider_usage_available": false,
+      "recorded_successful_requests": 109,
+      "started_at_utc": "2026-10-27T06:19:42.625758+00:00",
+      "status": "outcome_unknown_no_retry",
+      "task_id": "task-0000-0004",
+      "task_requests_used_before": 10,
+      "trace_path": "parallel_workers/worker_recovery/tasks/seed_0/task-0000-0004/run_001/traces/r4_step_0011.jsonl",
+      "trace_sha256": "6a6660edc738778ea4a04e4b748ed08a3d5df2bf6c9af8e007a4b224714fb261",
+      "worker_id": "worker_recovery"
+    },
+    {
+      "attempt_artifact_exists_without_state_commit": false,
+      "expected_request_number": 24,
+      "final_artifact_exists_without_state_commit": false,
+      "provider_usage_available": false,
+      "recorded_successful_requests": 127,
+      "started_at_utc": "2026-10-27T06:27:31.335569+00:00",
+      "status": "outcome_unknown_no_retry",
+      "task_id": "task-0000-0005",
+      "task_requests_used_before": 23,
+      "trace_path": "parallel_workers/worker_recovery/tasks/seed_0/task-0000-0005/run_001/traces/r4_step_0024.jsonl",
+      "trace_sha256": "3a085933816d16863b3afedbb339f0a33ba258e1ff632930c6f1afedd616cf0f",
+      "worker_id": "worker_recovery"
     }
   ],
-  "updated_at_utc": "2026-10-27T08:12:37.055327+00:00",
+  "updated_at_utc": "2026-10-27T08:57:09.552427+00:00",
   "usage_guard": {
-    "baseline_weekly_used_percent": 39,
-    "checked_at_utc": "2026-10-27T05:55:22.203534+00:00",
+    "baseline_weekly_used_percent": null,
+    "checked_at_utc": null,
+    "local_usage_stop_enabled": false,
     "max_new_requests_per_invocation": 1,
-    "mechanism": "caller supplies a fresh account snapshot before each invocation; this process can pause after a bounded number of requests but cannot query account usage MCP itself",
-    "stop_threshold_percent": 100
+    "max_new_requests_per_invocation_is_cumulative_cap": false,
+    "mechanism": "No local account-usage stop; provider-enforced service limits remain active and are not bypassed.",
+    "policy": "disabled_by_latest_user_instruction_no_artificial_limit",
+    "previous_configuration_preserved_in_authorization_history": true,
+    "scheduling_note": "The chunk driver loops after each one-response subprocess; 1 is invocation granularity only.",
+    "stop_threshold_percent": null
   },
   "validation_policy": "local deterministic validator gates each movement; no traditional route fallback"
 }

@@ -1,0 +1,274 @@
+{
+  "batch_id": "porto_r1_dynamic_sumo_v5_ev2_formal_matrix_20261027",
+  "status": "running",
+  "created_at_utc": "2026-10-27T08:45:39.857968+00:00",
+  "updated_at_utc": "2026-10-27T08:50:53.346141+00:00",
+  "protocol_path": "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/porto_hybrid_v1/derived/experiments/protocols/r1_dynamic_sumo_protocol_v5_energy_v2.json",
+  "protocol_sha256": "84407a37b780f4c676045e14162ac283964864faf0e472f38930aa549f938e46",
+  "runner_path": "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/porto_hybrid_v1/scripts/run_porto_r1_dynamic_sumo_v5.py",
+  "runner_sha256": "dda71ccc0ea75c08d12a29968870a99dfad3cbf491786fe4acd43bbef05b2e05",
+  "zero_call_preflight_path": "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/porto_hybrid_v1/derived/experiments/r1_dynamic_sumo_v1/formal_v5_energy_v2/zero_call_route_preflight_v5.json",
+  "zero_call_preflight_sha256": "842af0915a2aa4d32df4eb34ad4739a17b9ecb05fe99113e75425377f84d9df1",
+  "frozen_seed_count": 10,
+  "orders_per_seed": 100,
+  "fixed_fleet_per_seed": 10,
+  "objectives": [
+    "FASTEST",
+    "LOWEST_ENERGY"
+  ],
+  "run_count": 20,
+  "concurrency": 2,
+  "retry_policy": "no automatic replay; failed runs remain separately auditable",
+  "dispatch_or_reassignment": false,
+  "model_requests": 0,
+  "tasks": [
+    {
+      "task_id": "seed_00_fastest",
+      "seed": 0,
+      "objective": "FASTEST",
+      "output_dir": "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/porto_hybrid_v1/derived/experiments/r1_dynamic_sumo_v1/formal_v5_energy_v2/seed_0/fastest",
+      "status": "completed",
+      "started_at_utc": "2026-10-27T08:45:39.863945+00:00",
+      "command": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/porto_hybrid_v1/scripts/run_porto_r1_dynamic_sumo_v5.py",
+        "--seed",
+        "0",
+        "--objective",
+        "FASTEST",
+        "--planning-latency-trace",
+        "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/porto_hybrid_v1/derived/experiments/r1_dynamic_sumo_v1/planning_latency_traces_v1/seed_0/FASTEST.json",
+        "--output-dir",
+        "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/porto_hybrid_v1/derived/experiments/r1_dynamic_sumo_v1/formal_v5_energy_v2/seed_0/fastest"
+      ],
+      "log_path": "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/porto_hybrid_v1/derived/experiments/r1_dynamic_sumo_v1/formal_v5_energy_v2/logs/seed_00_fastest.log",
+      "updated_at_utc": "2026-10-27T08:48:16.010070+00:00",
+      "exit_code": 0,
+      "elapsed_wall_s": 155.839,
+      "run_audit_path": "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/porto_hybrid_v1/derived/experiments/r1_dynamic_sumo_v1/formal_v5_energy_v2/seed_0/fastest/run_audit.json",
+      "audit_summary": {
+        "orders_completed": 100,
+        "expected_orders": 100,
+        "observed_ev_v2_motion_trace_legs": 199,
+        "zero_distance_noop_legs": 1,
+        "non_estimable_energy_legs": [],
+        "sum_actual_energy_net_kwh": 106.82833
+      }
+    },
+    {
+      "task_id": "seed_00_lowest_energy",
+      "seed": 0,
+      "objective": "LOWEST_ENERGY",
+      "output_dir": "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/porto_hybrid_v1/derived/experiments/r1_dynamic_sumo_v1/formal_v5_energy_v2/seed_0/lowest_energy",
+      "status": "completed",
+      "started_at_utc": "2026-10-27T08:45:39.864076+00:00",
+      "command": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/porto_hybrid_v1/scripts/run_porto_r1_dynamic_sumo_v5.py",
+        "--seed",
+        "0",
+        "--objective",
+        "LOWEST_ENERGY",
+        "--planning-latency-trace",
+        "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/porto_hybrid_v1/derived/experiments/r1_dynamic_sumo_v1/planning_latency_traces_v1/seed_0/LOWEST_ENERGY.json",
+        "--output-dir",
+        "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/porto_hybrid_v1/derived/experiments/r1_dynamic_sumo_v1/formal_v5_energy_v2/seed_0/lowest_energy"
+      ],
+      "log_path": "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/porto_hybrid_v1/derived/experiments/r1_dynamic_sumo_v1/formal_v5_energy_v2/logs/seed_00_lowest_energy.log",
+      "updated_at_utc": "2026-10-27T08:50:31.105319+00:00",
+      "exit_code": 0,
+      "elapsed_wall_s": 290.921,
+      "run_audit_path": "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/porto_hybrid_v1/derived/experiments/r1_dynamic_sumo_v1/formal_v5_energy_v2/seed_0/lowest_energy/run_audit.json",
+      "audit_summary": {
+        "orders_completed": 100,
+        "expected_orders": 100,
+        "observed_ev_v2_motion_trace_legs": 199,
+        "zero_distance_noop_legs": 1,
+        "non_estimable_energy_legs": [],
+        "sum_actual_energy_net_kwh": 94.18566
+      }
+    },
+    {
+      "task_id": "seed_01_fastest",
+      "seed": 1,
+      "objective": "FASTEST",
+      "output_dir": "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/porto_hybrid_v1/derived/experiments/r1_dynamic_sumo_v1/formal_v5_energy_v2/seed_1/fastest",
+      "status": "completed",
+      "started_at_utc": "2026-10-27T08:48:16.012453+00:00",
+      "command": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/porto_hybrid_v1/scripts/run_porto_r1_dynamic_sumo_v5.py",
+        "--seed",
+        "1",
+        "--objective",
+        "FASTEST",
+        "--planning-latency-trace",
+        "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/porto_hybrid_v1/derived/experiments/r1_dynamic_sumo_v1/planning_latency_traces_v1/seed_1/FASTEST.json",
+        "--output-dir",
+        "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/porto_hybrid_v1/derived/experiments/r1_dynamic_sumo_v1/formal_v5_energy_v2/seed_1/fastest"
+      ],
+      "log_path": "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/porto_hybrid_v1/derived/experiments/r1_dynamic_sumo_v1/formal_v5_energy_v2/logs/seed_01_fastest.log",
+      "updated_at_utc": "2026-10-27T08:50:53.343842+00:00",
+      "exit_code": 0,
+      "elapsed_wall_s": 157.091,
+      "run_audit_path": "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/porto_hybrid_v1/derived/experiments/r1_dynamic_sumo_v1/formal_v5_energy_v2/seed_1/fastest/run_audit.json",
+      "audit_summary": {
+        "orders_completed": 100,
+        "expected_orders": 100,
+        "observed_ev_v2_motion_trace_legs": 197,
+        "zero_distance_noop_legs": 3,
+        "non_estimable_energy_legs": [],
+        "sum_actual_energy_net_kwh": 101.76731
+      }
+    },
+    {
+      "task_id": "seed_01_lowest_energy",
+      "seed": 1,
+      "objective": "LOWEST_ENERGY",
+      "output_dir": "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/porto_hybrid_v1/derived/experiments/r1_dynamic_sumo_v1/formal_v5_energy_v2/seed_1/lowest_energy",
+      "status": "running",
+      "started_at_utc": "2026-10-27T08:50:31.108148+00:00",
+      "command": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/porto_hybrid_v1/scripts/run_porto_r1_dynamic_sumo_v5.py",
+        "--seed",
+        "1",
+        "--objective",
+        "LOWEST_ENERGY",
+        "--planning-latency-trace",
+        "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/porto_hybrid_v1/derived/experiments/r1_dynamic_sumo_v1/planning_latency_traces_v1/seed_1/LOWEST_ENERGY.json",
+        "--output-dir",
+        "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/porto_hybrid_v1/derived/experiments/r1_dynamic_sumo_v1/formal_v5_energy_v2/seed_1/lowest_energy"
+      ],
+      "log_path": "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/porto_hybrid_v1/derived/experiments/r1_dynamic_sumo_v1/formal_v5_energy_v2/logs/seed_01_lowest_energy.log",
+      "updated_at_utc": "2026-10-27T08:50:31.108447+00:00"
+    },
+    {
+      "task_id": "seed_02_fastest",
+      "seed": 2,
+      "objective": "FASTEST",
+      "output_dir": "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/porto_hybrid_v1/derived/experiments/r1_dynamic_sumo_v1/formal_v5_energy_v2/seed_2/fastest",
+      "status": "running",
+      "started_at_utc": "2026-10-27T08:50:53.345858+00:00",
+      "command": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/porto_hybrid_v1/scripts/run_porto_r1_dynamic_sumo_v5.py",
+        "--seed",
+        "2",
+        "--objective",
+        "FASTEST",
+        "--planning-latency-trace",
+        "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/porto_hybrid_v1/derived/experiments/r1_dynamic_sumo_v1/planning_latency_traces_v1/seed_2/FASTEST.json",
+        "--output-dir",
+        "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/porto_hybrid_v1/derived/experiments/r1_dynamic_sumo_v1/formal_v5_energy_v2/seed_2/fastest"
+      ],
+      "log_path": "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/porto_hybrid_v1/derived/experiments/r1_dynamic_sumo_v1/formal_v5_energy_v2/logs/seed_02_fastest.log",
+      "updated_at_utc": "2026-10-27T08:50:53.346135+00:00"
+    },
+    {
+      "task_id": "seed_02_lowest_energy",
+      "seed": 2,
+      "objective": "LOWEST_ENERGY",
+      "output_dir": "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/porto_hybrid_v1/derived/experiments/r1_dynamic_sumo_v1/formal_v5_energy_v2/seed_2/lowest_energy",
+      "status": "queued"
+    },
+    {
+      "task_id": "seed_03_fastest",
+      "seed": 3,
+      "objective": "FASTEST",
+      "output_dir": "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/porto_hybrid_v1/derived/experiments/r1_dynamic_sumo_v1/formal_v5_energy_v2/seed_3/fastest",
+      "status": "queued"
+    },
+    {
+      "task_id": "seed_03_lowest_energy",
+      "seed": 3,
+      "objective": "LOWEST_ENERGY",
+      "output_dir": "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/porto_hybrid_v1/derived/experiments/r1_dynamic_sumo_v1/formal_v5_energy_v2/seed_3/lowest_energy",
+      "status": "queued"
+    },
+    {
+      "task_id": "seed_04_fastest",
+      "seed": 4,
+      "objective": "FASTEST",
+      "output_dir": "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/porto_hybrid_v1/derived/experiments/r1_dynamic_sumo_v1/formal_v5_energy_v2/seed_4/fastest",
+      "status": "queued"
+    },
+    {
+      "task_id": "seed_04_lowest_energy",
+      "seed": 4,
+      "objective": "LOWEST_ENERGY",
+      "output_dir": "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/porto_hybrid_v1/derived/experiments/r1_dynamic_sumo_v1/formal_v5_energy_v2/seed_4/lowest_energy",
+      "status": "queued"
+    },
+    {
+      "task_id": "seed_05_fastest",
+      "seed": 5,
+      "objective": "FASTEST",
+      "output_dir": "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/porto_hybrid_v1/derived/experiments/r1_dynamic_sumo_v1/formal_v5_energy_v2/seed_5/fastest",
+      "status": "queued"
+    },
+    {
+      "task_id": "seed_05_lowest_energy",
+      "seed": 5,
+      "objective": "LOWEST_ENERGY",
+      "output_dir": "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/porto_hybrid_v1/derived/experiments/r1_dynamic_sumo_v1/formal_v5_energy_v2/seed_5/lowest_energy",
+      "status": "queued"
+    },
+    {
+      "task_id": "seed_06_fastest",
+      "seed": 6,
+      "objective": "FASTEST",
+      "output_dir": "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/porto_hybrid_v1/derived/experiments/r1_dynamic_sumo_v1/formal_v5_energy_v2/seed_6/fastest",
+      "status": "queued"
+    },
+    {
+      "task_id": "seed_06_lowest_energy",
+      "seed": 6,
+      "objective": "LOWEST_ENERGY",
+      "output_dir": "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/porto_hybrid_v1/derived/experiments/r1_dynamic_sumo_v1/formal_v5_energy_v2/seed_6/lowest_energy",
+      "status": "queued"
+    },
+    {
+      "task_id": "seed_07_fastest",
+      "seed": 7,
+      "objective": "FASTEST",
+      "output_dir": "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/porto_hybrid_v1/derived/experiments/r1_dynamic_sumo_v1/formal_v5_energy_v2/seed_7/fastest",
+      "status": "queued"
+    },
+    {
+      "task_id": "seed_07_lowest_energy",
+      "seed": 7,
+      "objective": "LOWEST_ENERGY",
+      "output_dir": "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/porto_hybrid_v1/derived/experiments/r1_dynamic_sumo_v1/formal_v5_energy_v2/seed_7/lowest_energy",
+      "status": "queued"
+    },
+    {
+      "task_id": "seed_08_fastest",
+      "seed": 8,
+      "objective": "FASTEST",
+      "output_dir": "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/porto_hybrid_v1/derived/experiments/r1_dynamic_sumo_v1/formal_v5_energy_v2/seed_8/fastest",
+      "status": "queued"
+    },
+    {
+      "task_id": "seed_08_lowest_energy",
+      "seed": 8,
+      "objective": "LOWEST_ENERGY",
+      "output_dir": "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/porto_hybrid_v1/derived/experiments/r1_dynamic_sumo_v1/formal_v5_energy_v2/seed_8/lowest_energy",
+      "status": "queued"
+    },
+    {
+      "task_id": "seed_09_fastest",
+      "seed": 9,
+      "objective": "FASTEST",
+      "output_dir": "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/porto_hybrid_v1/derived/experiments/r1_dynamic_sumo_v1/formal_v5_energy_v2/seed_9/fastest",
+      "status": "queued"
+    },
+    {
+      "task_id": "seed_09_lowest_energy",
+      "seed": 9,
+      "objective": "LOWEST_ENERGY",
+      "output_dir": "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/porto_hybrid_v1/derived/experiments/r1_dynamic_sumo_v1/formal_v5_energy_v2/seed_9/lowest_energy",
+      "status": "queued"
+    }
+  ]
+}

@@ -41,3 +41,17 @@
 - R4外部manifest于16:12:37 CST读取，SHA-256 `7346b6ff93ab3b29c09db1d9b4b310add7f609f1dca5441e0e81f9f99e599c34`，状态`running`：3 route_complete、17 outcome_unknown、101 pending、3 active、5 ready，21项投递状态未决。manifest记录的worker PID未存活，但16:14:36 CST系统进程表仍见worker_00至worker_03的chunk driver及batch watcher；执行锁存在。本次只更新manifest快照，不复制worker文件。
 - NYC seed0的`EV_20240411_200000_q50/F4/D0_greedy`单方法结果在16:10:01 CST写入，文件1,604,350字节，SHA-256 `02b24d5277320cb688d49ef33f397b8ad5447295fbfc7df16698b4c58c091ec7`。状态字段为`complete_simulation`、`partial_run: false`、`performance_claim: false`；文件稳定且未被进程打开，记录内563轮审计、0个round validation errors。归档包为`outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/repository_archives_20261027T1616CST/nyc_seed0_ev2_F4_D0_greedy_20261027T161001.tar.gz`，SHA-256 `ba2d5bbf3a0c5685175fb17a085490c14e425f193bc520f7af8c4326978190e3`。
 - 该归档只包含一个完成的方法结果，不代表此格7种方法齐全或90格矩阵终态，不据此形成配对比较或效果结论。
+
+
+## 2026-10-27 16:55 CST 本轮归档与进度证据
+
+- 指定R4外部manifest `outputs/route_layer/r4_codex_formal_batch_20261027_v2/manifest.json` manifest `updated_at_utc` 为08:54:48.142851Z，文件于16:54 CST双读一致，SHA-256 `e1170cf8f8f228d0ff375730dbbdc8a61eeeaa1c20fe908cb1ea7d3d5abb1bd2`；状态running，129条可路由任务为8 route_complete、3 outcome_unknown、3 active、15 ready、100 pending，23条请求投递/usage未知。worker_01与worker_recovery仍running，其余四个worker暂停在请求分块限额；锁存在，旧formal_driver PID不存活，但活动chunk driver/batch watcher仍可见。本轮只同步manifest快照。
+- Porto R1 v5零调用预检v5通过：200 queries、0错误、0模型调用；runner、protocol、preflight哈希与正式batch manifest相符。正式20-run批次状态running，08:54:50.304244Z的manifest SHA-256为 `b30d2a8f13fe49d00530c6f8d5a9cb422cff81e201a1edb83d7b7a2fb6a9e8db`，4 completed、2 running、14 queued。仅归档4个已终态且文件稳定的task，不复制活动输出目录。
+- R1稳定归档位于 `outputs/real_map_dispatch/porto_hybrid_v1/r1_dynamic_sumo_v1/repository_archives_20261027T1651CST/`、`.../repository_archives_20261027T1652CST/`、`.../repository_archives_20261027T1655CST/`。seed0 FASTEST的68,176,596字节motion trace无损压缩进2,824,759字节归档；成员与压缩包哈希均已核验。
+- NYC `outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/repository_archives_20261027T1647CST/` 有5个tar和29个终态方法JSON；覆盖分别是official seed0 F4 6/7、seed3 replicate F4 6/7、seed4 legacy F4 7/7、F1 7/7、F2 3/7。seed0、seed3、seed4 legacy互相隔离；这些是部分格检查点，不作整体效果结论。
+- 上述数据均带文件级清单和校验值；此轮不删除远端文件，也不纳入活动日志、prompt trace、锁或PID文件。
+
+
+## 2026-10-27 16:57 CST R4 manifest刷新
+
+- **证据类型：精确外部root manifest、六个worker manifest、锁文件和系统进程表。** R4 root manifest于2026-10-27 16:57 CST双读一致；其 `updated_at_utc` 为 `2026-10-27T08:57:09.552427+00:00`，SHA-256 `fb3e89d4f8bcbd9fadb2dc11616fda657b106bfba91eebef1f9b81d4a2789d54`。状态仍为 `running`：8 route_complete、3 outcome_unknown、5 active、13 ready、100 pending；登记请求数3242，23条请求投递/usage未决。同期六个worker manifest中5个为running、worker_02暂停在请求分块限额；执行锁仍存在，旧formal_driver PID不存活而chunk driver/batch watcher仍运行。本快照仅为进度证据，不表示批次完成。

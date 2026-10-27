@@ -1,0 +1,728 @@
+{
+  "audit_id": "r1_v5_ev2_route_preflight_20261027_v1",
+  "status": "failed",
+  "zero_model_calls": true,
+  "frozen_seed_count": 10,
+  "sampled_od_legs_per_seed": 10,
+  "sampled_od_legs": 100,
+  "population_od_legs": 2000,
+  "objective_route_counts": {
+    "LOWEST_ENERGY:unreachable": 97,
+    "FASTEST:ok": 3,
+    "LOWEST_ENERGY:ok": 3
+  },
+  "route_queries": 103,
+  "errors": [
+    {
+      "seed": 0,
+      "from": "hotspot_-2_-5",
+      "to": "hotspot_0_-2",
+      "objective": "FASTEST",
+      "error": "ValueError:infeasible_continuous_energy_trace:1302687280"
+    },
+    {
+      "seed": 0,
+      "from": "hotspot_-2_-5",
+      "to": "hotspot_0_-2",
+      "objective": "LOWEST_ENERGY",
+      "status": "unreachable"
+    },
+    {
+      "seed": 0,
+      "from": "hotspot_-1_-3",
+      "to": "hotspot_-2_2",
+      "objective": "FASTEST",
+      "error": "ValueError:infeasible_continuous_energy_trace:715176795#2"
+    },
+    {
+      "seed": 0,
+      "from": "hotspot_-1_-3",
+      "to": "hotspot_-2_2",
+      "objective": "LOWEST_ENERGY",
+      "status": "unreachable"
+    },
+    {
+      "seed": 0,
+      "from": "hotspot_-8_6",
+      "to": "fuzzy_ord_0023_pickup",
+      "objective": "FASTEST",
+      "error": "ValueError:infeasible_continuous_energy_trace:-608418836#1"
+    },
+    {
+      "seed": 0,
+      "from": "hotspot_-8_6",
+      "to": "fuzzy_ord_0023_pickup",
+      "objective": "LOWEST_ENERGY",
+      "status": "unreachable"
+    },
+    {
+      "seed": 0,
+      "from": "hotspot_-3_-2",
+      "to": "fuzzy_ord_0034_pickup",
+      "objective": "FASTEST",
+      "error": "ValueError:infeasible_continuous_energy_trace:216969809#5"
+    },
+    {
+      "seed": 0,
+      "from": "hotspot_-3_-2",
+      "to": "fuzzy_ord_0034_pickup",
+      "objective": "LOWEST_ENERGY",
+      "status": "unreachable"
+    },
+    {
+      "seed": 0,
+      "from": "fuzzy_ord_0044_dropoff",
+      "to": "hotspot_-1_-3",
+      "objective": "FASTEST",
+      "error": "ValueError:infeasible_continuous_energy_trace:388048416"
+    },
+    {
+      "seed": 0,
+      "from": "fuzzy_ord_0044_dropoff",
+      "to": "hotspot_-1_-3",
+      "objective": "LOWEST_ENERGY",
+      "status": "unreachable"
+    },
+    {
+      "seed": 0,
+      "from": "hotspot_-2_-2",
+      "to": "hotspot_-1_-3",
+      "objective": "FASTEST",
+      "error": "ValueError:infeasible_continuous_energy_trace:39668434#1"
+    },
+    {
+      "seed": 0,
+      "from": "hotspot_-2_-2",
+      "to": "hotspot_-1_-3",
+      "objective": "LOWEST_ENERGY",
+      "status": "unreachable"
+    },
+    {
+      "seed": 0,
+      "from": "hotspot_-5_-2",
+      "to": "hotspot_1_-2",
+      "objective": "FASTEST",
+      "error": "ValueError:infeasible_continuous_energy_trace:-386286210"
+    },
+    {
+      "seed": 0,
+      "from": "hotspot_-5_-2",
+      "to": "hotspot_1_-2",
+      "objective": "LOWEST_ENERGY",
+      "status": "unreachable"
+    },
+    {
+      "seed": 0,
+      "from": "fuzzy_ord_0078_pickup",
+      "to": "hotspot_-2_-5",
+      "objective": "FASTEST",
+      "error": "ValueError:infeasible_continuous_energy_trace:706644344"
+    },
+    {
+      "seed": 0,
+      "from": "fuzzy_ord_0078_pickup",
+      "to": "hotspot_-2_-5",
+      "objective": "LOWEST_ENERGY",
+      "status": "unreachable"
+    },
+    {
+      "seed": 0,
+      "from": "hotspot_-2_-2",
+      "to": "hotspot_-1_-2",
+      "objective": "FASTEST",
+      "error": "ValueError:infeasible_continuous_energy_trace:39668434#1"
+    },
+    {
+      "seed": 0,
+      "from": "hotspot_-2_-2",
+      "to": "hotspot_-1_-2",
+      "objective": "LOWEST_ENERGY",
+      "status": "unreachable"
+    },
+    {
+      "seed": 0,
+      "from": "fuzzy_ord_0100_pickup",
+      "to": "hotspot_3_3",
+      "objective": "FASTEST",
+      "error": "ValueError:infeasible_continuous_energy_trace:482296561"
+    },
+    {
+      "seed": 0,
+      "from": "fuzzy_ord_0100_pickup",
+      "to": "hotspot_3_3",
+      "objective": "LOWEST_ENERGY",
+      "status": "unreachable"
+    },
+    {
+      "seed": 1,
+      "from": "hotspot_-1_-2",
+      "to": "hotspot_-4_-3",
+      "objective": "FASTEST",
+      "error": "ValueError:infeasible_continuous_energy_trace:1062979388"
+    },
+    {
+      "seed": 1,
+      "from": "hotspot_-1_-2",
+      "to": "hotspot_-4_-3",
+      "objective": "LOWEST_ENERGY",
+      "status": "unreachable"
+    },
+    {
+      "seed": 1,
+      "from": "hotspot_-4_-3",
+      "to": "fuzzy_ord_0012_pickup",
+      "objective": "FASTEST",
+      "error": "ValueError:infeasible_continuous_energy_trace:39670508#1"
+    },
+    {
+      "seed": 1,
+      "from": "hotspot_-4_-3",
+      "to": "fuzzy_ord_0012_pickup",
+      "objective": "LOWEST_ENERGY",
+      "status": "unreachable"
+    },
+    {
+      "seed": 1,
+      "from": "hotspot_-1_-2",
+      "to": "hotspot_1_-2",
+      "objective": "FASTEST",
+      "error": "ValueError:infeasible_continuous_energy_trace:1062979388"
+    },
+    {
+      "seed": 1,
+      "from": "hotspot_-1_-2",
+      "to": "hotspot_1_-2",
+      "objective": "LOWEST_ENERGY",
+      "status": "unreachable"
+    },
+    {
+      "seed": 1,
+      "from": "fuzzy_ord_0033_dropoff",
+      "to": "hotspot_-1_-3",
+      "objective": "FASTEST",
+      "error": "ValueError:infeasible_continuous_energy_trace:1174863227#2"
+    },
+    {
+      "seed": 1,
+      "from": "fuzzy_ord_0033_dropoff",
+      "to": "hotspot_-1_-3",
+      "objective": "LOWEST_ENERGY",
+      "status": "unreachable"
+    },
+    {
+      "seed": 1,
+      "from": "hotspot_-8_4",
+      "to": "fuzzy_ord_0045_pickup",
+      "objective": "FASTEST",
+      "error": "ValueError:infeasible_continuous_energy_trace:608418576#0"
+    },
+    {
+      "seed": 1,
+      "from": "hotspot_-8_4",
+      "to": "fuzzy_ord_0045_pickup",
+      "objective": "LOWEST_ENERGY",
+      "status": "unreachable"
+    },
+    {
+      "seed": 1,
+      "from": "hotspot_4_-1",
+      "to": "hotspot_1_-3",
+      "objective": "FASTEST",
+      "error": "ValueError:infeasible_continuous_energy_trace:36268853"
+    },
+    {
+      "seed": 1,
+      "from": "hotspot_4_-1",
+      "to": "hotspot_1_-3",
+      "objective": "LOWEST_ENERGY",
+      "status": "unreachable"
+    },
+    {
+      "seed": 1,
+      "from": "hotspot_-2_-3",
+      "to": "hotspot_-8_1",
+      "objective": "FASTEST",
+      "error": "ValueError:infeasible_continuous_energy_trace:14333500#0"
+    },
+    {
+      "seed": 1,
+      "from": "hotspot_-2_-3",
+      "to": "hotspot_-8_1",
+      "objective": "LOWEST_ENERGY",
+      "status": "unreachable"
+    },
+    {
+      "seed": 1,
+      "from": "hotspot_-9_2",
+      "to": "hotspot_-5_-2",
+      "objective": "FASTEST",
+      "error": "ValueError:infeasible_continuous_energy_trace:1165291407"
+    },
+    {
+      "seed": 1,
+      "from": "hotspot_-9_2",
+      "to": "hotspot_-5_-2",
+      "objective": "LOWEST_ENERGY",
+      "status": "unreachable"
+    },
+    {
+      "seed": 1,
+      "from": "hotspot_4_-1",
+      "to": "hotspot_-1_-3",
+      "objective": "FASTEST",
+      "error": "ValueError:infeasible_continuous_energy_trace:36268853"
+    },
+    {
+      "seed": 1,
+      "from": "hotspot_4_-1",
+      "to": "hotspot_-1_-3",
+      "objective": "LOWEST_ENERGY",
+      "status": "unreachable"
+    },
+    {
+      "seed": 1,
+      "from": "hotspot_0_-2",
+      "to": "fuzzy_ord_0100_dropoff",
+      "objective": "FASTEST",
+      "error": "ValueError:infeasible_continuous_energy_trace:715176796#6"
+    },
+    {
+      "seed": 1,
+      "from": "hotspot_0_-2",
+      "to": "fuzzy_ord_0100_dropoff",
+      "objective": "LOWEST_ENERGY",
+      "status": "unreachable"
+    },
+    {
+      "seed": 2,
+      "from": "hotspot_-2_-3",
+      "to": "fuzzy_ord_0001_pickup",
+      "objective": "FASTEST",
+      "error": "ValueError:infeasible_continuous_energy_trace:14333500#0"
+    },
+    {
+      "seed": 2,
+      "from": "hotspot_-2_-3",
+      "to": "fuzzy_ord_0001_pickup",
+      "objective": "LOWEST_ENERGY",
+      "status": "unreachable"
+    },
+    {
+      "seed": 2,
+      "from": "hotspot_-2_-5",
+      "to": "fuzzy_ord_0012_pickup",
+      "objective": "FASTEST",
+      "error": "ValueError:infeasible_continuous_energy_trace:1302687280"
+    },
+    {
+      "seed": 2,
+      "from": "hotspot_-2_-5",
+      "to": "fuzzy_ord_0012_pickup",
+      "objective": "LOWEST_ENERGY",
+      "status": "unreachable"
+    },
+    {
+      "seed": 2,
+      "from": "hotspot_-1_-3",
+      "to": "hotspot_-3_-6",
+      "objective": "FASTEST",
+      "error": "ValueError:infeasible_continuous_energy_trace:715176795#2"
+    },
+    {
+      "seed": 2,
+      "from": "hotspot_-1_-3",
+      "to": "hotspot_-3_-6",
+      "objective": "LOWEST_ENERGY",
+      "status": "unreachable"
+    },
+    {
+      "seed": 2,
+      "from": "hotspot_-2_-5",
+      "to": "hotspot_-1_-6",
+      "objective": "FASTEST",
+      "error": "ValueError:infeasible_continuous_energy_trace:1302687280"
+    },
+    {
+      "seed": 2,
+      "from": "hotspot_-2_-5",
+      "to": "hotspot_-1_-6",
+      "objective": "LOWEST_ENERGY",
+      "status": "unreachable"
+    },
+    {
+      "seed": 2,
+      "from": "hotspot_-2_-1",
+      "to": "hotspot_-5_-2",
+      "objective": "FASTEST",
+      "error": "ValueError:infeasible_continuous_energy_trace:498298756#0"
+    },
+    {
+      "seed": 2,
+      "from": "hotspot_-2_-1",
+      "to": "hotspot_-5_-2",
+      "objective": "LOWEST_ENERGY",
+      "status": "unreachable"
+    },
+    {
+      "seed": 2,
+      "from": "fuzzy_ord_0056_pickup",
+      "to": "fuzzy_ord_0056_dropoff",
+      "objective": "FASTEST",
+      "error": "ValueError:infeasible_continuous_energy_trace:448850568#0"
+    },
+    {
+      "seed": 2,
+      "from": "fuzzy_ord_0056_pickup",
+      "to": "fuzzy_ord_0056_dropoff",
+      "objective": "LOWEST_ENERGY",
+      "status": "unreachable"
+    },
+    {
+      "seed": 2,
+      "from": "hotspot_0_0",
+      "to": "hotspot_1_-4",
+      "objective": "FASTEST",
+      "error": "ValueError:infeasible_continuous_energy_trace:8367104#3"
+    },
+    {
+      "seed": 2,
+      "from": "hotspot_0_0",
+      "to": "hotspot_1_-4",
+      "objective": "LOWEST_ENERGY",
+      "status": "unreachable"
+    },
+    {
+      "seed": 2,
+      "from": "hotspot_-8_4",
+      "to": "hotspot_-2_-1",
+      "objective": "FASTEST",
+      "error": "ValueError:infeasible_continuous_energy_trace:608418576#0"
+    },
+    {
+      "seed": 2,
+      "from": "hotspot_-8_4",
+      "to": "hotspot_-2_-1",
+      "objective": "LOWEST_ENERGY",
+      "status": "unreachable"
+    },
+    {
+      "seed": 2,
+      "from": "hotspot_-2_-5",
+      "to": "hotspot_0_0",
+      "objective": "FASTEST",
+      "error": "ValueError:infeasible_continuous_energy_trace:1302687280"
+    },
+    {
+      "seed": 2,
+      "from": "hotspot_-2_-5",
+      "to": "hotspot_0_0",
+      "objective": "LOWEST_ENERGY",
+      "status": "unreachable"
+    },
+    {
+      "seed": 2,
+      "from": "hotspot_-2_-5",
+      "to": "hotspot_-1_-2",
+      "objective": "FASTEST",
+      "error": "ValueError:infeasible_continuous_energy_trace:1302687280"
+    },
+    {
+      "seed": 2,
+      "from": "hotspot_-2_-5",
+      "to": "hotspot_-1_-2",
+      "objective": "LOWEST_ENERGY",
+      "status": "unreachable"
+    },
+    {
+      "seed": 3,
+      "from": "hotspot_-1_-1",
+      "to": "fuzzy_ord_0001_pickup",
+      "objective": "FASTEST",
+      "error": "ValueError:infeasible_continuous_energy_trace:1019725089#1"
+    },
+    {
+      "seed": 3,
+      "from": "hotspot_-1_-1",
+      "to": "fuzzy_ord_0001_pickup",
+      "objective": "LOWEST_ENERGY",
+      "status": "unreachable"
+    },
+    {
+      "seed": 3,
+      "from": "fuzzy_ord_0011_dropoff",
+      "to": "hotspot_-8_1",
+      "objective": "FASTEST",
+      "error": "ValueError:infeasible_continuous_energy_trace:14334161#0"
+    },
+    {
+      "seed": 3,
+      "from": "fuzzy_ord_0011_dropoff",
+      "to": "hotspot_-8_1",
+      "objective": "LOWEST_ENERGY",
+      "status": "unreachable"
+    },
+    {
+      "seed": 3,
+      "from": "fuzzy_ord_0022_dropoff",
+      "to": "hotspot_0_-2",
+      "objective": "FASTEST",
+      "error": "ValueError:infeasible_continuous_energy_trace:262945890#0"
+    },
+    {
+      "seed": 3,
+      "from": "fuzzy_ord_0022_dropoff",
+      "to": "hotspot_0_-2",
+      "objective": "LOWEST_ENERGY",
+      "status": "unreachable"
+    },
+    {
+      "seed": 3,
+      "from": "hotspot_0_5",
+      "to": "hotspot_-9_4",
+      "objective": "FASTEST",
+      "error": "ValueError:infeasible_continuous_energy_trace:306780458#3"
+    },
+    {
+      "seed": 3,
+      "from": "hotspot_0_5",
+      "to": "hotspot_-9_4",
+      "objective": "LOWEST_ENERGY",
+      "status": "unreachable"
+    },
+    {
+      "seed": 3,
+      "from": "hotspot_1_-4",
+      "to": "hotspot_0_-2",
+      "objective": "FASTEST",
+      "error": "ValueError:infeasible_continuous_energy_trace:31573135#4"
+    },
+    {
+      "seed": 3,
+      "from": "hotspot_1_-4",
+      "to": "hotspot_0_-2",
+      "objective": "LOWEST_ENERGY",
+      "status": "unreachable"
+    },
+    {
+      "seed": 3,
+      "from": "hotspot_-3_-6",
+      "to": "hotspot_0_0",
+      "objective": "FASTEST",
+      "error": "ValueError:infeasible_continuous_energy_trace:759298059#0"
+    },
+    {
+      "seed": 3,
+      "from": "hotspot_-3_-6",
+      "to": "hotspot_0_0",
+      "objective": "LOWEST_ENERGY",
+      "status": "unreachable"
+    },
+    {
+      "seed": 3,
+      "from": "hotspot_-1_-3",
+      "to": "hotspot_-1_-2",
+      "objective": "FASTEST",
+      "error": "ValueError:infeasible_continuous_energy_trace:715176795#2"
+    },
+    {
+      "seed": 3,
+      "from": "hotspot_-1_-3",
+      "to": "hotspot_-1_-2",
+      "objective": "LOWEST_ENERGY",
+      "status": "unreachable"
+    },
+    {
+      "seed": 3,
+      "from": "hotspot_-5_-2",
+      "to": "hotspot_1_-2",
+      "objective": "FASTEST",
+      "error": "ValueError:infeasible_continuous_energy_trace:-386286210"
+    },
+    {
+      "seed": 3,
+      "from": "hotspot_-5_-2",
+      "to": "hotspot_1_-2",
+      "objective": "LOWEST_ENERGY",
+      "status": "unreachable"
+    },
+    {
+      "seed": 3,
+      "from": "hotspot_-8_6",
+      "to": "hotspot_1_-2",
+      "objective": "FASTEST",
+      "error": "ValueError:infeasible_continuous_energy_trace:-608418836#1"
+    },
+    {
+      "seed": 3,
+      "from": "hotspot_-8_6",
+      "to": "hotspot_1_-2",
+      "objective": "LOWEST_ENERGY",
+      "status": "unreachable"
+    },
+    {
+      "seed": 3,
+      "from": "hotspot_-2_-5",
+      "to": "hotspot_-2_-1",
+      "objective": "FASTEST",
+      "error": "ValueError:infeasible_continuous_energy_trace:1302687280"
+    },
+    {
+      "seed": 3,
+      "from": "hotspot_-2_-5",
+      "to": "hotspot_-2_-1",
+      "objective": "LOWEST_ENERGY",
+      "status": "unreachable"
+    },
+    {
+      "seed": 4,
+      "from": "hotspot_-1_-1",
+      "to": "fuzzy_ord_0001_pickup",
+      "objective": "FASTEST",
+      "error": "ValueError:infeasible_continuous_energy_trace:1019725089#1"
+    },
+    {
+      "seed": 4,
+      "from": "hotspot_-1_-1",
+      "to": "fuzzy_ord_0001_pickup",
+      "objective": "LOWEST_ENERGY",
+      "status": "unreachable"
+    },
+    {
+      "seed": 4,
+      "from": "hotspot_0_5",
+      "to": "hotspot_-4_-3",
+      "objective": "FASTEST",
+      "error": "ValueError:infeasible_continuous_energy_trace:306780458#3"
+    },
+    {
+      "seed": 4,
+      "from": "hotspot_0_5",
+      "to": "hotspot_-4_-3",
+      "objective": "LOWEST_ENERGY",
+      "status": "unreachable"
+    },
+    {
+      "seed": 4,
+      "from": "hotspot_-3_-2",
+      "to": "hotspot_1_-4",
+      "objective": "FASTEST",
+      "error": "ValueError:infeasible_continuous_energy_trace:216969809#5"
+    },
+    {
+      "seed": 4,
+      "from": "hotspot_-3_-2",
+      "to": "hotspot_1_-4",
+      "objective": "LOWEST_ENERGY",
+      "status": "unreachable"
+    },
+    {
+      "seed": 4,
+      "from": "hotspot_1_-3",
+      "to": "hotspot_-5_6",
+      "objective": "FASTEST",
+      "error": "ValueError:infeasible_continuous_energy_trace:14327868#2"
+    },
+    {
+      "seed": 4,
+      "from": "hotspot_1_-3",
+      "to": "hotspot_-5_6",
+      "objective": "LOWEST_ENERGY",
+      "status": "unreachable"
+    },
+    {
+      "seed": 4,
+      "from": "fuzzy_ord_0044_dropoff",
+      "to": "hotspot_4_-1",
+      "objective": "FASTEST",
+      "error": "ValueError:infeasible_continuous_energy_trace:252526951#5"
+    },
+    {
+      "seed": 4,
+      "from": "fuzzy_ord_0044_dropoff",
+      "to": "hotspot_4_-1",
+      "objective": "LOWEST_ENERGY",
+      "status": "unreachable"
+    },
+    {
+      "seed": 4,
+      "from": "hotspot_1_0",
+      "to": "hotspot_3_3",
+      "objective": "FASTEST",
+      "error": "ValueError:infeasible_continuous_energy_trace:8367114#2"
+    },
+    {
+      "seed": 4,
+      "from": "hotspot_1_0",
+      "to": "hotspot_3_3",
+      "objective": "LOWEST_ENERGY",
+      "status": "unreachable"
+    },
+    {
+      "seed": 4,
+      "from": "fuzzy_ord_0067_pickup",
+      "to": "fuzzy_ord_0067_dropoff",
+      "objective": "FASTEST",
+      "error": "ValueError:infeasible_continuous_energy_trace:-221013310#0"
+    },
+    {
+      "seed": 4,
+      "from": "fuzzy_ord_0067_pickup",
+      "to": "fuzzy_ord_0067_dropoff",
+      "objective": "LOWEST_ENERGY",
+      "status": "unreachable"
+    },
+    {
+      "seed": 4,
+      "from": "hotspot_-2_-1",
+      "to": "fuzzy_ord_0078_dropoff",
+      "objective": "FASTEST",
+      "error": "ValueError:infeasible_continuous_energy_trace:498298756#0"
+    },
+    {
+      "seed": 4,
+      "from": "hotspot_-2_-1",
+      "to": "fuzzy_ord_0078_dropoff",
+      "objective": "LOWEST_ENERGY",
+      "status": "unreachable"
+    },
+    {
+      "seed": 4,
+      "from": "hotspot_1_-3",
+      "to": "hotspot_-2_-3",
+      "objective": "FASTEST",
+      "error": "ValueError:infeasible_continuous_energy_trace:14327868#2"
+    },
+    {
+      "seed": 4,
+      "from": "hotspot_1_-3",
+      "to": "hotspot_-2_-3",
+      "objective": "LOWEST_ENERGY",
+      "status": "unreachable"
+    },
+    {
+      "seed": 4,
+      "from": "fuzzy_ord_0100_pickup",
+      "to": "hotspot_0_0",
+      "objective": "FASTEST",
+      "error": "ValueError:infeasible_continuous_energy_trace:482122892#5"
+    },
+    {
+      "seed": 4,
+      "from": "fuzzy_ord_0100_pickup",
+      "to": "hotspot_0_0",
+      "objective": "LOWEST_ENERGY",
+      "status": "unreachable"
+    }
+  ],
+  "error_count": 194,
+  "mean_query_wall_s": 0.01155511100000002,
+  "p95_query_wall_s": 0.057312291999999765,
+  "total_wall_s": 2.311406375,
+  "network_sha256": "9481618cfdc0f0fa2a4300a38db6fe7f13321dfc22c554feb1cf91b4f8aa7387",
+  "scenario_manifest_sha256": "846e01d17dadf41eba1284ddd26311c382d9b38af745ad7c1cfc4c00c46db898",
+  "runner_sha256": "e1deb7f2a38359b82180252dfddc9159175fab609024c4ec530c2b9e510521e7",
+  "protocol_sha256": "eeda6d9f28d27f970ad11abcbc30a712ec963f5be2e19a19b90dcfcc32ece67e",
+  "routing": "FASTEST frozen snapshot FIFO Dijkstra; LOWEST_ENERGY continuous signed-net EV v2 with kinetic-potential reweighting",
+  "traffic_snapshot": "deterministic synthetic occupied-edge sample; live SUMO traffic and signal changes are simulated during formal execution and refreshed per route query",
+  "signal_snapshot": "network phase 0 frozen in this preflight; formal runs use current TraCI phase"
+}

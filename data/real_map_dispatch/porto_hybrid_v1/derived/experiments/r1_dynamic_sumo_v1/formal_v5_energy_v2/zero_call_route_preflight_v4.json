@@ -1,0 +1,26 @@
+{
+  "audit_id": "r1_v5_ev2_route_preflight_20261027_v4",
+  "status": "passed",
+  "zero_model_calls": true,
+  "frozen_seed_count": 10,
+  "sampled_od_legs_per_seed": 10,
+  "sampled_od_legs": 100,
+  "population_od_legs": 2000,
+  "objective_route_counts": {
+    "FASTEST:ok": 100,
+    "LOWEST_ENERGY:ok": 100
+  },
+  "route_queries": 200,
+  "errors": [],
+  "error_count": 0,
+  "mean_query_wall_s": 0.21882657915500012,
+  "p95_query_wall_s": 0.8806789160000008,
+  "total_wall_s": 43.765597,
+  "network_sha256": "9481618cfdc0f0fa2a4300a38db6fe7f13321dfc22c554feb1cf91b4f8aa7387",
+  "scenario_manifest_sha256": "846e01d17dadf41eba1284ddd26311c382d9b38af745ad7c1cfc4c00c46db898",
+  "runner_sha256": "beb683f57b33a2839470b5662d4772fca621df1d16c96ae0bff2fccb113054da",
+  "protocol_sha256": "eeda6d9f28d27f970ad11abcbc30a712ec963f5be2e19a19b90dcfcc32ece67e",
+  "routing": "FASTEST frozen snapshot FIFO Dijkstra; LOWEST_ENERGY continuous signed-net EV v2 with kinetic-potential reweighting",
+  "traffic_snapshot": "deterministic synthetic occupied-edge sample; live SUMO traffic and signal changes are simulated during formal execution and refreshed per route query",
+  "signal_snapshot": "network phase 0 frozen in this preflight; formal runs use current TraCI phase"
+}

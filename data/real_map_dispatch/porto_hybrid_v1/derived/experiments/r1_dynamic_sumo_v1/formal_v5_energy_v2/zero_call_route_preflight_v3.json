@@ -1,0 +1,118 @@
+{
+  "audit_id": "r1_v5_ev2_route_preflight_20261027_v3",
+  "status": "failed",
+  "zero_model_calls": true,
+  "frozen_seed_count": 10,
+  "sampled_od_legs_per_seed": 10,
+  "sampled_od_legs": 100,
+  "population_od_legs": 2000,
+  "objective_route_counts": {
+    "FASTEST:ok": 87,
+    "LOWEST_ENERGY:ok": 100
+  },
+  "route_queries": 187,
+  "errors": [
+    {
+      "seed": 2,
+      "from": "hotspot_-2_-5",
+      "to": "fuzzy_ord_0012_pickup",
+      "objective": "FASTEST",
+      "error": "ValueError:infeasible_continuous_energy_trace:1016997824"
+    },
+    {
+      "seed": 2,
+      "from": "hotspot_-1_-3",
+      "to": "hotspot_-3_-6",
+      "objective": "FASTEST",
+      "error": "ValueError:infeasible_continuous_energy_trace:759298059#0"
+    },
+    {
+      "seed": 5,
+      "from": "hotspot_-1_-3",
+      "to": "hotspot_-9_2",
+      "objective": "FASTEST",
+      "error": "ValueError:infeasible_continuous_energy_trace:1188369998#0"
+    },
+    {
+      "seed": 6,
+      "from": "hotspot_1_-4",
+      "to": "fuzzy_ord_0012_pickup",
+      "objective": "FASTEST",
+      "error": "ValueError:infeasible_continuous_energy_trace:608418836#1"
+    },
+    {
+      "seed": 6,
+      "from": "fuzzy_ord_0056_pickup",
+      "to": "hotspot_-3_-2",
+      "objective": "FASTEST",
+      "error": "ValueError:infeasible_continuous_energy_trace:216969809#5"
+    },
+    {
+      "seed": 6,
+      "from": "hotspot_-1_-3",
+      "to": "fuzzy_ord_0089_dropoff",
+      "objective": "FASTEST",
+      "error": "ValueError:infeasible_continuous_energy_trace:482276565#0"
+    },
+    {
+      "seed": 7,
+      "from": "hotspot_1_-4",
+      "to": "hotspot_-3_-2",
+      "objective": "FASTEST",
+      "error": "ValueError:infeasible_continuous_energy_trace:216969809#5"
+    },
+    {
+      "seed": 7,
+      "from": "hotspot_-1_-3",
+      "to": "fuzzy_ord_0089_dropoff",
+      "objective": "FASTEST",
+      "error": "ValueError:infeasible_continuous_energy_trace:60175223#3"
+    },
+    {
+      "seed": 8,
+      "from": "hotspot_-2_-5",
+      "to": "hotspot_-3_-6",
+      "objective": "FASTEST",
+      "error": "ValueError:infeasible_continuous_energy_trace:759298059#0"
+    },
+    {
+      "seed": 9,
+      "from": "hotspot_-2_-3",
+      "to": "fuzzy_ord_0012_pickup",
+      "objective": "FASTEST",
+      "error": "ValueError:infeasible_continuous_energy_trace:30912922#1"
+    },
+    {
+      "seed": 9,
+      "from": "hotspot_-1_-6",
+      "to": "hotspot_0_5",
+      "objective": "FASTEST",
+      "error": "ValueError:infeasible_continuous_energy_trace:306780458#2"
+    },
+    {
+      "seed": 9,
+      "from": "fuzzy_ord_0056_pickup",
+      "to": "fuzzy_ord_0056_dropoff",
+      "objective": "FASTEST",
+      "error": "ValueError:infeasible_continuous_energy_trace:60175590#1"
+    },
+    {
+      "seed": 9,
+      "from": "fuzzy_ord_0089_pickup",
+      "to": "fuzzy_ord_0089_dropoff",
+      "objective": "FASTEST",
+      "error": "ValueError:infeasible_continuous_energy_trace:215200349#0"
+    }
+  ],
+  "error_count": 13,
+  "mean_query_wall_s": 0.2185472356450001,
+  "p95_query_wall_s": 0.9311239589999971,
+  "total_wall_s": 43.710330875,
+  "network_sha256": "9481618cfdc0f0fa2a4300a38db6fe7f13321dfc22c554feb1cf91b4f8aa7387",
+  "scenario_manifest_sha256": "846e01d17dadf41eba1284ddd26311c382d9b38af745ad7c1cfc4c00c46db898",
+  "runner_sha256": "68729e07e2c513c6688340d461d83185a8d603efeeea26791912c079639686f0",
+  "protocol_sha256": "eeda6d9f28d27f970ad11abcbc30a712ec963f5be2e19a19b90dcfcc32ece67e",
+  "routing": "FASTEST frozen snapshot FIFO Dijkstra; LOWEST_ENERGY continuous signed-net EV v2 with kinetic-potential reweighting",
+  "traffic_snapshot": "deterministic synthetic occupied-edge sample; live SUMO traffic and signal changes are simulated during formal execution and refreshed per route query",
+  "signal_snapshot": "network phase 0 frozen in this preflight; formal runs use current TraCI phase"
+}

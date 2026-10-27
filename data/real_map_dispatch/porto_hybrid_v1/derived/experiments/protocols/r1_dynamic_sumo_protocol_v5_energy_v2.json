@@ -1,0 +1,139 @@
+{
+  "protocol_id": "porto_r1_dynamic_sumo_v5_energy_v2",
+  "protocol_version": 5,
+  "date_frozen": "2026-10-27",
+  "status": "frozen_for_formal_v5_rerun",
+  "supersedes_for_reproducible_rerun": "r1_dynamic_sumo_protocol_v4_energy_v2.json",
+  "reason_for_revision": "Use a continuous signed-net EV v2 route objective with adjacent-link boundary speeds and nonnegative kinetic-potential reweighting; remove the per-link stop-start energy estimator that admitted a negative reversal cycle. Preserve SUMO motion-trace energy for actual outcomes and freeze route-query traffic/signal weights to the live planning snapshot.",
+  "frozen_inputs": {
+    "scenario_manifest": "derived/scenarios/v3_3/frozen_inputs_v1_3/manifest_v3_3.json",
+    "scenario_manifest_sha256": "846e01d17dadf41eba1284ddd26311c382d9b38af745ad7c1cfc4c00c46db898",
+    "network": "derived/sumo/v1.28.0/porto.net.xml",
+    "network_sha256": "9481618cfdc0f0fa2a4300a38db6fe7f13321dfc22c554feb1cf91b4f8aa7387",
+    "latency_trace_manifest": "derived/experiments/r1_dynamic_sumo_v1/planning_latency_traces_v1/manifest.json",
+    "latency_trace_manifest_sha256": "03f47f0c3eb412fe6a98eaa17349594f1e267fb6a0b38ef8342b88cff12e8824"
+  },
+  "implementation": {
+    "runner": "scripts/run_porto_r1_dynamic_sumo_v5.py",
+    "runner_sha256": "dda71ccc0ea75c08d12a29968870a99dfad3cbf491786fe4acd43bbef05b2e05",
+    "trace_builder": "scripts/build_porto_r1_latency_traces_v1.py",
+    "trace_builder_sha256": "2f24d5d15c53a63db5ba3a83cebf25fa24a3a1f6f5e5c0c73456cb1a63fc9fb3",
+    "sumo_version": "1.28.0",
+    "simulation_step_s": 0.1,
+    "vehicle_class": "passenger",
+    "teleport_after_gridlock": false
+  },
+  "scenario": {
+    "fixed_vehicles_per_seed": 10,
+    "fixed_orders_per_vehicle": 10,
+    "fixed_orders_per_seed": 100,
+    "seeds": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "dispatch_or_reassignment": false,
+    "background_flow_per_hour": 90,
+    "background_flow_duration_hours": 2,
+    "background_flow_vehicle_count": 180,
+    "background_flow_is_synthetic": true,
+    "max_simulated_time_s": 86400
+  },
+  "route_objectives": [
+    "FASTEST",
+    "LOWEST_ENERGY"
+  ],
+  "planning_delay": {
+    "mode": "frozen_measured_per_order_replay",
+    "trace_selection": "planning_latency_traces_v1/seed_<seed>/<objective>.json",
+    "definition": "For each order, apply its frozen measured planner_wall_time_s from the source R1 run as virtual route-planning delay. SUMO signals, background traffic, and other active vehicles continue during this delay; the logical vehicle waits until the delay has elapsed before it departs.",
+    "live_wall_time_recorded_separately": true,
+    "live_wall_time_drives_simulation_clock": false,
+    "reason": "Keep planning time in simulated completion time while preventing host-load variation in a live perf_counter measurement from changing signal phases and traffic interactions across repeats."
+  },
+  "cost_model": {
+    "energy_model": {
+      "model_version": "ev_longitudinal_v2",
+      "profile_id": "generic_reference_ev_v1",
+      "profile": {
+        "profile_id": "generic_reference_ev_v1",
+        "curb_mass_kg": 1900.0,
+        "passenger_load_kg": 75.0,
+        "rotating_mass_kg": 50.0,
+        "rolling_resistance_coefficient": 0.009,
+        "drag_coefficient": 0.26,
+        "frontal_area_m2": 2.35,
+        "air_density_kg_m3": 1.225,
+        "propulsion_efficiency": 0.9,
+        "regenerative_efficiency": 0.65,
+        "auxiliary_power_w": 800.0,
+        "max_acceleration_mps2": 1.2,
+        "max_deceleration_mps2": 2.0,
+        "regenerative_power_cap_w": 50000.0,
+        "gravity_mps2": 9.80665,
+        "model_version": "ev_longitudinal_v2"
+      },
+      "profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee",
+      "equations": {
+        "wheel_force": "(m + rotating_mass)*acceleration + 0.5*rho*Cd*A*v^2 + Crr*m*g*cos(slope) + m*g*sin(slope)",
+        "positive_wheel_power": "wheel_power / propulsion_efficiency",
+        "negative_wheel_power": "min(-wheel_power * regenerative_efficiency, regenerative_power_cap)",
+        "net_battery_energy": "propulsion_draw - regenerated_energy + auxiliary_energy"
+      }
+    },
+    "reported_energy_source": "shared model evaluated over 0.1 s SUMO speed trace; acceleration derived from successive speeds",
+    "sumo_battery_device_output_used": false,
+    "vehicle_calibration": "generic reference profile assumption; not calibrated to Porto vehicles",
+    "missing_grade_policy": "flat grade assumption, recorded in per-trip fidelity metadata",
+    "currency_cost_claim": false
+  },
+  "formal_matrix": {
+    "runs": 20,
+    "output_root": "derived/experiments/r1_dynamic_sumo_v1/formal_v5_energy_v2/",
+    "must_not_overwrite": [
+      "derived/experiments/r1_dynamic_sumo_v1/formal_v2/",
+      "derived/experiments/r1_dynamic_sumo_v1/diagnostics_v1/",
+      "derived/experiments/r1_dynamic_sumo_v1/formal_v4_energy_v2/"
+    ],
+    "batch_driver": "scripts/run_porto_r1_v5_formal_batch.py",
+    "batch_driver_sha256": "e4af8b346464a050d57c03b7bc896bc34cebf5b81fd49ffd141053536c604e6e"
+  },
+  "interpretation_limits": [
+    "Traffic, signal phases, and energy remain SUMO simulation outputs; they are not observed Porto real-time states.",
+    "Energy uses the generic reference profile and an observed SUMO motion trace; it is a simulation estimate, not a measured Porto fleet value.",
+    "The frozen planning delays are measured R1 latencies replayed as virtual delay. Live wall time is separately reported.",
+    "The 90 vehicles/hour background flow is a synthetic stress assumption shaped by historical taxi hotspot weights.",
+    "A completed R1 matrix does not by itself establish an AI map-readability effect; LLM and representation-control runs are separate.",
+    "This v5 rerun is required because prior completed R1 v1-v3 outputs lack per-step motion traces; their legacy energy summaries cannot be converted to signed-net EV v2."
+  ],
+  "routing_cost_model": {
+    "traffic_snapshot": "Traffic and signal weights are sampled once at each route-query start and held fixed within that path search. SUMO traffic and signals continue evolving during planning delay and vehicle execution; the next order takes a fresh snapshot.",
+    "fastest": "FIFO earliest-arrival Dijkstra over directed link states and frozen edge/signal snapshot weights.",
+    "lowest_energy": "Dijkstra over (previous_link,current_link,way_suffix) states; signed net EV v2 motion energy is reweighted by K_in/propulsion_efficiency - K_out/propulsion_efficiency. Potentials telescope to zero between stopped route endpoints.",
+    "edge_motion": "Acceleration, cruise, braking, queue idle, and signal idle are integrated on one continuous speed trace across adjacent links with shared boundary speeds. No independent stop-start assumption per link.",
+    "grade": "Flat grade, same as frozen EV v2 profile because the network package has no grade input.",
+    "scope": "Predicted energy is a routing estimate; actual comparison uses EV v2 energy recomputed from SUMO speed/acceleration trace.",
+    "signed_net_reweighting_proof": "For each flat-grade motion step, wheel work decomposes into delta kinetic energy plus nonnegative rolling/aerodynamic resistance work. With propulsion efficiency eta_p and regenerative efficiency eta_r <= eta_p, net battery energy + (K_in-K_out)/eta_p is nonnegative; regen power caps and auxiliary draw only increase it. K/eta_p potentials telescope across route states and cancel for stopped endpoints, preserving the signed-net EV v2 route objective while satisfying Dijkstra nonnegative arc weights."
+  },
+  "zero_call_preflight": {
+    "path": "derived/experiments/r1_dynamic_sumo_v1/formal_v5_energy_v2/zero_call_route_preflight_v5.json",
+    "sampled_od_legs": 100,
+    "sampled_per_seed": 10,
+    "objectives": [
+      "FASTEST",
+      "LOWEST_ENERGY"
+    ],
+    "route_queries": 200,
+    "errors": 0,
+    "status": "passed",
+    "scope_note": "Stratified zero-model-call sample, not the entire 2,000-leg population; formal batch must record route exceptions and all actual trajectories."
+  },
+  "actual_energy_missing_trace_policy": "Do not estimate missing actual trace energy from route length; preserve null per trip and null aggregate totals when any moving trip is non-estimable. Zero-distance no-op legs remain exactly zero."
+}
