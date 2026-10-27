@@ -1,0 +1,1 @@
+Partial NYC checkpoint for closed successful F4 outputs listed in COMPLETION_INDEX.json. D6/D7 are exact-prompt replay, not independent live outcomes. D5 live was active at cutoff and is excluded if incomplete. This does not represent the full multi-month batch or an aggregate comparison.
