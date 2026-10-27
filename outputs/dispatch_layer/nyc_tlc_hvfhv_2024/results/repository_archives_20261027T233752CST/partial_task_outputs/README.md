@@ -1,0 +1,1 @@
+Partial NYC checkpoint containing the closed successful F4 D0/D1 outputs listed in COMPLETION_INDEX.json. F4 D2 was active at cutoff and is excluded. This is not the complete multi-month batch or an aggregate comparison.
