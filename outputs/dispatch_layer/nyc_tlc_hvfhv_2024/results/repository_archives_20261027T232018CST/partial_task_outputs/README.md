@@ -1,0 +1,1 @@
+Partial NYC checkpoint containing only closed successful task outputs listed in COMPLETION_INDEX.json. D6/D7 replay was active at the recorded cutoff and is excluded. Replay outputs are identified as such. This does not represent the complete multi-month batch or an aggregate comparison.

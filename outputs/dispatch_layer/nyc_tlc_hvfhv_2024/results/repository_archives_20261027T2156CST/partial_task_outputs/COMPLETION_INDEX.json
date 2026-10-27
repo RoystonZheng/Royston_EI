@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "observed_at_local": "2026-10-27T21:56:05+08:00",
+  "checkpoint_type": "partial_completed_task_outputs",
+  "source_progress_path_relative_to_workspace": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/progress.jsonl",
+  "source_progress_sha256_at_capture": "b65ef92177b3e27856d5acf0238cdeed825707c2989d87617a2bccfd052c718b",
+  "completed_method_outputs": [
+    {
+      "scenario_id": "EV_20240611_211000_q75",
+      "phase": "F4",
+      "method": "D6_agent_codex_context_optimizer",
+      "run_id": "evaluation/EV_20240611_211000_q75/F4/D6_D7_replay",
+      "completion_status": "complete",
+      "return_code": 0,
+      "event_timestamp_utc": "2026-10-27T13:47:52+00:00",
+      "completion_event_sha256": "ad418958418b40225c3cf059e0e14b5558585502a6599f9743b29ef36b85326f",
+      "source_path_relative_to_workspace": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20240611_211000_q75/F4/D6_agent_codex_context_optimizer_seed_3.json",
+      "archive_path": "D6_agent_codex_context_optimizer_seed_3.json",
+      "sha256": "453a90938c74c1c74be9d1df274ee186454fd1e3e6b8c8b03488a2cd6664927a",
+      "bytes": 1878836,
+      "independence_note": "D6 live output."
+    },
+    {
+      "scenario_id": "EV_20240611_211000_q75",
+      "phase": "F4",
+      "method": "D7_agent_codex_capacity_shield_optimizer",
+      "run_id": "evaluation/EV_20240611_211000_q75/F4/D6_D7_replay",
+      "completion_status": "complete",
+      "return_code": 0,
+      "event_timestamp_utc": "2026-10-27T13:47:52+00:00",
+      "completion_event_sha256": "ad418958418b40225c3cf059e0e14b5558585502a6599f9743b29ef36b85326f",
+      "source_path_relative_to_workspace": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20240611_211000_q75/F4/D7_agent_codex_capacity_shield_optimizer_seed_3.json",
+      "archive_path": "D7_agent_codex_capacity_shield_optimizer_seed_3.json",
+      "sha256": "cec0b1e82affcb113f774f9550802cfc791f02f5d933843cae3d7f09c7e0d7ae",
+      "bytes": 2096316,
+      "independence_note": "D7 is replay-from-D6 and is not an independent result."
+    }
+  ],
+  "active_f4_runs_observed": [
+    {
+      "run_id": "evaluation/EV_20240611_211000_q75/F4/D5_live",
+      "last_event": "progress",
+      "timestamp_utc": "2026-10-27T13:55:53+00:00"
+    }
+  ],
+  "note": "F4 D6/D7 replay pair only. D7 is replay-from-D6, not independent. D5 remains active at capture; this is not a complete paired audit or method result."
+}

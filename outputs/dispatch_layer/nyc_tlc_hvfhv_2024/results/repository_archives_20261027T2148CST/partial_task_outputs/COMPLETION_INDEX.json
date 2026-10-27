@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "observed_at_local": "2026-10-27T21:48:40+08:00",
+  "checkpoint_type": "partial_completed_task_outputs",
+  "source_progress_path_relative_to_workspace": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/progress.jsonl",
+  "source_progress_sha256_at_capture": "6c53f79b86e01439b97544fe5886e8d446a6c87b3874b29f165f19a851e3a6dc",
+  "completed_method_outputs": [
+    {
+      "scenario_id": "EV_20240611_211000_q75",
+      "phase": "F4",
+      "method": "D2_agent_optimizer",
+      "run_id": "evaluation/EV_20240611_211000_q75/F4/D2",
+      "completion_status": "complete",
+      "return_code": 0,
+      "event_timestamp_utc": "2026-10-27T13:28:42+00:00",
+      "completion_event_sha256": "eddb01402a4f83929ffe4068093310ffa1a0fdc71fbaeb83d35255aa1dd1c999",
+      "source_path_relative_to_workspace": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20240611_211000_q75/F4/D2_agent_optimizer_seed_3.json",
+      "archive_path": "D2_agent_optimizer_seed_3.json",
+      "sha256": "6bbc2763acda5e514b2a54638a23915cccd7a4667f05778f02bc1b0d44380984",
+      "bytes": 1842201
+    },
+    {
+      "scenario_id": "EV_20240611_211000_q75",
+      "phase": "F4",
+      "method": "D8_agent_codex_nn_capacity_shield_optimizer",
+      "run_id": "evaluation/EV_20240611_211000_q75/F4/D8_live",
+      "completion_status": "complete",
+      "return_code": 0,
+      "event_timestamp_utc": "2026-10-27T13:34:59+00:00",
+      "completion_event_sha256": "16171cde2e1fefcfb20420caf3f4063b11c620acde5bb1db7bac4e709cb05b28",
+      "source_path_relative_to_workspace": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20240611_211000_q75/F4/D8_agent_codex_nn_capacity_shield_optimizer_seed_3.json",
+      "archive_path": "D8_agent_codex_nn_capacity_shield_optimizer_seed_3.json",
+      "sha256": "52b58e6c7c4e674d23fc762ccf4cee729de899a61ba95c16cb72ae920454b47e",
+      "bytes": 2709739
+    }
+  ],
+  "active_f4_runs_observed": [
+    {
+      "run_id": "evaluation/EV_20240611_211000_q75/F4/D5_live",
+      "last_event": "start",
+      "timestamp_utc": "2026-10-27T13:47:52+00:00"
+    }
+  ],
+  "note": "Incremental partial seed-3 checkpoint: D2 and D8 are terminal here; D0/D1 were archived in repository_archives_20261027T2128CST. Any active/replay task output is excluded. Not a paired audit or method conclusion."
+}

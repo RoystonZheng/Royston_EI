@@ -1,0 +1,83 @@
+{
+  "checkpoint_type": "partial completed task outputs; not a full batch result",
+  "observed_at_local": "2026-10-27T23:04:50+08:00",
+  "seed": 3,
+  "scenario_id": "EV_20240725_211000_q50",
+  "fleet_id": "F1",
+  "completed_results": [
+    {
+      "method": "D0_greedy",
+      "source_path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20240725_211000_q50/F1/D0_greedy_seed_3.json",
+      "archive_path": "D0_greedy_seed_3.json",
+      "sha256": "caaba4660c9ea375aafe7dd192da0c1e368df1e24c1a201fc0bff5541f49d388",
+      "size_bytes": 959795,
+      "run_id": "evaluation/EV_20240725_211000_q50/F1/D0_D1",
+      "return_code": 0,
+      "status": "complete",
+      "is_replay": false
+    },
+    {
+      "method": "D1_optimizer",
+      "source_path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20240725_211000_q50/F1/D1_optimizer_seed_3.json",
+      "archive_path": "D1_optimizer_seed_3.json",
+      "sha256": "81aebdeefeacf0a48ae76177e93dbb78c74af78d8f866b8c32e40ff7f76f60a7",
+      "size_bytes": 1344996,
+      "run_id": "evaluation/EV_20240725_211000_q50/F1/D0_D1",
+      "return_code": 0,
+      "status": "complete",
+      "is_replay": false
+    },
+    {
+      "method": "D2_agent_optimizer",
+      "source_path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20240725_211000_q50/F1/D2_agent_optimizer_seed_3.json",
+      "archive_path": "D2_agent_optimizer_seed_3.json",
+      "sha256": "f343bb4d3e15413d7d8fe063a38e96ebe4a6268cc45231b143e887f0c62563b6",
+      "size_bytes": 1432350,
+      "run_id": "evaluation/EV_20240725_211000_q50/F1/D2",
+      "return_code": 0,
+      "status": "complete",
+      "is_replay": false
+    },
+    {
+      "method": "D8_agent_codex_nn_capacity_shield_optimizer",
+      "source_path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20240725_211000_q50/F1/D8_agent_codex_nn_capacity_shield_optimizer_seed_3.json",
+      "archive_path": "D8_agent_codex_nn_capacity_shield_optimizer_seed_3.json",
+      "sha256": "0c905cff36581a83ed89bc68ba86bcc94019753e12b76a8d934f6a94dafd144e",
+      "size_bytes": 2123268,
+      "run_id": "evaluation/EV_20240725_211000_q50/F1/D8_live",
+      "return_code": 0,
+      "status": "complete",
+      "is_replay": false
+    },
+    {
+      "method": "D6_agent_codex_context_optimizer",
+      "source_path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20240725_211000_q50/F1/D6_agent_codex_context_optimizer_seed_3.json",
+      "archive_path": "D6_agent_codex_context_optimizer_seed_3.json",
+      "sha256": "1cc577024d9db1e442a10ba4f4be3e2233a2dca8fd202cd2f69996fa25c3837b",
+      "size_bytes": 1466207,
+      "run_id": "evaluation/EV_20240725_211000_q50/F1/D6_D7_replay",
+      "return_code": 0,
+      "status": "complete",
+      "is_replay": true
+    },
+    {
+      "method": "D7_agent_codex_capacity_shield_optimizer",
+      "source_path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20240725_211000_q50/F1/D7_agent_codex_capacity_shield_optimizer_seed_3.json",
+      "archive_path": "D7_agent_codex_capacity_shield_optimizer_seed_3.json",
+      "sha256": "ed93cb32ed60a0fcd58753ddbb6e9fd8593c8b1ca0b2a3baef867fb2f5f510b6",
+      "size_bytes": 1662519,
+      "run_id": "evaluation/EV_20240725_211000_q50/F1/D6_D7_replay",
+      "return_code": 0,
+      "status": "complete",
+      "is_replay": true
+    }
+  ],
+  "progress_cutoff_event": {
+    "timestamp_utc": "2026-10-27T15:04:27+00:00",
+    "event": "progress",
+    "run_id": "evaluation/EV_20240725_211000_q50/F1/D5_live",
+    "elapsed_seconds": 60.2,
+    "log_bytes": 0
+  },
+  "interpretation": "Completed cells and replay outputs only. Replay results are not independent live results. Any active run at the recorded cutoff is excluded. This is not a complete multi-month batch or aggregate performance comparison."
+}

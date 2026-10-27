@@ -1,0 +1,64 @@
+{
+  "checkpoint_type": "completed_tasks_during_active_batch",
+  "created_at_local": "2026-10-27T22:14:55+08:00",
+  "progress_file": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/progress.jsonl",
+  "task_runs": [
+    {
+      "run_id": "evaluation/EV_20240702_213000_q25/F1/D8_live",
+      "start_event_line": 860,
+      "start_timestamp_utc": "2026-10-27T14:03:32+00:00",
+      "finish_event_line": 862,
+      "finish_timestamp_utc": "2026-10-27T14:04:54+00:00",
+      "status": "complete",
+      "return_code": 0,
+      "result_file": "D8_agent_codex_nn_capacity_shield_optimizer_seed_3.json"
+    },
+    {
+      "run_id": "evaluation/EV_20240702_213000_q25/F1/D6_D7_replay",
+      "start_event_line": 863,
+      "start_timestamp_utc": "2026-10-27T14:04:54+00:00",
+      "finish_event_line": 866,
+      "finish_timestamp_utc": "2026-10-27T14:06:57+00:00",
+      "status": "complete",
+      "return_code": 0,
+      "result_file": "D6_agent_codex_context_optimizer_seed_3.json"
+    },
+    {
+      "run_id": "evaluation/EV_20240702_213000_q25/F1/D5_live",
+      "start_event_line": 867,
+      "start_timestamp_utc": "2026-10-27T14:06:57+00:00",
+      "finish_event_line": 870,
+      "finish_timestamp_utc": "2026-10-27T14:09:15+00:00",
+      "status": "complete",
+      "return_code": 0,
+      "result_file": "D5_pure_llm_direct_seed_3.json"
+    }
+  ],
+  "files": [
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20240702_213000_q25/F1/D8_agent_codex_nn_capacity_shield_optimizer_seed_3.json",
+      "bytes": 1963412,
+      "sha256": "807ffe4ce7b58ddaeb936b0e6e4f39bdfc0559c1ee95338cef0e9eb2e756f8d5"
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20240702_213000_q25/F1/D6_agent_codex_context_optimizer_seed_3.json",
+      "bytes": 1356227,
+      "sha256": "9d49b26bfc86c5baa53a083a71a0a7f9009c85cf6906105b2f1abfe0eb1032b0"
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20240702_213000_q25/F1/D7_agent_codex_capacity_shield_optimizer_seed_3.json",
+      "bytes": 1537250,
+      "sha256": "4ef8c9da9637a7be6e4048c8f7fd260ba6c36c88c6c99a13668eca7ea3958a4e"
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20240702_213000_q25/F1/D5_pure_llm_direct_seed_3.json",
+      "bytes": 1183054,
+      "sha256": "ff189a32c9e242e35bcf138e026dc1b97ed07bdb5a6442f44a3dc51d08f7a687"
+    }
+  ],
+  "limitations": [
+    "The seed-3 multi-month batch remains active.",
+    "D6/D7 output came from an exact-prompt replay; D7 is not an independent live run.",
+    "This checkpoint is not a paired audit, full batch, ranking, or performance conclusion."
+  ]
+}

@@ -1,0 +1,1 @@
+R4 point-in-time archive for the exact authorized external output root. Contains sanitized manifest status plus individually verified route_complete task audits/replays. No full-run snapshot or active outputs.

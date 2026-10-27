@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Codex CLI bounded dispatch context policy",
+  "type": "object",
+  "properties": {
+    "base": { "type": "number" },
+    "weights": {
+      "type": "array",
+      "items": { "type": "number" }
+    },
+    "reason": { "type": "string" }
+  },
+  "required": ["base", "weights", "reason"],
+  "additionalProperties": false
+}

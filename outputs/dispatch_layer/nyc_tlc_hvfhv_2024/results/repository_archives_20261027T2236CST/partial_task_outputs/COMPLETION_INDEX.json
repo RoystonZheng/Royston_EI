@@ -1,0 +1,56 @@
+{
+  "checkpoint_type": "completed_tasks_during_active_batch",
+  "created_at_local": "2026-10-27T22:36:18+08:00",
+  "progress_file": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/progress.jsonl",
+  "completed_runs": [
+    {
+      "run_id": "evaluation/EV_20240702_213000_q25/F2/D5_live",
+      "start_event_line": 889,
+      "start_timestamp_utc": "2026-10-27T14:21:14+00:00",
+      "finish_event_line": 893,
+      "finish_timestamp_utc": "2026-10-27T14:25:06+00:00",
+      "status": "complete",
+      "return_code": 0,
+      "result_files": [
+        "F2/D5_pure_llm_direct_seed_3.json"
+      ]
+    },
+    {
+      "run_id": "evaluation/EV_20240702_213000_q25/F4/D0_D1",
+      "start_event_line": 894,
+      "start_timestamp_utc": "2026-10-27T14:25:06+00:00",
+      "finish_event_line": 902,
+      "finish_timestamp_utc": "2026-10-27T14:32:23+00:00",
+      "status": "complete",
+      "return_code": 0,
+      "result_files": [
+        "F4/D0_greedy_seed_3.json",
+        "F4/D1_optimizer_seed_3.json"
+      ]
+    }
+  ],
+  "files": [
+    {
+      "file": "D5_pure_llm_direct_seed_3.json",
+      "bytes": 1263320,
+      "sha256": "c574ded1df5ad68b6112fd07225dc4c0c978cc874bad4739bfceea19859e6b5c",
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20240702_213000_q25/F2/D5_pure_llm_direct_seed_3.json"
+    },
+    {
+      "file": "D0_greedy_seed_3.json",
+      "bytes": 1050807,
+      "sha256": "ee7a9cdf8e6028457de464c4a2c451d23ee91f01aaa5c0d7132a1f0660a7c8e6",
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20240702_213000_q25/F4/D0_greedy_seed_3.json"
+    },
+    {
+      "file": "D1_optimizer_seed_3.json",
+      "bytes": 1433482,
+      "sha256": "889fe50870ef4a0a54f19a7357ab27d086a852af432c1cbe6c09e9ee5b5fe134",
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20240702_213000_q25/F4/D1_optimizer_seed_3.json"
+    }
+  ],
+  "limitations": [
+    "The seed-3 multi-month batch remains active; F4 D2 started after these tasks.",
+    "This partial checkpoint is not a paired audit, full batch, ranking, or performance conclusion."
+  ]
+}

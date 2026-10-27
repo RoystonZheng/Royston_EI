@@ -1,0 +1,1 @@
+Point-in-time R4 parent/worker status observation only. It records single reads of both manifests plus lock/PID state and worker log handles. No task outputs were copied. Parent and worker counters are separate; the formal batch remains incomplete.

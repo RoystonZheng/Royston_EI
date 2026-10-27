@@ -1,0 +1,1 @@
+Partial NYC dispatch checkpoint. COMPLETION_INDEX.json records each included stable completed file, source path, and SHA-256. D6/D7 are exact-prompt replay outputs and are identified as replay. The multi-month batch remains incomplete. D5 live was active at the recorded cutoff and is excluded. This checkpoint does not support an aggregate comparison.

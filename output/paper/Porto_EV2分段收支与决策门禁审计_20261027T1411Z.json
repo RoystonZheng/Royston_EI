@@ -1,0 +1,213 @@
+{
+  "schema": "porto_ev2_segment_economics_and_decision_gate_audit_v1",
+  "created_at_utc": "2026-10-27T14:11:30+00:00",
+  "status": "evidence_reconciled_r1_recovery_failed_r2_matrix_running_r4_partial_and_running",
+  "scope": [
+    "Porto R1 EV v2 10-seed two-objective matrix",
+    "Porto R2 EV v2 signed-net 10-seed LOWEST_ENERGY baseline",
+    "offline segment economics gates and runtime selector integration"
+  ],
+  "accounting_contract": {
+    "segment_net": "propulsion_draw - regenerated_energy + auxiliary_energy",
+    "billable_energy": "max(sum_of_signed_EV_v2_within_journey_segment, 0)",
+    "fare": "deadhead revenue known zero; passenger fare posted once per passenger journey segment when sourced; missing fare remains null",
+    "method_costs": "API/token/compute recorded once at method level, never duplicated by link/segment",
+    "currency": "carry explicit currency/source basis; monetary rank blocked where required values or full same-snapshot feasible candidate pool are absent"
+  },
+  "R1": {
+    "original_batch_status": "completed_with_gaps",
+    "original_matrix_summary_status": "completed_with_gaps",
+    "expected_cells": 20,
+    "completed_cells": 19,
+    "failed_cells": 1,
+    "failed_task_ids": [
+      "seed_02_fastest"
+    ],
+    "paired_complete_seed_count": 9,
+    "original_source_manifest_sha256": "bd00acdbafaf0d4df8260ab5111b89ca693f0ef8982e01241c7f5863647c9474",
+    "sidecar_manifest_sha256": "a8cc1bde9bea9ada6c0ba57b734492aff466c7f8473e6f21d5d858e144f74919",
+    "sidecar_gate_sha256": "997e4b45fcbe47d4e40d3d8ea7d23867353f19d9a7b87d8288a637fbefbc2e16",
+    "segment_rows": 3800,
+    "deadhead_segments": 1900,
+    "passenger_segments": 1900,
+    "signed_net_energy_kwh": 1869.003354438,
+    "billable_energy_kwh": 1869.003354438,
+    "electricity_cost_null_segments": 3800,
+    "passenger_fare_null_segments": 1900,
+    "known_zero_deadhead_revenue_segments": 1900,
+    "net_economic_cost_null_segments": 3800,
+    "per_link_energy_unavailable_segments": 3800,
+    "method_cost_rows": 2,
+    "method_api_cost_total": 0.0,
+    "method_compute_cost_null_rows": 2,
+    "time_money_gate": "blocked_missing_same_snapshot_complete_candidate_pool_and_passenger_fare",
+    "profiles": {
+      "time_priority_0_6_0_4": {
+        "time_weight": 0.6,
+        "money_weight": 0.4,
+        "status": "blocked"
+      },
+      "money_priority_0_4_0_6": {
+        "time_weight": 0.4,
+        "money_weight": 0.6,
+        "status": "blocked"
+      }
+    },
+    "runtime_selector_switched": false,
+    "interpretation": "EV2 segment energy is audited offline. FASTEST and LOWEST_ENERGY are separate dynamic executions, not a common same-snapshot candidate pool. Currency cost and weighted rankings are not available."
+  },
+  "R1_isolated_recovery": {
+    "attempt_manifest_path": "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/porto_hybrid_v1/derived/experiments/r1_dynamic_sumo_v1/formal_v5_energy_v2/isolated_recovery_20261027T135059Z/attempt_manifest.json",
+    "attempt_manifest_sha256": "278318d2382d385e5d45c5b24f97328da1c7346909812f1ec46d8d25bc999393",
+    "attempt_number": 2,
+    "status": "failed_or_incomplete",
+    "output_dir": "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/porto_hybrid_v1/derived/experiments/r1_dynamic_sumo_v1/formal_v5_energy_v2/isolated_recovery_20261027T135059Z/seed_2_fastest_attempt_02",
+    "started_at_utc": "2026-10-27T13:51:19.183300+00:00",
+    "original_outputs_preserved": true,
+    "frozen_runner_sha256_matches": true,
+    "frozen_protocol_sha256_matches": true,
+    "frozen_preflight_sha256_matches": true,
+    "third_attempt_allowed": false,
+    "finished_at_utc": "2026-10-27T14:05:50.946970+00:00",
+    "exit_code": 1,
+    "failure_reason": "SUMO run exceeded 24 simulated hours",
+    "tripinfo_sha256": "3e7230a529decea11a2fa77bbc6a7d975ce75a4d5fd05e54e59a049e125d9b57",
+    "third_attempt_started": false
+  },
+  "R2": {
+    "status": "completed_single_arm",
+    "completed_cells": 10,
+    "expected_cells": 10,
+    "orders_completed": 1000,
+    "segments": 2000,
+    "segment_types": {
+      "deadhead": 1000,
+      "passenger": 1000
+    },
+    "validator_passes": 2000,
+    "nonestimable_segments": 0,
+    "motion_trace_trips": 1981,
+    "max_abs_trace_energy_recompute_delta_wh": 0.0,
+    "max_abs_net_formula_delta_kwh": 3.3306690738754696e-16,
+    "max_abs_billable_rule_delta_kwh": 0.0,
+    "max_abs_electricity_proxy_delta_eur": 0.0,
+    "signed_net_energy_kwh": 933.80744206,
+    "billable_energy_kwh": 933.80744206,
+    "electricity_cost_eur_scenario_proxy": 280.142232618,
+    "electricity_tariff_eur_per_kwh": 0.3,
+    "electricity_tariff_basis": "frozen Porto scenario assumption EUR 0.30/kWh; not a market invoice",
+    "known_zero_deadhead_revenue_segments": 1000,
+    "passenger_fare_null_segments": 1000,
+    "link_energy_unavailable_segments": 2000,
+    "net_economic_cost_null_segments": 1000,
+    "method_cost_rows": 10,
+    "method_api_cost_total": 0.0,
+    "method_compute_cost_null_rows": 10,
+    "time_money_gate": "blocked_incomplete_candidate_data_and_candidate_pool",
+    "profiles": {
+      "time_priority_0_6_0_4": {
+        "time_weight": 0.6,
+        "money_weight": 0.4,
+        "status": "blocked"
+      },
+      "money_priority_0_4_0_6": {
+        "time_weight": 0.4,
+        "money_weight": 0.6,
+        "status": "blocked"
+      }
+    },
+    "runtime_selector_switched": false,
+    "candidate_pool_status": {
+      "status": "not_available",
+      "reason": "this batch records one selected route per OD from one method and does not contain the complete shared feasible alternatives from all methods for the same decision state"
+    },
+    "interpretation": "10/10 LOWEST_ENERGY traditional baseline only; no paired FASTEST arm or multi-route same-snapshot alternatives. €0.30/kWh is a scenario proxy, not invoice; cost totals omit passenger revenue.",
+    "batch_integrity_hashes_verified": true
+  },
+  "runtime_decision_integration": {
+    "time_money_scoring_callsite": "scripts/calculate_route_costs.py only (offline); route_experiment/decision.py defines scorer",
+    "R1_selector": "frozen FASTEST or LOWEST_ENERGY run objective",
+    "R2_selector": "frozen LOWEST_ENERGY signed-net path objective",
+    "online_time_money_selector_verified": false,
+    "weighted_rankings_emitted": false
+  },
+  "required_isolated_formal_variant": {
+    "preserve_existing_protocols": true,
+    "new_protocol_required": true,
+    "requirements": [
+      "freeze local electricity tariff and passenger fare source/schedule, or declare a clearly labeled sensitivity scenario",
+      "construct the full hard-feasible multi-route candidate pool at the same planning-time snapshot for each leg",
+      "use the same pool and frozen cost definitions across all compared methods",
+      "aggregate link/motion EV v2 energy to each journey segment before billing max(segment_net_kWh,0)",
+      "post passenger revenue once per passenger segment and deadhead revenue as zero",
+      "record model/API and compute expense once per method and declare currencies/source bases",
+      "emit rankings only when all monetary inputs and candidate feasibility evidence are complete"
+    ],
+    "not_authorized_by_this_audit": "No existing R1/R2 runner or historical result is changed; no R2 FASTEST matrix is added."
+  },
+  "source_hashes": {
+    "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/porto_hybrid_v1/derived/experiments/r1_dynamic_sumo_v1/formal_v5_energy_v2/batch_manifest.json": "bd00acdbafaf0d4df8260ab5111b89ca693f0ef8982e01241c7f5863647c9474",
+    "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/porto_hybrid_v1/derived/experiments/r1_dynamic_sumo_v1/formal_v5_energy_v2/matrix_summary.json": "9d549d095e4b0bb22800b532fad531b4cf66ef05b197ce78a3864efbb8d916c5",
+    "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/porto_hybrid_v1/derived/experiments/r1_dynamic_sumo_v1/formal_v5_energy_v2/completion_integrity_audit_v2.json": "39b8b1136de2486b259951fe4cb2bb93879a772a49f89607554a49c4f8623b60",
+    "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/porto_hybrid_v1/derived/experiments/r1_dynamic_sumo_v1/formal_v5_energy_v2/segment_economics_v5_sidecar_20261027T2120CST/manifest.json": "a8cc1bde9bea9ada6c0ba57b734492aff466c7f8473e6f21d5d858e144f74919",
+    "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/porto_hybrid_v1/derived/experiments/r1_dynamic_sumo_v1/formal_v5_energy_v2/segment_economics_v5_sidecar_20261027T2120CST/decision_gate_v5.json": "997e4b45fcbe47d4e40d3d8ea7d23867353f19d9a7b87d8288a637fbefbc2e16",
+    "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/porto_hybrid_v1/derived/experiments/r1_dynamic_sumo_v1/formal_v5_energy_v2/segment_economics_v5_sidecar_20261027T2120CST/segment_ledger_v5.jsonl": "45a2a66bdf936f0ca0beef25daa79d012748a93531a45e7859972e69582b06a4",
+    "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/porto_hybrid_v1/derived/experiments/r1_dynamic_sumo_v1/formal_v5_energy_v2/segment_economics_v5_sidecar_20261027T2120CST/method_costs_v5.jsonl": "55a5db89bb4005432591efd16e7d5d4368f40e3655adae6def169dfa7621e5c9",
+    "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/.worktrees/porto_r2_execute_20261025/derived/experiments/r2_dynamic_sumo_v1/porto_r2_ev2_signed_net_preflight_20261027T1801CST/segment_economics_v5_sidecar_20261027T2115CST/manifest.json": "d69a6ffe571373627092db3900474283fa4664fa54938e34c084a04df49b06a6",
+    "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/.worktrees/porto_r2_execute_20261025/derived/experiments/r2_dynamic_sumo_v1/porto_r2_ev2_signed_net_preflight_20261027T1801CST/segment_economics_v5_sidecar_20261027T2115CST/decision_gate.json": "d85897de912f98a8037604b3a390ddcd9955d375f776ba7975f31d47b1183513",
+    "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/.worktrees/porto_r2_execute_20261025/derived/experiments/r2_dynamic_sumo_v1/porto_r2_ev2_signed_net_preflight_20261027T1801CST/segment_economics_v5_sidecar_20261027T2115CST/method_costs.jsonl": "959fac4e1dcff128e5ef782464ac8034c2c2839f5e6441a612c8b05ae9860672",
+    "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/porto_hybrid_v1/derived/experiments/r1_dynamic_sumo_v1/formal_v5_energy_v2/isolated_recovery_20261027T135059Z/attempt_manifest.json": "278318d2382d385e5d45c5b24f97328da1c7346909812f1ec46d8d25bc999393",
+    "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/.worktrees/porto_r2_execute_20261025/derived/experiments/r2_dynamic_sumo_v1/porto_r2_ev2_signed_net_preflight_20261027T1801CST/segment_economics_v5_sidecar_20261027T2115CST/seed_0/journey_segments.jsonl": "1266a10e3ea7dfbaf9a99c2c704046fc7b4e9f20f95a2fc619c60979cde486e8",
+    "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/.worktrees/porto_r2_execute_20261025/derived/experiments/r2_dynamic_sumo_v1/porto_r2_ev2_signed_net_preflight_20261027T1801CST/segment_economics_v5_sidecar_20261027T2115CST/seed_1/journey_segments.jsonl": "2e56025bb45dda0982e8819fc3b916ff01922419748c3e746b28109aeeb7ccb1",
+    "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/.worktrees/porto_r2_execute_20261025/derived/experiments/r2_dynamic_sumo_v1/porto_r2_ev2_signed_net_preflight_20261027T1801CST/segment_economics_v5_sidecar_20261027T2115CST/seed_2/journey_segments.jsonl": "bdf0c868cf8a428948b93e753dd7f2ad10688f455138e194bf48f68b609327ff",
+    "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/.worktrees/porto_r2_execute_20261025/derived/experiments/r2_dynamic_sumo_v1/porto_r2_ev2_signed_net_preflight_20261027T1801CST/segment_economics_v5_sidecar_20261027T2115CST/seed_3/journey_segments.jsonl": "edd3e5074ce5997df297cd34f5100749a1a06f5fe6f2af4015074b2d6f278953",
+    "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/.worktrees/porto_r2_execute_20261025/derived/experiments/r2_dynamic_sumo_v1/porto_r2_ev2_signed_net_preflight_20261027T1801CST/segment_economics_v5_sidecar_20261027T2115CST/seed_4/journey_segments.jsonl": "4391e37dd1afa3aeb47dee4016b7c7163f6e7e378001d6e78370c285138b6136",
+    "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/.worktrees/porto_r2_execute_20261025/derived/experiments/r2_dynamic_sumo_v1/porto_r2_ev2_signed_net_preflight_20261027T1801CST/segment_economics_v5_sidecar_20261027T2115CST/seed_5/journey_segments.jsonl": "31cbc73bd4c519574c5f78acd0e745383cbb0f14ed908e4a4d2024dba4f53bb0",
+    "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/.worktrees/porto_r2_execute_20261025/derived/experiments/r2_dynamic_sumo_v1/porto_r2_ev2_signed_net_preflight_20261027T1801CST/segment_economics_v5_sidecar_20261027T2115CST/seed_6/journey_segments.jsonl": "3ce53968e99a98b2ff0dcd54efba18876106b135dc6fd1244b90e2357a1ee2f9",
+    "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/.worktrees/porto_r2_execute_20261025/derived/experiments/r2_dynamic_sumo_v1/porto_r2_ev2_signed_net_preflight_20261027T1801CST/segment_economics_v5_sidecar_20261027T2115CST/seed_7/journey_segments.jsonl": "8cec57da379936cf045282d79d4d175d65b9d2663ecc01ea5d2f15cc17336d49",
+    "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/.worktrees/porto_r2_execute_20261025/derived/experiments/r2_dynamic_sumo_v1/porto_r2_ev2_signed_net_preflight_20261027T1801CST/segment_economics_v5_sidecar_20261027T2115CST/seed_8/journey_segments.jsonl": "b04018e8374890bf7342d2d8b95be2e4b8f5833bad9712758af88eb7df305de0",
+    "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/.worktrees/porto_r2_execute_20261025/derived/experiments/r2_dynamic_sumo_v1/porto_r2_ev2_signed_net_preflight_20261027T1801CST/segment_economics_v5_sidecar_20261027T2115CST/seed_9/journey_segments.jsonl": "85f6e974fcee064f66ebb729e7e11f36cf8d0fb1ef939d9a341ecdd65aad8dde",
+    "/Users/didi/Documents/personalcodexfile/第二次课/route_experiment/decision.py": "6b383157aa3287faa0049f13bbf0ff7765e903367a63305fd826e89dc83a0375",
+    "/Users/didi/Documents/personalcodexfile/第二次课/scripts/calculate_route_costs.py": "8a8883a97ce19f80b9fad901592c37ffcc9a79df90b0d70f3ad3c76badfe459c",
+    "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/.worktrees/porto_r2_execute_20261025/derived/experiments/r2_dynamic_sumo_v1/porto_r2_ev2_signed_net_preflight_20261027T1801CST/batch_manifest.json": "0e62a607ac69f29c04521e9bfc42014ebbcab69da2d5d5fa3e205288b17debbb",
+    "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/.worktrees/porto_r2_execute_20261025/derived/experiments/r2_dynamic_sumo_v1/porto_r2_ev2_signed_net_preflight_20261027T1801CST/batch_summary.json": "a0ac428d1da60e1faa0a17c5f7e503f31b508c6786a5fedccd265ae9d2dd709d",
+    "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/porto_hybrid_v1/derived/experiments/r1_dynamic_sumo_v1/formal_v5_energy_v2/isolated_recovery_20261027T135059Z/runner.log": "b39f6d0aaa112a632cb3b2aa49b1759f1e84d359cb301db3add682c3f9a1370f",
+    "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/.worktrees/porto_r2_execute_20261025/derived/experiments/r2_dynamic_sumo_v1/porto_r2_traditional_20261027T135913Z/batch_manifest.json": "58251930a540da4745797a3ae429b62d025327340181dd68a6eea08d9ddc6d36",
+    "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/manifest.json": "63df0a891ea1162ba95ce4057ff5b46bc51bee2b82c801a465a66acd3ae24927",
+    "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_01/manifest.json": "16873dba1387151112b3768056b1caa532190aff87ee6ff6390178200d45cf70"
+  },
+  "R2_parallel_run_observation": {
+    "run_id": "porto_r2_traditional_20261027T135913Z",
+    "worktree": "/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/.worktrees/porto_r2_execute_20261025",
+    "batch_manifest_sha256": "58251930a540da4745797a3ae429b62d025327340181dd68a6eea08d9ddc6d36",
+    "status": "traditional_matrix_running",
+    "expected_cells": 20,
+    "started_cells": 5,
+    "terminal_cells": 5,
+    "selection_objectives": [
+      "FASTEST",
+      "LOWEST_ENERGY"
+    ],
+    "llm_model_calls": 0,
+    "weighted_net_cost_scoring_status": "blocked_missing_passenger_fare_and_complete_predeclared_candidate_pool",
+    "note": "Observed existing run in a separate managed worktree; left untouched. Separate from the completed R2 10/10 LOWEST_ENERGY baseline."
+  },
+  "R4_latest_observation": {
+    "root_manifest_sha256": "63df0a891ea1162ba95ce4057ff5b46bc51bee2b82c801a465a66acd3ae24927",
+    "root_status": "stopped_task_finalization_error",
+    "root_recorded_requests": 5017,
+    "route_complete": 19,
+    "failed": 20,
+    "ready": 5,
+    "pending": 85,
+    "delivery_unknown": 19,
+    "latest_failed_task": "formal-task-0000-boundary",
+    "latest_error": "attempt_trace_missing_without_partial_response_evidence",
+    "worker_01_manifest_sha256": "16873dba1387151112b3768056b1caa532190aff87ee6ff6390178200d45cf70",
+    "worker_01_status": "running",
+    "worker_01_current_task": "formal-task-0009-feasible",
+    "worker_01_recorded_requests": 801,
+    "worker_01_in_flight_request_number": 4,
+    "note": "Separate worker shard remains active under detached screen/caffeinate. Root and shard counts are not additive until formal reconciliation; failed/unknown requests were not replayed."
+  }
+}

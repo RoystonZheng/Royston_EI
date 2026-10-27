@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Codex CLI direct dispatch assignment",
+  "type": "object",
+  "properties": {
+    "selected_candidate_ids": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "required": ["selected_candidate_ids"],
+  "additionalProperties": false
+}

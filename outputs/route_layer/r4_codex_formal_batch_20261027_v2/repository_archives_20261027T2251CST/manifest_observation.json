@@ -1,0 +1,60 @@
+{
+  "observation_type": "single-read parent/worker manifests; individual terminal tasks only",
+  "observed_at_local": "2026-10-27T22:51:00+08:00",
+  "source_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2",
+  "parent_manifest_sha256": "b698ecb76594da73cd95e525210ffacc561de98d79e9f13a4990577865726a2e",
+  "parent_manifest_status": "running",
+  "parent_manifest_updated_at_utc": "2026-10-27T14:43:53.270086+00:00",
+  "parent_task_status_counts": {
+    "route_complete": 19,
+    "failed": 25,
+    "ready": 6,
+    "pending": 79
+  },
+  "parent_model_requests_used": 5095,
+  "parent_unknown_delivery": 19,
+  "worker_01_manifest_sha256": "8f997c82cd6dfa3aa5e8b15d9d5098a0ec5c0c69f8fb5fef5176d452a432a461",
+  "worker_01_status": "stopped_provider_or_tool_contract_failure",
+  "worker_01_updated_at_utc": "2026-10-27T14:48:56.343761+00:00",
+  "worker_01_model_requests_used": 877,
+  "worker_01_unknown_delivery": 4,
+  "worker_01_current_task_id": "task-0003-0004",
+  "worker_01_log_open_pids": [],
+  "execution_locks": [
+    {
+      "path": ".r4_model_execution.lock",
+      "open_pids": []
+    },
+    {
+      "path": "parallel_workers/worker_00/.r4_model_execution.lock",
+      "open_pids": []
+    },
+    {
+      "path": "parallel_workers/worker_01/.r4_model_execution.lock",
+      "open_pids": []
+    },
+    {
+      "path": "parallel_workers/worker_02/.r4_model_execution.lock",
+      "open_pids": []
+    },
+    {
+      "path": "parallel_workers/worker_03/.r4_model_execution.lock",
+      "open_pids": []
+    },
+    {
+      "path": "parallel_workers/worker_recovery/.r4_model_execution.lock",
+      "open_pids": []
+    },
+    {
+      "path": "parallel_workers/worker_recovery_addendum/.r4_model_execution.lock",
+      "open_pids": []
+    },
+    {
+      "path": "parallel_workers/worker_recovery_addendum2/.r4_model_execution.lock",
+      "open_pids": []
+    }
+  ],
+  "terminal_route_tasks_archived": 19,
+  "active_task_outputs_copied": false,
+  "interpretation": "This is a point-in-time partial archive. Only per-task final audit and replay files listed as route_complete were copied; the batch is not complete."
+}

@@ -1,0 +1,1 @@
+Single-read parent/worker status summary from the exact authorized R4 output directory. Root and worker counters remain separate; no active R4 task output is included. The overall batch remains incomplete.

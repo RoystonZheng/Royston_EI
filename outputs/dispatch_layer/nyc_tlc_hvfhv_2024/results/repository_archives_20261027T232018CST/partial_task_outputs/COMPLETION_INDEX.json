@@ -1,0 +1,72 @@
+{
+  "checkpoint_type": "partial completed task outputs; not a full batch result",
+  "observed_at_local": "2026-10-27T23:20:18+08:00",
+  "seed": 3,
+  "scenario_id": "EV_20240725_211000_q50",
+  "fleet_id": "F2 plus prior F4 D5",
+  "completed_results": [
+    {
+      "method": "D5_pure_llm_direct",
+      "source_path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20240702_213000_q25/F4/D5_pure_llm_direct_seed_3.json",
+      "archive_path": "D5_pure_llm_direct_seed_3.json",
+      "sha256": "ce0efd9878546ce11fa8330382be72dd0f025a13a8b436e58d70358f086f16dd",
+      "size_bytes": 1491468,
+      "run_id": "evaluation/EV_20240702_213000_q25/F4/D5_live",
+      "return_code": 0,
+      "status": "complete",
+      "is_replay": false
+    },
+    {
+      "method": "D0_greedy",
+      "source_path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20240725_211000_q50/F2/D0_greedy_seed_3.json",
+      "archive_path": "D0_greedy_seed_3.json",
+      "sha256": "a564f0c943790e83984f37e910b5155fa090284b9c48259013817aa8c39fc63e",
+      "size_bytes": 1003454,
+      "run_id": "evaluation/EV_20240725_211000_q50/F2/D0_D1",
+      "return_code": 0,
+      "status": "complete",
+      "is_replay": false
+    },
+    {
+      "method": "D1_optimizer",
+      "source_path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20240725_211000_q50/F2/D1_optimizer_seed_3.json",
+      "archive_path": "D1_optimizer_seed_3.json",
+      "sha256": "325e91f5868ce08a34af145656a125dbec8ed1a548ae6da6fa4ef0d2c80ec349",
+      "size_bytes": 1394270,
+      "run_id": "evaluation/EV_20240725_211000_q50/F2/D0_D1",
+      "return_code": 0,
+      "status": "complete",
+      "is_replay": false
+    },
+    {
+      "method": "D2_agent_optimizer",
+      "source_path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20240725_211000_q50/F2/D2_agent_optimizer_seed_3.json",
+      "archive_path": "D2_agent_optimizer_seed_3.json",
+      "sha256": "117dde508c80f3e323812b39b4ede12c4f44aa1d14494a36c945b22f7d368488",
+      "size_bytes": 1482832,
+      "run_id": "evaluation/EV_20240725_211000_q50/F2/D2",
+      "return_code": 0,
+      "status": "complete",
+      "is_replay": false
+    },
+    {
+      "method": "D8_agent_codex_nn_capacity_shield_optimizer",
+      "source_path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20240725_211000_q50/F2/D8_agent_codex_nn_capacity_shield_optimizer_seed_3.json",
+      "archive_path": "D8_agent_codex_nn_capacity_shield_optimizer_seed_3.json",
+      "sha256": "e919bf1252822dc579e86483eccb8ec1b11ed8dd59f5652b143c07d15564e9da",
+      "size_bytes": 2202056,
+      "run_id": "evaluation/EV_20240725_211000_q50/F2/D8_live",
+      "return_code": 0,
+      "status": "complete",
+      "is_replay": false
+    }
+  ],
+  "progress_cutoff_event": {
+    "timestamp_utc": "2026-10-27T15:19:50+00:00",
+    "event": "progress",
+    "run_id": "evaluation/EV_20240725_211000_q50/F2/D6_D7_replay",
+    "elapsed_seconds": 180.5,
+    "log_bytes": 0
+  },
+  "interpretation": "Only successful closed results are included. D6/D7 replay was active at cutoff and excluded. Replay outputs are not independent live results. The multi-month batch is incomplete; no aggregate performance comparison is claimed."
+}

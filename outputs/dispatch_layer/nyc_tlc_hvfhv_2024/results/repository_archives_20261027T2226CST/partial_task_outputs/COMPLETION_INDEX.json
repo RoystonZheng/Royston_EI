@@ -1,0 +1,57 @@
+{
+  "checkpoint_type": "completed_tasks_during_active_batch",
+  "created_at_local": "2026-10-27T22:26:29+08:00",
+  "progress_file": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/progress.jsonl",
+  "completed_runs": [
+    {
+      "run_id": "evaluation/EV_20240702_213000_q25/F2/D8_live",
+      "start_event_line": 880,
+      "start_timestamp_utc": "2026-10-27T14:15:07+00:00",
+      "finish_event_line": 883,
+      "finish_timestamp_utc": "2026-10-27T14:17:20+00:00",
+      "status": "complete",
+      "return_code": 0,
+      "result_files": [
+        "D8_agent_codex_nn_capacity_shield_optimizer_seed_3.json"
+      ]
+    },
+    {
+      "run_id": "evaluation/EV_20240702_213000_q25/F2/D6_D7_replay",
+      "start_event_line": 884,
+      "start_timestamp_utc": "2026-10-27T14:17:20+00:00",
+      "finish_event_line": 888,
+      "finish_timestamp_utc": "2026-10-27T14:21:14+00:00",
+      "status": "complete",
+      "return_code": 0,
+      "result_files": [
+        "D6_agent_codex_context_optimizer_seed_3.json",
+        "D7_agent_codex_capacity_shield_optimizer_seed_3.json"
+      ]
+    }
+  ],
+  "files": [
+    {
+      "file": "D8_agent_codex_nn_capacity_shield_optimizer_seed_3.json",
+      "bytes": 2081061,
+      "sha256": "8918c6bf59b2acde8e23261f5ae5c3dd56b96936b5c5cd3b3a8fb9a74c5abb31",
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20240702_213000_q25/F2/D8_agent_codex_nn_capacity_shield_optimizer_seed_3.json"
+    },
+    {
+      "file": "D6_agent_codex_context_optimizer_seed_3.json",
+      "bytes": 1433447,
+      "sha256": "5905b393f2d8fe5700ba62c33e073f20b6fc265b1c2e19980fb57875a055a51d",
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20240702_213000_q25/F2/D6_agent_codex_context_optimizer_seed_3.json"
+    },
+    {
+      "file": "D7_agent_codex_capacity_shield_optimizer_seed_3.json",
+      "bytes": 1619567,
+      "sha256": "4a6b56d2d3f56fc62c960d10aa0766f89e672250e8cc7b481a12710c6b3303bf",
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20240702_213000_q25/F2/D7_agent_codex_capacity_shield_optimizer_seed_3.json"
+    }
+  ],
+  "limitations": [
+    "NYC seed-3 multi-month batch remains active; F2 D5 had started after these tasks.",
+    "D6/D7 are exact-prompt replay ablations; D7 is not an independent live run.",
+    "This partial checkpoint is not a paired audit, full batch, ranking, or performance conclusion."
+  ]
+}

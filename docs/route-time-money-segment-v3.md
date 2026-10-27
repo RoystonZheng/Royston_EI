@@ -1,3 +1,5 @@
+> Historical specification: replaced by [route-time-money-segment-v4.md](route-time-money-segment-v4.md). Existing v3 sidecars remain preserved.
+
 # Route time and money decision model v3
 
 This is the current specification for `route_experiment/decision.py` version `route_time_money_segment_v3_billable_net_energy`. It defines a route decision rule and an auditable segment ledger. It does not establish full fleet profitability.
