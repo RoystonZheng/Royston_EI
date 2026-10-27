@@ -1,0 +1,1543 @@
+{
+  "schema_version": "nyc_dispatch_energy_recalculation_v2",
+  "recalculation_method": "fixed_assignment_route_reconstruction_v2_online_ev2_reconciliation_virtual_pickup_segment",
+  "recalculation_script_sha256": "e15bea9197790c24830f230c8279e0ee4038e62c318c48c487ded6d4b9c1dab3",
+  "status": "offline_recalculated_fixed_dispatch_assignments",
+  "source_result": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_lexicographic_v2_20261027/seed_0/evaluation/EV_20240330_200500_q75/F1/D5_pure_llm_direct_seed_0.json",
+  "source_result_sha256": "e1f1792f64c56e8fb01360327a16aaaee445692a1a9364f5f1fad25f5991cb58",
+  "scenario_id": "EV_20240330_200500_q75",
+  "cohort": "evaluation",
+  "fleet_id": "F1",
+  "seed": 0,
+  "method_name": "D5_pure_llm_direct",
+  "assignment_count": 13,
+  "input_hashes": {
+    "scenario_json": "a3c4ad0295ea67c17255618dd3905f40a44b8b5177f1629c94dba8de73a488d1",
+    "orders_json": "353f047e17d48936c77b8721d0dff488bdfc9ec08522aa04a34064ad5ae9fd7c",
+    "zone_od_cost_matrix": "2be04d3d22099acbb5ee95b3d0e3aedf41fec63fe2177da7b21c12b2e8906d81"
+  },
+  "energy_model": {
+    "version": "ev_longitudinal_v2",
+    "profile_id": "generic_reference_ev_v1",
+    "profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee",
+    "trace_basis": "zone_od_medians plus synthetic centroid pickup proxy",
+    "limitations": [
+      "not calibrated to a production vehicle or measured EV telemetry",
+      "NYC dataset has no road-level pickup trajectory or time-varying congestion trace",
+      "grade and signal delay are missing from zone OD edges; grade is treated as flat",
+      "selected dispatches remain the original decisions and may depend on the incomplete online pickup energy feature"
+    ]
+  },
+  "decision_energy_dependency": "candidate_energy_is_visible_to_the_llm_but_no_deterministic_energy_objective_is_applied",
+  "selection_correction_status": "not_applied_fixed_assignments_only",
+  "online_ev2_reconciliation": {
+    "status": "passed",
+    "stored_total_energy_kwh": 2.9925116286143303,
+    "reconstructed_online_ev2_total_energy_kwh": 2.9925116286143303,
+    "energy_delta_kwh": 0.0,
+    "stored_total_empty_distance_m": 7110.887090992347,
+    "reconstructed_total_empty_distance_m": 7110.887090992347,
+    "empty_distance_delta_m": 0.0
+  },
+  "metrics": {
+    "stored_online_ev_longitudinal_v2_total_energy_kwh": 2.9925116286143303,
+    "reconstructed_online_ev_longitudinal_v2_total_energy_kwh": 2.9925116286143303,
+    "corrected_fixed_assignment_ev_longitudinal_v2_total_energy_kwh": 3.7442201211164563,
+    "pickup_proxy_correction_kwh": 0.751708492502126,
+    "components": {
+      "net_kwh": 3.7442201211164563,
+      "pickup_propulsion_draw_kwh": 0.4790510628789483,
+      "pickup_regenerated_kwh": 0.05315997445984739,
+      "pickup_auxiliary_kwh": 0.3258174040830247,
+      "pickup_rolling_wheel_kwh": 0.33123640923168024,
+      "pickup_aerodynamic_wheel_kwh": 0.018124971267299967,
+      "pickup_grade_wheel_kwh": 0.0,
+      "pickup_acceleration_wheel_kwh": 0.0,
+      "pickup_drive_time_sec": 1466.1783183736106,
+      "pickup_distance_m": 7110.887090992329,
+      "missing_grade_steps": 6370,
+      "regen_power_capped_steps": 0,
+      "ride_propulsion_draw_kwh": 1.4067231528530146,
+      "ride_regenerated_kwh": 0.025305407953905984,
+      "ride_auxiliary_kwh": 1.611093883715222,
+      "ride_rolling_wheel_kwh": 1.1958756227664316,
+      "ride_aerodynamic_wheel_kwh": 0.03124381794912244,
+      "ride_grade_wheel_kwh": 0.0,
+      "ride_acceleration_wheel_kwh": 4.336808689942018e-19,
+      "ride_drive_time_sec": 7249.9224767185,
+      "ride_distance_m": 24697.797695999998
+    },
+    "original_non_energy_metrics": {
+      "experiment_run_id": "run-seed-0",
+      "method_name": "D5_pure_llm_direct",
+      "seed": 0,
+      "map_id": "nyc_tlc_zone_od_proxy_v1",
+      "vehicle_count": 12,
+      "order_count": 565,
+      "served_orders": 13,
+      "unserved_orders": 552,
+      "cancelled_orders": 0,
+      "service_rate": 0.023008849557522124,
+      "average_pickup_wait_sec": 127.70595524603611,
+      "p95_pickup_wait_sec": 298.0,
+      "max_pickup_wait_sec": 298.0,
+      "total_empty_distance_m": 7110.887090992347,
+      "total_energy_kwh": 2.9925116286143303,
+      "total_dispatch_rounds": 507,
+      "total_llm_calls": 7,
+      "total_llm_input_tokens": 126604,
+      "total_llm_cached_input_tokens": 88704,
+      "total_llm_output_tokens": 1018,
+      "total_llm_tokens": 127622,
+      "llm_usage_status": "available_best_effort",
+      "total_codex_cli_invocations": 7,
+      "total_api_cost": null,
+      "total_api_cost_usd": null,
+      "total_codex_standard_credit_equivalent": 0.264392,
+      "total_api_equivalent_usd": 0.010575679999999999,
+      "codex_cost_estimate_status": "estimated_from_official_standard_rate_card",
+      "total_decision_time_ms": 126563.29848100003,
+      "optimizer_time_ms": 0.0,
+      "candidate_count_before_filter": 1333983,
+      "candidate_count_after_filter": 1333983,
+      "fallback_count": 0,
+      "commitment_violations": 0,
+      "status_counts": {
+        "completed": 13,
+        "unserved": 552
+      }
+    }
+  },
+  "assignments": [
+    {
+      "dispatch_round_id": "round-0000",
+      "snapshot_time_sec": 0.0,
+      "vehicle_id": "EV_20240330_200500_q75-F1-001",
+      "order_id": "raw/fhvhv_tripdata_2024-03.parquet#20437738",
+      "candidate_type": "immediate_pickup",
+      "source_node_id": "zone_79",
+      "pickup_route": {
+        "reason": "synthetic_zone_centroid_pickup_proxy",
+        "distance_m": 300.0,
+        "duration_sec": 60.0,
+        "node_sequence": [
+          "zone_79",
+          "zone_79"
+        ],
+        "edge_sequence": [],
+        "energy_trace_basis": "synthetic_centroid_proxy_virtual_flat_edge"
+      },
+      "ride_route": {
+        "distance_m": 1625.4374400000002,
+        "duration_sec": 506.0,
+        "node_sequence": [
+          "zone_79",
+          "zone_148"
+        ],
+        "edge_sequence": [
+          "od_79_148"
+        ],
+        "energy_trace_basis": "saved_training_period_zone_od_edge"
+      },
+      "ev_longitudinal_v2_energy": {
+        "net_kwh": 0.2370874865587537,
+        "online_net_kwh": 0.20373819039912294,
+        "pickup": {
+          "distance_m": 300.0,
+          "drive_time_sec": 63.384484116475704,
+          "signal_idle_time_sec": 0.0,
+          "rolling_wheel_kwh": 0.013974476250000005,
+          "aerodynamic_wheel_kwh": 0.0007523281232986299,
+          "grade_wheel_kwh": 0.0,
+          "acceleration_wheel_kwh": 0.0,
+          "propulsion_draw_kwh": 0.023352849161962008,
+          "regenerated_kwh": 0.004088993917103652,
+          "auxiliary_kwh": 0.014085440914772394,
+          "net_kwh": 0.033349296159630754,
+          "regen_power_capped_steps": 0,
+          "missing_grade_steps": 60,
+          "trace_fidelity": "estimated_from_route_edge_conditions",
+          "model_version": "ev_longitudinal_v2",
+          "profile_id": "generic_reference_ev_v1",
+          "profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee",
+          "edge_breakdown": [
+            {
+              "edge_id": "synthetic_pickup_proxy",
+              "distance_m": 300.0,
+              "energy_kwh": 0.033349296159630754,
+              "drive_time_sec": 63.384484116475704,
+              "signal_idle_time_sec": 0.0,
+              "propulsion_draw_kwh": 0.023352849161962008,
+              "regenerated_kwh": 0.004088993917103652,
+              "auxiliary_kwh": 0.014085440914772394,
+              "rolling_wheel_kwh": 0.013974476250000005,
+              "aerodynamic_wheel_kwh": 0.0007523281232986299,
+              "grade_wheel_kwh": 0.0,
+              "acceleration_wheel_kwh": 0.0,
+              "missing_grade_steps": 60,
+              "trace_fidelity": "estimated_from_route_edge_conditions"
+            }
+          ]
+        },
+        "ride": {
+          "distance_m": 1625.437439999989,
+          "drive_time_sec": 509.10429447853204,
+          "signal_idle_time_sec": 0.0,
+          "rolling_wheel_kwh": 0.07870422435044401,
+          "aerodynamic_wheel_kwh": 0.001735608014314535,
+          "grade_wheel_kwh": 0.0,
+          "acceleration_wheel_kwh": 0.0,
+          "propulsion_draw_kwh": 0.09233255831357651,
+          "regenerated_kwh": 0.0017286555763488124,
+          "auxiliary_kwh": 0.11313428766189523,
+          "net_kwh": 0.20373819039912294,
+          "regen_power_capped_steps": 0,
+          "missing_grade_steps": 326,
+          "trace_fidelity": "estimated_from_route_edge_conditions",
+          "model_version": "ev_longitudinal_v2",
+          "profile_id": "generic_reference_ev_v1",
+          "profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee",
+          "edge_breakdown": [
+            {
+              "edge_id": "od_79_148",
+              "distance_m": 1625.437439999989,
+              "energy_kwh": 0.20373819039912294,
+              "drive_time_sec": 509.10429447853204,
+              "signal_idle_time_sec": 0.0,
+              "propulsion_draw_kwh": 0.09233255831357651,
+              "regenerated_kwh": 0.0017286555763488124,
+              "auxiliary_kwh": 0.11313428766189523,
+              "rolling_wheel_kwh": 0.07870422435044401,
+              "aerodynamic_wheel_kwh": 0.001735608014314535,
+              "grade_wheel_kwh": 0.0,
+              "acceleration_wheel_kwh": 0.0,
+              "missing_grade_steps": 326,
+              "trace_fidelity": "estimated_from_route_edge_conditions"
+            }
+          ]
+        }
+      },
+      "start_time_sec": 0.0
+    },
+    {
+      "dispatch_round_id": "round-0000",
+      "snapshot_time_sec": 0.0,
+      "vehicle_id": "EV_20240330_200500_q75-F1-006",
+      "order_id": "raw/fhvhv_tripdata_2024-03.parquet#20440498",
+      "candidate_type": "immediate_pickup",
+      "source_node_id": "zone_163",
+      "pickup_route": {
+        "reason": "synthetic_zone_centroid_pickup_proxy",
+        "distance_m": 300.0,
+        "duration_sec": 60.0,
+        "node_sequence": [
+          "zone_163",
+          "zone_163"
+        ],
+        "edge_sequence": [],
+        "energy_trace_basis": "synthetic_centroid_proxy_virtual_flat_edge"
+      },
+      "ride_route": {
+        "distance_m": 2124.33408,
+        "duration_sec": 581.0,
+        "node_sequence": [
+          "zone_163",
+          "zone_143"
+        ],
+        "edge_sequence": [
+          "od_163_143"
+        ],
+        "energy_trace_basis": "saved_training_period_zone_od_edge"
+      },
+      "ev_longitudinal_v2_energy": {
+        "net_kwh": 0.2822895235793721,
+        "online_net_kwh": 0.2489402274197413,
+        "pickup": {
+          "distance_m": 300.0,
+          "drive_time_sec": 63.384484116475704,
+          "signal_idle_time_sec": 0.0,
+          "rolling_wheel_kwh": 0.013974476250000005,
+          "aerodynamic_wheel_kwh": 0.0007523281232986299,
+          "grade_wheel_kwh": 0.0,
+          "acceleration_wheel_kwh": 0.0,
+          "propulsion_draw_kwh": 0.023352849161962008,
+          "regenerated_kwh": 0.004088993917103652,
+          "auxiliary_kwh": 0.014085440914772394,
+          "net_kwh": 0.033349296159630754,
+          "regen_power_capped_steps": 0,
+          "missing_grade_steps": 60,
+          "trace_fidelity": "estimated_from_route_edge_conditions",
+          "model_version": "ev_longitudinal_v2",
+          "profile_id": "generic_reference_ev_v1",
+          "profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee",
+          "edge_breakdown": [
+            {
+              "edge_id": "synthetic_pickup_proxy",
+              "distance_m": 300.0,
+              "energy_kwh": 0.033349296159630754,
+              "drive_time_sec": 63.384484116475704,
+              "signal_idle_time_sec": 0.0,
+              "propulsion_draw_kwh": 0.023352849161962008,
+              "regenerated_kwh": 0.004088993917103652,
+              "auxiliary_kwh": 0.014085440914772394,
+              "rolling_wheel_kwh": 0.013974476250000005,
+              "aerodynamic_wheel_kwh": 0.0007523281232986299,
+              "grade_wheel_kwh": 0.0,
+              "acceleration_wheel_kwh": 0.0,
+              "missing_grade_steps": 60,
+              "trace_fidelity": "estimated_from_route_edge_conditions"
+            }
+          ]
+        },
+        "ride": {
+          "distance_m": 2124.3340799999946,
+          "drive_time_sec": 583.9233141951705,
+          "signal_idle_time_sec": 0.0,
+          "rolling_wheel_kwh": 0.1028609664778077,
+          "aerodynamic_wheel_kwh": 0.002941343769788822,
+          "grade_wheel_kwh": 0.0,
+          "acceleration_wheel_kwh": 4.336808689942018e-19,
+          "propulsion_draw_kwh": 0.12146503438792036,
+          "regenerated_kwh": 0.0022855434559947074,
+          "auxiliary_kwh": 0.12976073648781564,
+          "net_kwh": 0.2489402274197413,
+          "regen_power_capped_steps": 0,
+          "missing_grade_steps": 425,
+          "trace_fidelity": "estimated_from_route_edge_conditions",
+          "model_version": "ev_longitudinal_v2",
+          "profile_id": "generic_reference_ev_v1",
+          "profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee",
+          "edge_breakdown": [
+            {
+              "edge_id": "od_163_143",
+              "distance_m": 2124.3340799999946,
+              "energy_kwh": 0.2489402274197413,
+              "drive_time_sec": 583.9233141951705,
+              "signal_idle_time_sec": 0.0,
+              "propulsion_draw_kwh": 0.12146503438792036,
+              "regenerated_kwh": 0.0022855434559947074,
+              "auxiliary_kwh": 0.12976073648781564,
+              "rolling_wheel_kwh": 0.1028609664778077,
+              "aerodynamic_wheel_kwh": 0.002941343769788822,
+              "grade_wheel_kwh": 0.0,
+              "acceleration_wheel_kwh": 4.336808689942018e-19,
+              "missing_grade_steps": 425,
+              "trace_fidelity": "estimated_from_route_edge_conditions"
+            }
+          ]
+        }
+      },
+      "start_time_sec": 0.0
+    },
+    {
+      "dispatch_round_id": "round-0000",
+      "snapshot_time_sec": 0.0,
+      "vehicle_id": "EV_20240330_200500_q75-F1-012",
+      "order_id": "raw/fhvhv_tripdata_2024-03.parquet#20458225",
+      "candidate_type": "immediate_pickup",
+      "source_node_id": "zone_234",
+      "pickup_route": {
+        "reason": "synthetic_zone_centroid_pickup_proxy",
+        "distance_m": 300.0,
+        "duration_sec": 60.0,
+        "node_sequence": [
+          "zone_234",
+          "zone_234"
+        ],
+        "edge_sequence": [],
+        "energy_trace_basis": "synthetic_centroid_proxy_virtual_flat_edge"
+      },
+      "ride_route": {
+        "distance_m": 1673.71776,
+        "duration_sec": 512.5,
+        "node_sequence": [
+          "zone_234",
+          "zone_186"
+        ],
+        "edge_sequence": [
+          "od_234_186"
+        ],
+        "energy_trace_basis": "saved_training_period_zone_od_edge"
+      },
+      "ev_longitudinal_v2_energy": {
+        "net_kwh": 0.24128837232157088,
+        "online_net_kwh": 0.20793907616194013,
+        "pickup": {
+          "distance_m": 300.0,
+          "drive_time_sec": 63.384484116475704,
+          "signal_idle_time_sec": 0.0,
+          "rolling_wheel_kwh": 0.013974476250000005,
+          "aerodynamic_wheel_kwh": 0.0007523281232986299,
+          "grade_wheel_kwh": 0.0,
+          "acceleration_wheel_kwh": 0.0,
+          "propulsion_draw_kwh": 0.023352849161962008,
+          "regenerated_kwh": 0.004088993917103652,
+          "auxiliary_kwh": 0.014085440914772394,
+          "net_kwh": 0.033349296159630754,
+          "regen_power_capped_steps": 0,
+          "missing_grade_steps": 60,
+          "trace_fidelity": "estimated_from_route_edge_conditions",
+          "model_version": "ev_longitudinal_v2",
+          "profile_id": "generic_reference_ev_v1",
+          "profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee",
+          "edge_breakdown": [
+            {
+              "edge_id": "synthetic_pickup_proxy",
+              "distance_m": 300.0,
+              "energy_kwh": 0.033349296159630754,
+              "drive_time_sec": 63.384484116475704,
+              "signal_idle_time_sec": 0.0,
+              "propulsion_draw_kwh": 0.023352849161962008,
+              "regenerated_kwh": 0.004088993917103652,
+              "auxiliary_kwh": 0.014085440914772394,
+              "rolling_wheel_kwh": 0.013974476250000005,
+              "aerodynamic_wheel_kwh": 0.0007523281232986299,
+              "grade_wheel_kwh": 0.0,
+              "acceleration_wheel_kwh": 0.0,
+              "missing_grade_steps": 60,
+              "trace_fidelity": "estimated_from_route_edge_conditions"
+            }
+          ]
+        },
+        "ride": {
+          "distance_m": 1673.7177599999952,
+          "drive_time_sec": 515.5597014925389,
+          "signal_idle_time_sec": 0.0,
+          "rolling_wheel_kwh": 0.08104197358857641,
+          "aerodynamic_wheel_kwh": 0.0018473737478251196,
+          "grade_wheel_kwh": 0.0,
+          "acceleration_wheel_kwh": 0.0,
+          "propulsion_draw_kwh": 0.09516187431176408,
+          "regenerated_kwh": 0.0017916207037211563,
+          "auxiliary_kwh": 0.1145688225538972,
+          "net_kwh": 0.20793907616194013,
+          "regen_power_capped_steps": 0,
+          "missing_grade_steps": 335,
+          "trace_fidelity": "estimated_from_route_edge_conditions",
+          "model_version": "ev_longitudinal_v2",
+          "profile_id": "generic_reference_ev_v1",
+          "profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee",
+          "edge_breakdown": [
+            {
+              "edge_id": "od_234_186",
+              "distance_m": 1673.7177599999952,
+              "energy_kwh": 0.20793907616194013,
+              "drive_time_sec": 515.5597014925389,
+              "signal_idle_time_sec": 0.0,
+              "propulsion_draw_kwh": 0.09516187431176408,
+              "regenerated_kwh": 0.0017916207037211563,
+              "auxiliary_kwh": 0.1145688225538972,
+              "rolling_wheel_kwh": 0.08104197358857641,
+              "aerodynamic_wheel_kwh": 0.0018473737478251196,
+              "grade_wheel_kwh": 0.0,
+              "acceleration_wheel_kwh": 0.0,
+              "missing_grade_steps": 335,
+              "trace_fidelity": "estimated_from_route_edge_conditions"
+            }
+          ]
+        }
+      },
+      "start_time_sec": 0.0
+    },
+    {
+      "dispatch_round_id": "round-0000",
+      "snapshot_time_sec": 0.0,
+      "vehicle_id": "EV_20240330_200500_q75-F1-010",
+      "order_id": "raw/fhvhv_tripdata_2024-03.parquet#20460918",
+      "candidate_type": "immediate_pickup",
+      "source_node_id": "zone_230",
+      "pickup_route": {
+        "reason": "synthetic_zone_centroid_pickup_proxy",
+        "distance_m": 300.0,
+        "duration_sec": 60.0,
+        "node_sequence": [
+          "zone_230",
+          "zone_230"
+        ],
+        "edge_sequence": [],
+        "energy_trace_basis": "synthetic_centroid_proxy_virtual_flat_edge"
+      },
+      "ride_route": {
+        "distance_m": 1496.68992,
+        "duration_sec": 475.0,
+        "node_sequence": [
+          "zone_230",
+          "zone_163"
+        ],
+        "edge_sequence": [
+          "od_230_163"
+        ],
+        "energy_trace_basis": "saved_training_period_zone_od_edge"
+      },
+      "ev_longitudinal_v2_energy": {
+        "net_kwh": 0.22301441401192304,
+        "online_net_kwh": 0.1896651178522923,
+        "pickup": {
+          "distance_m": 300.0,
+          "drive_time_sec": 63.384484116475704,
+          "signal_idle_time_sec": 0.0,
+          "rolling_wheel_kwh": 0.013974476250000005,
+          "aerodynamic_wheel_kwh": 0.0007523281232986299,
+          "grade_wheel_kwh": 0.0,
+          "acceleration_wheel_kwh": 0.0,
+          "propulsion_draw_kwh": 0.023352849161962008,
+          "regenerated_kwh": 0.004088993917103652,
+          "auxiliary_kwh": 0.014085440914772394,
+          "net_kwh": 0.033349296159630754,
+          "regen_power_capped_steps": 0,
+          "missing_grade_steps": 60,
+          "trace_fidelity": "estimated_from_route_edge_conditions",
+          "model_version": "ev_longitudinal_v2",
+          "profile_id": "generic_reference_ev_v1",
+          "profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee",
+          "edge_breakdown": [
+            {
+              "edge_id": "synthetic_pickup_proxy",
+              "distance_m": 300.0,
+              "energy_kwh": 0.033349296159630754,
+              "drive_time_sec": 63.384484116475704,
+              "signal_idle_time_sec": 0.0,
+              "propulsion_draw_kwh": 0.023352849161962008,
+              "regenerated_kwh": 0.004088993917103652,
+              "auxiliary_kwh": 0.014085440914772394,
+              "rolling_wheel_kwh": 0.013974476250000005,
+              "aerodynamic_wheel_kwh": 0.0007523281232986299,
+              "grade_wheel_kwh": 0.0,
+              "acceleration_wheel_kwh": 0.0,
+              "missing_grade_steps": 60,
+              "trace_fidelity": "estimated_from_route_edge_conditions"
+            }
+          ]
+        },
+        "ride": {
+          "distance_m": 1496.6899199999957,
+          "drive_time_sec": 478.1666666666647,
+          "signal_idle_time_sec": 0.0,
+          "rolling_wheel_kwh": 0.0724702263820918,
+          "aerodynamic_wheel_kwh": 0.0015370081320121398,
+          "grade_wheel_kwh": 0.0,
+          "acceleration_wheel_kwh": 0.0,
+          "propulsion_draw_kwh": 0.08506302688883143,
+          "regenerated_kwh": 0.0016571682957987304,
+          "auxiliary_kwh": 0.10625925925925958,
+          "net_kwh": 0.1896651178522923,
+          "regen_power_capped_steps": 0,
+          "missing_grade_steps": 300,
+          "trace_fidelity": "estimated_from_route_edge_conditions",
+          "model_version": "ev_longitudinal_v2",
+          "profile_id": "generic_reference_ev_v1",
+          "profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee",
+          "edge_breakdown": [
+            {
+              "edge_id": "od_230_163",
+              "distance_m": 1496.6899199999957,
+              "energy_kwh": 0.1896651178522923,
+              "drive_time_sec": 478.1666666666647,
+              "signal_idle_time_sec": 0.0,
+              "propulsion_draw_kwh": 0.08506302688883143,
+              "regenerated_kwh": 0.0016571682957987304,
+              "auxiliary_kwh": 0.10625925925925958,
+              "rolling_wheel_kwh": 0.0724702263820918,
+              "aerodynamic_wheel_kwh": 0.0015370081320121398,
+              "grade_wheel_kwh": 0.0,
+              "acceleration_wheel_kwh": 0.0,
+              "missing_grade_steps": 300,
+              "trace_fidelity": "estimated_from_route_edge_conditions"
+            }
+          ]
+        }
+      },
+      "start_time_sec": 0.0
+    },
+    {
+      "dispatch_round_id": "round-0000",
+      "snapshot_time_sec": 0.0,
+      "vehicle_id": "EV_20240330_200500_q75-F1-004",
+      "order_id": "raw/fhvhv_tripdata_2024-03.parquet#20467484",
+      "candidate_type": "immediate_pickup",
+      "source_node_id": "zone_161",
+      "pickup_route": {
+        "reason": "synthetic_zone_centroid_pickup_proxy",
+        "distance_m": 757.1543184517436,
+        "duration_sec": 151.43086369034873,
+        "node_sequence": [
+          "zone_161",
+          "zone_230"
+        ],
+        "edge_sequence": [],
+        "energy_trace_basis": "synthetic_centroid_proxy_virtual_flat_edge"
+      },
+      "ride_route": {
+        "distance_m": 1738.0915200000002,
+        "duration_sec": 505.0,
+        "node_sequence": [
+          "zone_230",
+          "zone_50"
+        ],
+        "edge_sequence": [
+          "od_230_50"
+        ],
+        "energy_trace_basis": "saved_training_period_zone_od_edge"
+      },
+      "ev_longitudinal_v2_energy": {
+        "net_kwh": 0.2888185800896639,
+        "online_net_kwh": 0.21016905991264068,
+        "pickup": {
+          "distance_m": 757.154318451741,
+          "drive_time_sec": 154.8163590524158,
+          "signal_idle_time_sec": 0.0,
+          "rolling_wheel_kwh": 0.035269450135962804,
+          "aerodynamic_wheel_kwh": 0.0019404223347082208,
+          "grade_wheel_kwh": 0.0,
+          "acceleration_wheel_kwh": 0.0,
+          "propulsion_draw_kwh": 0.04833606680989337,
+          "regenerated_kwh": 0.004090181977851526,
+          "auxiliary_kwh": 0.03440363534498134,
+          "net_kwh": 0.07864952017702317,
+          "regen_power_capped_steps": 0,
+          "missing_grade_steps": 152,
+          "trace_fidelity": "estimated_from_route_edge_conditions",
+          "model_version": "ev_longitudinal_v2",
+          "profile_id": "generic_reference_ev_v1",
+          "profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee",
+          "edge_breakdown": [
+            {
+              "edge_id": "synthetic_pickup_proxy",
+              "distance_m": 757.154318451741,
+              "energy_kwh": 0.07864952017702317,
+              "drive_time_sec": 154.8163590524158,
+              "signal_idle_time_sec": 0.0,
+              "propulsion_draw_kwh": 0.04833606680989337,
+              "regenerated_kwh": 0.004090181977851526,
+              "auxiliary_kwh": 0.03440363534498134,
+              "rolling_wheel_kwh": 0.035269450135962804,
+              "aerodynamic_wheel_kwh": 0.0019404223347082208,
+              "grade_wheel_kwh": 0.0,
+              "acceleration_wheel_kwh": 0.0,
+              "missing_grade_steps": 152,
+              "trace_fidelity": "estimated_from_route_edge_conditions"
+            }
+          ]
+        },
+        "ride": {
+          "distance_m": 1738.0915200000002,
+          "drive_time_sec": 507.90229885057903,
+          "signal_idle_time_sec": 0.0,
+          "rolling_wheel_kwh": 0.08415897257275248,
+          "aerodynamic_wheel_kwh": 0.002131100658821128,
+          "grade_wheel_kwh": 0.0,
+          "acceleration_wheel_kwh": 0.0,
+          "propulsion_draw_kwh": 0.09930924045727389,
+          "regenerated_kwh": 0.0020073580669825175,
+          "auxiliary_kwh": 0.11286717752234932,
+          "net_kwh": 0.21016905991264068,
+          "regen_power_capped_steps": 0,
+          "missing_grade_steps": 348,
+          "trace_fidelity": "estimated_from_route_edge_conditions",
+          "model_version": "ev_longitudinal_v2",
+          "profile_id": "generic_reference_ev_v1",
+          "profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee",
+          "edge_breakdown": [
+            {
+              "edge_id": "od_230_50",
+              "distance_m": 1738.0915200000002,
+              "energy_kwh": 0.21016905991264068,
+              "drive_time_sec": 507.90229885057903,
+              "signal_idle_time_sec": 0.0,
+              "propulsion_draw_kwh": 0.09930924045727389,
+              "regenerated_kwh": 0.0020073580669825175,
+              "auxiliary_kwh": 0.11286717752234932,
+              "rolling_wheel_kwh": 0.08415897257275248,
+              "aerodynamic_wheel_kwh": 0.002131100658821128,
+              "grade_wheel_kwh": 0.0,
+              "acceleration_wheel_kwh": 0.0,
+              "missing_grade_steps": 348,
+              "trace_fidelity": "estimated_from_route_edge_conditions"
+            }
+          ]
+        }
+      },
+      "start_time_sec": 0.0
+    },
+    {
+      "dispatch_round_id": "round-0001",
+      "snapshot_time_sec": 1.0,
+      "vehicle_id": "EV_20240330_200500_q75-F1-005",
+      "order_id": "raw/fhvhv_tripdata_2024-03.parquet#20462765",
+      "candidate_type": "immediate_pickup",
+      "source_node_id": "zone_162",
+      "pickup_route": {
+        "reason": "synthetic_zone_centroid_pickup_proxy",
+        "distance_m": 300.0,
+        "duration_sec": 60.0,
+        "node_sequence": [
+          "zone_162",
+          "zone_162"
+        ],
+        "edge_sequence": [],
+        "energy_trace_basis": "synthetic_centroid_proxy_virtual_flat_edge"
+      },
+      "ride_route": {
+        "distance_m": 1762.23168,
+        "duration_sec": 614.5,
+        "node_sequence": [
+          "zone_162",
+          "zone_163"
+        ],
+        "edge_sequence": [
+          "od_162_163"
+        ],
+        "energy_trace_basis": "saved_training_period_zone_od_edge"
+      },
+      "ev_longitudinal_v2_energy": {
+        "net_kwh": 0.26810870816404964,
+        "online_net_kwh": 0.23475941200441885,
+        "pickup": {
+          "distance_m": 300.0,
+          "drive_time_sec": 63.384484116475704,
+          "signal_idle_time_sec": 0.0,
+          "rolling_wheel_kwh": 0.013974476250000005,
+          "aerodynamic_wheel_kwh": 0.0007523281232986299,
+          "grade_wheel_kwh": 0.0,
+          "acceleration_wheel_kwh": 0.0,
+          "propulsion_draw_kwh": 0.023352849161962008,
+          "regenerated_kwh": 0.004088993917103652,
+          "auxiliary_kwh": 0.014085440914772394,
+          "net_kwh": 0.033349296159630754,
+          "regen_power_capped_steps": 0,
+          "missing_grade_steps": 60,
+          "trace_fidelity": "estimated_from_route_edge_conditions",
+          "model_version": "ev_longitudinal_v2",
+          "profile_id": "generic_reference_ev_v1",
+          "profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee",
+          "edge_breakdown": [
+            {
+              "edge_id": "synthetic_pickup_proxy",
+              "distance_m": 300.0,
+              "energy_kwh": 0.033349296159630754,
+              "drive_time_sec": 63.384484116475704,
+              "signal_idle_time_sec": 0.0,
+              "propulsion_draw_kwh": 0.023352849161962008,
+              "regenerated_kwh": 0.004088993917103652,
+              "auxiliary_kwh": 0.014085440914772394,
+              "rolling_wheel_kwh": 0.013974476250000005,
+              "aerodynamic_wheel_kwh": 0.0007523281232986299,
+              "grade_wheel_kwh": 0.0,
+              "acceleration_wheel_kwh": 0.0,
+              "missing_grade_steps": 60,
+              "trace_fidelity": "estimated_from_route_edge_conditions"
+            }
+          ]
+        },
+        "ride": {
+          "distance_m": 1762.2316800000042,
+          "drive_time_sec": 617.9815864022668,
+          "signal_idle_time_sec": 0.0,
+          "rolling_wheel_kwh": 0.0853278471918183,
+          "aerodynamic_wheel_kwh": 0.0015001706523713675,
+          "grade_wheel_kwh": 0.0,
+          "acceleration_wheel_kwh": 0.0,
+          "propulsion_draw_kwh": 0.0987758047782411,
+          "regenerated_kwh": 0.0013456341965475819,
+          "auxiliary_kwh": 0.13732924142272535,
+          "net_kwh": 0.23475941200441885,
+          "regen_power_capped_steps": 0,
+          "missing_grade_steps": 353,
+          "trace_fidelity": "estimated_from_route_edge_conditions",
+          "model_version": "ev_longitudinal_v2",
+          "profile_id": "generic_reference_ev_v1",
+          "profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee",
+          "edge_breakdown": [
+            {
+              "edge_id": "od_162_163",
+              "distance_m": 1762.2316800000042,
+              "energy_kwh": 0.23475941200441885,
+              "drive_time_sec": 617.9815864022668,
+              "signal_idle_time_sec": 0.0,
+              "propulsion_draw_kwh": 0.0987758047782411,
+              "regenerated_kwh": 0.0013456341965475819,
+              "auxiliary_kwh": 0.13732924142272535,
+              "rolling_wheel_kwh": 0.0853278471918183,
+              "aerodynamic_wheel_kwh": 0.0015001706523713675,
+              "grade_wheel_kwh": 0.0,
+              "acceleration_wheel_kwh": 0.0,
+              "missing_grade_steps": 353,
+              "trace_fidelity": "estimated_from_route_edge_conditions"
+            }
+          ]
+        }
+      },
+      "start_time_sec": 1.0
+    },
+    {
+      "dispatch_round_id": "round-0002",
+      "snapshot_time_sec": 2.0,
+      "vehicle_id": "EV_20240330_200500_q75-F1-011",
+      "order_id": "raw/fhvhv_tripdata_2024-03.parquet#20467291",
+      "candidate_type": "immediate_pickup",
+      "source_node_id": "zone_231",
+      "pickup_route": {
+        "reason": "synthetic_zone_centroid_pickup_proxy",
+        "distance_m": 300.0,
+        "duration_sec": 60.0,
+        "node_sequence": [
+          "zone_231",
+          "zone_231"
+        ],
+        "edge_sequence": [],
+        "energy_trace_basis": "synthetic_centroid_proxy_virtual_flat_edge"
+      },
+      "ride_route": {
+        "distance_m": 1126.5408,
+        "duration_sec": 343.0,
+        "node_sequence": [
+          "zone_231",
+          "zone_231"
+        ],
+        "edge_sequence": [
+          "od_231_231"
+        ],
+        "energy_trace_basis": "saved_training_period_zone_od_edge"
+      },
+      "ev_longitudinal_v2_energy": {
+        "net_kwh": 0.17353570234763283,
+        "online_net_kwh": 0.14018640618800207,
+        "pickup": {
+          "distance_m": 300.0,
+          "drive_time_sec": 63.384484116475704,
+          "signal_idle_time_sec": 0.0,
+          "rolling_wheel_kwh": 0.013974476250000005,
+          "aerodynamic_wheel_kwh": 0.0007523281232986299,
+          "grade_wheel_kwh": 0.0,
+          "acceleration_wheel_kwh": 0.0,
+          "propulsion_draw_kwh": 0.023352849161962008,
+          "regenerated_kwh": 0.004088993917103652,
+          "auxiliary_kwh": 0.014085440914772394,
+          "net_kwh": 0.033349296159630754,
+          "regen_power_capped_steps": 0,
+          "missing_grade_steps": 60,
+          "trace_fidelity": "estimated_from_route_edge_conditions",
+          "model_version": "ev_longitudinal_v2",
+          "profile_id": "generic_reference_ev_v1",
+          "profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee",
+          "edge_breakdown": [
+            {
+              "edge_id": "synthetic_pickup_proxy",
+              "distance_m": 300.0,
+              "energy_kwh": 0.033349296159630754,
+              "drive_time_sec": 63.384484116475704,
+              "signal_idle_time_sec": 0.0,
+              "propulsion_draw_kwh": 0.023352849161962008,
+              "regenerated_kwh": 0.004088993917103652,
+              "auxiliary_kwh": 0.014085440914772394,
+              "rolling_wheel_kwh": 0.013974476250000005,
+              "aerodynamic_wheel_kwh": 0.0007523281232986299,
+              "grade_wheel_kwh": 0.0,
+              "acceleration_wheel_kwh": 0.0,
+              "missing_grade_steps": 60,
+              "trace_fidelity": "estimated_from_route_edge_conditions"
+            }
+          ]
+        },
+        "ride": {
+          "distance_m": 1126.5407999999952,
+          "drive_time_sec": 346.0353982300892,
+          "signal_idle_time_sec": 0.0,
+          "rolling_wheel_kwh": 0.05454748222307979,
+          "aerodynamic_wheel_kwh": 0.0012548888030814794,
+          "grade_wheel_kwh": 0.0,
+          "acceleration_wheel_kwh": 0.0,
+          "propulsion_draw_kwh": 0.06510387917772273,
+          "regenerated_kwh": 0.001814228151962734,
+          "auxiliary_kwh": 0.07689675516224208,
+          "net_kwh": 0.14018640618800207,
+          "regen_power_capped_steps": 0,
+          "missing_grade_steps": 226,
+          "trace_fidelity": "estimated_from_route_edge_conditions",
+          "model_version": "ev_longitudinal_v2",
+          "profile_id": "generic_reference_ev_v1",
+          "profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee",
+          "edge_breakdown": [
+            {
+              "edge_id": "od_231_231",
+              "distance_m": 1126.5407999999952,
+              "energy_kwh": 0.14018640618800207,
+              "drive_time_sec": 346.0353982300892,
+              "signal_idle_time_sec": 0.0,
+              "propulsion_draw_kwh": 0.06510387917772273,
+              "regenerated_kwh": 0.001814228151962734,
+              "auxiliary_kwh": 0.07689675516224208,
+              "rolling_wheel_kwh": 0.05454748222307979,
+              "aerodynamic_wheel_kwh": 0.0012548888030814794,
+              "grade_wheel_kwh": 0.0,
+              "acceleration_wheel_kwh": 0.0,
+              "missing_grade_steps": 226,
+              "trace_fidelity": "estimated_from_route_edge_conditions"
+            }
+          ]
+        }
+      },
+      "start_time_sec": 2.0
+    },
+    {
+      "dispatch_round_id": "round-0003",
+      "snapshot_time_sec": 5.0,
+      "vehicle_id": "EV_20240330_200500_q75-F1-009",
+      "order_id": "raw/fhvhv_tripdata_2024-03.parquet#20449443",
+      "candidate_type": "immediate_pickup",
+      "source_node_id": "zone_186",
+      "pickup_route": {
+        "reason": "synthetic_zone_centroid_pickup_proxy",
+        "distance_m": 300.0,
+        "duration_sec": 60.0,
+        "node_sequence": [
+          "zone_186",
+          "zone_186"
+        ],
+        "edge_sequence": [],
+        "energy_trace_basis": "synthetic_centroid_proxy_virtual_flat_edge"
+      },
+      "ride_route": {
+        "distance_m": 2407.578624,
+        "duration_sec": 698.0,
+        "node_sequence": [
+          "zone_186",
+          "zone_48"
+        ],
+        "edge_sequence": [
+          "od_186_48"
+        ],
+        "energy_trace_basis": "saved_training_period_zone_od_edge"
+      },
+      "ev_longitudinal_v2_energy": {
+        "net_kwh": 0.32336156475293976,
+        "online_net_kwh": 0.290012268593309,
+        "pickup": {
+          "distance_m": 300.0,
+          "drive_time_sec": 63.384484116475704,
+          "signal_idle_time_sec": 0.0,
+          "rolling_wheel_kwh": 0.013974476250000005,
+          "aerodynamic_wheel_kwh": 0.0007523281232986299,
+          "grade_wheel_kwh": 0.0,
+          "acceleration_wheel_kwh": 0.0,
+          "propulsion_draw_kwh": 0.023352849161962008,
+          "regenerated_kwh": 0.004088993917103652,
+          "auxiliary_kwh": 0.014085440914772394,
+          "net_kwh": 0.033349296159630754,
+          "regen_power_capped_steps": 0,
+          "missing_grade_steps": 60,
+          "trace_fidelity": "estimated_from_route_edge_conditions",
+          "model_version": "ev_longitudinal_v2",
+          "profile_id": "generic_reference_ev_v1",
+          "profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee",
+          "edge_breakdown": [
+            {
+              "edge_id": "synthetic_pickup_proxy",
+              "distance_m": 300.0,
+              "energy_kwh": 0.033349296159630754,
+              "drive_time_sec": 63.384484116475704,
+              "signal_idle_time_sec": 0.0,
+              "propulsion_draw_kwh": 0.023352849161962008,
+              "regenerated_kwh": 0.004088993917103652,
+              "auxiliary_kwh": 0.014085440914772394,
+              "rolling_wheel_kwh": 0.013974476250000005,
+              "aerodynamic_wheel_kwh": 0.0007523281232986299,
+              "grade_wheel_kwh": 0.0,
+              "acceleration_wheel_kwh": 0.0,
+              "missing_grade_steps": 60,
+              "trace_fidelity": "estimated_from_route_edge_conditions"
+            }
+          ]
+        },
+        "ride": {
+          "distance_m": 2407.578624000004,
+          "drive_time_sec": 700.8962655601695,
+          "signal_idle_time_sec": 0.0,
+          "rolling_wheel_kwh": 0.11657576200818374,
+          "aerodynamic_wheel_kwh": 0.0029683953816243805,
+          "grade_wheel_kwh": 0.0,
+          "acceleration_wheel_kwh": 0.0,
+          "propulsion_draw_kwh": 0.13627431472264423,
+          "regenerated_kwh": 0.0020167718093721523,
+          "auxiliary_kwh": 0.1557547256800369,
+          "net_kwh": 0.290012268593309,
+          "regen_power_capped_steps": 0,
+          "missing_grade_steps": 482,
+          "trace_fidelity": "estimated_from_route_edge_conditions",
+          "model_version": "ev_longitudinal_v2",
+          "profile_id": "generic_reference_ev_v1",
+          "profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee",
+          "edge_breakdown": [
+            {
+              "edge_id": "od_186_48",
+              "distance_m": 2407.578624000004,
+              "energy_kwh": 0.290012268593309,
+              "drive_time_sec": 700.8962655601695,
+              "signal_idle_time_sec": 0.0,
+              "propulsion_draw_kwh": 0.13627431472264423,
+              "regenerated_kwh": 0.0020167718093721523,
+              "auxiliary_kwh": 0.1557547256800369,
+              "rolling_wheel_kwh": 0.11657576200818374,
+              "aerodynamic_wheel_kwh": 0.0029683953816243805,
+              "grade_wheel_kwh": 0.0,
+              "acceleration_wheel_kwh": 0.0,
+              "missing_grade_steps": 482,
+              "trace_fidelity": "estimated_from_route_edge_conditions"
+            }
+          ]
+        }
+      },
+      "start_time_sec": 5.0
+    },
+    {
+      "dispatch_round_id": "round-0004",
+      "snapshot_time_sec": 6.0,
+      "vehicle_id": "EV_20240330_200500_q75-F1-003",
+      "order_id": "raw/fhvhv_tripdata_2024-03.parquet#20443630",
+      "candidate_type": "immediate_pickup",
+      "source_node_id": "zone_148",
+      "pickup_route": {
+        "reason": "synthetic_zone_centroid_pickup_proxy",
+        "distance_m": 1367.5186944033783,
+        "duration_sec": 273.50373888067566,
+        "node_sequence": [
+          "zone_148",
+          "zone_79"
+        ],
+        "edge_sequence": [],
+        "energy_trace_basis": "synthetic_centroid_proxy_virtual_flat_edge"
+      },
+      "ride_route": {
+        "distance_m": 1158.72768,
+        "duration_sec": 340.0,
+        "node_sequence": [
+          "zone_79",
+          "zone_79"
+        ],
+        "edge_sequence": [
+          "od_79_79"
+        ],
+        "energy_trace_basis": "saved_training_period_zone_od_edge"
+      },
+      "ev_longitudinal_v2_energy": {
+        "net_kwh": 0.2806149841194526,
+        "online_net_kwh": 0.14148538031553248,
+        "pickup": {
+          "distance_m": 1367.5186944033696,
+          "drive_time_sec": 276.8887158121015,
+          "signal_idle_time_sec": 0.0,
+          "rolling_wheel_kwh": 0.06370119172123637,
+          "aerodynamic_wheel_kwh": 0.0035266762713817143,
+          "grade_wheel_kwh": 0.0,
+          "acceleration_wheel_kwh": 0.0,
+          "propulsion_draw_kwh": 0.08168834668119483,
+          "regenerated_kwh": 0.004089568613297203,
+          "auxiliary_kwh": 0.06153082573602249,
+          "net_kwh": 0.13912960380392012,
+          "regen_power_capped_steps": 0,
+          "missing_grade_steps": 274,
+          "trace_fidelity": "estimated_from_route_edge_conditions",
+          "model_version": "ev_longitudinal_v2",
+          "profile_id": "generic_reference_ev_v1",
+          "profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee",
+          "edge_breakdown": [
+            {
+              "edge_id": "synthetic_pickup_proxy",
+              "distance_m": 1367.5186944033696,
+              "energy_kwh": 0.13912960380392012,
+              "drive_time_sec": 276.8887158121015,
+              "signal_idle_time_sec": 0.0,
+              "propulsion_draw_kwh": 0.08168834668119483,
+              "regenerated_kwh": 0.004089568613297203,
+              "auxiliary_kwh": 0.06153082573602249,
+              "rolling_wheel_kwh": 0.06370119172123637,
+              "aerodynamic_wheel_kwh": 0.0035266762713817143,
+              "grade_wheel_kwh": 0.0,
+              "acceleration_wheel_kwh": 0.0,
+              "missing_grade_steps": 274,
+              "trace_fidelity": "estimated_from_route_edge_conditions"
+            }
+          ]
+        },
+        "ride": {
+          "distance_m": 1158.72768,
+          "drive_time_sec": 342.93103448275775,
+          "signal_idle_time_sec": 0.0,
+          "rolling_wheel_kwh": 0.0561059817151682,
+          "aerodynamic_wheel_kwh": 0.001389997624860742,
+          "grade_wheel_kwh": 0.0,
+          "acceleration_wheel_kwh": 0.0,
+          "propulsion_draw_kwh": 0.06724360769346881,
+          "regenerated_kwh": 0.00196512392966053,
+          "auxiliary_kwh": 0.0762068965517242,
+          "net_kwh": 0.14148538031553248,
+          "regen_power_capped_steps": 0,
+          "missing_grade_steps": 232,
+          "trace_fidelity": "estimated_from_route_edge_conditions",
+          "model_version": "ev_longitudinal_v2",
+          "profile_id": "generic_reference_ev_v1",
+          "profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee",
+          "edge_breakdown": [
+            {
+              "edge_id": "od_79_79",
+              "distance_m": 1158.72768,
+              "energy_kwh": 0.14148538031553248,
+              "drive_time_sec": 342.93103448275775,
+              "signal_idle_time_sec": 0.0,
+              "propulsion_draw_kwh": 0.06724360769346881,
+              "regenerated_kwh": 0.00196512392966053,
+              "auxiliary_kwh": 0.0762068965517242,
+              "rolling_wheel_kwh": 0.0561059817151682,
+              "aerodynamic_wheel_kwh": 0.001389997624860742,
+              "grade_wheel_kwh": 0.0,
+              "acceleration_wheel_kwh": 0.0,
+              "missing_grade_steps": 232,
+              "trace_fidelity": "estimated_from_route_edge_conditions"
+            }
+          ]
+        }
+      },
+      "start_time_sec": 6.0
+    },
+    {
+      "dispatch_round_id": "round-0004",
+      "snapshot_time_sec": 6.0,
+      "vehicle_id": "EV_20240330_200500_q75-F1-007",
+      "order_id": "raw/fhvhv_tripdata_2024-03.parquet#20461175",
+      "candidate_type": "immediate_pickup",
+      "source_node_id": "zone_164",
+      "pickup_route": {
+        "reason": "synthetic_zone_centroid_pickup_proxy",
+        "distance_m": 797.3618660465474,
+        "duration_sec": 159.4723732093095,
+        "node_sequence": [
+          "zone_164",
+          "zone_186"
+        ],
+        "edge_sequence": [],
+        "energy_trace_basis": "synthetic_centroid_proxy_virtual_flat_edge"
+      },
+      "ride_route": {
+        "distance_m": 4811.9385600000005,
+        "duration_sec": 1168.0,
+        "node_sequence": [
+          "zone_186",
+          "zone_45"
+        ],
+        "edge_sequence": [
+          "od_186_45"
+        ],
+        "energy_trace_basis": "saved_training_period_zone_od_edge"
+      },
+      "ev_longitudinal_v2_energy": {
+        "net_kwh": 0.6132430718422621,
+        "online_net_kwh": 0.5306095381518436,
+        "pickup": {
+          "distance_m": 797.3618660465455,
+          "drive_time_sec": 162.85774948449807,
+          "signal_idle_time_sec": 0.0,
+          "rolling_wheel_kwh": 0.03714238153241049,
+          "aerodynamic_wheel_kwh": 0.00204491549268107,
+          "grade_wheel_kwh": 0.0,
+          "acceleration_wheel_kwh": 0.0,
+          "propulsion_draw_kwh": 0.050532962957960545,
+          "regenerated_kwh": 0.004090040264097259,
+          "auxiliary_kwh": 0.03619061099655521,
+          "net_kwh": 0.0826335336904185,
+          "regen_power_capped_steps": 0,
+          "missing_grade_steps": 160,
+          "trace_fidelity": "estimated_from_route_edge_conditions",
+          "model_version": "ev_longitudinal_v2",
+          "profile_id": "generic_reference_ev_v1",
+          "profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee",
+          "edge_breakdown": [
+            {
+              "edge_id": "synthetic_pickup_proxy",
+              "distance_m": 797.3618660465455,
+              "energy_kwh": 0.0826335336904185,
+              "drive_time_sec": 162.85774948449807,
+              "signal_idle_time_sec": 0.0,
+              "propulsion_draw_kwh": 0.050532962957960545,
+              "regenerated_kwh": 0.004090040264097259,
+              "auxiliary_kwh": 0.03619061099655521,
+              "rolling_wheel_kwh": 0.03714238153241049,
+              "aerodynamic_wheel_kwh": 0.00204491549268107,
+              "grade_wheel_kwh": 0.0,
+              "acceleration_wheel_kwh": 0.0,
+              "missing_grade_steps": 160,
+              "trace_fidelity": "estimated_from_route_edge_conditions"
+            }
+          ]
+        },
+        "ride": {
+          "distance_m": 4811.938560000019,
+          "drive_time_sec": 1170.9908907881975,
+          "signal_idle_time_sec": 0.0,
+          "rolling_wheel_kwh": 0.2329956740671609,
+          "aerodynamic_wheel_kwh": 0.008475006714804889,
+          "grade_wheel_kwh": 0.0,
+          "acceleration_wheel_kwh": 8.673617379884035e-19,
+          "propulsion_draw_kwh": 0.27333348841116495,
+          "regenerated_kwh": 0.002944148212256546,
+          "auxiliary_kwh": 0.2602201979529352,
+          "net_kwh": 0.5306095381518436,
+          "regen_power_capped_steps": 0,
+          "missing_grade_steps": 963,
+          "trace_fidelity": "estimated_from_route_edge_conditions",
+          "model_version": "ev_longitudinal_v2",
+          "profile_id": "generic_reference_ev_v1",
+          "profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee",
+          "edge_breakdown": [
+            {
+              "edge_id": "od_186_45",
+              "distance_m": 4811.938560000019,
+              "energy_kwh": 0.5306095381518436,
+              "drive_time_sec": 1170.9908907881975,
+              "signal_idle_time_sec": 0.0,
+              "propulsion_draw_kwh": 0.27333348841116495,
+              "regenerated_kwh": 0.002944148212256546,
+              "auxiliary_kwh": 0.2602201979529352,
+              "rolling_wheel_kwh": 0.2329956740671609,
+              "aerodynamic_wheel_kwh": 0.008475006714804889,
+              "grade_wheel_kwh": 0.0,
+              "acceleration_wheel_kwh": 8.673617379884035e-19,
+              "missing_grade_steps": 963,
+              "trace_fidelity": "estimated_from_route_edge_conditions"
+            }
+          ]
+        }
+      },
+      "start_time_sec": 6.0
+    },
+    {
+      "dispatch_round_id": "round-0004",
+      "snapshot_time_sec": 6.0,
+      "vehicle_id": "EV_20240330_200500_q75-F1-008",
+      "order_id": "raw/fhvhv_tripdata_2024-03.parquet#20449248",
+      "candidate_type": "immediate_pickup",
+      "source_node_id": "zone_170",
+      "pickup_route": {
+        "reason": "synthetic_zone_centroid_pickup_proxy",
+        "distance_m": 1488.852212090678,
+        "duration_sec": 297.7704424181356,
+        "node_sequence": [
+          "zone_170",
+          "zone_161"
+        ],
+        "edge_sequence": [],
+        "energy_trace_basis": "synthetic_centroid_proxy_virtual_flat_edge"
+      },
+      "ride_route": {
+        "distance_m": 1882.93248,
+        "duration_sec": 658.0,
+        "node_sequence": [
+          "zone_161",
+          "zone_48"
+        ],
+        "edge_sequence": [
+          "od_161_48"
+        ],
+        "energy_trace_basis": "saved_training_period_zone_od_edge"
+      },
+      "ev_longitudinal_v2_energy": {
+        "net_kwh": 0.40217642493662475,
+        "online_net_kwh": 0.25102425554253777,
+        "pickup": {
+          "distance_m": 1488.8522120906728,
+          "drive_time_sec": 301.1551369763139,
+          "signal_idle_time_sec": 0.0,
+          "rolling_wheel_kwh": 0.06935309959207059,
+          "aerodynamic_wheel_kwh": 0.0038420040588412964,
+          "grade_wheel_kwh": 0.0,
+          "acceleration_wheel_kwh": 0.0,
+          "propulsion_draw_kwh": 0.0883180439722414,
+          "regenerated_kwh": 0.004089238350668536,
+          "auxiliary_kwh": 0.0669233637725141,
+          "net_kwh": 0.15115216939408696,
+          "regen_power_capped_steps": 0,
+          "missing_grade_steps": 298,
+          "trace_fidelity": "estimated_from_route_edge_conditions",
+          "model_version": "ev_longitudinal_v2",
+          "profile_id": "generic_reference_ev_v1",
+          "profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee",
+          "edge_breakdown": [
+            {
+              "edge_id": "synthetic_pickup_proxy",
+              "distance_m": 1488.8522120906728,
+              "energy_kwh": 0.15115216939408696,
+              "drive_time_sec": 301.1551369763139,
+              "signal_idle_time_sec": 0.0,
+              "propulsion_draw_kwh": 0.0883180439722414,
+              "regenerated_kwh": 0.004089238350668536,
+              "auxiliary_kwh": 0.0669233637725141,
+              "rolling_wheel_kwh": 0.06935309959207059,
+              "aerodynamic_wheel_kwh": 0.0038420040588412964,
+              "grade_wheel_kwh": 0.0,
+              "acceleration_wheel_kwh": 0.0,
+              "missing_grade_steps": 298,
+              "trace_fidelity": "estimated_from_route_edge_conditions"
+            }
+          ]
+        },
+        "ride": {
+          "distance_m": 1882.93248,
+          "drive_time_sec": 661.4907161803758,
+          "signal_idle_time_sec": 0.0,
+          "rolling_wheel_kwh": 0.09117222028714855,
+          "aerodynamic_wheel_kwh": 0.0015964886938438902,
+          "grade_wheel_kwh": 0.0,
+          "acceleration_wheel_kwh": 0.0,
+          "propulsion_draw_kwh": 0.10536544042390661,
+          "regenerated_kwh": 0.0013391218103409154,
+          "auxiliary_kwh": 0.1469979369289721,
+          "net_kwh": 0.25102425554253777,
+          "regen_power_capped_steps": 0,
+          "missing_grade_steps": 377,
+          "trace_fidelity": "estimated_from_route_edge_conditions",
+          "model_version": "ev_longitudinal_v2",
+          "profile_id": "generic_reference_ev_v1",
+          "profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee",
+          "edge_breakdown": [
+            {
+              "edge_id": "od_161_48",
+              "distance_m": 1882.93248,
+              "energy_kwh": 0.25102425554253777,
+              "drive_time_sec": 661.4907161803758,
+              "signal_idle_time_sec": 0.0,
+              "propulsion_draw_kwh": 0.10536544042390661,
+              "regenerated_kwh": 0.0013391218103409154,
+              "auxiliary_kwh": 0.1469979369289721,
+              "rolling_wheel_kwh": 0.09117222028714855,
+              "aerodynamic_wheel_kwh": 0.0015964886938438902,
+              "grade_wheel_kwh": 0.0,
+              "acceleration_wheel_kwh": 0.0,
+              "missing_grade_steps": 377,
+              "trace_fidelity": "estimated_from_route_edge_conditions"
+            }
+          ]
+        }
+      },
+      "start_time_sec": 6.0
+    },
+    {
+      "dispatch_round_id": "round-0007",
+      "snapshot_time_sec": 9.0,
+      "vehicle_id": "EV_20240330_200500_q75-F1-002",
+      "order_id": "raw/fhvhv_tripdata_2024-03.parquet#20445617",
+      "candidate_type": "immediate_pickup",
+      "source_node_id": "zone_125",
+      "pickup_route": {
+        "reason": "synthetic_zone_centroid_pickup_proxy",
+        "distance_m": 300.0,
+        "duration_sec": 60.0,
+        "node_sequence": [
+          "zone_125",
+          "zone_125"
+        ],
+        "edge_sequence": [],
+        "energy_trace_basis": "synthetic_centroid_proxy_virtual_flat_edge"
+      },
+      "ride_route": {
+        "distance_m": 1432.31616,
+        "duration_sec": 429.0,
+        "node_sequence": [
+          "zone_125",
+          "zone_114"
+        ],
+        "edge_sequence": [
+          "od_125_114"
+        ],
+        "energy_trace_basis": "saved_training_period_zone_od_edge"
+      },
+      "ev_longitudinal_v2_energy": {
+        "net_kwh": 0.20957421102261034,
+        "online_net_kwh": 0.1762249148629796,
+        "pickup": {
+          "distance_m": 300.0,
+          "drive_time_sec": 63.384484116475704,
+          "signal_idle_time_sec": 0.0,
+          "rolling_wheel_kwh": 0.013974476250000005,
+          "aerodynamic_wheel_kwh": 0.0007523281232986299,
+          "grade_wheel_kwh": 0.0,
+          "acceleration_wheel_kwh": 0.0,
+          "propulsion_draw_kwh": 0.023352849161962008,
+          "regenerated_kwh": 0.004088993917103652,
+          "auxiliary_kwh": 0.014085440914772394,
+          "net_kwh": 0.033349296159630754,
+          "regen_power_capped_steps": 0,
+          "missing_grade_steps": 60,
+          "trace_fidelity": "estimated_from_route_edge_conditions",
+          "model_version": "ev_longitudinal_v2",
+          "profile_id": "generic_reference_ev_v1",
+          "profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee",
+          "edge_breakdown": [
+            {
+              "edge_id": "synthetic_pickup_proxy",
+              "distance_m": 300.0,
+              "energy_kwh": 0.033349296159630754,
+              "drive_time_sec": 63.384484116475704,
+              "signal_idle_time_sec": 0.0,
+              "propulsion_draw_kwh": 0.023352849161962008,
+              "regenerated_kwh": 0.004088993917103652,
+              "auxiliary_kwh": 0.014085440914772394,
+              "rolling_wheel_kwh": 0.013974476250000005,
+              "aerodynamic_wheel_kwh": 0.0007523281232986299,
+              "grade_wheel_kwh": 0.0,
+              "acceleration_wheel_kwh": 0.0,
+              "missing_grade_steps": 60,
+              "trace_fidelity": "estimated_from_route_edge_conditions"
+            }
+          ]
+        },
+        "ride": {
+          "distance_m": 1432.316160000003,
+          "drive_time_sec": 431.98954703832584,
+          "signal_idle_time_sec": 0.0,
+          "rolling_wheel_kwh": 0.06935322739791583,
+          "aerodynamic_wheel_kwh": 0.0016510913780293096,
+          "grade_wheel_kwh": 0.0,
+          "acceleration_wheel_kwh": 0.0,
+          "propulsion_draw_kwh": 0.08210706153972726,
+          "regenerated_kwh": 0.0018798237963760537,
+          "auxiliary_kwh": 0.09599767711962838,
+          "net_kwh": 0.1762249148629796,
+          "regen_power_capped_steps": 0,
+          "missing_grade_steps": 287,
+          "trace_fidelity": "estimated_from_route_edge_conditions",
+          "model_version": "ev_longitudinal_v2",
+          "profile_id": "generic_reference_ev_v1",
+          "profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee",
+          "edge_breakdown": [
+            {
+              "edge_id": "od_125_114",
+              "distance_m": 1432.316160000003,
+              "energy_kwh": 0.1762249148629796,
+              "drive_time_sec": 431.98954703832584,
+              "signal_idle_time_sec": 0.0,
+              "propulsion_draw_kwh": 0.08210706153972726,
+              "regenerated_kwh": 0.0018798237963760537,
+              "auxiliary_kwh": 0.09599767711962838,
+              "rolling_wheel_kwh": 0.06935322739791583,
+              "aerodynamic_wheel_kwh": 0.0016510913780293096,
+              "grade_wheel_kwh": 0.0,
+              "acceleration_wheel_kwh": 0.0,
+              "missing_grade_steps": 287,
+              "trace_fidelity": "estimated_from_route_edge_conditions"
+            }
+          ]
+        }
+      },
+      "start_time_sec": 9.0
+    },
+    {
+      "dispatch_round_id": "round-0149",
+      "snapshot_time_sec": 167.0,
+      "vehicle_id": "EV_20240330_200500_q75-F1-011",
+      "order_id": "raw/fhvhv_tripdata_2024-03.parquet#20452947",
+      "candidate_type": "next_order_handoff",
+      "source_node_id": "zone_231",
+      "pickup_route": {
+        "reason": "synthetic_zone_centroid_pickup_proxy",
+        "distance_m": 300.0,
+        "duration_sec": 60.0,
+        "node_sequence": [
+          "zone_231",
+          "zone_231"
+        ],
+        "edge_sequence": [],
+        "energy_trace_basis": "synthetic_centroid_proxy_virtual_flat_edge"
+      },
+      "ride_route": {
+        "distance_m": 1457.260992,
+        "duration_sec": 380.0,
+        "node_sequence": [
+          "zone_231",
+          "zone_125"
+        ],
+        "edge_sequence": [
+          "od_231_125"
+        ],
+        "energy_trace_basis": "saved_training_period_zone_od_edge"
+      },
+      "ev_longitudinal_v2_energy": {
+        "net_kwh": 0.20110707736960043,
+        "online_net_kwh": 0.16775778120996968,
+        "pickup": {
+          "distance_m": 300.0,
+          "drive_time_sec": 63.384484116475704,
+          "signal_idle_time_sec": 0.0,
+          "rolling_wheel_kwh": 0.013974476250000005,
+          "aerodynamic_wheel_kwh": 0.0007523281232986299,
+          "grade_wheel_kwh": 0.0,
+          "acceleration_wheel_kwh": 0.0,
+          "propulsion_draw_kwh": 0.023352849161962008,
+          "regenerated_kwh": 0.004088993917103652,
+          "auxiliary_kwh": 0.014085440914772394,
+          "net_kwh": 0.033349296159630754,
+          "regen_power_capped_steps": 0,
+          "missing_grade_steps": 60,
+          "trace_fidelity": "estimated_from_route_edge_conditions",
+          "model_version": "ev_longitudinal_v2",
+          "profile_id": "generic_reference_ev_v1",
+          "profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee",
+          "edge_breakdown": [
+            {
+              "edge_id": "synthetic_pickup_proxy",
+              "distance_m": 300.0,
+              "energy_kwh": 0.033349296159630754,
+              "drive_time_sec": 63.384484116475704,
+              "signal_idle_time_sec": 0.0,
+              "propulsion_draw_kwh": 0.023352849161962008,
+              "regenerated_kwh": 0.004088993917103652,
+              "auxiliary_kwh": 0.014085440914772394,
+              "rolling_wheel_kwh": 0.013974476250000005,
+              "aerodynamic_wheel_kwh": 0.0007523281232986299,
+              "grade_wheel_kwh": 0.0,
+              "acceleration_wheel_kwh": 0.0,
+              "missing_grade_steps": 60,
+              "trace_fidelity": "estimated_from_route_edge_conditions"
+            }
+          ]
+        },
+        "ride": {
+          "distance_m": 1457.2609919999982,
+          "drive_time_sec": 382.9507623528324,
+          "signal_idle_time_sec": 0.0,
+          "rolling_wheel_kwh": 0.07056106450428377,
+          "aerodynamic_wheel_kwh": 0.0022153443777446383,
+          "grade_wheel_kwh": 0.0,
+          "acceleration_wheel_kwh": -8.673617379884035e-19,
+          "propulsion_draw_kwh": 0.0851878217467727,
+          "regenerated_kwh": 0.0025302099485435482,
+          "auxiliary_kwh": 0.08510016941174053,
+          "net_kwh": 0.16775778120996968,
+          "regen_power_capped_steps": 0,
+          "missing_grade_steps": 292,
+          "trace_fidelity": "estimated_from_route_edge_conditions",
+          "model_version": "ev_longitudinal_v2",
+          "profile_id": "generic_reference_ev_v1",
+          "profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee",
+          "edge_breakdown": [
+            {
+              "edge_id": "od_231_125",
+              "distance_m": 1457.2609919999982,
+              "energy_kwh": 0.16775778120996968,
+              "drive_time_sec": 382.9507623528324,
+              "signal_idle_time_sec": 0.0,
+              "propulsion_draw_kwh": 0.0851878217467727,
+              "regenerated_kwh": 0.0025302099485435482,
+              "auxiliary_kwh": 0.08510016941174053,
+              "rolling_wheel_kwh": 0.07056106450428377,
+              "aerodynamic_wheel_kwh": 0.0022153443777446383,
+              "grade_wheel_kwh": 0.0,
+              "acceleration_wheel_kwh": -8.673617379884035e-19,
+              "missing_grade_steps": 292,
+              "trace_fidelity": "estimated_from_route_edge_conditions"
+            }
+          ]
+        }
+      },
+      "start_time_sec": 405.0
+    }
+  ]
+}

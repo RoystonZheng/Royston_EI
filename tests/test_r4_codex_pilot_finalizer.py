@@ -144,7 +144,7 @@ class R4CodexPilotFinalizerTests(unittest.TestCase):
             "request_number": 9,
             "status": "delivery_and_usage_unknown",
             "response": None,
-            "validation": {},
+            "validation": None,
             "provider_record": {"delivery_and_usage_unknown_evidence": True},
         }
 

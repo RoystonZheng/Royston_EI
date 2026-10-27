@@ -327,6 +327,53 @@ class R4CodexPilotResumeTests(unittest.TestCase):
         self.assertEqual(resumed["effective_authorized_new_request_limit"], 512)
         self.assertTrue(resumed["additional_model_requests_authorized"])
 
+    def test_formal_batch_resume_requires_formal_batch_authorization_marker(self):
+        source = ROOT / "outputs/route_layer/r4_codex_task9_fresh_r4_step_v3_pilot_20261027_v8"
+        with tempfile.TemporaryDirectory() as directory:
+            parent = Path(directory) / "formal-parent"
+            shutil.copytree(source, parent)
+            state_path = parent / "state.json"
+            state = json.loads(state_path.read_text(encoding="utf-8"))
+            state["user_authorization_status"] = "superseded_by_latest_user_stop_instruction"
+            state_path.write_text(json.dumps(state), encoding="utf-8")
+
+            with self.assertRaisesRegex(RuntimeError, "resume_formal_batch_authorization_missing"):
+                _resume_state(
+                    parent,
+                    authorized_request_limit=512,
+                    user_authorized_formal_task_resume=True,
+                )
+
+    def test_formal_batch_resume_continues_validated_prefix_without_replaying_unknown_call(self):
+        source = ROOT / "outputs/route_layer/r4_codex_task9_fresh_r4_step_v3_pilot_20261027_v8"
+        with tempfile.TemporaryDirectory() as directory:
+            parent = Path(directory) / "formal-parent"
+            shutil.copytree(source, parent)
+            state_path = parent / "state.json"
+            state = json.loads(state_path.read_text(encoding="utf-8"))
+            state["user_authorization_status"] = "granted_for_formal_r4_batch_pilot"
+            state_path.write_text(json.dumps(state), encoding="utf-8")
+
+            resumed = _resume_state(
+                parent,
+                authorized_request_limit=512,
+                user_authorized_formal_task_resume=True,
+            )
+
+        self.assertEqual(resumed["status"], "ready")
+        self.assertEqual(resumed["task_id"], "task-0000-0009")
+        self.assertEqual(len(resumed["accepted_edges"]), 28)
+        self.assertEqual(resumed["accepted_nodes"][-1], "node_54_54")
+        self.assertEqual(resumed["unresolved_parent_request_numbers_not_replayed"], [5])
+        self.assertEqual(resumed["new_requests_used"], 0)
+        self.assertEqual(resumed["attempts"], [])
+        self.assertEqual(resumed["effective_authorized_new_request_limit"], 512)
+        self.assertEqual(
+            resumed["user_authorization_status"],
+            "granted_for_formal_r4_batch_pilot",
+        )
+        self.assertTrue(resumed["additional_model_requests_authorized"])
+
     def test_user_stopped_resume_preserves_multiple_unknown_invocations_without_replaying(self):
         attempts = [
             {"request_number": 1, "status": "accepted_legal_step", "retry_count": 0},

@@ -1,0 +1,4839 @@
+{
+  "authorization_history": [
+    {
+      "authorized_cumulative_request_limit": 8192,
+      "recorded_at_utc": "2026-10-27T06:06:46.595166+00:00",
+      "usage_baseline_percent": 39,
+      "usage_stop_percent": 100
+    }
+  ],
+  "authorized_request_limit": null,
+  "codex_cli_session_mode": "ephemeral_per_request",
+  "created_at_utc": "2026-10-27T06:06:20.496662+00:00",
+  "current_task_id": "task-0000-0008",
+  "error": null,
+  "events": [
+    {
+      "at_utc": "2026-10-27T06:06:20.497921+00:00",
+      "event": "user_authorized_unknown_delivery_recovery_prepared",
+      "model_requests": 0,
+      "scope": "same-position recovery requests; prior unknown attempts preserved in recovery_audit",
+      "task_count": 16
+    },
+    {
+      "at_utc": "2026-10-27T06:06:56.379042+00:00",
+      "event": "request_recorded",
+      "request_number": 15,
+      "task_id": "task-0000-0003",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:08:29.900456+00:00",
+      "event": "request_recorded",
+      "request_number": 16,
+      "task_id": "task-0000-0003",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:11:14.112720+00:00",
+      "event": "request_recorded",
+      "request_number": 17,
+      "task_id": "task-0000-0003",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:11:27.244753+00:00",
+      "event": "request_recorded",
+      "request_number": 18,
+      "task_id": "task-0000-0003",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:12:23.909078+00:00",
+      "details": "No terminal response or usage; no replay. Frozen task denominator remains unchanged.",
+      "event": "deferred_unknown_task_to_continue_independent_tasks",
+      "request_number": 19,
+      "requests_reconciled": 0,
+      "task_id": "task-0000-0003",
+      "trace_sha256": "40e25d3dbcdbb0e2ab5bed183fa99842370287ef57808bd18b0c92a4ff1645c6"
+    },
+    {
+      "at_utc": "2026-10-27T06:14:15.204934+00:00",
+      "event": "request_recorded",
+      "request_number": 3,
+      "task_id": "task-0000-0004",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:17:26.447692+00:00",
+      "event": "request_recorded",
+      "request_number": 4,
+      "task_id": "task-0000-0004",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:17:46.575809+00:00",
+      "event": "request_recorded",
+      "request_number": 5,
+      "task_id": "task-0000-0004",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:18:00.576242+00:00",
+      "event": "request_recorded",
+      "request_number": 6,
+      "task_id": "task-0000-0004",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:18:17.474923+00:00",
+      "event": "request_recorded",
+      "request_number": 7,
+      "task_id": "task-0000-0004",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:18:39.605387+00:00",
+      "event": "request_recorded",
+      "request_number": 8,
+      "task_id": "task-0000-0004",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:19:17.561283+00:00",
+      "event": "request_recorded",
+      "request_number": 9,
+      "task_id": "task-0000-0004",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:19:35.186500+00:00",
+      "event": "request_recorded",
+      "request_number": 10,
+      "task_id": "task-0000-0004",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:19:55.343716+00:00",
+      "details": "No terminal response or usage; no replay. Frozen task denominator remains unchanged.",
+      "event": "deferred_unknown_task_to_continue_independent_tasks",
+      "request_number": 11,
+      "requests_reconciled": 0,
+      "task_id": "task-0000-0004",
+      "trace_sha256": "6a6660edc738778ea4a04e4b748ed08a3d5df2bf6c9af8e007a4b224714fb261"
+    },
+    {
+      "at_utc": "2026-10-27T06:21:04.802482+00:00",
+      "event": "user_authorization_reconciled_and_recovery_shard_reenabled",
+      "recovery_model_requests_issued": 0,
+      "unknown_attempts_preserved": true
+    },
+    {
+      "at_utc": "2026-10-27T06:21:14.482182+00:00",
+      "event": "request_recorded",
+      "request_number": 6,
+      "task_id": "task-0000-0005",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:21:14.491013+00:00",
+      "event": "authorized_recovery_trace_slots_aligned_before_finalization",
+      "mappings": [
+        {
+          "moved_artifacts": [
+            {
+              "from": "r4_step_0007.jsonl",
+              "to": "r4_step_0006.jsonl"
+            },
+            {
+              "from": "r4_step_0007.final.json",
+              "to": "r4_step_0006.final.json"
+            },
+            {
+              "from": "r4_step_0007.prompt.txt",
+              "to": "r4_step_0006.prompt.txt"
+            },
+            {
+              "from": "r4_step_0007.schema.json",
+              "to": "r4_step_0006.schema.json"
+            }
+          ],
+          "previous_trace_slot": 7,
+          "request_number": 6
+        }
+      ],
+      "task_id": "task-0000-0005"
+    },
+    {
+      "at_utc": "2026-10-27T06:21:34.694635+00:00",
+      "event": "request_recorded",
+      "request_number": 7,
+      "task_id": "task-0000-0005",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:21:49.596161+00:00",
+      "event": "request_recorded",
+      "request_number": 8,
+      "task_id": "task-0000-0005",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:22:06.582831+00:00",
+      "event": "request_recorded",
+      "request_number": 9,
+      "task_id": "task-0000-0005",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:22:31.602541+00:00",
+      "event": "request_recorded",
+      "request_number": 10,
+      "task_id": "task-0000-0005",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:22:52.891778+00:00",
+      "event": "request_recorded",
+      "request_number": 11,
+      "task_id": "task-0000-0005",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:23:07.237529+00:00",
+      "event": "request_recorded",
+      "request_number": 12,
+      "task_id": "task-0000-0005",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:23:21.673186+00:00",
+      "event": "request_recorded",
+      "request_number": 13,
+      "task_id": "task-0000-0005",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:23:43.867096+00:00",
+      "event": "request_recorded",
+      "request_number": 14,
+      "task_id": "task-0000-0005",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:23:54.763216+00:00",
+      "event": "request_recorded",
+      "request_number": 15,
+      "task_id": "task-0000-0005",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:24:14.374726+00:00",
+      "event": "request_recorded",
+      "request_number": 16,
+      "task_id": "task-0000-0005",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:24:29.656136+00:00",
+      "event": "request_recorded",
+      "request_number": 17,
+      "task_id": "task-0000-0005",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:24:46.984123+00:00",
+      "event": "request_recorded",
+      "request_number": 18,
+      "task_id": "task-0000-0005",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:25:04.890452+00:00",
+      "event": "request_recorded",
+      "request_number": 19,
+      "task_id": "task-0000-0005",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:26:07.201614+00:00",
+      "authorization": "user explicitly authorized all current R4 recovery calls",
+      "event": "stale_zero_retry_pause_superseded_by_direct_user_authorization",
+      "frozen_denominator_changed": false,
+      "prior_pause_reason": "retired_sidecar_after_zero_retry_authorization; no additional calls",
+      "prior_status": "stopped_excluded_sidecar_zero_retry_policy",
+      "recovery_trace_history_preserved": true
+    },
+    {
+      "at_utc": "2026-10-27T06:26:27.685757+00:00",
+      "event": "request_recorded",
+      "request_number": 20,
+      "task_id": "task-0000-0005",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:26:49.702093+00:00",
+      "event": "request_recorded",
+      "request_number": 21,
+      "task_id": "task-0000-0005",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:27:07.714229+00:00",
+      "event": "request_recorded",
+      "request_number": 22,
+      "task_id": "task-0000-0005",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:27:24.663491+00:00",
+      "event": "request_recorded",
+      "request_number": 23,
+      "task_id": "task-0000-0005",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:28:07.038834+00:00",
+      "details": "No terminal response or usage; no replay. Frozen task denominator remains unchanged.",
+      "event": "deferred_unknown_task_to_continue_independent_tasks",
+      "request_number": 24,
+      "requests_reconciled": 0,
+      "task_id": "task-0000-0005",
+      "trace_sha256": "3a085933816d16863b3afedbb339f0a33ba258e1ff632930c6f1afedd616cf0f"
+    },
+    {
+      "at_utc": "2026-10-27T06:28:37.396245+00:00",
+      "authorization": "direct current user authorization for all current recovery calls",
+      "event": "authorized_recovery_shard_reinstated_in_active_aggregation",
+      "frozen_denominator_changed": false
+    },
+    {
+      "at_utc": "2026-10-27T06:31:04.090805+00:00",
+      "authorization": "current direct user authorization for recovery work",
+      "deferred_unknown_task_ids": [
+        "task-0000-0003",
+        "task-0000-0004",
+        "task-0000-0005"
+      ],
+      "event": "authorized_recovery_continued_without_replaying_unknown_attempts",
+      "prior_status": "stopped_excluded_sidecar_zero_retry_policy",
+      "remaining_runnable_tasks": 13
+    },
+    {
+      "at_utc": "2026-10-27T06:31:56.810677+00:00",
+      "event": "direct_user_authorization_overrode_persisted_no_more_calls_guard",
+      "frozen_denominator_changed": false,
+      "prior_guard": {
+        "halt_no_more_model_requests": true,
+        "halt_status": "stopped_excluded_sidecar_zero_retry_policy",
+        "pause_reason": "authorized recovery tasks with unknown deliveries deferred; continue other ready tasks",
+        "status": "stopped_excluded_sidecar_zero_retry_policy"
+      },
+      "unknown_tasks_still_deferred": true
+    },
+    {
+      "at_utc": "2026-10-27T06:32:07.763028+00:00",
+      "event": "request_recorded",
+      "request_number": 9,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:32:07.770597+00:00",
+      "event": "authorized_recovery_trace_slots_aligned_before_finalization",
+      "mappings": [
+        {
+          "moved_artifacts": [
+            {
+              "from": "r4_step_0010.jsonl",
+              "to": "r4_step_0009.jsonl"
+            },
+            {
+              "from": "r4_step_0010.final.json",
+              "to": "r4_step_0009.final.json"
+            },
+            {
+              "from": "r4_step_0010.prompt.txt",
+              "to": "r4_step_0009.prompt.txt"
+            },
+            {
+              "from": "r4_step_0010.schema.json",
+              "to": "r4_step_0009.schema.json"
+            }
+          ],
+          "previous_trace_slot": 10,
+          "request_number": 9
+        }
+      ],
+      "task_id": "task-0000-0006"
+    },
+    {
+      "at_utc": "2026-10-27T06:32:25.597683+00:00",
+      "event": "request_recorded",
+      "request_number": 10,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:32:40.411177+00:00",
+      "event": "request_recorded",
+      "request_number": 11,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:32:58.520974+00:00",
+      "event": "request_recorded",
+      "request_number": 12,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:33:16.645025+00:00",
+      "event": "request_recorded",
+      "request_number": 13,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:33:33.156114+00:00",
+      "event": "request_recorded",
+      "request_number": 14,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:33:48.324626+00:00",
+      "event": "request_recorded",
+      "request_number": 15,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:34:08.234775+00:00",
+      "event": "request_recorded",
+      "request_number": 16,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:34:24.586895+00:00",
+      "event": "request_recorded",
+      "request_number": 17,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:34:42.475250+00:00",
+      "event": "request_recorded",
+      "request_number": 18,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:34:58.035231+00:00",
+      "event": "request_recorded",
+      "request_number": 19,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:35:15.347787+00:00",
+      "event": "request_recorded",
+      "request_number": 20,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:35:29.505927+00:00",
+      "event": "request_recorded",
+      "request_number": 21,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:35:51.914599+00:00",
+      "event": "request_recorded",
+      "request_number": 22,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:36:07.163383+00:00",
+      "event": "request_recorded",
+      "request_number": 23,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:36:22.738390+00:00",
+      "event": "request_recorded",
+      "request_number": 24,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:36:39.391094+00:00",
+      "event": "request_recorded",
+      "request_number": 25,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:36:56.144956+00:00",
+      "event": "request_recorded",
+      "request_number": 26,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:37:14.626541+00:00",
+      "event": "request_recorded",
+      "request_number": 27,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:37:30.306007+00:00",
+      "event": "request_recorded",
+      "request_number": 28,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:37:47.664078+00:00",
+      "event": "request_recorded",
+      "request_number": 29,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:38:05.123116+00:00",
+      "event": "request_recorded",
+      "request_number": 30,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:38:23.521091+00:00",
+      "event": "request_recorded",
+      "request_number": 31,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:38:40.948890+00:00",
+      "event": "request_recorded",
+      "request_number": 32,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:39:00.887344+00:00",
+      "event": "request_recorded",
+      "request_number": 33,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:39:12.772377+00:00",
+      "event": "request_recorded",
+      "request_number": 34,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:39:29.422016+00:00",
+      "event": "request_recorded",
+      "request_number": 35,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:39:48.622053+00:00",
+      "event": "request_recorded",
+      "request_number": 36,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:40:05.191616+00:00",
+      "event": "request_recorded",
+      "request_number": 37,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:40:20.053216+00:00",
+      "event": "request_recorded",
+      "request_number": 38,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:40:37.792584+00:00",
+      "event": "request_recorded",
+      "request_number": 39,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:40:57.260934+00:00",
+      "event": "request_recorded",
+      "request_number": 40,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:41:11.615667+00:00",
+      "event": "request_recorded",
+      "request_number": 41,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:41:33.002607+00:00",
+      "event": "request_recorded",
+      "request_number": 42,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:41:46.073919+00:00",
+      "event": "request_recorded",
+      "request_number": 43,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:42:03.189508+00:00",
+      "event": "request_recorded",
+      "request_number": 44,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:42:18.953458+00:00",
+      "event": "request_recorded",
+      "request_number": 45,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:42:39.964381+00:00",
+      "event": "request_recorded",
+      "request_number": 46,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:42:55.334967+00:00",
+      "event": "request_recorded",
+      "request_number": 47,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:43:15.929413+00:00",
+      "event": "request_recorded",
+      "request_number": 48,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:43:31.904041+00:00",
+      "event": "request_recorded",
+      "request_number": 49,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:43:45.771620+00:00",
+      "event": "request_recorded",
+      "request_number": 50,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:44:01.778678+00:00",
+      "event": "request_recorded",
+      "request_number": 51,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:44:20.001394+00:00",
+      "event": "request_recorded",
+      "request_number": 52,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:44:39.209785+00:00",
+      "event": "request_recorded",
+      "request_number": 53,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:44:52.299680+00:00",
+      "event": "request_recorded",
+      "request_number": 54,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:45:09.810872+00:00",
+      "event": "request_recorded",
+      "request_number": 55,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:45:30.866653+00:00",
+      "event": "request_recorded",
+      "request_number": 56,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:45:46.387735+00:00",
+      "event": "request_recorded",
+      "request_number": 57,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:45:59.965180+00:00",
+      "event": "request_recorded",
+      "request_number": 58,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:46:19.548874+00:00",
+      "event": "request_recorded",
+      "request_number": 59,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:46:35.865177+00:00",
+      "event": "request_recorded",
+      "request_number": 60,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:46:55.564798+00:00",
+      "event": "request_recorded",
+      "request_number": 61,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:47:09.734825+00:00",
+      "event": "request_recorded",
+      "request_number": 62,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:47:25.447367+00:00",
+      "event": "request_recorded",
+      "request_number": 63,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:47:49.018250+00:00",
+      "event": "request_recorded",
+      "request_number": 64,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:48:09.752417+00:00",
+      "event": "request_recorded",
+      "request_number": 65,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:48:25.980564+00:00",
+      "event": "request_recorded",
+      "request_number": 66,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:48:44.199818+00:00",
+      "event": "request_recorded",
+      "request_number": 67,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:49:02.626098+00:00",
+      "event": "request_recorded",
+      "request_number": 68,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:49:16.680200+00:00",
+      "event": "request_recorded",
+      "request_number": 69,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:49:39.028566+00:00",
+      "event": "request_recorded",
+      "request_number": 70,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:49:58.537310+00:00",
+      "event": "request_recorded",
+      "request_number": 71,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:50:18.843279+00:00",
+      "event": "request_recorded",
+      "request_number": 72,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:50:32.893413+00:00",
+      "event": "request_recorded",
+      "request_number": 73,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:50:48.870631+00:00",
+      "event": "request_recorded",
+      "request_number": 74,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:51:08.998870+00:00",
+      "event": "request_recorded",
+      "request_number": 75,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:51:26.364273+00:00",
+      "event": "request_recorded",
+      "request_number": 76,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:51:41.519608+00:00",
+      "event": "request_recorded",
+      "request_number": 77,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:51:58.142839+00:00",
+      "event": "request_recorded",
+      "request_number": 78,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:52:14.866413+00:00",
+      "event": "request_recorded",
+      "request_number": 79,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:52:33.319566+00:00",
+      "event": "request_recorded",
+      "request_number": 80,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:52:52.413567+00:00",
+      "event": "request_recorded",
+      "request_number": 81,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:53:06.205006+00:00",
+      "event": "request_recorded",
+      "request_number": 82,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:53:21.812303+00:00",
+      "event": "request_recorded",
+      "request_number": 83,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:53:40.051573+00:00",
+      "event": "request_recorded",
+      "request_number": 84,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:53:57.225357+00:00",
+      "event": "request_recorded",
+      "request_number": 85,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:54:15.077174+00:00",
+      "event": "request_recorded",
+      "request_number": 86,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:54:30.303688+00:00",
+      "event": "request_recorded",
+      "request_number": 87,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:54:50.197631+00:00",
+      "event": "request_recorded",
+      "request_number": 88,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:55:07.735155+00:00",
+      "event": "request_recorded",
+      "request_number": 89,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:55:25.016264+00:00",
+      "event": "request_recorded",
+      "request_number": 90,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:55:43.291731+00:00",
+      "event": "request_recorded",
+      "request_number": 91,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:55:56.344043+00:00",
+      "event": "request_recorded",
+      "request_number": 92,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:56:13.864274+00:00",
+      "event": "request_recorded",
+      "request_number": 93,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:56:29.317980+00:00",
+      "event": "request_recorded",
+      "request_number": 94,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:56:48.342100+00:00",
+      "event": "request_recorded",
+      "request_number": 95,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:57:04.081496+00:00",
+      "event": "request_recorded",
+      "request_number": 96,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:57:20.723549+00:00",
+      "event": "request_recorded",
+      "request_number": 97,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:57:36.309430+00:00",
+      "event": "request_recorded",
+      "request_number": 98,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:58:00.817162+00:00",
+      "event": "request_recorded",
+      "request_number": 99,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:58:24.860942+00:00",
+      "event": "request_recorded",
+      "request_number": 100,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:58:38.043779+00:00",
+      "event": "request_recorded",
+      "request_number": 101,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:58:53.051455+00:00",
+      "event": "request_recorded",
+      "request_number": 102,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:59:15.980955+00:00",
+      "event": "request_recorded",
+      "request_number": 103,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:59:31.229172+00:00",
+      "event": "request_recorded",
+      "request_number": 104,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T06:59:46.238621+00:00",
+      "event": "request_recorded",
+      "request_number": 105,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:00:05.013313+00:00",
+      "event": "request_recorded",
+      "request_number": 106,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:00:19.222361+00:00",
+      "event": "request_recorded",
+      "request_number": 107,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:00:40.083160+00:00",
+      "event": "request_recorded",
+      "request_number": 108,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:00:53.812704+00:00",
+      "event": "request_recorded",
+      "request_number": 109,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:01:11.664630+00:00",
+      "event": "request_recorded",
+      "request_number": 110,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:01:27.085727+00:00",
+      "event": "request_recorded",
+      "request_number": 111,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:01:47.247004+00:00",
+      "event": "request_recorded",
+      "request_number": 112,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:02:03.197512+00:00",
+      "event": "request_recorded",
+      "request_number": 113,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:02:17.926440+00:00",
+      "event": "request_recorded",
+      "request_number": 114,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:02:37.870908+00:00",
+      "event": "request_recorded",
+      "request_number": 115,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:02:51.793311+00:00",
+      "event": "request_recorded",
+      "request_number": 116,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:03:11.223235+00:00",
+      "event": "request_recorded",
+      "request_number": 117,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:03:28.990261+00:00",
+      "event": "request_recorded",
+      "request_number": 118,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:03:43.659321+00:00",
+      "event": "request_recorded",
+      "request_number": 119,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:04:03.678715+00:00",
+      "event": "request_recorded",
+      "request_number": 120,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:04:19.712229+00:00",
+      "event": "request_recorded",
+      "request_number": 121,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:04:35.552258+00:00",
+      "event": "request_recorded",
+      "request_number": 122,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:04:52.956848+00:00",
+      "event": "request_recorded",
+      "request_number": 123,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:05:08.310856+00:00",
+      "event": "request_recorded",
+      "request_number": 124,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:05:29.151538+00:00",
+      "event": "request_recorded",
+      "request_number": 125,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:05:44.795119+00:00",
+      "event": "request_recorded",
+      "request_number": 126,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:05:59.900203+00:00",
+      "event": "request_recorded",
+      "request_number": 127,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:06:22.924290+00:00",
+      "event": "request_recorded",
+      "request_number": 128,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:06:41.172638+00:00",
+      "event": "request_recorded",
+      "request_number": 129,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:07:04.665953+00:00",
+      "event": "request_recorded",
+      "request_number": 130,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:07:25.264673+00:00",
+      "event": "request_recorded",
+      "request_number": 131,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:07:40.711993+00:00",
+      "event": "request_recorded",
+      "request_number": 132,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:07:57.128134+00:00",
+      "event": "request_recorded",
+      "request_number": 133,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:08:19.161008+00:00",
+      "event": "request_recorded",
+      "request_number": 134,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:08:37.434783+00:00",
+      "event": "request_recorded",
+      "request_number": 135,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:08:58.262605+00:00",
+      "event": "request_recorded",
+      "request_number": 136,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:09:16.249561+00:00",
+      "event": "request_recorded",
+      "request_number": 137,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:09:33.809684+00:00",
+      "event": "request_recorded",
+      "request_number": 138,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:09:46.971818+00:00",
+      "event": "request_recorded",
+      "request_number": 139,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:10:05.607467+00:00",
+      "event": "request_recorded",
+      "request_number": 140,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:10:22.355756+00:00",
+      "event": "request_recorded",
+      "request_number": 141,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:10:41.837586+00:00",
+      "event": "request_recorded",
+      "request_number": 142,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:10:56.227677+00:00",
+      "event": "request_recorded",
+      "request_number": 143,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:11:16.928082+00:00",
+      "event": "request_recorded",
+      "request_number": 144,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:11:30.517619+00:00",
+      "event": "request_recorded",
+      "request_number": 145,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:11:48.386389+00:00",
+      "event": "request_recorded",
+      "request_number": 146,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:12:05.789559+00:00",
+      "event": "request_recorded",
+      "request_number": 147,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:12:24.064278+00:00",
+      "event": "request_recorded",
+      "request_number": 148,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:12:42.189176+00:00",
+      "event": "request_recorded",
+      "request_number": 149,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:13:02.564657+00:00",
+      "event": "request_recorded",
+      "request_number": 150,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:13:20.527801+00:00",
+      "event": "request_recorded",
+      "request_number": 151,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:13:39.783609+00:00",
+      "event": "request_recorded",
+      "request_number": 152,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:13:54.249403+00:00",
+      "event": "request_recorded",
+      "request_number": 153,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:14:19.819535+00:00",
+      "event": "request_recorded",
+      "request_number": 154,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:14:36.995545+00:00",
+      "event": "request_recorded",
+      "request_number": 155,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:14:53.307398+00:00",
+      "event": "request_recorded",
+      "request_number": 156,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:15:14.287664+00:00",
+      "event": "request_recorded",
+      "request_number": 157,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:15:28.182637+00:00",
+      "event": "request_recorded",
+      "request_number": 158,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:15:45.984606+00:00",
+      "event": "request_recorded",
+      "request_number": 159,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:16:00.721362+00:00",
+      "event": "request_recorded",
+      "request_number": 160,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:16:20.664097+00:00",
+      "event": "request_recorded",
+      "request_number": 161,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:16:35.400466+00:00",
+      "event": "request_recorded",
+      "request_number": 162,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:16:53.591028+00:00",
+      "event": "request_recorded",
+      "request_number": 163,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:17:11.242304+00:00",
+      "event": "request_recorded",
+      "request_number": 164,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:17:28.612699+00:00",
+      "event": "request_recorded",
+      "request_number": 165,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:17:43.734096+00:00",
+      "event": "request_recorded",
+      "request_number": 166,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:18:03.081924+00:00",
+      "event": "request_recorded",
+      "request_number": 167,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:18:22.483899+00:00",
+      "event": "request_recorded",
+      "request_number": 168,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:18:34.849117+00:00",
+      "event": "request_recorded",
+      "request_number": 169,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:18:53.543962+00:00",
+      "event": "request_recorded",
+      "request_number": 170,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:19:11.918552+00:00",
+      "event": "request_recorded",
+      "request_number": 171,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:19:28.136322+00:00",
+      "event": "request_recorded",
+      "request_number": 172,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:19:44.523517+00:00",
+      "event": "request_recorded",
+      "request_number": 173,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:20:04.761713+00:00",
+      "event": "request_recorded",
+      "request_number": 174,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:20:17.447107+00:00",
+      "event": "request_recorded",
+      "request_number": 175,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:20:33.284778+00:00",
+      "event": "request_recorded",
+      "request_number": 176,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:20:51.536612+00:00",
+      "event": "request_recorded",
+      "request_number": 177,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:21:09.647962+00:00",
+      "event": "request_recorded",
+      "request_number": 178,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:21:25.773568+00:00",
+      "event": "request_recorded",
+      "request_number": 179,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:21:43.443917+00:00",
+      "event": "request_recorded",
+      "request_number": 180,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:21:59.564039+00:00",
+      "event": "request_recorded",
+      "request_number": 181,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:22:15.650647+00:00",
+      "event": "request_recorded",
+      "request_number": 182,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:22:33.955693+00:00",
+      "event": "request_recorded",
+      "request_number": 183,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:22:49.411737+00:00",
+      "event": "request_recorded",
+      "request_number": 184,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:23:08.248966+00:00",
+      "event": "request_recorded",
+      "request_number": 185,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:23:25.055280+00:00",
+      "event": "request_recorded",
+      "request_number": 186,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:23:42.961428+00:00",
+      "event": "request_recorded",
+      "request_number": 187,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:24:03.727719+00:00",
+      "event": "request_recorded",
+      "request_number": 188,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:24:24.988449+00:00",
+      "event": "request_recorded",
+      "request_number": 189,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:24:46.832060+00:00",
+      "event": "request_recorded",
+      "request_number": 190,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:25:12.256224+00:00",
+      "event": "request_recorded",
+      "request_number": 191,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:25:33.997384+00:00",
+      "event": "request_recorded",
+      "request_number": 192,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:25:49.859741+00:00",
+      "event": "request_recorded",
+      "request_number": 193,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:26:06.693830+00:00",
+      "event": "request_recorded",
+      "request_number": 194,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:26:20.930562+00:00",
+      "event": "request_recorded",
+      "request_number": 195,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:26:42.144297+00:00",
+      "event": "request_recorded",
+      "request_number": 196,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:26:55.213855+00:00",
+      "event": "request_recorded",
+      "request_number": 197,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:27:14.114550+00:00",
+      "event": "request_recorded",
+      "request_number": 198,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:27:30.724456+00:00",
+      "event": "request_recorded",
+      "request_number": 199,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:27:50.308092+00:00",
+      "event": "request_recorded",
+      "request_number": 200,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:28:04.213503+00:00",
+      "event": "request_recorded",
+      "request_number": 201,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:28:25.692676+00:00",
+      "event": "request_recorded",
+      "request_number": 202,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:28:46.648068+00:00",
+      "event": "request_recorded",
+      "request_number": 203,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:29:05.609687+00:00",
+      "event": "request_recorded",
+      "request_number": 204,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:29:23.938660+00:00",
+      "event": "request_recorded",
+      "request_number": 205,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:29:37.053820+00:00",
+      "event": "request_recorded",
+      "request_number": 206,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:29:55.782011+00:00",
+      "event": "request_recorded",
+      "request_number": 207,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:30:12.572076+00:00",
+      "event": "request_recorded",
+      "request_number": 208,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:30:28.269736+00:00",
+      "event": "request_recorded",
+      "request_number": 209,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:30:44.003155+00:00",
+      "event": "request_recorded",
+      "request_number": 210,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:31:04.973411+00:00",
+      "event": "request_recorded",
+      "request_number": 211,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:31:19.695845+00:00",
+      "event": "request_recorded",
+      "request_number": 212,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:31:38.627595+00:00",
+      "event": "request_recorded",
+      "request_number": 213,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:31:51.644737+00:00",
+      "event": "request_recorded",
+      "request_number": 214,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:32:12.635782+00:00",
+      "event": "request_recorded",
+      "request_number": 215,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:32:30.036982+00:00",
+      "event": "request_recorded",
+      "request_number": 216,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:32:43.814939+00:00",
+      "event": "request_recorded",
+      "request_number": 217,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:33:02.589095+00:00",
+      "event": "request_recorded",
+      "request_number": 218,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:33:18.594353+00:00",
+      "event": "request_recorded",
+      "request_number": 219,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:33:39.223266+00:00",
+      "event": "request_recorded",
+      "request_number": 220,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:33:55.339698+00:00",
+      "event": "request_recorded",
+      "request_number": 221,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:34:09.330520+00:00",
+      "event": "request_recorded",
+      "request_number": 222,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:34:26.888714+00:00",
+      "event": "request_recorded",
+      "request_number": 223,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:34:45.449282+00:00",
+      "event": "request_recorded",
+      "request_number": 224,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:35:16.041280+00:00",
+      "event": "request_recorded",
+      "request_number": 225,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:35:36.363401+00:00",
+      "event": "request_recorded",
+      "request_number": 226,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:35:54.638444+00:00",
+      "event": "request_recorded",
+      "request_number": 227,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:36:08.314788+00:00",
+      "event": "request_recorded",
+      "request_number": 228,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:36:26.693661+00:00",
+      "event": "request_recorded",
+      "request_number": 229,
+      "task_id": "task-0000-0006",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:36:40.111062+00:00",
+      "event": "request_recorded",
+      "request_number": 230,
+      "task_id": "task-0000-0006",
+      "task_status": "route_complete"
+    },
+    {
+      "at_utc": "2026-10-27T07:36:59.334240+00:00",
+      "event": "request_recorded",
+      "request_number": 9,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:36:59.342592+00:00",
+      "event": "authorized_recovery_trace_slots_aligned_before_finalization",
+      "mappings": [
+        {
+          "moved_artifacts": [
+            {
+              "from": "r4_step_0010.jsonl",
+              "to": "r4_step_0009.jsonl"
+            },
+            {
+              "from": "r4_step_0010.final.json",
+              "to": "r4_step_0009.final.json"
+            },
+            {
+              "from": "r4_step_0010.prompt.txt",
+              "to": "r4_step_0009.prompt.txt"
+            },
+            {
+              "from": "r4_step_0010.schema.json",
+              "to": "r4_step_0009.schema.json"
+            }
+          ],
+          "previous_trace_slot": 10,
+          "request_number": 9
+        }
+      ],
+      "task_id": "task-0000-0007"
+    },
+    {
+      "at_utc": "2026-10-27T07:37:15.439512+00:00",
+      "event": "request_recorded",
+      "request_number": 10,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:37:31.708176+00:00",
+      "event": "request_recorded",
+      "request_number": 11,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:37:50.166286+00:00",
+      "event": "request_recorded",
+      "request_number": 12,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:38:05.805809+00:00",
+      "event": "request_recorded",
+      "request_number": 13,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:38:22.227181+00:00",
+      "event": "request_recorded",
+      "request_number": 14,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:38:41.909056+00:00",
+      "event": "request_recorded",
+      "request_number": 15,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:38:57.834914+00:00",
+      "event": "request_recorded",
+      "request_number": 16,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:39:14.608288+00:00",
+      "event": "request_recorded",
+      "request_number": 17,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:39:38.853735+00:00",
+      "event": "request_recorded",
+      "request_number": 18,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:40:01.129372+00:00",
+      "event": "request_recorded",
+      "request_number": 19,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:40:15.466439+00:00",
+      "event": "request_recorded",
+      "request_number": 20,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:40:37.953702+00:00",
+      "event": "request_recorded",
+      "request_number": 21,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:40:54.193738+00:00",
+      "event": "request_recorded",
+      "request_number": 22,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:41:13.335003+00:00",
+      "event": "request_recorded",
+      "request_number": 23,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:41:32.142329+00:00",
+      "event": "request_recorded",
+      "request_number": 24,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:41:46.778741+00:00",
+      "event": "request_recorded",
+      "request_number": 25,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:42:03.015561+00:00",
+      "event": "request_recorded",
+      "request_number": 26,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:42:19.963848+00:00",
+      "event": "request_recorded",
+      "request_number": 27,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:42:45.990864+00:00",
+      "event": "request_recorded",
+      "request_number": 28,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:43:05.862861+00:00",
+      "event": "request_recorded",
+      "request_number": 29,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:43:18.808431+00:00",
+      "event": "request_recorded",
+      "request_number": 30,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:43:35.107403+00:00",
+      "event": "request_recorded",
+      "request_number": 31,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:43:54.760519+00:00",
+      "event": "request_recorded",
+      "request_number": 32,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:44:13.950493+00:00",
+      "event": "request_recorded",
+      "request_number": 33,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:44:27.594270+00:00",
+      "event": "request_recorded",
+      "request_number": 34,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:44:44.375552+00:00",
+      "event": "request_recorded",
+      "request_number": 35,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:45:03.605583+00:00",
+      "event": "request_recorded",
+      "request_number": 36,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:45:18.624105+00:00",
+      "event": "request_recorded",
+      "request_number": 37,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:45:40.936826+00:00",
+      "event": "request_recorded",
+      "request_number": 38,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:45:53.357908+00:00",
+      "event": "request_recorded",
+      "request_number": 39,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:46:09.910735+00:00",
+      "event": "request_recorded",
+      "request_number": 40,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:46:30.803942+00:00",
+      "event": "request_recorded",
+      "request_number": 41,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:46:44.842678+00:00",
+      "event": "request_recorded",
+      "request_number": 42,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:46:59.932928+00:00",
+      "event": "request_recorded",
+      "request_number": 43,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:47:22.197630+00:00",
+      "event": "request_recorded",
+      "request_number": 44,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:47:38.632281+00:00",
+      "event": "request_recorded",
+      "request_number": 45,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:47:51.972150+00:00",
+      "event": "request_recorded",
+      "request_number": 46,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:48:15.631213+00:00",
+      "event": "request_recorded",
+      "request_number": 47,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:48:34.033226+00:00",
+      "event": "request_recorded",
+      "request_number": 48,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:48:50.845641+00:00",
+      "event": "request_recorded",
+      "request_number": 49,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:49:07.428611+00:00",
+      "event": "request_recorded",
+      "request_number": 50,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:49:24.074978+00:00",
+      "event": "request_recorded",
+      "request_number": 51,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:49:44.085162+00:00",
+      "event": "request_recorded",
+      "request_number": 52,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:50:06.548205+00:00",
+      "event": "request_recorded",
+      "request_number": 53,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:50:24.143154+00:00",
+      "event": "request_recorded",
+      "request_number": 54,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:50:43.447389+00:00",
+      "event": "request_recorded",
+      "request_number": 55,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:50:56.542537+00:00",
+      "event": "request_recorded",
+      "request_number": 56,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:51:17.184868+00:00",
+      "event": "request_recorded",
+      "request_number": 57,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:51:33.499499+00:00",
+      "event": "request_recorded",
+      "request_number": 58,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:51:49.634081+00:00",
+      "event": "request_recorded",
+      "request_number": 59,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:52:07.410657+00:00",
+      "event": "request_recorded",
+      "request_number": 60,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:52:24.467976+00:00",
+      "event": "request_recorded",
+      "request_number": 61,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:52:40.919532+00:00",
+      "event": "request_recorded",
+      "request_number": 62,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:52:58.870720+00:00",
+      "event": "request_recorded",
+      "request_number": 63,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:53:19.474678+00:00",
+      "event": "request_recorded",
+      "request_number": 64,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "additional_requests_issued": 0,
+      "at_utc": "2026-10-27T07:55:30.319187+00:00",
+      "canonical_worker_id": "worker_01",
+      "event": "duplicate_recovery_slot_suppressed_at_safe_checkpoint",
+      "preserved_output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_1/formal-task-0001-feasible/run_001",
+      "task_id": "formal-task-0001-feasible"
+    },
+    {
+      "additional_requests_issued": 0,
+      "at_utc": "2026-10-27T07:55:30.319187+00:00",
+      "canonical_worker_id": "worker_02",
+      "event": "duplicate_recovery_slot_suppressed_at_safe_checkpoint",
+      "preserved_output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_6/formal-task-0006-boundary/run_001",
+      "task_id": "formal-task-0006-boundary"
+    },
+    {
+      "additional_requests_issued": 0,
+      "at_utc": "2026-10-27T07:55:30.319187+00:00",
+      "canonical_worker_id": "worker_03",
+      "event": "duplicate_recovery_slot_suppressed_at_safe_checkpoint",
+      "preserved_output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_3/task-0003-0009/run_001",
+      "task_id": "task-0003-0009"
+    },
+    {
+      "at_utc": "2026-10-27T07:55:43.569943+00:00",
+      "event": "request_recorded",
+      "request_number": 65,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:55:58.358578+00:00",
+      "event": "request_recorded",
+      "request_number": 66,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:56:15.976657+00:00",
+      "event": "request_recorded",
+      "request_number": 67,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:56:32.117249+00:00",
+      "event": "request_recorded",
+      "request_number": 68,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:56:53.730687+00:00",
+      "event": "request_recorded",
+      "request_number": 69,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:57:07.294508+00:00",
+      "event": "request_recorded",
+      "request_number": 70,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:57:27.444406+00:00",
+      "event": "request_recorded",
+      "request_number": 71,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:57:40.380785+00:00",
+      "event": "request_recorded",
+      "request_number": 72,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:58:01.471022+00:00",
+      "event": "request_recorded",
+      "request_number": 73,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:58:24.546134+00:00",
+      "event": "request_recorded",
+      "request_number": 74,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:58:43.460357+00:00",
+      "event": "request_recorded",
+      "request_number": 75,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:59:12.611896+00:00",
+      "event": "request_recorded",
+      "request_number": 76,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:59:33.271921+00:00",
+      "event": "request_recorded",
+      "request_number": 77,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T07:59:54.112644+00:00",
+      "event": "request_recorded",
+      "request_number": 78,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:00:10.076842+00:00",
+      "event": "request_recorded",
+      "request_number": 79,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:00:26.680236+00:00",
+      "event": "request_recorded",
+      "request_number": 80,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:00:46.598781+00:00",
+      "event": "request_recorded",
+      "request_number": 81,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:01:01.553302+00:00",
+      "event": "request_recorded",
+      "request_number": 82,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:01:19.021831+00:00",
+      "event": "request_recorded",
+      "request_number": 83,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:01:35.624444+00:00",
+      "event": "request_recorded",
+      "request_number": 84,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:15:18.923690+00:00",
+      "authorized_request_limit": null,
+      "event": "project_cumulative_request_and_local_usage_stops_disabled_at_user_direction",
+      "model_requests_during_transition": 0,
+      "prior_request_limit": 8192,
+      "usage_stop_percent": null
+    },
+    {
+      "at_utc": "2026-10-27T08:21:05.840118+00:00",
+      "event": "request_recorded",
+      "request_number": 85,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:21:28.500955+00:00",
+      "event": "request_recorded",
+      "request_number": 86,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:21:48.728474+00:00",
+      "event": "request_recorded",
+      "request_number": 87,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:22:11.783464+00:00",
+      "event": "request_recorded",
+      "request_number": 88,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:22:41.178491+00:00",
+      "event": "request_recorded",
+      "request_number": 89,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:23:03.988172+00:00",
+      "event": "request_recorded",
+      "request_number": 90,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:23:25.983364+00:00",
+      "event": "request_recorded",
+      "request_number": 91,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:23:45.160240+00:00",
+      "event": "request_recorded",
+      "request_number": 92,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:24:01.210632+00:00",
+      "event": "request_recorded",
+      "request_number": 93,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:24:17.651855+00:00",
+      "event": "request_recorded",
+      "request_number": 94,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:24:36.152275+00:00",
+      "event": "request_recorded",
+      "request_number": 95,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:24:52.621016+00:00",
+      "event": "request_recorded",
+      "request_number": 96,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:25:12.422702+00:00",
+      "event": "request_recorded",
+      "request_number": 97,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:25:35.685467+00:00",
+      "event": "request_recorded",
+      "request_number": 98,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:25:55.317700+00:00",
+      "event": "request_recorded",
+      "request_number": 99,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:26:18.259800+00:00",
+      "event": "request_recorded",
+      "request_number": 100,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:26:40.312158+00:00",
+      "event": "request_recorded",
+      "request_number": 101,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:27:02.780770+00:00",
+      "event": "request_recorded",
+      "request_number": 102,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:27:25.717273+00:00",
+      "event": "request_recorded",
+      "request_number": 103,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:27:42.145745+00:00",
+      "event": "request_recorded",
+      "request_number": 104,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:28:03.158738+00:00",
+      "event": "request_recorded",
+      "request_number": 105,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:28:23.303545+00:00",
+      "event": "request_recorded",
+      "request_number": 106,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:28:42.197508+00:00",
+      "event": "request_recorded",
+      "request_number": 107,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:28:58.147923+00:00",
+      "event": "request_recorded",
+      "request_number": 108,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:29:18.665992+00:00",
+      "event": "request_recorded",
+      "request_number": 109,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:29:43.051563+00:00",
+      "event": "request_recorded",
+      "request_number": 110,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:29:59.440778+00:00",
+      "event": "request_recorded",
+      "request_number": 111,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:30:19.062831+00:00",
+      "event": "request_recorded",
+      "request_number": 112,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:30:41.800481+00:00",
+      "event": "request_recorded",
+      "request_number": 113,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:30:58.203136+00:00",
+      "event": "request_recorded",
+      "request_number": 114,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:31:16.436253+00:00",
+      "event": "request_recorded",
+      "request_number": 115,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:31:37.726461+00:00",
+      "event": "request_recorded",
+      "request_number": 116,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:32:01.831431+00:00",
+      "event": "request_recorded",
+      "request_number": 117,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:32:22.759691+00:00",
+      "event": "request_recorded",
+      "request_number": 118,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:32:43.542958+00:00",
+      "event": "request_recorded",
+      "request_number": 119,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:33:05.812434+00:00",
+      "event": "request_recorded",
+      "request_number": 120,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:33:25.739143+00:00",
+      "event": "request_recorded",
+      "request_number": 121,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:33:49.037854+00:00",
+      "event": "request_recorded",
+      "request_number": 122,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:34:25.688796+00:00",
+      "event": "request_recorded",
+      "request_number": 123,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:34:48.427806+00:00",
+      "event": "request_recorded",
+      "request_number": 124,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:35:06.045649+00:00",
+      "event": "request_recorded",
+      "request_number": 125,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:35:27.002205+00:00",
+      "event": "request_recorded",
+      "request_number": 126,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:35:48.012695+00:00",
+      "event": "request_recorded",
+      "request_number": 127,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:36:04.763854+00:00",
+      "event": "request_recorded",
+      "request_number": 128,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:36:21.689447+00:00",
+      "event": "request_recorded",
+      "request_number": 129,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:36:40.376412+00:00",
+      "event": "request_recorded",
+      "request_number": 130,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:36:55.917297+00:00",
+      "event": "request_recorded",
+      "request_number": 131,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:37:13.708754+00:00",
+      "event": "request_recorded",
+      "request_number": 132,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:37:34.195481+00:00",
+      "event": "request_recorded",
+      "request_number": 133,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:37:58.747782+00:00",
+      "event": "request_recorded",
+      "request_number": 134,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:38:21.816994+00:00",
+      "event": "request_recorded",
+      "request_number": 135,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:38:39.547839+00:00",
+      "event": "request_recorded",
+      "request_number": 136,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:38:58.888775+00:00",
+      "event": "request_recorded",
+      "request_number": 137,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:39:21.916942+00:00",
+      "event": "request_recorded",
+      "request_number": 138,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:39:38.807098+00:00",
+      "event": "request_recorded",
+      "request_number": 139,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:39:55.758350+00:00",
+      "event": "request_recorded",
+      "request_number": 140,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:40:12.966742+00:00",
+      "event": "request_recorded",
+      "request_number": 141,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:40:31.970433+00:00",
+      "event": "request_recorded",
+      "request_number": 142,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:40:47.355099+00:00",
+      "event": "request_recorded",
+      "request_number": 143,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:41:05.472744+00:00",
+      "event": "request_recorded",
+      "request_number": 144,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:41:20.651450+00:00",
+      "event": "request_recorded",
+      "request_number": 145,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:41:43.208301+00:00",
+      "event": "request_recorded",
+      "request_number": 146,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:42:06.486074+00:00",
+      "event": "request_recorded",
+      "request_number": 147,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:42:28.859794+00:00",
+      "event": "request_recorded",
+      "request_number": 148,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:42:47.015998+00:00",
+      "event": "request_recorded",
+      "request_number": 149,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:43:04.993060+00:00",
+      "event": "request_recorded",
+      "request_number": 150,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:43:21.669954+00:00",
+      "event": "request_recorded",
+      "request_number": 151,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:43:39.903011+00:00",
+      "event": "request_recorded",
+      "request_number": 152,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:43:58.166206+00:00",
+      "event": "request_recorded",
+      "request_number": 153,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:44:14.605817+00:00",
+      "event": "request_recorded",
+      "request_number": 154,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:44:32.528630+00:00",
+      "event": "request_recorded",
+      "request_number": 155,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:44:47.163750+00:00",
+      "event": "request_recorded",
+      "request_number": 156,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:45:06.094600+00:00",
+      "event": "request_recorded",
+      "request_number": 157,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:45:27.092727+00:00",
+      "event": "request_recorded",
+      "request_number": 158,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:45:50.079887+00:00",
+      "event": "request_recorded",
+      "request_number": 159,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:46:04.784361+00:00",
+      "event": "request_recorded",
+      "request_number": 160,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:46:25.677671+00:00",
+      "event": "request_recorded",
+      "request_number": 161,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:46:47.571132+00:00",
+      "event": "request_recorded",
+      "request_number": 162,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:47:06.767464+00:00",
+      "event": "request_recorded",
+      "request_number": 163,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:47:23.667410+00:00",
+      "event": "request_recorded",
+      "request_number": 164,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:47:42.605407+00:00",
+      "event": "request_recorded",
+      "request_number": 165,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:48:07.307722+00:00",
+      "event": "request_recorded",
+      "request_number": 166,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:48:21.308792+00:00",
+      "event": "request_recorded",
+      "request_number": 167,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:48:38.297203+00:00",
+      "event": "request_recorded",
+      "request_number": 168,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:48:57.778219+00:00",
+      "event": "request_recorded",
+      "request_number": 169,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:49:18.871611+00:00",
+      "event": "request_recorded",
+      "request_number": 170,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:49:43.633036+00:00",
+      "event": "request_recorded",
+      "request_number": 171,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:50:06.859887+00:00",
+      "event": "request_recorded",
+      "request_number": 172,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:50:30.513834+00:00",
+      "event": "request_recorded",
+      "request_number": 173,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:50:50.399447+00:00",
+      "event": "request_recorded",
+      "request_number": 174,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:51:07.850578+00:00",
+      "event": "request_recorded",
+      "request_number": 175,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:51:32.349985+00:00",
+      "event": "request_recorded",
+      "request_number": 176,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:51:57.692229+00:00",
+      "event": "request_recorded",
+      "request_number": 177,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:52:12.774065+00:00",
+      "event": "request_recorded",
+      "request_number": 178,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:52:33.231245+00:00",
+      "event": "request_recorded",
+      "request_number": 179,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:52:59.343667+00:00",
+      "event": "request_recorded",
+      "request_number": 180,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:53:21.804774+00:00",
+      "event": "request_recorded",
+      "request_number": 181,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:53:39.815985+00:00",
+      "event": "request_recorded",
+      "request_number": 182,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:53:55.487075+00:00",
+      "event": "request_recorded",
+      "request_number": 183,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:54:13.172366+00:00",
+      "event": "request_recorded",
+      "request_number": 184,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:54:30.095020+00:00",
+      "event": "request_recorded",
+      "request_number": 185,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:54:45.607443+00:00",
+      "event": "request_recorded",
+      "request_number": 186,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:55:03.188064+00:00",
+      "event": "request_recorded",
+      "request_number": 187,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:55:24.240376+00:00",
+      "event": "request_recorded",
+      "request_number": 188,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:55:47.817685+00:00",
+      "event": "request_recorded",
+      "request_number": 189,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:56:04.615961+00:00",
+      "event": "request_recorded",
+      "request_number": 190,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:56:23.922140+00:00",
+      "event": "request_recorded",
+      "request_number": 191,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:56:48.740044+00:00",
+      "event": "request_recorded",
+      "request_number": 192,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:57:06.256979+00:00",
+      "event": "request_recorded",
+      "request_number": 193,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:57:23.245915+00:00",
+      "event": "request_recorded",
+      "request_number": 194,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:57:37.817960+00:00",
+      "event": "request_recorded",
+      "request_number": 195,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:57:56.614112+00:00",
+      "event": "request_recorded",
+      "request_number": 196,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:58:15.238432+00:00",
+      "event": "request_recorded",
+      "request_number": 197,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:58:30.907035+00:00",
+      "event": "request_recorded",
+      "request_number": 198,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:58:51.580780+00:00",
+      "event": "request_recorded",
+      "request_number": 199,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:59:14.585338+00:00",
+      "event": "request_recorded",
+      "request_number": 200,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:59:31.735650+00:00",
+      "event": "request_recorded",
+      "request_number": 201,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T08:59:53.745345+00:00",
+      "event": "request_recorded",
+      "request_number": 202,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:00:14.532075+00:00",
+      "event": "request_recorded",
+      "request_number": 203,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:00:33.676888+00:00",
+      "event": "request_recorded",
+      "request_number": 204,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:00:56.874983+00:00",
+      "event": "request_recorded",
+      "request_number": 205,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:01:30.128397+00:00",
+      "event": "request_recorded",
+      "request_number": 206,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:01:48.703250+00:00",
+      "event": "request_recorded",
+      "request_number": 207,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:02:10.585788+00:00",
+      "event": "request_recorded",
+      "request_number": 208,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:02:32.230374+00:00",
+      "event": "request_recorded",
+      "request_number": 209,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:02:54.526122+00:00",
+      "event": "request_recorded",
+      "request_number": 210,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:03:13.867523+00:00",
+      "event": "request_recorded",
+      "request_number": 211,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:03:39.728323+00:00",
+      "event": "request_recorded",
+      "request_number": 212,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:04:01.880918+00:00",
+      "event": "request_recorded",
+      "request_number": 213,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:04:20.074147+00:00",
+      "event": "request_recorded",
+      "request_number": 214,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:04:36.714830+00:00",
+      "event": "request_recorded",
+      "request_number": 215,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:04:56.844068+00:00",
+      "event": "request_recorded",
+      "request_number": 216,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:05:19.104588+00:00",
+      "event": "request_recorded",
+      "request_number": 217,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:05:36.113698+00:00",
+      "event": "request_recorded",
+      "request_number": 218,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:05:53.802197+00:00",
+      "event": "request_recorded",
+      "request_number": 219,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:06:09.164393+00:00",
+      "event": "request_recorded",
+      "request_number": 220,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:06:29.612747+00:00",
+      "event": "request_recorded",
+      "request_number": 221,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:06:51.163760+00:00",
+      "event": "request_recorded",
+      "request_number": 222,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:07:09.497574+00:00",
+      "event": "request_recorded",
+      "request_number": 223,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:07:30.941880+00:00",
+      "event": "request_recorded",
+      "request_number": 224,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:07:51.155618+00:00",
+      "event": "request_recorded",
+      "request_number": 225,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:08:12.038242+00:00",
+      "event": "request_recorded",
+      "request_number": 226,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:08:27.310688+00:00",
+      "event": "request_recorded",
+      "request_number": 227,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:08:45.834919+00:00",
+      "event": "request_recorded",
+      "request_number": 228,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:09:00.608244+00:00",
+      "event": "request_recorded",
+      "request_number": 229,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:09:23.351039+00:00",
+      "event": "request_recorded",
+      "request_number": 230,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:09:45.302400+00:00",
+      "event": "request_recorded",
+      "request_number": 231,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:10:04.344762+00:00",
+      "event": "request_recorded",
+      "request_number": 232,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:10:28.713063+00:00",
+      "event": "request_recorded",
+      "request_number": 233,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:10:44.035096+00:00",
+      "event": "request_recorded",
+      "request_number": 234,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:11:00.504143+00:00",
+      "event": "request_recorded",
+      "request_number": 235,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:11:21.928828+00:00",
+      "event": "request_recorded",
+      "request_number": 236,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:11:44.163852+00:00",
+      "event": "request_recorded",
+      "request_number": 237,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:12:01.664321+00:00",
+      "event": "request_recorded",
+      "request_number": 238,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:12:19.464435+00:00",
+      "event": "request_recorded",
+      "request_number": 239,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:12:36.142220+00:00",
+      "event": "request_recorded",
+      "request_number": 240,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:12:54.451617+00:00",
+      "event": "request_recorded",
+      "request_number": 241,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:13:11.570500+00:00",
+      "event": "request_recorded",
+      "request_number": 242,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:13:28.332940+00:00",
+      "event": "request_recorded",
+      "request_number": 243,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:13:45.019125+00:00",
+      "event": "request_recorded",
+      "request_number": 244,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:14:00.726361+00:00",
+      "event": "request_recorded",
+      "request_number": 245,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:14:18.488520+00:00",
+      "event": "request_recorded",
+      "request_number": 246,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:14:39.355002+00:00",
+      "event": "request_recorded",
+      "request_number": 247,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:15:01.671059+00:00",
+      "event": "request_recorded",
+      "request_number": 248,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:15:21.373144+00:00",
+      "event": "request_recorded",
+      "request_number": 249,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:15:46.131744+00:00",
+      "event": "request_recorded",
+      "request_number": 250,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:16:03.485936+00:00",
+      "event": "request_recorded",
+      "request_number": 251,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:16:20.084646+00:00",
+      "event": "request_recorded",
+      "request_number": 252,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:16:37.632716+00:00",
+      "event": "request_recorded",
+      "request_number": 253,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:16:53.375390+00:00",
+      "event": "request_recorded",
+      "request_number": 254,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:17:12.431529+00:00",
+      "event": "request_recorded",
+      "request_number": 255,
+      "task_id": "task-0000-0007",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:17:36.077198+00:00",
+      "event": "request_recorded",
+      "request_number": 256,
+      "task_id": "task-0000-0007",
+      "task_status": "route_complete"
+    },
+    {
+      "at_utc": "2026-10-27T09:17:51.245618+00:00",
+      "event": "request_recorded",
+      "request_number": 2,
+      "task_id": "task-0000-0008",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:17:51.304485+00:00",
+      "event": "authorized_recovery_trace_slots_aligned_before_finalization",
+      "mappings": [
+        {
+          "moved_artifacts": [
+            {
+              "from": "r4_step_0003.jsonl",
+              "to": "r4_step_0002.jsonl"
+            },
+            {
+              "from": "r4_step_0003.final.json",
+              "to": "r4_step_0002.final.json"
+            },
+            {
+              "from": "r4_step_0003.prompt.txt",
+              "to": "r4_step_0002.prompt.txt"
+            },
+            {
+              "from": "r4_step_0003.schema.json",
+              "to": "r4_step_0002.schema.json"
+            }
+          ],
+          "previous_trace_slot": 3,
+          "request_number": 2
+        }
+      ],
+      "task_id": "task-0000-0008"
+    },
+    {
+      "at_utc": "2026-10-27T09:18:07.544919+00:00",
+      "event": "request_recorded",
+      "request_number": 3,
+      "task_id": "task-0000-0008",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:18:25.374630+00:00",
+      "event": "request_recorded",
+      "request_number": 4,
+      "task_id": "task-0000-0008",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:18:42.270169+00:00",
+      "event": "request_recorded",
+      "request_number": 5,
+      "task_id": "task-0000-0008",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:19:03.040453+00:00",
+      "event": "request_recorded",
+      "request_number": 6,
+      "task_id": "task-0000-0008",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:19:23.819558+00:00",
+      "event": "request_recorded",
+      "request_number": 7,
+      "task_id": "task-0000-0008",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:19:44.331689+00:00",
+      "event": "request_recorded",
+      "request_number": 8,
+      "task_id": "task-0000-0008",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:20:02.767167+00:00",
+      "event": "request_recorded",
+      "request_number": 9,
+      "task_id": "task-0000-0008",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:20:20.554348+00:00",
+      "event": "request_recorded",
+      "request_number": 10,
+      "task_id": "task-0000-0008",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:20:34.615783+00:00",
+      "event": "request_recorded",
+      "request_number": 11,
+      "task_id": "task-0000-0008",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:20:53.519142+00:00",
+      "event": "request_recorded",
+      "request_number": 12,
+      "task_id": "task-0000-0008",
+      "task_status": "ready"
+    },
+    {
+      "at_utc": "2026-10-27T09:21:13.790786+00:00",
+      "event": "request_recorded",
+      "request_number": 13,
+      "task_id": "task-0000-0008",
+      "task_status": "ready"
+    }
+  ],
+  "experiment_id": "r4_codex_formal_batch_v2",
+  "frozen_task_count": 16,
+  "halt_no_more_model_requests": false,
+  "halt_status": "stopped_excluded_sidecar_zero_retry_policy",
+  "minimum_model_request_lower_bound": 2988,
+  "model_requests_used": 609,
+  "pause_reason": "max_new_requests_per_invocation_reached",
+  "pilot_gate": {
+    "account_usage_guard": {
+      "accepted_route_steps_when_stopped": 113,
+      "baseline_weekly_used_percent": 36,
+      "checked_at_utc": "2026-10-27T04:15:31Z",
+      "credits_balance_after": "62408.2904120000",
+      "credits_balance_before": "62408.2904120000",
+      "credits_balance_changed": false,
+      "limitation": "Weekly usage is integer-rounded and may update with delay; no account spend or actual billing is inferred.",
+      "max_weekly_usage_increase_percentage_points": 64,
+      "observed_weekly_used_percent_after_request": 38,
+      "requests_used_when_stopped": 113,
+      "schema_version": "codex_account_usage_guard_v2",
+      "stop_threshold_percent": 100
+    },
+    "checked_at_utc": "2026-10-27T09:20:57.276587+00:00",
+    "dropoff_node_id": "node_42_43",
+    "errors": [],
+    "input_tokens": 1857583,
+    "latency_ms": 1018036.373,
+    "manifest_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_task9_pilot_20261027_v3/manifest.json",
+    "manifest_sha256": "9d26dde2454c7173d289ae5ca388f1e4ab8e806d1232a93411a98ae2588c939e",
+    "map_id": "grid-100x100-seed-0",
+    "output_tokens": 39449,
+    "passed": true,
+    "path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_task9_pilot_20261027_v3/final_audit.json",
+    "pickup_node_id": "node_25_66",
+    "reason": null,
+    "requests": 113,
+    "route_distance_m": 11300.0,
+    "route_duration_sec": 1257.2595197777393,
+    "route_energy_kwh": 1.2862863790274712,
+    "session_mode": "ephemeral_per_request",
+    "sha256": "b7a510fbf9b848a3d6b34174256fa1741402376dc988bf87fe4d8113f7e8362c",
+    "start_node_id": "node_69_41",
+    "task_id": "task-0000-0009"
+  },
+  "prior_halt_guard_superseded_by_user_authorization": {
+    "halt_no_more_model_requests": true,
+    "halt_status": "stopped_excluded_sidecar_zero_retry_policy",
+    "pause_reason": "authorized recovery tasks with unknown deliveries deferred; continue other ready tasks",
+    "status": "stopped_excluded_sidecar_zero_retry_policy"
+  },
+  "prior_pause_reason_superseded_by_user_authorization": "retired_sidecar_after_zero_retry_authorization; no additional calls",
+  "recovery_authorizations": [
+    {
+      "accepted_edges_before_recovery": 14,
+      "original_trace_sha256": "5a066be0245995604cd0d449d890c840252bf9bdff801c4a2c9140bb9b0f45a0",
+      "original_unknown_request_number": 15,
+      "preserved_artifact_count": 1,
+      "prior_successful_requests": 14,
+      "task_id": "task-0000-0003"
+    },
+    {
+      "accepted_edges_before_recovery": 2,
+      "original_trace_sha256": "c558e03889a717b4d4a0a788c8ed71c9a5b95f837253fa54c3b3004268efdc64",
+      "original_unknown_request_number": 3,
+      "preserved_artifact_count": 1,
+      "prior_successful_requests": 2,
+      "task_id": "task-0000-0004"
+    },
+    {
+      "accepted_edges_before_recovery": 5,
+      "original_trace_sha256": "acc564d8768c554a965558d140137875081d90ca4c68113bde090a038f7ac333",
+      "original_unknown_request_number": 6,
+      "preserved_artifact_count": 1,
+      "prior_successful_requests": 5,
+      "task_id": "task-0000-0005"
+    },
+    {
+      "accepted_edges_before_recovery": 8,
+      "original_trace_sha256": "d87af5a3c317512607590b901602f710856f2fe80ee5fb17328520c423453793",
+      "original_unknown_request_number": 9,
+      "preserved_artifact_count": 1,
+      "prior_successful_requests": 8,
+      "task_id": "task-0000-0006"
+    },
+    {
+      "accepted_edges_before_recovery": 8,
+      "original_trace_sha256": "c7bed13c0e1c011c03cbb6f1018970afb0c61ba614ce761d5158899dee7f182f",
+      "original_unknown_request_number": 9,
+      "preserved_artifact_count": 1,
+      "prior_successful_requests": 8,
+      "task_id": "task-0000-0007"
+    },
+    {
+      "accepted_edges_before_recovery": 1,
+      "original_trace_sha256": "3846a92beb07be1c0b55b35249a90656639be17a8ef7c23710c21a1ef8e6e48d",
+      "original_unknown_request_number": 2,
+      "preserved_artifact_count": 1,
+      "prior_successful_requests": 1,
+      "task_id": "task-0000-0008"
+    },
+    {
+      "accepted_edges_before_recovery": 3,
+      "original_trace_sha256": "7be232d4de4ad813f4a4b875e82f3192b891d931d71ce2a35ef33c971249e9c2",
+      "original_unknown_request_number": 4,
+      "preserved_artifact_count": 1,
+      "prior_successful_requests": 3,
+      "task_id": "task-0000-0009"
+    },
+    {
+      "accepted_edges_before_recovery": 5,
+      "original_trace_sha256": "b22d48bf4de9858fc141dcfe35c7cafdcd389e73f481c95c4185754f97ceb2e9",
+      "original_unknown_request_number": 6,
+      "preserved_artifact_count": 1,
+      "prior_successful_requests": 5,
+      "task_id": "task-0000-0010"
+    },
+    {
+      "accepted_edges_before_recovery": 7,
+      "original_trace_sha256": "efa5922bc0fb46fe9ccc0a021bdca9a023598bb419654415124d2e40a44db827",
+      "original_unknown_request_number": 8,
+      "preserved_artifact_count": 1,
+      "prior_successful_requests": 7,
+      "task_id": "formal-task-0000-feasible"
+    },
+    {
+      "accepted_edges_before_recovery": 17,
+      "original_trace_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_unknown_request_number": 18,
+      "preserved_artifact_count": 1,
+      "prior_successful_requests": 17,
+      "task_id": "formal-task-0000-boundary"
+    },
+    {
+      "accepted_edges_before_recovery": 5,
+      "original_trace_sha256": "37a1ec67ef58ff418449869b486db98171ecf9e60267a3929d74e74c99d4e7bf",
+      "original_unknown_request_number": 6,
+      "preserved_artifact_count": 2,
+      "prior_successful_requests": 5,
+      "task_id": "formal-task-0001-feasible"
+    },
+    {
+      "accepted_edges_before_recovery": 3,
+      "original_trace_sha256": "22bf98434091929bcecfbaca04acd7907a38422be3bee5cc1751788ecf59a92a",
+      "original_unknown_request_number": 4,
+      "preserved_artifact_count": 1,
+      "prior_successful_requests": 3,
+      "task_id": "task-0002-0010"
+    },
+    {
+      "accepted_edges_before_recovery": 5,
+      "original_trace_sha256": "17cc544c278b8b90998b84493837b9f8a1db6e28e4918e0dc43bf3cebadce839",
+      "original_unknown_request_number": 6,
+      "preserved_artifact_count": 2,
+      "prior_successful_requests": 5,
+      "task_id": "task-0003-0009"
+    },
+    {
+      "accepted_edges_before_recovery": 4,
+      "original_trace_sha256": "0c268269a55fdee8079feea7644c8f1d655949731811aa8107139083efbb2268",
+      "original_unknown_request_number": 5,
+      "preserved_artifact_count": 1,
+      "prior_successful_requests": 4,
+      "task_id": "task-0005-0004"
+    },
+    {
+      "accepted_edges_before_recovery": 5,
+      "original_trace_sha256": "c2d131cd0ef73bd36397c921fe74c22e39aaff57dd56763bd6c749b4064214dc",
+      "original_unknown_request_number": 6,
+      "preserved_artifact_count": 2,
+      "prior_successful_requests": 5,
+      "task_id": "formal-task-0006-feasible"
+    },
+    {
+      "accepted_edges_before_recovery": 5,
+      "original_trace_sha256": "04d5dcd884839a81df8b91af5b1b57471c895936b87551855ce6e9bfc2e405ff",
+      "original_unknown_request_number": 6,
+      "preserved_artifact_count": 2,
+      "prior_successful_requests": 5,
+      "task_id": "formal-task-0006-boundary"
+    }
+  ],
+  "request_budget_allocation": "No project-level cumulative request cap. Each task continuation is a resumable slice of at most 512 model responses; no response is automatically retried.",
+  "request_limit_display": "无项目累计请求上限",
+  "request_limit_policy": "no_project_level_cumulative_cap_user_authorized",
+  "requests_with_unknown_delivery": 3,
+  "retry_policy": "zero_retries; interrupted in-flight outcome is unknown and never automatically replayed",
+  "route_input_protocol": "r4-step-v3",
+  "routeable_task_count": 16,
+  "schema_version": "r4_codex_formal_batch_v2",
+  "session_policy": "one isolated Codex CLI request per route action; each prompt repeats the compact map, current route state, feature context, and v3 cost-to-go guidance",
+  "skipped_task_count": 0,
+  "skipped_tasks": [],
+  "source_manifest": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/authorized_recovery_source_manifest.json",
+  "source_manifest_sha256": "23ab50d67f847631ee27af769a37475448d72c04d9b4178c43187b800d952f04",
+  "status": "paused_at_request_chunk_limit",
+  "status_policy": "invalid task actions are not executed; task outcome is audited before the next independent task",
+  "tasks": [
+    {
+      "active_run_requests_recorded": 0,
+      "error": "request_interrupted_without_terminal_response_or_usage; preserved_without_automatic_replay",
+      "final_audit_path": "tasks/seed_0/task-0000-0003/run_001/final_audit.json",
+      "minimum_route_actions_lower_bound": 101,
+      "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/task-0000-0003/run_001",
+      "preflight_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_batch_preflights_20261024_v1/tasks/seed_0/task-0000-0003/preflight.json",
+      "preflight_sha256": "5beef84b284eb71a202f982a39315c589ef4090db8f5fc1a1a813dc3f1dd3df0",
+      "recovery_authorization": {
+        "accepted_route_edges_before_recovery": 14,
+        "authorization_date": "2026-10-27",
+        "authorization_scope": "Recover every unresolved R4 formal task by resending one same-position route-selection call; count recovery calls separately and preserve prior unknown attempts.",
+        "original_output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/tasks/seed_0/task-0000-0003/run_001",
+        "original_task_id": "task-0000-0003",
+        "original_unknown_delivery_provider_usage_available": false,
+        "original_unknown_request_number": 15,
+        "original_unknown_trace_path": "tasks/seed_0/task-0000-0003/run_001/traces/r4_step_0015.jsonl",
+        "original_unknown_trace_sha256": "5a066be0245995604cd0d449d890c840252bf9bdff801c4a2c9140bb9b0f45a0",
+        "prepared_at_utc": "2026-10-27T06:06:20.497921+00:00",
+        "preserved_unknown_artifacts": [
+          {
+            "bytes": 101,
+            "path": "recovery_audit/prior_unknown_delivery/r4_step_0015.jsonl",
+            "sha256": "5a066be0245995604cd0d449d890c840252bf9bdff801c4a2c9140bb9b0f45a0"
+          }
+        ],
+        "recovery_output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/task-0000-0003/run_001",
+        "recovery_request_expected_number": 15,
+        "user_authorized": true
+      },
+      "replay_path": "tasks/seed_0/task-0000-0003/run_001/replay.html",
+      "requests_used": 18,
+      "runs": [
+        {
+          "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/task-0000-0003/run_001",
+          "parent_run": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/tasks/seed_0/task-0000-0003/run_001",
+          "request_limit": 512,
+          "requests_used": 18,
+          "run_type": "user_authorized_same_position_recovery"
+        }
+      ],
+      "sample_group": "orders",
+      "seed": 0,
+      "status": "outcome_unknown",
+      "task_id": "task-0000-0003"
+    },
+    {
+      "active_run_requests_recorded": 0,
+      "error": "request_interrupted_without_terminal_response_or_usage; preserved_without_automatic_replay",
+      "final_audit_path": "tasks/seed_0/task-0000-0004/run_001/final_audit.json",
+      "minimum_route_actions_lower_bound": 89,
+      "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/task-0000-0004/run_001",
+      "preflight_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_batch_preflights_20261024_v1/tasks/seed_0/task-0000-0004/preflight.json",
+      "preflight_sha256": "ac5135bb102c998dad776b00feab527919548ccfe318a1e9d3f13255a02c2646",
+      "recovery_authorization": {
+        "accepted_route_edges_before_recovery": 2,
+        "authorization_date": "2026-10-27",
+        "authorization_scope": "Recover every unresolved R4 formal task by resending one same-position route-selection call; count recovery calls separately and preserve prior unknown attempts.",
+        "original_output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/tasks/seed_0/task-0000-0004/run_001",
+        "original_task_id": "task-0000-0004",
+        "original_unknown_delivery_provider_usage_available": false,
+        "original_unknown_request_number": 3,
+        "original_unknown_trace_path": "tasks/seed_0/task-0000-0004/run_001/traces/r4_step_0003.jsonl",
+        "original_unknown_trace_sha256": "c558e03889a717b4d4a0a788c8ed71c9a5b95f837253fa54c3b3004268efdc64",
+        "prepared_at_utc": "2026-10-27T06:06:20.497921+00:00",
+        "preserved_unknown_artifacts": [
+          {
+            "bytes": 101,
+            "path": "recovery_audit/prior_unknown_delivery/r4_step_0003.jsonl",
+            "sha256": "c558e03889a717b4d4a0a788c8ed71c9a5b95f837253fa54c3b3004268efdc64"
+          }
+        ],
+        "recovery_output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/task-0000-0004/run_001",
+        "recovery_request_expected_number": 3,
+        "user_authorized": true
+      },
+      "replay_path": "tasks/seed_0/task-0000-0004/run_001/replay.html",
+      "requests_used": 10,
+      "runs": [
+        {
+          "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/task-0000-0004/run_001",
+          "parent_run": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/tasks/seed_0/task-0000-0004/run_001",
+          "request_limit": 512,
+          "requests_used": 10,
+          "run_type": "user_authorized_same_position_recovery"
+        }
+      ],
+      "sample_group": "orders",
+      "seed": 0,
+      "status": "outcome_unknown",
+      "task_id": "task-0000-0004"
+    },
+    {
+      "active_run_requests_recorded": 0,
+      "error": "request_interrupted_without_terminal_response_or_usage; preserved_without_automatic_replay",
+      "final_audit_path": "tasks/seed_0/task-0000-0005/run_001/final_audit.json",
+      "minimum_route_actions_lower_bound": 179,
+      "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/task-0000-0005/run_001",
+      "preflight_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_batch_preflights_20261024_v1/tasks/seed_0/task-0000-0005/preflight.json",
+      "preflight_sha256": "a0efe09a051bdb82a964d1fc01a9ad45dac2e322c2b415b44f88cc28c5d07eb6",
+      "recovery_authorization": {
+        "accepted_route_edges_before_recovery": 5,
+        "authorization_date": "2026-10-27",
+        "authorization_scope": "Recover every unresolved R4 formal task by resending one same-position route-selection call; count recovery calls separately and preserve prior unknown attempts.",
+        "original_output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/tasks/seed_0/task-0000-0005/run_001",
+        "original_task_id": "task-0000-0005",
+        "original_unknown_delivery_provider_usage_available": false,
+        "original_unknown_request_number": 6,
+        "original_unknown_trace_path": "tasks/seed_0/task-0000-0005/run_001/traces/r4_step_0006.jsonl",
+        "original_unknown_trace_sha256": "acc564d8768c554a965558d140137875081d90ca4c68113bde090a038f7ac333",
+        "prepared_at_utc": "2026-10-27T06:06:20.497921+00:00",
+        "preserved_unknown_artifacts": [
+          {
+            "bytes": 101,
+            "path": "recovery_audit/prior_unknown_delivery/r4_step_0006.jsonl",
+            "sha256": "acc564d8768c554a965558d140137875081d90ca4c68113bde090a038f7ac333"
+          }
+        ],
+        "recovery_output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/task-0000-0005/run_001",
+        "recovery_request_expected_number": 6,
+        "user_authorized": true
+      },
+      "replay_path": "tasks/seed_0/task-0000-0005/run_001/replay.html",
+      "requests_used": 23,
+      "runs": [
+        {
+          "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/task-0000-0005/run_001",
+          "parent_run": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/tasks/seed_0/task-0000-0005/run_001",
+          "request_limit": 512,
+          "requests_used": 23,
+          "run_type": "user_authorized_same_position_recovery"
+        }
+      ],
+      "sample_group": "orders",
+      "seed": 0,
+      "status": "outcome_unknown",
+      "task_id": "task-0000-0005"
+    },
+    {
+      "active_run_requests_recorded": 1,
+      "error": null,
+      "final_audit_path": "tasks/seed_0/task-0000-0006/run_001/final_audit.json",
+      "minimum_route_actions_lower_bound": 178,
+      "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/task-0000-0006/run_001",
+      "preflight_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_batch_preflights_20261024_v1/tasks/seed_0/task-0000-0006/preflight.json",
+      "preflight_sha256": "805669fd400d964fdf4ad9b29849fde1431e9e87bbeb042b1d0c5fef07e6a3af",
+      "recovery_authorization": {
+        "accepted_route_edges_before_recovery": 8,
+        "authorization_date": "2026-10-27",
+        "authorization_scope": "Recover every unresolved R4 formal task by resending one same-position route-selection call; count recovery calls separately and preserve prior unknown attempts.",
+        "original_output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/tasks/seed_0/task-0000-0006/run_001",
+        "original_task_id": "task-0000-0006",
+        "original_unknown_delivery_provider_usage_available": false,
+        "original_unknown_request_number": 9,
+        "original_unknown_trace_path": "tasks/seed_0/task-0000-0006/run_001/traces/r4_step_0009.jsonl",
+        "original_unknown_trace_sha256": "d87af5a3c317512607590b901602f710856f2fe80ee5fb17328520c423453793",
+        "prepared_at_utc": "2026-10-27T06:06:20.497921+00:00",
+        "preserved_unknown_artifacts": [
+          {
+            "bytes": 101,
+            "path": "recovery_audit/prior_unknown_delivery/r4_step_0009.jsonl",
+            "sha256": "d87af5a3c317512607590b901602f710856f2fe80ee5fb17328520c423453793"
+          }
+        ],
+        "recovery_output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/task-0000-0006/run_001",
+        "recovery_request_expected_number": 9,
+        "user_authorized": true
+      },
+      "replay_path": "tasks/seed_0/task-0000-0006/run_001/replay.html",
+      "requests_used": 230,
+      "runs": [
+        {
+          "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/task-0000-0006/run_001",
+          "parent_run": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/tasks/seed_0/task-0000-0006/run_001",
+          "request_limit": 512,
+          "requests_used": 230,
+          "run_type": "user_authorized_same_position_recovery"
+        }
+      ],
+      "sample_group": "orders",
+      "seed": 0,
+      "status": "route_complete",
+      "task_id": "task-0000-0006"
+    },
+    {
+      "active_run_requests_recorded": 1,
+      "error": null,
+      "final_audit_path": "tasks/seed_0/task-0000-0007/run_001/final_audit.json",
+      "minimum_route_actions_lower_bound": 220,
+      "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/task-0000-0007/run_001",
+      "preflight_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_batch_preflights_20261024_v1/tasks/seed_0/task-0000-0007/preflight.json",
+      "preflight_sha256": "737424eb7f8a86e3b94a5119b25ad4e34e48aad5c9eb54d8223adda7d047235a",
+      "recovery_authorization": {
+        "accepted_route_edges_before_recovery": 8,
+        "authorization_date": "2026-10-27",
+        "authorization_scope": "Recover every unresolved R4 formal task by resending one same-position route-selection call; count recovery calls separately and preserve prior unknown attempts.",
+        "original_output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/tasks/seed_0/task-0000-0007/run_001",
+        "original_task_id": "task-0000-0007",
+        "original_unknown_delivery_provider_usage_available": false,
+        "original_unknown_request_number": 9,
+        "original_unknown_trace_path": "tasks/seed_0/task-0000-0007/run_001/traces/r4_step_0009.jsonl",
+        "original_unknown_trace_sha256": "c7bed13c0e1c011c03cbb6f1018970afb0c61ba614ce761d5158899dee7f182f",
+        "prepared_at_utc": "2026-10-27T06:06:20.497921+00:00",
+        "preserved_unknown_artifacts": [
+          {
+            "bytes": 101,
+            "path": "recovery_audit/prior_unknown_delivery/r4_step_0009.jsonl",
+            "sha256": "c7bed13c0e1c011c03cbb6f1018970afb0c61ba614ce761d5158899dee7f182f"
+          }
+        ],
+        "recovery_output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/task-0000-0007/run_001",
+        "recovery_request_expected_number": 9,
+        "user_authorized": true
+      },
+      "replay_path": "tasks/seed_0/task-0000-0007/run_001/replay.html",
+      "requests_used": 256,
+      "runs": [
+        {
+          "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/task-0000-0007/run_001",
+          "parent_run": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/tasks/seed_0/task-0000-0007/run_001",
+          "request_limit": 512,
+          "requests_used": 256,
+          "run_type": "user_authorized_same_position_recovery"
+        }
+      ],
+      "sample_group": "orders",
+      "seed": 0,
+      "status": "route_complete",
+      "task_id": "task-0000-0007"
+    },
+    {
+      "active_run_requests_recorded": 1,
+      "error": null,
+      "final_audit_path": "tasks/seed_0/task-0000-0008/run_001/final_audit.json",
+      "minimum_route_actions_lower_bound": 121,
+      "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/task-0000-0008/run_001",
+      "preflight_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_batch_preflights_20261024_v1/tasks/seed_0/task-0000-0008/preflight.json",
+      "preflight_sha256": "b39833fa1fa0cb0121e99630a3715e4fcae7ffcae4ef8fcdb0c53149dd168d89",
+      "recovery_authorization": {
+        "accepted_route_edges_before_recovery": 1,
+        "authorization_date": "2026-10-27",
+        "authorization_scope": "Recover every unresolved R4 formal task by resending one same-position route-selection call; count recovery calls separately and preserve prior unknown attempts.",
+        "original_output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/tasks/seed_0/task-0000-0008/run_001",
+        "original_task_id": "task-0000-0008",
+        "original_unknown_delivery_provider_usage_available": false,
+        "original_unknown_request_number": 2,
+        "original_unknown_trace_path": "tasks/seed_0/task-0000-0008/run_001/traces/r4_step_0002.jsonl",
+        "original_unknown_trace_sha256": "3846a92beb07be1c0b55b35249a90656639be17a8ef7c23710c21a1ef8e6e48d",
+        "prepared_at_utc": "2026-10-27T06:06:20.497921+00:00",
+        "preserved_unknown_artifacts": [
+          {
+            "bytes": 101,
+            "path": "recovery_audit/prior_unknown_delivery/r4_step_0002.jsonl",
+            "sha256": "3846a92beb07be1c0b55b35249a90656639be17a8ef7c23710c21a1ef8e6e48d"
+          }
+        ],
+        "recovery_output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/task-0000-0008/run_001",
+        "recovery_request_expected_number": 2,
+        "user_authorized": true
+      },
+      "replay_path": "tasks/seed_0/task-0000-0008/run_001/replay.html",
+      "requests_used": 13,
+      "runs": [
+        {
+          "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/task-0000-0008/run_001",
+          "parent_run": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/tasks/seed_0/task-0000-0008/run_001",
+          "request_limit": 512,
+          "requests_used": 13,
+          "run_type": "user_authorized_same_position_recovery"
+        }
+      ],
+      "sample_group": "orders",
+      "seed": 0,
+      "status": "ready",
+      "task_id": "task-0000-0008"
+    },
+    {
+      "active_run_requests_recorded": 0,
+      "error": null,
+      "final_audit_path": null,
+      "minimum_route_actions_lower_bound": 109,
+      "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/task-0000-0009/run_001",
+      "preflight_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_batch_preflights_20261024_v1/tasks/seed_0/task-0000-0009/preflight.json",
+      "preflight_sha256": "c977a210d9c5e94f2d90e42d92a3dd458b950199566c3ee5d0fc3306c0c07b28",
+      "recovery_authorization": {
+        "accepted_route_edges_before_recovery": 3,
+        "authorization_date": "2026-10-27",
+        "authorization_scope": "Recover every unresolved R4 formal task by resending one same-position route-selection call; count recovery calls separately and preserve prior unknown attempts.",
+        "original_output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/tasks/seed_0/task-0000-0009/run_001",
+        "original_task_id": "task-0000-0009",
+        "original_unknown_delivery_provider_usage_available": false,
+        "original_unknown_request_number": 4,
+        "original_unknown_trace_path": "tasks/seed_0/task-0000-0009/run_001/traces/r4_step_0004.jsonl",
+        "original_unknown_trace_sha256": "7be232d4de4ad813f4a4b875e82f3192b891d931d71ce2a35ef33c971249e9c2",
+        "prepared_at_utc": "2026-10-27T06:06:20.497921+00:00",
+        "preserved_unknown_artifacts": [
+          {
+            "bytes": 101,
+            "path": "recovery_audit/prior_unknown_delivery/r4_step_0004.jsonl",
+            "sha256": "7be232d4de4ad813f4a4b875e82f3192b891d931d71ce2a35ef33c971249e9c2"
+          }
+        ],
+        "recovery_output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/task-0000-0009/run_001",
+        "recovery_request_expected_number": 4,
+        "user_authorized": true
+      },
+      "replay_path": null,
+      "requests_used": 3,
+      "runs": [
+        {
+          "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/task-0000-0009/run_001",
+          "parent_run": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/tasks/seed_0/task-0000-0009/run_001",
+          "request_limit": 512,
+          "requests_used": 3,
+          "run_type": "user_authorized_same_position_recovery"
+        }
+      ],
+      "sample_group": "orders",
+      "seed": 0,
+      "status": "ready",
+      "task_id": "task-0000-0009"
+    },
+    {
+      "active_run_requests_recorded": 0,
+      "error": null,
+      "final_audit_path": null,
+      "minimum_route_actions_lower_bound": 170,
+      "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/task-0000-0010/run_001",
+      "preflight_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_batch_preflights_20261024_v1/tasks/seed_0/task-0000-0010/preflight.json",
+      "preflight_sha256": "561efc6cd45ca92730d3d105d18bf6674ffe76aea7c9e86aa7cc998b433d4a74",
+      "recovery_authorization": {
+        "accepted_route_edges_before_recovery": 5,
+        "authorization_date": "2026-10-27",
+        "authorization_scope": "Recover every unresolved R4 formal task by resending one same-position route-selection call; count recovery calls separately and preserve prior unknown attempts.",
+        "original_output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/tasks/seed_0/task-0000-0010/run_001",
+        "original_task_id": "task-0000-0010",
+        "original_unknown_delivery_provider_usage_available": false,
+        "original_unknown_request_number": 6,
+        "original_unknown_trace_path": "tasks/seed_0/task-0000-0010/run_001/traces/r4_step_0006.jsonl",
+        "original_unknown_trace_sha256": "b22d48bf4de9858fc141dcfe35c7cafdcd389e73f481c95c4185754f97ceb2e9",
+        "prepared_at_utc": "2026-10-27T06:06:20.497921+00:00",
+        "preserved_unknown_artifacts": [
+          {
+            "bytes": 410,
+            "path": "recovery_audit/prior_unknown_delivery/r4_step_0006.jsonl",
+            "sha256": "b22d48bf4de9858fc141dcfe35c7cafdcd389e73f481c95c4185754f97ceb2e9"
+          }
+        ],
+        "recovery_output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/task-0000-0010/run_001",
+        "recovery_request_expected_number": 6,
+        "user_authorized": true
+      },
+      "replay_path": null,
+      "requests_used": 5,
+      "runs": [
+        {
+          "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/task-0000-0010/run_001",
+          "parent_run": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/tasks/seed_0/task-0000-0010/run_001",
+          "request_limit": 512,
+          "requests_used": 5,
+          "run_type": "user_authorized_same_position_recovery"
+        }
+      ],
+      "sample_group": "orders",
+      "seed": 0,
+      "status": "ready",
+      "task_id": "task-0000-0010"
+    },
+    {
+      "active_run_requests_recorded": 0,
+      "error": null,
+      "final_audit_path": null,
+      "minimum_route_actions_lower_bound": 238,
+      "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/formal-task-0000-feasible/run_001",
+      "preflight_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_batch_preflights_20261024_v1/tasks/seed_0/formal-task-0000-feasible/preflight.json",
+      "preflight_sha256": "11e62075f99c21a5c3e08e9cf7554e57986be93b29f8e0851c60249074a494f8",
+      "recovery_authorization": {
+        "accepted_route_edges_before_recovery": 7,
+        "authorization_date": "2026-10-27",
+        "authorization_scope": "Recover every unresolved R4 formal task by resending one same-position route-selection call; count recovery calls separately and preserve prior unknown attempts.",
+        "original_output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/tasks/seed_0/formal-task-0000-feasible/run_001",
+        "original_task_id": "formal-task-0000-feasible",
+        "original_unknown_delivery_provider_usage_available": false,
+        "original_unknown_request_number": 8,
+        "original_unknown_trace_path": "tasks/seed_0/formal-task-0000-feasible/run_001/traces/r4_step_0008.jsonl",
+        "original_unknown_trace_sha256": "efa5922bc0fb46fe9ccc0a021bdca9a023598bb419654415124d2e40a44db827",
+        "prepared_at_utc": "2026-10-27T06:06:20.497921+00:00",
+        "preserved_unknown_artifacts": [
+          {
+            "bytes": 101,
+            "path": "recovery_audit/prior_unknown_delivery/r4_step_0008.jsonl",
+            "sha256": "efa5922bc0fb46fe9ccc0a021bdca9a023598bb419654415124d2e40a44db827"
+          }
+        ],
+        "recovery_output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/formal-task-0000-feasible/run_001",
+        "recovery_request_expected_number": 8,
+        "user_authorized": true
+      },
+      "replay_path": null,
+      "requests_used": 7,
+      "runs": [
+        {
+          "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/formal-task-0000-feasible/run_001",
+          "parent_run": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/tasks/seed_0/formal-task-0000-feasible/run_001",
+          "request_limit": 512,
+          "requests_used": 7,
+          "run_type": "user_authorized_same_position_recovery"
+        }
+      ],
+      "sample_group": "formal_scenarios",
+      "seed": 0,
+      "status": "ready",
+      "task_id": "formal-task-0000-feasible"
+    },
+    {
+      "active_run_requests_recorded": 0,
+      "error": null,
+      "final_audit_path": null,
+      "minimum_route_actions_lower_bound": 146,
+      "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/formal-task-0000-boundary/run_001",
+      "preflight_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_batch_preflights_20261024_v1/tasks/seed_0/formal-task-0000-boundary/preflight.json",
+      "preflight_sha256": "4fd08c4c096f34029ac2d20406b4e923875353bc45fbfdb7b3b6b3ecfdd5af90",
+      "recovery_authorization": {
+        "accepted_route_edges_before_recovery": 17,
+        "authorization_date": "2026-10-27",
+        "authorization_scope": "Recover every unresolved R4 formal task by resending one same-position route-selection call; count recovery calls separately and preserve prior unknown attempts.",
+        "original_output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/tasks/seed_0/formal-task-0000-boundary/run_001",
+        "original_task_id": "formal-task-0000-boundary",
+        "original_unknown_delivery_provider_usage_available": false,
+        "original_unknown_request_number": 18,
+        "original_unknown_trace_path": "tasks/seed_0/formal-task-0000-boundary/run_001/traces/r4_step_0018.jsonl",
+        "original_unknown_trace_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "prepared_at_utc": "2026-10-27T06:06:20.497921+00:00",
+        "preserved_unknown_artifacts": [
+          {
+            "bytes": 0,
+            "path": "recovery_audit/prior_unknown_delivery/r4_step_0018.jsonl",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        ],
+        "recovery_output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/formal-task-0000-boundary/run_001",
+        "recovery_request_expected_number": 18,
+        "user_authorized": true
+      },
+      "replay_path": null,
+      "requests_used": 17,
+      "runs": [
+        {
+          "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/formal-task-0000-boundary/run_001",
+          "parent_run": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/tasks/seed_0/formal-task-0000-boundary/run_001",
+          "request_limit": 512,
+          "requests_used": 17,
+          "run_type": "user_authorized_same_position_recovery"
+        }
+      ],
+      "sample_group": "formal_scenarios",
+      "seed": 0,
+      "status": "ready",
+      "task_id": "formal-task-0000-boundary"
+    },
+    {
+      "active_run_requests_recorded": 0,
+      "duplicate_suppressed_by_primary_worker": "worker_01",
+      "error": "Duplicate recovery slot suppressed at safe checkpoint; all partial traces preserved; primary shard remains responsible for this frozen task.",
+      "final_audit_path": null,
+      "minimum_route_actions_lower_bound": 263,
+      "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_1/formal-task-0001-feasible/run_001",
+      "preflight_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_batch_preflights_20261024_v1/tasks/seed_1/formal-task-0001-feasible/preflight.json",
+      "preflight_sha256": "9631ae09233338af58b749c45c52bf42673c7158c5d29b5bbf9d4f8e89d3e839",
+      "recovery_authorization": {
+        "accepted_route_edges_before_recovery": 5,
+        "authorization_date": "2026-10-27",
+        "authorization_scope": "Recover every unresolved R4 formal task by resending one same-position route-selection call; count recovery calls separately and preserve prior unknown attempts.",
+        "original_output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_01/tasks/seed_1/formal-task-0001-feasible/run_000",
+        "original_task_id": "formal-task-0001-feasible",
+        "original_unknown_delivery_provider_usage_available": false,
+        "original_unknown_request_number": 6,
+        "original_unknown_trace_path": "parallel_workers/worker_01/tasks/seed_1/formal-task-0001-feasible/run_000/traces/r4_step_0006.jsonl",
+        "original_unknown_trace_sha256": "37a1ec67ef58ff418449869b486db98171ecf9e60267a3929d74e74c99d4e7bf",
+        "prepared_at_utc": "2026-10-27T06:06:20.497921+00:00",
+        "preserved_unknown_artifacts": [
+          {
+            "bytes": 570,
+            "path": "recovery_audit/prior_unknown_delivery/r4_step_0006.jsonl",
+            "sha256": "37a1ec67ef58ff418449869b486db98171ecf9e60267a3929d74e74c99d4e7bf"
+          },
+          {
+            "bytes": 203,
+            "path": "recovery_audit/prior_unknown_delivery/r4_step_0006.final.json",
+            "sha256": "f00451b85cbc01e2c26a6bad30b6c0357c724f364dd62bf8f72b759f8132178b"
+          }
+        ],
+        "recovery_output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_1/formal-task-0001-feasible/run_001",
+        "recovery_request_expected_number": 6,
+        "user_authorized": true
+      },
+      "replay_path": null,
+      "requests_used": 5,
+      "runs": [
+        {
+          "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_1/formal-task-0001-feasible/run_001",
+          "parent_run": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_01/tasks/seed_1/formal-task-0001-feasible/run_000",
+          "request_limit": 512,
+          "requests_used": 5,
+          "run_type": "user_authorized_same_position_recovery"
+        }
+      ],
+      "sample_group": "formal_scenarios",
+      "seed": 1,
+      "status": "duplicate_suppressed",
+      "status_before_duplicate_suppression": "ready",
+      "task_id": "formal-task-0001-feasible"
+    },
+    {
+      "active_run_requests_recorded": 0,
+      "error": null,
+      "final_audit_path": null,
+      "minimum_route_actions_lower_bound": 215,
+      "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_2/task-0002-0010/run_001",
+      "preflight_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_batch_preflights_20261024_v1/tasks/seed_2/task-0002-0010/preflight.json",
+      "preflight_sha256": "c2614187a508426b5c7b31814fd2e64f8f2f9f157702cbfac96fa3dd2770d3b4",
+      "recovery_authorization": {
+        "accepted_route_edges_before_recovery": 3,
+        "authorization_date": "2026-10-27",
+        "authorization_scope": "Recover every unresolved R4 formal task by resending one same-position route-selection call; count recovery calls separately and preserve prior unknown attempts.",
+        "original_output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_01/tasks/seed_2/task-0002-0010/run_000",
+        "original_task_id": "task-0002-0010",
+        "original_unknown_delivery_provider_usage_available": false,
+        "original_unknown_request_number": 4,
+        "original_unknown_trace_path": "parallel_workers/worker_01/tasks/seed_2/task-0002-0010/run_000/traces/r4_step_0004.jsonl",
+        "original_unknown_trace_sha256": "22bf98434091929bcecfbaca04acd7907a38422be3bee5cc1751788ecf59a92a",
+        "prepared_at_utc": "2026-10-27T06:06:20.497921+00:00",
+        "preserved_unknown_artifacts": [
+          {
+            "bytes": 101,
+            "path": "recovery_audit/prior_unknown_delivery/r4_step_0004.jsonl",
+            "sha256": "22bf98434091929bcecfbaca04acd7907a38422be3bee5cc1751788ecf59a92a"
+          }
+        ],
+        "recovery_output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_2/task-0002-0010/run_001",
+        "recovery_request_expected_number": 4,
+        "user_authorized": true
+      },
+      "replay_path": null,
+      "requests_used": 3,
+      "runs": [
+        {
+          "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_2/task-0002-0010/run_001",
+          "parent_run": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_01/tasks/seed_2/task-0002-0010/run_000",
+          "request_limit": 512,
+          "requests_used": 3,
+          "run_type": "user_authorized_same_position_recovery"
+        }
+      ],
+      "sample_group": "orders",
+      "seed": 2,
+      "status": "ready",
+      "task_id": "task-0002-0010"
+    },
+    {
+      "active_run_requests_recorded": 0,
+      "duplicate_suppressed_by_primary_worker": "worker_03",
+      "error": "Duplicate recovery slot suppressed at safe checkpoint; all partial traces preserved; primary shard remains responsible for this frozen task.",
+      "final_audit_path": null,
+      "minimum_route_actions_lower_bound": 236,
+      "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_3/task-0003-0009/run_001",
+      "preflight_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_batch_preflights_20261024_v1/tasks/seed_3/task-0003-0009/preflight.json",
+      "preflight_sha256": "37a98fa62abdd54a79390c87991d19b3c42d56923b15d7b6710847032e9c4208",
+      "recovery_authorization": {
+        "accepted_route_edges_before_recovery": 5,
+        "authorization_date": "2026-10-27",
+        "authorization_scope": "Recover every unresolved R4 formal task by resending one same-position route-selection call; count recovery calls separately and preserve prior unknown attempts.",
+        "original_output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_03/tasks/seed_3/task-0003-0009/run_000",
+        "original_task_id": "task-0003-0009",
+        "original_unknown_delivery_provider_usage_available": false,
+        "original_unknown_request_number": 6,
+        "original_unknown_trace_path": "parallel_workers/worker_03/tasks/seed_3/task-0003-0009/run_000/traces/r4_step_0006.jsonl",
+        "original_unknown_trace_sha256": "17cc544c278b8b90998b84493837b9f8a1db6e28e4918e0dc43bf3cebadce839",
+        "prepared_at_utc": "2026-10-27T06:06:20.497921+00:00",
+        "preserved_unknown_artifacts": [
+          {
+            "bytes": 572,
+            "path": "recovery_audit/prior_unknown_delivery/r4_step_0006.jsonl",
+            "sha256": "17cc544c278b8b90998b84493837b9f8a1db6e28e4918e0dc43bf3cebadce839"
+          },
+          {
+            "bytes": 203,
+            "path": "recovery_audit/prior_unknown_delivery/r4_step_0006.final.json",
+            "sha256": "38fe5ae1e552f3117930fc8425b5cbb2ec6fd70fd717a57484d93e262fba5393"
+          }
+        ],
+        "recovery_output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_3/task-0003-0009/run_001",
+        "recovery_request_expected_number": 6,
+        "user_authorized": true
+      },
+      "replay_path": null,
+      "requests_used": 5,
+      "runs": [
+        {
+          "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_3/task-0003-0009/run_001",
+          "parent_run": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_03/tasks/seed_3/task-0003-0009/run_000",
+          "request_limit": 512,
+          "requests_used": 5,
+          "run_type": "user_authorized_same_position_recovery"
+        }
+      ],
+      "sample_group": "orders",
+      "seed": 3,
+      "status": "duplicate_suppressed",
+      "status_before_duplicate_suppression": "ready",
+      "task_id": "task-0003-0009"
+    },
+    {
+      "active_run_requests_recorded": 0,
+      "error": null,
+      "final_audit_path": null,
+      "minimum_route_actions_lower_bound": 209,
+      "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_5/task-0005-0004/run_001",
+      "preflight_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_batch_preflights_20261024_v1/tasks/seed_5/task-0005-0004/preflight.json",
+      "preflight_sha256": "84929e52674d8c3fad82cb8181f7e314f921516975ce725a5a1edee477d4d906",
+      "recovery_authorization": {
+        "accepted_route_edges_before_recovery": 4,
+        "authorization_date": "2026-10-27",
+        "authorization_scope": "Recover every unresolved R4 formal task by resending one same-position route-selection call; count recovery calls separately and preserve prior unknown attempts.",
+        "original_output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_5/task-0005-0004/run_000",
+        "original_task_id": "task-0005-0004",
+        "original_unknown_delivery_provider_usage_available": false,
+        "original_unknown_request_number": 5,
+        "original_unknown_trace_path": "parallel_workers/worker_00/tasks/seed_5/task-0005-0004/run_000/traces/r4_step_0005.jsonl",
+        "original_unknown_trace_sha256": "0c268269a55fdee8079feea7644c8f1d655949731811aa8107139083efbb2268",
+        "prepared_at_utc": "2026-10-27T06:06:20.497921+00:00",
+        "preserved_unknown_artifacts": [
+          {
+            "bytes": 101,
+            "path": "recovery_audit/prior_unknown_delivery/r4_step_0005.jsonl",
+            "sha256": "0c268269a55fdee8079feea7644c8f1d655949731811aa8107139083efbb2268"
+          }
+        ],
+        "recovery_output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_5/task-0005-0004/run_001",
+        "recovery_request_expected_number": 5,
+        "user_authorized": true
+      },
+      "replay_path": null,
+      "requests_used": 4,
+      "runs": [
+        {
+          "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_5/task-0005-0004/run_001",
+          "parent_run": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_5/task-0005-0004/run_000",
+          "request_limit": 512,
+          "requests_used": 4,
+          "run_type": "user_authorized_same_position_recovery"
+        }
+      ],
+      "sample_group": "orders",
+      "seed": 5,
+      "status": "ready",
+      "task_id": "task-0005-0004"
+    },
+    {
+      "active_run_requests_recorded": 0,
+      "error": null,
+      "final_audit_path": null,
+      "minimum_route_actions_lower_bound": 264,
+      "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_6/formal-task-0006-feasible/run_001",
+      "preflight_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_batch_preflights_20261024_v1/tasks/seed_6/formal-task-0006-feasible/preflight.json",
+      "preflight_sha256": "a6ec4b926cab32d0cfbc6497681fb9d9889af249faeb8bc9a2ccea0bec8a5986",
+      "recovery_authorization": {
+        "accepted_route_edges_before_recovery": 5,
+        "authorization_date": "2026-10-27",
+        "authorization_scope": "Recover every unresolved R4 formal task by resending one same-position route-selection call; count recovery calls separately and preserve prior unknown attempts.",
+        "original_output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_6/formal-task-0006-feasible/run_000",
+        "original_task_id": "formal-task-0006-feasible",
+        "original_unknown_delivery_provider_usage_available": false,
+        "original_unknown_request_number": 6,
+        "original_unknown_trace_path": "parallel_workers/worker_00/tasks/seed_6/formal-task-0006-feasible/run_000/traces/r4_step_0006.jsonl",
+        "original_unknown_trace_sha256": "c2d131cd0ef73bd36397c921fe74c22e39aaff57dd56763bd6c749b4064214dc",
+        "prepared_at_utc": "2026-10-27T06:06:20.497921+00:00",
+        "preserved_unknown_artifacts": [
+          {
+            "bytes": 573,
+            "path": "recovery_audit/prior_unknown_delivery/r4_step_0006.jsonl",
+            "sha256": "c2d131cd0ef73bd36397c921fe74c22e39aaff57dd56763bd6c749b4064214dc"
+          },
+          {
+            "bytes": 203,
+            "path": "recovery_audit/prior_unknown_delivery/r4_step_0006.final.json",
+            "sha256": "f238f2025b62ea9aeb1c4055daacc2bb80ce663853b5c0bc9edefcaac642cbd3"
+          }
+        ],
+        "recovery_output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_6/formal-task-0006-feasible/run_001",
+        "recovery_request_expected_number": 6,
+        "user_authorized": true
+      },
+      "replay_path": null,
+      "requests_used": 5,
+      "runs": [
+        {
+          "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_6/formal-task-0006-feasible/run_001",
+          "parent_run": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_6/formal-task-0006-feasible/run_000",
+          "request_limit": 512,
+          "requests_used": 5,
+          "run_type": "user_authorized_same_position_recovery"
+        }
+      ],
+      "sample_group": "formal_scenarios",
+      "seed": 6,
+      "status": "ready",
+      "task_id": "formal-task-0006-feasible"
+    },
+    {
+      "active_run_requests_recorded": 0,
+      "duplicate_suppressed_by_primary_worker": "worker_02",
+      "error": "Duplicate recovery slot suppressed at safe checkpoint; all partial traces preserved; primary shard remains responsible for this frozen task.",
+      "final_audit_path": null,
+      "minimum_route_actions_lower_bound": 250,
+      "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_6/formal-task-0006-boundary/run_001",
+      "preflight_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_batch_preflights_20261024_v1/tasks/seed_6/formal-task-0006-boundary/preflight.json",
+      "preflight_sha256": "8b39288b2ecfe1bd9902ea4f24cc7b5cfcbab389cd5716a024421cb3feff6018",
+      "recovery_authorization": {
+        "accepted_route_edges_before_recovery": 5,
+        "authorization_date": "2026-10-27",
+        "authorization_scope": "Recover every unresolved R4 formal task by resending one same-position route-selection call; count recovery calls separately and preserve prior unknown attempts.",
+        "original_output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_02/tasks/seed_6/formal-task-0006-boundary/run_000",
+        "original_task_id": "formal-task-0006-boundary",
+        "original_unknown_delivery_provider_usage_available": false,
+        "original_unknown_request_number": 6,
+        "original_unknown_trace_path": "parallel_workers/worker_02/tasks/seed_6/formal-task-0006-boundary/run_000/traces/r4_step_0006.jsonl",
+        "original_unknown_trace_sha256": "04d5dcd884839a81df8b91af5b1b57471c895936b87551855ce6e9bfc2e405ff",
+        "prepared_at_utc": "2026-10-27T06:06:20.497921+00:00",
+        "preserved_unknown_artifacts": [
+          {
+            "bytes": 570,
+            "path": "recovery_audit/prior_unknown_delivery/r4_step_0006.jsonl",
+            "sha256": "04d5dcd884839a81df8b91af5b1b57471c895936b87551855ce6e9bfc2e405ff"
+          },
+          {
+            "bytes": 203,
+            "path": "recovery_audit/prior_unknown_delivery/r4_step_0006.final.json",
+            "sha256": "38fe5ae1e552f3117930fc8425b5cbb2ec6fd70fd717a57484d93e262fba5393"
+          }
+        ],
+        "recovery_output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_6/formal-task-0006-boundary/run_001",
+        "recovery_request_expected_number": 6,
+        "user_authorized": true
+      },
+      "replay_path": null,
+      "requests_used": 5,
+      "runs": [
+        {
+          "output_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_6/formal-task-0006-boundary/run_001",
+          "parent_run": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_02/tasks/seed_6/formal-task-0006-boundary/run_000",
+          "request_limit": 512,
+          "requests_used": 5,
+          "run_type": "user_authorized_same_position_recovery"
+        }
+      ],
+      "sample_group": "formal_scenarios",
+      "seed": 6,
+      "status": "duplicate_suppressed",
+      "status_before_duplicate_suppression": "ready",
+      "task_id": "formal-task-0006-boundary"
+    }
+  ],
+  "unresolved_in_flight": [
+    {
+      "attempt_artifact_exists_without_state_commit": false,
+      "expected_request_number": 19,
+      "final_artifact_exists_without_state_commit": false,
+      "provider_usage_available": false,
+      "recorded_successful_requests": 101,
+      "started_at_utc": "2026-10-27T06:11:34.778013+00:00",
+      "status": "outcome_unknown_no_retry",
+      "task_id": "task-0000-0003",
+      "task_requests_used_before": 18,
+      "trace_path": "tasks/seed_0/task-0000-0003/run_001/traces/r4_step_0019.jsonl",
+      "trace_sha256": "40e25d3dbcdbb0e2ab5bed183fa99842370287ef57808bd18b0c92a4ff1645c6"
+    },
+    {
+      "attempt_artifact_exists_without_state_commit": false,
+      "expected_request_number": 11,
+      "final_artifact_exists_without_state_commit": false,
+      "provider_usage_available": false,
+      "recorded_successful_requests": 109,
+      "started_at_utc": "2026-10-27T06:19:42.625758+00:00",
+      "status": "outcome_unknown_no_retry",
+      "task_id": "task-0000-0004",
+      "task_requests_used_before": 10,
+      "trace_path": "tasks/seed_0/task-0000-0004/run_001/traces/r4_step_0011.jsonl",
+      "trace_sha256": "6a6660edc738778ea4a04e4b748ed08a3d5df2bf6c9af8e007a4b224714fb261"
+    },
+    {
+      "attempt_artifact_exists_without_state_commit": false,
+      "expected_request_number": 24,
+      "final_artifact_exists_without_state_commit": false,
+      "provider_usage_available": false,
+      "recorded_successful_requests": 127,
+      "started_at_utc": "2026-10-27T06:27:31.335569+00:00",
+      "status": "outcome_unknown_no_retry",
+      "task_id": "task-0000-0005",
+      "task_requests_used_before": 23,
+      "trace_path": "tasks/seed_0/task-0000-0005/run_001/traces/r4_step_0024.jsonl",
+      "trace_sha256": "3a085933816d16863b3afedbb339f0a33ba258e1ff632930c6f1afedd616cf0f"
+    }
+  ],
+  "updated_at_utc": "2026-10-27T09:21:14.786361+00:00",
+  "usage_guard": {
+    "baseline_weekly_used_percent": 52,
+    "checked_at_utc": "2026-10-27T09:20:57.317112+00:00",
+    "max_new_requests_per_invocation": 1,
+    "mechanism": "local account-usage stop disabled by user instruction; provider-enforced limits remain active",
+    "stop_threshold_percent": null
+  },
+  "usage_stop_percent": null,
+  "validation_policy": "local deterministic validator gates each movement; no traditional route fallback"
+}

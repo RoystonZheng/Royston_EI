@@ -3,10 +3,10 @@
 """Prepare or resume the frozen R4 Codex stepwise batch.
 
 The default workflow is zero-request preparation. Model requests require an
-explicit --execute flag and an absolute cumulative --request-limit. Each task
-uses the existing deterministic per-direction validator and writes its own
-replay and final audit. No request is retried; an interrupted in-flight call is
-marked outcome-unknown and is never replayed automatically.
+explicit --execute flag and --request-limit; pass "none" for no project-level
+cumulative request cap. Each task uses the existing deterministic per-direction
+validator and writes its own replay and final audit. No request is retried; an
+interrupted in-flight call is marked outcome-unknown and is never replayed.
 """
 
 from __future__ import annotations
@@ -33,6 +33,13 @@ DEFAULT_OUTPUT = ROOT / "outputs/route_layer/r4_codex_formal_batch_v2"
 STEP_RUNNER = ROOT / "scripts/run_r4_codex_pilot_continuation.py"
 FINALIZER = ROOT / "scripts/finalize_r4_codex_pilot_continuation.py"
 MAX_TASK_REQUESTS = 512
+ARGUMENT_NOT_SET = object()
+
+
+def parse_optional_int(value: str) -> Optional[int]:
+    if value.strip().lower() in {"none", "unlimited", "off", "no-limit"}:
+        return None
+    return int(value)
 REQUIRED_PILOT_TASK_ID = "task-0000-0009"
 REQUIRED_PILOT_MAP_ID = "grid-100x100-seed-0"
 REQUIRED_PILOT_SCHEMA = "r4_codex_stepwise_single_task_audit_v1"
@@ -202,7 +209,7 @@ def _render_index(manifest: Dict[str, Any], output_dir: Path) -> None:
     done = sum(task["status"] in {"route_complete", "failed", "preflight_blocked"} for task in manifest["tasks"])
     document = document.replace("__STATUS__", status)
     document = document.replace("__USED__", str(manifest.get("model_requests_used", 0)))
-    document = document.replace("__LIMIT__", str(manifest.get("authorized_request_limit") or "未授权"))
+    document = document.replace("__LIMIT__", str(manifest.get("request_limit_display") or manifest.get("authorized_request_limit") or "未授权"))
     document = document.replace("__FROZEN__", str(manifest.get("frozen_task_count", 0)))
     document = document.replace("__SKIPPED__", str(manifest.get("skipped_task_count", 0)))
     document = document.replace("__DONE__", str(done)).replace("__COUNT__", str(len(manifest["tasks"])))
@@ -461,9 +468,9 @@ def _validate_pilot_audit(path: Optional[Path]) -> Dict[str, Any]:
 def execute_batch(
     output_dir: Path,
     *,
-    authorized_request_limit: int,
+    authorized_request_limit: Optional[int],
     usage_baseline_percent: int,
-    usage_stop_percent: int,
+    usage_stop_percent: Optional[int],
     pilot_audit_path: Optional[Path] = None,
     max_new_requests_per_invocation: Optional[int] = None,
     stop_after_task_id: Optional[str] = None,
@@ -544,9 +551,11 @@ def execute_batch(
     source_manifest_path = Path(manifest["source_manifest"])
     if sha256_file(source_manifest_path) != manifest["source_manifest_sha256"]:
         raise RuntimeError("batch_source_manifest_hash_changed")
-    if authorized_request_limit < 1:
+    if authorized_request_limit is not None and authorized_request_limit < 1:
         raise ValueError("authorized_request_limit_must_be_positive")
-    if not (0 <= usage_baseline_percent <= 100 and 0 <= usage_stop_percent <= 100):
+    if not (0 <= usage_baseline_percent <= 100) or (
+        usage_stop_percent is not None and not (0 <= usage_stop_percent <= 100)
+    ):
         raise ValueError("usage_percent_out_of_range")
     if max_new_requests_per_invocation is not None and max_new_requests_per_invocation < 1:
         raise ValueError("max_new_requests_per_invocation_must_be_positive")
@@ -579,7 +588,7 @@ def execute_batch(
         **pilot_gate,
         "checked_at_utc": datetime.now(timezone.utc).isoformat(),
     }
-    if usage_baseline_percent >= usage_stop_percent:
+    if usage_stop_percent is not None and usage_baseline_percent >= usage_stop_percent:
         checked_at = datetime.now(timezone.utc).isoformat()
         manifest["status"] = "stopped_before_request_usage_at_or_above_stop_line"
         manifest["updated_at_utc"] = checked_at
@@ -594,12 +603,12 @@ def execute_batch(
         return manifest
 
     used = int(manifest.get("model_requests_used", 0))
-    if authorized_request_limit < used:
+    if authorized_request_limit is not None and authorized_request_limit < used:
         raise ValueError("request_limit_below_already_used_requests")
     pending = [task for task in manifest["tasks"] if task["status"] in {"pending", "ready", "active", "budget_paused"}]
     pending_minimum = sum(_minimum_remaining_for_task(task) for task in pending)
-    remaining = authorized_request_limit - used
-    if pending and remaining < pending_minimum:
+    remaining = None if authorized_request_limit is None else authorized_request_limit - used
+    if authorized_request_limit is not None and pending and remaining < pending_minimum:
         checked_at = datetime.now(timezone.utc).isoformat()
         manifest["status"] = "stopped_before_request_insufficient_budget_for_remaining_minimum"
         manifest["updated_at_utc"] = checked_at
@@ -617,9 +626,22 @@ def execute_batch(
 
     previous_limit = manifest.get("authorized_request_limit")
     manifest["authorized_request_limit"] = authorized_request_limit
+    manifest["request_limit_policy"] = (
+        "no_project_level_cumulative_cap_user_authorized"
+        if authorized_request_limit is None else "explicit_project_level_cumulative_cap"
+    )
+    manifest["request_limit_display"] = (
+        "无项目累计请求上限" if authorized_request_limit is None else str(authorized_request_limit)
+    )
+    if authorized_request_limit is None:
+        manifest["request_budget_allocation"] = (
+            "No project-level cumulative request cap. Each task continuation is a resumable slice "
+            "of at most 512 model responses; no response is automatically retried."
+        )
     if previous_limit != authorized_request_limit:
         manifest.setdefault("authorization_history", []).append({
             "authorized_cumulative_request_limit": authorized_request_limit,
+            "no_project_level_cumulative_cap": authorized_request_limit is None,
             "usage_baseline_percent": usage_baseline_percent,
             "usage_stop_percent": usage_stop_percent,
             "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
@@ -628,7 +650,11 @@ def execute_batch(
     manifest["usage_guard"] = {
         "baseline_weekly_used_percent": usage_baseline_percent,
         "stop_threshold_percent": usage_stop_percent,
-        "mechanism": "caller supplies a fresh account snapshot before each invocation; this process can pause after a bounded number of requests but cannot query account usage MCP itself",
+        "mechanism": (
+            "local account-usage stop disabled by user instruction; provider-enforced limits remain active"
+            if usage_stop_percent is None else
+            "caller supplies a read-only account snapshot; this process cannot query account usage itself"
+        ),
         "max_new_requests_per_invocation": max_new_requests_per_invocation,
         "checked_at_utc": checked_at,
     }
@@ -657,9 +683,12 @@ def execute_batch(
         reserve = sum(_minimum_remaining_for_task(item) for item in other_pending)
         current_minimum = _minimum_remaining_for_task(task)
         total_pending_minimum = current_minimum + reserve
-        remaining_slack = max(0, authorized_request_limit - used - total_pending_minimum)
-        fair_slack = remaining_slack // (1 + len(other_pending))
-        task_limit = min(MAX_TASK_REQUESTS, current_minimum + fair_slack)
+        if authorized_request_limit is None:
+            task_limit = MAX_TASK_REQUESTS
+        else:
+            remaining_slack = max(0, authorized_request_limit - used - total_pending_minimum)
+            fair_slack = remaining_slack // (1 + len(other_pending))
+            task_limit = min(MAX_TASK_REQUESTS, current_minimum + fair_slack)
         if task_limit < current_minimum:
             manifest["status"] = "stopped_before_request_insufficient_budget_for_next_task"
             manifest["current_task_id"] = task["task_id"]
@@ -913,16 +942,16 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     mode = parser.add_mutually_exclusive_group(required=True)
     mode.add_argument("--preflight-only", action="store_true", help="create a zero-request batch plan")
-    mode.add_argument("--execute", action="store_true", help="send route requests under explicit caps")
+    mode.add_argument("--execute", action="store_true", help="send route requests with an explicit cumulative cap or none")
     parser.add_argument("--source-manifest", type=Path, default=DEFAULT_SOURCE)
     parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT)
-    parser.add_argument("--request-limit", type=int, default=None, help="absolute cumulative request ceiling for this batch")
+    parser.add_argument("--request-limit", type=parse_optional_int, default=ARGUMENT_NOT_SET, help="absolute cumulative request ceiling; use none for no project-level cap")
     parser.add_argument("--usage-baseline-percent", type=int, default=None, help="fresh read-only weekly usage snapshot before execution")
-    parser.add_argument("--usage-stop-percent", type=int, default=None, help="maximum allowed weekly usage percentage")
+    parser.add_argument("--usage-stop-percent", type=parse_optional_int, default=ARGUMENT_NOT_SET, help="local weekly usage stop percentage; use none to disable this local stop")
     parser.add_argument("--pilot-audit", type=Path, default=None,
                         help="completed, zero-retry task-0000-0009 pilot audit required before the formal batch")
     parser.add_argument("--max-new-requests-per-invocation", type=int, default=None,
-                        help="pause after at most this many new model responses so an external caller can refresh account usage")
+                        help="checkpoint after this many new model responses; this is resumable and not a cumulative cap")
     parser.add_argument("--stop-after-task-id", default=None,
                         help="stop cleanly once this frozen task has a terminal audited outcome")
     args = parser.parse_args()
@@ -930,7 +959,7 @@ def main() -> int:
     if args.preflight_only:
         manifest = prepare_batch(args.source_manifest, output_dir)
     else:
-        if args.request_limit is None or args.usage_baseline_percent is None or args.usage_stop_percent is None or args.pilot_audit is None:
+        if args.request_limit is ARGUMENT_NOT_SET or args.usage_baseline_percent is None or args.usage_stop_percent is ARGUMENT_NOT_SET or args.pilot_audit is None:
             parser.error("--execute requires --request-limit, --usage-baseline-percent, --usage-stop-percent, and --pilot-audit")
         try:
             lock_handle = acquire_execution_lock(output_dir)

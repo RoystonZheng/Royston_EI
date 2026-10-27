@@ -15,6 +15,12 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 
+def parse_optional_int(value):
+    if value.strip().lower() in {"none", "unlimited", "off", "no-limit"}:
+        return None
+    return int(value)
+
+
 def read_manifest(path):
     return json.loads(path.read_text(encoding="utf-8"))
 
@@ -83,9 +89,9 @@ def main():
     parser.add_argument("--batch-dir", type=Path, required=True)
     parser.add_argument("--project-root", type=Path, required=True)
     parser.add_argument("--pilot-audit", type=Path, required=True)
-    parser.add_argument("--request-limit", type=int, required=True)
+    parser.add_argument("--request-limit", type=parse_optional_int, required=True, help="cumulative cap; use none for no project-level cap")
     parser.add_argument("--usage-baseline-percent", type=int, required=True)
-    parser.add_argument("--usage-stop-percent", type=int, default=100)
+    parser.add_argument("--usage-stop-percent", type=parse_optional_int, default=None)
     args = parser.parse_args()
     batch_dir = args.batch_dir.resolve()
     project_root = args.project_root.resolve()
@@ -104,9 +110,9 @@ def main():
                            "unknown_tasks": [item["task_id"] for item in manifest["tasks"] if item.get("status") == "outcome_unknown"]})
             return 0
         command = [sys.executable, str(runner), "--execute", "--output-dir", str(batch_dir),
-                   "--request-limit", str(args.request_limit),
+                   "--request-limit", "none" if args.request_limit is None else str(args.request_limit),
                    "--usage-baseline-percent", str(args.usage_baseline_percent),
-                   "--usage-stop-percent", str(args.usage_stop_percent),
+                   "--usage-stop-percent", "none" if args.usage_stop_percent is None else str(args.usage_stop_percent),
                    "--pilot-audit", str(args.pilot_audit.resolve()),
                    "--max-new-requests-per-invocation", "1"]
         started = time.monotonic()

@@ -56,7 +56,7 @@ class R4CodexPilotReplayRendererTests(unittest.TestCase):
                 "allowed_directions": ["N", "W"],
                 "allowed_edge_ids": {"N": "edge_node_35_63_node_35_64", "W": "edge_node_35_63_node_34_63"},
                 "response": None,
-                "validation": {"deterministic_local_check": {"passed": None, "errors": []}},
+                "validation": None,
                 "usage": {"input_tokens": None, "output_tokens": None},
                 "tool_item_types": None,
                 "provider_record": {

@@ -472,6 +472,7 @@ def _resume_state(
     codex_session_mode: str = "ephemeral_per_request",
     user_authorized_user_stop_resume: bool = False,
     input_protocol: Optional[str] = None,
+    user_authorized_formal_task_resume: bool = False,
 ) -> Dict[str, Any]:
     """Start a separately budgeted continuation from a validated pilot prefix."""
     if codex_session_mode not in {"ephemeral_per_request", "persistent_per_task"}:
@@ -483,6 +484,12 @@ def _resume_state(
         raise RuntimeError("resume_parent_artifacts_missing")
     parent = _read_json(parent_state_path)
     parent_audit = _read_json(parent_audit_path)
+    if user_authorized_formal_task_resume and (
+        parent.get("user_authorization_status") != "granted_for_formal_r4_batch_pilot"
+    ):
+        raise RuntimeError("resume_formal_batch_authorization_missing")
+    if user_authorized_formal_task_resume and user_authorized_user_stop_resume:
+        raise RuntimeError("resume_authorization_mode_conflict")
     parent_input_protocol = parent.get("route_input_protocol", "r4-step-v2")
     selected_input_protocol = input_protocol or parent_input_protocol
     if selected_input_protocol != parent_input_protocol:
@@ -510,7 +517,7 @@ def _resume_state(
     )
     unresolved_parent_request_numbers = (
         _safe_unresolved_delivery_resume_parent(parent, parent_audit)
-        if user_authorized_user_stop_resume
+        if user_authorized_user_stop_resume or user_authorized_formal_task_resume
         else []
     )
     safe_unresolved_delivery_resume = bool(unresolved_parent_request_numbers)
@@ -530,7 +537,7 @@ def _resume_state(
         "authorized_call_limit_exhausted",
         "insufficient_authorized_budget_for_remaining_route",
     } or clean_quota_stop or (
-        user_authorized_user_stop_resume
+        (user_authorized_user_stop_resume or user_authorized_formal_task_resume)
         and parent.get("status") == "stopped_by_user_instruction"
     ) or safe_unresolved_delivery_resume
     if not clean_budget_stop and not safe_self_check_resume:
@@ -549,7 +556,7 @@ def _resume_state(
         item for item in parent.get("attempts", [])
         if item.get("status") == "accepted_legal_step"
     ]
-    if user_authorized_user_stop_resume and parent.get("status") in {
+    if (user_authorized_user_stop_resume or user_authorized_formal_task_resume) and parent.get("status") in {
         "stopped_by_user_instruction", "stopped_outcome_unknown_no_retry"
     }:
         if (
@@ -608,6 +615,12 @@ def _resume_state(
     }:
         if road_map.size != 100 or task.task_id != "task-0000-0009":
             raise RuntimeError("resume_user_stopped_parent_scope_mismatch")
+    if user_authorized_formal_task_resume and (
+        road_map.size != 100
+        or not task.task_id.startswith("task-")
+        or selected_input_protocol != "r4-step-v3"
+    ):
+        raise RuntimeError("resume_formal_batch_parent_scope_mismatch")
 
     current = parent["accepted_nodes"][-1]
     full_constraint = build_r4_route_output_constraint(
@@ -711,11 +724,17 @@ def _resume_state(
         # Do not inherit effective permission from the parent. A resume gets
         # fresh authority only when the explicit user-stop-resume flag is set.
         "effective_authorized_new_request_limit": (
-            authorized_request_limit if user_authorized_user_stop_resume else 0
+            authorized_request_limit
+            if user_authorized_user_stop_resume or user_authorized_formal_task_resume
+            else 0
         ),
-        "additional_model_requests_authorized": bool(user_authorized_user_stop_resume),
+        "additional_model_requests_authorized": bool(
+            user_authorized_user_stop_resume or user_authorized_formal_task_resume
+        ),
         "current_authorization_status": (
-            "user_authorized_resume"
+            "user_authorized_formal_task_resume"
+            if user_authorized_formal_task_resume
+            else "user_authorized_resume"
             if user_authorized_user_stop_resume
             else "not_authorized"
         ),
@@ -730,7 +749,12 @@ def _resume_state(
         "map_equivalence_audit": map_audit,
         "initial_continuation_allowed_directions": sorted(step_constraint.edge_by_direction),
         "initial_remaining_minimum_moves": step_constraint.remaining_minimum_moves,
-        "scope": "Continuation of the independent Codex {0}x{0} pilot from its accepted legal prefix; up to {1} new one-step requests; separate from formal route comparison.".format(
+        "scope": (
+            "Continuation of the frozen formal R4 task from its validator-accepted legal prefix; "
+            "up to {0} new one-step requests; unresolved parent invocations remain separate and are not replayed."
+        ).format(authorized_request_limit)
+        if user_authorized_formal_task_resume
+        else "Continuation of the independent Codex {0}x{0} pilot from its accepted legal prefix; up to {1} new one-step requests; separate from formal route comparison.".format(
             road_map.size, authorized_request_limit
         ),
         "source_preflight": str(selected_preflight.relative_to(ROOT)) if selected_preflight.is_relative_to(ROOT) else str(selected_preflight),
@@ -748,6 +772,21 @@ def _resume_state(
                 "authorization_source": "direct_user_goal_continuation_2026-10-27",
             }
             if user_authorized_user_stop_resume
+            else {}
+        ),
+        **(
+            {
+                "user_authorization_status": "granted_for_formal_r4_batch_pilot",
+                "authorization_scope": (
+                    "continue the frozen formal R4 task from its last validator-accepted prefix; "
+                    "preserve unresolved parent invocations without replay; no project-level request cap"
+                ),
+                "authorization_quote": (
+                    "直接完成这个实验快一点，要符合实验依据要；不设置额度上限"
+                ),
+                "authorization_source": "direct_user_goal_continuation_2026-10-27",
+            }
+            if user_authorized_formal_task_resume
             else {}
         ),
         **(
@@ -864,9 +903,12 @@ def preflight_only(
     input_protocol: Optional[str] = None,
     user_authorized_task9_experiment: bool = False,
     user_authorized_formal_batch_pilot: bool = False,
+    user_authorized_formal_task_resume: bool = False,
 ) -> None:
     if OUTPUT_DIR.exists():
         raise FileExistsError("continuation_output_already_exists")
+    if user_authorized_formal_task_resume and not resume_from:
+        raise ValueError("formal_task_resume_requires_resume_preflight")
     if resume_from and experiment_id:
         raise ValueError("experiment_id_override_only_supported_for_fresh_run")
     if resume_from and (user_authorized_task9_experiment or user_authorized_formal_batch_pilot):
@@ -880,6 +922,7 @@ def preflight_only(
             codex_session_mode,
             user_authorized_user_stop_resume,
             input_protocol,
+            user_authorized_formal_task_resume,
         )
         if resume_from
         else _initial_state(
@@ -1495,6 +1538,11 @@ def main() -> None:
         action="store_true",
         help="Record explicit user authorization to continue a stopped task9 route from its validated prefix",
     )
+    parser.add_argument(
+        "--user-authorized-formal-task-resume",
+        action="store_true",
+        help="Continue an already authorized formal R4 task from its validated prefix; unresolved requests remain unreplayed",
+    )
     args = parser.parse_args()
     OUTPUT_DIR = args.output_dir if args.output_dir.is_absolute() else ROOT / args.output_dir
     if (OUTPUT_DIR / "USER_STOP_REQUESTED").exists():
@@ -1510,6 +1558,10 @@ def main() -> None:
         parser.error("--allow-unexecuted-self-check-mismatch requires --resume-from")
     if args.user_authorized_user_stop_resume and (not args.resume_from or not args.preflight_only):
         parser.error("--user-authorized-user-stop-resume requires --resume-from and --preflight-only")
+    if args.user_authorized_formal_task_resume and (not args.resume_from or not args.preflight_only):
+        parser.error("--user-authorized-formal-task-resume requires --resume-from and --preflight-only")
+    if args.user_authorized_formal_task_resume and args.user_authorized_user_stop_resume:
+        parser.error("formal task resume and task9 user-stop resume are mutually exclusive")
     if args.resume_from and args.experiment_id:
         parser.error("--experiment-id is only supported for a fresh pilot")
     if args.request_limit < 1 or args.request_limit > MAX_FORMAL_STEPWISE_CALLS:
@@ -1526,6 +1578,7 @@ def main() -> None:
             args.route_input_protocol,
             args.record_user_authorized_task9_experiment,
             args.record_user_authorized_formal_batch_pilot,
+            args.user_authorized_formal_task_resume,
         )
     else:
         one_step()

@@ -261,7 +261,12 @@ def render(run_dir, output, parent_run=None):
         response = attempt.get("response") or {}
         direction = response.get("direction")
         accepted = attempt.get("status") in {"accepted_legal_step", "route_completed"} and bool(attempt.get("selected_edge_id"))
-        local = attempt.get("validation", {}).get("deterministic_local_check", {})
+        validation = attempt.get("validation")
+        if not isinstance(validation, dict):
+            validation = {}
+        local = validation.get("deterministic_local_check")
+        if not isinstance(local, dict):
+            local = {}
         request_unknown = (
             (attempt_run_dir.resolve(), attempt.get("request_number")) in delivery_unknown_by_run
             or bool(attempt.get("provider_record", {}).get("delivery_and_usage_unknown_evidence"))
@@ -324,7 +329,7 @@ def render(run_dir, output, parent_run=None):
             "failure_detail": failure_detail,
             "failure_reason_code": response.get("failure_reason_code"),
             "model_failure_code_overridden_by_local_validation": bool(
-                attempt.get("validation", {}).get(
+                validation.get(
                     "model_failure_code_overridden_by_local_validation"
                 )
             ),
@@ -335,7 +340,7 @@ def render(run_dir, output, parent_run=None):
             "self_check_false_fields": false_fields,
             "model_self_check_mismatch_fields": discrepancy.get(
                 "model_self_check_mismatch_fields",
-                attempt.get("validation", {}).get("model_self_check_mismatch_fields", []),
+                validation.get("model_self_check_mismatch_fields", []),
             ),
             "tool_item_types": None if request_unknown else attempt.get("tool_item_types", []),
             "tool_audit_available": not bool(
@@ -369,8 +374,14 @@ def render(run_dir, output, parent_run=None):
         for item in run_states
     )
     last_accepted = next((a for a in reversed(all_attempts) if a.get("status") == "accepted_legal_step"), None)
+    last_validation = (last_accepted or {}).get("validation")
+    if not isinstance(last_validation, dict):
+        last_validation = {}
+    last_local = last_validation.get("deterministic_local_check")
+    if not isinstance(last_local, dict):
+        last_local = {}
     min_remaining = (
-        last_accepted.get("validation", {}).get("deterministic_local_check", {}).get("remaining_minimum_moves_after_move")
+        last_local.get("remaining_minimum_moves_after_move")
         if last_accepted else state.get("initial_remaining_minimum_moves")
     )
     accepted_self_check_discrepancies = [

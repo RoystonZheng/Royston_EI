@@ -315,8 +315,12 @@ def _reconcile_trace_usage(
 def _collect_self_check_discrepancies(attempts: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     discrepancies = []
     for attempt in attempts:
-        validation = attempt.get("validation", {})
-        local = validation.get("deterministic_local_check", {})
+        validation = attempt.get("validation")
+        if not isinstance(validation, dict):
+            validation = {}
+        local = validation.get("deterministic_local_check")
+        if not isinstance(local, dict):
+            local = {}
         model_self_check = (attempt.get("response") or {}).get("self_check", {})
         if not isinstance(model_self_check, dict) or not isinstance(local.get("flags"), dict):
             continue
@@ -341,8 +345,12 @@ def _collect_self_check_discrepancies(attempts: List[Dict[str, Any]]) -> List[Di
 def _collect_model_failure_code_overrides(attempts: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     overrides = []
     for attempt in attempts:
-        validation = attempt.get("validation", {})
-        local = validation.get("deterministic_local_check", {})
+        validation = attempt.get("validation")
+        if not isinstance(validation, dict):
+            validation = {}
+        local = validation.get("deterministic_local_check")
+        if not isinstance(local, dict):
+            local = {}
         failure_code = (attempt.get("response") or {}).get("failure_reason_code")
         if (
             validation.get("model_failure_code_overridden_by_local_validation")
