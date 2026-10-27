@@ -1,0 +1,1 @@
+Point-in-time observation of the exact R4 formal output root, parent/worker manifests, lock/PID state, and open log handles. No task outputs copied. Root and worker counters are reported separately; the whole batch is incomplete.

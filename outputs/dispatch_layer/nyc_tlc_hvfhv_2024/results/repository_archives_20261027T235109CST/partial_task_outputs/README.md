@@ -1,0 +1,1 @@
+Partial NYC checkpoint for the closed successful F4 D8 live result. F4 D6/D7 replay was active at cutoff and is excluded. This does not represent the complete multi-month batch or an aggregate comparison.

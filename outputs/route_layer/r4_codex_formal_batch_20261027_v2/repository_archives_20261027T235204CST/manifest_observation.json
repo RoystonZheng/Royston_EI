@@ -1,0 +1,112 @@
+{
+  "observation_type": "single-read exact-root R4 parent/worker status; no task outputs copied",
+  "observed_at_local": "2026-10-27T23:52:04+08:00",
+  "source_root": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2",
+  "parent_manifest": {
+    "sha256": "98ad41cb7aeee34004fed609f621dac8fce7514f3a60b1445eb376720c8a7a5a",
+    "mtime_ns": 1793115910380861431,
+    "status": "running",
+    "updated_at_utc": "2026-10-27T15:45:10.377267+00:00",
+    "model_requests_used": 5191,
+    "unknown_delivery": null,
+    "task_status_counts": {
+      "route_complete": 19,
+      "failed": 34,
+      "ready": 5,
+      "pending": 70,
+      "active": 1
+    },
+    "route_complete_task_ids": [
+      "task-0000-0001",
+      "task-0000-0002",
+      "task-0000-0003",
+      "task-0000-0006",
+      "task-0000-0007",
+      "task-0000-0008",
+      "task-0001-0003",
+      "formal-task-0001-feasible",
+      "task-0002-0006",
+      "task-0003-0009",
+      "task-0004-0001",
+      "task-0004-0002",
+      "task-0005-0006",
+      "formal-task-0005-boundary",
+      "task-0006-0008",
+      "formal-task-0006-boundary",
+      "task-0007-0001",
+      "task-0007-0005",
+      "task-0009-0005"
+    ],
+    "active_tasks": [
+      "task-0003-0002"
+    ],
+    "new_route_complete_since_T2251": []
+  },
+  "worker_01_manifest": {
+    "sha256": "93483bcc7dff15824fe71880038b9b61b8700fad304fe87192d96250fb031665",
+    "mtime_ns": 1793115167243175840,
+    "status": "stopped_provider_or_tool_contract_failure",
+    "updated_at_utc": "2026-10-27T15:32:47.240387+00:00",
+    "model_requests_used": 940,
+    "unknown_delivery": null,
+    "task_status_counts": {
+      "route_complete": 3,
+      "outcome_unknown": 3,
+      "failed": 17,
+      "pending": 6
+    },
+    "active_tasks": []
+  },
+  "execution_lock_and_pid_files": [
+    {
+      "path": ".r4_model_execution.lock",
+      "exists": true,
+      "size_bytes": 9,
+      "mtime_ns": 1793110122572332502
+    },
+    {
+      "path": "parallel_workers/worker_00/.r4_model_execution.lock",
+      "exists": true,
+      "size_bytes": 10,
+      "mtime_ns": 1793116317604667138
+    },
+    {
+      "path": "parallel_workers/worker_01/.r4_model_execution.lock",
+      "exists": true,
+      "size_bytes": 10,
+      "mtime_ns": 1793115103009172228
+    },
+    {
+      "path": "parallel_workers/worker_02/.r4_model_execution.lock",
+      "exists": true,
+      "size_bytes": 10,
+      "mtime_ns": 1793108119097420584
+    },
+    {
+      "path": "parallel_workers/worker_03/.r4_model_execution.lock",
+      "exists": true,
+      "size_bytes": 10,
+      "mtime_ns": 1793108127182197950
+    },
+    {
+      "path": "parallel_workers/worker_recovery/.r4_model_execution.lock",
+      "exists": true,
+      "size_bytes": 10,
+      "mtime_ns": 1793107453443526673
+    },
+    {
+      "path": "parallel_workers/worker_recovery_addendum/.r4_model_execution.lock",
+      "exists": true,
+      "size_bytes": 10,
+      "mtime_ns": 1793095536687986007
+    },
+    {
+      "path": "parallel_workers/worker_recovery_addendum2/.r4_model_execution.lock",
+      "exists": true,
+      "size_bytes": 10,
+      "mtime_ns": 1793106459012495374
+    }
+  ],
+  "open_logs": [],
+  "interpretation": "Root resumed running with an active task while worker_01 remains stopped. Parent and worker counters are separate. No R4 outputs copied; the whole formal batch is incomplete."
+}
