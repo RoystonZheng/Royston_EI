@@ -7,8 +7,10 @@ must not be confused with measured energy from an executed, valid route.
 import json
 import re
 import statistics
+from dataclasses import replace
 from typing import Any, Dict, Optional
 
+from .energy_model import evaluate_route_edges
 from .models import EvaluationConfig, Edge, RoadMap
 
 
@@ -142,15 +144,6 @@ def _node_xy(node_id: str):
     return int(match.group(1)), int(match.group(2))
 
 
-def _edge_energy(edge: Edge, config: EvaluationConfig) -> float:
-    distance_km = edge.length_m / 1000.0
-    return (
-        distance_km * config.moving_kwh_per_km
-        + edge.signal_delay_sec * config.signal_idle_kwh_per_sec
-        + distance_km * edge.congestion_level * config.congestion_extra_kwh_per_km_level
-    )
-
-
 def estimate_route_proposal_energy(
     road_map: RoadMap,
     replay: Dict[str, Any],
@@ -170,6 +163,7 @@ def estimate_route_proposal_energy(
     edge_by_id = {edge.edge_id: edge for edge in edges}
     fallback_length_m = statistics.median([edge.length_m for edge in edges]) if edges else 100.0
     fallback_congestion = statistics.median([edge.congestion_level for edge in edges]) if edges else 0
+    fallback_speed = statistics.median([edge.base_speed_mps for edge in edges]) if edges else 10.0
     fallback_signal_delay = statistics.median([edge.signal_delay_sec for edge in edges]) if edges else 0.0
 
     attempted_nodes = list(replay.get("attempted_route_node_sequence", []))
@@ -180,25 +174,30 @@ def estimate_route_proposal_energy(
         if directed_edge_mode
         else max(0, len(attempted_nodes) - 1)
     )
-    total_energy = 0.0
     distance_m = 0.0
     exact_edge_moves = 0
     reverse_edge_inferred_moves = 0
     proxy_edge_moves = 0
+    hypothetical_edges = []
 
     if directed_edge_mode:
         for edge_id in proposed_edge_ids:
             edge = edge_by_id.get(edge_id)
             if edge is not None:
-                total_energy += _edge_energy(edge, config)
+                hypothetical_edges.append(edge)
                 distance_m += edge.length_m
                 exact_edge_moves += 1
             else:
-                segment_km = fallback_length_m / 1000.0
-                total_energy += (
-                    segment_km * config.moving_kwh_per_km
-                    + fallback_signal_delay * config.signal_idle_kwh_per_sec
-                    + segment_km * fallback_congestion * config.congestion_extra_kwh_per_km_level
+                hypothetical_edges.append(
+                    Edge(
+                        edge_id="hypothetical_" + str(edge_id),
+                        from_node="hypothetical_from",
+                        to_node="hypothetical_to",
+                        length_m=fallback_length_m,
+                        base_speed_mps=fallback_speed,
+                        congestion_level=int(fallback_congestion),
+                        signal_delay_sec=fallback_signal_delay,
+                    )
                 )
                 distance_m += fallback_length_m
                 proxy_edge_moves += 1
@@ -207,7 +206,7 @@ def estimate_route_proposal_energy(
             edge_id = "edge_{0}_{1}".format(source_id, target_id)
             edge = edge_by_id.get(edge_id)
             if edge is not None:
-                total_energy += _edge_energy(edge, config)
+                hypothetical_edges.append(edge)
                 distance_m += edge.length_m
                 exact_edge_moves += 1
                 continue
@@ -215,7 +214,19 @@ def estimate_route_proposal_energy(
             reverse_id = "edge_{0}_{1}".format(target_id, source_id)
             reverse_edge = edge_by_id.get(reverse_id)
             if reverse_edge is not None:
-                total_energy += _edge_energy(reverse_edge, config)
+                hypothetical_edges.append(
+                    replace(
+                        reverse_edge,
+                        edge_id="reverse_inferred_" + reverse_edge.edge_id,
+                        from_node=reverse_edge.to_node,
+                        to_node=reverse_edge.from_node,
+                        slope_rad=(
+                            -reverse_edge.slope_rad
+                            if reverse_edge.slope_rad is not None
+                            else None
+                        ),
+                    )
+                )
                 distance_m += reverse_edge.length_m
                 reverse_edge_inferred_moves += 1
                 continue
@@ -226,26 +237,39 @@ def estimate_route_proposal_energy(
                 segment_length_m = fallback_length_m * max(1, grid_steps)
             else:
                 segment_length_m = fallback_length_m
-            segment_km = segment_length_m / 1000.0
-            total_energy += (
-                segment_km * config.moving_kwh_per_km
-                + fallback_signal_delay * config.signal_idle_kwh_per_sec
-                + segment_km * fallback_congestion * config.congestion_extra_kwh_per_km_level
+            hypothetical_edges.append(
+                Edge(
+                    edge_id="hypothetical_proxy_" + str(len(hypothetical_edges)),
+                    from_node=str(source_id),
+                    to_node=str(target_id),
+                    length_m=segment_length_m,
+                    base_speed_mps=fallback_speed,
+                    congestion_level=int(fallback_congestion),
+                    signal_delay_sec=fallback_signal_delay,
+                )
             )
             distance_m += segment_length_m
             proxy_edge_moves += 1
 
-    prefix_energy = 0.0
+    prefix_edges = []
     prefix_edges = list(replay.get("validated_prefix_edge_sequence", []))
-    for edge_id in prefix_edges:
-        edge = edge_by_id.get(edge_id)
-        if edge is not None:
-            prefix_energy += _edge_energy(edge, config)
+    prefix_route_edges = [edge_by_id[edge_id] for edge_id in prefix_edges if edge_id in edge_by_id]
+    profile = config.energy_profile
+    proposal_result = evaluate_route_edges(
+        hypothetical_edges,
+        config.congestion_speed_multipliers,
+        profile,
+    ) if hypothetical_edges else None
+    prefix_result = evaluate_route_edges(
+        prefix_route_edges,
+        config.congestion_speed_multipliers,
+        profile,
+    ) if prefix_route_edges else None
 
     return {
         "status": "estimated" if proposed_move_count else "no_route_proposed",
-        "route_energy_estimate_kwh": total_energy if proposed_move_count else None,
-        "validated_prefix_energy_estimate_kwh": prefix_energy if proposed_move_count else None,
+        "route_energy_estimate_kwh": proposal_result.net_kwh if proposed_move_count and proposal_result else None,
+        "validated_prefix_energy_estimate_kwh": prefix_result.net_kwh if prefix_result else None,
         "estimated_route_distance_m": distance_m if proposed_move_count else None,
         "proposed_move_count": proposed_move_count,
         "validated_prefix_move_count": len(prefix_edges),
@@ -253,7 +277,31 @@ def estimate_route_proposal_energy(
         "reverse_edge_inferred_moves": reverse_edge_inferred_moves,
         "proxy_edge_moves": proxy_edge_moves,
         "energy_model_version": config.energy_model_version,
+        "energy_profile_id": profile.profile_id,
+        "energy_profile_sha256": profile.fingerprint(),
+        "energy_trace_fidelity": "hypothetical_proposal_with_inferred_edges",
+        "hypothetical_energy_components": (
+            {
+                "propulsion_draw_kwh": proposal_result.propulsion_draw_kwh,
+                "regenerated_kwh": proposal_result.regenerated_kwh,
+                "auxiliary_kwh": proposal_result.auxiliary_kwh,
+                "net_kwh": proposal_result.net_kwh,
+            }
+            if proposal_result
+            else None
+        ),
+        "validated_prefix_energy_components": (
+            {
+                "propulsion_draw_kwh": prefix_result.propulsion_draw_kwh,
+                "regenerated_kwh": prefix_result.regenerated_kwh,
+                "auxiliary_kwh": prefix_result.auxiliary_kwh,
+                "net_kwh": prefix_result.net_kwh,
+            }
+            if prefix_result
+            else None
+        ),
         "fallback_length_m": fallback_length_m,
+        "fallback_speed_mps": fallback_speed,
         "fallback_congestion_level": fallback_congestion,
         "fallback_signal_delay_sec": fallback_signal_delay,
         "interpretation": (

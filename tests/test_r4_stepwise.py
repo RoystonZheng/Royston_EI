@@ -132,7 +132,7 @@ class R4StepwiseTests(unittest.TestCase):
             }
         )
 
-    def _run(self, client, max_api_calls=8):
+    def _run(self, client, max_api_calls=8, enable_validation_feedback=True):
         client.route_constraint = self.full_constraint
         return run_r4_stepwise_route_search(
             client,
@@ -142,6 +142,7 @@ class R4StepwiseTests(unittest.TestCase):
             self.task.pickup_node_id,
             self.task.dropoff_node_id,
             max_api_calls=max_api_calls,
+            enable_validation_feedback=enable_validation_feedback,
         )
 
     def test_stepwise_payload_is_smaller_and_preserves_every_directed_edge_and_cost(self):
@@ -202,6 +203,76 @@ class R4StepwiseTests(unittest.TestCase):
             "compact_grid_boundary_mismatch",
         )
 
+    def test_step_constraint_exposes_objective_progress_without_pruning_valid_detours(self):
+        nodes = [
+            Node(f"node_{x}_{y}", x, y,
+                 legal_pickup=(x == 0 and y == 2),
+                 legal_dropoff=(x == 2 and y == 2))
+            for y in range(3) for x in range(3)
+        ]
+        edges = [
+            Edge("direct_1", "node_0_0", "node_0_1", 100.0, 10.0),
+            Edge("direct_2", "node_0_1", "node_0_2", 100.0, 10.0),
+            Edge("detour_1", "node_0_0", "node_1_0", 100.0, 10.0),
+            Edge("detour_2", "node_1_0", "node_2_0", 100.0, 10.0),
+            Edge("detour_3", "node_2_0", "node_2_1", 100.0, 10.0),
+            Edge("detour_4", "node_2_1", "node_1_1", 100.0, 10.0),
+            Edge("detour_5", "node_1_1", "node_0_1", 100.0, 10.0),
+            Edge("dropoff_1", "node_0_2", "node_1_2", 100.0, 10.0),
+            Edge("dropoff_2", "node_1_2", "node_2_2", 100.0, 10.0),
+        ]
+        package = replace(
+            self.package,
+            start_node_id="node_0_0",
+            pickup_node_id="node_0_2",
+            dropoff_node_id="node_2_2",
+            nodes=nodes,
+            edges=edges,
+            expansion_count=len(nodes),
+            boundary={"min_x": 0, "max_x": 2, "min_y": 0, "max_y": 2},
+        )
+        full_constraint = build_r4_route_output_constraint(
+            package, "node_0_2", "node_2_2", allow_failed=False
+        )
+
+        constraint = build_r4_step_output_constraint(
+            package,
+            full_constraint,
+            current_node_id="node_0_0",
+            pickup_seen=False,
+            visited_node_ids=["node_0_0"],
+            include_objective_cost_guidance=True,
+        )
+
+        self.assertEqual(set(constraint.edge_by_direction), {"N", "E"})
+        self.assertEqual(
+            constraint.remaining_objective_cost_lower_bound,
+            {"travel_time_sec": 40.0, "distance_m": 400.0},
+        )
+        self.assertEqual(
+            constraint.objective_cost_lower_bound_by_direction["N"],
+            {
+                "route_lower_bound_if_taken": {"travel_time_sec": 40.0, "distance_m": 400.0},
+                "excess_over_current_lower_bound": {"travel_time_sec": 0.0, "distance_m": 0.0},
+            },
+        )
+        self.assertEqual(
+            constraint.objective_cost_lower_bound_by_direction["E"]
+            ["excess_over_current_lower_bound"],
+            {"travel_time_sec": 40.0, "distance_m": 400.0},
+        )
+
+    def test_default_step_constraint_skips_optional_objective_guidance_computation(self):
+        constraint = build_r4_step_output_constraint(
+            self.package,
+            self.full_constraint,
+            current_node_id=self.task.start_node_id,
+            pickup_seen=False,
+            visited_node_ids=[self.task.start_node_id],
+        )
+        self.assertIsNone(constraint.remaining_objective_cost_lower_bound)
+        self.assertEqual(constraint.objective_cost_lower_bound_by_direction, {})
+
     def test_route_feature_context_is_serialized_separately_from_graph_and_rejects_truth(self):
         context = {
             "protocol": {"name": "RoadFeatureInputProtocol", "version": "v1"},
@@ -239,6 +310,87 @@ class R4StepwiseTests(unittest.TestCase):
                 visited_node_ids=[self.task.start_node_id],
                 route_feature_context={"true_pickup_node_id": self.task.pickup_node_id},
             )
+
+    def test_v3_prompt_compacts_visited_nodes_and_labels_progress_as_guidance_only(self):
+        nodes = [
+            Node(f"node_{x}_{y}", x, y,
+                 legal_pickup=(x == 0 and y == 1),
+                 legal_dropoff=(x == 2 and y == 1))
+            for y in range(2) for x in range(3)
+        ]
+        edges = [
+            Edge("start_pickup", "node_0_0", "node_0_1", 100.0, 10.0),
+            Edge("pickup_current", "node_0_1", "node_1_1", 100.0, 10.0),
+            Edge("current_dropoff", "node_1_1", "node_2_1", 100.0, 10.0),
+        ]
+        package = replace(
+            self.package,
+            start_node_id="node_0_0",
+            pickup_node_id="node_0_1",
+            dropoff_node_id="node_2_1",
+            nodes=nodes,
+            edges=edges,
+            expansion_count=len(nodes),
+            boundary={"min_x": 0, "max_x": 2, "min_y": 0, "max_y": 1},
+        )
+        progress_guidance = {
+            "current_lower_bound": {"travel_time_sec": 10.0, "distance_m": 100.0},
+            "by_direction": {
+                "E": {
+                    "route_lower_bound_if_taken": {"travel_time_sec": 10.0, "distance_m": 100.0},
+                    "excess_over_current_lower_bound": {"travel_time_sec": 0.0, "distance_m": 0.0},
+                }
+            },
+        }
+
+        messages = build_r4_stepwise_messages(
+            package,
+            "node_0_0",
+            "node_0_1",
+            "node_2_1",
+            current_node_id="node_1_1",
+            visited_node_ids=["node_0_0", "node_0_1", "node_1_1"],
+            pickup_seen=True,
+            accepted_directions=["N", "E"],
+            compact_visited_state=True,
+            progress_guidance=progress_guidance,
+        )
+
+        payload = json.loads(messages[1]["content"])
+        self.assertEqual(payload["v"], "r4-step-v3")
+        self.assertEqual(payload["s"]["v"], "3")
+        self.assertEqual(payload["s"]["vf"], "grid_slot_base36")
+        self.assertEqual(payload["s"]["vl"], 1)
+        self.assertEqual(payload["r"], progress_guidance)
+        self.assertIn("只作为路线质量提示", messages[0]["content"])
+        self.assertIn("本地确定性校验仍是唯一准入依据", messages[0]["content"])
+        self.assertIn("起点和当前节点也视为已访问", messages[0]["content"])
+
+    def test_runner_opt_in_v3_records_guidance_and_keeps_validator_authoritative(self):
+        client = StepSequenceClient([self._move("N")])
+        client.route_constraint = self.full_constraint
+
+        result = run_r4_stepwise_route_search(
+            client,
+            self.package,
+            self.road_map,
+            self.task,
+            self.task.pickup_node_id,
+            self.task.dropoff_node_id,
+            max_api_calls=1,
+            max_route_actions=8,
+            compact_visited_state=True,
+            enable_progress_guidance=True,
+        )
+
+        sent = json.loads(client.calls[0][-1]["content"])
+        attempt = result["attempts"][0]
+        self.assertEqual(sent["v"], "r4-step-v3")
+        self.assertEqual(sent["s"]["v"], "")
+        self.assertIn("current_lower_bound", sent["r"])
+        self.assertEqual(attempt["route_progress_guidance"], sent["r"])
+        self.assertTrue(attempt["local_checks"]["passed"])
+        self.assertTrue(result["steps"][0]["accepted_step"])
 
     def test_stepwise_prompt_uses_explicit_visited_nodes_and_positive_self_check(self):
         messages = build_r4_stepwise_messages(
@@ -290,6 +442,10 @@ class R4StepwiseTests(unittest.TestCase):
         self.assertEqual(set(constraint.edge_by_direction), {"N"})
         self.assertEqual(constraint.schema["properties"]["direction"]["enum"], ["N"])
         self.assertEqual(constraint.schema["properties"]["action"]["enum"], ["move"])
+        self.assertEqual(
+            constraint.schema["properties"]["failure_reason_code"]["enum"],
+            ["none"],
+        )
         self.assertTrue(constraint.tool_definition()["function"]["strict"])
 
         no_early_dropoff = build_r4_step_output_constraint(
@@ -303,6 +459,10 @@ class R4StepwiseTests(unittest.TestCase):
         self.assertEqual(
             no_early_dropoff.schema["properties"]["action"]["enum"],
             ["give_up"],
+        )
+        self.assertEqual(
+            no_early_dropoff.schema["properties"]["failure_reason_code"]["enum"],
+            ["unable_to_construct_route"],
         )
 
     def test_dynamic_schema_prunes_detour_that_cannot_fit_remaining_action_budget(self):
@@ -439,6 +599,54 @@ class R4StepwiseTests(unittest.TestCase):
         self.assertEqual(result["attempts"][0]["status"], "step_invalid")
         self.assertIn("input_user_sha256", result["attempts"][0])
 
+    def test_feedback_ablation_stops_after_rejected_move_without_a_followup_request(self):
+        client = StepSequenceClient([self._move("W"), self._move("N"), self._move("E")])
+        result = self._run(
+            client,
+            max_api_calls=3,
+            enable_validation_feedback=False,
+        )
+
+        self.assertEqual(result["status"], "validation_rejected_without_feedback")
+        self.assertFalse(result["validation_feedback_enabled"])
+        self.assertEqual(result["api_request_count"], 1)
+        self.assertEqual(len(client.calls), 1)
+        self.assertEqual(result["attempts"][0]["status"], "step_invalid")
+        self.assertEqual(result["attempts"][0]["feedback"]["code"], "directed_edge_missing")
+        self.assertFalse(result["steps"][0]["accepted_step"])
+
+    def test_feedback_ablation_stops_after_reachable_give_up(self):
+        client = StepSequenceClient([self._give_up(), self._move("N"), self._move("E")])
+        result = self._run(
+            client,
+            max_api_calls=3,
+            enable_validation_feedback=False,
+        )
+
+        self.assertEqual(result["status"], "validation_rejected_without_feedback")
+        self.assertEqual(result["api_request_count"], 1)
+        self.assertEqual(len(client.calls), 1)
+        self.assertIn(
+            "give_up_while_route_reachable",
+            result["attempts"][0]["local_checks"]["errors"],
+        )
+        self.assertEqual(result["attempts"][0]["feedback"]["code"], "give_up_while_route_reachable")
+
+    def test_feedback_ablation_stops_after_invalid_json(self):
+        malformed = SimpleNamespace(content="not-json", retries=0)
+        client = StepSequenceClient([malformed, self._move("N"), self._move("E")])
+        result = self._run(
+            client,
+            max_api_calls=3,
+            enable_validation_feedback=False,
+        )
+
+        self.assertEqual(result["status"], "validation_rejected_without_feedback")
+        self.assertEqual(result["api_request_count"], 1)
+        self.assertEqual(len(client.calls), 1)
+        self.assertEqual(result["attempts"][0]["status"], "step_output_invalid")
+        self.assertEqual(result["attempts"][0]["feedback"]["code"], "r4_step_output_json_invalid")
+
     def test_false_model_self_check_is_recorded_but_local_validator_controls_acceptance(self):
         failed_self_check = {
             "allowed_directed_edge": True,
@@ -458,6 +666,22 @@ class R4StepwiseTests(unittest.TestCase):
         self.assertEqual(attempt["model_self_check_mismatch_fields"], ["target_node_is_new"])
         self.assertTrue(result["steps"][0]["accepted_step"])
         self.assertEqual(result["steps"][0]["to_node_id"], "node_0_1")
+
+    def test_local_validator_overrides_a_model_failure_code_on_a_legal_move(self):
+        contradictory = json.loads(self._move("N").content)
+        contradictory["failure_reason_code"] = "unable_to_construct_route"
+        response = self._response(contradictory)
+        client = StepSequenceClient([response, self._move("E")])
+
+        result = self._run(client, max_api_calls=2)
+
+        self.assertEqual(result["status"], "route_validated")
+        self.assertEqual(result["api_request_count"], 2)
+        attempt = result["attempts"][0]
+        self.assertEqual(attempt["status"], "step_accepted")
+        self.assertEqual(attempt["parsed_output"]["failure_reason_code"], "unable_to_construct_route")
+        self.assertTrue(attempt["local_checks"]["passed"])
+        self.assertTrue(attempt["model_failure_code_overridden_by_local_validation"])
 
     def test_reachable_task_rejects_model_give_up_and_continues_same_state(self):
         client = StepSequenceClient([self._give_up(), self._move("N"), self._move("E")])

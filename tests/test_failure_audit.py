@@ -54,8 +54,13 @@ class FailureAuditTests(unittest.TestCase):
         self.assertEqual(estimate["proposed_move_count"], 3)
         self.assertEqual(estimate["validated_prefix_move_count"], 1)
         self.assertEqual(estimate["reverse_edge_inferred_moves"], 1)
-        self.assertAlmostEqual(estimate["validated_prefix_energy_estimate_kwh"], 0.1906)
-        self.assertAlmostEqual(estimate["route_energy_estimate_kwh"], 0.5718)
+        self.assertAlmostEqual(
+            estimate["validated_prefix_energy_estimate_kwh"], 0.10225644973632048
+        )
+        self.assertAlmostEqual(
+            estimate["route_energy_estimate_kwh"], 0.30676934920896143
+        )
+        self.assertEqual(estimate["energy_model_version"], "ev_longitudinal_v2")
         self.assertIn("not actual", estimate["interpretation"])
 
     def test_partial_move_runs_can_be_recovered_without_claiming_full_route(self):
@@ -110,7 +115,10 @@ class FailureAuditTests(unittest.TestCase):
         self.assertEqual(estimate["validated_prefix_move_count"], 1)
         self.assertEqual(estimate["reverse_edge_inferred_moves"], 0)
         self.assertAlmostEqual(estimate["estimated_route_distance_m"], 1400.0)
-        self.assertAlmostEqual(estimate["route_energy_estimate_kwh"], 0.2626)
+        self.assertAlmostEqual(
+            estimate["route_energy_estimate_kwh"], 0.15072780502660693
+        )
+        self.assertEqual(estimate["energy_model_version"], "ev_longitudinal_v2")
         self.assertIn("Disconnected", estimate["interpretation"])
 
     def test_failure_description_distinguishes_model_decline_and_route_violation(self):

@@ -15,12 +15,14 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from dispatch_experiment.models import DispatchConfig
+from dispatch_experiment.decision_contract import decision_function_record
 from dispatch_experiment.llm import CODEX_DIRECT_ASSIGNMENT_INPUT_POLICY
 from dispatch_experiment.nyc_tlc_scenario import (
     NYCTLCZoneCentroidPickupOracle,
     load_dispatch_scenario,
 )
 from dispatch_experiment.runner import DispatchSimulation
+from route_experiment.energy_model import model_metadata
 
 
 METHODS = [
@@ -60,14 +62,24 @@ def main() -> None:
         action="store_true",
         help="store per-round audits and the full first candidate table without full state snapshots",
     )
+    parser.add_argument(
+        "--compact-training-labels",
+        action="store_true",
+        help="for D1 only, retain compact hard-feasible candidate features and selected IDs for pairwise ranker training",
+    )
     parser.add_argument("--output-dir", default="outputs/dispatch_layer/nyc_tlc_hvfhv_2024/three_method_benchmark_v1/results")
     parser.add_argument("--feedback-mode", choices=["offline_rule", "none", "deepseek"], default="offline_rule")
     parser.add_argument("--allow-live-api", action="store_true", help="required for live D5/D6/D7/D8 Codex CLI, or D4 with feedback-mode=deepseek")
     parser.add_argument("--codex-model", default=os.environ.get("DISPATCH_CODEX_MODEL", "gpt-5.6-luna"))
     parser.add_argument("--codex-policy-replay", default=None, help="reuse a previously captured D6/D7/D8-compatible context-policy response without a new model call")
     parser.add_argument("--nn-ranker-model", default=None, help="trained JSON checkpoint required by the integrated D8 method")
-    parser.add_argument("--nn-top-k", type=int, default=8, help="maximum candidates retained per vehicle after neural scoring")
+    parser.add_argument("--nn-top-k", type=int, default=1, help="maximum candidates retained per vehicle after neural scoring")
     args = parser.parse_args()
+
+    if args.compact_training_labels and args.methods != ["D1_optimizer"]:
+        raise SystemExit("--compact-training-labels is only valid for a single D1_optimizer run")
+    if args.compact_training_labels and args.compact_records:
+        raise SystemExit("--compact-training-labels already enables compact recording")
 
     package = (ROOT / args.package).resolve()
     manifest = json.loads((package / "benchmark_manifest.json").read_text(encoding="utf-8"))
@@ -95,6 +107,7 @@ def main() -> None:
         method not in {
             "D0_greedy",
             "D1_optimizer",
+            "D2_agent_optimizer",
             "D5_pure_llm_direct",
             "D6_agent_codex_context_optimizer",
             "D7_agent_codex_capacity_shield_optimizer",
@@ -102,7 +115,7 @@ def main() -> None:
         }
         for method in args.methods
     ):
-        raise SystemExit("--compact-records is supported for D0/D1/D5 and Codex CLI D6/D7/D8 runs")
+        raise SystemExit("--compact-records is supported for D0/D1/D2/D5 and Codex CLI D6/D7/D8 runs")
     needs_live_api = "D4_agent_llm_feedback_optimizer" in args.methods and args.feedback_mode == "deepseek"
     if (
         ("D5_pure_llm_direct" in args.methods or (selected_context_methods and not args.codex_policy_replay))
@@ -159,7 +172,8 @@ def main() -> None:
             road_map=loaded["road_map"],
             orders=loaded["orders"],
             vehicles=loaded["vehicles"],
-            retain_round_records=not args.compact_records,
+            retain_round_records=not (args.compact_records or args.compact_training_labels),
+            retain_training_rounds=args.compact_training_labels,
             route_oracle=NYCTLCZoneCentroidPickupOracle(
                 loaded["road_map"],
                 loaded["od_costs"],
@@ -169,7 +183,7 @@ def main() -> None:
                 minimum_intrazonal_distance_m=float(pickup_policy["minimum_intrazonal_distance_m"]),
             ),
             llm_trace_dir=(
-                output_dir / ("codex_context_policy_traces" if method_name in codex_context_methods else "codex_cli_traces")
+                output_dir / ("codex_context_policy_traces" if method_name in codex_context_methods else "codex_cli_traces") / method_name
                 if method_name in {"D5_pure_llm_direct", *codex_context_methods}
                 else None
             ),
@@ -187,9 +201,10 @@ def main() -> None:
             "partial_run": bool(args.single_round_smoke),
             "performance_claim": False,
             "recording_mode": (
-                "compact_round_audits_with_first_candidate_table"
-                if args.compact_records
-                else "full_round_records"
+                "compact_training_label_rounds"
+                if args.compact_training_labels
+                else ("compact_round_audits_with_first_candidate_table"
+                      if args.compact_records else "full_round_records")
             ),
             "case_id": args.case,
             "scenario_id": loaded["scenario"]["scenario_id"],
@@ -212,11 +227,22 @@ def main() -> None:
                 "pickup": pickup_policy,
                 "ride": "direct observed training-period zone OD median proxy; not street routing",
             },
+            "decision_function": decision_function_record(method_name),
+            "energy_accounting": {
+                **model_metadata(config.energy_profile),
+                "trace_fidelity": "estimated_from_route_edge_conditions",
+                "reported_outcome": "simulated net battery energy; not measured vehicle telemetry",
+                "assignment_dependency": decision_function_record(method_name)["energy_dependency"],
+            },
             "config": config.to_dict(),
             "summary": summary.to_dict(),
             "rounds": [record.to_dict() for record in rounds],
         }
-        if args.compact_records:
+        if args.compact_training_labels:
+            payload["training_rounds"] = simulation.training_rounds
+            payload["round_audits"] = simulation.round_audits
+            payload["round_validation_errors"] = simulation.round_validation_errors
+        elif args.compact_records:
             payload["round_audits"] = simulation.round_audits
             payload["round_validation_errors"] = simulation.round_validation_errors
         path = output_dir / f"{method_name}_seed_{args.seed}.json"

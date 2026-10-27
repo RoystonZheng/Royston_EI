@@ -4,6 +4,8 @@ import math
 from dataclasses import dataclass
 from typing import Dict, Iterable, List, Optional, Sequence, Tuple
 
+from route_experiment.models import EvaluationConfig
+
 from .models import Candidate, CandidateDecision, DispatchConfig, Order, Vehicle
 from .route_oracle import GraphRouteOracle
 
@@ -181,6 +183,8 @@ class VehicleAgent:
             source_node_id = vehicle.current_dropoff_node_id
 
         waiting = [order for order in orders if order.status == "waiting" and order.arrival_time_sec <= now]
+        energy_profile = config.energy_profile
+        energy_config = EvaluationConfig()
         candidates: List[Candidate] = []
         decisions: List[CandidateDecision] = []
         hard_candidates: List[Candidate] = []
@@ -195,6 +199,19 @@ class VehicleAgent:
             predicted_dropoff = predicted_pickup + ride_leg.duration_sec if ride_leg.reachable else math.inf
             wait = max(0.0, predicted_pickup - order.arrival_time_sec)
             route_ok = pickup_leg.reachable and ride_leg.reachable
+            pickup_energy = oracle.route_energy_summary(
+                pickup_leg.edge_sequence,
+                energy_config.congestion_speed_multipliers,
+                energy_profile,
+                payload_mass_kg=0.0,
+            )
+            ride_energy = oracle.route_energy_summary(
+                ride_leg.edge_sequence,
+                energy_config.congestion_speed_multipliers,
+                energy_profile,
+                payload_mass_kg=energy_profile.passenger_load_kg,
+            )
+            candidate_energy_kwh = pickup_energy.net_kwh + ride_energy.net_kwh
             hard_ok = (
                 route_ok
                 and wait <= config.max_pickup_wait_sec
@@ -216,12 +233,25 @@ class VehicleAgent:
                 predicted_wait_sec=wait,
                 empty_distance_m=pickup_leg.distance_m,
                 total_distance_m=pickup_leg.distance_m + ride_leg.distance_m,
-                energy_kwh=(pickup_leg.distance_m + ride_leg.distance_m) / 1000.0 * config.moving_kwh_per_km,
+                energy_kwh=candidate_energy_kwh,
                 current_commitment_ok=True,
                 one_to_one_ok=True,
                 time_non_overlap_ok=True,
                 max_wait_ok=wait <= config.max_pickup_wait_sec,
                 hard_constraint_ok=hard_ok,
+                energy_model_version=energy_profile.model_version,
+                energy_profile_id=energy_profile.profile_id,
+                energy_profile_sha256=energy_profile.fingerprint(),
+                energy_trace_fidelity="estimated_from_route_edge_conditions",
+                energy_components={
+                    "pickup_propulsion_draw_kwh": pickup_energy.propulsion_draw_kwh,
+                    "pickup_regenerated_kwh": pickup_energy.regenerated_kwh,
+                    "pickup_auxiliary_kwh": pickup_energy.auxiliary_kwh,
+                    "ride_propulsion_draw_kwh": ride_energy.propulsion_draw_kwh,
+                    "ride_regenerated_kwh": ride_energy.regenerated_kwh,
+                    "ride_auxiliary_kwh": ride_energy.auxiliary_kwh,
+                    "net_kwh": candidate_energy_kwh,
+                },
             )
             candidate.feature_vector = _features(
                 now, config, waiting, vehicles, vehicle, pickup_leg.duration_sec

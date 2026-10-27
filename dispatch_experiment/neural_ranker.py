@@ -178,6 +178,76 @@ def _stable_key(text: str) -> str:
     return hashlib.sha256(text.encode("utf-8")).hexdigest()
 
 
+def _read_json_header_value(path: Path, key: str) -> Any:
+    """Read one small top-level value before the large rounds array."""
+    with path.open("r", encoding="utf-8") as stream:
+        prefix = stream.read(2 * 1024 * 1024)
+    marker = '"' + key + '"'
+    position = prefix.find(marker)
+    if position < 0:
+        raise ValueError("training_result_header_missing_" + key)
+    colon = prefix.find(":", position + len(marker))
+    if colon < 0:
+        raise ValueError("training_result_header_invalid_" + key)
+    start = colon + 1
+    while start < len(prefix) and prefix[start].isspace():
+        start += 1
+    try:
+        value, _ = json.JSONDecoder().raw_decode(prefix, start)
+    except json.JSONDecodeError as error:
+        raise ValueError("training_result_header_invalid_" + key) from error
+    return value
+
+
+def _iter_json_array(path: Path, key: str):
+    """Yield items from a top-level JSON array without loading the full file."""
+    with path.open("r", encoding="utf-8") as stream:
+        prefix = stream.read(2 * 1024 * 1024)
+        marker = '"' + key + '"'
+        position = prefix.find(marker)
+        if position < 0:
+            raise ValueError("training_result_array_missing_" + key)
+        colon = prefix.find(":", position + len(marker))
+        array_start = prefix.find("[", colon + 1) if colon >= 0 else -1
+        if array_start < 0:
+            raise ValueError("training_result_array_invalid_" + key)
+        stream.seek(0)
+        stream.read(array_start + 1)
+        decoder = json.JSONDecoder()
+        buffer = ""
+        while True:
+            if not buffer:
+                buffer = stream.read(1024 * 1024)
+                if not buffer:
+                    raise ValueError("training_result_array_unterminated_" + key)
+            start = 0
+            while start < len(buffer) and (buffer[start].isspace() or buffer[start] == ","):
+                start += 1
+            if start == len(buffer):
+                buffer = ""
+                continue
+            if buffer[start] == "]":
+                return
+            try:
+                item, end = decoder.raw_decode(buffer, start)
+            except json.JSONDecodeError:
+                more = stream.read(1024 * 1024)
+                if not more:
+                    raise ValueError("training_result_array_item_invalid_" + key)
+                buffer += more
+                continue
+            yield item
+            buffer = buffer[end:]
+
+
+def _sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as stream:
+        for block in iter(lambda: stream.read(8 * 1024 * 1024), b""):
+            digest.update(block)
+    return digest.hexdigest()
+
+
 def collect_pairwise_training_data(
     result_paths: Sequence[Path | str],
     *,
@@ -194,13 +264,13 @@ def collect_pairwise_training_data(
     all_order_ids = set()
     for raw_path in result_paths:
         path = Path(raw_path).resolve()
-        content = path.read_bytes()
-        payload = json.loads(content)
-        if payload.get("method_name") != "D1_optimizer":
+        method_name = _read_json_header_value(path, "method_name")
+        recording_mode = _read_json_header_value(path, "recording_mode")
+        if method_name != "D1_optimizer":
             raise ValueError("ranker_training_source_must_be_D1_optimizer")
-        if payload.get("recording_mode") != "full_round_records":
-            raise ValueError("ranker_training_source_requires_full_round_records")
-        config = payload.get("config", {})
+        if recording_mode not in {"full_round_records", "compact_training_label_rounds"}:
+            raise ValueError("ranker_training_source_requires_full_or_compact_training_records")
+        config = _read_json_header_value(path, "config")
         wait_limit = float(max_wait_sec or config.get("max_pickup_wait_sec", 300.0))
         horizon = float(config.get("horizon_sec", 3600.0))
         window_order_ids = set()
@@ -208,11 +278,17 @@ def collect_pairwise_training_data(
         feasible_count = 0
         selected_count = 0
         pair_count = 0
-        for record in payload.get("rounds", []):
-            dispatch_input = record.get("input", {})
-            dispatch_output = record.get("output", {})
-            candidates = dispatch_input.get("candidates", [])
-            selected_ids = set(dispatch_output.get("selected_candidate_ids", []))
+        compact = recording_mode == "compact_training_label_rounds"
+        records = _iter_json_array(path, "training_rounds" if compact else "rounds")
+        for record in records:
+            if compact:
+                candidates = record.get("candidates", [])
+                selected_ids = set(record.get("selected_candidate_ids", []))
+            else:
+                dispatch_input = record.get("input", {})
+                dispatch_output = record.get("output", {})
+                candidates = dispatch_input.get("candidates", [])
+                selected_ids = set(dispatch_output.get("selected_candidate_ids", []))
             feasible = [candidate for candidate in candidates if candidate.get("hard_constraint_ok")]
             if not feasible or not selected_ids:
                 round_count += 1
@@ -255,12 +331,13 @@ def collect_pairwise_training_data(
         all_order_ids.update(window_order_ids)
         run_metadata.append({
             "path": str(path),
-            "sha256": hashlib.sha256(content).hexdigest(),
-            "scenario_id": payload.get("scenario_id"),
-            "case_id": payload.get("case_id"),
-            "fleet_id": payload.get("fleet_id"),
-            "scenario_fingerprint_sha256": payload.get("scenario_fingerprint_sha256"),
-            "input_hashes": payload.get("input_hashes", {}),
+            "sha256": _sha256_file(path),
+            "scenario_id": _read_json_header_value(path, "scenario_id"),
+            "case_id": _read_json_header_value(path, "case_id"),
+            "fleet_id": _read_json_header_value(path, "fleet_id"),
+            "scenario_fingerprint_sha256": _read_json_header_value(path, "scenario_fingerprint_sha256"),
+            "input_hashes": _read_json_header_value(path, "input_hashes"),
+            "recording_mode": recording_mode,
             "round_count": round_count,
             "hard_feasible_candidate_count": feasible_count,
             "selected_candidate_count": selected_count,

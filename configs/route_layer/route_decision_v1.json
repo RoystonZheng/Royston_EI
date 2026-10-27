@@ -1,0 +1,65 @@
+{
+  "model_version": "route_time_money_segment_v2",
+  "status": "approved_for_implementation; per-segment fare and tariff inputs remain scenario-specific",
+  "profiles": {
+    "time_priority_0_6_0_4": {
+      "time_weight": 0.6,
+      "money_weight": 0.4
+    },
+    "money_priority_0_4_0_6": {
+      "time_weight": 0.4,
+      "money_weight": 0.6
+    }
+  },
+  "score": "time_weight * normalized_travel_time + money_weight * normalized_net_economic_cost",
+  "normalization": "min-max within the same feasible candidate set for one scenario",
+  "lower_score_is_better": true,
+  "hard_constraints": "Exclude unreachable, invalid, illegal, or incomplete routes before scoring; weights cannot offset a hard constraint failure.",
+  "tie_break": [
+    "lower unnormalized travel time",
+    "lower unnormalized net economic cost",
+    "lexicographically lower candidate ID"
+  ],
+  "constant_dimension": "A dimension with no variation in the eligible set contributes zero after normalization.",
+  "segment_economics": {
+    "net_economic_cost_formula": "sum over journey segments (known operating costs - known fare revenue)",
+    "segment_accounting": "Retain one ledger row per deadhead or passenger journey segment, with segment ID, distance, energy, electricity cost, fare revenue, API/compute cost, currency, and source basis; include ordered road-Link energy details under each journey segment.",
+    "fare_attribution": "Observed whole-trip fare is recorded once on the passenger journey segment; only an explicit per-kilometre fare schedule may allocate revenue to individual road Links.",
+    "known_operating_cost_components": [
+      "EV energy kWh * explicit electricity price per kWh",
+      "API/token cost when both measured usage and an explicit token price are available",
+      "compute cost when both measured compute usage and an explicit rate are available"
+    ],
+    "segment_types": {
+      "deadhead": "fare revenue is known zero",
+      "passenger": "use observed segment fare or an explicit fare schedule; if neither exists, fare revenue is null"
+    },
+    "unknown_value_policy": "Keep unknown components null; never treat unknown costs or revenue as zero. If passenger fare revenue or segment electricity cost is unknown, expose the known subtotal but block net-cost route scoring.",
+    "route_scoring_gate": "The monetary dimension is scoreable only when every segment in the candidate has a known fare revenue amount and a priced electricity cost. For a deadhead segment, revenue is known zero.",
+    "profitability_claim": "This accounting omits vehicle depreciation, maintenance, insurance, and unpriced taxes/tolls; it does not establish full business profitability."
+  },
+  "meeting_transcript_context": {
+    "meeting_url": "https://meeting.tencent.com/cw/2q8pQndO0b",
+    "discussion_window": "approximately 00:50-00:55",
+    "transcript_interpretation": "The teacher discusses comparing per-distance fare revenue with electricity and token/API expense, and dynamic weights for electricity versus token expense. The recognized 0.6/0.4 and 0.4/0.6 pairs refer to electricity versus token cost in that passage, not explicitly time versus money.",
+    "user_adopted_weight_mapping": "For this implementation, the user approved mapping the two pairs to time versus money: (0.6, 0.4) and (0.4, 0.6).",
+    "fare_rate_examples_cny_per_km": [
+      3,
+      4
+    ],
+    "fare_rate_status": "illustrative transcript examples only; do not apply as a frozen tariff or to non-CNY experiments without scenario-specific confirmation"
+  },
+  "required_inputs": {
+    "currency": "Same explicit currency for all candidates in one decision set.",
+    "electricity_price": "Explicit nonzero price and source/status are required to score the monetary dimension.",
+    "fare_revenue": "Observed segment fare or an explicit experiment fare schedule; otherwise report operating-cost-only selection and mark fare unpriced."
+  },
+  "outputs": [
+    "selected candidate and deterministic rank per weight profile",
+    "raw time and monetary values",
+    "normalized values and combined score",
+    "candidate eligibility and exclusion reasons",
+    "electricity, API/compute cost, fare revenue, net economic cost, currency and source metadata",
+    "accounting completeness and excluded business-cost components"
+  ]
+}

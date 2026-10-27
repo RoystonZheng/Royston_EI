@@ -3,7 +3,10 @@ import json
 import shutil
 import tempfile
 import unittest
+from contextlib import redirect_stdout
+from io import StringIO
 from pathlib import Path
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
@@ -11,13 +14,46 @@ sys.path.insert(0, str(ROOT / "scripts"))
 from run_r4_codex_pilot_continuation import (  # noqa: E402
     _authorized_call_budget_stop_reason,
     _initial_state,
+    _summarize_attempt_usage,
     _model_self_check_all_true,
     _model_self_check_is_well_formed,
+    preflight_only,
     _resume_state,
+    _safe_unresolved_delivery_resume_parent,
+    one_step,
 )
 
 
 class R4CodexPilotResumeTests(unittest.TestCase):
+    def test_usage_summary_keeps_missing_request_usage_unknown(self):
+        summary = _summarize_attempt_usage(
+            [
+                {
+                    "request_number": 1,
+                    "usage": {
+                        "input_tokens": 100,
+                        "cached_input_tokens": 10,
+                        "output_tokens": 7,
+                    },
+                },
+                {
+                    "request_number": 2,
+                    "usage": {
+                        "input_tokens": None,
+                        "cached_input_tokens": None,
+                        "output_tokens": 5,
+                    },
+                },
+            ],
+            new_requests=2,
+        )
+
+        self.assertIsNone(summary["input_tokens"])
+        self.assertEqual(summary["known_input_tokens_sum"], 100)
+        self.assertEqual(summary["output_tokens"], 12)
+        self.assertEqual(summary["unknown_usage_request_numbers"], [2])
+        self.assertFalse(summary["usage_complete"])
+
     def test_authorized_call_budget_stops_when_shortest_remaining_route_cannot_fit(self):
         self.assertIsNone(_authorized_call_budget_stop_reason(5, 8))
         self.assertEqual(
@@ -36,6 +72,8 @@ class R4CodexPilotResumeTests(unittest.TestCase):
         self.assertEqual(state["accepted_nodes"], ["node_0_5"])
         self.assertEqual(state["accepted_edges"], [])
         self.assertEqual(state["accepted_directions"], [])
+        self.assertEqual(state["effective_authorized_new_request_limit"], 0)
+        self.assertFalse(state["additional_model_requests_authorized"])
 
     def test_fresh_pilot_honors_a_lower_authorized_request_limit(self):
         state = _initial_state(
@@ -159,6 +197,235 @@ class R4CodexPilotResumeTests(unittest.TestCase):
         self.assertEqual(resumed["parent_requests"], 8)
         self.assertEqual(resumed["new_requests_used"], 0)
         self.assertEqual(resumed["accepted_nodes"][-1], "node_1_4")
+
+    def test_resume_quota_stopped_100x100_task_from_accepted_prefix_with_new_budget(self):
+        parent = ROOT / "outputs/route_layer/r4_codex_stepwise_formal_task9_pilot_v1"
+
+        with tempfile.TemporaryDirectory() as directory:
+            output_dir = Path(directory) / "resumed"
+            with (
+                patch("run_r4_codex_pilot_continuation.OUTPUT_DIR", output_dir),
+                redirect_stdout(StringIO()),
+            ):
+                preflight_only(resume_from=parent, authorized_request_limit=108)
+            resumed = json.loads((output_dir / "state.json").read_text(encoding="utf-8"))
+            manifest = json.loads((output_dir / "manifest.json").read_text(encoding="utf-8"))
+
+        self.assertEqual(resumed["status"], "ready")
+        self.assertEqual(resumed["accepted_nodes"][-1], "node_68_41")
+        self.assertEqual(len(resumed["accepted_edges"]), 1)
+        self.assertEqual(resumed["parent_requests"], 1)
+        self.assertEqual(resumed["authorized_new_request_limit"], 108)
+        self.assertEqual(resumed["initial_remaining_minimum_moves"], 108)
+        self.assertEqual(resumed["map_equivalence_audit"]["expected_directed_edge_count"], 10853)
+        self.assertIsNone(resumed.get("account_usage_guard"))
+        self.assertEqual(resumed["parent_account_usage_guard"]["stop_threshold_percent"], 13)
+        self.assertEqual(manifest["api_calls_made_by_this_preflight"], 0)
+
+    def test_resume_can_start_a_fresh_persistent_session_for_one_step_requests(self):
+        parent = ROOT / "outputs/route_layer/r4_codex_stepwise_formal_task9_pilot_v1"
+
+        with tempfile.TemporaryDirectory() as directory:
+            output_dir = Path(directory) / "resumed-persistent"
+            with (
+                patch("run_r4_codex_pilot_continuation.OUTPUT_DIR", output_dir),
+                redirect_stdout(StringIO()),
+            ):
+                preflight_only(
+                    resume_from=parent,
+                    authorized_request_limit=108,
+                    codex_session_mode="persistent_per_task",
+                )
+            resumed = json.loads((output_dir / "state.json").read_text(encoding="utf-8"))
+            manifest = json.loads((output_dir / "manifest.json").read_text(encoding="utf-8"))
+
+        self.assertEqual(resumed["status"], "ready")
+        self.assertEqual(resumed["codex_session_mode"], "persistent_per_task")
+        self.assertIsNone(resumed["codex_session_id"])
+        self.assertEqual(manifest["codex_cli_session_mode"], "persistent_per_task")
+        self.assertEqual(
+            manifest["per_step_map_payload"],
+            "full compact map only on initial request; later requests send q/s state and current dynamic directions",
+        )
+        self.assertEqual(manifest["api_calls_made_by_this_preflight"], 0)
+
+    def test_resume_rejects_quota_stopped_parent_without_a_matching_guard_record(self):
+        source = ROOT / "outputs/route_layer/r4_codex_stepwise_formal_task9_pilot_v1"
+        with tempfile.TemporaryDirectory() as directory:
+            parent = Path(directory) / "parent"
+            parent.mkdir()
+            state = json.loads((source / "state.json").read_text(encoding="utf-8"))
+            state["account_usage_guard"]["requests_used_when_stopped"] = 0
+            (parent / "state.json").write_text(json.dumps(state), encoding="utf-8")
+            shutil.copyfile(source / "final_audit.json", parent / "final_audit.json")
+
+            with self.assertRaisesRegex(RuntimeError, "resume_parent_not_cleanly_capped"):
+                _resume_state(parent, authorized_request_limit=108)
+
+    def test_user_stopped_task9_parent_requires_fresh_explicit_authorization_to_resume(self):
+        parent = ROOT / "outputs/route_layer/r4_codex_task9_stateless_run_20261026_v5"
+
+        with self.assertRaisesRegex(RuntimeError, "resume_parent_not_cleanly_capped"):
+            _resume_state(parent, authorized_request_limit=296)
+
+        resumed = _resume_state(
+            parent,
+            authorized_request_limit=296,
+            user_authorized_user_stop_resume=True,
+        )
+
+        self.assertEqual(resumed["status"], "ready")
+        self.assertEqual(resumed["parent_requests"], 80)
+        self.assertEqual(len(resumed["accepted_edges"]), 216)
+        self.assertEqual(resumed["authorized_new_request_limit"], 296)
+        self.assertEqual(resumed["effective_authorized_new_request_limit"], 296)
+        self.assertTrue(resumed["additional_model_requests_authorized"])
+        self.assertEqual(resumed["user_authorization_status"], "granted_for_task9_continuation")
+        self.assertEqual(
+            resumed["authorization_scope"],
+            "continue only the frozen seed-0 task9 route from its accepted prefix; "
+            "do not replay unresolved parent calls; no ten-seed batch",
+        )
+
+    def test_user_stopped_resume_sets_effective_authorized_request_limit(self):
+        parent = ROOT / "outputs/route_layer/r4_codex_task9_stateless_run_20261026_v5"
+
+        resumed = _resume_state(
+            parent,
+            authorized_request_limit=296,
+            user_authorized_user_stop_resume=True,
+        )
+
+        self.assertEqual(resumed["effective_authorized_new_request_limit"], 296)
+        self.assertTrue(resumed["additional_model_requests_authorized"])
+        self.assertEqual(resumed["current_authorization_status"], "user_authorized_resume")
+
+    def test_user_authorized_resume_from_unknown_delivery_parent_never_replays_unknown_call(self):
+        source = ROOT / "outputs/route_layer/r4_codex_task9_fresh_r4_step_v3_pilot_20261027_v8"
+        with tempfile.TemporaryDirectory() as directory:
+            parent = Path(directory) / "v8"
+            shutil.copytree(source, parent)
+
+            with self.assertRaisesRegex(RuntimeError, "resume_parent_not_cleanly_capped"):
+                _resume_state(parent, authorized_request_limit=512)
+
+            resumed = _resume_state(
+                parent,
+                authorized_request_limit=512,
+                user_authorized_user_stop_resume=True,
+            )
+
+        self.assertEqual(resumed["status"], "ready")
+        self.assertEqual(resumed["parent_requests"], 5)
+        self.assertEqual(resumed["cumulative_parent_requests"], 29)
+        self.assertEqual(resumed["cumulative_parent_cli_invocations"], 29)
+        self.assertEqual(len(resumed["accepted_edges"]), 28)
+        self.assertEqual(resumed["accepted_nodes"][-1], "node_54_54")
+        self.assertEqual(resumed["new_requests_used"], 0)
+        self.assertEqual(resumed["attempts"], [])
+        self.assertEqual(resumed["unresolved_parent_request_numbers_not_replayed"], [5])
+        self.assertEqual(resumed["effective_authorized_new_request_limit"], 512)
+        self.assertTrue(resumed["additional_model_requests_authorized"])
+
+    def test_user_stopped_resume_preserves_multiple_unknown_invocations_without_replaying(self):
+        attempts = [
+            {"request_number": 1, "status": "accepted_legal_step", "retry_count": 0},
+            {
+                "request_number": 2,
+                "step_number": 2,
+                "current_node_id": "node_1_0",
+                "status": "delivery_and_usage_unknown",
+                "response": None,
+                "route_action_executed": False,
+                "retry_count": 0,
+                "provider_record": {
+                    "delivery_and_usage_unknown_evidence": True,
+                    "status": "interrupted_before_turn_completion",
+                },
+            },
+            {"request_number": 3, "status": "accepted_legal_step", "retry_count": 0},
+            {
+                "request_number": 4,
+                "step_number": 3,
+                "current_node_id": "node_2_0",
+                "status": "delivery_and_usage_unknown",
+                "response": None,
+                "route_action_executed": False,
+                "retry_count": 0,
+                "provider_record": {
+                    "delivery_and_usage_unknown_evidence": True,
+                    "status": "interrupted_before_turn_completion",
+                },
+            },
+        ]
+        parent = {
+            "status": "stopped_by_user_instruction",
+            "new_requests_used": 4,
+            "retry_count": 0,
+            "attempts": attempts,
+            "accepted_edges": ["edge_0_1", "edge_1_2"],
+            "accepted_nodes": ["node_0_0", "node_1_0", "node_2_0"],
+        }
+        audit = {
+            "status": "partial_legal_prefix_not_complete",
+            "retries": 0,
+            "codex_cli_invocations_this_continuation": 4,
+            "actual_model_requests_this_continuation": 2,
+            "route_continuity_violations": [],
+            "additional_model_requests_authorized": False,
+            "delivery_unknown_request_numbers": [2, 4],
+            "usage_unknown_request_numbers": [2, 4],
+            "tool_audit_unknown_request_numbers": [2, 4],
+            "tool_events": None,
+            "tool_audit_complete": False,
+            "accepted_move_count_including_prior_smoke": 2,
+            "current_node": "node_2_0",
+        }
+
+        self.assertEqual(
+            _safe_unresolved_delivery_resume_parent(parent, audit),
+            [2, 4],
+        )
+
+    def test_resume_without_explicit_authorization_keeps_effective_limit_at_zero(self):
+        parent = ROOT / "outputs/route_layer/r4_codex_stepwise_formal_task9_pilot_v1"
+        resumed = _resume_state(parent, authorized_request_limit=108)
+
+        self.assertEqual(resumed["authorized_new_request_limit"], 108)
+        self.assertEqual(resumed["effective_authorized_new_request_limit"], 0)
+        self.assertFalse(resumed["additional_model_requests_authorized"])
+
+    def test_one_step_refuses_zero_effective_authorization_before_client_creation(self):
+        source = ROOT / "outputs/route_layer/r4_codex_task9_progress_feedback_v3_resume_from_7_20261026_v1"
+
+        with tempfile.TemporaryDirectory() as directory:
+            output_dir = Path(directory) / "run"
+            shutil.copytree(source, output_dir)
+            state_path = output_dir / "state.json"
+            state = json.loads(state_path.read_text(encoding="utf-8"))
+            state.update({
+                "status": "ready",
+                "effective_authorized_new_request_limit": 0,
+                "additional_model_requests_authorized": False,
+                "new_requests_used": 0,
+                "attempts": [],
+                "accepted_nodes": state["accepted_nodes"][:-1],
+                "accepted_edges": state["accepted_edges"][:-1],
+                "accepted_directions": state["accepted_directions"][:-1],
+            })
+            state_path.write_text(json.dumps(state), encoding="utf-8")
+
+            with (
+                patch("run_r4_codex_pilot_continuation.OUTPUT_DIR", output_dir),
+                patch("run_r4_codex_pilot_continuation._refresh_replay"),
+                patch("run_r4_codex_pilot_continuation.CodexCliRouteStepClient") as client_class,
+            ):
+                with self.assertRaisesRegex(RuntimeError, "model_request_not_authorized"):
+                    one_step()
+
+            client_class.assert_not_called()
+            saved = json.loads(state_path.read_text(encoding="utf-8"))
+            self.assertEqual(saved["status"], "awaiting_user_authorization")
 
     def test_resume_v3_rejects_parent_with_failed_local_edge_check(self):
         source = ROOT / "outputs/route_layer/r4_codex_pilot_continuation_v3"

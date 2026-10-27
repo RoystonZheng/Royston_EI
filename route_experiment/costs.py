@@ -8,6 +8,8 @@ separate from monetary amounts; only monetary components are summed.
 
 from typing import Dict, Optional, Tuple
 
+from .energy_model import EnergyModelConfig, evaluate_route_edges
+
 from .models import (
     Edge,
     EvaluationConfig,
@@ -64,11 +66,7 @@ def evaluate_route_candidate(
                 raise ValueError("route_edge_discontinuity")
 
     base_time = 0.0
-    congestion_delay = 0.0
     signal_delay = 0.0
-    moving_energy = 0.0
-    idle_signal_energy = 0.0
-    congestion_energy = 0.0
     distance_m = 0.0
 
     for edge in edges:
@@ -81,34 +79,47 @@ def evaluate_route_candidate(
             raise ValueError("congestion_multiplier_must_be_positive")
 
         edge_base_time = edge.length_m / edge.base_speed_mps
-        effective_time = edge.length_m / (edge.base_speed_mps * multiplier)
         base_time += edge_base_time
-        congestion_delay += effective_time - edge_base_time
         signal_delay += edge.signal_delay_sec
         distance_m += edge.length_m
-
-        distance_km = edge.length_m / 1000.0
-        moving_energy += distance_km * config.moving_kwh_per_km
-        idle_signal_energy += edge.signal_delay_sec * config.signal_idle_kwh_per_sec
-        congestion_energy += (
-            distance_km
-            * edge.congestion_level
-            * config.congestion_extra_kwh_per_km_level
-        )
-
-    total_energy = moving_energy + idle_signal_energy + congestion_energy
+    profile = config.energy_profile
+    if isinstance(profile, dict):
+        profile = EnergyModelConfig(**profile)
+    energy = evaluate_route_edges(
+        edges,
+        config.congestion_speed_multipliers,
+        profile,
+        payload_mass_kg=route.payload_mass_kg,
+    )
+    congestion_delay = max(0.0, energy.drive_time_sec - base_time)
+    signal_idle_energy = (
+        profile.auxiliary_power_w * signal_delay / 3_600_000.0
+    )
     return EvaluationResult(
         base_travel_time_sec=base_time,
         congestion_delay_sec=congestion_delay,
         signal_delay_sec=signal_delay,
-        total_travel_time_sec=base_time + congestion_delay + signal_delay,
-        energy_moving_kwh=moving_energy,
-        energy_idle_signal_kwh=idle_signal_energy,
-        energy_congestion_kwh=congestion_energy,
-        energy_total_kwh=total_energy,
+        total_travel_time_sec=energy.drive_time_sec + signal_delay,
+        energy_moving_kwh=energy.propulsion_draw_kwh,
+        energy_idle_signal_kwh=signal_idle_energy,
+        # Kept as a zero-valued compatibility field: congestion is represented
+        # by speed changes and stop/start motion, never by a flat kWh surcharge.
+        energy_congestion_kwh=0.0,
+        energy_rolling_wheel_kwh=energy.rolling_wheel_kwh,
+        energy_aerodynamic_wheel_kwh=energy.aerodynamic_wheel_kwh,
+        energy_grade_wheel_kwh=energy.grade_wheel_kwh,
+        energy_acceleration_wheel_kwh=energy.acceleration_wheel_kwh,
+        energy_regenerated_kwh=energy.regenerated_kwh,
+        energy_auxiliary_kwh=energy.auxiliary_kwh,
+        energy_total_kwh=energy.net_kwh,
         route_distance_m=distance_m,
         simulation_estimate=True,
-        energy_model_version=config.energy_model_version,
+        energy_model_version=energy.model_version,
+        energy_trace_fidelity=energy.trace_fidelity,
+        energy_profile_id=energy.profile_id,
+        energy_profile_sha256=energy.profile_sha256,
+        energy_grade_missing=energy.missing_grade_steps > 0,
+        energy_segments=energy.edge_breakdown,
     )
 
 
@@ -170,11 +181,13 @@ def price_costs(resources: ResourceUsage, prices: PriceConfig) -> MonetaryCost:
         _nonnegative(value, field_name)
     api_cost = (resources.input_tokens + resources.output_tokens) * prices.api_price_per_token
     compute_cost = resources.compute_time_ms * prices.compute_price_per_ms
-    electricity_cost = resources.energy_kwh * prices.electricity_price_per_kwh
+    billable_energy_kwh = max(0.0, float(resources.energy_kwh))
+    electricity_cost = billable_energy_kwh * prices.electricity_price_per_kwh
     return MonetaryCost(
         api_cost_amount=api_cost,
         compute_cost_amount=compute_cost,
         electricity_cost_amount=electricity_cost,
+        billable_energy_kwh=billable_energy_kwh,
         total_monetary_cost=api_cost + compute_cost + electricity_cost,
         currency=prices.currency,
     )
@@ -225,6 +238,10 @@ def enrich_route_method_result(
     method_result.monetary_cost = money
     method_result.metadata["cost_status"] = "evaluated"
     method_result.metadata["energy_model_version"] = evaluation.energy_model_version
+    method_result.metadata["energy_profile_id"] = evaluation.energy_profile_id
+    method_result.metadata["energy_profile_sha256"] = evaluation.energy_profile_sha256
+    method_result.metadata["energy_trace_fidelity"] = evaluation.energy_trace_fidelity
+    method_result.metadata["energy_grade_missing"] = evaluation.energy_grade_missing
     method_result.metadata["pricing_version"] = price_config.pricing_version
     method_result.metadata["billing_period"] = price_config.billing_period
     method_result.metadata["pricing_status"] = price_config.pricing_status

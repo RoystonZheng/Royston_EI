@@ -8,6 +8,8 @@ candidate facts, the hard-constraint result and the selected fallback.
 from dataclasses import asdict, dataclass, field
 from typing import Any, Dict, List, Optional
 
+from route_experiment.energy_model import EnergyModelConfig
+
 
 class JsonModel:
     def to_dict(self) -> Dict[str, Any]:
@@ -25,8 +27,8 @@ class DispatchConfig(JsonModel):
     passenger_no_show_rate: float = 0.05
     pickup_sampling_mode: str = "equal_probability_area_weighted_hotspots_v1"
     max_next_reservation_per_vehicle: int = 1
-    moving_kwh_per_km: float = 0.18
     electricity_price_per_kwh: float = 2.29
+    energy_profile: EnergyModelConfig = field(default_factory=EnergyModelConfig)
     method_name: str = "D4_agent_llm_feedback_optimizer"
     context_function_mode: str = "manual_linear_clip"
     feedback_mode: str = "offline_rule"
@@ -35,7 +37,19 @@ class DispatchConfig(JsonModel):
     llm_backend: str = "codex_cli"
     llm_model: str = "gpt-5.6-luna"
     neural_ranker_model_path: Optional[str] = None
-    neural_ranker_top_k: int = 8
+    neural_ranker_top_k: int = 1
+
+    def __post_init__(self) -> None:
+        if isinstance(self.energy_profile, dict):
+            self.energy_profile = EnergyModelConfig(**self.energy_profile)
+
+    @property
+    def energy_model_version(self) -> str:
+        return self.energy_profile.model_version
+
+    @property
+    def energy_profile_id(self) -> str:
+        return self.energy_profile.profile_id
 
 
 @dataclass
@@ -108,6 +122,11 @@ class Candidate(JsonModel):
     time_non_overlap_ok: bool
     max_wait_ok: bool
     hard_constraint_ok: bool
+    energy_model_version: str = "ev_longitudinal_v2"
+    energy_profile_id: str = "generic_reference_ev_v1"
+    energy_profile_sha256: str = ""
+    energy_trace_fidelity: str = "estimated_from_route_edge_conditions"
+    energy_components: Dict[str, float] = field(default_factory=dict)
     feature_vector: Dict[str, float] = field(default_factory=dict)
     context_threshold_sec: Optional[float] = None
     neural_score: Optional[float] = None

@@ -8,6 +8,8 @@ dependencies.
 from dataclasses import asdict, dataclass, field, is_dataclass
 from typing import Any, Dict, List, Optional
 
+from .energy_model import EnergyModelConfig
+
 
 class JsonModel:
     """Provide a stable JSON-compatible representation for a data record."""
@@ -47,6 +49,7 @@ class Edge(JsonModel):
     one_way: bool = False
     congestion_level: int = 0
     signal_delay_sec: float = 0.0
+    slope_rad: Optional[float] = None
 
 
 @dataclass
@@ -125,6 +128,7 @@ class RouteCandidate(JsonModel):
     route_duration_sec: Optional[float] = None
     validation_status: str = "unvalidated"
     validation_errors: List[str] = field(default_factory=list)
+    payload_mass_kg: Optional[float] = None
 
 
 @dataclass
@@ -155,6 +159,8 @@ class MonetaryCost(JsonModel):
     api_cost_amount: float = 0.0
     compute_cost_amount: float = 0.0
     electricity_cost_amount: float = 0.0
+    billable_energy_kwh: float = 0.0
+    energy_cost_basis: str = "max(net_route_energy_kwh, 0) * electricity_price_per_kwh"
     total_monetary_cost: float = 0.0
     currency: str = "CNY"
 
@@ -168,10 +174,21 @@ class EvaluationResult(JsonModel):
     energy_moving_kwh: float = 0.0
     energy_idle_signal_kwh: float = 0.0
     energy_congestion_kwh: float = 0.0
+    energy_rolling_wheel_kwh: float = 0.0
+    energy_aerodynamic_wheel_kwh: float = 0.0
+    energy_grade_wheel_kwh: float = 0.0
+    energy_acceleration_wheel_kwh: float = 0.0
+    energy_regenerated_kwh: float = 0.0
+    energy_auxiliary_kwh: float = 0.0
     energy_total_kwh: float = 0.0
     route_distance_m: float = 0.0
     simulation_estimate: bool = True
-    energy_model_version: str = "energy_v1"
+    energy_model_version: str = "ev_longitudinal_v2"
+    energy_trace_fidelity: str = "estimated_from_route_edge_conditions"
+    energy_profile_id: str = "generic_reference_ev_v1"
+    energy_profile_sha256: str = ""
+    energy_grade_missing: bool = True
+    energy_segments: List[Dict[str, Any]] = field(default_factory=list)
 
 
 @dataclass
@@ -276,10 +293,11 @@ class EvaluationConfig(JsonModel):
     congestion_speed_multipliers: Dict[int, float] = field(
         default_factory=lambda: {0: 1.0, 1: 0.8, 2: 0.6}
     )
-    moving_kwh_per_km: float = 0.18
-    signal_idle_kwh_per_sec: float = 0.00003
-    congestion_extra_kwh_per_km_level: float = 0.01
-    energy_model_version: str = "energy_v1"
+    energy_profile: EnergyModelConfig = field(default_factory=EnergyModelConfig)
+
+    @property
+    def energy_model_version(self) -> str:
+        return self.energy_profile.model_version
 
 
 @dataclass

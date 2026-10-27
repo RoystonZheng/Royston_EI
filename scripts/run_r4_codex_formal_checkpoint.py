@@ -416,7 +416,8 @@ def execute_once() -> Dict[str, Any]:
         validation = {"valid": False, "status": "not_evaluated", "errors": [attempt.get("error", "request_failed")]}
 
     energy = evaluation.energy_total_kwh if evaluation else None
-    electricity_cost = energy * ELECTRICITY_CNY_PER_KWH if isinstance(energy, (int, float)) else None
+    billable_energy = max(0.0, float(energy)) if isinstance(energy, (int, float)) else None
+    electricity_cost = billable_energy * ELECTRICITY_CNY_PER_KWH if billable_energy is not None else None
     method_result = {
         "task_id": TASK_ID,
         "method_name": "r4_codex_cli",
@@ -442,6 +443,8 @@ def execute_once() -> Dict[str, Any]:
             "api_cost_amount": None,
             "compute_cost_amount": None,
             "electricity_cost_amount": electricity_cost,
+            "billable_energy_kwh": billable_energy,
+            "energy_cost_basis": "max(net_route_leg_energy_kwh, 0) * configured_electricity_price_per_kwh",
             "total_monetary_cost": None,
             "currency": "CNY",
         },

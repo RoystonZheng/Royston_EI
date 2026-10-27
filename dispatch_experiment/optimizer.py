@@ -1,7 +1,8 @@
 """Deterministic global assignment and output validation."""
 
+import math
 from dataclasses import dataclass
-from typing import Dict, Iterable, List, Sequence, Tuple
+from typing import Dict, Iterable, List, Optional, Sequence, Tuple
 
 from .models import Assignment, Candidate, Order, Vehicle
 
@@ -16,21 +17,41 @@ class _FlowEdge:
 
 
 class DeterministicGlobalOptimizer:
-    """Minimum-cost bipartite flow with an explicit unserved penalty.
+    """Minimum-cost bipartite flow with an exact, bounded lexicographic cost.
 
-    The large unserved penalty implements the documented lexicographic order:
-    maximize served orders first, then minimize wait, distance and energy.
+    The integer objective is ordered as: maximize served orders, minimize total
+    pickup wait, minimize total empty distance, then minimize EV energy. The
+    dynamic scales are derived from the current feasible candidate set, so no
+    fixed penalty can let a lower-priority metric overturn a higher-priority
+    one.
     """
 
-    def __init__(self, method_name: str = "global_min_cost_flow_v1"):
-        self.method_name = method_name
+    OBJECTIVE_VERSION = "global_min_cost_flow_lexicographic_v2"
+    WAIT_UNITS_PER_SECOND = 1_000
+    DISTANCE_UNITS_PER_METER = 1_000
+    ENERGY_UNITS_PER_KWH = 1_000_000
 
-    @staticmethod
-    def _cost(candidate: Candidate) -> int:
-        wait = int(round(candidate.predicted_wait_sec * 1000.0))
-        distance = int(round(candidate.empty_distance_m * 100.0))
-        energy = int(round(candidate.energy_kwh * 100.0))
-        return wait * 1_000_000 + distance + energy
+    def __init__(self, method_name: str = OBJECTIVE_VERSION):
+        self.method_name = method_name
+        self.last_objective_metadata: Dict[str, object] = {
+            "version": self.OBJECTIVE_VERSION,
+            "status": "not_run",
+        }
+
+    @classmethod
+    def _quantized_components(cls, candidate: Candidate) -> Tuple[int, int, int]:
+        wait_s = float(candidate.predicted_wait_sec)
+        distance_m = float(candidate.empty_distance_m)
+        energy_kwh = float(candidate.energy_kwh)
+        if not all(map(math.isfinite, (wait_s, distance_m, energy_kwh))):
+            raise ValueError("optimizer_candidate_cost_must_be_finite")
+        if wait_s < 0.0 or distance_m < 0.0:
+            raise ValueError("optimizer_wait_and_distance_must_be_non_negative")
+        return (
+            int(round(wait_s * cls.WAIT_UNITS_PER_SECOND)),
+            int(round(distance_m * cls.DISTANCE_UNITS_PER_METER)),
+            int(round(energy_kwh * cls.ENERGY_UNITS_PER_KWH)),
+        )
 
     def optimize(
         self,
@@ -41,8 +62,81 @@ class DeterministicGlobalOptimizer:
         valid = [candidate for candidate in candidates if candidate.hard_constraint_ok]
         eligible_vehicle_ids = sorted({candidate.vehicle_id for candidate in valid})
         if not eligible_vehicle_ids:
+            # Do not carry a previous round's integer scales into this audit.
+            # No min-cost-flow problem was constructed for this round.
+            self.last_objective_metadata = {
+                "version": self.OBJECTIVE_VERSION,
+                "status": "no_feasible_candidates",
+                "priority_order": [
+                    "maximize_served_orders",
+                    "minimize_total_pickup_wait",
+                    "minimize_total_empty_distance",
+                    "minimize_total_ev_energy",
+                ],
+                "eligible_candidate_count": 0,
+                "eligible_vehicle_count": 0,
+                "max_assignments_for_bounds": 0,
+            }
             return [], "infeasible"
         order_ids = sorted({candidate.order_id for candidate in valid})
+        flow_target = len(eligible_vehicle_ids)
+        max_assignments = min(flow_target, len(order_ids))
+        quantized = {
+            candidate.candidate_id: self._quantized_components(candidate)
+            for candidate in valid
+        }
+        min_energy = min(value[2] for value in quantized.values())
+        max_energy = max(value[2] for value in quantized.values())
+        energy_span = max_energy - min_energy
+        max_wait = max(value[0] for value in quantized.values())
+        max_distance = max(value[1] for value in quantized.values())
+
+        # A one-unit improvement in distance must exceed every possible
+        # aggregate energy change. A one-unit improvement in wait must exceed
+        # every possible aggregate distance and energy change.
+        distance_weight = max_assignments * energy_span + 1
+        wait_weight = (
+            max_assignments * max_distance * distance_weight
+            + max_assignments * energy_span
+            + 1
+        )
+        max_candidate_cost = (
+            max_wait * wait_weight
+            + max_distance * distance_weight
+            + energy_span
+        )
+        unserved_penalty = max_assignments * max_candidate_cost + 1
+        self.last_objective_metadata = {
+            "version": self.OBJECTIVE_VERSION,
+            "status": "ready",
+            "priority_order": [
+                "maximize_served_orders",
+                "minimize_total_pickup_wait",
+                "minimize_total_empty_distance",
+                "minimize_total_ev_energy",
+            ],
+            "quantization": {
+                "wait": "1 millisecond",
+                "empty_distance": "1 millimeter",
+                "energy": "0.000001 kWh (0.001 Wh)",
+            },
+            "distance_weight": distance_weight,
+            "wait_weight": wait_weight,
+            "energy_offset_units": -min_energy,
+            "unserved_vehicle_penalty": unserved_penalty,
+            "max_assignments_for_bounds": max_assignments,
+            "tie_break": "candidate edges inserted in ascending candidate_id; strict distance improvements only",
+        }
+
+        def candidate_cost(candidate: Candidate) -> int:
+            wait_units, distance_units, energy_units = quantized[candidate.candidate_id]
+            return (
+                wait_units * wait_weight
+                + distance_units * distance_weight
+                + energy_units
+                - min_energy
+            )
+
         source = 0
         vehicle_start = 1
         order_start = vehicle_start + len(eligible_vehicle_ids)
@@ -70,9 +164,10 @@ class DeterministicGlobalOptimizer:
         order_index = {order_id: order_start + i for i, order_id in enumerate(order_ids)}
         for vehicle_id in eligible_vehicle_ids:
             add_edge(source, vehicle_index[vehicle_id], 1, 0)
-            # A vehicle can remain unused; this is much cheaper than violating
-            # a hard rule but much more expensive than any feasible order.
-            add_edge(vehicle_index[vehicle_id], sink, 1, 10**18)
+            # A vehicle can remain unused. The penalty exceeds the maximum
+            # possible sum of all selected candidate costs, guaranteeing that
+            # every feasible additional match wins before quality terms.
+            add_edge(vehicle_index[vehicle_id], sink, 1, unserved_penalty)
         for order_id in order_ids:
             add_edge(order_index[order_id], sink, 1, 0)
 
@@ -82,15 +177,14 @@ class DeterministicGlobalOptimizer:
                 vehicle_index[candidate.vehicle_id],
                 order_index[candidate.order_id],
                 1,
-                self._cost(candidate),
+                candidate_cost(candidate),
                 candidate.candidate_id,
             )
             refs.append((vehicle_index[candidate.vehicle_id], idx, candidate))
 
-        flow_target = len(eligible_vehicle_ids)
         flow = 0
         while flow < flow_target:
-            distances = [10**30] * node_count
+            distances: List[Optional[int]] = [None] * node_count
             prev: List[Tuple[int, int]] = [(-1, -1)] * node_count
             in_queue = [False] * node_count
             queue = [source]
@@ -104,15 +198,19 @@ class DeterministicGlobalOptimizer:
                 for edge_index, edge in enumerate(graph[current]):
                     if edge.capacity <= 0:
                         continue
-                    candidate_distance = distances[current] + edge.cost
-                    if candidate_distance >= distances[edge.to]:
+                    current_distance = distances[current]
+                    if current_distance is None:
+                        continue
+                    candidate_distance = current_distance + edge.cost
+                    known_distance = distances[edge.to]
+                    if known_distance is not None and candidate_distance >= known_distance:
                         continue
                     distances[edge.to] = candidate_distance
                     prev[edge.to] = (current, edge_index)
                     if not in_queue[edge.to]:
                         queue.append(edge.to)
                         in_queue[edge.to] = True
-            if distances[sink] >= 10**30:
+            if distances[sink] is None:
                 return [], "error"
             current = sink
             while current != source:

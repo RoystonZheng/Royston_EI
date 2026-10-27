@@ -82,11 +82,14 @@ class CodexCliRouteStepClient:
         persist_session: bool = False,
         session_id: Optional[str] = None,
         working_directory: Optional[Path] = None,
+        trace_stem: str = "r4_step",
     ) -> None:
         if reasoning_effort not in {"low", "medium", "high", "xhigh", "max", "ultra"}:
             raise ValueError("codex_cli_reasoning_effort_invalid")
         self.model = model
-        self.trace_dir = Path(trace_dir)
+        # Codex CLI runs with a different --cd directory, so schema/output
+        # arguments must not depend on the parent process working directory.
+        self.trace_dir = Path(trace_dir).expanduser().resolve()
         self.reasoning_effort = reasoning_effort
         self.codex_executable = codex_executable
         self.timeout_sec = max(1, int(timeout_sec))
@@ -96,6 +99,9 @@ class CodexCliRouteStepClient:
         self.persist_session = bool(persist_session)
         self.session_id = session_id if self.persist_session else None
         self.working_directory = Path(working_directory) if working_directory else None
+        if not re.fullmatch(r"[a-z][a-z0-9_]{0,47}", trace_stem):
+            raise ValueError("codex_cli_trace_stem_invalid")
+        self.trace_stem = trace_stem
         self.retries = 0
         self.call_count = 0
         self.trace_index = 0
@@ -238,17 +244,56 @@ class CodexCliRouteStepClient:
         properties = schema.get("properties", {}) if isinstance(schema, dict) else {}
         direction_schema = properties.get("direction", {}) if isinstance(properties, dict) else {}
         directions = direction_schema.get("enum", []) if isinstance(direction_schema, dict) else []
-        if not isinstance(directions, list) or not directions:
+        if isinstance(directions, list) and directions:
+            update = {
+                "q": snapshot["q"],
+                "s": snapshot["s"],
+                "allowed_directions": directions,
+            }
+            # Keep per-step quality and validator feedback in the persistent
+            # conversation update. The static map and feature context already
+            # exist in the initial session prompt and must not be resent here.
+            for key in ("r", "f"):
+                if key in snapshot:
+                    update[key] = snapshot[key]
+            return (
+                "当前状态更新（覆盖前序状态快照；初始消息中的地图、目标顺序和约束规则保持不变）。"
+                "只提出当前节点的一步移动，并逐项完成原格式自检。\n"
+                + json.dumps(update, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+            )
+
+        # Segment-v1 uses an array of actions, so its direction enum is nested
+        # under actions.items. Preserve only the latest compact route state on
+        # resumed turns; the full map and RoadFeatureInputProtocol context stay
+        # in the initial task-scoped session message.
+        actions_schema = properties.get("actions", {}) if isinstance(properties, dict) else {}
+        items_schema = actions_schema.get("items", {}) if isinstance(actions_schema, dict) else {}
+        item_properties = items_schema.get("properties", {}) if isinstance(items_schema, dict) else {}
+        segment_direction_schema = item_properties.get("direction", {}) if isinstance(item_properties, dict) else {}
+        segment_directions = segment_direction_schema.get("enum", []) if isinstance(segment_direction_schema, dict) else []
+        if not isinstance(segment_directions, list) or not segment_directions:
             raise RuntimeError("codex_cli_resume_direction_schema_missing")
+        if not isinstance(snapshot.get("seg"), dict) or not isinstance(snapshot.get("r"), dict):
+            raise RuntimeError("codex_cli_resume_segment_state_missing")
         update = {
-            "q": snapshot["q"],
-            "s": snapshot["s"],
-            "allowed_directions": directions,
+            key: snapshot[key]
+            for key in ("v", "q", "s", "seg", "r", "f")
+            if key in snapshot
         }
         return (
-            "当前状态更新（覆盖前序状态快照；初始消息中的地图、目标顺序和约束规则保持不变）。"
-            "只提出当前节点的一步移动，并逐项完成原格式自检。\n"
+            "路线段状态更新：当前快照覆盖前一段后的当前位置、访问状态、动作预算和路线进度；"
+            "首轮消息中的地图、道路特征、固定端点与约束继续有效。"
+            "根据最新快照提出最多 seg.max_actions 个连续动作，每步填写方向和结构化自检；"
+            "方向字段遵循 JSON Schema 枚举。不要输出长篇自由文本推理。\n"
             + json.dumps(update, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+        )
+
+    def render_request_prompt(self, messages: Sequence[Dict[str, str]]) -> str:
+        """Return the exact stdin prompt that the next CLI invocation will receive."""
+        return (
+            self._render_resume_prompt(messages)
+            if self.session_id
+            else self._render_prompt(messages)
         )
 
     def chat(self, messages: List[Dict[str, str]]) -> CodexCliRouteResponse:
@@ -272,7 +317,7 @@ class CodexCliRouteStepClient:
 
         call_index, paths = reserve_indexed_artifacts(
             self.trace_dir,
-            "r4_step",
+            self.trace_stem,
             (".prompt.txt", ".schema.json", ".jsonl", ".final.json"),
             (".prompt.txt", ".schema.json"),
             self.trace_index,
@@ -284,11 +329,7 @@ class CodexCliRouteStepClient:
         self.trace_index = call_index
         self.call_count += 1
 
-        prompt = (
-            self._render_resume_prompt(messages)
-            if self.session_id
-            else self._render_prompt(messages)
-        )
+        prompt = self.render_request_prompt(messages)
         prompt_bytes = prompt.encode("utf-8")
         schema_bytes = json.dumps(
             constraint.schema, ensure_ascii=False, sort_keys=True, indent=2
@@ -369,47 +410,52 @@ class CodexCliRouteStepClient:
         exit_code = None
         timeout = False
         try:
-            if self.persist_session and self.working_directory:
-                working_directory = str(self.working_directory.resolve())
-                if "{empty_cwd}" in command:
-                    command[command.index("{empty_cwd}")] = working_directory
-                process = subprocess.run(
-                    command,
-                    input=prompt,
-                    capture_output=True,
-                    text=True,
-                    timeout=self.timeout_sec,
-                    check=False,
-                    cwd=working_directory,
-                    env=child_env,
-                )
-                stdout = process.stdout or ""
-                stderr = process.stderr or ""
-                exit_code = process.returncode
-            else:
-                with tempfile.TemporaryDirectory(prefix="route-codex-empty-") as empty_cwd:
+            with trace_path.open("w", encoding="utf-8") as trace_stream:
+                if self.persist_session and self.working_directory:
+                    working_directory = str(self.working_directory.resolve())
                     if "{empty_cwd}" in command:
-                        command[command.index("{empty_cwd}")] = empty_cwd
+                        command[command.index("{empty_cwd}")] = working_directory
                     process = subprocess.run(
                         command,
                         input=prompt,
-                        capture_output=True,
+                        stdout=trace_stream,
+                        stderr=subprocess.PIPE,
                         text=True,
                         timeout=self.timeout_sec,
                         check=False,
-                        cwd=empty_cwd,
+                        cwd=working_directory,
                         env=child_env,
                     )
-                    stdout = process.stdout or ""
-                    stderr = process.stderr or ""
-                    exit_code = process.returncode
+                else:
+                    with tempfile.TemporaryDirectory(prefix="route-codex-empty-") as empty_cwd:
+                        if "{empty_cwd}" in command:
+                            command[command.index("{empty_cwd}")] = empty_cwd
+                        process = subprocess.run(
+                            command,
+                            input=prompt,
+                            stdout=trace_stream,
+                            stderr=subprocess.PIPE,
+                            text=True,
+                            timeout=self.timeout_sec,
+                            check=False,
+                            cwd=empty_cwd,
+                            env=child_env,
+                        )
+                trace_stream.flush()
+                os.fsync(trace_stream.fileno())
+                stderr = process.stderr or ""
+                exit_code = process.returncode
         except subprocess.TimeoutExpired as error:
             timeout = True
-            stdout = error.stdout.decode("utf-8", errors="replace") if isinstance(error.stdout, bytes) else (error.stdout or "")
             stderr = error.stderr.decode("utf-8", errors="replace") if isinstance(error.stderr, bytes) else (error.stderr or "")
+            if trace_path.exists():
+                with trace_path.open("a", encoding="utf-8") as trace_stream:
+                    trace_stream.flush()
+                    os.fsync(trace_stream.fileno())
+        if trace_path.exists():
+            stdout = trace_path.read_text(encoding="utf-8", errors="replace")
 
         elapsed_ms = (time.perf_counter() - started) * 1000.0
-        trace_path.write_text(stdout, encoding="utf-8")
         events = []
         parse_errors = []
         for line_number, line in enumerate(stdout.splitlines(), start=1):
@@ -432,6 +478,58 @@ class CodexCliRouteStepClient:
             audit["output_tokens"],
         )
         final_text = final_path.read_text(encoding="utf-8") if final_path.exists() else ""
+        agent_messages = [
+            event["item"]["text"]
+            for event in events
+            if event.get("type") == "item.completed"
+            and isinstance(event.get("item"), dict)
+            and event["item"].get("type") == "agent_message"
+            and isinstance(event["item"].get("text"), str)
+        ]
+        error_items = [
+            item
+            for event in events
+            if event.get("type") == "item.completed"
+            and isinstance(event.get("item"), dict)
+            and event["item"].get("type") == "error"
+            for item in [event["item"]]
+        ]
+        completed_turn_count = sum(event.get("type") == "turn.completed" for event in events)
+        recovered_agent_message_path = None
+        response_recovered_from_jsonl = False
+        if not final_text and len(agent_messages) == 1:
+            only_known_disabled_code_mode_error = all(
+                "code mode is unavailable because code-mode host is disabled" in
+                str(item.get("message", "")).lower()
+                and "code mode will fail closed" in str(item.get("message", "")).lower()
+                for item in error_items
+            )
+            try:
+                recovered_payload = json.loads(agent_messages[0])
+            except json.JSONDecodeError:
+                recovered_payload = None
+            if (
+                not timeout
+                and not parse_errors
+                and exit_code == 0
+                and audit["tool_usage_detected"] is False
+                and audit["turn_started_count"] == 1
+                and completed_turn_count == 1
+                and audit["usage_event_count"] == 1
+                and only_known_disabled_code_mode_error
+                and isinstance(recovered_payload, dict)
+            ):
+                # Codex CLI can emit a complete, usage-bearing agent_message
+                # while omitting --output-last-message when its disabled
+                # Code Mode host reports a fail-closed diagnostic. Retain
+                # the original JSONL and write the recovered text separately;
+                # never fabricate the canonical final artifact.
+                final_text = agent_messages[0]
+                recovered_agent_message_path = final_path.with_name(
+                    final_path.name.replace(".final.json", ".recovered-agent-message.json")
+                )
+                recovered_agent_message_path.write_text(final_text, encoding="utf-8")
+                response_recovered_from_jsonl = True
         record = {
             "backend": "codex_cli",
             "call_index": call_index,
@@ -466,6 +564,13 @@ class CodexCliRouteStepClient:
             "output_tokens": audit["output_tokens"],
             "reasoning_output_tokens": audit["reasoning_output_tokens"],
             "usage_available": audit["usage_event_count"] > 0,
+            "agent_message_count": len(agent_messages),
+            "canonical_final_json_present": final_path.exists(),
+            "response_recovered_from_jsonl_agent_message": response_recovered_from_jsonl,
+            "recovered_agent_message_path": (
+                str(recovered_agent_message_path) if recovered_agent_message_path else None
+            ),
+            "recovery_error_items": error_items if response_recovered_from_jsonl else [],
             "output_token_hard_limit": None,
             "account_cost": "not_reported_by_cli",
             "cost_estimate": cost_estimate,

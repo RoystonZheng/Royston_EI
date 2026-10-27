@@ -51,8 +51,13 @@ def load_zone_od_cost_map(cost_matrix_path: Path) -> Tuple[RoadMap, Dict[Tuple[i
             seconds = float(row["median_trip_time_s"])
             miles = float(row["median_trip_miles"])
             count = int(row["source_trip_count"])
-            if seconds <= 0 or miles <= 0 or count <= 0:
-                raise ValueError("zone OD cost rows must have positive time, distance, and count")
+            cost_source = row.get("cost_source") or "observed_training_period_median"
+            if seconds <= 0 or miles <= 0 or count < 0:
+                raise ValueError("zone OD cost rows must have positive time and distance and non-negative count")
+            if count == 0 and cost_source != "taxi_zone_centroid_fallback_v1":
+                raise ValueError("zero-count zone OD rows must be explicitly tagged as centroid fallback")
+            if count > 0 and cost_source == "taxi_zone_centroid_fallback_v1":
+                raise ValueError("centroid fallback rows must not claim observed source trips")
             nodes_by_zone.setdefault(
                 origin,
                 Node(
@@ -88,6 +93,7 @@ def load_zone_od_cost_map(cost_matrix_path: Path) -> Tuple[RoadMap, Dict[Tuple[i
                 "median_trip_time_s": seconds,
                 "median_trip_miles": miles,
                 "source_trip_count": count,
+                "cost_source": cost_source,
             }
 
     if not nodes_by_zone or not edges:

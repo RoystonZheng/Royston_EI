@@ -41,3 +41,15 @@
 - 输入对照：`outputs/route_layer/r4_codex_all_frozen_tasks_preflight_20261022_v2/summary.json`
 
 **当前决定：**不以离线调用数推断模型可一次完成，也不启动十种子 R4 批次。先统一跨算法的重复节点规则；随后才决定是否花一次有界模型请求检验这个整路线候选。模型请求、token 与费用均为 0（本次）。
+
+## 2026-10-23 补充：约束裁决已确认
+
+本版早期文本把跨段不重访规则写成待统一事项；该表述现已被已确认的实验决定更新：2026-10-20 用户确认完整路线不得重复访问节点，传统、纯 LLM、R4 共用同一全程 validator。保留本文件中的原始审计结论，不改传统实验输出。
+
+传统组 450 条记录的独立只读审计发现 390 条有路线，其中 160 条原标 `valid` 却跨段重访，涉及 54 个任务。详情见 `outputs/route_layer/traditional_no_revisit_audit_20261023_v2/`。全量候选重建 v5 将 73 条无重访 Dijkstra 参考路线作为存在见证，将另外 56 条标成未证明可行/不可行；报告见 `outputs/route_layer/r4_codex_full_route_candidate_preflight_20261023_v5/`。
+
+单个语义任务的最新零请求 smoke 预检见 `outputs/route_layer/r4_codex_semantic_full_route_pilot_preflight_20261023_v3/`；v1、v2 作为历史版本保留。这不是模型试跑；它仍需单次请求授权。完整限制与统一评估口径见 `docs/route-layer-r4-no-revisit-alignment-and-single-pilot-preflight-2026-10-23.md`。
+
+### 本地 validator 参考路线验收更新（2026-10-23）
+
+v3 请求前预检已将 seed 8 候选任务的 80 边、不重访 Dijkstra 参考路线提交给同一个整路线 validator，实际验证通过且 0 项违规；新增测试确认跨 pickup 后重访的路线会被拒绝。查看 `outputs/route_layer/r4_codex_semantic_full_route_pilot_preflight_20261023_v3/index.html`。此更新仍是本地测试、模型请求为 0。

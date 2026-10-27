@@ -27,7 +27,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data/real_map_dispatch/porto_hybrid_v1"
 DEFAULT_PACKAGE = DATA / "map_import/porto-map-order-package-v1.json"
 DEFAULT_OSM = DATA / "raw/osm/porto_candidate.osm"
-DEFAULT_OUTPUT = ROOT / "outputs/route_layer/porto_traditional_preflight_20261023_v4"
+DEFAULT_OUTPUT = ROOT / "outputs/route_layer/porto_traditional_preflight_20261023_v7"
 BBOX = {"west": -8.635, "south": 41.138, "east": -8.595, "north": 41.162}
 ALLOWED_HIGHWAYS = {
     "motorway", "trunk", "primary", "secondary", "tertiary", "unclassified",
@@ -271,6 +271,22 @@ def make_pilot_orders(candidates: list[dict[str, Any]], features: list[dict[str,
             "vehicles": vehicles, "orders": orders}
 
 
+def replacement_endpoints(kind: str, rng: random.Random, candidates: list[dict[str, Any]],
+                          features: list[dict[str, Any]], fuzzy_counter: int) -> tuple[dict[str, Any], dict[str, Any], int]:
+    if kind == "candidate_to_candidate":
+        return weighted_pick(rng, candidates), weighted_pick(rng, candidates), fuzzy_counter
+    if kind == "one_candidate_one_fuzzy":
+        fuzzy_counter += 1
+        fuzzy = create_fuzzy(rng, features, f"fuzzy_{fuzzy_counter:03d}")
+        candidate = weighted_pick(rng, candidates)
+        return ((candidate, fuzzy) if rng.random() < 0.5 else (fuzzy, candidate)) + (fuzzy_counter,)
+    fuzzy_counter += 1
+    pickup = create_fuzzy(rng, features, f"fuzzy_{fuzzy_counter:03d}")
+    fuzzy_counter += 1
+    dropoff = create_fuzzy(rng, features, f"fuzzy_{fuzzy_counter:03d}")
+    return pickup, dropoff, fuzzy_counter
+
+
 def nearest_node(point: dict[str, Any], routable_nodes: list[str], nodes: dict[str, tuple[float, float]]) -> tuple[str | None, float]:
     coord = (float(point["lon"]), float(point["lat"]))
     # Fuzzy samples retain their source OSM feature node; prefer that anchor
@@ -336,6 +352,7 @@ def main() -> int:
     nodes, adjacency, graph_stats, segments = parse_graph(args.osm)
     candidates = candidate_points(package, args.top_k)
     features = build_fuzzy_features(nodes, segments, args.osm)
+    graph_stats["road_feature_nodes_for_fuzzy_sampling"] = len(features)
     scenario = make_pilot_orders(candidates, features, args.seed)
 
     incoming_nodes = {edge["to_node"] for edges in adjacency.values() for edge in edges}
@@ -356,6 +373,7 @@ def main() -> int:
     total_restriction_relations = 0
     via_way_count = 0
     conditional_count = 0
+    mode_exception_count = 0
     for relation in root.findall("relation"):
         rt = tags(relation)
         if rt.get("type") != "restriction":
@@ -366,6 +384,7 @@ def main() -> int:
             conditional_count += 1
         exceptions = {x.strip() for x in rt.get("except", "").split(";") if x.strip()}
         if exceptions.intersection({"motorcar", "motor_vehicle", "vehicle"}):
+            mode_exception_count += 1
             continue
         members = [(m.attrib.get("type"), m.attrib.get("ref"), m.attrib.get("role")) for m in relation.findall("member")]
         f = [ref for typ, ref, role in members if role == "from" and typ == "way"]
@@ -376,7 +395,7 @@ def main() -> int:
             via_way_count += 1
             continue
         if len(f) == len(t) == len(vnodes) == 1 and f[0] in {e["way_id"] for es in adjacency.values() for e in es} and t[0] in {e["way_id"] for es in adjacency.values() for e in es} and restriction and restriction.startswith(("no_", "only_")):
-            if vnodes[0] in nodes and inside(*nodes[vnodes[0]]):
+            if vnodes[0] in nodes:
                 rules_by_key[(vnodes[0], f[0])].append({"to_way": t[0], "restriction": restriction})
 
     for i, p in enumerate(points.values()):
@@ -384,13 +403,71 @@ def main() -> int:
         p["map_match"] = {"status": "matched" if node_id else "outside_300m_snap_limit", "osm_node_id": node_id,
                            "distance_m": round(snap_distance, 2), "max_snap_m": MAX_SNAP_M}
 
+    route_cache: dict[tuple[str, str], tuple[dict[tuple[str, str | None], float], dict[tuple[str, str | None], tuple[tuple[str, str | None], dict[str, Any]]]]] = {}
+
+    def route_search_exists(start_point: dict[str, Any], end_point: dict[str, Any], metric: str = "time") -> bool:
+        start_node = matches[start_point["point_id"]][0]
+        end_node = matches[end_point["point_id"]][0]
+        if not start_node or not end_node:
+            return False
+        key = (start_node, metric)
+        if key not in route_cache:
+            route_cache[key] = dijkstra(start_node, adjacency, rules_by_key, metric)
+        return best_state(end_node, route_cache[key][0]) is not None
+
+    def add_match(point: dict[str, Any]) -> None:
+        points[point["point_id"]] = point
+        node_id, snap_distance = nearest_node(point, routable_nodes, nodes)
+        matches[point["point_id"]] = (node_id, snap_distance)
+        point["map_match"] = {"status": "matched" if node_id else "outside_300m_snap_limit", "osm_node_id": node_id,
+                              "distance_m": round(snap_distance, 2), "max_snap_m": MAX_SNAP_M}
+
+    # Deterministically regenerate only infeasible pilot orders before the
+    # sequence is frozen. The assigned vehicle and sequence index stay fixed.
+    pilot_rng = random.Random(args.seed + 1_000_003)
+    fuzzy_counter = max((int(pid.split("_")[-1]) for pid in points if pid.startswith("fuzzy_")), default=0)
+    order_by_id = {order["order_id"]: order for order in scenario["orders"]}
+    regeneration_records = []
+    unresolved_regenerations = []
+    for vehicle in scenario["vehicles"]:
+        current = vehicle["initial_position"]
+        for order_id in vehicle["fixed_order_sequence"]:
+            order = order_by_id[order_id]
+            old_pair = [order["pickup"]["point_id"], order["dropoff"]["point_id"]]
+            first_leg_ok = route_search_exists(current, order["pickup"])
+            passenger_leg_ok = route_search_exists(order["pickup"], order["dropoff"])
+            if not (first_leg_ok and passenger_leg_ok):
+                replacement = None
+                for attempt in range(1, 501):
+                    new_pickup, new_dropoff, fuzzy_counter = replacement_endpoints(order["order_kind"], pilot_rng, candidates, features, fuzzy_counter)
+                    add_match(new_pickup)
+                    add_match(new_dropoff)
+                    if route_search_exists(current, new_pickup) and route_search_exists(new_pickup, new_dropoff):
+                        replacement = (new_pickup, new_dropoff, attempt)
+                        break
+                if replacement is None:
+                    unresolved_regenerations.append({"order_id": order_id, "old_endpoints": old_pair, "attempt_limit": 500})
+                else:
+                    order["pickup"], order["dropoff"], attempts = replacement
+                    regeneration_records.append({"order_id": order_id, "vehicle_id": vehicle["vehicle_id"],
+                                                 "sequence_index": order["sequence_index"], "old_endpoints": old_pair,
+                                                 "new_endpoints": [order["pickup"]["point_id"], order["dropoff"]["point_id"]],
+                                                 "rejected_draws_before_acceptance": attempts - 1,
+                                                 "initial_failed_leg_roles": [name for name, ok in (("vehicle_to_pickup", first_leg_ok), ("pickup_to_dropoff", passenger_leg_ok)) if not ok]})
+            current = order["dropoff"]
+
+    scenario["status"] = "pilot_static_preflight_regenerated" if regeneration_records else "pilot_static_preflight_only"
+    scenario["preflight_regeneration"] = {"policy": "keep vehicle assignment and sequence; resample only infeasible order endpoints from the same order category; first feasible deterministic draw is accepted",
+                                           "rng_seed": args.seed + 1_000_003, "max_draws_per_order": 500,
+                                           "replacement_count": len(regeneration_records), "unresolved_count": len(unresolved_regenerations),
+                                           "records": regeneration_records, "unresolved": unresolved_regenerations}
+
     args.output.mkdir(parents=True, exist_ok=False)
     (args.output / "pilot_orders.json").write_text(json.dumps(scenario, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     # Candidate-to-candidate links: shortest distance, same directed graph.
     candidate_rows = []
     candidate_features = []
-    route_cache: dict[tuple[str, str], tuple[dict[tuple[str, str | None], float], dict[tuple[str, str | None], tuple[tuple[str, str | None], dict[str, Any]]]]] = {}
     for source in candidates:
         source_node = matches[source["point_id"]][0]
         for target in candidates:
@@ -469,6 +546,12 @@ def main() -> int:
     reachable_candidates = sum(row["status"] == "reachable_via_node_only" for row in candidate_rows)
     reachable_legs = sum(row["status"] == "reachable_via_node_only" for row in route_rows)
     snap_failures = sum(not matches[pid][0] for pid in matches)
+    total_distance_m = sum(float(row["distance_m"]) for row in route_rows if row["distance_m"] is not None)
+    total_freeflow_s = sum(float(row["freeflow_time_s"]) for row in route_rows if row["freeflow_time_s"] is not None)
+    vehicle_freeflow_s: dict[str, float] = defaultdict(float)
+    for row in route_rows:
+        if row["freeflow_time_s"] is not None:
+            vehicle_freeflow_s[row["vehicle_id"]] += float(row["freeflow_time_s"])
     summary = {
         "status": "static_traditional_dijkstra_preflight_pilot",
         "formal_experiment": False,
@@ -478,7 +561,13 @@ def main() -> int:
         "fixed_order_route_objective": "estimated free-flow time using fixed highway-class speeds",
         "fixed_orders": {"vehicles": 10, "orders": 100, "route_legs": 200, "reachable_route_legs": reachable_legs,
                          "unreachable_or_unmatched_route_legs": 200 - reachable_legs, "endpoint_snap_failures": snap_failures,
-                         "endpoint_mix": scenario["endpoint_mix"]},
+                         "endpoint_mix": scenario["endpoint_mix"],
+                         "deterministic_endpoint_regenerations": len(regeneration_records),
+                         "unresolved_regenerations": len(unresolved_regenerations),
+                         "planned_route_distance_km_static": round(total_distance_m / 1000, 3),
+                         "planned_freeflow_route_time_h_static": round(total_freeflow_s / 3600, 3),
+                         "sum_vehicle_freeflow_route_time_h_static": round(sum(vehicle_freeflow_s.values()) / 3600, 3),
+                         "fleet_makespan_freeflow_h_static": round(max(vehicle_freeflow_s.values(), default=0) / 3600, 3)},
         "candidate_links": {"candidate_points": len(candidates), "ordered_pairs_including_self": len(candidate_rows),
                             "nonself_ordered_pairs": len(candidate_rows) - len(candidates),
                             "reachable_nonself_under_applied_restrictions": reachable_candidates - len(candidates),
@@ -487,6 +576,7 @@ def main() -> int:
         "graph": graph_stats,
         "routing_restrictions": {"applied_via_node_relations": sum(len(v) for v in rules_by_key.values()),
                                  "unsupported_via_way_relations": via_way_count,
+                                 "other_relations_not_applied_to_routable_graph": max(0, total_restriction_relations - sum(len(v) for v in rules_by_key.values()) - via_way_count - mode_exception_count),
                                  "conditional_relations_not_applied": conditional_count,
                                  "turn_restriction_relations_total": total_restriction_relations},
         "source_files": {"package": str(args.package), "package_sha256": sha256(args.package), "osm": str(args.osm), "osm_sha256": sha256(args.osm)},
@@ -497,8 +587,10 @@ def main() -> int:
                        "sumo_or_traci_used": False},
         "limitations": [
             "This run is a static algorithm preflight, not the dynamic fixed-fleet experiment.",
+            "Infeasible pilot orders are deterministically resampled offline within the same order category, preserving each vehicle assignment and sequence; replacement records are stored in pilot_orders.json.",
             "Order endpoints remain inside the candidate fence, while routes may use roads beyond the fence inside the downloaded OSM snapshot to avoid cutting boundary connections; point matching uses the nearest node with both incoming and outgoing arcs within 300 m.",
             "Via-node turn restrictions are applied, but via-way turn restrictions are not enforced; routes are not certified legal.",
+            "Some OSM restriction relations reference roads excluded from this passenger-car graph and therefore cannot be applied here.",
             "Free-flow speed is an explicit highway-class estimate; mapped signal phase, congestion, vehicle interactions, planning delay, and actual pass-through time are absent.",
             "The 15/15 split of the 30% fuzzy orders is a pilot assumption because the formal internal split has not been frozen.",
             "The imported Porto package is historical aggregate taxi demand, not real-time ride-hailing orders.",
@@ -506,7 +598,7 @@ def main() -> int:
         "output_files": ["pilot_orders.json", "fixed_order_route_legs.csv", "candidate_pair_routes.csv", "candidate_dijkstra_links.geojson", "summary.json", "run_notes.md"],
     }
     (args.output / "summary.json").write_text(json.dumps(summary, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    notes = """# Porto 传统 Dijkstra 静态预检 Pilot\n\n本次从本地 Porto 需求包按围栏内上车热度选出 Top 30 候选点，生成 10 辆车、每车固定 10 单的 pilot 序列。所有车辆订单归属与顺序固定，没有派单、换单或跨车调度。候选点 Link 以道路长度最短为目标；固定订单的 200 条行程腿以道路等级自由流速度估计时间，并运行有向 Dijkstra。\n\n这是传统算法的静态路线与可达性预检，不是完整动态实验结果。路网遵守单行方向并应用可识别的经节点 `no_*` / `only_*` 转向限制。OSM 快照仍有未支持的经道路限制；点位按 300 米内最近可路由节点吸附。信号相位、排队、背景车流、其他实验车造成的拥堵、规划耗时和车辆实际逐路段通行时间均未进入本次运行。\n\n需求包包含 2013–2014 年历史出租车轨迹聚合热度与 OD 需求，不含实际逐单订单。为使静态算法能运行，本 pilot 基于 Top 30 候选点和 OSM 道路特征点生成固定合成订单。30% 模糊订单暂按 15 单单侧模糊、15 单双侧模糊构造；这是 pilot 假设，不是已冻结的正式设置。\n\n逐项数量、哈希、预检状态和限制见 `summary.json`；所有候选点方向路线见 `candidate_pair_routes.csv` 与 `candidate_dijkstra_links.geojson`；固定订单和路线腿见 `pilot_orders.json` 与 `fixed_order_route_legs.csv`。\n"""
+    notes = """# Porto 传统 Dijkstra 静态预检 Pilot\n\n本次从本地 Porto 需求包按围栏内上车热度选出 Top 30 候选点，生成 10 辆车、每车固定 10 单的 pilot 序列。所有车辆订单归属与顺序固定，没有派单、换单或跨车调度。候选点 Link 以道路长度最短为目标；固定订单的 200 条行程腿以道路等级自由流速度估计时间，并运行有向 Dijkstra。\n\n这是传统算法的静态路线与可达性预检，不是完整动态实验结果。路网遵守单行方向并应用可识别的经节点 `no_*` / `only_*` 转向限制。订单端点留在围栏内，车辆路线允许使用已下载 OSM 快照中围栏外的接续道路。点位按 300 米内最近且同时有入边和出边的路网节点吸附；OSM 快照仍有 2 条未支持的经道路限制。初始不可达订单按固定随机种子、保留订单类别/车辆/顺序的规则离线重采样，记录在订单文件中。信号相位、排队、背景车流、其他实验车造成的拥堵、规划耗时和车辆实际逐路段通行时间均未进入本次运行。\n\n需求包包含 2013–2014 年历史出租车轨迹聚合热度与 OD 需求，不含实际逐单订单。为使静态算法能运行，本 pilot 基于 Top 30 候选点和 OSM 道路特征点生成固定合成订单。30% 模糊订单暂按 15 单单侧模糊、15 单双侧模糊构造；这是 pilot 假设，不是已冻结的正式设置。\n\n逐项数量、哈希、预检状态和限制见 `summary.json`；所有候选点方向路线见 `candidate_pair_routes.csv` 与 `candidate_dijkstra_links.geojson`；固定订单和路线腿见 `pilot_orders.json` 与 `fixed_order_route_legs.csv`。\n"""
     (args.output / "run_notes.md").write_text(notes, encoding="utf-8")
     print(json.dumps(summary, ensure_ascii=False, indent=2))
     return 0

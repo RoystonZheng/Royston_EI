@@ -67,16 +67,16 @@ class RouteCostTests(unittest.TestCase):
         evaluation = evaluate_route_candidate(self.road_map, self.route)
 
         self.assertAlmostEqual(evaluation.base_travel_time_sec, 200.0)
-        self.assertAlmostEqual(evaluation.congestion_delay_sec, 25.0)
+        self.assertAlmostEqual(evaluation.congestion_delay_sec, 37.01819050925775)
         self.assertAlmostEqual(evaluation.signal_delay_sec, 20.0)
-        self.assertAlmostEqual(evaluation.total_travel_time_sec, 245.0)
+        self.assertAlmostEqual(evaluation.total_travel_time_sec, 257.01819050925775)
         self.assertAlmostEqual(evaluation.route_distance_m, 2000.0)
-        self.assertAlmostEqual(evaluation.energy_moving_kwh, 0.36)
-        self.assertAlmostEqual(evaluation.energy_idle_signal_kwh, 0.0006)
-        self.assertAlmostEqual(evaluation.energy_congestion_kwh, 0.01)
-        self.assertAlmostEqual(evaluation.energy_total_kwh, 0.3706)
+        self.assertAlmostEqual(evaluation.energy_moving_kwh, 0.17459019047055183)
+        self.assertAlmostEqual(evaluation.energy_idle_signal_kwh, 0.0044444444444444444)
+        self.assertAlmostEqual(evaluation.energy_congestion_kwh, 0.0)
+        self.assertAlmostEqual(evaluation.energy_total_kwh, 0.2032716853506813)
         self.assertTrue(evaluation.simulation_estimate)
-        self.assertEqual(evaluation.energy_model_version, "energy_v1")
+        self.assertEqual(evaluation.energy_model_version, "ev_longitudinal_v2")
 
     def test_calculate_resource_cost_keeps_units_separate_and_sums_money(self):
         method_result = RouteMethodResult(
@@ -104,11 +104,11 @@ class RouteCostTests(unittest.TestCase):
         self.assertEqual(resources.llm_calls, 1)
         self.assertAlmostEqual(resources.llm_latency_ms, 12.5)
         self.assertAlmostEqual(resources.compute_time_ms, 10.0)
-        self.assertAlmostEqual(resources.energy_kwh, 0.3706)
+        self.assertAlmostEqual(resources.energy_kwh, 0.2032716853506813)
         self.assertAlmostEqual(money.api_cost_amount, 1.5)
         self.assertAlmostEqual(money.compute_cost_amount, 2.0)
-        self.assertAlmostEqual(money.electricity_cost_amount, 0.29648)
-        self.assertAlmostEqual(money.total_monetary_cost, 3.79648)
+        self.assertAlmostEqual(money.electricity_cost_amount, 0.16261734828054505)
+        self.assertAlmostEqual(money.total_monetary_cost, 3.662617348280545)
         self.assertEqual(money.currency, "CNY")
 
     def test_plan_evaluation_interfaces_match_shared_cost_model(self):
@@ -125,8 +125,8 @@ class RouteCostTests(unittest.TestCase):
             ),
         )
 
-        self.assertAlmostEqual(evaluation.energy_total_kwh, 0.3706)
-        self.assertAlmostEqual(money.electricity_cost_amount, 0.29648)
+        self.assertAlmostEqual(evaluation.energy_total_kwh, 0.2032716853506813)
+        self.assertAlmostEqual(money.electricity_cost_amount, 0.16261734828054505)
 
     def test_enrichment_does_not_invent_cost_for_failed_route(self):
         result = RouteMethodResult(
@@ -160,9 +160,9 @@ class RouteCostTests(unittest.TestCase):
         )
 
         self.assertIs(enriched.routes[0], self.route)
-        self.assertAlmostEqual(enriched.evaluation.energy_total_kwh, 0.3706)
-        self.assertAlmostEqual(enriched.resources.energy_kwh, 0.3706)
-        self.assertAlmostEqual(enriched.monetary_cost.electricity_cost_amount, 0.3706)
+        self.assertAlmostEqual(enriched.evaluation.energy_total_kwh, 0.2032716853506813)
+        self.assertAlmostEqual(enriched.resources.energy_kwh, 0.2032716853506813)
+        self.assertAlmostEqual(enriched.monetary_cost.electricity_cost_amount, 0.2032716853506813)
         self.assertEqual(enriched.metadata["cost_status"], "evaluated")
 
     def test_cost_cli_enriches_json_and_writes_summary(self):
@@ -218,9 +218,9 @@ class RouteCostTests(unittest.TestCase):
             output = json.loads(output_path.read_text(encoding="utf-8"))
             method = output["results"][0]["methods"][0]
             self.assertEqual(method["metadata"]["cost_status"], "evaluated")
-            self.assertAlmostEqual(method["evaluation"]["energy_total_kwh"], 0.3706)
+            self.assertAlmostEqual(method["evaluation"]["energy_total_kwh"], 0.2032716853506813)
             self.assertAlmostEqual(
-                method["monetary_cost"]["electricity_cost_amount"], 0.3706
+                method["monetary_cost"]["electricity_cost_amount"], 0.2032716853506813
             )
             self.assertIn("summary", output)
             self.assertEqual(output["summary"]["local_dijkstra"]["evaluated_routes"], 1)
@@ -296,7 +296,7 @@ class RouteCostTests(unittest.TestCase):
 
             output = json.loads(output_path.read_text(encoding="utf-8"))
             method = output["results"][0]["methods"][0]
-            self.assertAlmostEqual(method["monetary_cost"]["total_monetary_cost"], 2.29648)
+            self.assertAlmostEqual(method["monetary_cost"]["total_monetary_cost"], 2.162617348280545)
             self.assertEqual(method["metadata"]["pricing_status"], "illustrative_smoke_only")
             self.assertEqual(method["metadata"]["price_source"], "unit_test")
             self.assertEqual(output["cost_config"]["pricing"]["pricing_version"], "test_price_v1")

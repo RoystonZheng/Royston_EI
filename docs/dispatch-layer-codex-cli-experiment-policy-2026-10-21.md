@@ -110,8 +110,14 @@ D6 与 D5 分开记录：Codex 只在首个已到达订单快照上生成一次�
 
 该次调用使用 `gpt-5.6-luna` / low，零重试、零工具事件；输入/缓存/输出/总计为 13,453/0/178/13,631 token，按 2026-10-22 标准费率为 0.072605 credits 与 $0.00290420 API 标价等值，账号实扣未知。D6 完成 41 轮，逐轮 validator 有效、硬约束错误与承诺违约为 0、候选回退 2 次；C3 seed 0 完成 16/44，与同输入 D0/D1/D2/D5 相同。相对 D1，平均接驾等待 +4.96 秒、P95 −12.06 秒、空驶 +396.8 米、能耗代理 +0.071 kWh。单个固定案例没有性能优劣结论。
 
-结果、原始 prompt/JSONL/最终响应、输入哈希与用量审计见 `outputs/dispatch_layer/nyc_tlc_hvfhv_2024/three_method_benchmark_v1/results/hybrid_agent_codex_nn_v1/C3_manhattan_multizone_44_order_burst/single_fleet/`。完整方法与 NN 数据标签边界见 `docs/dispatch-layer-hybrid-agent-codex-nn-design-2026-10-22.md`。D7 已更新为最大匹配容量保护组，神经网络排序顺延为 D8。
+结果、原始 prompt/JSONL/最终响应、输入哈希与用量审计见 `outputs/dispatch_layer/nyc_tlc_hvfhv_2024/three_method_benchmark_v1/results/hybrid_agent_codex_nn_v1/C3_manhattan_multizone_44_order_burst/single_fleet/`。完整方法与 NN 数据标签边界见 `docs/dispatch-layer-hybrid-agent-codex-nn-design-2026-10-22.md`。截至 2026-10-22，NN 曾暂列后续 D8；此安排已按用户 2026-10-23 指示更新，现 D8 是第一轮集成主方法。
 
 ## D7 最大匹配容量保护配对 pilot（2026-10-23）
 
 在 C4/F1/seed 0 完成 D6/D7 完整仿真。D7 的 Codex 响应通过同 prompt SHA-256 校验后回放给 D6；唯一新调用 1 次，13,451 输入 + 210 输出 = 13,661 token，0.073555 credits / $0.00294220 标准费率等值，账户实扣未知。D7 571 轮 validator 全通过；其中 round-0002 的完整硬可行图最大匹配容量 5、筛选后 4，保护器恢复 1 条边并恢复至 5。D6/D7 均完成 13/790，单 seed 不能证明性能改善。逐轮输入、响应、用量和审计见 `outputs/dispatch_layer/nyc_tlc_hvfhv_2024/three_method_benchmark_v1/results/hybrid_agent_codex_capacity_shield_v1/C4_manhattan_790_order_five_minute_load_sweep/F1/`。
+
+## D8：Agent + Codex + MLP + 容量保护集成 pilot（2026-10-23）
+
+D8 在 C4/F1/seed 0 复用 D7 已保存的 prompt/响应，没有新增 Codex 请求。训练集由 C2/C3 两个时间窗的 D1 完整回放构成，共 82 个成对标签样本；模型在 D1 模仿标签上的训练集命中率为 74.4%，不代表留出准确率。C4-F1 的 571 轮均通过 validator 并保留最大匹配容量；MLP 对 31 条硬可行候选打分，筛掉 10 条，容量保护在 1 轮恢复 2 条边。D7/D8 均完成 13/790，等待、空驶和能耗代理主要指标相同。D8 审计记录中的 13,661 token 是原始 Codex 响应 usage，不能再计为新请求或新增费用。
+
+模型训练、D8 结果及配对审计见 `outputs/dispatch_layer/nyc_tlc_hvfhv_2024/three_method_benchmark_v1/results/nn_integrated_method_v1/`。本结果是少量训练样本和单评估窗口的 pilot，不是正式性能或泛化结论。

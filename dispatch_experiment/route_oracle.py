@@ -1,12 +1,23 @@
 """Deterministic route and ETA oracle used by the dispatch simulation."""
 
 import heapq
+from collections import OrderedDict
+from dataclasses import dataclass
 from typing import Dict, List, Optional, Tuple
 
+from route_experiment.energy_model import EnergyModelConfig, evaluate_route_edges
 from route_experiment.models import Edge, RoadMap
 from route_experiment.routing import edge_travel_time_sec
 
 from .models import RouteLeg
+
+
+@dataclass(frozen=True)
+class RouteEnergySummary:
+    net_kwh: float
+    propulsion_draw_kwh: float
+    regenerated_kwh: float
+    auxiliary_kwh: float
 
 
 class GraphRouteOracle:
@@ -26,6 +37,53 @@ class GraphRouteOracle:
         for edges in self._adjacency.values():
             edges.sort(key=lambda edge: edge.edge_id)
         self._cache: Dict[Tuple[str, str], RouteLeg] = {}
+        self._energy_cache = OrderedDict()
+
+    def route_energy_summary(
+        self,
+        edge_sequence: List[str],
+        congestion_speed_multipliers: Dict[int, float],
+        config: EnergyModelConfig,
+        *,
+        payload_mass_kg: Optional[float] = None,
+    ) -> RouteEnergySummary:
+        """Return candidate energy components, reusing exact route evaluations.
+
+        The cache belongs to this oracle, so its fixed road map is part of the
+        cache identity. Every setting that affects the evaluation is in the
+        key. Cached values contain only the immutable totals consumed by
+        dispatch candidates; callers cannot mutate a shared EnergyResult.
+        """
+
+        payload = config.passenger_load_kg if payload_mass_kg is None else float(payload_mass_kg)
+        if payload < 0:
+            raise ValueError("payload_mass_kg_must_be_nonnegative")
+        multipliers_key = tuple(
+            sorted((int(level), float(multiplier)) for level, multiplier in congestion_speed_multipliers.items())
+        )
+        key = (tuple(edge_sequence), multipliers_key, config.fingerprint(), payload)
+        cached = self._energy_cache.get(key)
+        if cached is not None:
+            self._energy_cache.move_to_end(key)
+            return cached
+
+        edges = [self._edges[edge_id] for edge_id in edge_sequence if edge_id in self._edges]
+        result = evaluate_route_edges(
+            edges,
+            congestion_speed_multipliers,
+            config,
+            payload_mass_kg=payload,
+        )
+        summary = RouteEnergySummary(
+            net_kwh=result.net_kwh,
+            propulsion_draw_kwh=result.propulsion_draw_kwh,
+            regenerated_kwh=result.regenerated_kwh,
+            auxiliary_kwh=result.auxiliary_kwh,
+        )
+        self._energy_cache[key] = summary
+        if len(self._energy_cache) > 8192:
+            self._energy_cache.popitem(last=False)
+        return summary
 
     def route(self, source_node_id: str, target_node_id: str) -> RouteLeg:
         key = (source_node_id, target_node_id)

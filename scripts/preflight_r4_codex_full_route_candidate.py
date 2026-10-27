@@ -50,7 +50,7 @@ from preflight_r4_codex_all_frozen_tasks import (
 )
 
 
-DEFAULT_OUTPUT = ROOT / "outputs/route_layer/r4_codex_full_route_candidate_preflight_20261023_v4"
+DEFAULT_OUTPUT = ROOT / "outputs/route_layer/r4_codex_full_route_candidate_preflight_20261023_v5"
 MAX_ROUTE_EDGES = 512
 
 
@@ -245,7 +245,12 @@ def audit_candidate(
         "model_requests_sent": 0,
         "frozen_task_count": 150,
         "chain_reachable_task_count": len(result_rows),
-        "simple_route_feasibility_verified_count": 0,
+        "simple_route_reference_witness_count": sum(
+            row["local_dijkstra_reference_route_is_simple"] is True for row in result_rows
+        ),
+        "chain_reachable_tasks_without_simple_reference_witness": sum(
+            row["local_dijkstra_reference_route_is_simple"] is False for row in result_rows
+        ),
         "not_sent_task_count": 150 - len(result_rows),
         "one_request_per_chain_reachable_task_assumed_calls": one_shot_assumed_calls,
         "stepwise_minimum_request_lower_bound": stepwise_floor,
@@ -316,7 +321,7 @@ def audit_candidate(
             "整路线方案与逐步方案的方法不同，不能将候选预检写成正式 R4 结果。",
             "输出方向串即使附带逐步自检码，也必须由本地程序逐边验证；任何违规都拒绝整条路线，且不回退到 Dijkstra/A*。",
             "Dijkstra 只在离线审计中测量 512 边输出上限的参考长度，不进入模型提示、不作为路线回退；参考长度不等同于满足无重访规则的证明。",
-            "129 条任务仅通过分段有向可达门禁；尚未证明每条都存在满足全局不重复节点规则的完整路线。传统 Dijkstra 两段结果中有 56 条跨腿节点重复，这不证明无替代路线，但暴露两组约束口径需要统一。",
+            "129 条任务仅通过分段有向可达门禁；其中 73 条传统 local Dijkstra 拼接参考路线本身不重访，可作为路线存在的见证。另 56 条当前参考路线跨腿重复，尚未搜索替代的不重访路线；这不证明它们无路。",
             "提示字节数不换算为 token 或费用；实际费用取决于调用后端、缓存与实际用量。",
             "10 个非法端点、10 个预设不可达任务和 1 个语义解析失败任务不发路线请求，失败分类保留在冻结任务审计中。",
         ],
@@ -330,7 +335,7 @@ def _render(summary: dict[str, Any]) -> str:
     cards = [
         ("冻结任务", summary["frozen_task_count"]),
         ("分段有向可达任务", summary["chain_reachable_task_count"]),
-        ("已证明不重复可行", summary["simple_route_feasibility_verified_count"]),
+        ("不重访参考路线见证", summary["simple_route_reference_witness_count"]),
         ("模型调用（本次）", summary["model_requests_sent"]),
         ("整路线一次请求假设", summary["one_request_per_chain_reachable_task_assumed_calls"]),
         ("逐步方案最低请求数", summary["stepwise_minimum_request_lower_bound"]),

@@ -151,6 +151,24 @@ class R4CompactRouteTests(unittest.TestCase):
         self.assertEqual(result["route_edge_sequence"], ["edge_north", "edge_east"])
         self.assertEqual([step["local_directed_edge_check"] for step in result["steps"]], ["PASS", "PASS"])
 
+    def test_validator_rejects_revisit_across_pickup_boundary(self):
+        result = validate_r4_compact_route_proposal(
+            self.road_map,
+            start_node_id="node_0_0",
+            pickup_node_id="node_0_1",
+            dropoff_node_id="node_1_1",
+            payload={
+                "status": "completed",
+                "move_sequence": "NSNE",
+                "step_check_sequence": "1111",
+            },
+        )
+
+        self.assertFalse(result["accepted"])
+        self.assertEqual(result["steps"][1]["to_node_id"], "node_0_0")
+        self.assertIn("node_revisited", result["steps"][1]["violation_kinds"])
+        self.assertEqual(result["first_violation_step"], 2)
+
     def test_validator_rejects_reverse_one_way_move_and_keeps_step_location(self):
         result = validate_r4_compact_route_proposal(
             self.road_map,

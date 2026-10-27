@@ -26,6 +26,7 @@ from .models import (
     Order,
     Vehicle,
 )
+from .decision_contract import decision_function_record
 from .optimizer import (
     DeterministicGlobalOptimizer,
     build_assignments,
@@ -204,11 +205,14 @@ class DispatchSimulation:
         vehicles: Optional[Sequence[Vehicle]] = None,
         route_oracle=None,
         retain_round_records: bool = True,
+        retain_training_rounds: bool = False,
         llm_trace_dir: Optional[Path] = None,
         codex_policy_replay_path: Optional[Path] = None,
     ):
         self.config = config
         self.retain_round_records = retain_round_records
+        self.retain_training_rounds = retain_training_rounds
+        self.training_rounds: List[Dict[str, object]] = []
         self.rng = random.Random(config.seed)
         supplied = (road_map is not None, orders is not None, vehicles is not None)
         if any(supplied) and not all(supplied):
@@ -576,7 +580,10 @@ class DispatchSimulation:
                 all_candidates.extend(retained)
                 all_decisions.extend(decisions)
         if self.neural_ranker is not None:
-            scored_candidates = [candidate for candidate in all_candidates if candidate.hard_constraint_ok]
+            # Rank the full hard-feasible graph. Codex context-pass edges get
+            # priority; the MLP fills remaining per-vehicle Top-K slots and
+            # breaks ties within the context-approved group.
+            scored_candidates = [candidate for candidate in raw_candidates if candidate.hard_constraint_ok]
             scores = self.neural_ranker.score_candidates(
                 scored_candidates,
                 max_wait_sec=self.config.max_pickup_wait_sec,
@@ -591,6 +598,7 @@ class DispatchSimulation:
                 ordered = sorted(
                     vehicle_candidates,
                     key=lambda candidate: (
+                        not bool(candidate.context_pass),
                         -float(candidate.neural_score),
                         candidate.candidate_id,
                     ),
@@ -599,11 +607,28 @@ class DispatchSimulation:
                     candidate.candidate_id
                     for candidate in ordered[:self.config.neural_ranker_top_k]
                 )
-            previous_count = len(all_candidates)
+            previous_count = len(scored_candidates)
             all_candidates = [
-                candidate for candidate in all_candidates
+                candidate for candidate in scored_candidates
                 if candidate.candidate_id in retained_ids
             ]
+            score_audit_rows = [
+                {
+                    "candidate_id": candidate.candidate_id,
+                    "vehicle_id": candidate.vehicle_id,
+                    "neural_score": float(candidate.neural_score),
+                    "context_pass": bool(candidate.context_pass),
+                    "retained": candidate.candidate_id in retained_ids,
+                }
+                for candidate in sorted(scored_candidates, key=lambda item: item.candidate_id)
+            ]
+            score_audit_bytes = json.dumps(
+                score_audit_rows,
+                ensure_ascii=False,
+                sort_keys=True,
+                separators=(",", ":"),
+                allow_nan=False,
+            ).encode("utf-8")
             for candidate in scored_candidates:
                 kept = candidate.candidate_id in retained_ids
                 all_decisions.append(CandidateDecision(
@@ -628,8 +653,13 @@ class DispatchSimulation:
                 "candidate_count_before_ranker": previous_count,
                 "candidate_count_after_ranker": len(all_candidates),
                 "candidate_count_pruned": previous_count - len(all_candidates),
+                "context_pass_candidate_count": sum(bool(item.context_pass) for item in scored_candidates),
+                "context_pass_priority": True,
                 "score_min": min(scores) if scores else None,
                 "score_max": max(scores) if scores else None,
+                "candidate_score_audit_sha256": hashlib.sha256(score_audit_bytes).hexdigest(),
+                "candidate_score_audit_truncated": len(score_audit_rows) > 1000,
+                "candidate_score_audit": score_audit_rows if len(score_audit_rows) <= 1000 else None,
                 "label_source": self.neural_ranker.payload.get("training", {}).get("label_source"),
             }
         if self.method_use_capacity_shield:
@@ -748,6 +778,30 @@ class DispatchSimulation:
         errors = validate_selection(
             selected, all_candidates, self.config.max_pickup_wait_sec
         )
+        if self.retain_training_rounds:
+            def compact_training_candidate(candidate: Candidate) -> Dict[str, object]:
+                return {
+                    "candidate_id": candidate.candidate_id,
+                    "vehicle_id": candidate.vehicle_id,
+                    "order_id": candidate.order_id,
+                    "hard_constraint_ok": candidate.hard_constraint_ok,
+                    "candidate_type": candidate.candidate_type,
+                    "predicted_wait_sec": candidate.predicted_wait_sec,
+                    "feature_vector": dict(candidate.feature_vector or {}),
+                    "pickup_leg": {"distance_m": candidate.pickup_leg.distance_m},
+                    "ride_leg": {
+                        "distance_m": candidate.ride_leg.distance_m,
+                        "duration_sec": candidate.ride_leg.duration_sec,
+                    },
+                }
+            self.training_rounds.append({
+                "dispatch_round_id": round_id,
+                "candidates": [
+                    compact_training_candidate(candidate)
+                    for candidate in raw_candidates if candidate.hard_constraint_ok
+                ],
+                "selected_candidate_ids": [candidate.candidate_id for candidate in selected],
+            })
         elapsed_ms = (time.perf_counter() - started) * 1000.0
         selected_order_ids = {candidate.order_id for candidate in selected}
         feasible_by_order: Dict[str, set] = {}
@@ -802,6 +856,14 @@ class DispatchSimulation:
                     len(self.direct_llm.errors) if self.direct_llm is not None else 0
                 ),
             }
+        round_audit["decision_function"] = decision_function_record(
+            self.config.method_name,
+            optimizer_metadata=(
+                self.optimizer.last_objective_metadata
+                if self.config.method_name not in {"D0_greedy", "D5_pure_llm_direct"}
+                else None
+            ),
+        )
         if not self.retain_round_records and self.metrics["rounds"] == 0:
             # Keep the complete first candidate table so compact D0/D1/D5
             # runs still expose an auditable common initial decision input.
@@ -838,7 +900,7 @@ class DispatchSimulation:
             decision_package_id="decision-" + round_id,
             dispatch_round_id=round_id,
             method_name=self.config.method_name,
-            method_version="dispatch-agent-v1",
+            method_version="dispatch-agent-v2",
             assignments=build_assignments(selected),
             unserved_order_ids=[
                 order.order_id
@@ -911,6 +973,14 @@ class DispatchSimulation:
                 else None
             ),
             audit={
+                "decision_function": decision_function_record(
+                    self.config.method_name,
+                    optimizer_metadata=(
+                        self.optimizer.last_objective_metadata
+                        if self.config.method_name not in {"D0_greedy", "D5_pure_llm_direct"}
+                        else None
+                    ),
+                ),
                 "context_function": self.context_function.to_record(),
                 "feedback_mode": self.feedback.mode,
                 "feedback_evaluation_count": self.feedback.call_count,

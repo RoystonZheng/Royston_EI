@@ -36,6 +36,38 @@ CODEX_DISABLED_TOOL_FEATURES = (
 )
 
 
+def normalize_session_cumulative_usage(
+    usage: Dict[str, Any], previous: Optional[Dict[str, Any]] = None
+) -> Dict[str, Any]:
+    """Convert Codex persistent-session cumulative counters into invocation deltas.
+
+    The CLI reports cumulative session usage on resumed turns. Callers must only
+    pass a previous usage row from the same session. Raw counters are preserved
+    so the normalized ledger remains auditable.
+    """
+    previous = previous or {}
+    normalized: Dict[str, Any] = {
+        "accounting_basis": "persistent_session_cumulative_delta",
+        "session_cumulative": {},
+    }
+    for key in ("input_tokens", "cached_input_tokens", "output_tokens"):
+        current_value = usage.get(key)
+        previous_value = previous.get(key, 0)
+        if current_value is None:
+            normalized[key] = None
+            normalized["session_cumulative"][key] = None
+            continue
+        if not isinstance(current_value, int) or current_value < 0:
+            raise ValueError("invalid_session_usage_counter:" + key)
+        if not isinstance(previous_value, int) or previous_value < 0:
+            raise ValueError("invalid_previous_session_usage_counter:" + key)
+        if current_value < previous_value:
+            raise ValueError("session_usage_counter_decreased:" + key)
+        normalized[key] = current_value - previous_value
+        normalized["session_cumulative"][key] = current_value
+    return normalized
+
+
 def reserve_indexed_artifacts(
     trace_dir: Path,
     stem: str,

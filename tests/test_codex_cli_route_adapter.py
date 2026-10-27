@@ -1,4 +1,6 @@
 import json
+import shutil
+import subprocess
 import tempfile
 import unittest
 from pathlib import Path
@@ -13,6 +15,7 @@ from route_experiment.r4_stepwise import (
     build_r4_step_output_constraint,
     run_r4_stepwise_route_search,
 )
+from route_experiment.r4_segment import make_r4_segment_constraint
 
 
 class CodexCliRouteAdapterTests(unittest.TestCase):
@@ -98,6 +101,12 @@ class CodexCliRouteAdapterTests(unittest.TestCase):
             "failure_reason_code": "none",
         }
 
+    @staticmethod
+    def _write_jsonl_stdout(kwargs, events):
+        trace_stream = kwargs["stdout"]
+        trace_stream.write("".join(json.dumps(item) + "\n" for item in events))
+        trace_stream.flush()
+
     def _fake_cli(self, directions):
         calls = {"count": 0}
 
@@ -153,9 +162,10 @@ class CodexCliRouteAdapterTests(unittest.TestCase):
                     },
                 },
             ]
+            self._write_jsonl_stdout(kwargs, events)
             return SimpleNamespace(
                 returncode=0,
-                stdout="".join(json.dumps(item) + "\n" for item in events),
+                stdout=None,
                 stderr="",
             )
 
@@ -253,6 +263,40 @@ class CodexCliRouteAdapterTests(unittest.TestCase):
         self.assertFalse(client.persist_session)
         self.assertIsNone(client.session_id)
 
+    def test_partial_cli_jsonl_is_persisted_when_call_times_out(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            client = CodexCliRouteStepClient(
+                model="gpt-5.6-luna",
+                trace_dir=Path(temp_dir) / "traces",
+                route_constraint=SimpleNamespace(
+                    schema={"type": "object", "properties": {"direction": {"enum": ["N"]}}},
+                    schema_sha256="schema-hash",
+                    schema_bytes=64,
+                ),
+                persist_session=False,
+            )
+
+            def timeout_after_partial_event(command, **kwargs):
+                trace_stream = kwargs.get("stdout")
+                self.assertIsNotNone(trace_stream)
+                trace_stream.write(json.dumps({"type": "thread.started"}) + "\n")
+                trace_stream.flush()
+                raise subprocess.TimeoutExpired(command, timeout=1)
+
+            with patch(
+                "route_experiment.codex_cli_adapter.subprocess.run",
+                side_effect=timeout_after_partial_event,
+            ):
+                with self.assertRaisesRegex(RuntimeError, "codex_cli_timeout"):
+                    client.chat([{"role": "user", "content": "one route step"}])
+
+            trace_path = Path(client.last_record["trace_jsonl_path"])
+            self.assertEqual(
+                trace_path.read_text(encoding="utf-8"),
+                json.dumps({"type": "thread.started"}) + "\n",
+            )
+            self.assertEqual(client.last_record["status"], "timeout")
+
     def test_cli_tool_event_invalidates_model_response(self):
         with tempfile.TemporaryDirectory() as temp_dir:
             constraint = SimpleNamespace(
@@ -269,9 +313,10 @@ class CodexCliRouteAdapterTests(unittest.TestCase):
                     {"type": "item.completed", "item": {"type": "command_execution", "command": "pwd"}},
                     {"type": "turn.completed", "usage": {"input_tokens": 5, "output_tokens": 2}},
                 ]
+                self._write_jsonl_stdout(kwargs, events)
                 return SimpleNamespace(
                     returncode=0,
-                    stdout="".join(json.dumps(item) + "\n" for item in events),
+                    stdout=None,
                     stderr=(
                         "Authorization: Bearer abcdef1234567890\n"
                         "api_key=sk-sensitive-secret-1234567890"
@@ -288,6 +333,83 @@ class CodexCliRouteAdapterTests(unittest.TestCase):
                     client.chat([{"role": "user", "content": "choose N"}])
             self.assertNotIn("abcdef1234567890", client.last_record["stderr_tail"])
             self.assertNotIn("sk-sensitive-secret-1234567890", client.last_record["stderr_tail"])
+
+    def test_completed_jsonl_agent_message_can_recover_missing_canonical_final_without_tools(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            response_text = json.dumps(self._model_response("N"))
+
+            def run(command, **kwargs):
+                events = [
+                    {"type": "thread.started", "thread_id": "thread-recovery"},
+                    {
+                        "type": "item.completed",
+                        "item": {
+                            "type": "error",
+                            "message": "Code Mode is unavailable because code-mode host is disabled. "
+                            "Code mode will fail closed; enable `features.code_mode_host` and install "
+                            "`codex-code-mode-host`.",
+                        },
+                    },
+                    {"type": "turn.started"},
+                    {
+                        "type": "item.completed",
+                        "item": {"type": "agent_message", "text": response_text},
+                    },
+                    {
+                        "type": "turn.completed",
+                        "usage": {"input_tokens": 15, "output_tokens": 9},
+                    },
+                ]
+                self._write_jsonl_stdout(kwargs, events)
+                return SimpleNamespace(returncode=0, stdout=None, stderr="")
+
+            client = CodexCliRouteStepClient(
+                model="gpt-5.6-luna",
+                trace_dir=Path(temp_dir) / "traces",
+            )
+            client.route_constraint = SimpleNamespace(
+                schema={"type": "object", "properties": {"direction": {"enum": ["N"]}}},
+                schema_sha256="schema-hash",
+                schema_bytes=64,
+            )
+            with patch("route_experiment.codex_cli_adapter.subprocess.run", side_effect=run):
+                result = client.chat([{"role": "user", "content": "choose N"}])
+
+            self.assertEqual(json.loads(result.content), self._model_response("N"))
+            self.assertEqual(result.input_tokens, 15)
+            self.assertEqual(result.output_tokens, 9)
+            self.assertEqual(client.last_record["status"], "accepted")
+            self.assertTrue(client.last_record["response_recovered_from_jsonl_agent_message"])
+            self.assertFalse(client.last_record["canonical_final_json_present"])
+            recovered = Path(client.last_record["recovered_agent_message_path"])
+            self.assertEqual(json.loads(recovered.read_text()), self._model_response("N"))
+
+    def test_missing_final_recovery_rejects_multiple_agent_messages(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            response_text = json.dumps(self._model_response("N"))
+
+            def run(command, **kwargs):
+                events = [
+                    {"type": "turn.started"},
+                    {"type": "item.completed", "item": {"type": "agent_message", "text": response_text}},
+                    {"type": "item.completed", "item": {"type": "agent_message", "text": response_text}},
+                    {"type": "turn.completed", "usage": {"input_tokens": 5, "output_tokens": 2}},
+                ]
+                self._write_jsonl_stdout(kwargs, events)
+                return SimpleNamespace(returncode=0, stdout=None, stderr="")
+
+            client = CodexCliRouteStepClient(
+                model="gpt-5.6-luna",
+                trace_dir=Path(temp_dir) / "traces",
+            )
+            client.route_constraint = SimpleNamespace(
+                schema={"type": "object", "properties": {"direction": {"enum": ["N"]}}},
+                schema_sha256="schema-hash",
+                schema_bytes=64,
+            )
+            with patch("route_experiment.codex_cli_adapter.subprocess.run", side_effect=run):
+                with self.assertRaisesRegex(RuntimeError, "codex_cli_final_response_missing"):
+                    client.chat([{"role": "user", "content": "choose N"}])
 
     def test_new_client_resumes_trace_sequence_without_overwriting_prior_call(self):
         with tempfile.TemporaryDirectory() as temp_dir:
@@ -318,6 +440,36 @@ class CodexCliRouteAdapterTests(unittest.TestCase):
             self.assertTrue(second_result.request_id.endswith("r4_step_0002.jsonl"))
             self.assertTrue((trace_dir / "r4_step_0001.prompt.txt").is_file())
             self.assertTrue((trace_dir / "r4_step_0002.prompt.txt").is_file())
+
+    def test_cli_artifact_paths_are_absolute_when_cli_changes_working_directory(self):
+        trace_root = Path(tempfile.mkdtemp(prefix=".r4-relative-trace-", dir="."))
+        trace_dir = trace_root / "traces"
+        try:
+            client = CodexCliRouteStepClient(
+                model="gpt-5.6-luna",
+                trace_dir=trace_dir,
+                route_constraint=SimpleNamespace(
+                    schema={
+                        "type": "object",
+                        "properties": {"direction": {"type": "string", "enum": ["N"]}},
+                    },
+                    schema_sha256="schema-hash",
+                    schema_bytes=64,
+                ),
+            )
+            _, fake_run = self._fake_cli(["N"])
+
+            def check_absolute_paths(command, **kwargs):
+                schema_path = Path(command[command.index("--output-schema") + 1])
+                final_path = Path(command[command.index("--output-last-message") + 1])
+                self.assertTrue(schema_path.is_absolute())
+                self.assertTrue(final_path.is_absolute())
+                return fake_run(command, **kwargs)
+
+            with patch("route_experiment.codex_cli_adapter.subprocess.run", side_effect=check_absolute_paths):
+                client.chat([{"role": "user", "content": "choose N"}])
+        finally:
+            shutil.rmtree(trace_root, ignore_errors=True)
 
     def test_codex_prompt_uses_json_contract_instead_of_disabled_tool_contract(self):
         messages = build_r4_stepwise_messages(
@@ -384,9 +536,10 @@ class CodexCliRouteAdapterTests(unittest.TestCase):
                     {"type": "turn.started"},
                     {"type": "turn.completed", "usage": {"input_tokens": 100, "output_tokens": 5}},
                 ]
+                self._write_jsonl_stdout(kwargs, events)
                 return SimpleNamespace(
                     returncode=0,
-                    stdout="".join(json.dumps(item) + "\n" for item in events),
+                    stdout=None,
                     stderr="",
                 )
 
@@ -421,6 +574,150 @@ class CodexCliRouteAdapterTests(unittest.TestCase):
             self.assertIn("node_0_1", calls[1][1])
             self.assertNotIn('"m"', calls[1][1])
             self.assertLess(len(calls[1][1]), 1000)
+
+    def test_persistent_segment_session_resumes_with_nested_action_schema(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            calls = []
+            responses = [
+                {"actions": [{"direction": "N", "self_check": {}}]},
+                {"actions": [{"direction": "E", "self_check": {}}]},
+            ]
+            messages = [
+                {"role": "system", "content": "Keep the map, features, and route rules for this task."},
+                {"role": "user", "content": json.dumps({
+                    "m": {"g": ["large-map"]},
+                    "i": {"feature": "road-sign"},
+                    "v": "r4-segment-v2",
+                    "q": {"s": "node_0_0", "p": "node_0_1", "d": "node_1_1"},
+                    "s": {"n": "node_0_0", "p": False, "v": "0000", "b": 4},
+                    "seg": {"max_actions": 10, "accepted_actions": 0, "remaining_action_budget": 4, "progress_limit": 4},
+                    "r": {"remaining_moves_lower_bound": 2},
+                })},
+            ]
+
+            def run(command, **kwargs):
+                index = len(calls)
+                calls.append((list(command), kwargs["input"]))
+                self.assertNotIn("--ephemeral", command)
+                schema_path = Path(command[command.index("--output-schema") + 1])
+                schema = json.loads(schema_path.read_text(encoding="utf-8"))
+                self.assertEqual(schema["properties"]["actions"]["maxItems"], 10)
+                final_path = Path(command[command.index("--output-last-message") + 1])
+                final_path.write_text(json.dumps(responses[index]), encoding="utf-8")
+                events = [
+                    {"type": "thread.started", "thread_id": "segment-session-123"},
+                    {"type": "turn.started"},
+                    {"type": "turn.completed", "usage": {"input_tokens": 100, "output_tokens": 10}},
+                ]
+                self._write_jsonl_stdout(kwargs, events)
+                return SimpleNamespace(
+                    returncode=0,
+                    stdout=None,
+                    stderr="",
+                )
+
+            client = CodexCliRouteStepClient(
+                model="gpt-5.6-luna",
+                trace_dir=Path(temp_dir) / "traces",
+                route_constraint=make_r4_segment_constraint(10),
+                persist_session=True,
+                working_directory=Path(temp_dir) / "empty-workspace",
+            )
+            next_messages = [
+                {"role": "system", "content": "same system"},
+                {"role": "user", "content": json.dumps({
+                    "m": {"g": ["large-map-resend-should-be-stripped"]},
+                    "i": {"feature": "feature-resend-should-be-stripped"},
+                    "v": "r4-segment-v2",
+                    "q": {"s": "node_0_0", "p": "node_0_1", "d": "node_1_1"},
+                    "s": {"n": "node_0_1", "p": True, "v": "0001", "b": 3},
+                    "seg": {"max_actions": 10, "accepted_actions": 1, "remaining_action_budget": 3, "progress_limit": 4},
+                    "r": {"remaining_moves_lower_bound": 1},
+                    "f": {"code": "previous_segment_rejected"},
+                })},
+            ]
+
+            with patch("route_experiment.codex_cli_adapter.subprocess.run", side_effect=run):
+                first = client.chat(messages)
+                second = client.chat(next_messages)
+
+            self.assertEqual(first.session_id, "segment-session-123")
+            self.assertEqual(second.session_id, "segment-session-123")
+            self.assertEqual(calls[1][0][calls[1][0].index("exec") + 1], "resume")
+            self.assertNotIn('"m"', calls[1][1])
+            self.assertNotIn('"i"', calls[1][1])
+            self.assertIn("previous_segment_rejected", calls[1][1])
+
+    def test_resume_prompt_preserves_per_step_progress_and_feedback_without_resending_map(self):
+        constraint = build_r4_step_output_constraint(
+            self.package,
+            build_r4_route_output_constraint(
+                self.package, "node_0_1", "node_1_1", allow_failed=False
+            ),
+            current_node_id="node_0_0",
+            pickup_seen=False,
+            visited_node_ids=["node_0_0"],
+            remaining_action_budget=2,
+        )
+        client = CodexCliRouteStepClient(
+            model="gpt-5.6-luna",
+            trace_dir=Path("/tmp/r4-adapter-test"),
+            route_constraint=constraint,
+            persist_session=True,
+            session_id="test-session",
+        )
+        messages = [{"role": "user", "content": json.dumps({
+            "m": {"g": ["large-map"]},
+            "q": {"s": "node_0_0", "p": "node_0_1", "d": "node_1_1", "o": "travel_time_then_distance"},
+            "s": {"n": "node_0_0", "p": False, "v": "0001", "vf": "grid_slot_base36", "vl": 4, "b": 2},
+            "r": {"objective": "travel_time_then_distance", "by_direction": {"N": {"excess_sec": 0}}},
+            "f": {"code": "previous_move_rejected", "direction": "S"},
+            "i": {"feature": "retained_in_initial_session_context"},
+        })}]
+
+        prompt = client._render_resume_prompt(messages)
+        payload_text = prompt.splitlines()[-1]
+        payload = json.loads(payload_text)
+
+        self.assertEqual(payload["r"], {"objective": "travel_time_then_distance", "by_direction": {"N": {"excess_sec": 0}}})
+        self.assertEqual(payload["f"], {"code": "previous_move_rejected", "direction": "S"})
+        self.assertEqual(payload["s"]["v"], "0001")
+        self.assertEqual(payload["allowed_directions"], ["N"])
+        self.assertNotIn("m", payload)
+        self.assertNotIn("i", payload)
+
+    def test_persistent_segment_resume_sends_only_latest_route_snapshot(self):
+        client = CodexCliRouteStepClient(
+            model="gpt-5.6-luna",
+            trace_dir=Path("/tmp/r4-segment-adapter-test"),
+            route_constraint=make_r4_segment_constraint(10),
+            persist_session=True,
+            session_id="segment-session",
+        )
+        snapshot = {
+            "v": "r4-segment-v2",
+            "m": {"g": ["large-frozen-map"]},
+            "i": {"feature": "frozen-road-feature-context"},
+            "q": {"s": "node_0_0", "p": "node_0_1", "d": "node_1_1"},
+            "s": {"n": "node_0_1", "p": True, "v": "0001", "b": 3},
+            "seg": {"max_actions": 10, "accepted_actions": 1, "remaining_action_budget": 3, "progress_limit": 4},
+            "r": {"remaining_moves_lower_bound": 2, "progress_lower_bound": 3},
+            "f": {"code": "previous_segment_rejected", "step": 2},
+        }
+
+        prompt = client._render_resume_prompt([
+            {"role": "user", "content": json.dumps(snapshot)}
+        ])
+        payload = json.loads(prompt.splitlines()[-1])
+
+        self.assertEqual(
+            set(payload), {"v", "q", "s", "seg", "r", "f"}
+        )
+        self.assertEqual(payload["seg"]["max_actions"], 10)
+        self.assertEqual(payload["f"]["code"], "previous_segment_rejected")
+        self.assertNotIn('"m"', prompt)
+        self.assertNotIn('"i"', prompt)
+        self.assertIn("最多 seg.max_actions 个连续动作", prompt)
 
     def test_nonempty_persistent_workspace_is_rejected_before_model_request(self):
         with tempfile.TemporaryDirectory() as temp_dir:
@@ -467,9 +764,10 @@ class CodexCliRouteAdapterTests(unittest.TestCase):
                     {"type": "item.completed", "item": {"type": "browser_action"}},
                     {"type": "turn.completed", "usage": {"input_tokens": 3, "output_tokens": 2}},
                 ]
+                self._write_jsonl_stdout(kwargs, events)
                 return SimpleNamespace(
                     returncode=0,
-                    stdout="".join(json.dumps(item) + "\n" for item in events),
+                    stdout=None,
                     stderr="",
                 )
 
@@ -503,9 +801,10 @@ class CodexCliRouteAdapterTests(unittest.TestCase):
                     },
                     {"type": "turn.completed", "usage": {"input_tokens": 5, "output_tokens": 2}},
                 ]
+                self._write_jsonl_stdout(kwargs, events)
                 return SimpleNamespace(
                     returncode=0,
-                    stdout="".join(json.dumps(item) + "\n" for item in events),
+                    stdout=None,
                     stderr="",
                 )
 

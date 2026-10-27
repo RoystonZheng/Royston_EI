@@ -878,8 +878,11 @@ def main():
                     road_map, attempt["replay"], EvaluationConfig()
                 )
                 energy_estimate["hypothetical_electricity_cost_amount"] = (
-                    energy_estimate.get("route_energy_estimate_kwh", 0.0)
+                    max(0.0, energy_estimate.get("route_energy_estimate_kwh", 0.0))
                     * prices.electricity_price_per_kwh
+                )
+                energy_estimate["hypothetical_billable_energy_kwh"] = max(
+                    0.0, float(energy_estimate.get("route_energy_estimate_kwh", 0.0) or 0.0)
                 )
                 attempt["proposal_energy_estimate"] = energy_estimate
             if needs_edge_slot_proposal_audit(attempt.get("status", "")) and "partial_proposal_audit" not in attempt:
@@ -896,10 +899,18 @@ def main():
                         partial_slot_audit["energy_estimate"][
                             "hypothetical_electricity_cost_amount"
                         ] = (
-                            partial_slot_audit["energy_estimate"].get(
+                            max(0.0, partial_slot_audit["energy_estimate"].get(
                                 "route_energy_estimate_kwh", 0.0
-                            )
+                            ))
                             * prices.electricity_price_per_kwh
+                        )
+                        partial_slot_audit["energy_estimate"][
+                            "hypothetical_billable_energy_kwh"
+                        ] = max(
+                            0.0,
+                            float(partial_slot_audit["energy_estimate"].get(
+                                "route_energy_estimate_kwh", 0.0
+                            ) or 0.0),
                         )
                         attempt["partial_proposal_audit"] = partial_slot_audit
                 partial_moves = recover_partial_move_sequence(
@@ -913,8 +924,11 @@ def main():
                         road_map, partial_replay, EvaluationConfig()
                     )
                     partial_energy["hypothetical_electricity_cost_amount"] = (
-                        partial_energy.get("route_energy_estimate_kwh", 0.0)
+                        max(0.0, partial_energy.get("route_energy_estimate_kwh", 0.0))
                         * prices.electricity_price_per_kwh
+                    )
+                    partial_energy["hypothetical_billable_energy_kwh"] = max(
+                        0.0, float(partial_energy.get("route_energy_estimate_kwh", 0.0) or 0.0)
                     )
                     attempt["partial_proposal_audit"] = {
                         "recovered_move_sequence": partial_moves,

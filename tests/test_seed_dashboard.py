@@ -1,11 +1,34 @@
 import subprocess
 import sys
+import shutil
 import tempfile
 import unittest
 from pathlib import Path
 
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "scripts"))
+from render_seed_dashboard import render_seed_dashboard
+
 
 class SeedDashboardTests(unittest.TestCase):
+    def test_r4_checkpoint_dashboard_shows_recorded_model_usage_without_claiming_invoice(self):
+        source_seed = ROOT / "outputs/route_layer/r4_codex_formal_checkpoint_v1/seeds/seed_0"
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            seed_dir = Path(temp_dir) / "seed_0"
+            shutil.copytree(source_seed, seed_dir)
+            dashboard = render_seed_dashboard(seed_dir)
+            html = dashboard.read_text(encoding="utf-8")
+
+        self.assertIn("模型请求次数", html)
+        self.assertIn("模型输入 / 输出 token", html)
+        self.assertIn("模型响应耗时", html)
+        self.assertIn("API 标价等值（估算，非账单）", html)
+        self.assertIn('"llm_input_tokens":15567', html)
+        self.assertIn('"llm_output_tokens":110', html)
+        self.assertIn('"codex_api_equivalent_usd":0.0032454000000000003', html)
+        self.assertIn("账户账单状态", html)
+
     def test_seed_dashboard_shows_map_and_algorithm_result_fields(self):
         with tempfile.TemporaryDirectory() as temp_dir:
             output_dir = Path(temp_dir) / "experiment"
