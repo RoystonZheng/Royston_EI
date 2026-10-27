@@ -10,7 +10,7 @@ import math
 from typing import Any, Dict, Iterable, List, Mapping, Optional, Union
 
 
-DECISION_MODEL_VERSION = "route_time_money_segment_v3_billable_net_energy"
+DECISION_MODEL_VERSION = "route_time_money_segment_v5_signed_fare_audit"
 
 
 @dataclass(frozen=True)
@@ -83,6 +83,7 @@ def score_route_candidates(
     selected_profile = DECISION_PROFILES[profile] if isinstance(profile, str) else profile
     eligible: List[Dict[str, Any]] = []
     excluded: List[Dict[str, str]] = []
+    incomplete: List[Dict[str, str]] = []
     for item in candidates:
         candidate_id = str(item.get("candidate_id", ""))
         if not item.get("feasible", False):
@@ -90,14 +91,18 @@ def score_route_candidates(
             continue
         travel_time = _finite_nonnegative(item, "travel_time_sec")
         money_cost = _finite_number(item, "money_cost")
-        if travel_time is None:
-            excluded.append({"candidate_id": candidate_id, "reason": "travel_time_missing_or_invalid"})
-            continue
-        if money_cost is None:
-            excluded.append({"candidate_id": candidate_id, "reason": "money_cost_missing_or_invalid"})
-            continue
-        if not candidate_id:
-            excluded.append({"candidate_id": "", "reason": "candidate_id_missing"})
+        if not candidate_id or travel_time is None or money_cost is None:
+            reasons = []
+            if not candidate_id:
+                reasons.append("candidate_id_missing")
+            if travel_time is None:
+                reasons.append("travel_time_missing_or_invalid")
+            if money_cost is None:
+                reasons.append("money_cost_missing_or_invalid")
+            incomplete.append({
+                "candidate_id": candidate_id,
+                "reason": "+".join(reasons),
+            })
             continue
         eligible.append({
             **dict(item),
@@ -115,12 +120,17 @@ def score_route_candidates(
         },
         "normalization": "min_max_over_same_feasible_candidate_set_per_scenario",
         "candidate_count": len(eligible),
+        "hard_feasible_candidate_count": len(eligible) + len(incomplete),
         "excluded_candidates": excluded,
+        "incomplete_candidates": incomplete,
         "currency": currency,
         "candidates": [],
         "selected_candidate_id": None,
         "status": "no_feasible_candidates",
     }
+    if incomplete:
+        result["status"] = "blocked_incomplete_candidate_data"
+        return result
     if not eligible:
         return result
 
@@ -164,8 +174,6 @@ def calculate_segment_economics(
     segment_type: str,
     fare_per_km: Optional[float] = None,
     observed_fare_revenue_amount: Optional[float] = None,
-    api_cost_amount: Optional[float] = None,
-    compute_cost_amount: Optional[float] = None,
     price_basis: Optional[str] = None,
     fare_basis: Optional[str] = None,
 ) -> Dict[str, Any]:
@@ -197,28 +205,43 @@ def calculate_segment_economics(
             raise ValueError("energy_kwh_must_be_finite")
         return number
 
+    def checked_signed_revenue(value: Optional[float]) -> Optional[float]:
+        if value is None:
+            return None
+        number = float(value)
+        if not math.isfinite(number):
+            raise ValueError("observed_fare_revenue_amount_must_be_finite")
+        return number
+
     distance = checked(distance_m, "distance_m")
     energy = checked_net_energy(energy_kwh)
     billable_energy = max(0.0, energy) if energy is not None else None
     tariff = checked(electricity_price_per_kwh, "electricity_price_per_kwh")
-    api_cost = checked(api_cost_amount, "api_cost_amount")
-    compute_cost = checked(compute_cost_amount, "compute_cost_amount")
     fare_rate = checked(fare_per_km, "fare_per_km")
-    observed_fare = checked(observed_fare_revenue_amount, "observed_fare_revenue_amount")
+    # Preserve signed source fares, including negative adjustments. Their
+    # business meaning must be audited separately; do not clamp them to zero.
+    observed_fare = checked_signed_revenue(observed_fare_revenue_amount)
 
     electricity_cost = (
         billable_energy * tariff
         if energy is not None and tariff is not None
         else None
     )
-    known_costs = [value for value in (electricity_cost, api_cost, compute_cost) if value is not None]
-    known_operating_cost = sum(known_costs) if known_costs else None
+    # API/token and compute costs belong to the method record and are added
+    # once per alternative candidate by the caller, never to journey segments.
+    known_operating_cost = electricity_cost
+    fare_sign_semantics: Optional[str] = None
     if segment_type == "deadhead":
         fare_revenue: Optional[float] = 0.0
         applied_fare_basis = "known_zero_for_deadhead"
+        fare_sign_semantics = "known_zero_deadhead_revenue"
     elif observed_fare is not None:
         fare_revenue = observed_fare
         applied_fare_basis = fare_basis or "observed_or_frozen_segment_fare"
+        if observed_fare < 0.0:
+            fare_sign_semantics = "signed_source_amount_negative_preserved_meaning_unverified"
+        else:
+            fare_sign_semantics = "signed_source_amount_nonnegative"
     elif fare_rate is not None:
         if distance is None:
             fare_revenue = None
@@ -226,6 +249,7 @@ def calculate_segment_economics(
         else:
             fare_revenue = distance / 1000.0 * fare_rate
             applied_fare_basis = fare_basis or "passenger_distance_km_times_configured_rate"
+            fare_sign_semantics = "configured_nonnegative_distance_rate"
     else:
         fare_revenue = None
         applied_fare_basis = None
@@ -239,9 +263,6 @@ def calculate_segment_economics(
         )
         else None
     )
-    all_operating_cost_components_known = all(
-        value is not None for value in (electricity_cost, api_cost, compute_cost)
-    )
     if energy is None:
         status = "segment_energy_unpriced"
     elif fare_revenue is None:
@@ -250,10 +271,32 @@ def calculate_segment_economics(
         status = "net_cost_not_priced_electricity_price_missing"
     elif net_economic_cost is None:
         status = "net_cost_not_priced"
-    elif all_operating_cost_components_known:
-        status = "priced_net_cost_partial_business_model"
     else:
-        status = "partial_cost_and_revenue_priced"
+        status = "priced_segment_net_cost_method_costs_separate"
+
+    null_reasons: Dict[str, str] = {}
+    if energy is None:
+        null_reasons["energy_kwh"] = "route_segment_energy_missing_or_not_estimable"
+    if electricity_cost is None:
+        if tariff is None:
+            null_reasons["electricity_cost_amount"] = "electricity_tariff_missing_or_unconfirmed"
+        elif energy is None:
+            null_reasons["electricity_cost_amount"] = "route_segment_energy_missing_or_not_estimable"
+    if segment_type == "passenger" and fare_revenue is None:
+        null_reasons["fare_revenue_amount"] = (
+            "passenger_fare_or_frozen_fare_rate_missing"
+            if fare_rate is None
+            else "distance_missing_for_configured_fare_rate"
+        )
+    if net_economic_cost is None:
+        missing_parts = []
+        if electricity_cost is None:
+            missing_parts.append("electricity_cost")
+        if fare_revenue is None:
+            missing_parts.append("fare_revenue")
+        if known_operating_cost is None:
+            missing_parts.append("known_operating_cost")
+        null_reasons["net_economic_cost"] = "missing_required_segment_components:" + "+".join(missing_parts)
 
     return {
         "currency": currency,
@@ -263,15 +306,17 @@ def calculate_segment_economics(
         "billable_energy_kwh": billable_energy,
         "electricity_price_per_kwh": tariff,
         "electricity_cost_amount": electricity_cost,
-        "api_cost_amount": api_cost,
-        "compute_cost_amount": compute_cost,
         "known_operating_cost_amount": known_operating_cost,
         "fare_per_km": fare_rate,
         "fare_revenue_amount": fare_revenue,
         "fare_basis": applied_fare_basis,
+        "fare_source": applied_fare_basis,
+        "fare_sign_semantics": fare_sign_semantics,
         "net_economic_cost": net_economic_cost,
         "price_basis": price_basis,
+        "electricity_price_source": price_basis,
         "accounting_status": status,
+        "null_reasons": null_reasons,
         "full_profitability_established": False,
         "excluded_costs": [
             "vehicle depreciation",
@@ -352,7 +397,13 @@ def aggregate_route_segment_economics(
                     "electricity_price_per_kwh": link_tariff,
                     "electricity_cost_amount": link_electricity_cost,
                     "electricity_cost_basis": "priced_at_parent_route_leg_after_net_energy_sum",
+                    "electricity_null_reason": "billed_after_signed_link_sum_at_segment_boundary",
                     "fare_revenue_amount": link_fare,
+                    "fare_null_reason": (
+                        "observed_fare_recorded_at_segment_boundary_no_link_allocation"
+                        if segment_type == "passenger" and link_fare is None
+                        else None
+                    ),
                     "fare_basis": (
                         segment.get("fare_basis", fare_basis)
                         if segment_fare_rate is not None
@@ -389,8 +440,6 @@ def aggregate_route_segment_economics(
             segment_type=segment_type,
             fare_per_km=segment_fare_rate,
             observed_fare_revenue_amount=segment.get("fare_revenue_amount"),
-            api_cost_amount=segment.get("api_cost_amount"),
-            compute_cost_amount=segment.get("compute_cost_amount"),
             price_basis=segment.get("price_basis", price_basis),
             fare_basis=segment.get("fare_basis", fare_basis),
         )

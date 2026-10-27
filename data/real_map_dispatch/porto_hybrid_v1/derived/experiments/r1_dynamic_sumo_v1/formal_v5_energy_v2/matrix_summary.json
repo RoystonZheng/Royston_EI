@@ -1,0 +1,305 @@
+{
+  "schema_version": "porto_r1_v5_ev2_matrix_summary_v1",
+  "status": "completed_with_gaps",
+  "protocol_sha256": "84407a37b780f4c676045e14162ac283964864faf0e472f38930aa549f938e46",
+  "runner_sha256": "dda71ccc0ea75c08d12a29968870a99dfad3cbf491786fe4acd43bbef05b2e05",
+  "expected_runs": 20,
+  "expected_seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "comparison": "paired descriptive differences are LOWEST_ENERGY minus FASTEST; no inferential test or causal claim is made",
+  "electricity_cost_boundary": "net EV v2 kWh is reported as a simulated resource metric; currency cost is null because no frozen electricity tariff is specified",
+  "by_objective": {
+    "FASTEST": {
+      "completed_seed_count": 9,
+      "metrics": {
+        "elapsed_completion_time_s": {
+          "n": 9,
+          "mean": 5166.01,
+          "sd_population": 409.8533849832428,
+          "median": 5011.237
+        },
+        "sum_actual_vehicle_operating_time_s": {
+          "n": 9,
+          "mean": 42573.444444444445,
+          "sd_population": 1247.9846038144954,
+          "median": 42100.4
+        },
+        "sum_actual_waiting_time_s": {
+          "n": 9,
+          "mean": 2743.288888888889,
+          "sd_population": 191.73307512989356,
+          "median": 2790.1
+        },
+        "sum_actual_distance_km": {
+          "n": 9,
+          "mean": 446.4338888888889,
+          "sd_population": 11.003980001642281,
+          "median": 447.497
+        },
+        "sum_actual_energy_gross_kwh": {
+          "n": 9,
+          "mean": 183.1848322222222,
+          "sd_population": 5.124025558388372,
+          "median": 183.49009
+        },
+        "sum_actual_energy_regenerated_kwh": {
+          "n": 9,
+          "mean": 78.39982777777777,
+          "sd_population": 2.292237330158647,
+          "median": 78.52112
+        },
+        "sum_actual_energy_net_kwh": {
+          "n": 9,
+          "mean": 104.78500777777778,
+          "sd_population": 2.854488090439638,
+          "median": 104.98111
+        }
+      }
+    },
+    "LOWEST_ENERGY": {
+      "completed_seed_count": 10,
+      "metrics": {
+        "elapsed_completion_time_s": {
+          "n": 10,
+          "mean": 5571.4995,
+          "sd_population": 418.36753893777416,
+          "median": 5474.719499999999
+        },
+        "sum_actual_vehicle_operating_time_s": {
+          "n": 10,
+          "mean": 46769.24,
+          "sd_population": 1229.544024587976,
+          "median": 46510.35
+        },
+        "sum_actual_waiting_time_s": {
+          "n": 10,
+          "mean": 3596.71,
+          "sd_population": 285.0124609556572,
+          "median": 3630.3
+        },
+        "sum_actual_distance_km": {
+          "n": 10,
+          "mean": 412.948,
+          "sd_population": 10.8942823811392,
+          "median": 411.698
+        },
+        "sum_actual_energy_gross_kwh": {
+          "n": 10,
+          "mean": 161.29714,
+          "sd_population": 4.2099686799096325,
+          "median": 161.22463
+        },
+        "sum_actual_energy_regenerated_kwh": {
+          "n": 10,
+          "mean": 68.703309,
+          "sd_population": 1.9155554623891717,
+          "median": 68.75872000000001
+        },
+        "sum_actual_energy_net_kwh": {
+          "n": 10,
+          "mean": 92.593829,
+          "sd_population": 2.3146358285892403,
+          "median": 92.46591000000001
+        }
+      }
+    }
+  },
+  "paired_difference_lowest_energy_minus_fastest": {
+    "elapsed_completion_time_s": {
+      "n": 9,
+      "mean": 432.7835555555555,
+      "sd_population": 198.1598865075659,
+      "median": 411.20300000000043
+    },
+    "sum_actual_vehicle_operating_time_s": {
+      "n": 9,
+      "mean": 4026.0555555555547,
+      "sd_population": 480.32630369852876,
+      "median": 4010.199999999997
+    },
+    "sum_actual_waiting_time_s": {
+      "n": 9,
+      "mean": 801.5,
+      "sd_population": 218.46950460978408,
+      "median": 787.2000000000003
+    },
+    "sum_actual_distance_km": {
+      "n": 9,
+      "mean": -34.689888888888895,
+      "sd_population": 2.2455985316685876,
+      "median": -34.77800000000002
+    },
+    "sum_actual_energy_gross_kwh": {
+      "n": 9,
+      "mean": -22.254932222222223,
+      "sd_population": 1.3910105252000327,
+      "median": -21.738079999999997
+    },
+    "sum_actual_energy_regenerated_kwh": {
+      "n": 9,
+      "mean": -9.853365555555555,
+      "sd_population": 0.74797676385643,
+      "median": -9.659239999999997
+    },
+    "sum_actual_energy_net_kwh": {
+      "n": 9,
+      "mean": -12.40157222222222,
+      "sd_population": 0.6986722443126241,
+      "median": -12.25282
+    }
+  },
+  "paired_complete_seed_count": 9,
+  "run_statuses": {
+    "seed_00_fastest": {
+      "summary_status": "completed",
+      "run_audit_status": "completed",
+      "orders_completed": 100,
+      "expected_orders": 100,
+      "non_estimable_energy_legs": []
+    },
+    "seed_00_lowest_energy": {
+      "summary_status": "completed",
+      "run_audit_status": "completed",
+      "orders_completed": 100,
+      "expected_orders": 100,
+      "non_estimable_energy_legs": []
+    },
+    "seed_01_fastest": {
+      "summary_status": "completed",
+      "run_audit_status": "completed",
+      "orders_completed": 100,
+      "expected_orders": 100,
+      "non_estimable_energy_legs": []
+    },
+    "seed_01_lowest_energy": {
+      "summary_status": "completed",
+      "run_audit_status": "completed",
+      "orders_completed": 100,
+      "expected_orders": 100,
+      "non_estimable_energy_legs": []
+    },
+    "seed_02_fastest": {
+      "summary_status": "missing_summary",
+      "run_audit_status": null,
+      "orders_completed": null,
+      "expected_orders": null,
+      "non_estimable_energy_legs": null
+    },
+    "seed_02_lowest_energy": {
+      "summary_status": "completed",
+      "run_audit_status": "completed",
+      "orders_completed": 100,
+      "expected_orders": 100,
+      "non_estimable_energy_legs": []
+    },
+    "seed_03_fastest": {
+      "summary_status": "completed",
+      "run_audit_status": "completed",
+      "orders_completed": 100,
+      "expected_orders": 100,
+      "non_estimable_energy_legs": []
+    },
+    "seed_03_lowest_energy": {
+      "summary_status": "completed",
+      "run_audit_status": "completed",
+      "orders_completed": 100,
+      "expected_orders": 100,
+      "non_estimable_energy_legs": []
+    },
+    "seed_04_fastest": {
+      "summary_status": "completed",
+      "run_audit_status": "completed",
+      "orders_completed": 100,
+      "expected_orders": 100,
+      "non_estimable_energy_legs": []
+    },
+    "seed_04_lowest_energy": {
+      "summary_status": "completed",
+      "run_audit_status": "completed",
+      "orders_completed": 100,
+      "expected_orders": 100,
+      "non_estimable_energy_legs": []
+    },
+    "seed_05_fastest": {
+      "summary_status": "completed",
+      "run_audit_status": "completed",
+      "orders_completed": 100,
+      "expected_orders": 100,
+      "non_estimable_energy_legs": []
+    },
+    "seed_05_lowest_energy": {
+      "summary_status": "completed",
+      "run_audit_status": "completed",
+      "orders_completed": 100,
+      "expected_orders": 100,
+      "non_estimable_energy_legs": []
+    },
+    "seed_06_fastest": {
+      "summary_status": "completed",
+      "run_audit_status": "completed",
+      "orders_completed": 100,
+      "expected_orders": 100,
+      "non_estimable_energy_legs": []
+    },
+    "seed_06_lowest_energy": {
+      "summary_status": "completed",
+      "run_audit_status": "completed",
+      "orders_completed": 100,
+      "expected_orders": 100,
+      "non_estimable_energy_legs": []
+    },
+    "seed_07_fastest": {
+      "summary_status": "completed",
+      "run_audit_status": "completed",
+      "orders_completed": 100,
+      "expected_orders": 100,
+      "non_estimable_energy_legs": []
+    },
+    "seed_07_lowest_energy": {
+      "summary_status": "completed",
+      "run_audit_status": "completed",
+      "orders_completed": 100,
+      "expected_orders": 100,
+      "non_estimable_energy_legs": []
+    },
+    "seed_08_fastest": {
+      "summary_status": "completed",
+      "run_audit_status": "completed",
+      "orders_completed": 100,
+      "expected_orders": 100,
+      "non_estimable_energy_legs": []
+    },
+    "seed_08_lowest_energy": {
+      "summary_status": "completed",
+      "run_audit_status": "completed",
+      "orders_completed": 100,
+      "expected_orders": 100,
+      "non_estimable_energy_legs": []
+    },
+    "seed_09_fastest": {
+      "summary_status": "completed",
+      "run_audit_status": "completed",
+      "orders_completed": 100,
+      "expected_orders": 100,
+      "non_estimable_energy_legs": []
+    },
+    "seed_09_lowest_energy": {
+      "summary_status": "completed",
+      "run_audit_status": "completed",
+      "orders_completed": 100,
+      "expected_orders": 100,
+      "non_estimable_energy_legs": []
+    }
+  },
+  "interpretation_limit": "SUMO simulation on a real OSM-derived Porto road graph with synthetic background traffic; not observed fleet performance. Missing trace energy remains non-estimable and is excluded from complete paired energy summaries."
+}

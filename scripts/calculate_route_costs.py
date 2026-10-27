@@ -182,89 +182,129 @@ def _route_decisions_for_item(
     fare_per_km=None,
     segment_type="passenger",
 ):
-    """Score alternatives within each planner separately under both profiles."""
+    """Compare all feasible planner routes in one shared task-level pool."""
 
-    if (
-        price_config.electricity_price_per_kwh <= 0
-        or price_config.pricing_status == "unconfirmed"
-        or price_config.price_source == "unconfirmed"
-    ):
-        return {
-            "model_version": DECISION_MODEL_VERSION,
-            "status": "blocked_missing_frozen_electricity_price",
-            "pricing_status": price_config.pricing_status,
-            "price_source": price_config.price_source,
-            "method_decisions": {
-                method.get("method_name", "unknown_method"): {
-                    "profiles": {
-                        profile_id: {
-                            "profile": {
-                                "time_weight": profile.time_weight,
-                                "money_weight": profile.money_weight,
-                            },
-                            "status": "not_scored_missing_frozen_electricity_price",
-                        }
-                        for profile_id, profile in DECISION_PROFILES.items()
-                    },
-                    "candidate_catalog": [],
-                }
-                for method in item.get("methods", [])
-            },
-        }
-
+    electricity_price_available = (
+        price_config.electricity_price_per_kwh is not None
+        and price_config.electricity_price_per_kwh > 0
+        and price_config.pricing_status != "unconfirmed"
+        and price_config.price_source != "unconfirmed"
+    )
+    electricity_price = (
+        price_config.electricity_price_per_kwh
+        if electricity_price_available
+        else None
+    )
     observed_fare = item.get("fare_revenue_amount")
     observed_fare_currency = item.get("fare_currency")
     fare_currency_mismatch = (
         observed_fare is not None
-        and observed_fare_currency is not None
         and observed_fare_currency != price_config.currency
     )
+
     method_decisions = {}
+    candidate_catalog = []
+    score_candidates = []
+    feasible_count = 0
+    blocked_candidates = []
+
     for method_payload in item.get("methods", []):
         method = _parse_method(method_payload)
-        catalog = []
-        score_candidates = []
+        method_catalog = []
+        method_candidate_ids = []
+        method_feasible_count = 0
+        method_scoreable_count = 0
+
+        token_total = method.resources.input_tokens + method.resources.output_tokens
+        usage_known = (
+            method.resources.llm_calls > 0
+            or token_total > 0
+            or method.metadata.get("usage_accounting_status") == "reported"
+            or method.metadata.get("cost_status") == "evaluated"
+        )
+        api_cost = None
+        if usage_known and token_total == 0 and method.resources.llm_calls == 0:
+            api_cost = 0.0
+        elif (
+            usage_known
+            and price_config.api_price_per_token is not None
+            and price_config.api_price_per_token > 0
+        ):
+            api_cost = token_total * price_config.api_price_per_token
+
+        compute_ms = method.metadata.get("compute_time_ms")
+        if compute_ms is None and method.resources.compute_time_ms > 0:
+            compute_ms = method.resources.compute_time_ms
+        compute_cost = None
+        if compute_ms is not None:
+            try:
+                compute_ms = float(compute_ms)
+            except (TypeError, ValueError):
+                compute_ms = None
+        if compute_ms == 0:
+            compute_cost = 0.0
+        elif (
+            compute_ms is not None
+            and compute_ms > 0
+            and price_config.compute_price_per_ms is not None
+            and price_config.compute_price_per_ms > 0
+        ):
+            compute_cost = compute_ms * price_config.compute_price_per_ms
+        method_money_complete = api_cost is not None and compute_cost is not None
+        method_costs = {
+            "currency": price_config.currency,
+            "api_cost_amount": api_cost,
+            "compute_cost_amount": compute_cost,
+            "known_method_cost_subtotal": (
+                sum(value for value in (api_cost, compute_cost) if value is not None)
+                if api_cost is not None or compute_cost is not None
+                else None
+            ),
+            "complete_for_declared_scope": method_money_complete,
+            "accounted_once_per_method": True,
+            "null_reasons": {
+                **({"api_cost_amount": "usage_or_matching_api_rate_missing"} if api_cost is None else {}),
+                **({"compute_cost_amount": "compute_time_or_matching_compute_rate_missing"} if compute_cost is None else {}),
+            },
+        }
+
         for route in method.routes:
             candidate_id = f"{method.method_name}::{route.route_id}"
+            method_candidate_ids.append(candidate_id)
             if not route.route_reachability or route.validation_status not in ("valid", ""):
-                catalog.append({
+                candidate = {
                     "candidate_id": candidate_id,
                     "method_name": method.method_name,
                     "route_id": route.route_id,
+                    "hard_feasible": False,
+                    "feasible": False,
+                    "scoreable_for_time_money": False,
                     "eligible": False,
                     "exclusion_reason": "hard_constraint_failed_or_unvalidated",
-                })
+                }
+                method_catalog.append(candidate)
+                candidate_catalog.append(candidate)
                 continue
+
             try:
                 evaluation = evaluate_route_candidate(road_map, route, evaluation_config)
             except (ValueError, KeyError) as error:
-                catalog.append({
+                candidate = {
                     "candidate_id": candidate_id,
                     "method_name": method.method_name,
                     "route_id": route.route_id,
+                    "hard_feasible": False,
+                    "feasible": False,
+                    "scoreable_for_time_money": False,
                     "eligible": False,
                     "exclusion_reason": str(error),
-                })
+                }
+                method_catalog.append(candidate)
+                candidate_catalog.append(candidate)
                 continue
 
-            api_cost = None
-            compute_cost = None
-            usage_known = (
-                method.resources.llm_calls > 0
-                or method.resources.input_tokens > 0
-                or method.resources.output_tokens > 0
-                or method.metadata.get("usage_accounting_status") == "reported"
-            )
-            if usage_known and price_config.api_price_per_token > 0:
-                api_cost = (
-                    method.resources.input_tokens + method.resources.output_tokens
-                ) * price_config.api_price_per_token
-            compute_ms = method.metadata.get("compute_time_ms")
-            if compute_ms is None and method.resources.compute_time_ms > 0:
-                compute_ms = method.resources.compute_time_ms
-            if compute_ms is not None and price_config.compute_price_per_ms > 0:
-                compute_cost = float(compute_ms) * price_config.compute_price_per_ms
-
+            method_feasible_count += 1
+            feasible_count += 1
             fare_for_candidate = (
                 float(observed_fare)
                 if observed_fare is not None and not fare_currency_mismatch
@@ -280,8 +320,6 @@ def _route_decisions_for_item(
                         "road_links": evaluation.energy_segments,
                         "fare_revenue_amount": fare_for_candidate,
                         "fare_per_km": fare_per_km,
-                        "api_cost_amount": api_cost,
-                        "compute_cost_amount": compute_cost,
                         "price_basis": (
                             f"{price_config.pricing_version}:{price_config.price_source}"
                         ),
@@ -296,87 +334,158 @@ def _route_decisions_for_item(
                     }
                 ],
                 currency=price_config.currency,
-                electricity_price_per_kwh=price_config.electricity_price_per_kwh,
+                electricity_price_per_kwh=electricity_price,
                 fare_per_km=fare_per_km,
                 price_basis=f"{price_config.pricing_version}:{price_config.price_source}",
             )
-            eligible = economics["net_economic_cost"] is not None
-            catalog.append({
+
+            missing_money_inputs = []
+            if economics.get("energy_kwh") is None:
+                missing_money_inputs.append("route_energy")
+            if economics.get("electricity_cost_amount") is None:
+                missing_money_inputs.append("electricity_tariff")
+            if economics.get("fare_revenue_amount") is None:
+                missing_money_inputs.append(
+                    "fare_currency_missing_or_mismatch"
+                    if fare_currency_mismatch
+                    else "passenger_fare"
+                )
+            if api_cost is None:
+                missing_money_inputs.append("api_usage_or_rate")
+            if compute_cost is None:
+                missing_money_inputs.append("compute_time_or_rate")
+            segment_net_cost = economics.get("net_economic_cost")
+            if segment_net_cost is None:
+                missing_money_inputs.append("segment_net_cost")
+
+            scoreable = not missing_money_inputs
+            money_cost = (
+                segment_net_cost + api_cost + compute_cost
+                if scoreable
+                else None
+            )
+            candidate = {
                 "candidate_id": candidate_id,
                 "method_name": method.method_name,
                 "route_id": route.route_id,
-                "eligible": eligible,
+                "hard_feasible": True,
+                "feasible": True,
+                "scoreable_for_time_money": scoreable,
+                "eligible": scoreable,
                 "exclusion_reason": (
-                    None if eligible else economics["accounting_status"]
+                    None
+                    if scoreable
+                    else "incomplete_economic_inputs:" + ",".join(missing_money_inputs)
                 ),
+                "missing_money_inputs": missing_money_inputs,
                 "travel_time_sec": evaluation.total_travel_time_sec,
                 "distance_m": evaluation.route_distance_m,
                 "energy_kwh": evaluation.energy_total_kwh,
+                "segment_net_economic_cost": segment_net_cost,
+                "money_cost": money_cost,
+                "method_cost_ref": method.method_name,
                 "economics": economics,
-            })
-            if eligible:
+            }
+            method_catalog.append(candidate)
+            candidate_catalog.append(candidate)
+            if scoreable:
+                method_scoreable_count += 1
                 score_candidates.append({
                     "candidate_id": candidate_id,
+                    "method_name": method.method_name,
                     "feasible": True,
                     "travel_time_sec": evaluation.total_travel_time_sec,
-                    "money_cost": economics["net_economic_cost"],
+                    "money_cost": money_cost,
                 })
-        profiles = {
-            profile_id: score_route_candidates(
+            else:
+                blocked_candidates.append({
+                    "candidate_id": candidate_id,
+                    "method_name": method.method_name,
+                    "reason": candidate["exclusion_reason"],
+                })
+
+        if method_feasible_count == 0:
+            method_status = "no_feasible_candidates"
+        elif method_scoreable_count < method_feasible_count:
+            method_status = "blocked_incomplete_economic_inputs"
+        else:
+            method_status = "candidate_data_complete"
+        method_decisions[method.method_name] = {
+            "status": method_status,
+            "candidate_count": len(method_catalog),
+            "hard_feasible_candidate_count": method_feasible_count,
+            "money_scoreable_candidate_count": method_scoreable_count,
+            "candidate_ids": method_candidate_ids,
+            "method_costs": method_costs,
+            "candidate_catalog": method_catalog,
+        }
+
+    profile_results = {}
+    for profile_id, profile in DECISION_PROFILES.items():
+        if feasible_count == 0:
+            profile_results[profile_id] = score_route_candidates(
+                [], profile, currency=price_config.currency
+            )
+            continue
+        if blocked_candidates:
+            profile_results[profile_id] = {
+                "model_version": DECISION_MODEL_VERSION,
+                "profile": {
+                    "profile_id": profile.profile_id,
+                    "time_weight": profile.time_weight,
+                    "money_weight": profile.money_weight,
+                },
+                "normalization": "min_max_over_same_feasible_candidate_set_per_scenario",
+                "candidate_pool_scope": "same_task_scenario_across_all_methods",
+                "candidate_count": 0,
+                "hard_feasible_candidate_count": feasible_count,
+                "money_scoreable_candidate_count": len(score_candidates),
+                "blocked_candidate_count": len(blocked_candidates),
+                "currency": price_config.currency,
+                "excluded_candidates": [],
+                "incomplete_candidates": blocked_candidates,
+                "candidates": [],
+                "selected_candidate_id": None,
+                "status": "blocked_incomplete_economic_inputs",
+            }
+        else:
+            profile_results[profile_id] = score_route_candidates(
                 score_candidates,
                 profile,
                 currency=price_config.currency,
             )
-            for profile_id, profile in DECISION_PROFILES.items()
-        }
-        unpriced_candidate_count = sum(
-            1
-            for candidate in catalog
-            if candidate.get("economics", {}).get("net_economic_cost") is None
-            and candidate.get("economics", {}).get("accounting_status")
-            in {
-                "operating_cost_only_fare_unpriced",
-                "net_cost_not_priced_electricity_price_missing",
-                "net_cost_incomplete_segment_inputs",
+            profile_results[profile_id]["candidate_pool_scope"] = (
+                "same_task_scenario_across_all_methods"
+            )
+
+    for method_name, decision in method_decisions.items():
+        method_ids = set(decision["candidate_ids"])
+        decision["profiles"] = {
+            profile_id: {
+                "status": profile_result["status"],
+                "candidate_pool_scope": "same_task_scenario_across_all_methods",
+                "selected_candidate_id": (
+                    profile_result.get("selected_candidate_id")
+                    if profile_result.get("selected_candidate_id") in method_ids
+                    else None
+                ),
+                "selected_by_shared_pool": (
+                    profile_result.get("selected_candidate_id") in method_ids
+                ),
             }
-        )
-        if not score_candidates and unpriced_candidate_count:
-            for profile_result in profiles.values():
-                profile_result["status"] = "blocked_incomplete_economic_inputs"
-                profile_result["blocked_candidate_count"] = unpriced_candidate_count
-        method_decisions[method.method_name] = {
-            "status": (
-                "scored"
-                if score_candidates
-                else (
-                    "blocked_incomplete_economic_inputs"
-                    if unpriced_candidate_count
-                    else "no_feasible_candidates"
-                )
-            ),
-            "candidate_pool_shared_across_profiles": True,
-            "profiles": profiles,
-            "candidate_catalog": catalog,
+            for profile_id, profile_result in profile_results.items()
         }
-    any_scoreable_candidate = any(
-        decision["status"] == "scored"
-        for decision in method_decisions.values()
-    )
-    any_incomplete_candidate = any(
-        decision["status"] == "blocked_incomplete_economic_inputs"
-        for decision in method_decisions.values()
-    )
+
+    if feasible_count == 0:
+        overall_status = "no_feasible_candidates" if method_decisions else "no_methods"
+    elif blocked_candidates:
+        overall_status = "blocked_incomplete_economic_inputs"
+    else:
+        overall_status = "scored"
+
     return {
         "model_version": DECISION_MODEL_VERSION,
-        "status": (
-            "scored"
-            if any_scoreable_candidate
-            else (
-                "blocked_incomplete_economic_inputs"
-                if any_incomplete_candidate
-                else "no_feasible_candidates" if method_decisions else "no_methods"
-            )
-        ),
+        "status": overall_status,
         "pricing_status": price_config.pricing_status,
         "price_source": price_config.price_source,
         "price_source_url": price_config.price_source_url,
@@ -384,12 +493,36 @@ def _route_decisions_for_item(
         "currency": price_config.currency,
         "fare_per_km_scenario": fare_per_km,
         "fare_currency_mismatch": fare_currency_mismatch,
+        "fare_currency_status": (
+            "not_applicable"
+            if observed_fare is None
+            else "matched"
+            if observed_fare_currency == price_config.currency
+            else "missing_or_mismatched"
+        ),
         "segment_type": segment_type,
+        "candidate_pool": {
+            "scope": "same_task_scenario_across_all_methods",
+            "candidate_count": feasible_count,
+            "generated_route_count": len(candidate_catalog),
+            "hard_feasible_candidate_count": feasible_count,
+            "money_scoreable_candidate_count": len(score_candidates),
+            "blocked_candidate_count": len(blocked_candidates),
+            "candidate_ids": [
+                candidate["candidate_id"]
+                for candidate in candidate_catalog
+                if candidate.get("hard_feasible")
+            ],
+            "shared_across_profiles": True,
+        },
+        "profiles": profile_results,
         "method_decisions": method_decisions,
         "accounting_limit": (
-            "Known segment electricity/API/compute costs minus known passenger fare revenue; "
-            "unknown passenger revenue or electricity price blocks net-cost scoring. "
-            "Full vehicle profitability is not established."
+            "Route segment economics contain priced electricity minus known fare "
+            "revenue. API/token and compute charges are held once at method level "
+            "and added once to each alternative method-route decision. Missing "
+            "inputs block shared-pool scoring. Full vehicle profitability is not "
+            "established."
         ),
     }
 
@@ -421,7 +554,7 @@ def main():
     parser.add_argument(
         "--enable-route-decisions",
         action="store_true",
-        help="write v1 time/money decisions as a sidecar field without changing original routes",
+        help="write versioned time/money decisions as a sidecar field without changing original routes",
     )
     parser.add_argument("--fare-per-km", type=float)
     parser.add_argument(
@@ -486,6 +619,9 @@ def main():
     if args.enable_route_decisions:
         output["route_decision_config"] = {
             "model_version": DECISION_MODEL_VERSION,
+            "candidate_pool_scope": "same_task_scenario_across_all_methods",
+            "candidate_pool_shared_across_profiles": True,
+            "economic_input_completeness_required_for_selection": True,
             "profiles": {
                 profile_id: {
                     "time_weight": profile.time_weight,
@@ -495,9 +631,11 @@ def main():
             },
             "fare_per_km_scenario": args.fare_per_km,
             "segment_type": args.decision_segment_type,
-            "money_value": "known operating costs minus known fare revenue",
-            "unknown_fare_policy": "retain known cost subtotal and block net-economic-cost scoring",
+            "money_value": "priced journey-segment electricity minus known fare revenue plus method-level API/token and compute cost once",
+            "unknown_economic_input_policy": "retain known subtotals and block candidate-pool scoring if any hard-feasible candidate lacks comparable monetary inputs",
             "segment_accounting": "ordered road-Link energy details; observed trip fare once per passenger leg; per-Link fare only for an explicit per-km schedule",
+            "signed_fare_policy": "finite observed fare amounts may be negative; preserve the signed source amount and audit its meaning without clamping",
+            "method_cost_accounting": "API/token and compute charges are stored once per method and added once to each alternative method-route score; they are not assigned to Links or summed across alternative candidates",
             "results_are_sidecar_only": True,
             "source_routes_sha256": _sha256(Path(args.routes_json)),
             "source_map_sha256": _sha256(Path(args.map_json)),

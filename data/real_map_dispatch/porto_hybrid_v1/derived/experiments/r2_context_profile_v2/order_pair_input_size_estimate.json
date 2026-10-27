@@ -1,0 +1,39 @@
+{
+  "profile_id": "porto_r2_order_pair_input_size_estimate_v1",
+  "status": "completed_offline_estimate_no_model_calls",
+  "formal_experiment": false,
+  "request_unit": "one Codex request for both route legs of one fixed order under one objective",
+  "paired_order_count": 1000,
+  "route_legs_per_request": 2,
+  "objectives_per_order": 2,
+  "modeled_calls_if_full_matrix": 2000,
+  "paired_crop_graph_json_bytes": {
+    "median": 126474.5,
+    "mean": 134321.296,
+    "p90": 205869,
+    "p95": 232806,
+    "max": 336411
+  },
+  "input_token_estimate": {
+    "formula": "ceil(sum(two leg compact_graph_json_bytes) / 3 * observed_tokens_per_rough_token)",
+    "observed_tokens_per_rough_token": 1.9142226148409893,
+    "calibration_call_input_tokens": 65007,
+    "calibration_call_rough_tokens": 33960,
+    "calibration_call_order": "seed 0 ord_0001 FASTEST local crop; one call only",
+    "median": 80700.5,
+    "mean": 85707.46,
+    "p90": 131360,
+    "p95": 148548,
+    "max": 214656,
+    "at_or_below_75000_gate_count": 435,
+    "above_75000_gate_count": 565,
+    "above_75000_gate_count_two_objectives": 1130
+  },
+  "source_profile_csv_sha256": "496fd83d1ed288e254fd1e395c83ad9103fa9c99c655ca1e0650a88a45d2be80",
+  "caveats": [
+    "This is a byte-based planning estimate calibrated from one successful Codex CLI invocation; actual per-request token usage varies and must be read from JSONL.",
+    "The 75000-token threshold is the current single-call pilot gate, not a formal experiment budget or account limit.",
+    "The profile uses complete induced legal turns; it does not prove route-generation success or dynamic SUMO behavior.",
+    "Full matrix count assumes one request per fixed order per objective across 10 seeds and 100 orders per seed."
+  ]
+}

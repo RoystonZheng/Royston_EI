@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "observed_at_local": "2026-10-27T21:28:35+08:00",
+  "checkpoint_type": "partial_completed_task_outputs",
+  "source_progress_path_relative_to_workspace": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/progress.jsonl",
+  "source_progress_sha256_at_capture": "43bf6b5dca69e182188fa00ecf894c5eea2fcbba0dbea67dfea514bce063a377",
+  "completion_event_sha256": "507ecc235baa395941b95ebc3313a0dc9a0c606b023babb8ae093e845d25e59d",
+  "completed_method_outputs": [
+    {
+      "scenario_id": "EV_20240611_211000_q75",
+      "phase": "F4",
+      "method": "D0_greedy",
+      "run_id": "evaluation/EV_20240611_211000_q75/F4/D0_D1",
+      "completion_status": "complete",
+      "return_code": 0,
+      "event_timestamp_utc": "2026-10-27T13:23:35+00:00",
+      "source_path_relative_to_workspace": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20240611_211000_q75/F4/D0_greedy_seed_3.json",
+      "archive_path": "D0_greedy_seed_3.json",
+      "source_sha256": "1075295f7d6b6ca4a546967a63a0b384f3eaa58c4c338fb87aeaf6d380f6f4a3",
+      "archive_sha256": "1075295f7d6b6ca4a546967a63a0b384f3eaa58c4c338fb87aeaf6d380f6f4a3",
+      "bytes": 1310772
+    },
+    {
+      "scenario_id": "EV_20240611_211000_q75",
+      "phase": "F4",
+      "method": "D1_optimizer",
+      "run_id": "evaluation/EV_20240611_211000_q75/F4/D0_D1",
+      "completion_status": "complete",
+      "return_code": 0,
+      "event_timestamp_utc": "2026-10-27T13:23:35+00:00",
+      "source_path_relative_to_workspace": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20240611_211000_q75/F4/D1_optimizer_seed_3.json",
+      "archive_path": "D1_optimizer_seed_3.json",
+      "source_sha256": "d9130a6353160d452027f867c4b13f8259297c25f84187a776c43a98bff73a9c",
+      "archive_sha256": "d9130a6353160d452027f867c4b13f8259297c25f84187a776c43a98bff73a9c",
+      "bytes": 1744985
+    }
+  ],
+  "active_work_observed": {
+    "run_id": "evaluation/EV_20240611_211000_q75/F4/D2",
+    "last_event": "progress",
+    "timestamp_utc": "2026-10-27T13:27:36+00:00",
+    "copied": false
+  },
+  "note": "Partial seed-3 checkpoint only. F4 D0/D1 terminal outputs are archived; F4 D2 remains active. This is not a paired audit or overall result."
+}
