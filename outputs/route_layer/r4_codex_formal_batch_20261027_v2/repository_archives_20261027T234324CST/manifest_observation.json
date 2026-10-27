@@ -1,0 +1,108 @@
+{
+  "observation_type": "single-read exact-root R4 parent/worker status; no task outputs copied",
+  "observed_at_local": "2026-10-27T23:43:24+08:00",
+  "source_root": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2",
+  "parent_manifest": {
+    "sha256": "bb24b36e74d079e39c755f464fb7f7df18e2203d222028b2f0dadd456304f050",
+    "mtime_ns": 1793115513605657188,
+    "status": "paused_at_parallel_checkpoint",
+    "updated_at_utc": "2026-10-27T15:38:33.602550+00:00",
+    "model_requests_used": 5173,
+    "unknown_delivery": null,
+    "task_status_counts": {
+      "route_complete": 19,
+      "failed": 34,
+      "ready": 5,
+      "pending": 71
+    },
+    "route_complete_task_ids": [
+      "task-0000-0001",
+      "task-0000-0002",
+      "task-0000-0003",
+      "task-0000-0006",
+      "task-0000-0007",
+      "task-0000-0008",
+      "task-0001-0003",
+      "formal-task-0001-feasible",
+      "task-0002-0006",
+      "task-0003-0009",
+      "task-0004-0001",
+      "task-0004-0002",
+      "task-0005-0006",
+      "formal-task-0005-boundary",
+      "task-0006-0008",
+      "formal-task-0006-boundary",
+      "task-0007-0001",
+      "task-0007-0005",
+      "task-0009-0005"
+    ],
+    "new_route_complete_since_T2251": []
+  },
+  "worker_01_manifest": {
+    "sha256": "93483bcc7dff15824fe71880038b9b61b8700fad304fe87192d96250fb031665",
+    "mtime_ns": 1793115167243175840,
+    "status": "stopped_provider_or_tool_contract_failure",
+    "updated_at_utc": "2026-10-27T15:32:47.240387+00:00",
+    "model_requests_used": 940,
+    "unknown_delivery": null,
+    "task_status_counts": {
+      "route_complete": 3,
+      "outcome_unknown": 3,
+      "failed": 17,
+      "pending": 6
+    },
+    "active_tasks": []
+  },
+  "execution_lock_and_pid_files": [
+    {
+      "path": ".r4_model_execution.lock",
+      "exists": true,
+      "size_bytes": 9,
+      "mtime_ns": 1793110122572332502
+    },
+    {
+      "path": "parallel_workers/worker_00/.r4_model_execution.lock",
+      "exists": true,
+      "size_bytes": 10,
+      "mtime_ns": 1793115779997917015
+    },
+    {
+      "path": "parallel_workers/worker_01/.r4_model_execution.lock",
+      "exists": true,
+      "size_bytes": 10,
+      "mtime_ns": 1793115103009172228
+    },
+    {
+      "path": "parallel_workers/worker_02/.r4_model_execution.lock",
+      "exists": true,
+      "size_bytes": 10,
+      "mtime_ns": 1793108119097420584
+    },
+    {
+      "path": "parallel_workers/worker_03/.r4_model_execution.lock",
+      "exists": true,
+      "size_bytes": 10,
+      "mtime_ns": 1793108127182197950
+    },
+    {
+      "path": "parallel_workers/worker_recovery/.r4_model_execution.lock",
+      "exists": true,
+      "size_bytes": 10,
+      "mtime_ns": 1793107453443526673
+    },
+    {
+      "path": "parallel_workers/worker_recovery_addendum/.r4_model_execution.lock",
+      "exists": true,
+      "size_bytes": 10,
+      "mtime_ns": 1793095536687986007
+    },
+    {
+      "path": "parallel_workers/worker_recovery_addendum2/.r4_model_execution.lock",
+      "exists": true,
+      "size_bytes": 10,
+      "mtime_ns": 1793106459012495374
+    }
+  ],
+  "open_worker_logs": [],
+  "interpretation": "Root remains paused at parallel checkpoint. worker_01 remains separate from the parent; do not combine counters. No R4 task outputs copied."
+}

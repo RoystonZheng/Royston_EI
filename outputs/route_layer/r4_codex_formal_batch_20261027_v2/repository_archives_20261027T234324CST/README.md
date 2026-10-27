@@ -1,0 +1,1 @@
+Point-in-time status observation from the exact R4 root. It captures one read of the parent and worker_01 manifests, lock/PID state, and worker log handles. No task outputs copied; parent and worker counters are separate.
