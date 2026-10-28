@@ -1,0 +1,70 @@
+{
+  "created_at_utc": "2026-10-28T04:59:24.146907+00:00",
+  "branch": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2",
+  "authorization": {
+    "stop_threshold_percent": 100,
+    "zero_retry": true,
+    "source": "direct user reply in current conversation"
+  },
+  "violation": {
+    "request_limit": "none",
+    "usage_stop_percent": "none",
+    "max_new_requests_per_invocation": "none",
+    "launcher_ignored_halt_flag": true,
+    "wrapper_restarted_after_sigterm": true
+  },
+  "observed_account_usage_percent": {
+    "pre_observation": 10,
+    "post_observation": 10,
+    "per_request_snapshots": false,
+    "billing_reported_by_cli": false
+  },
+  "worker_00": {
+    "requests_before": 1200,
+    "requests_after": 1202,
+    "task_id": "task-0006-0009",
+    "manifest_sha256_after_quarantine": "2595570726c5612e3ee56a36382914ac4d7670347770b02076133c4206807fd5",
+    "manifest_sha256_before_quarantine": "076bf6b5026304d62fee3f9293e7b8078307196ac49b6bd81218e7d9bdc97530"
+  },
+  "committed_attempts": [
+    {
+      "request": 1201,
+      "attempt_sha256": "18439b515e7f0694308e311107aca1478f2c929c3d8a40130d8c4c09a7bb442c",
+      "trace_sha256": "756c0a23e4dae1d8f1e20c8fc84c9502eeed616597cdaaff894c40896355b591",
+      "status": "accepted_legal_step",
+      "direction": "S",
+      "input_tokens": 22590,
+      "cached_input_tokens": 0,
+      "output_tokens": 205,
+      "retry_count": 0
+    },
+    {
+      "request": 1202,
+      "attempt_sha256": "7dcc2de8d93d6aaa2101168feb1d332ea1fe7ab9c2d52a1b15514efb7229c5a6",
+      "trace_sha256": "2303de0e51afb80a74299ba20a37134cfdbd041b494e16ca93fa10e78b6ebd7a",
+      "status": "accepted_legal_step",
+      "direction": "S",
+      "input_tokens": 22537,
+      "cached_input_tokens": 0,
+      "output_tokens": 136,
+      "retry_count": 0
+    }
+  ],
+  "uncommitted_trace": {
+    "request_number": 3,
+    "trace_sha256": "3c5048c8dd6fc1f4884f5aef2f03de618e60015172d0b26a17fbcec5a438a05e",
+    "final_sha256": "f00451b85cbc01e2c26a6bad30b6c0357c724f364dd62bf8f72b759f8132178b",
+    "turn_completed_seen": true,
+    "state_committed": false,
+    "automatic_replay": false
+  },
+  "source_backups_sha256": {
+    "resilient_runner.py": "897cb31778ef1580a2e490cbb9c7e6a5c4ab5fd7dcc82ed1737429885a454fcf",
+    "serial_supervisor.py": "e7b01c05af0a55168292fcd97cdfa30b483375b14a41e230e053d93b2f71d13e"
+  },
+  "fail_closed_stub_sha256": {
+    "resilient_runner.py": "986411ba136eb55e59fcdc4e93dbab007ac4607e56c0a8ccefd50844648bf2b0",
+    "serial_supervisor.py": "986411ba136eb55e59fcdc4e93dbab007ac4607e56c0a8ccefd50844648bf2b0"
+  },
+  "preserved_manifest_snapshot": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/manifest_pre_runner_quarantine_20261028T0458Z.json"
+}

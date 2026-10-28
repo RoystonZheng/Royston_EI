@@ -1,0 +1,110 @@
+{
+  "authoritative_electricity_tariff_available": false,
+  "calculation_script_path": "/Users/didi/Documents/personalcodexfile/第二次课/scripts/recalculate_grid_dispatch_ev2_sidecar.py",
+  "calculation_script_sha256": "f12fcbddfd50424254a5893324fe29eb47854c59df772d296473587cb48ab834",
+  "candidate_routes_are_counterfactual_unless_selected": true,
+  "congestion_speed_multipliers": {
+    "0": 1.0,
+    "1": 0.8,
+    "2": 0.6
+  },
+  "counts": {
+    "assignment_segment_not_executed_counterfactual_only": 34,
+    "assignment_segment_rows": 1244,
+    "assignment_segment_simulated_leg_completed_estimate_only": 1176,
+    "assignment_segment_simulated_pickup_completed_estimate_only": 34,
+    "candidate_leg_estimable_from_saved_edge_conditions": 1688,
+    "candidate_leg_rows": 1688,
+    "candidate_legs_counterfactual": 444,
+    "candidate_legs_selected": 1244,
+    "candidate_link_rows": 71336,
+    "source_runs": 20
+  },
+  "created_at_utc": "2026-10-28T04:49:31.097841+00:00",
+  "energy_model_path": "/Users/didi/Documents/personalcodexfile/第二次课/route_experiment/energy_model.py",
+  "energy_model_sha256": "a53ac3860e7a9d169b5ceb0f8ca853a0cb73061cc106ba0ec235f1e3c600e893",
+  "energy_model_version": "ev_longitudinal_v2",
+  "energy_profile": {
+    "equations": {
+      "negative_wheel_power": "min(-wheel_power * regenerative_efficiency, regenerative_power_cap)",
+      "net_battery_energy": "propulsion_draw - regenerated_energy + auxiliary_energy",
+      "positive_wheel_power": "wheel_power / propulsion_efficiency",
+      "wheel_force": "(m + rotating_mass)*acceleration + 0.5*rho*Cd*A*v^2 + Crr*m*g*cos(slope) + m*g*sin(slope)"
+    },
+    "model_version": "ev_longitudinal_v2",
+    "profile": {
+      "air_density_kg_m3": 1.225,
+      "auxiliary_power_w": 800.0,
+      "curb_mass_kg": 1900.0,
+      "drag_coefficient": 0.26,
+      "frontal_area_m2": 2.35,
+      "gravity_mps2": 9.80665,
+      "max_acceleration_mps2": 1.2,
+      "max_deceleration_mps2": 2.0,
+      "model_version": "ev_longitudinal_v2",
+      "passenger_load_kg": 75.0,
+      "profile_id": "generic_reference_ev_v1",
+      "propulsion_efficiency": 0.9,
+      "regenerative_efficiency": 0.65,
+      "regenerative_power_cap_w": 50000.0,
+      "rolling_resistance_coefficient": 0.009,
+      "rotating_mass_kg": 50.0
+    },
+    "profile_id": "generic_reference_ev_v1",
+    "profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee"
+  },
+  "energy_profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee",
+  "method_compute_price_available": false,
+  "money_decision_status": "blocked_missing_order_fare_verified_tariff_and_method_cost",
+  "new_model_calls": 0,
+  "outputs": {
+    "assigned_journey_segments_ev2.jsonl": {
+      "path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/traditional_experiment_v1/ev2_segment_sidecar_20261028T0448Z_v2/assigned_journey_segments_ev2.jsonl",
+      "sha256": "38522056ed250a648c4fc423dac9c7aa6679f54423c2030cb9bf64a5367aec0e"
+    },
+    "candidate_leg_ev2.jsonl": {
+      "path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/traditional_experiment_v1/ev2_segment_sidecar_20261028T0448Z_v2/candidate_leg_ev2.jsonl",
+      "sha256": "9a54797720f60ba227f60c3cb022453f69ddaf70416624235bcbdbbf1e1efb86"
+    },
+    "run_summary.jsonl": {
+      "path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/traditional_experiment_v1/ev2_segment_sidecar_20261028T0448Z_v2/run_summary.jsonl",
+      "sha256": "ffcf02edd357ef0196423ced84c6f31c2108ee95db2325412a91d14750ae7f7c"
+    }
+  },
+  "passenger_fares_available": false,
+  "physical_or_stepwise_motion_trace_available": false,
+  "runtime_selector_switched": false,
+  "schema_version": "grid_dispatch_ev2_segment_sidecar_v1",
+  "selected_route_energy_is_still_model_estimated_without_per_edge_motion_trace": true,
+  "sidecar_only": true,
+  "source_manifest_path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/traditional_experiment_v1/dispatch_matrix_manifest.json",
+  "source_manifest_sha256": "0ce6c47b69a85a564c88111616c0a0307fa4c8b9f60a0c95da1734a8a0fe23f3",
+  "source_matrix_schema": "dispatch-matrix-v1",
+  "source_result_count": 20,
+  "source_results": {
+    "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/traditional_experiment_v1/D0_greedy_seed_0.json": "6d7b02a7dfeb2037e8f2d7662d846a54f14c742fb86df24d82870a8f24124ba4",
+    "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/traditional_experiment_v1/D0_greedy_seed_1.json": "0c95be452f6727701ca1177f900726591c1a4bdaf7047243d4aea09e3f8afe07",
+    "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/traditional_experiment_v1/D0_greedy_seed_2.json": "0aae7b167f83715d403a157d5dba102d70e704cd20166e77bef695da94c07885",
+    "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/traditional_experiment_v1/D0_greedy_seed_3.json": "0c5b9ea47ec548c59837306ca8c9419dde7057c62f752d362f1dac2da19140f1",
+    "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/traditional_experiment_v1/D0_greedy_seed_4.json": "2fe1274788b956d6537f35b6a1a3fcc9276b7d67d40510570efa3a38c425269b",
+    "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/traditional_experiment_v1/D0_greedy_seed_5.json": "ce7c2fb781dd6fc41571a3bd28522f348c75214308b0ae8175d54d0b1b9b1207",
+    "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/traditional_experiment_v1/D0_greedy_seed_6.json": "9498976918bf17075e699807ea8cf95db56f954d9bc9b169e00e71113b41152a",
+    "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/traditional_experiment_v1/D0_greedy_seed_7.json": "7f9c078b2ff0365de838f3d0cdb4bd6a386d32cb54c654c7a3ce1f3734103e3c",
+    "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/traditional_experiment_v1/D0_greedy_seed_8.json": "de8f48b9b0c32eda4ace4801022a915a6321c447f7bbddd041dde4844cf3737e",
+    "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/traditional_experiment_v1/D0_greedy_seed_9.json": "8f00dab920a163051d15cb494a29243b2dacc7ffe26d797917792f9a87857c6c",
+    "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/traditional_experiment_v1/D1_optimizer_seed_0.json": "466690cac8689641cb4b6b6b3bee851bdec3fda02a7d5cf9a59dbd16fa8d267b",
+    "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/traditional_experiment_v1/D1_optimizer_seed_1.json": "32de32dc3f47ec38006835b6b845a59b8f31b8265e0b81501061a92a1b13bd4f",
+    "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/traditional_experiment_v1/D1_optimizer_seed_2.json": "30556dc22e98207f41f3fe70ef0cf84b4c3851adb9dfe42592d2b62c3093f85a",
+    "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/traditional_experiment_v1/D1_optimizer_seed_3.json": "c1c88e19abab51fe904547a95cf02804621501e49ec5309918ce33cfe345fa22",
+    "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/traditional_experiment_v1/D1_optimizer_seed_4.json": "67dc6b475bd23784c4e7815bff80b0ef1d164dc8d9a7c23c64a6ef7be1872fdd",
+    "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/traditional_experiment_v1/D1_optimizer_seed_5.json": "445a825682f19ae6c260618251d37f5b412e58533e3a22b1af4610d921e73148",
+    "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/traditional_experiment_v1/D1_optimizer_seed_6.json": "182f10f61b358007ede2f4953bfe9b7d75ab4ee0c479b5ceb794f1b89e07216a",
+    "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/traditional_experiment_v1/D1_optimizer_seed_7.json": "9968cd872177f82c766c7953ac1b57346ebbd9d2b6b122dcd92764b546a2513d",
+    "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/traditional_experiment_v1/D1_optimizer_seed_8.json": "f6e00400b03650cb14c441bcf6e920c1f5412be198f31d95cdd7fe0363c2ae4c",
+    "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/traditional_experiment_v1/D1_optimizer_seed_9.json": "fb2782c69afe04cc319c53c47b6ecfd7f9937bc8a1bdf43496bb32fb95aac342"
+  },
+  "source_results_modified": false,
+  "sumo_reruns": 0,
+  "time_money_rankings_emitted": false,
+  "trace_fidelity": "estimated_from_route_edge_conditions"
+}
