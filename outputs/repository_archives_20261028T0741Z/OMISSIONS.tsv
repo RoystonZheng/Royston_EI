@@ -1,0 +1,5 @@
+scope	reason
+$R4_APP_SUPPORT entire live tree	Worker active; include allowlisted status snapshot only
+Raw prompts, agent messages, trace content, trace files	Removed during sanitization; retain structured counters and hashes only
+Other in-progress task outputs	Only stable completed individual result files are included
+Live progress logs, quota/PID/lock files, temporary artifacts	Operational state only; not a stable research result

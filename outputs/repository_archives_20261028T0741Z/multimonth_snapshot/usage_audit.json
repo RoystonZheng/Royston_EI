@@ -1,0 +1,54 @@
+{
+  "unique_trace_file_count": 2663,
+  "totals": {
+    "turn_started_count": 2663,
+    "turn_completed_count": 2593,
+    "input_tokens": 49245336,
+    "cached_input_tokens": 29159168,
+    "output_tokens": 402191,
+    "reasoning_tokens": 177693,
+    "total_tokens": 49647527,
+    "tool_event_count": 0,
+    "non_tool_notice_item_count": 2663,
+    "cli_error_event_count": 72,
+    "reconnect_notice_count": 2,
+    "malformed_line_count": 0
+  },
+  "by_seed": {
+    "0": {
+      "unique_trace_file_count": 1639,
+      "totals": {
+        "turn_started_count": 1639,
+        "turn_completed_count": 1639,
+        "input_tokens": 30973582,
+        "cached_input_tokens": 19395968,
+        "output_tokens": 252047,
+        "reasoning_tokens": 112247,
+        "total_tokens": 31225629,
+        "tool_event_count": 0,
+        "non_tool_notice_item_count": 1639,
+        "cli_error_event_count": 2,
+        "reconnect_notice_count": 2,
+        "malformed_line_count": 0
+      }
+    },
+    "3": {
+      "unique_trace_file_count": 1024,
+      "totals": {
+        "turn_started_count": 1024,
+        "turn_completed_count": 954,
+        "input_tokens": 18271754,
+        "cached_input_tokens": 9763200,
+        "output_tokens": 150144,
+        "reasoning_tokens": 65446,
+        "total_tokens": 18421898,
+        "tool_event_count": 0,
+        "non_tool_notice_item_count": 1024,
+        "cli_error_event_count": 70,
+        "reconnect_notice_count": 0,
+        "malformed_line_count": 0
+      }
+    }
+  },
+  "interpretation": "Counts unique JSONL files physically present under the evaluation output. Tool events count classified tool-call item types; other non-message items and top-level CLI errors are reported separately. Replay methods are not double-counted unless they created a duplicate trace file."
+}

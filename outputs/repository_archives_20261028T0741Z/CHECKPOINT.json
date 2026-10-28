@@ -1,0 +1,386 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-10-28T07:41:00Z",
+  "status": "nonterminal_progress_checkpoint",
+  "workspace_root": "$WORKSPACE",
+  "r4_root": "$R4_APP_SUPPORT",
+  "r4_parent": {
+    "manifest_sha256": "dae7064e91366f8ab971e81b0d9cab597c1545bd7e3a9e13fbbfaa4deefcf1c5",
+    "updated_at_utc": "2026-10-28T07:29:21.447826+00:00",
+    "status": "paused_at_parallel_checkpoint",
+    "task_count": 129,
+    "task_status_counts": {
+      "failed": 35,
+      "outcome_unknown": 5,
+      "pending": 62,
+      "ready": 6,
+      "route_complete": 21
+    },
+    "unresolved_count": 24,
+    "in_flight": false
+  },
+  "r4_worker_00": {
+    "manifest_sha256": "8d1dc1468e24420a90fe99c28b6c54a7b6ed7b7c50ed249420befcdfc7151dab",
+    "updated_at_utc": "2026-10-28T07:38:39.643377+00:00",
+    "status": "running",
+    "task_count": 29,
+    "task_status_counts": {
+      "active": 1,
+      "failed": 6,
+      "outcome_unknown": 8,
+      "pending": 9,
+      "route_complete": 5
+    },
+    "unresolved_count": 9,
+    "in_flight": true
+  },
+  "aggregate_audit_snapshot": {
+    "captured_at_utc": "2026-10-28T07:20:09Z",
+    "complete_paired_cells": "142/180",
+    "result_files": "1017/1260",
+    "incomplete_paired_cells": 38,
+    "d8_complete_sha_matched_rows": 1,
+    "snapshot_mtime_ns": 1793172009269009605
+  },
+  "ev2_sidecars": {
+    "time_money_v5_segment_sidecar_full_20261028071350Z": {
+      "audited_valid_method_runs": 134,
+      "expected_method_runs": 630,
+      "new_model_calls": 0,
+      "run_row_count": 134,
+      "segment_row_count": 7552,
+      "file_run_rows": 134,
+      "new_source_result_count": 134,
+      "previously_covered_source_result_count": 0
+    },
+    "time_money_v5_segment_sidecar_refresh_20261028071350Z": {
+      "audited_valid_method_runs": 134,
+      "expected_method_runs": 630,
+      "new_model_calls": 0,
+      "run_row_count": 53,
+      "segment_row_count": 3100,
+      "file_run_rows": 53,
+      "new_source_result_count": 53,
+      "previously_covered_source_result_count": 81
+    }
+  },
+  "ev2_refresh_is_strict_subset_of_full": true,
+  "individual_outputs": [
+    {
+      "archive_path": "ev2_individual/EV_20240611_211000_q75/F4/D1_optimizer_seed_0.json",
+      "source_mtime_ns": 1793172204524884598,
+      "note": "EV2 D1 generated after the 07:13Z sidecar snapshot; not counted in its 134/630"
+    },
+    {
+      "archive_path": "multimonth_individual/EV_20240926_214000_q25/F2/D5_pure_llm_direct_seed_3.json",
+      "source_mtime_ns": 1793172500839725398,
+      "note": "D5 generated after the 07:20Z aggregate snapshot; do not add to 142/180"
+    },
+    {
+      "archive_path": "multimonth_individual/EV_20240926_214000_q25/F2/D6_agent_codex_context_optimizer_seed_3.json",
+      "source_mtime_ns": 1793172048024788619,
+      "note": "D6 generated after the 07:20Z aggregate snapshot; do not add to 142/180"
+    },
+    {
+      "archive_path": "multimonth_individual/EV_20240926_214000_q25/F2/D7_agent_codex_capacity_shield_optimizer_seed_3.json",
+      "source_mtime_ns": 1793172209094131178,
+      "note": "D7 generated after the 07:20Z aggregate snapshot; do not add to 142/180"
+    },
+    {
+      "archive_path": "multimonth_individual/EV_20240926_214000_q25/F2/D8_agent_codex_nn_capacity_shield_optimizer_seed_3.json",
+      "source_mtime_ns": 1793171862963126031,
+      "note": "D8 SHA is present in the 07:20Z audit; already included in its aggregate"
+    },
+    {
+      "archive_path": "ev2_individual/EV_20240611_211000_q75/F4/D2_agent_optimizer_seed_0.json",
+      "source_mtime_ns": 1793172643864490633,
+      "note": "EV2 D2 generated after the 07:13Z sidecar snapshot; do not add to its 134/630 coverage"
+    },
+    {
+      "archive_path": "multimonth_individual/EV_20240926_214000_q25/F4/D0_greedy_seed_3.json",
+      "source_mtime_ns": 1793172806382299005,
+      "note": "F4 D0 generated after the 07:20Z aggregate snapshot; do not add to 142/180"
+    }
+  ],
+  "files": [
+    {
+      "source": "$R4_APP_SUPPORT/manifest.json + parallel_workers/worker_00/manifest.json",
+      "source_sha256": null,
+      "source_bytes": null,
+      "path": "r4_app_support/progress_status.json",
+      "sha256": "db948dd480c935ef211b67d9fa3ed50ea347a4dc5e93aba116c7cc8244ae7ce3",
+      "bytes": 1110,
+      "rows": null
+    },
+    {
+      "source": "$WORKSPACE/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/time_money_v5_segment_sidecar_full_20261028071350Z/manifest.json",
+      "source_sha256": "b7005e7a45f07e5eb1fd1b1888aa9ce3ce7c65cb3e40f6d889dc26264e0d7445",
+      "source_bytes": 3406,
+      "path": "ev2/time_money_v5_segment_sidecar_full_20261028071350Z/manifest.json",
+      "sha256": "0668f436d844fb647156f923d14b82f390059eb332696cd98f8f2f029b077eca",
+      "bytes": 3238,
+      "rows": null
+    },
+    {
+      "source": "$WORKSPACE/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/time_money_v5_segment_sidecar_full_20261028071350Z/run_economics_v5.jsonl",
+      "source_sha256": "6fc58a198e675dceb09329583a3591a3d67bc4d8dc176071a9a2ec54bbf4d116",
+      "source_bytes": 8942693,
+      "path": "ev2/time_money_v5_segment_sidecar_full_20261028071350Z/run_economics_v5.jsonl",
+      "sha256": "6d0b8d445fa37ef583a01e58286c60922cd0d6dac201f39beda1e8654fc8cddd",
+      "bytes": 8937065,
+      "rows": 134
+    },
+    {
+      "source": "$WORKSPACE/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/time_money_v5_segment_sidecar_full_20261028071350Z/segment_economics_v5.jsonl",
+      "source_sha256": "cd6ea3685ba2264880fffa90c49a722f358ae220bdccb89378c8fdbb9056f4e6",
+      "source_bytes": 15704484,
+      "path": "ev2/time_money_v5_segment_sidecar_full_20261028071350Z/segment_economics_v5.jsonl",
+      "sha256": "1a09d776a7bc5f531fdba6924bca213e72d28f5e1ca30cdb07a59fbb4f9e4679",
+      "bytes": 15387300,
+      "rows": 7552
+    },
+    {
+      "source": "$WORKSPACE/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/time_money_v5_segment_sidecar_refresh_20261028071350Z/manifest.json",
+      "source_sha256": "1d4ed25e96d8158550a5102834a0137956e89275343f4d1eb58ceaf07eede27d",
+      "source_bytes": 3614,
+      "path": "ev2/time_money_v5_segment_sidecar_refresh_20261028071350Z/manifest.json",
+      "sha256": "0f80bee127ea8fa1cd518f66c9d2c345a8bcf1729d39811a6e5f8245f643e836",
+      "bytes": 3404,
+      "rows": null
+    },
+    {
+      "source": "$WORKSPACE/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/time_money_v5_segment_sidecar_refresh_20261028071350Z/run_economics_v5.jsonl",
+      "source_sha256": "f1d41aeca87cc5d130cf984b3717381cd4e9002a34cd4e70f80d28afe6abc62c",
+      "source_bytes": 3665227,
+      "path": "ev2/time_money_v5_segment_sidecar_refresh_20261028071350Z/run_economics_v5.jsonl",
+      "sha256": "c45eb3acd0bcf65435dbee7c72aec7ce8eb4532322843b116854e519ac8f5ab9",
+      "bytes": 3663001,
+      "rows": 53
+    },
+    {
+      "source": "$WORKSPACE/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/time_money_v5_segment_sidecar_refresh_20261028071350Z/segment_economics_v5.jsonl",
+      "source_sha256": "bca4417a69fedf1c8d871afbdc93a975a068f6b595361bbc09d73b65c997cd08",
+      "source_bytes": 6438035,
+      "path": "ev2/time_money_v5_segment_sidecar_refresh_20261028071350Z/segment_economics_v5.jsonl",
+      "sha256": "9928a539cac09bfe737ce20d703bbf8c63cb06d3bc048d255beb680b4293782f",
+      "bytes": 6307835,
+      "rows": 3100
+    },
+    {
+      "source": "$WORKSPACE/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_v1/monitor_snapshot_20261028071828Z_ev2_time_money_refresh/accepted_policy_sensitivity.csv",
+      "source_sha256": "20772fb6b6ec7cfc3412a8b77231b316f9cbbdd81f51b09915e3c39d1dc458d6",
+      "source_bytes": 35324,
+      "path": "multimonth_snapshot/accepted_policy_sensitivity.csv",
+      "sha256": "20772fb6b6ec7cfc3412a8b77231b316f9cbbdd81f51b09915e3c39d1dc458d6",
+      "bytes": 35324,
+      "rows": 181
+    },
+    {
+      "source": "$WORKSPACE/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_v1/monitor_snapshot_20261028071828Z_ev2_time_money_refresh/comparison_report.md",
+      "source_sha256": "8fa8a117d64cf16bc6b82b09d1eafa5c6ac2df4fed2b1aba1b79ea2354437dbf",
+      "source_bytes": 2869,
+      "path": "multimonth_snapshot/comparison_report.md",
+      "sha256": "8fa8a117d64cf16bc6b82b09d1eafa5c6ac2df4fed2b1aba1b79ea2354437dbf",
+      "bytes": 2869,
+      "rows": 34
+    },
+    {
+      "source": "$WORKSPACE/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_v1/monitor_snapshot_20261028071828Z_ev2_time_money_refresh/method_policy_summary_by_seed.csv",
+      "source_sha256": "eb83ab025a03dfe31ede51950e36f7a8b3c9e096b61bc40e27ba810d3a4c3f1d",
+      "source_bytes": 1515,
+      "path": "multimonth_snapshot/method_policy_summary_by_seed.csv",
+      "sha256": "eb83ab025a03dfe31ede51950e36f7a8b3c9e096b61bc40e27ba810d3a4c3f1d",
+      "bytes": 1515,
+      "rows": 15
+    },
+    {
+      "source": "$WORKSPACE/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_v1/monitor_snapshot_20261028071828Z_ev2_time_money_refresh/method_runs.csv",
+      "source_sha256": "665e1f82545fd777c8d2896f0a512d48606de58416b28ee693ad16504c9303b2",
+      "source_bytes": 2219651,
+      "path": "multimonth_snapshot/method_runs.csv",
+      "sha256": "e624373f7e215c002dda555e4f0109e2e4025759547809f7008832c6b3986ebe",
+      "bytes": 2176937,
+      "rows": 1018
+    },
+    {
+      "source": "$WORKSPACE/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_v1/monitor_snapshot_20261028071828Z_ev2_time_money_refresh/method_summary_by_fleet.csv",
+      "source_sha256": "e14bc477d79b1348d21909ed5f1e60a6662dc73227eab91278afa7d96ef811cf",
+      "source_bytes": 18185,
+      "path": "multimonth_snapshot/method_summary_by_fleet.csv",
+      "sha256": "e14bc477d79b1348d21909ed5f1e60a6662dc73227eab91278afa7d96ef811cf",
+      "bytes": 18185,
+      "rows": 29
+    },
+    {
+      "source": "$WORKSPACE/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_v1/monitor_snapshot_20261028071828Z_ev2_time_money_refresh/paired_differences.csv",
+      "source_sha256": "321635cffce415258145c1ef62781faa326763bf009558b6758276f6d1c9d0ad",
+      "source_bytes": 230857,
+      "path": "multimonth_snapshot/paired_differences.csv",
+      "sha256": "321635cffce415258145c1ef62781faa326763bf009558b6758276f6d1c9d0ad",
+      "bytes": 230857,
+      "rows": 869
+    },
+    {
+      "source": "$WORKSPACE/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_v1/monitor_snapshot_20261028071828Z_ev2_time_money_refresh/paired_statistics.csv",
+      "source_sha256": "f632c5f01b53524be330a4ad3cc065ec3bcdb378c1612696e0c14822b1b33b9b",
+      "source_bytes": 40402,
+      "path": "multimonth_snapshot/paired_statistics.csv",
+      "sha256": "f632c5f01b53524be330a4ad3cc065ec3bcdb378c1612696e0c14822b1b33b9b",
+      "bytes": 40402,
+      "rows": 193
+    },
+    {
+      "source": "$WORKSPACE/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_v1/monitor_snapshot_20261028071828Z_ev2_time_money_refresh/paired_statistics.json",
+      "source_sha256": "f65e08e501cca75f9cf8b7a207f3c3df76b30b5f706719ee7049c9b060a5ab48",
+      "source_bytes": 108129,
+      "path": "multimonth_snapshot/paired_statistics.json",
+      "sha256": "f65e08e501cca75f9cf8b7a207f3c3df76b30b5f706719ee7049c9b060a5ab48",
+      "bytes": 108129,
+      "rows": null
+    },
+    {
+      "source": "$WORKSPACE/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_v1/monitor_snapshot_20261028071828Z_ev2_time_money_refresh/run_audit.json",
+      "source_sha256": "168d23a17a98b1ee9af2f57014f0508a239cbe6ebd6a400c5d2419c041056d5a",
+      "source_bytes": 3215022,
+      "path": "multimonth_snapshot/run_audit.json",
+      "sha256": "0838a9ca2803a6dff8966add9bd3dd225a8222721a1c98f9b5ac0f3c6d8ea842",
+      "bytes": 610639,
+      "rows": null
+    },
+    {
+      "source": "$WORKSPACE/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_v1/monitor_snapshot_20261028071828Z_ev2_time_money_refresh/seed_effects.csv",
+      "source_sha256": "fd0c3060561342b05944cce3a44a786e7e4f147a18efd31981ab31296c6fff48",
+      "source_bytes": 33451,
+      "path": "multimonth_snapshot/seed_effects.csv",
+      "sha256": "fd0c3060561342b05944cce3a44a786e7e4f147a18efd31981ab31296c6fff48",
+      "bytes": 33451,
+      "rows": 385
+    },
+    {
+      "source": "$WORKSPACE/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_v1/monitor_snapshot_20261028071828Z_ev2_time_money_refresh/usage_audit.json",
+      "source_sha256": "334574ff4482afdfb490259b1d6557bb7b30b332ebde85fa6a5bfc52df54f426",
+      "source_bytes": 2379793,
+      "path": "multimonth_snapshot/usage_audit.json",
+      "sha256": "82b41faac52e242fef36d80c3c63771508ccb18b6238b906bb215573e42b008c",
+      "bytes": 1799,
+      "rows": null
+    },
+    {
+      "source": "$WORKSPACE/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_v1/monitor_snapshot_20261028071828Z_ev2_time_money_refresh/usage_by_seed.csv",
+      "source_sha256": "58d7cea4554dd31e951b957d8fe6763eaacbc5edc0501e2c2525ee113bb7e5e4",
+      "source_bytes": 399,
+      "path": "multimonth_snapshot/usage_by_seed.csv",
+      "sha256": "58d7cea4554dd31e951b957d8fe6763eaacbc5edc0501e2c2525ee113bb7e5e4",
+      "bytes": 399,
+      "rows": 3
+    },
+    {
+      "source": "$WORKSPACE/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240611_211000_q75/F4/D1_optimizer_seed_0.json",
+      "source_sha256": "e3f6c0d6121ca652b6ec28aede8625ad1378e00c87dd526b7d05971756ba325e",
+      "source_bytes": 2977767,
+      "path": "ev2_individual/EV_20240611_211000_q75/F4/D1_optimizer_seed_0.json",
+      "sha256": "4b02f7c61e05274d69b7693618d818728cb6c97bca256c781c9d924f446a0cd0",
+      "bytes": 2935633,
+      "rows": null,
+      "completion_evidence": {
+        "partial_run_false_count": 1,
+        "performance_claim_true_count": 0,
+        "interpretation": "EV2 D1 generated after the 07:13Z sidecar snapshot; not counted in its 134/630"
+      }
+    },
+    {
+      "source": "$WORKSPACE/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20240926_214000_q25/F2/D5_pure_llm_direct_seed_3.json",
+      "source_sha256": "1f78659507e53fcb307f308d195c82b3e0ddf1bf715887e27d8b7b028fee835f",
+      "source_bytes": 1305551,
+      "path": "multimonth_individual/EV_20240926_214000_q25/F2/D5_pure_llm_direct_seed_3.json",
+      "sha256": "446310d023441025ba71ea7b3442e0a40b0802b327666ce9546a7dd2389ddfe7",
+      "bytes": 1293658,
+      "rows": null,
+      "completion_evidence": {
+        "partial_run_false_count": 1,
+        "performance_claim_true_count": 0,
+        "interpretation": "D5 generated after the 07:20Z aggregate snapshot; do not add to 142/180"
+      }
+    },
+    {
+      "source": "$WORKSPACE/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20240926_214000_q25/F2/D6_agent_codex_context_optimizer_seed_3.json",
+      "source_sha256": "9f0a1876adfad24f0e457fc2e1cb00436d759fc21970cfd931236a9133f2076c",
+      "source_bytes": 1462924,
+      "path": "multimonth_individual/EV_20240926_214000_q25/F2/D6_agent_codex_context_optimizer_seed_3.json",
+      "sha256": "e09ba8324640692c4d90ea48a8c70cd89ebc8f3188586713c64d64f1b21bd871",
+      "bytes": 1459427,
+      "rows": null,
+      "completion_evidence": {
+        "partial_run_false_count": 1,
+        "performance_claim_true_count": 0,
+        "interpretation": "D6 generated after the 07:20Z aggregate snapshot; do not add to 142/180"
+      }
+    },
+    {
+      "source": "$WORKSPACE/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20240926_214000_q25/F2/D7_agent_codex_capacity_shield_optimizer_seed_3.json",
+      "source_sha256": "afc27bce43deb82abd15276ab65758e4a5d6a1f101426ee63643b0de3cadb387",
+      "source_bytes": 1655902,
+      "path": "multimonth_individual/EV_20240926_214000_q25/F2/D7_agent_codex_capacity_shield_optimizer_seed_3.json",
+      "sha256": "4a763de263bf699b7df607e1a38e4fbdb79f457be5dc4742cac5714992532d16",
+      "bytes": 1652405,
+      "rows": null,
+      "completion_evidence": {
+        "partial_run_false_count": 1,
+        "performance_claim_true_count": 0,
+        "interpretation": "D7 generated after the 07:20Z aggregate snapshot; do not add to 142/180"
+      }
+    },
+    {
+      "source": "$WORKSPACE/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20240926_214000_q25/F2/D8_agent_codex_nn_capacity_shield_optimizer_seed_3.json",
+      "source_sha256": "48fa057ace8d8cc863d7f6156daa6393dac205d141f2bb16a2563f179b6136cf",
+      "source_bytes": 2127189,
+      "path": "multimonth_individual/EV_20240926_214000_q25/F2/D8_agent_codex_nn_capacity_shield_optimizer_seed_3.json",
+      "sha256": "e575ee4ab3b5e86ac83333632f9737c67e665db018eb20b096692df342e86320",
+      "bytes": 2123650,
+      "rows": null,
+      "completion_evidence": {
+        "partial_run_false_count": 1,
+        "performance_claim_true_count": 0,
+        "interpretation": "D8 SHA is present in the 07:20Z audit; already included in its aggregate"
+      }
+    },
+    {
+      "source": "$WORKSPACE/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240611_211000_q75/F4/D2_agent_optimizer_seed_0.json",
+      "source_sha256": "68275f651f5909b4d64ae1ad5818099f33ee7e03e1d0202385abed493a401986",
+      "source_bytes": 3074985,
+      "path": "ev2_individual/EV_20240611_211000_q75/F4/D2_agent_optimizer_seed_0.json",
+      "sha256": "d27ef3a08390cd07d030b4b16901582126baf516b6e6abe66367c6b9ae8ee120",
+      "bytes": 3032851,
+      "rows": null,
+      "completion_evidence": {
+        "partial_run_false_count": 1,
+        "performance_claim_true_count": 0,
+        "interpretation": "EV2 D2 generated after the 07:13Z sidecar snapshot; do not add to its 134/630 coverage"
+      }
+    },
+    {
+      "source": "$WORKSPACE/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20240926_214000_q25/F4/D0_greedy_seed_3.json",
+      "source_sha256": "7e5f1dc2fddb840bf2ec055b5217fe396f70685607ed5db369d22a5d4e60b778",
+      "source_bytes": 1073064,
+      "path": "multimonth_individual/EV_20240926_214000_q25/F4/D0_greedy_seed_3.json",
+      "sha256": "9778728ff9476a3cb74d6e56011d87deee99cde2825c69a2c81d96f207163611",
+      "bytes": 1067867,
+      "rows": null,
+      "completion_evidence": {
+        "partial_run_false_count": 1,
+        "performance_claim_true_count": 0,
+        "interpretation": "F4 D0 generated after the 07:20Z aggregate snapshot; do not add to 142/180"
+      }
+    }
+  ],
+  "sanitization": {
+    "removed_sensitive_or_raw_fields": 2610,
+    "absolute_local_paths_redacted": true,
+    "credential_patterns_checked": true,
+    "raw_prompts_messages_traces_included": false
+  },
+  "lfs": {
+    "required": false,
+    "max_file_bytes": 15387300
+  }
+}

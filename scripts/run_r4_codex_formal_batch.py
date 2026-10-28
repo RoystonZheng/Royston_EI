@@ -15,6 +15,7 @@ import argparse
 import hashlib
 import html
 import json
+import os
 import re
 import shutil
 import subprocess
@@ -487,6 +488,77 @@ def execute_batch(
         or manifest.get("route_input_protocol") != REQUIRED_ROUTE_INPUT_PROTOCOL
     ):
         raise RuntimeError("batch_method_version_mismatch")
+    # Current direct user authorization permits R4 continuation without a
+    # project-level request, account-usage, or fee cap. Keep usage as an
+    # observation; provider limits and the no-replay policy remain in force.
+    if authorized_request_limit is None and usage_stop_percent is None:
+        prior_gate = manifest.get("external_live_account_usage_checkpoint")
+        quota_halt_statuses = {
+            "paused_for_fresh_live_usage_gate",
+            "stopped_before_request_live_usage_gate_missing_or_stale",
+            "stopped_before_request_usage_at_or_above_stop_line",
+        }
+        quota_pause_reasons = {
+            "awaiting_next_fresh_usage_snapshot",
+            "paused_for_fresh_live_usage_gate",
+        }
+        gate_was_active = (
+            manifest.get("require_external_live_account_usage_gate") is True
+            or manifest.get("usage_stop_percent") is not None
+            or manifest.get("authorized_stop_threshold_percent") is not None
+            or (isinstance(prior_gate, dict) and prior_gate.get("active") is True)
+            or manifest.get("halt_status") in quota_halt_statuses
+            or manifest.get("pause_reason") in quota_pause_reasons
+            or str(manifest.get("current_authorization_status", "")).startswith(
+                "user_authorized_stop_at_100_percent_account_usage"
+            )
+        )
+        manifest["require_external_live_account_usage_gate"] = False
+        manifest["usage_stop_percent"] = None
+        manifest["authorized_stop_threshold_percent"] = None
+        if isinstance(prior_gate, dict):
+            prior_gate.update({
+                "active": False,
+                "stop_threshold_percent": None,
+                "disabled_reason": "latest_direct_user_authorized_no_manual_usage_stop",
+                "usage_snapshot_is_observation_only": True,
+            })
+        halt_status = manifest.get("halt_status")
+        if halt_status in quota_halt_statuses or (
+            manifest.get("halt_no_more_model_requests") is True
+            and halt_status is None
+            and gate_was_active
+        ):
+            manifest["halt_no_more_model_requests"] = False
+            manifest["halt_status"] = None
+        if manifest.get("pause_reason") in quota_pause_reasons:
+            manifest["pause_reason"] = None
+        if manifest.get("status") in quota_halt_statuses:
+            manifest["status"] = "ready_for_serial_resume"
+        checkpoint = manifest.get("quota_control_checkpoint")
+        if isinstance(checkpoint, dict):
+            checkpoint.update({
+                "branch_status": "cleared_no_project_level_usage_stop",
+                "halt_no_more_model_requests": False,
+                "stop_threshold_percent": None,
+                "provider_hard_limits_and_retry_after_still_apply": True,
+            })
+        if gate_was_active:
+            manifest["current_authorization_status"] = "no_project_level_request_or_usage_stop_user_authorized"
+        if gate_was_active:
+            manifest.setdefault("events", []).append({
+                "event": "external_usage_stop_gate_disabled_by_latest_direct_user_authorization",
+                "authorization_source": "latest_direct_user_reply_in_active_conversation",
+                "usage_snapshot_is_observation_only": True,
+                "provider_hard_limits_and_retry_after_still_apply": True,
+                "at_utc": datetime.now(timezone.utc).isoformat(),
+            })
+        if manifest.get("halt_no_more_model_requests") is True:
+            # A provider, schema, hash, or finalization halt is not a quota
+            # gate and must survive the no-cap authorization unchanged.
+            write_json(manifest_path, manifest)
+            _render_index(manifest, output_dir)
+            return manifest
     if stop_after_task_id is not None and not any(
         item.get("task_id") == stop_after_task_id for item in manifest.get("tasks", [])
     ):

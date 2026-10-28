@@ -1,0 +1,68 @@
+{
+  "api_compute_cost_rule": "preserved once per source run; no invented missing compute rate",
+  "audited_missing_method_runs": 496,
+  "audited_valid_method_runs": 134,
+  "combined_source_result_count": 134,
+  "created_at_utc": "2026-10-28T07:14:01.481329+00:00",
+  "decision_model_version": "route_time_money_segment_v5_signed_fare_audit",
+  "decision_module_path": "$WORKSPACE/route_experiment/decision.py",
+  "decision_module_sha256": "6b383157aa3287faa0049f13bbf0ff7765e903367a63305fd826e89dc83a0375",
+  "dispatch_replayed": false,
+  "electricity_costs_null_when_tariff_missing": true,
+  "electricity_price_per_kwh": null,
+  "energy_model_path": "$WORKSPACE/route_experiment/energy_model.py",
+  "energy_model_sha256": "a53ac3860e7a9d169b5ceb0f8ca853a0cb73061cc106ba0ec235f1e3c600e893",
+  "expected_method_runs": 630,
+  "experiment_manifest_sha256": "ae0619dc593cd9a5c64f042012520b99b0553d754effee7bb803f7e6640f811c",
+  "fare_rule": "passenger fare preserved once per journey segment; deadhead revenue is known zero",
+  "fare_status_limit": "historical fare proxies are not current realized revenue",
+  "generator_path": "$WORKSPACE/scripts/recalculate_nyc_tlc_ev2_v5_segment_economics_sidecar.py",
+  "generator_sha256": "5a33f2a1e496e0628cbd04c12408e60d981ba9bffe8fab63477e5f8b6cefdbf6",
+  "incremental_from_manifest_path": "$WORKSPACE/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/time_money_v5_segment_sidecar_20261028T0636Z_monitor_increment_0420/manifest.json",
+  "incremental_from_manifest_sha256": "e0a7e13c66144c2ac62a1894dcf7a21312d4096ceaaffab6a7fe49efa120ffcb",
+  "method_cost_status_counts": {
+    "no_model_calls": 53
+  },
+  "new_model_calls": 0,
+  "new_source_result_count": 53,
+  "outputs": {
+    "run_economics_v5.jsonl": {
+      "rows": 53,
+      "sha256": "f1d41aeca87cc5d130cf984b3717381cd4e9002a34cd4e70f80d28afe6abc62c"
+    },
+    "segment_economics_v5.jsonl": {
+      "rows": 3100,
+      "sha256": "bca4417a69fedf1c8d871afbdc93a975a068f6b595361bbc09d73b65c997cd08"
+    }
+  },
+  "package_manifest_sha256": "262d067a59a35ffe9b299a49f1cc86868bba19713cfed2361d0d287dd2f95d22",
+  "previously_covered_source_result_count": 81,
+  "run_money_gate_counts": {
+    "blocked_incomplete_economic_inputs": 53
+  },
+  "run_row_count": 53,
+  "schema_version": "nyc_tlc_ev2_time_money_v5_segment_sidecar_v1",
+  "segment_row_count": 3100,
+  "segment_type_counts": {
+    "deadhead": 1550,
+    "passenger": 1550
+  },
+  "shared_route_pool_available": false,
+  "source_audit_path": "$WORKSPACE/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/time_money_ev2_coverage_snapshots/ev2_segment_ledger_audit_refresh_20261028071350Z.json",
+  "source_audit_sha256": "ec292bdcdf318a83916ad6b1288eac313e7e4ed6f17bb51920120a02e4981b29",
+  "source_energy_complete_segment_count": 3100,
+  "source_fare_status_counts": {
+    "known_zero_for_deadhead": 1550,
+    "observed_historical_fare_proxy_not_realized_revenue": 1550
+  },
+  "source_result_count": 53,
+  "source_result_hashes_reverified_after_recalculation": true,
+  "source_results_modified": false,
+  "status": "completed_segment_economics_route_choice_blocked",
+  "sumo_reruns": 0,
+  "tariff_basis": null,
+  "v5_run_accounting_status_counts": {
+    "net_cost_not_priced_electricity_price_missing": 53
+  },
+  "weighted_rankings_emitted": false
+}
