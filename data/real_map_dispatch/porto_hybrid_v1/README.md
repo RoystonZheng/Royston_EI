@@ -1,8 +1,8 @@
 # Porto Hybrid Real-Map Experiment Dataset v1
 
-**Status:** partial candidate dataset. The 540,159,049-byte Figshare record describing full-year Porto taxi trajectories passed its MD5 and ZIP CRC checks; 200 m heat/OD tables and a heat-informed provisional fence are present. Its exact content equivalence to the current UCI download is unconfirmed, with a one-row metadata/parsed-count discrepancy recorded. A timestamped OSM candidate snapshot is present with a structural preflight. Final fence/Link binding, the SUMO network, and simulated traffic scenarios are not complete.
+**Status:** the source-data package remains a partial historical proxy, while the fixed-fleet R1 simulation is complete. The 540,159,049-byte Figshare record describing full-year Porto taxi trajectories passed its MD5 and ZIP CRC checks; its exact content equivalence to the current UCI download remains unconfirmed, with a one-row metadata/parsed-count discrepancy recorded. The OSM/SUMO network and v3.3 frozen orders are now in place. R1 completed the 20-cell dynamic SUMO matrix under frozen planning-delay replay; R2 has one failed, non-retried Codex route diagnostic and no formal LLM matrix yet.
 
-The fixed-order generation and execution module design was added on 2026-10-23 ([module specification](../../../output/paper/固定订单序列生成与执行模块设计_20261023.md)). The existing `orders_seed_0_draft.json` through `orders_seed_9_draft.json` use an older endpoint rule; they remain audit drafts and are not valid formal inputs. No replacement orders or SUMO runs have been generated yet.
+The fixed-order generation and execution module design was added on 2026-10-23 ([module specification](../../../output/paper/固定订单序列生成与执行模块设计_20261023.md)). The old `orders_seed_0_draft.json` through `orders_seed_9_draft.json` remain audit drafts. Formal R1 inputs are the separate v3.3 frozen orders and shared endpoint bindings; their static directed reachability passed before the R1 SUMO matrix.
 
 This package contains two independent research designs on a real geographic road network: the earlier dispatch-layer experiment and a new fixed-fleet route-execution experiment. The route-execution branch fixes each vehicle's order sequence and does not run an assignment or dispatch layer. The package combines:
 
@@ -20,9 +20,9 @@ raw/uci/train.csv.zip      # 540,159,049 bytes; mirror MD5 and ZIP CRC verified;
 raw/osm/                   # full highway-way OSM candidate extract and query; final fence remains provisional
 derived/heat/              # 200 m heat and OD aggregate tables
 derived/region/            # provisional fence and OSM structural preflight
-derived/scenarios/         # fixed-fleet route scenario, schema, and unvalidated order drafts
+derived/scenarios/         # fixed-fleet route schema, old drafts, and frozen v3.3 formal inputs
 map_import/                 # importable JSON package/schema and browser-side derivation prototype
-derived/sumo/              # future SUMO network, traffic inputs, and simulation outputs
+derived/sumo/              # frozen SUMO network, traffic inputs, and simulation outputs
 manifests/SHA256SUMS.txt   # source and derived-file checksums
 source_manifest.json       # source URLs, DOI, licenses, versions, and build status
 LICENSES.md                # per-source license and attribution instructions
@@ -44,4 +44,4 @@ download_osm_candidate.sh  # fetches the candidate-area OSM extract; refuses ove
 - Do not commit extracted duplicates, temporary caches, credentials, or undocumented snapshots.
 - The raw UCI archive exceeds GitHub's normal 100 MiB file limit and is configured for Git LFS. Confirm the destination repository's LFS storage/bandwidth quota before pushing.
 
-See [the dispatch-layer experiment design](experiment_design.md). The independent fixed-fleet route-execution experiment is documented in [fixed_fleet_route_experiment_design.md](fixed_fleet_route_experiment_design.md), with configuration and draft tasks in `derived/scenarios/`. Its generation/execution contract is in the linked 2026-10-23 module specification. Neither branch replaces existing synthetic-map experiments.
+See [the dispatch-layer experiment design](experiment_design.md). The independent fixed-fleet route-execution experiment, R1 confidence intervals, corrected local-crop profile, and R2 diagnostics are documented in [fixed_fleet_route_experiment_design_v11_20261024.md](fixed_fleet_route_experiment_design_v11_20261024.md); v10, v9, v8, v7, v6, and v5 remain preserved. R1 raw results are under `derived/experiments/r1_dynamic_sumo_v1/formal_v3_fixed_delay/`. The full-graph, local-crop, and randomized-alias Codex CLI one-call audits are under `derived/experiments/r2_codex_cli_v1/pilot_seed0_order0001_fastest_v3/`, `derived/experiments/r2_codex_cli_v1/pilot_seed0_order0001_fastest_local_crop_v4/`, and `derived/experiments/r2_codex_cli_v1/pilot_seed0_order0001_fastest_local_crop_alias_shuffle_v3/`; none passed hard validation or entered SUMO. Corrected zero-call endpoint-crop profiling covers all 2,000 frozen route legs under `derived/experiments/r2_context_profile_v2/`; its paired request-size estimate finds 565/1,000 orders above the current 75k-token planning gate. v1 is retained as historical output with an incomplete legal-turn serialization count. Neither branch replaces existing synthetic-map experiments.

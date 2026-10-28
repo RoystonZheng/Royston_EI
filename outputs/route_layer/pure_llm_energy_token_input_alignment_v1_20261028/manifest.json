@@ -1,0 +1,423 @@
+{
+  "calculation_script_path": "scripts/recalculate_grid_energy_token_inputs_v1.py",
+  "calculation_script_sha256": "bf2291d58d28787c246cb95dda92a24c7fa8739d745fd63a2e15b43dacd13f5f",
+  "decision_scores_generated": false,
+  "energy_model_module_sha256": "a53ac3860e7a9d169b5ceb0f8ca853a0cb73061cc106ba0ec235f1e3c600e893",
+  "limitations": [
+    "no frozen local electricity tariff bound to this generic EV v2 grid scenario",
+    "the saved pure-LLM records do not provide a complete shared feasible candidate pool per decision",
+    "the meeting's profit threshold and normalization rule remain unspecified",
+    "order-level revenue is not present in this route-planning result set",
+    "Recorded token costs use the saved per-token reference rate and are not actual billing.",
+    "Rows with zero tokens and request errors are billing-unverified, not proven zero-cost.",
+    "EV v2 estimates for invalid or truncated proposals remain hypothetical, not executed energy."
+  ],
+  "model_calls": 0,
+  "outputs": {
+    "energy_token_inputs_v1.jsonl": "60ff9ea805456e084fb9793a70fa070adc5fd46bb0fbde5dc5ed3b8198fa8c9e",
+    "summary.json": "205158a27a72af18e84b642a5e0f4bf1eb8fd96a1104b04c17c0ddcf317de396"
+  },
+  "record_count": 596,
+  "route_reruns": 0,
+  "schema_version": "pure_llm_energy_token_input_alignment_manifest_v1",
+  "source_energy_manifest_path": "outputs/route_layer/pure_llm_grid_energy_v2_recalculation_20261027_current_module_path_recovered_v2/manifest.json",
+  "source_energy_manifest_sha256": "3257ada23d971239e63e0e7d5c7a3bc96ce29899b38f10c624792f6ef3dbdf1a",
+  "source_result_files": [
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v1/seeds/seed_0/pure_llm_formal_routes_costs_seed_0.json",
+      "sha256": "0e55b5f040a48c6d1998638bd65904014e02945c20fef0f065474a0405b90420"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v1/seeds/seed_0/pure_llm_order_routes_costs_seed_0.json",
+      "sha256": "192263d5a3be409f5c94262aca53cc5794ceb747fd0ad5e7b0151d6e1c92559b"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v1/seeds/seed_1/pure_llm_formal_routes_costs_seed_1.json",
+      "sha256": "8488aea7b8221aa197b0dd59a783ee794bf7027410f65f640a92ef98e92f8ddb"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v1/seeds/seed_1/pure_llm_order_routes_costs_seed_1.json",
+      "sha256": "67c56c56c623f021f2fddf3e759e83b3b01f7ef43e6a1be8737819d35029f92b"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v1/seeds/seed_2/pure_llm_formal_routes_costs_seed_2.json",
+      "sha256": "db30d24a2c8e5ce48005b08611acc1d9050b26249f52320f0437405763f4976b"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v1/seeds/seed_2/pure_llm_order_routes_costs_seed_2.json",
+      "sha256": "da23ccff0b0904ca351e8c6283f82fe3e6f1e9860104ed4567809cbee6286d77"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v1/seeds/seed_3/pure_llm_formal_routes_costs_seed_3.json",
+      "sha256": "12da88f77521cb907fd79e7ee5ce3bcf9dcce2b43f1f378f3ace0d70e23043a7"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v1/seeds/seed_3/pure_llm_order_routes_costs_seed_3.json",
+      "sha256": "76325ba9a7423a2befa9408568508ce375070faa72d06b5d09b1c99a57f26d11"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v1/seeds/seed_4/pure_llm_formal_routes_costs_seed_4.json",
+      "sha256": "fbca7abe2dff37114e8e3af9774a827a796b928169937418d125e3006313608a"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v1/seeds/seed_4/pure_llm_order_routes_costs_seed_4.json",
+      "sha256": "c5e996234434d474a3722c6a4a2a4193ed2584479a27ebd6c41d96506efb973a"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v1/seeds/seed_5/pure_llm_formal_routes_costs_seed_5.json",
+      "sha256": "fae07578b160afafc43040c884e5499f631cca3bc9f0d4f03f1289706f62d407"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v1/seeds/seed_5/pure_llm_order_routes_costs_seed_5.json",
+      "sha256": "9703874be9531c6fbeee0f706e5cd49230087c860cc593b9f57c6e9ccb9ee385"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v1/seeds/seed_6/pure_llm_formal_routes_costs_seed_6.json",
+      "sha256": "59434c404945c3a2965cd70f29a533b272c23fb8370b55826b5e553c527cd933"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v1/seeds/seed_6/pure_llm_order_routes_costs_seed_6.json",
+      "sha256": "8479070d518bf9aca6744edd630893845a22c6fc00f75f699fba12fe181dbea2"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v1/seeds/seed_7/pure_llm_formal_routes_costs_seed_7.json",
+      "sha256": "a3bac346366900fd1a9d60be9080243565d301dafc3eb0a5701105a0fab79439"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v1/seeds/seed_7/pure_llm_order_routes_costs_seed_7.json",
+      "sha256": "8b00b16f85470f08561b03aecd51a482f6110e34c345aebcc6f016a06534106c"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v1/seeds/seed_8/pure_llm_formal_routes_costs_seed_8.json",
+      "sha256": "c9a357673f8e238acc9f3f90728cbbfb4f93e398c55487e3665021aee4d5be77"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v1/seeds/seed_8/pure_llm_order_routes_costs_seed_8.json",
+      "sha256": "fba40df91fded2f5a4a4f2d318deeecc78827fc4922e5acb60210074e31a8d57"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v1/seeds/seed_9/pure_llm_formal_routes_costs_seed_9.json",
+      "sha256": "b43d19f98c9c8caf12a2dfc9c6af97662198f6007dfe8225b848d5806dc1c2f7"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v1/seeds/seed_9/pure_llm_order_routes_costs_seed_9.json",
+      "sha256": "46f488e7bb815be283c7087f7903dbe1a6883989608834448dbdf77580b3b611"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v4/seeds/seed_0/pure_llm_formal_routes_costs_seed_0.json",
+      "sha256": "c58d70b2ea89587b286b50d18bb615dec8c140e488f2d0806e7333d997c79f0c"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v4/seeds/seed_0/pure_llm_order_routes_costs_seed_0.json",
+      "sha256": "311f20c7a112a5a922618f705fcc118d428746b0e3281da086024189f92af6a9"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v4/seeds/seed_1/pure_llm_formal_routes_costs_seed_1.json",
+      "sha256": "1b60bf7bdd61f39c07a6b74219c0c3301febbbcbb0b945d9f9f85041d70d8a6a"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v4/seeds/seed_1/pure_llm_order_routes_costs_seed_1.json",
+      "sha256": "078d6e4aa461f42e457cc30b7220a72f97df1d3266c00a88d31f2c60d1c2c3bf"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v4/seeds/seed_2/pure_llm_formal_routes_costs_seed_2.json",
+      "sha256": "4b808151abecfeba068e3d577ebb9b71ba2fb8375e3a3312b056a4d1740ea897"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v4/seeds/seed_2/pure_llm_order_routes_costs_seed_2.json",
+      "sha256": "c220a1d3db77518204d4f290ec80ab8d711b7a3850ce76b2d31a0c69d4f6a99a"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v4/seeds/seed_3/pure_llm_formal_routes_costs_seed_3.json",
+      "sha256": "e8b3f368818a300e1d2379f6b0e2a3e56d815994dd3c81ddbf8976f9fd91feee"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v4/seeds/seed_3/pure_llm_order_routes_costs_seed_3.json",
+      "sha256": "194acec79a6705ff43ee87681514851fd8bac233e5f0812e8a9256342e68f966"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v4/seeds/seed_4/pure_llm_formal_routes_costs_seed_4.json",
+      "sha256": "041bf2b947e573c99fcb65f0422295344ec352849f7e427790b0cd84a6b3a0c5"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v4/seeds/seed_4/pure_llm_order_routes_costs_seed_4.json",
+      "sha256": "9ddd873075c56b766aaa12d56cae07e71534e82875324f0916cd7767208257d0"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v4/seeds/seed_5/pure_llm_formal_routes_costs_seed_5.json",
+      "sha256": "30064644f75031795a9f453e8f6cfa3c841cd6d1aeabebe1023909d4fd32ede5"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v4/seeds/seed_5/pure_llm_order_routes_costs_seed_5.json",
+      "sha256": "ec671cc8b6567a8f9700c71da87e046bd89ac5cfe00377e1402f28b50eb89c0a"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v4/seeds/seed_6/pure_llm_formal_routes_costs_seed_6.json",
+      "sha256": "9fb4a3f79cb715cadf9e0563db00a6dc5e8a039814ef6662c9eb9b82f724bc55"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v4/seeds/seed_6/pure_llm_order_routes_costs_seed_6.json",
+      "sha256": "17f4fc96d2a89984027ffe2eb8b00fffd4e1a5dd7f15d274bde05a2ef1af7347"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v5/seeds/seed_0/pure_llm_order_routes_costs_seed_0.json",
+      "sha256": "1e3de602c17a6697d630bf652b008165589286b3923a7ce08eccb2f34506bce5"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v6/seeds/seed_0/pure_llm_formal_routes_costs_seed_0.json",
+      "sha256": "4695424c3b5a941214c33efb196dab47213cc1961621e692af0f2de149aeeadd"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v6/seeds/seed_0/pure_llm_order_routes_costs_seed_0.json",
+      "sha256": "68668e20a0000ef1e0bd500f98f51aae51ba5266762181fc3fc064855433f29d"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v6/seeds/seed_1/pure_llm_formal_routes_costs_seed_1.json",
+      "sha256": "644f422ea051047e1a1e374177810849fc51ea6f1e42878c66eb323ef15c54ee"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v6/seeds/seed_1/pure_llm_order_routes_costs_seed_1.json",
+      "sha256": "a7d579ab6e0cc99923a664dcf1145b862a3eba56c5ce60d1a3b088b0c58e4cc4"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v6/seeds/seed_2/pure_llm_order_routes_costs_seed_2.json",
+      "sha256": "94d8f92d40709f8132037c20fdc149861f82b11634477efcb7ce99bcfb2d9463"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v7/seeds/seed_0/pure_llm_formal_routes_costs_seed_0.json",
+      "sha256": "a2c312d8aa8fff830dd5860d23507187a5a31648d956f6eb188ec6c0bb1922b5"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v7/seeds/seed_0/pure_llm_order_routes_costs_seed_0.json",
+      "sha256": "9cc0b6df2301e7ef62987db9e3f9936f7568a64a74a0a02d8f2b7094688e5f43"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v7/seeds/seed_1/pure_llm_formal_routes_costs_seed_1.json",
+      "sha256": "d0520821b4cae229cea91fbef9dfcae39c1fb4bfc3afc069919f5b9bc4602317"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v7/seeds/seed_1/pure_llm_order_routes_costs_seed_1.json",
+      "sha256": "1f0f6f9db76bab7b55edfd7269a78847d467a5e5b994e3164fc7010285a97598"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v7/seeds/seed_2/pure_llm_formal_routes_costs_seed_2.json",
+      "sha256": "5b57ac486140379ea7e410aa16f69dc4d0d995cc9a200e197337303ea4f6b835"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v7/seeds/seed_2/pure_llm_order_routes_costs_seed_2.json",
+      "sha256": "442181ccd6570b49feeda162baf81541ef7fe25b92987361d405a84ac7076c5e"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v7/seeds/seed_3/pure_llm_formal_routes_costs_seed_3.json",
+      "sha256": "b05883b9aaa624cfb33cffca4572f8341e577fb89829faec2c993f4cc11a4c56"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v7/seeds/seed_3/pure_llm_order_routes_costs_seed_3.json",
+      "sha256": "be6c72e8450627ea192da9c6bee3e2027f88c83d829783a3f6ef397c3c30128a"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v7/seeds/seed_4/pure_llm_formal_routes_costs_seed_4.json",
+      "sha256": "4f5f174120503736fa18314d1d3ab6cd2afb434123ad65fe8067f86a9da1700e"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v7/seeds/seed_4/pure_llm_order_routes_costs_seed_4.json",
+      "sha256": "340cd6aee57269878e85b44c171dfc1cd90616f8c19bf593c9a68ba7b0e7bb21"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v7/seeds/seed_5/pure_llm_formal_routes_costs_seed_5.json",
+      "sha256": "bb0695c35b2c66831ddb1c7772b7b233e620f5b1b60cbe261509447fc6610525"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v7/seeds/seed_5/pure_llm_order_routes_costs_seed_5.json",
+      "sha256": "e4a94b69ef8d987c0a09978fa7f7aa0fcb68b60f07e5d3d143810ac88a46a484"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v7/seeds/seed_6/pure_llm_formal_routes_costs_seed_6.json",
+      "sha256": "c8cde7cdd42d0765c08d9d66db548c477c3e5bf016d12e66cbd41e20a16fb30d"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v7/seeds/seed_6/pure_llm_order_routes_costs_seed_6.json",
+      "sha256": "816d41a394aa85eae744db726613e6edfa6bb85b7a63d5a23f033d4ab6ad5a56"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v7/seeds/seed_7/pure_llm_formal_routes_costs_seed_7.json",
+      "sha256": "23183f9f9103b7c1ce6b259032d2cdd868d8731e871ddbbd4893dc69a78380c7"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v7/seeds/seed_7/pure_llm_order_routes_costs_seed_7.json",
+      "sha256": "87642bd76bd692ae0c270f8f95f527f84e6c319dddd4443b3ddf8aa82e7038a3"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v7/seeds/seed_8/pure_llm_formal_routes_costs_seed_8.json",
+      "sha256": "2d9945a5de6f8937c116883229af3e1d4a2c0303daaacf0c5d825d44a7f34ddd"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v7/seeds/seed_8/pure_llm_order_routes_costs_seed_8.json",
+      "sha256": "c1cd8852ffc69d5806cb0f03807ffe6ecb832e849d8d6441b142c8b30e679711"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v7/seeds/seed_9/pure_llm_formal_routes_costs_seed_9.json",
+      "sha256": "a7ba7422e6af35e114751523248ecb30e0d736aaf3a46e3b96f37660d7b12682"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v7/seeds/seed_9/pure_llm_order_routes_costs_seed_9.json",
+      "sha256": "a3665e72177cee96005a04f76e48f6c33edc5335edc31ae4d8e4a2b6808c21b4"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v8/seeds/seed_0/pure_llm_formal_routes_costs_seed_0.json",
+      "sha256": "fb8fbb57abe917fd3f19c9808798d1d54da7b6858fdb3bda24a2200888775150"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v8/seeds/seed_0/pure_llm_order_routes_costs_seed_0.json",
+      "sha256": "cdf5980cca3ab10dc3b25e59b7adfd97242f37e5e890e58cfa1af73aee980279"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v8/seeds/seed_1/pure_llm_formal_routes_costs_seed_1.json",
+      "sha256": "d587a63d02e3f41869069fb42c5c781365e14d3efa3be67b3540bb6a9bf276de"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v8/seeds/seed_1/pure_llm_order_routes_costs_seed_1.json",
+      "sha256": "d9354d2207d6d8a802fa98556c858530722fb698a254518131545b1c323a47d0"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v8/seeds/seed_2/pure_llm_formal_routes_costs_seed_2.json",
+      "sha256": "11a0f4515ecf07343b5b6c909b16e360600024f9732cb3d6f6b0871aa93a8c66"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v8/seeds/seed_2/pure_llm_order_routes_costs_seed_2.json",
+      "sha256": "2077742a751850d101957f467044d0a594089d5aa2d8ff7a3f041de654ed0032"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v8/seeds/seed_3/pure_llm_formal_routes_costs_seed_3.json",
+      "sha256": "e2c55a328984b6c08b6d5beb6b6d40c533ea06053cda26801f27e1be0304b8ab"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v8/seeds/seed_3/pure_llm_order_routes_costs_seed_3.json",
+      "sha256": "12f4a410cb04f141f9c540a4b4a1d80cd5db07e606b7f68e9dd1564af525ba5d"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v8/seeds/seed_4/pure_llm_formal_routes_costs_seed_4.json",
+      "sha256": "862c0b255434d42182476962cee4b297be806652bdfb63b3b454a4b459bf8526"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v8/seeds/seed_4/pure_llm_order_routes_costs_seed_4.json",
+      "sha256": "a4d03b32041cefe35a6e4339b9707ab54dc8b392abfabb4feaa4ea4b22a6efde"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v8/seeds/seed_5/pure_llm_formal_routes_costs_seed_5.json",
+      "sha256": "b386236d578b921852a8d6aaecef9c802e6601c337d2201f00546e55cc0af897"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v8/seeds/seed_5/pure_llm_order_routes_costs_seed_5.json",
+      "sha256": "b833e802001de6c2b08176f1966c308f26a37c27777cea666c49fdd42a41a999"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v8/seeds/seed_6/pure_llm_formal_routes_costs_seed_6.json",
+      "sha256": "8eed6617b9b090dd15542f39d906dbc6f13589441dca8ef2b0c9b263dcbb297b"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v8/seeds/seed_6/pure_llm_order_routes_costs_seed_6.json",
+      "sha256": "7ef1f274235a356073ce9bd7ab9e55e70b0ef8d3dd64bd4af09fdca82864a307"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v8/seeds/seed_7/pure_llm_formal_routes_costs_seed_7.json",
+      "sha256": "b52e2a39bfbb4621962b043cae54bddb02abdb78840b5ed0f4cf9b2eea1e6ac9"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v8/seeds/seed_7/pure_llm_order_routes_costs_seed_7.json",
+      "sha256": "2c0c96080e5947b76bbf0f5b4003a30466c6aed1f031a6cf211c7e515b030a7c"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v8/seeds/seed_8/pure_llm_formal_routes_costs_seed_8.json",
+      "sha256": "1bc23218ecaa2d2ebfdce2419e2b441fdd4f11f058edf3c5ffe609e89d4f2c09"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v8/seeds/seed_8/pure_llm_order_routes_costs_seed_8.json",
+      "sha256": "8bae620e8c2844b82e083885b24225885d8261ec104cb420273e1fe3b4003204"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v8/seeds/seed_9/pure_llm_formal_routes_costs_seed_9.json",
+      "sha256": "7579ad553b49ddd08d0c22163789bb15959d7c7e83a3ce3fbbc82bb7ce707ea4"
+    },
+    {
+      "path": "outputs/route_layer/pure_llm_experiment_v8/seeds/seed_9/pure_llm_order_routes_costs_seed_9.json",
+      "sha256": "76fb66be46d4b1d19e04d46876b4da74eba4c03c6b061e1ec10b912b323f5538"
+    }
+  ],
+  "source_results_modified": false,
+  "source_runs": [
+    {
+      "energy_audit_hash_matches_energy_manifest": true,
+      "energy_audit_path": "outputs/route_layer/pure_llm_grid_energy_v2_recalculation_20261027_current_module_path_recovered_v2/pure_llm_experiment_v1/failure_energy_audit_v2.json",
+      "energy_audit_sha256": "1e58f92189b9b57e23059f0dd5af402541fcf4d657572c3018b4477c2c98b7c4",
+      "expected_energy_audit_sha256": "1e58f92189b9b57e23059f0dd5af402541fcf4d657572c3018b4477c2c98b7c4",
+      "expected_source_manifest_sha256": "42d0fa1bbf2222d69698c7ab235224aa1c5402dca1a3b3ee5c2b2fa136a79d47",
+      "source_experiment": "outputs/route_layer/pure_llm_experiment_v1",
+      "source_manifest_hash_matches_energy_manifest": true,
+      "source_manifest_path": "outputs/route_layer/pure_llm_experiment_v1/manifest.json",
+      "source_manifest_sha256": "42d0fa1bbf2222d69698c7ab235224aa1c5402dca1a3b3ee5c2b2fa136a79d47",
+      "source_status": "api_error"
+    },
+    {
+      "energy_audit_hash_matches_energy_manifest": true,
+      "energy_audit_path": "outputs/route_layer/pure_llm_grid_energy_v2_recalculation_20261027_current_module_path_recovered_v2/pure_llm_experiment_v4/failure_energy_audit_v2.json",
+      "energy_audit_sha256": "32d6fcca053713766b6a46da63a757c1a9a09dda8e55a5301ba40b3451d04eed",
+      "expected_energy_audit_sha256": "32d6fcca053713766b6a46da63a757c1a9a09dda8e55a5301ba40b3451d04eed",
+      "expected_source_manifest_sha256": "4befcefb6cdb2dd22cd33ba1c26a24e2d0d9611c296d87a7f9581cb32eaf8591",
+      "source_experiment": "outputs/route_layer/pure_llm_experiment_v4",
+      "source_manifest_hash_matches_energy_manifest": true,
+      "source_manifest_path": "outputs/route_layer/pure_llm_experiment_v4/manifest.json",
+      "source_manifest_sha256": "4befcefb6cdb2dd22cd33ba1c26a24e2d0d9611c296d87a7f9581cb32eaf8591",
+      "source_status": "api_error"
+    },
+    {
+      "energy_audit_hash_matches_energy_manifest": true,
+      "energy_audit_path": "outputs/route_layer/pure_llm_grid_energy_v2_recalculation_20261027_current_module_path_recovered_v2/pure_llm_experiment_v5/failure_energy_audit_v2.json",
+      "energy_audit_sha256": "ff2b3f9d2ee77aa57bf7cc43d4c79500c30cbfdd75b6b5887a072b101f260b53",
+      "expected_energy_audit_sha256": "ff2b3f9d2ee77aa57bf7cc43d4c79500c30cbfdd75b6b5887a072b101f260b53",
+      "expected_source_manifest_sha256": "9bc1e561da290ab08791d31970baefab641a765142edd831661bd66276c17171",
+      "source_experiment": "outputs/route_layer/pure_llm_experiment_v5",
+      "source_manifest_hash_matches_energy_manifest": true,
+      "source_manifest_path": "outputs/route_layer/pure_llm_experiment_v5/manifest.json",
+      "source_manifest_sha256": "9bc1e561da290ab08791d31970baefab641a765142edd831661bd66276c17171",
+      "source_status": "completed"
+    },
+    {
+      "energy_audit_hash_matches_energy_manifest": true,
+      "energy_audit_path": "outputs/route_layer/pure_llm_grid_energy_v2_recalculation_20261027_current_module_path_recovered_v2/pure_llm_experiment_v6/failure_energy_audit_v2.json",
+      "energy_audit_sha256": "68e7199061fb66871687d9c5336843feec28876a7517443a7e580281f532c149",
+      "expected_energy_audit_sha256": "68e7199061fb66871687d9c5336843feec28876a7517443a7e580281f532c149",
+      "expected_source_manifest_sha256": "bd265cc0114868515faf97769b094c808970c81f50d64e6cbbf3990d2ffb50f1",
+      "source_experiment": "outputs/route_layer/pure_llm_experiment_v6",
+      "source_manifest_hash_matches_energy_manifest": true,
+      "source_manifest_path": "outputs/route_layer/pure_llm_experiment_v6/manifest.json",
+      "source_manifest_sha256": "bd265cc0114868515faf97769b094c808970c81f50d64e6cbbf3990d2ffb50f1",
+      "source_status": "api_error"
+    },
+    {
+      "energy_audit_hash_matches_energy_manifest": true,
+      "energy_audit_path": "outputs/route_layer/pure_llm_grid_energy_v2_recalculation_20261027_current_module_path_recovered_v2/pure_llm_experiment_v7/failure_energy_audit_v2.json",
+      "energy_audit_sha256": "eb47446c7f69f7f04a96179586083e98b4c40127eca6857858a6466a56744abe",
+      "expected_energy_audit_sha256": "eb47446c7f69f7f04a96179586083e98b4c40127eca6857858a6466a56744abe",
+      "expected_source_manifest_sha256": "00dcd1b6c046cd9d284e0b8e4a999d1a56a1e783e7c772a7236cbe9eca2de6fb",
+      "source_experiment": "outputs/route_layer/pure_llm_experiment_v7",
+      "source_manifest_hash_matches_energy_manifest": true,
+      "source_manifest_path": "outputs/route_layer/pure_llm_experiment_v7/manifest.json",
+      "source_manifest_sha256": "00dcd1b6c046cd9d284e0b8e4a999d1a56a1e783e7c772a7236cbe9eca2de6fb",
+      "source_status": "completed"
+    },
+    {
+      "energy_audit_hash_matches_energy_manifest": true,
+      "energy_audit_path": "outputs/route_layer/pure_llm_grid_energy_v2_recalculation_20261027_current_module_path_recovered_v2/pure_llm_experiment_v8/failure_energy_audit_v2.json",
+      "energy_audit_sha256": "903fee0771aa4c1a9f40a6cc8d112f4c389effab3d40f45333b4371d6baecdf9",
+      "expected_energy_audit_sha256": "903fee0771aa4c1a9f40a6cc8d112f4c389effab3d40f45333b4371d6baecdf9",
+      "expected_source_manifest_sha256": "588b41cfa94cbb4308b6c357b2400b32fb970dd789a6f9f0b0c84e58ee30c265",
+      "source_experiment": "outputs/route_layer/pure_llm_experiment_v8",
+      "source_manifest_hash_matches_energy_manifest": true,
+      "source_manifest_path": "outputs/route_layer/pure_llm_experiment_v8/manifest.json",
+      "source_manifest_sha256": "588b41cfa94cbb4308b6c357b2400b32fb970dd789a6f9f0b0c84e58ee30c265",
+      "source_status": "completed"
+    }
+  ],
+  "status": "completed_offline_input_inventory"
+}

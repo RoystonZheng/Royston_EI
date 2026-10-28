@@ -9,10 +9,13 @@ route planner.
 from __future__ import annotations
 
 import copy
+import argparse
 import hashlib
 import json
+import re
 import sys
 from collections import Counter
+from datetime import date
 from pathlib import Path
 from typing import Any
 
@@ -58,6 +61,46 @@ def write_json(path: Path, payload: dict[str, Any]) -> None:
     )
 
 
+def recover_node_sequence(raw_output: Any) -> tuple[list[str], bool]:
+    """Read a returned node path or recover complete node IDs from truncated JSON."""
+
+    if not isinstance(raw_output, dict):
+        return [], False
+    nodes = raw_output.get("node_sequence")
+    if isinstance(nodes, list):
+        return [str(node) for node in nodes], False
+    content = raw_output.get("content")
+    if not isinstance(content, str):
+        return [], False
+    match = re.search(r'"node_sequence"\s*:\s*\[', content)
+    if not match:
+        return [], False
+    node_array = content[match.end():].split("]", 1)[0]
+    recovered = re.findall(r'"(node_-?\d+_-?\d+)"', node_array)
+    return recovered, bool(recovered)
+
+
+def move_sequence_from_nodes(nodes: list[str]) -> str:
+    """Convert a complete cardinal grid-node chain into direction letters."""
+
+    if len(nodes) < 2:
+        return ""
+    coordinates = []
+    for node_id in nodes:
+        match = re.fullmatch(r"node_(-?\d+)_(-?\d+)", node_id)
+        if not match:
+            return ""
+        coordinates.append((int(match.group(1)), int(match.group(2))))
+    directions = {(1, 0): "E", (-1, 0): "W", (0, 1): "N", (0, -1): "S"}
+    moves = []
+    for left, right in zip(coordinates, coordinates[1:]):
+        direction = directions.get((right[0] - left[0], right[1] - left[1]))
+        if direction is None:
+            return ""
+        moves.append(direction)
+    return "".join(moves)
+
+
 def load_map(path: Path) -> RoadMap:
     payload = read_json(path)
     return RoadMap(
@@ -96,31 +139,61 @@ def audit_method(method: dict[str, Any], task: dict[str, Any], road_map: RoadMap
     reason = str(method.get("failure_reason") or "unknown_failure")
     sequence = metadata.get("move_sequence") or raw_output.get("move_sequence") or ""
     recovered = False
+    recovered_nodes = False
+    sequence_start_node = task.get("start_node_id")
+    path_basis = "move_sequence"
     if not sequence and reason == "llm_output_parse_failed":
         sequence = metadata.get("recovered_partial_move_sequence") or recover_partial_move_sequence(raw_output)
         recovered = bool(sequence)
+        if recovered:
+            path_basis = "recovered_move_runs"
+
+    if not sequence:
+        proposed_nodes, recovered_nodes = recover_node_sequence(raw_output)
+        node_moves = move_sequence_from_nodes(proposed_nodes)
+        if node_moves:
+            sequence = node_moves
+            sequence_start_node = proposed_nodes[0]
+            path_basis = "recovered_node_sequence_prefix" if recovered_nodes else "returned_node_sequence"
+            recovered = recovered or recovered_nodes
 
     audit: dict[str, Any]
-    if sequence and task.get("start_node_id"):
+    if sequence and sequence_start_node:
         replay = replay_move_sequence(
             road_map,
-            task["start_node_id"],
+            sequence_start_node,
             sequence,
             blocked_edge_ids=task.get("blocked_edge_ids", []),
         )
         audit = estimate_route_proposal_energy(road_map, replay, config)
         if recovered:
             audit["status"] = "partial_estimated"
-            audit["interpretation"] = (
-                "Partial hypothetical estimate from complete move_runs recovered before response truncation; "
-                "not the full route and not actual vehicle consumption."
-            )
+            if path_basis == "recovered_node_sequence_prefix":
+                audit["interpretation"] = (
+                    "Partial hypothetical estimate from complete node IDs recovered before response truncation; "
+                    "not the full route and not actual vehicle consumption."
+                )
+            else:
+                audit["interpretation"] = (
+                    "Partial hypothetical estimate from complete move_runs recovered before response truncation; "
+                    "not the full route and not actual vehicle consumption."
+                )
         else:
             audit["interpretation"] = (
                 "Hypothetical estimate for the model-proposed sequence, not actual vehicle consumption; "
                 "legal-prefix energy is reported separately and inferred edges remain explicit."
             )
         audit["recovered_move_sequence"] = recovered
+        audit["proposal_path_basis"] = path_basis
+        audit["proposal_path_start_node_id"] = sequence_start_node
+        audit["task_start_node_id"] = task.get("start_node_id")
+        audit["proposal_origin_matches_task_start"] = sequence_start_node == task.get("start_node_id")
+        audit["recovered_from_truncated_node_sequence"] = recovered_nodes
+        if sequence_start_node != task.get("start_node_id"):
+            audit["interpretation"] += (
+                " The returned path origin differs from the task vehicle start; its energy is only for the "
+                "reported path segment and its prefix is not evidence of an executable task route."
+            )
     else:
         audit = {
             "status": "no_route_proposed",
@@ -137,6 +210,11 @@ def audit_method(method: dict[str, Any], task: dict[str, Any], road_map: RoadMap
             "energy_profile_sha256": config.energy_profile.fingerprint(),
             "interpretation": "No route steps were returned or recoverable; energy is not estimable, not zero.",
             "recovered_move_sequence": False,
+            "proposal_path_basis": "no_recoverable_path",
+            "proposal_path_start_node_id": None,
+            "task_start_node_id": task.get("start_node_id"),
+            "proposal_origin_matches_task_start": None,
+            "recovered_from_truncated_node_sequence": False,
         }
     return {
         "task_id": method.get("task_id"),
@@ -144,22 +222,37 @@ def audit_method(method: dict[str, Any], task: dict[str, Any], road_map: RoadMap
         "status": method.get("status"),
         "failure_reason": reason,
         "response_received": bool(metadata.get("llm_response_received", raw_output is not None)),
+        "validation": method.get("validation"),
         "proposal_energy_audit_v2": audit,
     }
 
 
 def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--source",
+        type=Path,
+        action="append",
+        help="Source experiment directory; may be repeated. Defaults to the saved formal grid runs.",
+    )
+    parser.add_argument(
+        "--output",
+        type=Path,
+        default=DEFAULT_OUTPUT,
+        help="Versioned sidecar output directory.",
+    )
+    args = parser.parse_args()
+    source_roots = tuple(path.resolve() for path in (args.source or DEFAULT_SOURCES))
+    output_root = args.output.resolve()
     config = EvaluationConfig(energy_profile=EnergyModelConfig())
     calculation_script_sha256 = sha256(Path(__file__).resolve())
-    output_root = DEFAULT_OUTPUT
     summaries = []
     all_records = []
 
-    for source_root in DEFAULT_SOURCES:
+    for source_root in source_roots:
         source_manifest_path = source_root / "manifest.json"
-        if not source_manifest_path.is_file():
-            raise FileNotFoundError(source_manifest_path)
-        source_manifest = read_json(source_manifest_path)
+        source_manifest = read_json(source_manifest_path) if source_manifest_path.is_file() else {}
+        source_manifest_sha256 = sha256(source_manifest_path) if source_manifest_path.is_file() else None
         per_run_records = []
         source_files = []
         counters: Counter[str] = Counter()
@@ -245,8 +338,8 @@ def main() -> int:
         payload = {
             "schema_version": "pure_llm_grid_energy_audit_ev_longitudinal_v2",
             "source_experiment": str(source_root.relative_to(ROOT)),
-            "source_experiment_status": source_manifest.get("status"),
-            "source_manifest_sha256": sha256(source_manifest_path),
+            "source_experiment_status": source_manifest.get("status", "no_source_manifest"),
+            "source_manifest_sha256": source_manifest_sha256,
             "calculation_scope": "offline energy recalculation from saved maps, tasks, and responses; no model calls or route reruns",
             "energy_model": profile_info,
             "energy_model_module_sha256": sha256(ROOT / "route_experiment/energy_model.py"),
@@ -265,8 +358,8 @@ def main() -> int:
         write_json(output_path, payload)
         summaries.append({
             "source_experiment": str(source_root.relative_to(ROOT)),
-            "source_manifest_sha256": sha256(source_manifest_path),
-            "source_status": source_manifest.get("status"),
+            "source_manifest_sha256": source_manifest_sha256,
+            "source_status": source_manifest.get("status", "no_source_manifest"),
             "output": str(output_path.relative_to(ROOT)),
             "output_sha256": sha256(output_path),
             "coverage": dict(counters),
@@ -276,7 +369,7 @@ def main() -> int:
     master = {
         "schema_version": "pure_llm_grid_energy_v2_recalculation_manifest_v1",
         "status": "completed_offline_recalculation",
-        "created_date": "2026-10-26",
+        "created_date": date.today().isoformat(),
         "energy_model": model_metadata(config.energy_profile),
         "energy_model_module_sha256": sha256(ROOT / "route_experiment/energy_model.py"),
         "calculation_script_sha256": calculation_script_sha256,

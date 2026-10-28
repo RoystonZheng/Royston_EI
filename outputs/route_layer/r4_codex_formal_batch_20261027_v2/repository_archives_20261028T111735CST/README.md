@@ -1,0 +1,7 @@
+# R4 terminal-task and manifest checkpoint
+
+Captured 2026-10-28 11:17:35 CST from the exact Application Support output root listed in `SOURCE_MANIFESTS.tsv`. Only task records in the parent manifest already marked `route_complete` or `failed` were considered for artifacts. The package stores the current `state.json`, `manifest.json`, `final_audit.json`, `replay.html`, and `codex_usage_cost_reconciliation.json` where not already represented on GitHub. Each compressed member has source and archive SHA-256 values and passed round-trip verification. Files explicitly superseded by `pre_energy_basis_fix` names, logs, locks, PIDs, and temporary files are excluded.
+
+Parent manifest status is `running` with {'route_complete': 19, 'failed': 35, 'ready': 5, 'pending': 69, 'active': 1}; `worker_00` status is `running` with {'outcome_unknown': 4, 'route_complete': 3, 'failed': 6, 'active': 1, 'pending': 15}. Parent and worker counts are separate scopes and must not be added. The parent was updated at `2026-10-28T03:12:00.637621+00:00` and records 5375 model requests. The worker was updated at `2026-10-28T03:17:25.021377+00:00` and records 1103 model requests. The run is not final; active, pending, ready, and outcome-unknown task outputs were not copied.
+
+This is a progress/terminal-task archive, not a final batch audit or an effect claim. `OMISSIONS.tsv` records any missing, oversized, or credential-pattern files.

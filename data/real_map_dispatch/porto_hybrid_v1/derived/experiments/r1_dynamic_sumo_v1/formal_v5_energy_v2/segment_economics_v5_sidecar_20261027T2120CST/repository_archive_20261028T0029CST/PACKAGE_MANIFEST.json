@@ -1,0 +1,26 @@
+{
+  "schema_version": "porto_r1_segment_economics_v5_archive_v1",
+  "created_local": "2026-10-28 00:29 CST",
+  "source_sidecar": "data/real_map_dispatch/porto_hybrid_v1/derived/experiments/r1_dynamic_sumo_v1/formal_v5_energy_v2/segment_economics_v5_sidecar_20261027T2120CST",
+  "source_status": "completed offline sidecar",
+  "decision_gate_status": "blocked_missing_same_snapshot_complete_candidate_pool_and_passenger_fare",
+  "segments": 3800,
+  "deadhead_segments": 1900,
+  "passenger_segments": 1900,
+  "energy_nonestimable_segments": 0,
+  "link_energy_attribution_unavailable_segments": 3800,
+  "model_calls": 0,
+  "sumo_reruns": 0,
+  "source_results_modified": false,
+  "electricity_tariff": null,
+  "passenger_fare_schedule": null,
+  "raw_bytes": 42583327,
+  "compressed_bytes": 1918010,
+  "source_sha256": "45a2a66bdf936f0ca0beef25daa79d012748a93531a45e7859972e69582b06a4",
+  "compressed_sha256": "bc6d42da86b2ffd8529e0f279888eec155b293ff4d63997aa713417562bd39aa",
+  "interpretation_limits": [
+    "Offline accounting sidecar; no route selector changed and no SUMO rerun occurred.",
+    "No electricity tariff or passenger-fare schedule is frozen, so v5 decision scoring remains blocked.",
+    "Link-level energy attribution is unavailable for all recorded segments."
+  ]
+}

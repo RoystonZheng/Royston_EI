@@ -216,21 +216,30 @@ def _route_decisions_for_item(
         method_scoreable_count = 0
 
         token_total = method.resources.input_tokens + method.resources.output_tokens
-        usage_known = (
-            method.resources.llm_calls > 0
-            or token_total > 0
-            or method.metadata.get("usage_accounting_status") == "reported"
-            or method.metadata.get("cost_status") == "evaluated"
+        resource_payload = method_payload.get("resources", {})
+        llm_calls_explicit = "llm_calls" in resource_payload
+        usage_reported = method.metadata.get("usage_accounting_status") == "reported"
+        # A request count does not prove token usage. Failed or delivery-unknown
+        # requests can have zero recorded tokens while provider billing remains
+        # unknown, so keep their API cost null and block economic scoring.
+        zero_usage_confirmed = usage_reported or (
+            llm_calls_explicit and method.resources.llm_calls == 0
         )
         api_cost = None
-        if usage_known and token_total == 0 and method.resources.llm_calls == 0:
+        api_cost_status = "usage_missing"
+        if token_total > 0:
+            api_cost_status = "usage_recorded"
+            if (
+                price_config.api_price_per_token is not None
+                and price_config.api_price_per_token > 0
+            ):
+                api_cost = token_total * price_config.api_price_per_token
+                api_cost_status = "rate_estimate"
+        elif zero_usage_confirmed:
             api_cost = 0.0
-        elif (
-            usage_known
-            and price_config.api_price_per_token is not None
-            and price_config.api_price_per_token > 0
-        ):
-            api_cost = token_total * price_config.api_price_per_token
+            api_cost_status = "confirmed_zero_usage"
+        elif method.resources.llm_calls > 0:
+            api_cost_status = "zero_tokens_request_billing_unverified"
 
         compute_ms = method.metadata.get("compute_time_ms")
         if compute_ms is None and method.resources.compute_time_ms > 0:
@@ -254,6 +263,7 @@ def _route_decisions_for_item(
         method_costs = {
             "currency": price_config.currency,
             "api_cost_amount": api_cost,
+            "api_cost_status": api_cost_status,
             "compute_cost_amount": compute_cost,
             "known_method_cost_subtotal": (
                 sum(value for value in (api_cost, compute_cost) if value is not None)
@@ -263,7 +273,15 @@ def _route_decisions_for_item(
             "complete_for_declared_scope": method_money_complete,
             "accounted_once_per_method": True,
             "null_reasons": {
-                **({"api_cost_amount": "usage_or_matching_api_rate_missing"} if api_cost is None else {}),
+                **(
+                    {
+                        "api_cost_amount": api_cost_status
+                        if api_cost_status == "zero_tokens_request_billing_unverified"
+                        else "usage_or_matching_api_rate_missing"
+                    }
+                    if api_cost is None
+                    else {}
+                ),
                 **({"compute_cost_amount": "compute_time_or_matching_compute_rate_missing"} if compute_cost is None else {}),
             },
         }

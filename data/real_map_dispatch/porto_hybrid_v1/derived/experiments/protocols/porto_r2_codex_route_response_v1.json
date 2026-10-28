@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:porto-r2-codex-route-response-v1",
+  "title": "Porto R2 pure LLM route response",
+  "type": "object",
+  "required": ["routes"],
+  "additionalProperties": false,
+  "properties": {
+    "routes": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "type": "object",
+        "required": ["leg_role", "edge_ids"],
+        "additionalProperties": false,
+        "properties": {
+          "leg_role": {"enum": ["vehicle_to_pickup", "pickup_to_dropoff"]},
+          "edge_ids": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 512,
+            "items": {"type": "string", "pattern": "^e[0-9]{4}$"}
+          }
+        }
+      }
+    }
+  }
+}
