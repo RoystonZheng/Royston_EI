@@ -1,0 +1,4 @@
+#!/bin/bash
+set -e
+cd "/Users/didi/Documents/personalcodexfile/第二次课"
+exec /usr/bin/caffeinate -s -i /Library/Developer/CommandLineTools/usr/bin/python3 "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/resume_audit_20261028T034707Z/run_r4_serial_formal_supervisor_resume.py" --project-root "/Users/didi/Documents/personalcodexfile/第二次课" --batch-root "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2" --pilot-audit "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_task9_pilot_20261027_v3/final_audit.json" --usage-baseline-percent 0 >> "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/serial_supervisor_screen_20261028.log" 2>&1

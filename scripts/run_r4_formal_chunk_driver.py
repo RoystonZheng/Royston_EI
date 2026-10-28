@@ -92,6 +92,12 @@ def main():
     parser.add_argument("--request-limit", type=parse_optional_int, required=True, help="cumulative cap; use none for no project-level cap")
     parser.add_argument("--usage-baseline-percent", type=int, required=True)
     parser.add_argument("--usage-stop-percent", type=parse_optional_int, default=None)
+    parser.add_argument(
+        "--max-new-requests-per-invocation",
+        type=parse_optional_int,
+        default=1,
+        help="resumable checkpoint size; use none to keep one driver alive across checkpoints",
+    )
     args = parser.parse_args()
     batch_dir = args.batch_dir.resolve()
     project_root = args.project_root.resolve()
@@ -100,7 +106,8 @@ def main():
     log_path = batch_dir / "chunk_driver.jsonl"
     log(log_path, {"event": "driver_started", "request_limit": args.request_limit,
                    "usage_baseline_percent": args.usage_baseline_percent,
-                   "usage_stop_percent": args.usage_stop_percent})
+                   "usage_stop_percent": args.usage_stop_percent,
+                   "max_new_requests_per_invocation": args.max_new_requests_per_invocation})
 
     while True:
         manifest = read_manifest(manifest_path)
@@ -113,8 +120,12 @@ def main():
                    "--request-limit", "none" if args.request_limit is None else str(args.request_limit),
                    "--usage-baseline-percent", str(args.usage_baseline_percent),
                    "--usage-stop-percent", "none" if args.usage_stop_percent is None else str(args.usage_stop_percent),
-                   "--pilot-audit", str(args.pilot_audit.resolve()),
-                   "--max-new-requests-per-invocation", "1"]
+                   "--pilot-audit", str(args.pilot_audit.resolve())]
+        if args.max_new_requests_per_invocation is not None:
+            command.extend([
+                "--max-new-requests-per-invocation",
+                str(args.max_new_requests_per_invocation),
+            ])
         started = time.monotonic()
         with (batch_dir / "chunk_runner.log").open("a", encoding="utf-8") as handle:
             process = subprocess.Popen(command, cwd=str(project_root), stdout=handle, stderr=subprocess.STDOUT)
