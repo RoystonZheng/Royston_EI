@@ -1,0 +1,50 @@
+{
+  "captured_at_utc": "2026-10-28T05:14:00+00:00",
+  "scope": "two terminal per-unit F4/D0 outputs from independent experiments; no batch completion claim",
+  "included_files": [
+    {
+      "source": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20240817_225000_q50/F4/D0_greedy_seed_3.json",
+      "archive_path": "artifacts/seed_3/EV_20240817_225000_q50/F4/D0_greedy_seed_3.json",
+      "size_bytes": 1339588,
+      "sha256": "6933541d1ebdfef5a093e93235fc42e3bec5ced6ecb433aaf785b014f84c0f91",
+      "partial_run": false
+    },
+    {
+      "source": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240521_210000_q50/F4/D0_greedy_seed_0.json",
+      "archive_path": "artifacts/ev2_seed_0/EV_20240521_210000_q50/F4/D0_greedy_seed_0.json",
+      "size_bytes": 2315715,
+      "sha256": "adb9eb6daa8b223d66c548a93fa63d116db3c06fbe206eea82bfc99245b051df",
+      "partial_run": false
+    }
+  ],
+  "progress_streams": [
+    {
+      "source": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/progress.jsonl",
+      "sha256": "d7b0f026c79291a650b7e735a6b2f942e50f53850c75ce6d0bad4068bc44bd4a",
+      "size_bytes": 685955,
+      "mtime_utc": "2026-10-28T05:14:24+00:00",
+      "status": "active_progress_at_capture"
+    },
+    {
+      "source": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/progress.jsonl",
+      "sha256": "e59e70a8e62051ada6185ecad652d4220d78475b20899316cc10f2aaed699011",
+      "size_bytes": 200448,
+      "mtime_utc": "2026-10-28T05:14:24+00:00",
+      "status": "active_progress_at_capture"
+    }
+  ],
+  "omissions": [
+    [
+      "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/progress.jsonl",
+      "mutable progress stream; SHA-256 and mtime recorded in CHECKPOINT.json, source bytes omitted"
+    ],
+    [
+      "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/progress.jsonl",
+      "mutable progress stream; SHA-256 and mtime recorded in CHECKPOINT.json, source bytes omitted"
+    ],
+    [
+      "other active or unfinished per-unit outputs",
+      "not copied until terminal and stable"
+    ]
+  ]
+}

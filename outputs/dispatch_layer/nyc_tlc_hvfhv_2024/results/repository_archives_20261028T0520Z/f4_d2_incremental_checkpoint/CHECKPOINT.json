@@ -1,0 +1,54 @@
+{
+  "captured_at_utc": "2026-10-28T05:20:31+00:00",
+  "scope": "two terminal per-unit F4/D2 outputs from independent experiments; no batch completion claim",
+  "included_files": [
+    {
+      "source": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20240817_225000_q50/F4/D2_agent_optimizer_seed_3.json",
+      "archive_path": "artifacts/seed_3/EV_20240817_225000_q50/F4/D2_agent_optimizer_seed_3.json",
+      "size_bytes": 1816183,
+      "sha256": "465141e6b4192cb6fc3d710bf0208ac76793bb1b8ece0ed8f47f81f2e0f036e5",
+      "partial_run": false
+    },
+    {
+      "source": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240521_210000_q50/F4/D2_agent_optimizer_seed_0.json",
+      "archive_path": "artifacts/ev2_seed_0/EV_20240521_210000_q50/F4/D2_agent_optimizer_seed_0.json",
+      "size_bytes": 2841650,
+      "sha256": "4c5972bdca48edd8421afee128176deab6a80bdbe1430d7d29b601620a8f9020",
+      "partial_run": false
+    }
+  ],
+  "progress_streams": [
+    {
+      "source": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/progress.jsonl",
+      "sha256": "3f2856deb9b3d72c9abdff963d34a64d6a5dc2c835cd72f9612bbdb64067ac98",
+      "size_bytes": 688795,
+      "mtime_utc": "2026-10-28T05:19:39+00:00",
+      "status": "progress_stream_updated_during_monitoring"
+    },
+    {
+      "source": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/progress.jsonl",
+      "sha256": "e608567120a2edad72272f24e6c7d7eb2eb4a51ed48427b469983b17181fbf89",
+      "size_bytes": 203273,
+      "mtime_utc": "2026-10-28T05:19:53+00:00",
+      "status": "progress_stream_updated_during_monitoring"
+    }
+  ],
+  "omissions": [
+    [
+      "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/progress.jsonl",
+      "mutable progress stream; only hash/mtime recorded"
+    ],
+    [
+      "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/progress.jsonl",
+      "mutable progress stream; only hash/mtime recorded"
+    ],
+    [
+      "seed_3/evaluation/EV_20240817_225000_q50/F4/codex_context_policy_traces/",
+      "context-policy trace material omitted from this result checkpoint"
+    ],
+    [
+      "other active or unfinished per-unit outputs",
+      "not included until terminal and stable"
+    ]
+  ]
+}

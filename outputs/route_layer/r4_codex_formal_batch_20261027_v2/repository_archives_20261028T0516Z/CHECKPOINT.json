@@ -1,0 +1,66 @@
+{
+  "captured_at_utc": "2026-10-28T05:16:29+00:00",
+  "scope": "selected stable control and task audit files from exact Application Support root; no batch completion claim",
+  "observed_status": {
+    "parent": "paused_at_parallel_checkpoint",
+    "worker_00": "ready_for_serial_resume",
+    "worker_01": "paused_at_checkpoint_for_serial_resume",
+    "task_0006_0009": "partial_legal_prefix_not_complete"
+  },
+  "included_files": [
+    {
+      "source": "manifest.json",
+      "archive_path": "app_support/manifest.json",
+      "size_bytes": 285987,
+      "sha256": "c42ab56920365c641c2bf6e0b7b697cb1b68dca9fff73a5ae426975764c59ce5"
+    },
+    {
+      "source": "parallel_workers/worker_00/manifest.json",
+      "archive_path": "app_support/parallel_workers/worker_00/manifest.json",
+      "size_bytes": 283822,
+      "sha256": "51b62b02ad3c086d47a75baaeef38d5928e4f7ab2e0dd667d325442537e434a6"
+    },
+    {
+      "source": "parallel_workers/worker_01/manifest.json",
+      "archive_path": "app_support/parallel_workers/worker_01/manifest.json",
+      "size_bytes": 233382,
+      "sha256": "7475bff80df0ccba4724c03aaa32964759d125dd83da2abf098bab3f9ba1575e"
+    },
+    {
+      "source": "parallel_workers/worker_00/tasks/seed_6/task-0006-0009/run_000/manifest.json",
+      "archive_path": "app_support/parallel_workers/worker_00/tasks/seed_6/task-0006-0009/run_000/manifest.json",
+      "size_bytes": 4763,
+      "sha256": "9d0b092d2ae4149a2e45495e836918c1efe5e041a3f2f462dc57b3703e2546fe"
+    },
+    {
+      "source": "parallel_workers/worker_00/tasks/seed_6/task-0006-0009/run_000/final_audit.json",
+      "archive_path": "app_support/parallel_workers/worker_00/tasks/seed_6/task-0006-0009/run_000/final_audit.json",
+      "size_bytes": 6033,
+      "sha256": "00897074183a5291c7f16d72156f09c2c716c7049f3fc6a69139230215f55849"
+    },
+    {
+      "source": "parallel_workers/worker_00/tasks/seed_6/task-0006-0009/run_000/codex_usage_cost_reconciliation.json",
+      "archive_path": "app_support/parallel_workers/worker_00/tasks/seed_6/task-0006-0009/run_000/codex_usage_cost_reconciliation.json",
+      "size_bytes": 5437,
+      "sha256": "c9bb75b0abf7a2ebd7e711bc4c786bcca827eea5775c215f64e635d984d0b2ed"
+    }
+  ],
+  "omissions": [
+    [
+      "parallel_workers/worker_00/tasks/seed_6/task-0006-0009/run_000/state.json",
+      "contains prompt fields; omitted from repository package"
+    ],
+    [
+      "parallel_workers/worker_00/tasks/seed_6/task-0006-0009/run_000/replay.html",
+      "replay/trace material omitted"
+    ],
+    [
+      "parallel_workers/worker_00/chunk_driver.jsonl and serial_supervisor.jsonl",
+      "mutable runtime logs omitted"
+    ],
+    [
+      "**/*.bak and traces/**/*.prompt.txt",
+      "backup and prompt/trace material excluded"
+    ]
+  ]
+}
