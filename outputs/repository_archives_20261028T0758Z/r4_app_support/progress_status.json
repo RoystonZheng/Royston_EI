@@ -1,0 +1,39 @@
+{
+  "snapshot_type": "allowlisted_r4_progress_checkpoint",
+  "captured_at_utc": "2026-10-28T07:59:50.010001+00:00",
+  "parent": {
+    "manifest_sha256": "dae7064e91366f8ab971e81b0d9cab597c1545bd7e3a9e13fbbfaa4deefcf1c5",
+    "updated_at_utc": "2026-10-28T07:29:21.447826+00:00",
+    "status": "paused_at_parallel_checkpoint",
+    "task_count": 129,
+    "task_status_counts": {
+      "failed": 35,
+      "outcome_unknown": 5,
+      "pending": 62,
+      "ready": 6,
+      "route_complete": 21
+    },
+    "unresolved_count": 24,
+    "in_flight": false,
+    "stop_reason": null
+  },
+  "worker_00": {
+    "manifest_sha256": "abce82148c4ff5c0bfe6f6ed91b5b8eb93dab192d5aac5fa1b1b4a8908b708b8",
+    "updated_at_utc": "2026-10-28T07:38:39.643377+00:00",
+    "status": "running",
+    "task_count": 29,
+    "task_status_counts": {
+      "active": 1,
+      "failed": 6,
+      "outcome_unknown": 8,
+      "pending": 9,
+      "route_complete": 5
+    },
+    "unresolved_count": 9,
+    "in_flight": true,
+    "stop_reason": "stopped_request_error"
+  },
+  "lock_files_present": 17,
+  "lock_files_open": 2,
+  "interpretation": "Parent and worker scopes differ; counts are not additive. Worker is running with an in-flight request and stop_reason stopped_request_error. No active R4 outputs or raw manifests were copied."
+}

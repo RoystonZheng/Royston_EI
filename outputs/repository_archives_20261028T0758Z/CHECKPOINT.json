@@ -1,0 +1,229 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-10-28T07:59:50.020749+00:00",
+  "status": "nonterminal_progress_checkpoint",
+  "workspace_root": "$WORKSPACE",
+  "r4_root": "$R4_APP_SUPPORT",
+  "seed4_legacy_audit": {
+    "audit_time_utc": "2026-10-28T07:50:19Z",
+    "seed": "4",
+    "selected_dates": 30,
+    "fleets": 3,
+    "complete_paired_cells": "84/90",
+    "complete_method_result_files": "615/630",
+    "incomplete_paired_cells": 6,
+    "method_runs_rows": 615,
+    "source_report_sha256": "f88e6e682e35275e2a89fda4b779ea2a05fd7e5d4c42098a68c01273da53586c",
+    "source_run_audit_sha256": "98708dda7dd722ef9670f92cf2511473fe2d4f2a9eda58aeba068f4cf1c92ff7",
+    "scope_note": "Separate one-seed legacy audit; do not combine with the earlier two-seed 142/180 snapshot."
+  },
+  "individual_outputs": [
+    {
+      "archive_path": "individual/ev2/EV_20240702_213000_q25/F4/D1_optimizer_seed_0.json",
+      "source_sha256": "3c7ed48cca84a00dbd39fa9131cda8ca259c6fd8361da0a50ec55d56d7403a1f",
+      "partial_run_false": true,
+      "note": "Completed standalone EV2 result; generated after the last 07:13Z sidecar and not in that coverage."
+    },
+    {
+      "archive_path": "individual/ev2/EV_20240702_213000_q25/F4/D2_agent_optimizer_seed_0.json",
+      "source_sha256": "5e725e121b853b0a1716fe21f9db41c3efc1a85aabe663d97488ec88ce3a99ef",
+      "partial_run_false": true,
+      "note": "Completed standalone EV2 result; generated after the last 07:13Z sidecar and not in that coverage."
+    },
+    {
+      "archive_path": "individual/multimonth/EV_20240926_214000_q25/F4/D6_agent_codex_context_optimizer_seed_3.json",
+      "source_sha256": "eafa836638fa0b1d2c8b8b7e96b5f8c9fac2270207ae3c6fe9ecee9f6fedfb70",
+      "partial_run_false": true,
+      "note": "Completed seed 3 result generated after the prior 07:20Z two-seed audit; keep separate until a fresh aggregate audit."
+    }
+  ],
+  "r4_parent": {
+    "manifest_sha256": "dae7064e91366f8ab971e81b0d9cab597c1545bd7e3a9e13fbbfaa4deefcf1c5",
+    "updated_at_utc": "2026-10-28T07:29:21.447826+00:00",
+    "status": "paused_at_parallel_checkpoint",
+    "task_count": 129,
+    "task_status_counts": {
+      "failed": 35,
+      "outcome_unknown": 5,
+      "pending": 62,
+      "ready": 6,
+      "route_complete": 21
+    },
+    "unresolved_count": 24,
+    "in_flight": false,
+    "stop_reason": null
+  },
+  "r4_worker_00": {
+    "manifest_sha256": "abce82148c4ff5c0bfe6f6ed91b5b8eb93dab192d5aac5fa1b1b4a8908b708b8",
+    "updated_at_utc": "2026-10-28T07:38:39.643377+00:00",
+    "status": "running",
+    "task_count": 29,
+    "task_status_counts": {
+      "active": 1,
+      "failed": 6,
+      "outcome_unknown": 8,
+      "pending": 9,
+      "route_complete": 5
+    },
+    "unresolved_count": 9,
+    "in_flight": true,
+    "stop_reason": "stopped_request_error"
+  },
+  "r4_lock_check": {
+    "lock_files_present": 17,
+    "lock_files_open": 2,
+    "pid_files_live": 0
+  },
+  "sanitization": {
+    "removed_sensitive_or_raw_fields": 1838,
+    "absolute_local_paths_redacted": true,
+    "credential_patterns_checked": true,
+    "raw_prompts_messages_traces_included": false
+  },
+  "files": [
+    {
+      "source": "$WORKSPACE/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/analysis_seed4_legacy_audit_20261028_v1/accepted_policy_sensitivity.csv",
+      "source_sha256": "3fcd28a0d806f10be8b9346076ec3ab86973ada6c6aff79f6653e403fbc30cba",
+      "source_bytes": 34448,
+      "path": "seed4_legacy_audit/accepted_policy_sensitivity.csv",
+      "sha256": "3fcd28a0d806f10be8b9346076ec3ab86973ada6c6aff79f6653e403fbc30cba",
+      "bytes": 34448
+    },
+    {
+      "source": "$WORKSPACE/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/analysis_seed4_legacy_audit_20261028_v1/comparison_report.md",
+      "source_sha256": "f88e6e682e35275e2a89fda4b779ea2a05fd7e5d4c42098a68c01273da53586c",
+      "source_bytes": 2865,
+      "path": "seed4_legacy_audit/comparison_report.md",
+      "sha256": "f88e6e682e35275e2a89fda4b779ea2a05fd7e5d4c42098a68c01273da53586c",
+      "bytes": 2865
+    },
+    {
+      "source": "$WORKSPACE/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/analysis_seed4_legacy_audit_20261028_v1/method_policy_summary_by_seed.csv",
+      "source_sha256": "e221a870c7856d922ded9f591c0d0bb692f57600b875e14421ceb3459aa38dae",
+      "source_bytes": 997,
+      "path": "seed4_legacy_audit/method_policy_summary_by_seed.csv",
+      "sha256": "e221a870c7856d922ded9f591c0d0bb692f57600b875e14421ceb3459aa38dae",
+      "bytes": 997
+    },
+    {
+      "source": "$WORKSPACE/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/analysis_seed4_legacy_audit_20261028_v1/method_runs.csv",
+      "source_sha256": "bcf497e1090af857dcf1becb5c5a083c1d66e665ad01ee5c3b5926615c5cd649",
+      "source_bytes": 1350376,
+      "path": "seed4_legacy_audit/method_runs.csv",
+      "sha256": "c8427c4dc8e5c649d77af210c895661cd53ae754da0423cf82172fcd76cd3f7b",
+      "bytes": 1324546
+    },
+    {
+      "source": "$WORKSPACE/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/analysis_seed4_legacy_audit_20261028_v1/method_summary_by_fleet.csv",
+      "source_sha256": "070144630e9ca98cce66d843e4463d2cc0746ca14d9d45f55fd3fe73fac18e8a",
+      "source_bytes": 18192,
+      "path": "seed4_legacy_audit/method_summary_by_fleet.csv",
+      "sha256": "070144630e9ca98cce66d843e4463d2cc0746ca14d9d45f55fd3fe73fac18e8a",
+      "bytes": 18192
+    },
+    {
+      "source": "$WORKSPACE/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/analysis_seed4_legacy_audit_20261028_v1/paired_differences.csv",
+      "source_sha256": "16e0f4de7970d39acb1428b9694af93a9d39fdc16349075b780d7f6b5b56b9c8",
+      "source_bytes": 139982,
+      "path": "seed4_legacy_audit/paired_differences.csv",
+      "sha256": "16e0f4de7970d39acb1428b9694af93a9d39fdc16349075b780d7f6b5b56b9c8",
+      "bytes": 139982
+    },
+    {
+      "source": "$WORKSPACE/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/analysis_seed4_legacy_audit_20261028_v1/paired_statistics.csv",
+      "source_sha256": "ef00765469174ace55c4b4713c54e65f631ae6f60f77f50a69911aafdd50151e",
+      "source_bytes": 40483,
+      "path": "seed4_legacy_audit/paired_statistics.csv",
+      "sha256": "ef00765469174ace55c4b4713c54e65f631ae6f60f77f50a69911aafdd50151e",
+      "bytes": 40483
+    },
+    {
+      "source": "$WORKSPACE/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/analysis_seed4_legacy_audit_20261028_v1/paired_statistics.json",
+      "source_sha256": "bde56965a4da81134e6ceeef9d6b5d593ef048f06d6df42f7768a10effddba72",
+      "source_bytes": 108210,
+      "path": "seed4_legacy_audit/paired_statistics.json",
+      "sha256": "bde56965a4da81134e6ceeef9d6b5d593ef048f06d6df42f7768a10effddba72",
+      "bytes": 108210
+    },
+    {
+      "source": "$WORKSPACE/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/analysis_seed4_legacy_audit_20261028_v1/run_audit.json",
+      "source_sha256": "98708dda7dd722ef9670f92cf2511473fe2d4f2a9eda58aeba068f4cf1c92ff7",
+      "source_bytes": 1929623,
+      "path": "seed4_legacy_audit/run_audit.json",
+      "sha256": "412af7eacd2455fee25969dfac54fe36b78ba16bc300496dbf475e7ed4d26ff4",
+      "bytes": 309655
+    },
+    {
+      "source": "$WORKSPACE/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/analysis_seed4_legacy_audit_20261028_v1/seed_effects.csv",
+      "source_sha256": "3b06d8374a0fc013423f4340ce7a3ace2742fabbb64c91a4e211f3134e2ba9dd",
+      "source_bytes": 17207,
+      "path": "seed4_legacy_audit/seed_effects.csv",
+      "sha256": "3b06d8374a0fc013423f4340ce7a3ace2742fabbb64c91a4e211f3134e2ba9dd",
+      "bytes": 17207
+    },
+    {
+      "source": "$WORKSPACE/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/analysis_seed4_legacy_audit_20261028_v1/usage_audit.json",
+      "source_sha256": "3e102d0e61728de0e7652a35249042a221f568c68ef2823e0188821d8dc27d3a",
+      "source_bytes": 1495512,
+      "path": "seed4_legacy_audit/usage_audit.json",
+      "sha256": "a07070e18ac47f8df24000246931ba61bd67cb335d3d22f1ac0669009dcd0052",
+      "bytes": 1285
+    },
+    {
+      "source": "$WORKSPACE/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/analysis_seed4_legacy_audit_20261028_v1/usage_by_seed.csv",
+      "source_sha256": "ec4d4a2cffa43852775e26d909776fd5372829d6f43913da8dacba66a5f6878b",
+      "source_bytes": 330,
+      "path": "seed4_legacy_audit/usage_by_seed.csv",
+      "sha256": "ec4d4a2cffa43852775e26d909776fd5372829d6f43913da8dacba66a5f6878b",
+      "bytes": 330
+    },
+    {
+      "source": "$WORKSPACE/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240702_213000_q25/F4/D1_optimizer_seed_0.json",
+      "source_sha256": "3c7ed48cca84a00dbd39fa9131cda8ca259c6fd8361da0a50ec55d56d7403a1f",
+      "source_bytes": 2517112,
+      "path": "individual/ev2/EV_20240702_213000_q25/F4/D1_optimizer_seed_0.json",
+      "sha256": "054fe2a02d9a00fd963d154dbdcd297d6454db5429a4e1db5ff2191cf18d78e5",
+      "bytes": 2483598,
+      "completion_evidence": {
+        "partial_run_false": true,
+        "performance_claim_true": false,
+        "note": "Completed standalone EV2 result; generated after the last 07:13Z sidecar and not in that coverage."
+      }
+    },
+    {
+      "source": "$WORKSPACE/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240702_213000_q25/F4/D2_agent_optimizer_seed_0.json",
+      "source_sha256": "5e725e121b853b0a1716fe21f9db41c3efc1a85aabe663d97488ec88ce3a99ef",
+      "source_bytes": 2602993,
+      "path": "individual/ev2/EV_20240702_213000_q25/F4/D2_agent_optimizer_seed_0.json",
+      "sha256": "fee80f6d818aa059ab94e3eeba7021c8da55bd37148ed818fb9d78febb1a48a5",
+      "bytes": 2569479,
+      "completion_evidence": {
+        "partial_run_false": true,
+        "performance_claim_true": false,
+        "note": "Completed standalone EV2 result; generated after the last 07:13Z sidecar and not in that coverage."
+      }
+    },
+    {
+      "source": "$WORKSPACE/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20240926_214000_q25/F4/D6_agent_codex_context_optimizer_seed_3.json",
+      "source_sha256": "eafa836638fa0b1d2c8b8b7e96b5f8c9fac2270207ae3c6fe9ecee9f6fedfb70",
+      "source_bytes": 1587940,
+      "path": "individual/multimonth/EV_20240926_214000_q25/F4/D6_agent_codex_context_optimizer_seed_3.json",
+      "sha256": "730cedc31253c75da7efec9aff990d3adf23a3da52b3cb3de9cfcffde170bb35",
+      "bytes": 1581875,
+      "completion_evidence": {
+        "partial_run_false": true,
+        "performance_claim_true": false,
+        "note": "Completed seed 3 result generated after the prior 07:20Z two-seed audit; keep separate until a fresh aggregate audit."
+      }
+    },
+    {
+      "source": "$R4_APP_SUPPORT/manifest.json + parallel_workers/worker_00/manifest.json",
+      "source_sha256": null,
+      "source_bytes": null,
+      "path": "r4_app_support/progress_status.json",
+      "sha256": "4cbb8b9861d5887489d0f5a3007f65171a032e70ef5e8cf815cf184756c2e9cf",
+      "bytes": 1305
+    }
+  ],
+  "lfs_required": false
+}
