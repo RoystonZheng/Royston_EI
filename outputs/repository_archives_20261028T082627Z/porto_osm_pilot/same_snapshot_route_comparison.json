@@ -1,0 +1,38 @@
+{
+  "legs": {
+    "pickup_to_dropoff": {
+      "executed_matches_selected_policy": true,
+      "executed_path_sha256": "124695fc6f9db16470c7a545956ab13c322a402f5e107b3c9916e0ce79ec2393",
+      "model_route": null,
+      "model_route_valid": false,
+      "selected_route_source": "shared_link_fallback",
+      "selection_rule": "legal model route only when strictly faster on the same frozen dynamic snapshot; otherwise shared Dijkstra fallback",
+      "shared_dijkstra_route": {
+        "link_count": 94,
+        "path_sha256": "124695fc6f9db16470c7a545956ab13c322a402f5e107b3c9916e0ce79ec2393",
+        "predicted_ev2_signed_net_wh": 471.590092,
+        "predicted_travel_time_s": 659.238204
+      },
+      "status": "compared_same_snapshot"
+    },
+    "vehicle_to_pickup": {
+      "executed_matches_selected_policy": true,
+      "executed_path_sha256": "0e9f74d568d8aa8a7fc90eb6c4dd11adff49439156405b89e476889d5d2479c5",
+      "model_route": null,
+      "model_route_valid": false,
+      "selected_route_source": "shared_link_fallback",
+      "selection_rule": "legal model route only when strictly faster on the same frozen dynamic snapshot; otherwise shared Dijkstra fallback",
+      "shared_dijkstra_route": {
+        "link_count": 28,
+        "path_sha256": "0e9f74d568d8aa8a7fc90eb6c4dd11adff49439156405b89e476889d5d2479c5",
+        "predicted_ev2_signed_net_wh": 181.196573,
+        "predicted_travel_time_s": 223.469447
+      },
+      "status": "compared_same_snapshot"
+    }
+  },
+  "model_validation_error": "ValueError:illegal_directed_turn",
+  "objective": "FASTEST",
+  "snapshot_sha256": "46e57ff4d18bfed348e4c50348e59a51102d55b899cada488b960779448a9090",
+  "status": "completed"
+}

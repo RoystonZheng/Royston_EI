@@ -53,6 +53,45 @@ class FakeStepClient:
 
 
 class R4CodexPilotAcceptanceTests(unittest.TestCase):
+    def test_explicit_unbounded_authorization_replaces_512_with_simple_path_bound(self):
+        state = {
+            "additional_model_requests_authorized": True,
+            "authorization_quote": "不设置上限，尽快完成实验。",
+            "authorized_new_request_limit": 512,
+            "effective_authorized_new_request_limit": 512,
+            "route_action_budget": 512,
+            "new_requests_used": 105,
+        }
+
+        changed = pilot._apply_unbounded_route_budget(
+            state, SimpleNamespace(nodes=[SimpleNamespace(node_id=str(i)) for i in range(10000)])
+        )
+
+        self.assertTrue(changed)
+        self.assertEqual(state["authorized_new_request_limit"], 9999)
+        self.assertEqual(state["effective_authorized_new_request_limit"], 9999)
+        self.assertEqual(state["route_action_budget"], 9999)
+        self.assertEqual(state["new_requests_used"], 105)
+        self.assertEqual(state["unbounded_authorization_applied"]["natural_simple_path_limit"], 9999)
+
+    def test_unbounded_route_budget_requires_explicit_no_limit_authorization(self):
+        state = {
+            "additional_model_requests_authorized": True,
+            "authorization_quote": "最多授权 128 次请求。",
+            "authorized_new_request_limit": 128,
+            "effective_authorized_new_request_limit": 128,
+            "route_action_budget": 512,
+        }
+
+        changed = pilot._apply_unbounded_route_budget(
+            state, SimpleNamespace(nodes=[SimpleNamespace(node_id=str(i)) for i in range(10000)])
+        )
+
+        self.assertFalse(changed)
+        self.assertEqual(state["authorized_new_request_limit"], 128)
+        self.assertEqual(state["effective_authorized_new_request_limit"], 128)
+        self.assertEqual(state["route_action_budget"], 512)
+
     def test_persistent_usage_ledger_stores_per_call_delta_and_raw_counter(self):
         state = {
             "codex_session_mode": "persistent_per_task",
@@ -120,7 +159,12 @@ class R4CodexPilotAcceptanceTests(unittest.TestCase):
         self.assertEqual(default_state["effective_authorized_new_request_limit"], 0)
         self.assertFalse(default_state["additional_model_requests_authorized"])
         self.assertEqual(authorized_state["user_authorization_status"], "granted_for_task9_continuation")
-        self.assertEqual(authorized_state["effective_authorized_new_request_limit"], 138)
+        _, _, _, package = pilot._load_frozen_task(preflight)
+        natural_limit = pilot._natural_simple_path_limit(package)
+        self.assertEqual(authorized_state["authorized_new_request_limit"], natural_limit)
+        self.assertEqual(authorized_state["effective_authorized_new_request_limit"], natural_limit)
+        self.assertEqual(authorized_state["route_action_budget"], natural_limit)
+        self.assertEqual(authorized_state["unbounded_authorization_applied"]["natural_simple_path_limit"], natural_limit)
         self.assertTrue(authorized_state["additional_model_requests_authorized"])
         self.assertEqual(authorized_state["authorization_scope"], "complete the task9 route experiment only; no ten-seed batch")
         self.assertEqual(authorized_state["authorization_quote"], "完成全部这部分实验无限制！")

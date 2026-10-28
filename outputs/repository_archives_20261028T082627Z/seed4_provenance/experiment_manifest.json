@@ -1,0 +1,126 @@
+{
+  "analysis_snapshot": {
+    "audited_at_utc": "2026-10-28T08:06:05+00:00",
+    "expected_method_cells": 630,
+    "expected_paired_cells": 90,
+    "fully_valid_paired_cells": 87,
+    "missing_or_partial_results": [
+      {
+        "case_id": "EV_20240411_200000_q50",
+        "complete": false,
+        "fleet_id": "F4",
+        "method": "D5_pure_llm_direct",
+        "present": false
+      },
+      {
+        "case_id": "EV_20240718_210000_q75",
+        "complete": false,
+        "fleet_id": "F2",
+        "method": "D7_agent_codex_capacity_shield_optimizer",
+        "present": false
+      },
+      {
+        "case_id": "EV_20240821_200000_q25",
+        "complete": false,
+        "fleet_id": "F4",
+        "method": "D7_agent_codex_capacity_shield_optimizer",
+        "present": false
+      }
+    ],
+    "path": "./outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/analysis_seed4_resume_20261028_v1/run_audit.json",
+    "present_result_files": 627,
+    "sha256": "664468a895b8b406c9d8657d5f3793ce759b73f40a5ce63718af9540fcced672"
+  },
+  "backend": "codex_cli",
+  "cost_accounting": "Raw Codex CLI JSONL traces are retained per live run; token usage is audited after execution; rate-card equivalents are estimates and actual account billing is unknown",
+  "created_at_utc": "2026-10-28T07:57:07+00:00",
+  "evaluation_fleets": [
+    "F1",
+    "F2",
+    "F4"
+  ],
+  "evaluation_methods": [
+    "D0_greedy",
+    "D1_optimizer",
+    "D2_agent_optimizer",
+    "D5_pure_llm_direct",
+    "D6_agent_codex_context_optimizer",
+    "D7_agent_codex_capacity_shield_optimizer",
+    "D8_agent_codex_nn_capacity_shield_optimizer"
+  ],
+  "evaluation_output_root": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_4_legacy_resume_20261028_v1/evaluation",
+  "evaluation_windows": [
+    "EV_20240312_200000_q25",
+    "EV_20240321_220000_q50",
+    "EV_20240330_200500_q75",
+    "EV_20240401_200000_q25",
+    "EV_20240411_200000_q50",
+    "EV_20240427_223500_q75",
+    "EV_20240528_210000_q25",
+    "EV_20240521_210000_q50",
+    "EV_20240509_210000_q75",
+    "EV_20240624_210000_q25",
+    "EV_20240608_225000_q50",
+    "EV_20240611_211000_q75",
+    "EV_20240702_213000_q25",
+    "EV_20240725_211000_q50",
+    "EV_20240718_210000_q75",
+    "EV_20240821_200000_q25",
+    "EV_20240817_225000_q50",
+    "EV_20240828_213000_q75",
+    "EV_20240926_214000_q25",
+    "EV_20240913_221500_q50",
+    "EV_20240904_200000_q75",
+    "EV_20241021_200000_q25",
+    "EV_20241030_210000_q50",
+    "EV_20241005_225000_q75",
+    "EV_20241111_200000_q25",
+    "EV_20241107_214500_q50",
+    "EV_20241115_224000_q75",
+    "EV_20241222_205500_q25",
+    "EV_20241202_210000_q50",
+    "EV_20241214_224500_q75"
+  ],
+  "experiment_id": "nyc_tlc_dispatch_formal_multimonth_v1_seed_4",
+  "limitations": [
+    "Completed, already-matched TLC trips are used as demand proxies; unserved trip attempts are not observed.",
+    "Fleet counts and initial vehicle positions are synthetic zone-level scenarios.",
+    "Ride costs use zone OD medians, with any centroid estimate tagged per OD row; this is not street routing or an observed empty-vehicle ETA.",
+    "The evaluation uses one simulation/model seed per date/fleet; calendar dates are the independent demand clusters."
+  ],
+  "model": {
+    "interpretation": "In-sample pair ranking against D1 assignment labels only; not an independent performance or real-world decision-quality result.",
+    "pairwise_sample_count": 208,
+    "path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_4_legacy_resume_20261028_v1/models/d1_pairwise_mlp.json",
+    "sha256": "b74d839ac168a44d7b8d6aa0067eded72a191a579753eb4cde3c8828bc29035a",
+    "training_case_count": 10,
+    "training_order_count": 128,
+    "training_report": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_4_legacy_resume_20261028_v1/models/d1_pairwise_mlp_training_report.json"
+  },
+  "paired_policy": "D0/D1 share one process; D2 is separate; D8 makes one live shared-context request; D6/D7 replay that response only if prompt bytes match; D5 runs live independently",
+  "phases": {
+    "analysis": "partial_official_audit_complete_unresolved_cells",
+    "evaluation": "all_planned_cells_attempted_audit_pending",
+    "training": "reused_frozen_seed0_ranker"
+  },
+  "reasoning_effort": "low",
+  "retry_policy": "zero retries for live Codex model calls; interrupted deterministic runs may be restarted after preserving their log",
+  "runner_terminal_status_before_audit": "completed_runs_analysis_pending",
+  "scenario_package": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/dispatch_formal_multimonth_v1",
+  "scenario_package_manifest_sha256": "262d067a59a35ffe9b299a49f1cc86868bba19713cfed2361d0d287dd2f95d22",
+  "seed": 4,
+  "status": "analysis_partial_unresolved",
+  "training_windows": [
+    "TR_20240103_200000_q10",
+    "TR_20240122_210000_q30",
+    "TR_20240123_200500_q50",
+    "TR_20240130_210000_q70",
+    "TR_20240113_225500_q90",
+    "TR_20240218_221000_q10",
+    "TR_20240220_200000_q30",
+    "TR_20240207_220000_q50",
+    "TR_20240222_200000_q70",
+    "TR_20240214_200000_q90"
+  ],
+  "updated_at_utc": "2026-10-28T08:06:05+00:00"
+}

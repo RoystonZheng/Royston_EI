@@ -17,6 +17,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 ROOT = Path(__file__).resolve().parents[1]
+LOADED_RUNNER_SHA256 = hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
@@ -50,7 +51,10 @@ PREFLIGHT_PATH = ROOT / "outputs/route_layer/r4_codex_offline_preflight_20261021
 OUTPUT_DIR = ROOT / "outputs/route_layer/r4_codex_pilot_continuation_v1"
 DEFAULT_OUTPUT_DIR = OUTPUT_DIR
 MAX_NEW_CALLS = 8
-MAX_FORMAL_STEPWISE_CALLS = 512
+# Formal request/action ceilings are derived from the frozen task graph's
+# unique nodes. With revisit forbidden, a simple path can use at most N - 1
+# moves; this is a structural bound, not a quota.
+MAX_FORMAL_STEPWISE_CALLS = 100 * 100 - 1
 DEFAULT_NEW_CALLS = 8
 ROUTE_ACTION_BUDGET = 32
 MODEL = "gpt-5.6-luna"
@@ -217,6 +221,58 @@ def _input_protocol_flags(input_protocol: str):
     return enabled, enabled
 
 
+def _natural_simple_path_limit(package: Any) -> int:
+    node_ids = {node.node_id for node in package.nodes}
+    return max(1, len(node_ids) - 1)
+
+
+def _has_explicit_unbounded_authorization(state: Dict[str, Any]) -> bool:
+    if not state.get("additional_model_requests_authorized", False):
+        return False
+    quote = str(state.get("authorization_quote") or "").casefold()
+    return any(marker in quote for marker in (
+        "不设置上限", "不设置额度上限", "无限制", "no limit", "unlimited"
+    ))
+
+
+def _apply_unbounded_route_budget(state: Dict[str, Any], package: Any) -> bool:
+    """Replace an old per-task quota with the finite no-revisit graph bound."""
+    if not _has_explicit_unbounded_authorization(state):
+        return False
+    natural_limit = _natural_simple_path_limit(package)
+    prior = state.get("unbounded_authorization_applied")
+    if (
+        isinstance(prior, dict)
+        and prior.get("natural_simple_path_limit") == natural_limit
+        and state.get("authorized_new_request_limit") == natural_limit
+        and state.get("effective_authorized_new_request_limit") == natural_limit
+        and state.get("route_action_budget") == natural_limit
+        and prior.get("runner_sha256") == LOADED_RUNNER_SHA256
+    ):
+        return False
+    state["authorization_budget_overrides"] = state.get("authorization_budget_overrides", []) + [{
+        "reason": "explicit_user_no_limit_authorization",
+        "previous_authorized_request_limit": state.get(
+            "initial_candidate_request_limit", state.get("authorized_new_request_limit")
+        ),
+        "previous_effective_authorized_new_request_limit": state.get("effective_authorized_new_request_limit"),
+        "previous_route_action_budget": state.get(
+            "frozen_route_action_budget", state.get("route_action_budget")
+        ),
+        "applied_at_utc": datetime.now(timezone.utc).isoformat(),
+    }]
+    state["authorized_new_request_limit"] = natural_limit
+    state["effective_authorized_new_request_limit"] = natural_limit
+    state["route_action_budget"] = natural_limit
+    state["unbounded_authorization_applied"] = {
+        "user_authorized": True,
+        "natural_simple_path_limit": natural_limit,
+        "derivation": "unique frozen graph nodes minus one; validator continues to forbid revisits",
+        "runner_sha256": LOADED_RUNNER_SHA256,
+    }
+    return True
+
+
 def _objective_progress_guidance(constraint: Any) -> Dict[str, Any]:
     return {
         "objective": "travel_time_then_distance",
@@ -248,10 +304,16 @@ def _initial_state(
     if route_search.get("generation_mode", "stepwise") != "stepwise":
         raise RuntimeError("frozen_preflight_is_not_stepwise")
     route_action_budget = int(route_search.get("max_route_actions", ROUTE_ACTION_BUDGET))
+    frozen_route_action_budget = route_action_budget
+    requested_candidate_request_limit = authorized_request_limit
     if route_action_budget < 1:
         raise RuntimeError("frozen_route_action_budget_invalid")
+    natural_limit = _natural_simple_path_limit(package)
+    if user_authorized_formal_batch_pilot or user_authorized_task9_experiment:
+        authorized_request_limit = natural_limit
+        route_action_budget = natural_limit
     maximum_requests = (
-        MAX_FORMAL_STEPWISE_CALLS if road_map.size >= 100 else MAX_NEW_CALLS
+        natural_limit if road_map.size >= 100 else MAX_NEW_CALLS
     )
     if authorized_request_limit < 1 or authorized_request_limit > maximum_requests:
         raise ValueError("authorized_request_limit_out_of_range")
@@ -328,6 +390,8 @@ def _initial_state(
         "model": MODEL,
         "reasoning_effort": "low",
         "authorized_new_request_limit": authorized_request_limit,
+        "frozen_route_action_budget": frozen_route_action_budget,
+        "initial_candidate_request_limit": requested_candidate_request_limit,
         # The candidate limit is a safety ceiling, not permission to spend it.
         # Only the explicit task9 authorization flag activates new requests.
         "effective_authorized_new_request_limit": (
@@ -378,6 +442,7 @@ def _initial_state(
             "authorization_quote": "按实验方案完成全部需要的实验，不必要可以省略；不设置上限，减少不必要测试，尽快完成实验。",
             "authorization_source": "direct_user_replies_2026-10-27_current_thread; formal R4 batch and quota follow-up",
         })
+    _apply_unbounded_route_budget(state, package)
     return state
 
 
@@ -599,7 +664,11 @@ def _resume_state(
         raise RuntimeError("resume_parent_audit_tool_or_retry_mismatch")
 
     _, road_map, task, package = _load_frozen_task(selected_preflight)
-    maximum_requests = MAX_FORMAL_STEPWISE_CALLS if road_map.size >= 100 else MAX_NEW_CALLS
+    natural_limit = _natural_simple_path_limit(package)
+    unbounded_resume = _has_explicit_unbounded_authorization(parent)
+    if unbounded_resume:
+        authorized_request_limit = natural_limit
+    maximum_requests = natural_limit if road_map.size >= 100 else MAX_NEW_CALLS
     if authorized_request_limit < 1 or authorized_request_limit > maximum_requests:
         raise ValueError("resume_request_limit_out_of_range")
     if (
@@ -626,7 +695,11 @@ def _resume_state(
     full_constraint = build_r4_route_output_constraint(
         package, parent["pickup_node_id"], parent["dropoff_node_id"], allow_failed=False
     )
-    route_action_budget = int(parent.get("route_action_budget", ROUTE_ACTION_BUDGET)) - len(parent["accepted_edges"])
+    route_action_total = (
+        natural_limit if unbounded_resume
+        else int(parent.get("route_action_budget", ROUTE_ACTION_BUDGET))
+    )
+    route_action_budget = route_action_total - len(parent["accepted_edges"])
     resume_completion_budget = min(authorized_request_limit, route_action_budget)
     step_constraint = build_r4_step_output_constraint(
         package,
@@ -728,6 +801,7 @@ def _resume_state(
             if user_authorized_user_stop_resume or user_authorized_formal_task_resume
             else 0
         ),
+        "route_action_budget": route_action_total,
         "additional_model_requests_authorized": bool(
             user_authorized_user_stop_resume or user_authorized_formal_task_resume
         ),
@@ -810,6 +884,7 @@ def _resume_state(
             "account_cost": "not_reported_by_cli",
         },
     })
+    _apply_unbounded_route_budget(state, package)
     state["route_metrics"] = _route_summary(state, road_map)
     return state
 
@@ -950,7 +1025,9 @@ def preflight_only(
         "authorization_quote": state.get("authorization_quote"),
         "authorization_source": state.get("authorization_source"),
         "request_limit_semantics": (
-            "user_authorized_formal_batch_pilot_candidate_safety_cap"
+            "user_authorized_unbounded_graph_derived_simple_path_bound"
+            if state.get("unbounded_authorization_applied")
+            else "user_authorized_formal_batch_pilot_candidate_safety_cap"
             if state.get("user_authorization_status") == "granted_for_formal_r4_batch_pilot"
             else
             "user_authorized_task9_candidate_safety_cap"
@@ -958,7 +1035,9 @@ def preflight_only(
             else "candidate_safety_cap_not_user_authorization"
         ),
         "candidate_run_limits": (
-            "formal-batch-authorized R4 task: at most {0} one-step requests under the protocol's per-task candidate ceiling; zero retry; stop on tool event, illegal action, give_up, or call error; stop early if the shortest remaining route exceeds unused candidate calls"
+            "No artificial per-task request/action quota; maximum is unique frozen graph nodes minus one under no-revisit validation. Zero retry; stop on tool event, illegal action, give_up, or call error."
+            if state.get("unbounded_authorization_applied")
+            else "formal-batch-authorized R4 task: at most {0} one-step requests under the protocol's per-task candidate ceiling; zero retry; stop on tool event, illegal action, give_up, or call error; stop early if the shortest remaining route exceeds unused candidate calls"
             if state.get("user_authorization_status") == "granted_for_formal_r4_batch_pilot"
             else "user-authorized task9-only pilot: at most {0} one-step requests under this candidate safety cap; zero retry; stop on tool event, illegal action, give_up, or call error; stop early if the shortest remaining route exceeds unused candidate calls"
             if state.get("user_authorization_status") == "granted_for_task9_continuation"
@@ -1115,25 +1194,12 @@ def one_step() -> None:
     state = _read_json(OUTPUT_DIR / "state.json")
     if state["status"] != "ready":
         raise RuntimeError("pilot_stopped_status:" + str(state["status"]))
-    effective_authorized_limit = int(state.get("effective_authorized_new_request_limit", 0))
-    if (
-        not state.get("additional_model_requests_authorized", False)
-        or effective_authorized_limit <= 0
-        or int(state.get("new_requests_used", 0)) >= effective_authorized_limit
-    ):
+    if not state.get("additional_model_requests_authorized", False):
         state["status"] = "awaiting_user_authorization"
         state["current_authorization_status"] = "not_authorized"
-        state["additional_model_requests_authorized"] = False
-        state["effective_authorized_new_request_limit"] = 0
         _write_json(OUTPUT_DIR / "state.json", state)
         _refresh_replay()
         raise RuntimeError("model_request_not_authorized")
-    authorized_limit = int(state.get("authorized_new_request_limit", DEFAULT_NEW_CALLS))
-    if state["new_requests_used"] >= authorized_limit:
-        state["status"] = "authorized_call_limit_exhausted"
-        _write_json(OUTPUT_DIR / "state.json", state)
-        _refresh_replay()
-        raise RuntimeError("authorized_call_limit_exhausted")
 
     preflight_path = Path(state["source_preflight"])
     if not preflight_path.is_absolute():
@@ -1149,6 +1215,39 @@ def one_step() -> None:
         or package.dropoff_node_id != state["dropoff_node_id"]
     ):
         raise RuntimeError("frozen_preflight_task_mismatch")
+    if _apply_unbounded_route_budget(state, package):
+        _write_json(OUTPUT_DIR / "state.json", state)
+        task_manifest_path = OUTPUT_DIR / "manifest.json"
+        if task_manifest_path.is_file():
+            task_manifest = _read_json(task_manifest_path)
+            task_manifest.update({
+                "candidate_request_limit": state["authorized_new_request_limit"],
+                "effective_authorized_new_request_limit": state["effective_authorized_new_request_limit"],
+                "route_action_budget": state["route_action_budget"],
+                "request_limit_semantics": "user_authorized_unbounded; finite graph-derived simple-path bound",
+                "candidate_run_limits": (
+                    "No artificial per-task request/action quota; natural maximum is unique frozen graph nodes minus one. "
+                    "Zero retry; deterministic validator and no-revisit constraint remain active."
+                ),
+                "unbounded_authorization_applied": state["unbounded_authorization_applied"],
+            })
+            _write_json(task_manifest_path, task_manifest)
+        _refresh_replay()
+    effective_authorized_limit = int(state.get("effective_authorized_new_request_limit", 0))
+    if effective_authorized_limit <= 0:
+        state["status"] = "awaiting_user_authorization"
+        state["current_authorization_status"] = "not_authorized"
+        state["additional_model_requests_authorized"] = False
+        state["effective_authorized_new_request_limit"] = 0
+        _write_json(OUTPUT_DIR / "state.json", state)
+        _refresh_replay()
+        raise RuntimeError("model_request_not_authorized")
+    authorized_limit = int(state.get("authorized_new_request_limit", DEFAULT_NEW_CALLS))
+    if int(state.get("new_requests_used", 0)) >= min(effective_authorized_limit, authorized_limit):
+        state["status"] = "authorized_call_limit_exhausted"
+        _write_json(OUTPUT_DIR / "state.json", state)
+        _refresh_replay()
+        raise RuntimeError("authorized_call_limit_exhausted")
     current = state["accepted_nodes"][-1]
     route_action_budget = int(state.get("route_action_budget", ROUTE_ACTION_BUDGET)) - len(state["accepted_edges"])
     remaining_authorized_calls = max(
@@ -1502,7 +1601,7 @@ def main() -> None:
         "--request-limit",
         type=int,
         default=DEFAULT_NEW_CALLS,
-        help="Candidate safety cap for a separately authorized run (1-512; this flag does not grant user authorization)",
+        help="Candidate request count for a separately authorized run; formal no-limit authorization expands to the frozen graph's simple-path bound",
     )
     parser.add_argument(
         "--codex-session-mode",
@@ -1564,8 +1663,8 @@ def main() -> None:
         parser.error("formal task resume and task9 user-stop resume are mutually exclusive")
     if args.resume_from and args.experiment_id:
         parser.error("--experiment-id is only supported for a fresh pilot")
-    if args.request_limit < 1 or args.request_limit > MAX_FORMAL_STEPWISE_CALLS:
-        parser.error("--request-limit must be between 1 and {0}".format(MAX_FORMAL_STEPWISE_CALLS))
+    if args.request_limit < 1:
+        parser.error("--request-limit must be a positive integer")
     if args.preflight_only:
         preflight_only(
             args.resume_from or None,

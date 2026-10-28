@@ -1,0 +1,76 @@
+{
+  "batch_root": "<R4_APP_SUPPORT_OUTPUT_ROOT>/parallel_workers/worker_00",
+  "completed_source_run_count": 6,
+  "created_at_utc": "2026-10-28T08:08:01.729678+00:00",
+  "currency": "CNY",
+  "decision_model_version": "route_time_money_segment_v5_signed_fare_audit",
+  "decision_module_path": "./route_experiment/decision.py",
+  "decision_module_sha256": "6b383157aa3287faa0049f13bbf0ff7765e903367a63305fd826e89dc83a0375",
+  "decision_status_counts": {
+    "blocked_incomplete_inputs_and_shared_candidate_pool": 6
+  },
+  "dispatch_or_sumo_rerun": false,
+  "electricity_price_per_kwh": null,
+  "electricity_price_source": null,
+  "energy_model": {
+    "equations": {
+      "negative_wheel_power": "min(-wheel_power * regenerative_efficiency, regenerative_power_cap)",
+      "net_battery_energy": "propulsion_draw - regenerated_energy + auxiliary_energy",
+      "positive_wheel_power": "wheel_power / propulsion_efficiency",
+      "wheel_force": "(m + rotating_mass)*acceleration + 0.5*rho*Cd*A*v^2 + Crr*m*g*cos(slope) + m*g*sin(slope)"
+    },
+    "model_version": "ev_longitudinal_v2",
+    "profile": {
+      "air_density_kg_m3": 1.225,
+      "auxiliary_power_w": 800.0,
+      "curb_mass_kg": 1900.0,
+      "drag_coefficient": 0.26,
+      "frontal_area_m2": 2.35,
+      "gravity_mps2": 9.80665,
+      "max_acceleration_mps2": 1.2,
+      "max_deceleration_mps2": 2.0,
+      "model_version": "ev_longitudinal_v2",
+      "passenger_load_kg": 75.0,
+      "profile_id": "generic_reference_ev_v1",
+      "propulsion_efficiency": 0.9,
+      "regenerative_efficiency": 0.65,
+      "regenerative_power_cap_w": 50000.0,
+      "rolling_resistance_coefficient": 0.009,
+      "rotating_mass_kg": 50.0
+    },
+    "profile_id": "generic_reference_ev_v1",
+    "profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee"
+  },
+  "energy_model_path": "./route_experiment/energy_model.py",
+  "energy_model_sha256": "a53ac3860e7a9d169b5ceb0f8ca853a0cb73061cc106ba0ec235f1e3c600e893",
+  "fare_basis": null,
+  "fare_per_km": null,
+  "generator_path": "./scripts/recalculate_r4_formal_batch_v5_segment_economics_sidecar.py",
+  "generator_sha256": "d0a8f346d87a46f96cd3e478a957f1ab9d1ed273dfe8636395658cf694f8681d",
+  "new_model_calls": 0,
+  "outputs": {
+    "run_economics_v5.jsonl": {
+      "path": "./outputs/route_layer/r4_formal_batch_time_money_v5_segment_sidecar_20261028T0810Z_worker00_incremental/run_economics_v5.jsonl",
+      "rows": 6,
+      "sha256": "0a9c4eca1c10da132c81e8cd9273a12f6ede6e9014ad03f295f35e127a269093"
+    },
+    "segment_economics_v5.jsonl": {
+      "path": "./outputs/route_layer/r4_formal_batch_time_money_v5_segment_sidecar_20261028T0810Z_worker00_incremental/segment_economics_v5.jsonl",
+      "rows": 12,
+      "sha256": "1321649b2e26ebc8610ff2319e5557165c8755dfddfcda16c7ea1b048885e976"
+    }
+  },
+  "route_algorithm_rerun": false,
+  "route_complete_task_count_in_source_manifest": 6,
+  "schema_version": "r4_formal_batch_time_money_v5_segment_sidecar_v1",
+  "segment_row_count": 12,
+  "shared_candidate_pool_available": false,
+  "source_hashes_reverified_after_recalculation": true,
+  "source_manifest_path": "<R4_APP_SUPPORT_OUTPUT_ROOT>/parallel_workers/worker_00/manifest.json",
+  "source_manifest_sha256": "edbe96b3741725b6396987534f36aeabae9145fbe084e61d61b0fee64a72c70c",
+  "source_manifest_snapshot_sha256": "edbe96b3741725b6396987534f36aeabae9145fbe084e61d61b0fee64a72c70c",
+  "source_manifest_updated_at_utc": "2026-10-28T07:38:39.643377+00:00",
+  "source_results_modified": false,
+  "status": "completed_segment_economics_route_choice_blocked",
+  "weighted_rankings_emitted": false
+}

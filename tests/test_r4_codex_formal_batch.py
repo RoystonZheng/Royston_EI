@@ -8,7 +8,12 @@ from types import SimpleNamespace
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
-from run_r4_codex_formal_batch import _validate_pilot_audit, execute_batch, prepare_batch
+from run_r4_codex_formal_batch import (
+    _natural_task_request_limit,
+    _validate_pilot_audit,
+    execute_batch,
+    prepare_batch,
+)
 
 
 class R4CodexFormalBatchTests(unittest.TestCase):
@@ -67,6 +72,7 @@ class R4CodexFormalBatchTests(unittest.TestCase):
                 "credits_balance_changed": False,
             },
         }), encoding="utf-8")
+
         self.pilot_manifest_path = self.root / "manifest.json"
         self.pilot_manifest_path.write_text(json.dumps({
             "schema_version": "r4_codex_pilot_continuation_manifest_v2",
@@ -76,6 +82,15 @@ class R4CodexFormalBatchTests(unittest.TestCase):
             "actual_model_requests": 111,
         }), encoding="utf-8")
         self.output = self.root / "batch"
+
+    def test_unbounded_task_limit_comes_from_frozen_graph_node_count(self):
+        preflight = ROOT / "outputs/route_layer/r4_codex_stepwise_100x100_preflight_v2/preflight.json"
+        task = {"preflight_path": str(preflight), "minimum_route_actions_lower_bound": 109}
+
+        limit = _natural_task_request_limit(task)
+
+        self.assertGreater(limit, task["minimum_route_actions_lower_bound"])
+        self.assertLessEqual(limit, 10000)
 
     def tearDown(self):
         self.temp.cleanup()
@@ -396,6 +411,87 @@ class R4CodexFormalBatchTests(unittest.TestCase):
         self.assertTrue((self.output / task["replay_path"]).is_file())
         self.assertTrue((self.output / task["final_audit_path"]).is_file())
         self.assertEqual(sum("--one-step" in args for args in calls), 1)
+
+    def test_no_project_cap_disables_legacy_external_usage_stop_gate(self):
+        manifest = self._prepare()
+        manifest["require_external_live_account_usage_gate"] = True
+        manifest["external_live_account_usage_checkpoint"] = {
+            "active": False,
+            "stop_threshold_percent": 100,
+        }
+        manifest["halt_no_more_model_requests"] = True
+        manifest["halt_status"] = "stopped_before_request_live_usage_gate_missing_or_stale"
+        manifest["usage_stop_percent"] = 100
+        manifest["authorized_stop_threshold_percent"] = 100
+        (self.output / "manifest.json").write_text(json.dumps(manifest), encoding="utf-8")
+        calls = []
+
+        def fake_runner(args, **kwargs):
+            calls.append(args)
+            if str(args[1]).endswith("run_r4_codex_pilot_continuation.py"):
+                output_dir = self._arg(args, "--output-dir")
+                state_path = output_dir / "state.json"
+                if "--preflight-only" in args:
+                    output_dir.mkdir(parents=True, exist_ok=True)
+                    (output_dir / "replay.html").write_text("fake replay", encoding="utf-8")
+                    state_path.write_text(json.dumps({"status": "ready", "new_requests_used": 0, "attempts": []}), encoding="utf-8")
+                else:
+                    state = json.loads(state_path.read_text(encoding="utf-8"))
+                    state.update({"status": "route_complete", "new_requests_used": 1})
+                    state_path.write_text(json.dumps(state), encoding="utf-8")
+            elif str(args[1]).endswith("finalize_r4_codex_pilot_continuation.py"):
+                run_dir = self._arg(args, "--run-dir")
+                (run_dir / "final_audit.json").write_text("{}", encoding="utf-8")
+            return SimpleNamespace(returncode=0, stdout="", stderr="")
+
+        result = execute_batch(
+            self.output,
+            authorized_request_limit=None,
+            usage_baseline_percent=5,
+            usage_stop_percent=None,
+            pilot_audit_path=self.pilot_audit_path,
+            max_new_requests_per_invocation=1,
+            runner=fake_runner,
+        )
+
+        self.assertEqual(result["status"], "completed_with_audited_task_outcomes")
+        self.assertFalse(result["require_external_live_account_usage_gate"])
+        self.assertFalse(result["halt_no_more_model_requests"])
+        self.assertIsNone(result["halt_status"])
+        self.assertIsNone(result["usage_stop_percent"])
+        self.assertIsNone(result["authorized_stop_threshold_percent"])
+        self.assertIsNone(result["usage_guard"]["stop_threshold_percent"])
+        self.assertTrue(any(e.get("event") == "external_usage_stop_gate_disabled_by_latest_direct_user_authorization" for e in result["events"]))
+        self.assertEqual(sum("--one-step" in args for args in calls), 1)
+
+    def test_no_project_cap_preserves_non_quota_safety_halt(self):
+        manifest = self._prepare()
+        manifest.update({
+            "require_external_live_account_usage_gate": True,
+            "usage_stop_percent": 100,
+            "authorized_stop_threshold_percent": 100,
+            "halt_no_more_model_requests": True,
+            "halt_status": "stopped_task_preflight_hash_mismatch",
+            "status": "stopped_task_preflight_hash_mismatch",
+        })
+        (self.output / "manifest.json").write_text(json.dumps(manifest), encoding="utf-8")
+        calls = []
+
+        result = execute_batch(
+            self.output,
+            authorized_request_limit=None,
+            usage_baseline_percent=5,
+            usage_stop_percent=None,
+            pilot_audit_path=self.pilot_audit_path,
+            runner=lambda *args, **kwargs: calls.append(args),
+        )
+
+        self.assertEqual(result["status"], "stopped_task_preflight_hash_mismatch")
+        self.assertTrue(result["halt_no_more_model_requests"])
+        self.assertEqual(result["halt_status"], "stopped_task_preflight_hash_mismatch")
+        self.assertFalse(result["require_external_live_account_usage_gate"])
+        self.assertIsNone(result["usage_stop_percent"])
+        self.assertEqual(calls, [])
 
     def test_request_chunk_pauses_after_one_response_and_resumes_same_task(self):
         self._prepare()

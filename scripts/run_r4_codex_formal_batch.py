@@ -28,13 +28,36 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT / "scripts") not in sys.path:
     sys.path.insert(0, str(ROOT / "scripts"))
 from r4_execution_lock import acquire_execution_lock, release_execution_lock
+from run_r4_codex_pilot_continuation import _load_frozen_task, _natural_simple_path_limit
 
 DEFAULT_SOURCE = ROOT / "outputs/route_layer/r4_codex_batch_preflights_20261024_v1/manifest.json"
 DEFAULT_OUTPUT = ROOT / "outputs/route_layer/r4_codex_formal_batch_v2"
 STEP_RUNNER = ROOT / "scripts/run_r4_codex_pilot_continuation.py"
 FINALIZER = ROOT / "scripts/finalize_r4_codex_pilot_continuation.py"
-MAX_TASK_REQUESTS = 512
 ARGUMENT_NOT_SET = object()
+_TASK_LIMIT_CACHE: Dict[str, int] = {}
+
+
+def _natural_task_request_limit(task: Dict[str, Any]) -> int:
+    preflight_path = Path(task["preflight_path"])
+    if not preflight_path.is_absolute():
+        preflight_path = ROOT / preflight_path
+    key = str(preflight_path.resolve())
+    if key not in _TASK_LIMIT_CACHE:
+        try:
+            _, _, _, package = _load_frozen_task(Path(key))
+            _TASK_LIMIT_CACHE[key] = _natural_simple_path_limit(package)
+        except RuntimeError as error:
+            # A preflight without a map reference is rejected by the child
+            # before any model request. Keep offline/fake-child fixtures
+            # executable using their already-audited shortest-route lower bound.
+            if str(error) != "frozen_map_reference_missing":
+                raise
+            lower_bound = int(task.get("minimum_route_actions_lower_bound", 0))
+            if lower_bound < 1:
+                raise
+            _TASK_LIMIT_CACHE[key] = lower_bound
+    return _TASK_LIMIT_CACHE[key]
 
 
 def parse_optional_int(value: str) -> Optional[int]:
@@ -246,7 +269,7 @@ def prepare_batch(source_manifest_path: Path, output_dir: Path) -> Dict[str, Any
         "codex_cli_session_mode": REQUIRED_PILOT_SESSION_MODE,
         "route_input_protocol": REQUIRED_ROUTE_INPUT_PROTOCOL,
         "session_policy": "one isolated Codex CLI request per route action; each prompt repeats the compact map, current route state, feature context, and v3 cost-to-go guidance",
-        "request_budget_allocation": "reserve each pending task shortest-path lower bound; distribute any additional authorized requests evenly across remaining tasks; maximum 512 requests per task continuation",
+        "request_budget_allocation": "per-task action/request ceiling is the unique frozen graph node count minus one (simple-path bound under no-revisit validation); no project-level cap when the user authorizes none; no response is automatically retried",
         "validation_policy": "local deterministic validator gates each movement; no traditional route fallback",
         "status_policy": "invalid task actions are not executed; task outcome is audited before the next independent task",
         "tasks": tasks,
@@ -707,8 +730,8 @@ def execute_batch(
     )
     if authorized_request_limit is None:
         manifest["request_budget_allocation"] = (
-            "No project-level cumulative request cap. Each task continuation is a resumable slice "
-            "of at most 512 model responses; no response is automatically retried."
+            "No project-level cumulative request cap. Each task's finite bound is derived from "
+            "unique frozen graph nodes minus one; no response is automatically retried."
         )
     if previous_limit != authorized_request_limit:
         manifest.setdefault("authorization_history", []).append({
@@ -755,12 +778,13 @@ def execute_batch(
         reserve = sum(_minimum_remaining_for_task(item) for item in other_pending)
         current_minimum = _minimum_remaining_for_task(task)
         total_pending_minimum = current_minimum + reserve
+        natural_task_limit = _natural_task_request_limit(task)
         if authorized_request_limit is None:
-            task_limit = MAX_TASK_REQUESTS
+            task_limit = natural_task_limit
         else:
             remaining_slack = max(0, authorized_request_limit - used - total_pending_minimum)
             fair_slack = remaining_slack // (1 + len(other_pending))
-            task_limit = min(MAX_TASK_REQUESTS, current_minimum + fair_slack)
+            task_limit = min(natural_task_limit, current_minimum + fair_slack)
         if task_limit < current_minimum:
             manifest["status"] = "stopped_before_request_insufficient_budget_for_next_task"
             manifest["current_task_id"] = task["task_id"]

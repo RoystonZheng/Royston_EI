@@ -1,0 +1,6 @@
+category	reason	action
+raw_prompts_requests_and_context_traces	May contain private prompts or raw task content	Excluded; source files remain local
+R4_active_worker_manifests_and_outputs	Worker manifest has unresolved in-flight marker and stale process metadata	Only allowlisted progress fields recorded
+source_manifest_snapshot.json	Raw worker manifest copy, not needed to reproduce sidecar	Excluded
+individual_task_logs_and_route_plan_log	Verbose transient traces, not required for summarized outputs	Excluded
+files_over_100MB_or_credentials	Selected files are below 100MB; credentials and local paths are redacted	No oversized or credential-bearing file included

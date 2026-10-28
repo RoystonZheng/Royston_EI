@@ -13,7 +13,9 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 from run_r4_codex_pilot_continuation import (  # noqa: E402
     _authorized_call_budget_stop_reason,
+    _load_frozen_task,
     _initial_state,
+    _natural_simple_path_limit,
     _summarize_attempt_usage,
     _model_self_check_all_true,
     _model_self_check_is_well_formed,
@@ -324,6 +326,7 @@ class R4CodexPilotResumeTests(unittest.TestCase):
         self.assertEqual(resumed["new_requests_used"], 0)
         self.assertEqual(resumed["attempts"], [])
         self.assertEqual(resumed["unresolved_parent_request_numbers_not_replayed"], [5])
+        self.assertEqual(resumed["authorized_new_request_limit"], 512)
         self.assertEqual(resumed["effective_authorized_new_request_limit"], 512)
         self.assertTrue(resumed["additional_model_requests_authorized"])
 
@@ -367,7 +370,12 @@ class R4CodexPilotResumeTests(unittest.TestCase):
         self.assertEqual(resumed["unresolved_parent_request_numbers_not_replayed"], [5])
         self.assertEqual(resumed["new_requests_used"], 0)
         self.assertEqual(resumed["attempts"], [])
-        self.assertEqual(resumed["effective_authorized_new_request_limit"], 512)
+        _, _, _, package = _load_frozen_task(Path(resumed["source_preflight"]))
+        natural_limit = _natural_simple_path_limit(package)
+        self.assertEqual(resumed["authorized_new_request_limit"], natural_limit)
+        self.assertEqual(resumed["effective_authorized_new_request_limit"], natural_limit)
+        self.assertEqual(resumed["route_action_budget"], natural_limit)
+        self.assertEqual(resumed["unbounded_authorization_applied"]["natural_simple_path_limit"], natural_limit)
         self.assertEqual(
             resumed["user_authorization_status"],
             "granted_for_formal_r4_batch_pilot",

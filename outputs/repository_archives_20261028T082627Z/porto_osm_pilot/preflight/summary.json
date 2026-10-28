@@ -1,0 +1,132 @@
+{
+  "actual_model_call_count": 0,
+  "artifacts": {
+    "full_shared_graph_copy_sha256": "175cd45243e47d141a4407ea539652ab64a8f092b9086400bb8dff5945d2f0cb",
+    "prompt_sha256": "ac3d9345288c5174c8968a1f4bdf992fa173085d2a5cbf24a9125976138cd3e6",
+    "schema_sha256": "037318617c207f1519d324a23b3615f546f984cfcae76fb83e6ba07bd1edc8f9",
+    "task_sha256": "d933fc262259681769003bec243f5716ee8b69c0bb8620af4951d7bd7cdcba3c"
+  },
+  "codex_cli_preflight": {
+    "authentication_environment_values_logged": false,
+    "available": true,
+    "config": "ignore-user-config; skills.include_instructions=false",
+    "disabled_features": [
+      "shell_tool",
+      "unified_exec",
+      "browser_use",
+      "browser_use_external",
+      "browser_use_full_cdp_access",
+      "computer_use",
+      "apps",
+      "tool_call_mcp_elicitation",
+      "image_generation",
+      "standalone_web_search",
+      "code_mode",
+      "code_mode_buffered_exec",
+      "code_mode_host"
+    ],
+    "disabled_features_verified_against_cli": true,
+    "executable_path": "[LOCAL_PATH_REDACTED]",
+    "missing_cli_features": [],
+    "model": "gpt-5.6-luna",
+    "model_calls": 0,
+    "model_configuration_verified_by_cli": false,
+    "model_id_availability_verified_by_cli": false,
+    "model_selection_flag_supported": true,
+    "reasoning_effort": "low",
+    "required_cli_features_present": true,
+    "sandbox": "read-only",
+    "unknown_disabled_feature_flags": [],
+    "version": "codex-cli 0.145.0"
+  },
+  "decision_function": {
+    "online_route_objective": "FASTEST; keep model route only when legal and strictly faster than shared Dijkstra on the same snapshot",
+    "time_money_v5_status": "not_used_for_route_choice; economic ranking remains blocked when candidate money inputs or passenger fare are unknown",
+    "time_money_v5_version": "route_time_money_segment_v5_signed_fare_audit"
+  },
+  "energy_module": {
+    "application": "post-run, from observed SUMO speed traces; signed net energy, with regen and auxiliary load",
+    "profile_id": "generic_reference_ev_v1",
+    "profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee",
+    "source_sha256": "a53ac3860e7a9d169b5ceb0f8ca853a0cb73061cc106ba0ec235f1e3c600e893",
+    "version": "ev_longitudinal_v2"
+  },
+  "experiment_family": "R4_real_OSM_route_layer",
+  "layer": "route planning; fixed vehicle/order assignment, no dispatch optimization",
+  "map_type": "real OSM-derived Porto SUMO network",
+  "pilot_scope": {
+    "model_requests": 1,
+    "objective": "FASTEST",
+    "order_id": "ord_0001",
+    "route_legs": [
+      "vehicle_to_pickup",
+      "pickup_to_dropoff"
+    ],
+    "seed": 0,
+    "vehicle_id": "veh_01"
+  },
+  "request_gate": {
+    "estimated_input_tokens_including_schema_and_cli_overhead": 41662,
+    "estimator_is_not_actual_usage": true,
+    "output_reserve_tokens": 8192,
+    "project_soft_input_target_tokens": 75000,
+    "prompt_bytes": 52818,
+    "provider_context_gate_status": "passed",
+    "provider_context_window_tokens": 1050000,
+    "provider_max_output_tokens": 128000,
+    "schema_bytes": 1928,
+    "soft_target_status": "within_target"
+  },
+  "road_turn_information": {
+    "all_induced_legal_directed_turns_retained": true,
+    "all_links_in_each_leg_crop_retained": true,
+    "current_snapshot_signal_and_traffic_fields_retained": true,
+    "removed_from_prompt": "unrelated shared candidate-pair routes; complete source graph retained by SHA in artifacts"
+  },
+  "run_id": "porto_r4_osm_seed0_ord0001_fastest_pilot_20261028T0801Z",
+  "run_status": "completed_zero_model_calls",
+  "shared_graph_scope": {
+    "candidate_count": 30,
+    "fallback_routes": {
+      "pickup_to_dropoff": {
+        "link_count": 94,
+        "path_sha256": "124695fc6f9db16470c7a545956ab13c322a402f5e107b3c9916e0ce79ec2393",
+        "status": "passed"
+      },
+      "vehicle_to_pickup": {
+        "link_count": 28,
+        "path_sha256": "0e9f74d568d8aa8a7fc90eb6c4dd11adff49439156405b89e476889d5d2479c5",
+        "status": "passed"
+      }
+    },
+    "fallback_validation_status": "passed",
+    "full_graph_available_in_run_artifacts": true,
+    "full_graph_sha256": "175cd45243e47d141a4407ea539652ab64a8f092b9086400bb8dff5945d2f0cb",
+    "ordered_pair_count": 870,
+    "projection_route_pair_count": 6,
+    "prompt_projection_endpoints": [
+      "hotspot_-2_-5",
+      "hotspot_0_-2",
+      "hotspot_-1_-3"
+    ]
+  },
+  "source_provenance": {
+    "codex_adapter_sha256": "2501fbb145efdc00539dee0e440381c42490e487223fcaa7a181741ca03c658d",
+    "core_connection_sha256": "ce941f304f711911ce735938dfe33a7b3e2b6e6f2b64acfaff9161ae8d61c6e4",
+    "core_edge_sha256": "98e709326201459f7955f9575722e61a2e7051ef8d50b8644a874e54908b36f6",
+    "costs_module_sha256": "2f89a5c9a5a2dde723956920c3bedf181ab16f622c6d035b5e78e0b5691a2c29",
+    "decision_module_sha256": "6b383157aa3287faa0049f13bbf0ff7765e903367a63305fd826e89dc83a0375",
+    "energy_model_module_sha256": "a53ac3860e7a9d169b5ceb0f8ca853a0cb73061cc106ba0ec235f1e3c600e893",
+    "frozen_input_manifest_sha256": "846e01d17dadf41eba1284ddd26311c382d9b38af745ad7c1cfc4c00c46db898",
+    "network_sha256": "9481618cfdc0f0fa2a4300a38db6fe7f13321dfc22c554feb1cf91b4f8aa7387",
+    "protocol_sha256": "887472d75934f293b1ff15e564b48dfd481b9a3e36feafb983e2baf0dca506d7",
+    "r1_runner_expected_sha256": "dda71ccc0ea75c08d12a29968870a99dfad3cbf491786fe4acd43bbef05b2e05",
+    "r1_runner_sha256": "dda71ccc0ea75c08d12a29968870a99dfad3cbf491786fe4acd43bbef05b2e05",
+    "r2_runner_sha256": "2db21ba0e429d3845ffd0a267f4bfe2beffa72ac339768ca29bd297f149958bb",
+    "route_problem_sha256": "cc69de60889d2176e0ddcc56abfdb57d194413a9ca657bfcc9b981bef286c14f",
+    "shared_candidate_link_graph_sha256": "175cd45243e47d141a4407ea539652ab64a8f092b9086400bb8dff5945d2f0cb",
+    "source_preflight_manifest_sha256": "0e62a607ac69f29c04521e9bfc42014ebbcab69da2d5d5fa3e205288b17debbb",
+    "source_preflight_report_sha256": "cf42c25454e5b57144f3afc0deb59788ca3d082c4f6614d6f522031985fa6c8f",
+    "source_preflight_run_id": "porto_r2_ev2_signed_net_preflight_20261027T1801CST"
+  }
+}
