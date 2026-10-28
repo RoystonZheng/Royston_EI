@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "captured_at_utc": "2026-10-28T08:42:29+00:00",
+  "scope": "exact_codex_r4_app_support_output_root",
+  "parent": {
+    "status": "paused_at_parallel_checkpoint",
+    "manifest_updated_at_utc": "2026-10-28T08:08:11.287979+00:00",
+    "manifest_sha256": "311f9deae76f5bfa45119143ecf5d6c9c0a069b6b834a5cd5917c708114825fb",
+    "requests_used": 5949,
+    "task_status_counts": {
+      "route_complete": 22,
+      "failed": 35,
+      "ready": 7,
+      "outcome_unknown": 5,
+      "pending": 60
+    }
+  },
+  "worker_00": {
+    "status": "running",
+    "manifest_updated_at_utc": "2026-10-28T07:38:39.643377+00:00",
+    "manifest_file_mtime_utc": "2026-10-28T08:42:22.031652+00:00",
+    "manifest_sha256": "42f40d47110a73639b07b8b16ce7aaa84a71fcadc9240c9adb6d5db15617d0b6",
+    "requests_used": 1796,
+    "task_status_counts": {
+      "outcome_unknown": 9,
+      "route_complete": 7,
+      "failed": 6,
+      "active": 1,
+      "pending": 6
+    },
+    "in_flight_marker": true,
+    "in_flight_request_number": 26,
+    "in_flight_started_at_utc": "2026-10-28T08:42:22.025964+00:00"
+  },
+  "process_observation": {
+    "formal_driver_pid_file_owner_alive": false,
+    "codex_process_matching_exact_output_root_observed": true,
+    "raw_pid_and_command_line_not_recorded": true
+  },
+  "interpretation": "Parent and worker task scopes differ; do not add counts. Worker manifest reports a live in-flight request and matching Codex process was observed. Its internal updated_at field is stale while the manifest file mtime is current. This is progress only, not a final result."
+}

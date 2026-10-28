@@ -1,0 +1,4 @@
+category	reason	action
+raw_prompts_requests_task_states	May contain private prompt content, task IDs, or active protocol state	Excluded; safe status fields only
+R4_in_flight_outputs	Worker currently has an in-flight request	Not copied; monitor again after terminal state
+large_files_or_credentials	No selected file exceeds 100MB; paths/credential patterns are sanitized	No oversized or credential-bearing file included
