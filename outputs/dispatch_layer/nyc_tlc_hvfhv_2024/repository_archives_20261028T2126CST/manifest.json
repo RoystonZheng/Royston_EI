@@ -1,0 +1,2203 @@
+{
+  "schema_version": 1,
+  "evidence_type": "partial deterministic EV2 full-matrix audit checkpoint; source runner remained active",
+  "source_audit_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/audit_snapshots/ev2_fullmatrix_audit_20261028T2126CST.json",
+  "source_audit_sha256": "4c4f6d84fd0f9155cc7aa3a3181f5eb7d14ac7455d03324a38a3bc2e984672f8",
+  "normalized_audit_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/repository_archives_20261028T2126CST/ev2_fullmatrix_audit_20261028T2126CST_repo_relative.json",
+  "normalized_audit_sha256": "29c3050797ca5619210bcfe9419e0787d50211933c821b94cf68682ae96e45cc",
+  "audited_at_utc": "2026-10-28T13:27:10+00:00",
+  "present_valid_runs": 233,
+  "missing_runs": 397,
+  "invalid_runs": 0,
+  "all_630_runs_complete": false,
+  "source_files_total_bytes": 582601175,
+  "sanitized_run_files_total_bytes": 459921907,
+  "redaction_policy": {
+    "removed_json_fields": [
+      "prompt_path",
+      "stderr_tail"
+    ],
+    "path_normalization": "absolute /Users paths replaced by repository-relative or portable markers",
+    "retained": "metrics, route/assignment details, EV2 ledgers, usage totals, original source SHA256 values"
+  },
+  "removed_field_counts": {
+    "stderr_tail": 25,
+    "prompt_path": 9
+  },
+  "archives": [
+    {
+      "path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/repository_archives_20261028T2126CST/nyc_ev2_v4_seed0_D0_greedy_20261028T2126CST_sanitized.tar.gz",
+      "sha256": "0f096a1759d4e6bd03eb62b05c85c3ee76af4124f4f30e11d7474248f3f7b5d4",
+      "bytes": 3040417,
+      "method": "D0_greedy",
+      "source_file_count": 74
+    },
+    {
+      "path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/repository_archives_20261028T2126CST/nyc_ev2_v4_seed0_D1_optimizer_20261028T2126CST_sanitized.tar.gz",
+      "sha256": "056014659886ca53dd3f74c463d0abaa61f95b4a682ea3088a718f8585e906ea",
+      "bytes": 3249498,
+      "method": "D1_optimizer",
+      "source_file_count": 74
+    },
+    {
+      "path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/repository_archives_20261028T2126CST/nyc_ev2_v4_seed0_D2_agent_optimizer_20261028T2126CST_sanitized.tar.gz",
+      "sha256": "4b802be510f328f6a7639276e775d8b358418762b37a616f6c1203c37264df23",
+      "bytes": 3153710,
+      "method": "D2_agent_optimizer",
+      "source_file_count": 74
+    },
+    {
+      "path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/repository_archives_20261028T2126CST/nyc_ev2_v4_seed0_D5_pure_llm_direct_20261028T2126CST_sanitized.tar.gz",
+      "sha256": "f049fa36ccecddb415679900e30b69916ea1ed5ad3c042dc82fa64a01e074c76",
+      "bytes": 83358,
+      "method": "D5_pure_llm_direct",
+      "source_file_count": 2
+    },
+    {
+      "path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/repository_archives_20261028T2126CST/nyc_ev2_v4_seed0_D6_agent_codex_context_optimizer_20261028T2126CST_sanitized.tar.gz",
+      "sha256": "a3595a9a9d36e328c28b64b7cb9d64d9efaa75baabe509e53f1d351cebc2ee39",
+      "bytes": 125816,
+      "method": "D6_agent_codex_context_optimizer",
+      "source_file_count": 3
+    },
+    {
+      "path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/repository_archives_20261028T2126CST/nyc_ev2_v4_seed0_D7_agent_codex_capacity_shield_optimizer_20261028T2126CST_sanitized.tar.gz",
+      "sha256": "d59620487c6c1fbd1dfe06fdce461f61cf8e770d1f7f2713ddee44cdabba8db9",
+      "bytes": 128288,
+      "method": "D7_agent_codex_capacity_shield_optimizer",
+      "source_file_count": 3
+    },
+    {
+      "path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/repository_archives_20261028T2126CST/nyc_ev2_v4_seed0_D8_agent_codex_nn_capacity_shield_optimizer_20261028T2126CST_sanitized.tar.gz",
+      "sha256": "17aa4122285f93b4e4c1dd708923e3fb3f27a754443acc5076b062506d1c21d1",
+      "bytes": 149468,
+      "method": "D8_agent_codex_nn_capacity_shield_optimizer",
+      "source_file_count": 3
+    }
+  ],
+  "files": [
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240312_200000_q25/F1/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "2933032a6f31703317725954d1c964f2fb21332bd0956a420a12526866e6bce4",
+      "source_bytes": 1809367,
+      "sanitized_json_sha256": "3d4f47ddeccb6f004d8e028ac981e2f3aacb568babea6e1d5cdf8ae95443fa7e",
+      "sanitized_json_bytes": 1474035,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240312_200000_q25/F1/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "b2d509ca4bfc3e9820210420b2584031deb1bc057b5e4292c5e5778688a24e88",
+      "source_bytes": 2182821,
+      "sanitized_json_sha256": "53409c83cc36f9602d4bc1d8feab3ee0391d026a13272303cedd63bbab1fbe7e",
+      "sanitized_json_bytes": 1716641,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240312_200000_q25/F1/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "69bec747868d96a8ffb2fd74bca57c9f82f2f5985642cea5f7a3fb5859b30e7f",
+      "source_bytes": 2265282,
+      "sanitized_json_sha256": "1335fb033f027ac9aed8062b3e4d61d38992f72f5d621200cbd28ce2291d8f17",
+      "sanitized_json_bytes": 1793842,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240312_200000_q25/F1/D5_pure_llm_direct_seed_0.json",
+      "method": "D5_pure_llm_direct",
+      "source_sha256": "d4932ae9eed7f64f2ca4b3283f91b465fac2b560d644ac020efa0331126e644d",
+      "source_bytes": 2129124,
+      "sanitized_json_sha256": "dfe0b696dd0cdb7f5e9231a716001ccb616b3a4172198a8166b795b3ab402f21",
+      "sanitized_json_bytes": 1732261,
+      "removed_fields": {
+        "stderr_tail": 9
+      }
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240312_200000_q25/F1/D6_agent_codex_context_optimizer_seed_0.json",
+      "method": "D6_agent_codex_context_optimizer",
+      "source_sha256": "ff02fa8a518078d1ade0f416ba201815d2507d938648a7c335346e092a3cceae",
+      "source_bytes": 2297631,
+      "sanitized_json_sha256": "cca4789721c2181fec6c197102d1ff123e1f9db018ea434c77f56c088bb8cd1a",
+      "sanitized_json_bytes": 1818974,
+      "removed_fields": {
+        "prompt_path": 1
+      }
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240312_200000_q25/F1/D7_agent_codex_capacity_shield_optimizer_seed_0.json",
+      "method": "D7_agent_codex_capacity_shield_optimizer",
+      "source_sha256": "c12dbbda8f6f76efee663e6a51ba54db46ce4eca4ac2595b749cd07ff21234e4",
+      "source_bytes": 2482965,
+      "sanitized_json_sha256": "116a735f499d9f350bb8cd0ce442202d50a50850c46d69f91f9e2bbd68475cbd",
+      "sanitized_json_bytes": 1943298,
+      "removed_fields": {
+        "prompt_path": 1
+      }
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240312_200000_q25/F1/D8_agent_codex_nn_capacity_shield_optimizer_seed_0.json",
+      "method": "D8_agent_codex_nn_capacity_shield_optimizer",
+      "source_sha256": "53b1065307311f11ff722ad083f21a5adf59c4f930998a75b92f57417b07768f",
+      "source_bytes": 2920207,
+      "sanitized_json_sha256": "aa8592accd257e63ee245dc73e4a16621b143ea1f27418016da2b51dc7e7c7fb",
+      "sanitized_json_bytes": 2293403,
+      "removed_fields": {
+        "prompt_path": 1,
+        "stderr_tail": 1
+      }
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240312_200000_q25/F2/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "611eda1b1422a06c29e9c5abf0167bb6ad90b2cacddb5e8bd97711429ee46225",
+      "source_bytes": 1996485,
+      "sanitized_json_sha256": "175603436adf065deb08651800e6175344bd1fc64f404ac3df3f7073f8dcde96",
+      "sanitized_json_bytes": 1616106,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240312_200000_q25/F2/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "49eb16ee1663ff4cfe0ea48dc3efb4c4d5021466461c5073d3abac9d7f1b9f6a",
+      "source_bytes": 2373391,
+      "sanitized_json_sha256": "b2ce31807d6808a77c0a106e02576df28c2fbaceff27bbd277a4118eeb06a07a",
+      "sanitized_json_bytes": 1859814,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240312_200000_q25/F2/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "e28c0e3e9ca2245211b7aff9795c9cf4b669c040b8a66c7b0e77bc299374e708",
+      "source_bytes": 2466857,
+      "sanitized_json_sha256": "266068c4339460540e77fc78c38cb23971b3d7773bc9080e7e659f962abed82f",
+      "sanitized_json_bytes": 1946037,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240312_200000_q25/F2/D5_pure_llm_direct_seed_0.json",
+      "method": "D5_pure_llm_direct",
+      "source_sha256": "d79a8fba0b8645a03179e6eb1efd072f8a537c1316c420fa4aa377486f115d89",
+      "source_bytes": 2324989,
+      "sanitized_json_sha256": "e7ec0452de25770840932cd54b234c8ffd933ad637509754f81b9813447ba155",
+      "sanitized_json_bytes": 1879078,
+      "removed_fields": {
+        "stderr_tail": 12
+      }
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240312_200000_q25/F2/D6_agent_codex_context_optimizer_seed_0.json",
+      "method": "D6_agent_codex_context_optimizer",
+      "source_sha256": "1894d8d7331e3d968b123e4c93c7f0be39945a1d850e44cce13ded06e5d7908d",
+      "source_bytes": 2500055,
+      "sanitized_json_sha256": "b2ada83affc1567754d5214ec26a35bf51879d82e639e0feba32d3732ffa76e8",
+      "sanitized_json_bytes": 1971497,
+      "removed_fields": {
+        "prompt_path": 1,
+        "stderr_tail": 1
+      }
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240312_200000_q25/F2/D7_agent_codex_capacity_shield_optimizer_seed_0.json",
+      "method": "D7_agent_codex_capacity_shield_optimizer",
+      "source_sha256": "a1e2563fb5588e5fd338136e5531530dc0f5b9e40cb51c25cfab1af447e3ccc2",
+      "source_bytes": 2680500,
+      "sanitized_json_sha256": "f3a8609bd30a820fbec275869fae6a606d135952e929dac0bd1348d06de2d265",
+      "sanitized_json_bytes": 2091736,
+      "removed_fields": {
+        "prompt_path": 1
+      }
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240312_200000_q25/F2/D8_agent_codex_nn_capacity_shield_optimizer_seed_0.json",
+      "method": "D8_agent_codex_nn_capacity_shield_optimizer",
+      "source_sha256": "c618f09e17a2cdfba7dcb63f56d37935b1cddfcf317708742c1ae2985d8760e9",
+      "source_bytes": 3150371,
+      "sanitized_json_sha256": "74b1ba5c1c1eb682c3b319446eca335a5dd154bf2c47e57fdae4f915ed4417c4",
+      "sanitized_json_bytes": 2465723,
+      "removed_fields": {
+        "prompt_path": 1,
+        "stderr_tail": 1
+      }
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240312_200000_q25/F4/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "72e625a2c7f3291acf87c5ea1f913a765a6c94785e806f735cdee6175f85b357",
+      "source_bytes": 2353254,
+      "sanitized_json_sha256": "2d55828a18405e5487ec757820ce5fcd3751752c135345212ad281cee2b96082",
+      "sanitized_json_bytes": 1886095,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240312_200000_q25/F4/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "51ef7f53edf5e60b17a324383efcb8a3875713016b7ce2620a2a26dc619061fb",
+      "source_bytes": 2759829,
+      "sanitized_json_sha256": "887310059c9a012bf7424d626eeb4b7760e2caeaca84c84fbff9d9955a4c28d3",
+      "sanitized_json_bytes": 2150483,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240312_200000_q25/F4/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "c033f30e65075a6047c8a6461983fd0d4988524ca909bcb8094958449377702a",
+      "source_bytes": 2848720,
+      "sanitized_json_sha256": "1e95eb24bf0d421ff83be009115061ae56e8d6b98fec2351ee6da9758fe49238",
+      "sanitized_json_bytes": 2233570,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240312_200000_q25/F4/D6_agent_codex_context_optimizer_seed_0.json",
+      "method": "D6_agent_codex_context_optimizer",
+      "source_sha256": "f3a9740c8c2157f1fb6a0234c233187a813bcc3403bb20c0d5d17657ddad9ed8",
+      "source_bytes": 2883026,
+      "sanitized_json_sha256": "d3b50eeeb7884e51ffb4c2c7aabfd94bfa03d67fe8a874db7a451eb42f956d10",
+      "sanitized_json_bytes": 2260267,
+      "removed_fields": {
+        "prompt_path": 1
+      }
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240312_200000_q25/F4/D7_agent_codex_capacity_shield_optimizer_seed_0.json",
+      "method": "D7_agent_codex_capacity_shield_optimizer",
+      "source_sha256": "47750d195729fe1e8ddd421e38b61e9c98b4adee2ddb526f34bcce32099d7427",
+      "source_bytes": 3081689,
+      "sanitized_json_sha256": "879c43e4d2d0b24b994ee2ee61f8df19a049ea80e8012c8e6ef0ca9f5749d963",
+      "sanitized_json_bytes": 2393532,
+      "removed_fields": {
+        "prompt_path": 1
+      }
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240312_200000_q25/F4/D8_agent_codex_nn_capacity_shield_optimizer_seed_0.json",
+      "method": "D8_agent_codex_nn_capacity_shield_optimizer",
+      "source_sha256": "3bd89ee9c367997e1359c94f32a5384fafa9b5e4aab988fc87cbc010794733c6",
+      "source_bytes": 3654286,
+      "sanitized_json_sha256": "37fd8a0a176e1bce5684a540bbf7061fa2453e2a3994aa32ef4c773e71643e75",
+      "sanitized_json_bytes": 2842065,
+      "removed_fields": {
+        "prompt_path": 1,
+        "stderr_tail": 1
+      }
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F1/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "4a801966e3de48bf20a18b2ac623ee91c82ea7224048b2e4400979fbd5d64b72",
+      "source_bytes": 1882480,
+      "sanitized_json_sha256": "2249011e1be2391ec0a0cd69e280bc997befa0201013166d9147f8744b579b26",
+      "sanitized_json_bytes": 1529090,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F1/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "6a23e6db24d0f767dba65361e3c25ae09c579230b96f60b56518681155fcd0bd",
+      "source_bytes": 2267112,
+      "sanitized_json_sha256": "c3bd1032190e2709ef9764de0aaf06f1058e4fe8839298a530e9050691db31f1",
+      "sanitized_json_bytes": 1779532,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F1/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "a8e039ae65bbd1f8324052aa0c1939f836696b772f61b4ae4a5e84fb6bae3531",
+      "source_bytes": 2347433,
+      "sanitized_json_sha256": "09acf707ad5739d32b72a9c3b7f8a4180da6bb3ba33d53d15d1961841872fb2b",
+      "sanitized_json_bytes": 1855234,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F2/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "ee6101a122cadbeeda1b86744539829cee9ea513a808916b560bb1bca0d4936a",
+      "source_bytes": 2104262,
+      "sanitized_json_sha256": "e002b7cd280ad7a8e8a561d83332fc7c495dd443fba2faf9841c9381352c56e0",
+      "sanitized_json_bytes": 1694698,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F2/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "a60ce689ae8291fe5c1868c815de0dad25f00d4f2fbcb865d855ea7d54a4ffac",
+      "source_bytes": 2495707,
+      "sanitized_json_sha256": "76df1c66627c32f2733b8c96c9e025d17ef4ef59071ba41ba5add81075020900",
+      "sanitized_json_bytes": 1949093,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F2/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "9f4d95d8d5d131f6e49dc61bfa9b26906cd6a6e732fcdf64ed36f16057ff7c77",
+      "source_bytes": 2581810,
+      "sanitized_json_sha256": "992b4b7822e45780a94a3a23fcd7ec6bb3083df90d0e3fc8c2a83292a4b481c1",
+      "sanitized_json_bytes": 2029656,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F4/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "55fccfb1c8b5d3da28cc5465ce17eb4b69ba9e7433165fce528d76cdb92a8fe5",
+      "source_bytes": 2533788,
+      "sanitized_json_sha256": "1113598b1be5f61282838c12cb07b9faa95a89a7edf62106b81635fd03059f6b",
+      "sanitized_json_bytes": 2014543,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F4/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "f6fc234b0c643218a66cc48bcb4b2610867fe33af6095bbbf519518ed72979d6",
+      "source_bytes": 2945322,
+      "sanitized_json_sha256": "33c073fbdc646ace4ecbafa0d5b85c20e8fbb61112d93cd4d6462f0b81258606",
+      "sanitized_json_bytes": 2282205,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F4/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "5f521417ba9416c74b11d916a0de919082fa12910025e5142b8cb11124c1ab5d",
+      "source_bytes": 3035044,
+      "sanitized_json_sha256": "04f623dd86ee948b00422db02fa552e7cd1e7057ca749b3e66cb86efe751bfe7",
+      "sanitized_json_bytes": 2366039,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240330_200500_q75/F1/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "9b23073560ebe0ec9bbe7b9b5fbb9f7aa2b74e6b228ce91aed73a3dddc0ac7f3",
+      "source_bytes": 2059054,
+      "sanitized_json_sha256": "5f935e5348095c667d8dbec20de332c88bd37cada9f62395be91cab00b37b166",
+      "sanitized_json_bytes": 1664120,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240330_200500_q75/F1/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "bec51c350e92b1932378a431bf5a972db31817d7f3b632479a8974683303c09d",
+      "source_bytes": 2459543,
+      "sanitized_json_sha256": "12526c3c3a1d4cf07b04730d64755df5eab7ca7f8ff1638c77d14671df1b22aa",
+      "sanitized_json_bytes": 1924294,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240330_200500_q75/F1/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "f77ddf900abfcd31ff607e84796902c5ac5fc00804df2662518faa30fbc8ff59",
+      "source_bytes": 2547897,
+      "sanitized_json_sha256": "8d6344ebed74c846e5af8e23f19975175568c4d27612daa54bb229cc5c6497f4",
+      "sanitized_json_bytes": 2007004,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240330_200500_q75/F2/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "1ad5a6d0375c31f93a21b634cf29e6f627851a579b71d261e6cc53b67c0d4ff1",
+      "source_bytes": 2370392,
+      "sanitized_json_sha256": "6f5b9bbb34147e31ccc3558e023f146d6809cc096dd05aa5899d492ed41e8003",
+      "sanitized_json_bytes": 1893324,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240330_200500_q75/F2/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "ae482b3b4c133828d70e08b113991c3b48bbda6819bdf14b74e914cd3b37c574",
+      "source_bytes": 2780960,
+      "sanitized_json_sha256": "46c9b6e25d9efc0168674e0909dfde10d2632bb5ac0e550764add8716c4cb05c",
+      "sanitized_json_bytes": 2160125,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240330_200500_q75/F2/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "1d91873d102e3145b575fa199004d985ef21170aa09145368fa32a0393630a15",
+      "source_bytes": 2871255,
+      "sanitized_json_sha256": "aa56ab5dcb80cca0919062ce2bf26a5f513c85c12d0cdff6983b4c2f8ab5121e",
+      "sanitized_json_bytes": 2244606,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240330_200500_q75/F4/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "a4533193b0b33cb5da508ee0cfecc397368c153734199a286934aa8698848ffc",
+      "source_bytes": 2962790,
+      "sanitized_json_sha256": "07e7c903e7b26d0ae1152c8308fb677a7cf537889abd5ad87508f956b501df16",
+      "sanitized_json_bytes": 2327147,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240330_200500_q75/F4/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "d0a4f731fb378f15676bc5bd15626e1971547e3f02caecfffeb48f096556acb5",
+      "source_bytes": 3389593,
+      "sanitized_json_sha256": "3533a0159afea15c37d3561099070292555ee24013825af40dd7a674a6e6ce3a",
+      "sanitized_json_bytes": 2604695,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240330_200500_q75/F4/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "18c787519372335b6c85925966a6e9c6bd94c8c657122f9b8944e86817ff3097",
+      "source_bytes": 3482754,
+      "sanitized_json_sha256": "5a9032f496686f414f8d22907113d39da9139af15e2856c3493c9e1a3a0dc063",
+      "sanitized_json_bytes": 2691738,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240401_200000_q25/F1/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "f2d4dd1afe55a8247ba370c7926407a80d5789b3797a6c8c76011cd01cd589cb",
+      "source_bytes": 1855568,
+      "sanitized_json_sha256": "116f7162ca570c8b055e772fec0d4b7643049ed74b2e29eea4513cec7c5acf64",
+      "sanitized_json_bytes": 1506707,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240401_200000_q25/F1/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "f322e5f5e4a0bbf7d951bd5c00f8f2bd707d5bb5ce0c311f3a85152bc6f7985e",
+      "source_bytes": 2230120,
+      "sanitized_json_sha256": "2ac9e5941e36351ff7c2d97d9cbbd9a920f385d388ecd49573e8425075ca7f3c",
+      "sanitized_json_bytes": 1750060,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240401_200000_q25/F1/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "8cd7c4e838b992242451aa46952f19a9ee5bca560c19d405b6af167f322387db",
+      "source_bytes": 2312701,
+      "sanitized_json_sha256": "ff699c0911f16aec1a9c3c7333d4a183a12e00007b2ad4ff031b01b36e9153c9",
+      "sanitized_json_bytes": 1827361,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240401_200000_q25/F2/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "349e5e76e31141f83448a34cc299c712e6d0be1f55a0b4cc75ac6184af17eef3",
+      "source_bytes": 2084801,
+      "sanitized_json_sha256": "25896b3ee6145dac9c8a240c0f84b3089839101338d7e8fc1efe00665ebd18f0",
+      "sanitized_json_bytes": 1678353,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240401_200000_q25/F2/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "fecb30ccc605cc6044e40387dff31ae00a1ac1b420a33ed85f2462b3f34803b3",
+      "source_bytes": 2473606,
+      "sanitized_json_sha256": "126b25d9737fd13fc99dd468b1b57cd1c8cbdedc1d61bfa4bfc73291a045d1ed",
+      "sanitized_json_bytes": 1931097,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240401_200000_q25/F2/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "d0d792b1e6afb16be331c068f78888ebac931fa6a1ab2302dbd351008a3552e1",
+      "source_bytes": 2558846,
+      "sanitized_json_sha256": "c42ee9930022f83fbf14910a4c17d6f303d66b9a205d88cbf5fe61e0617b46ac",
+      "sanitized_json_bytes": 2010804,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240401_200000_q25/F4/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "47258ba07ac14f2889fcff9a564b5b668a803e578afe3500219272ec70e01f3c",
+      "source_bytes": 2546420,
+      "sanitized_json_sha256": "fbc67c6013d475a6cfd85e74c0c2556630b1e6ee913c02607bd255e66880f535",
+      "sanitized_json_bytes": 2024190,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240401_200000_q25/F4/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "97b67335acdc4470d4f0703f44404b8ed908c42feab4f8b6736c6e712c3c866a",
+      "source_bytes": 2961348,
+      "sanitized_json_sha256": "6ade9cd54ecb2bfd2ae25603b257f8a87291971f81d7e4c9245d931dd3fd17b6",
+      "sanitized_json_bytes": 2294152,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240401_200000_q25/F4/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "20d4659dab2f5f20ab2a7dc4f06119a3363500e3f35dcd700f03fa9d4325d824",
+      "source_bytes": 3052062,
+      "sanitized_json_sha256": "8abe2ab5b607703d93b8bbd13b375d03e17770e5dbdbb3c9d4478f4484fe0296",
+      "sanitized_json_bytes": 2378759,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240411_200000_q50/F1/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "860c74c9e3833cf874b5b2e006c7990b30b6a9b10ea80b94dc1fa400703e20d9",
+      "source_bytes": 2096116,
+      "sanitized_json_sha256": "3d1349396797cf52bd2032794077a8502ba8a516243aa003c743c008231cd316",
+      "sanitized_json_bytes": 1699446,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240411_200000_q50/F1/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "50beb6f6210f64222bc7ef43026f307203073f46bfe5ae386dffa264d6f88b1e",
+      "source_bytes": 2515027,
+      "sanitized_json_sha256": "b9d717c25665c4533fec530f794f95fd1f640f468dc1ddb922a1490a804d8b1b",
+      "sanitized_json_bytes": 1971559,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240411_200000_q50/F1/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "de98ba4f9f98244b7a2b18bc9c5505280e5adbd970180136f8093b4be9cc0925",
+      "source_bytes": 2607476,
+      "sanitized_json_sha256": "d258e52577689acde2a1f542b837056d1d69350d53fa8297d27477d0b81406a3",
+      "sanitized_json_bytes": 2058120,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240411_200000_q50/F2/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "7a423a19dc826771ab501ffc25c2fe52e59b39a90cd26482087f0e7c66ead41e",
+      "source_bytes": 2367516,
+      "sanitized_json_sha256": "534735dd88ab3d272d428e2f63afa01a2b60a5a0eb473c8d7546773eddfffd4a",
+      "sanitized_json_bytes": 1900897,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240411_200000_q50/F2/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "4d6e65094b91e9576c1baa6d832e55595a0069729bfd7a495a7d74ab6876669a",
+      "source_bytes": 2800008,
+      "sanitized_json_sha256": "1670102a3456020ac2bffd2b72787d1659175549db033d9ce25a8ce2d4b7a5f0",
+      "sanitized_json_bytes": 2181963,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240411_200000_q50/F2/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "c54d44c2c3a22d71afc8498ce0ac6113012c49a2a97d40c339125f989819a022",
+      "source_bytes": 2894946,
+      "sanitized_json_sha256": "af3ade730fb451b692667346baa9660a3687d59945f4b91600ddd744aa57b3e9",
+      "sanitized_json_bytes": 2270790,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240411_200000_q50/F4/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "f87dadbbf8e2265dfde608beb3061e61f963183ce2a88a1f61f4929a748eccf2",
+      "source_bytes": 2888869,
+      "sanitized_json_sha256": "69d1dbbe80fad465caeb69617db36099619d68ac11fa462db58493be59037eb4",
+      "sanitized_json_bytes": 2286167,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240411_200000_q50/F4/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "f62c02012068ad964c7d2389a592002ece0e203b6f04ff4ab1b8a128274264df",
+      "source_bytes": 3341917,
+      "sanitized_json_sha256": "5d4da2418234a9c64ff26c7ef06d947b00ee26273ef828144ebe3229615eb3d6",
+      "sanitized_json_bytes": 2580809,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240411_200000_q50/F4/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "6eddde96c5598e4ef923123f7295611dfdbbdf60a709e1bffcd57414289630be",
+      "source_bytes": 3440670,
+      "sanitized_json_sha256": "ce07b19acba1e811d4513757da1d5371ea4e6ee6b32786dfe8440fd836ed4801",
+      "sanitized_json_bytes": 2673072,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240427_223500_q75/F1/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "4bab9bd5200328cc05d93a67063584673d312493a8bea16a4964328405299fef",
+      "source_bytes": 2004138,
+      "sanitized_json_sha256": "9aee48d5d44b77d286236deae0cf619f16e2eeff3065c0ce75ebc74e9a7f7aaa",
+      "sanitized_json_bytes": 1633765,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240427_223500_q75/F1/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "51bfc30a9a46766d6763c5d5ecebb34a2372a8733848008c32674d3f347bfb68",
+      "source_bytes": 2420664,
+      "sanitized_json_sha256": "6ad4ffc40f4956ed539e4345daed29d36196130934c2a249bb0ab7a17e5f3b65",
+      "sanitized_json_bytes": 1904359,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240427_223500_q75/F1/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "4f3ee49b261eac68f6dc538dbbaa7bf2093130e372f9b4866c71ad1e8b7fe2d3",
+      "source_bytes": 2512568,
+      "sanitized_json_sha256": "445b627e42bbde62eadaba9c34a7b623c32554bcbb0a35edf23012df070ee133",
+      "sanitized_json_bytes": 1990389,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240427_223500_q75/F2/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "670228f0c5ea62c02c86fd3be2fac46c709c65aeb50a8e879fac75163617084c",
+      "source_bytes": 2189920,
+      "sanitized_json_sha256": "358a71005549698492397184ce79d5ebdf6b041ad1b0a3a9af97d80e92cba3a6",
+      "sanitized_json_bytes": 1774745,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240427_223500_q75/F2/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "46d822e24be9642ff2762f3cf99e4604bde78cbae724b702187caf25b901fffd",
+      "source_bytes": 2617684,
+      "sanitized_json_sha256": "3afc56656863201b2c38e30888a4fad0200da32b0a77ea3bcab40109a2bb7f8a",
+      "sanitized_json_bytes": 2052733,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240427_223500_q75/F2/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "c3d6ae845e406e8dc11d39375ffe2fd9cf98f7a8dd94b3d4bffa477c0b2c2f67",
+      "source_bytes": 2711645,
+      "sanitized_json_sha256": "32e0da38e5173f4a0db817ab9ae4168826cdae8f0a8ab0ac9bf55cd1203af320",
+      "sanitized_json_bytes": 2140639,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240427_223500_q75/F4/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "6db16c0ab2ed7a796b3b86fb16ffe18346f32fd53ca21e486e0821ec3ee693bc",
+      "source_bytes": 2554987,
+      "sanitized_json_sha256": "2ba0743317396fd73907bb4cf7b42b2054929039e0c1f06089a6442676c965a0",
+      "sanitized_json_bytes": 2051669,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240427_223500_q75/F4/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "5bc932d6413744c706d2f73cc698ecfeb91a06fc03ef053a615869c258553d14",
+      "source_bytes": 3011358,
+      "sanitized_json_sha256": "00dc91aae7aafc252d1b0ffd12a8f0152b6e278823f47e9b83e87effc909fba4",
+      "sanitized_json_bytes": 2349176,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240427_223500_q75/F4/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "5b48c702c42b5ada2a5536503735fd799921a1bb63e25bf312114198968999f0",
+      "source_bytes": 3109982,
+      "sanitized_json_sha256": "e393218939a00ae45d488bcddf317654e078e03225df499317853863957baf61",
+      "sanitized_json_bytes": 2441297,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240509_210000_q75/F1/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "3f7ef0766c9cf101ac9f6aacf7101648b90dafe91e80aed4b97f4e37960a8134",
+      "source_bytes": 2037595,
+      "sanitized_json_sha256": "ef61b88da5e75b713737197979fec6851ccdac538c76ec7e2ecf348d7a73bce1",
+      "sanitized_json_bytes": 1651549,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240509_210000_q75/F1/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "30b986fff0af59040cea0c21ba0c54694057a9ec56e63e01606ed462bad2a5f8",
+      "source_bytes": 2443568,
+      "sanitized_json_sha256": "949d26a354424999e70e202b214c82e45d094caaef2a8756cdbe4027f05d15a5",
+      "sanitized_json_bytes": 1915282,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240509_210000_q75/F1/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "12cf1211bcf19c0e3b8913e317be1f711a8abb82aa8b32b1cfd872a80aec0610",
+      "source_bytes": 2533152,
+      "sanitized_json_sha256": "bd9580b89ce766a36bc60720ef8c70fac846d02ce931e4e6364e1743e622b456",
+      "sanitized_json_bytes": 1999145,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240509_210000_q75/F2/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "5db7ba02720cd2e375813469218e95bf9a2f1229ac2ef6ddca1312a7fdb7ca24",
+      "source_bytes": 2309846,
+      "sanitized_json_sha256": "1e835ee678e4f17b83eee9ca2853e88fc01911621ea110b2b6783dd08cc2a3ae",
+      "sanitized_json_bytes": 1853719,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240509_210000_q75/F2/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "3494fdfbda0afd5060106884869b98e59923c92a671a32fe7e2e65f4ed392491",
+      "source_bytes": 2727877,
+      "sanitized_json_sha256": "a074ed488dc76715bdbb7383cb73e7432c65536218b960c95a50e41a0e574af8",
+      "sanitized_json_bytes": 2125391,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240509_210000_q75/F2/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "cb623c1d45bc2bc8b63451c684ec2d7761738e275effd177edc4e3be075fdc99",
+      "source_bytes": 2819719,
+      "sanitized_json_sha256": "b521de279b538a6aa3ab413760096d717077fe41da93c1e198fde9372c66a1a4",
+      "sanitized_json_bytes": 2211310,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240509_210000_q75/F4/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "b62b6fa2e5aca25e7bd752304998bbce2980d704b79a5f7a8069e08b318b4bdf",
+      "source_bytes": 2828333,
+      "sanitized_json_sha256": "7ee03199a2d0010f8788b70f58096e6dfc6d2d38acf552af48718088e985be85",
+      "sanitized_json_bytes": 2236851,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240509_210000_q75/F4/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "b1a6037ceecdda54b8abdb535ad8f3167884030080c015848ce50f7edbbd5c43",
+      "source_bytes": 3269040,
+      "sanitized_json_sha256": "dff40c4fe552c81d93b9c48445291e4da14cc0fda01335aef90c61d43e329afb",
+      "sanitized_json_bytes": 2524057,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240509_210000_q75/F4/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "f453eea797a0ed1ef000a9f45f81142371b9bb9145afe035c401faba0b34a3bd",
+      "source_bytes": 3355925,
+      "sanitized_json_sha256": "d376d2d1a63e34ff1c3d71e05c8771ab1ca592161eb39e95a5cab0c4a2dea516",
+      "sanitized_json_bytes": 2606395,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240521_210000_q50/F1/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "795dbdac37de30b8bf0a550c0103107972a64962d747b77e7a7de2a813965f6d",
+      "source_bytes": 1861001,
+      "sanitized_json_sha256": "b9f377b3a00c39ef4c65c88a8271cae060f63bcec6627b72df9a9123a4fca18b",
+      "sanitized_json_bytes": 1521202,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240521_210000_q50/F1/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "30fe0e4ff0029b9ba96ee57f58e1dde3b51884115a4e0b77d5215746a7b381e4",
+      "source_bytes": 2255543,
+      "sanitized_json_sha256": "f3a9c464fd42fb3b84b7c31dbf19e5cc607a0838bc14df297596f01bb6f17859",
+      "sanitized_json_bytes": 1777553,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240521_210000_q50/F1/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "d2dc43b81d01e74d1e347eda074b02eefd351c5587d88b9840b62740991e9112",
+      "source_bytes": 2342459,
+      "sanitized_json_sha256": "d7c986fe52a9f66715264af613253a771c2e3ea8c5cd542de5b7790d14faa282",
+      "sanitized_json_bytes": 1858904,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240521_210000_q50/F2/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "26d200d3d54433a32d13fa036a097973927b8ab650de5b2e644f42724dbae9ef",
+      "source_bytes": 2018342,
+      "sanitized_json_sha256": "da55200fc6e1daa4326196aaa8ad1f9c885689546e7291cd987a3832f29fcdc1",
+      "sanitized_json_bytes": 1643846,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240521_210000_q50/F2/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "d7e5bfe297fa54f699257e574d04b1083994a9819b033f731ea089349af66222",
+      "source_bytes": 2423601,
+      "sanitized_json_sha256": "bbc183df4e001d9371328dbca145adb75996674d1fdfdd110ffe90ea60a1e136",
+      "sanitized_json_bytes": 1906621,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240521_210000_q50/F2/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "5a54aa21da509c4368762de3feba7e98b28b4fc7bbc61e435ed9410d9c27d779",
+      "source_bytes": 2513357,
+      "sanitized_json_sha256": "41c5aec2ca31a180090664f63fba686d103e03b5af33d60c9e283753117a3c5b",
+      "sanitized_json_bytes": 1990577,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240521_210000_q50/F4/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "adb9eb6daa8b223d66c548a93fa63d116db3c06fbe206eea82bfc99245b051df",
+      "source_bytes": 2315715,
+      "sanitized_json_sha256": "fab603044859a08ee181b15a58e75d12b0c85959ace55aab8d9d2aa3511bed29",
+      "sanitized_json_bytes": 1874923,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240521_210000_q50/F4/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "aec4dd59512d1677363d1163f15c1566c2d288183e27b69562af1b2110cf907e",
+      "source_bytes": 2751087,
+      "sanitized_json_sha256": "11791fd8e50990e016c6fcb141914933fe72ce77f63b103b5366dcdab0a5eaee",
+      "sanitized_json_bytes": 2158097,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240521_210000_q50/F4/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "4c5972bdca48edd8421afee128176deab6a80bdbe1430d7d29b601620a8f9020",
+      "source_bytes": 2841650,
+      "sanitized_json_sha256": "bf75849192c54b126ceda59310f348e160d78f8b42de6262de6ff94e6615d37c",
+      "sanitized_json_bytes": 2243305,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240528_210000_q25/F1/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "f7dc464b397d134323ec26a353bec6eeb1176c1721208e8497addda8de79e040",
+      "source_bytes": 1830994,
+      "sanitized_json_sha256": "abd4bab60bed838bae12da67247a4a4d0ec5c102e3de690e1c0854b4ad4e2a6f",
+      "sanitized_json_bytes": 1486908,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240528_210000_q25/F1/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "8620504112f6b79307dc0420da3ef472d932bb47c867ed6e230272d558b72c01",
+      "source_bytes": 2200104,
+      "sanitized_json_sha256": "b4ea806b2c32b09f5c151c4454e8b75bd5ed784bcc370a3c18e9339662676f22",
+      "sanitized_json_bytes": 1726703,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240528_210000_q25/F1/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "654d630d92601d63061b7e827856a67320ac47ca9af15adef183761ea36ce396",
+      "source_bytes": 2281546,
+      "sanitized_json_sha256": "306e9ed28b895dee31a7efd622bdc267c3ffeb5ed1f62c5cf5d0cb42fb8e3e67",
+      "sanitized_json_bytes": 1802941,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240528_210000_q25/F2/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "86c0c3de34b401eb551d5daba9f40c9168af5459f8a4cd52d77d9c7b7850cfab",
+      "source_bytes": 2047118,
+      "sanitized_json_sha256": "458b7828ca9b14647835c0006abc6e00fc23b89cd64f5947a190841f8914a207",
+      "sanitized_json_bytes": 1647972,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240528_210000_q25/F2/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "cfe8f7abbdee5f1fd80ff288baf8464464840302480d09b506c6b0698599a4fe",
+      "source_bytes": 2426651,
+      "sanitized_json_sha256": "a84b5312e6da7860bc4fef90c3219da52eeb071c46a04ae6acedd44b14210b9c",
+      "sanitized_json_bytes": 1894662,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240528_210000_q25/F2/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "8f056c0fac199326c5aba2d67b8db57d6b28a16b22308f778cf04d11ae11872b",
+      "source_bytes": 2509925,
+      "sanitized_json_sha256": "27f6181fe66779fd8fa0ffb8856006865d1c4a0ec684e9b759f1581b80627cfe",
+      "sanitized_json_bytes": 1972563,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240528_210000_q25/F4/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "2de55863e4e83e84f59b71c3d8e16a91134e486decd8b8962c3ec7b2ee67a4ea",
+      "source_bytes": 2499855,
+      "sanitized_json_sha256": "000083c49eb570c27e8a14ed6d924ccc818a42c5a63edbfe8ab6936e8ee8b3a7",
+      "sanitized_json_bytes": 1987160,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240528_210000_q25/F4/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "9ca6d26c447da6e7e8eb51f6e8033ec8b5c8fb15a5dcc1d4a42c89855c26c4de",
+      "source_bytes": 2903484,
+      "sanitized_json_sha256": "abc6dfbd9a04d374262ef16d83767097326f5627f788e5655271fd09c0e65a1c",
+      "sanitized_json_bytes": 2249708,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240528_210000_q25/F4/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "880fae8239dd91bbfcc5548a7523c8f625f2b477f2388bb293f1f80b8931fa1b",
+      "source_bytes": 2991372,
+      "sanitized_json_sha256": "6f5b70007903d6db7c114863d0da3191a228825008be497437b7a44ca94182c5",
+      "sanitized_json_bytes": 2331809,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240608_225000_q50/F1/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "aff63e5ad15d88cafea555d5d47c4f010800e5234724b99ccb35b68cd1105570",
+      "source_bytes": 2013593,
+      "sanitized_json_sha256": "f08ea560a1e96fa5008e641ddce2d2c127ccc00bc1a2dd92e3705decdd8016e8",
+      "sanitized_json_bytes": 1631632,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240608_225000_q50/F1/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "1e7054956953719f082bea5693a94dbecea3451eb4aa366f7c6fab16f7514b1d",
+      "source_bytes": 2413280,
+      "sanitized_json_sha256": "3b6c1c5a815c38cd84dc0f172e0c424c32875c182615e7e7c92c1587a1efa48e",
+      "sanitized_json_bytes": 1891279,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240608_225000_q50/F1/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "04180117e923ae009cbf25b140c25921036273320e08b3d19da8d3a3ab47c3ec",
+      "source_bytes": 2501538,
+      "sanitized_json_sha256": "aa3b886401cf88a8bcd61d70ed7409fcc7aa66a325ed63f248f9f2ce19b0881f",
+      "sanitized_json_bytes": 1973894,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240608_225000_q50/F2/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "8571783f4a7656119b8b938a84c3a112ab7134c0200d9ae20466b5f4f35967ce",
+      "source_bytes": 2264755,
+      "sanitized_json_sha256": "724c6264474f36f1e3fc5a507f7c54d9aa6fae9be804ef0b97e590b7632db4f5",
+      "sanitized_json_bytes": 1816414,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240608_225000_q50/F2/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "4af2f8119a924eaedce3d01fd4f869b55e42cf9bb240ca5a599281af4325b96a",
+      "source_bytes": 2672867,
+      "sanitized_json_sha256": "bce4927b4a60d8e3783ca999d42854de8fec910f7d6506ea06b040b4888fae26",
+      "sanitized_json_bytes": 2081666,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240608_225000_q50/F2/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "2c60970bd91b1b7da8c9d50921604ad22ff62571a62c242267969886a0c14b9d",
+      "source_bytes": 2762407,
+      "sanitized_json_sha256": "fca43c188c98bb1dc35808ed22ebe44babcb3d2cd39757b28c7c493776f5f693",
+      "sanitized_json_bytes": 2165428,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240608_225000_q50/F4/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "8e91cc8cfd8077c4ec136a2ceb38efaecde8f0c31709529e673259ed26bad717",
+      "source_bytes": 2770211,
+      "sanitized_json_sha256": "fd95765d0b95cec2603a2cfa7cf921dcbf72ba8c6972a00663bad590382a98b5",
+      "sanitized_json_bytes": 2188868,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240608_225000_q50/F4/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "63dd6bc263efb2126d0a7e07346ae16c2ec70b0ff5ec2d22c6e57a18db733533",
+      "source_bytes": 3194740,
+      "sanitized_json_sha256": "1c2b36f1b7c2f229baf4fb201da8f6e4af8887cbca039f81423c3eb21b66882e",
+      "sanitized_json_bytes": 2464967,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240608_225000_q50/F4/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "47fd0ea9fe104212be6c81f2490d5aafce7242efe5861d6b9da1fb30e989faff",
+      "source_bytes": 3282940,
+      "sanitized_json_sha256": "e53f54bf90a13bcdcbc30e6c20dba2341fa96e45d37de0ad6db9ef3732848feb",
+      "sanitized_json_bytes": 2548009,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240611_211000_q75/F1/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "363788ab794fe4d8386bb544e161107f9d6ef839146d0b824112d88801beac8e",
+      "source_bytes": 1981305,
+      "sanitized_json_sha256": "2a0d612f3bc6902929ddba7c61b92c5344e0f0020eb59011f10221f4dcf628f0",
+      "sanitized_json_bytes": 1615133,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240611_211000_q75/F1/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "1637f3859c0dc0722692ad498a0e14a3453db7296b884d719deee7896f9f650c",
+      "source_bytes": 2392985,
+      "sanitized_json_sha256": "64e7f6be7697cd7ab44015cb2177f47103ef9a5fd49fba8d95f4436c86f4d036",
+      "sanitized_json_bytes": 1882520,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240611_211000_q75/F1/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "45cc070fb13349110dfc7e3fc004edf9f8183953494faade0456616bf0240a1e",
+      "source_bytes": 2484566,
+      "sanitized_json_sha256": "8108a51a6251d2cfecb832b4377f470eb056ae30c575fe86c1cbfcfeb6fe2144",
+      "sanitized_json_bytes": 1968135,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240611_211000_q75/F2/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "1e285fb94bce4ff10cfcdacfd0475d873fc19f5ee43a41e5ce1ed6d7098dfe5a",
+      "source_bytes": 2158072,
+      "sanitized_json_sha256": "0b9c3a1d46a59dd55a9a13690247e2a0074460eceb2a7b4d6ba925af01a4c739",
+      "sanitized_json_bytes": 1748755,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240611_211000_q75/F2/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "06ddf55d8245ebb131d86e1a1e45568369373178d27737bc8a4b5b1f1b0691ad",
+      "source_bytes": 2579674,
+      "sanitized_json_sha256": "68d13ea56cd33581d859675696c1e02798df2ffe25411454863d7d989bc32c21",
+      "sanitized_json_bytes": 2022699,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240611_211000_q75/F2/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "1c344873424cf0afcdb9a08598a0cd3f501d9968aae552d4e717d0dc81208b6b",
+      "source_bytes": 2672425,
+      "sanitized_json_sha256": "b1436b386481ce201d3b38761d6865b276ad4e3be4eac624691136d1551dba29",
+      "sanitized_json_bytes": 2109501,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240611_211000_q75/F4/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "8fa2a938dd7c3cd006942b9e7f6b0e6e47923ea6630da54dc6a448d1df686b79",
+      "source_bytes": 2531738,
+      "sanitized_json_sha256": "e7225e468e49c15fcf6ae12c3252e70f915ce07352750712f1929edc6249b3d3",
+      "sanitized_json_bytes": 2032345,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240611_211000_q75/F4/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "e3f6c0d6121ca652b6ec28aede8625ad1378e00c87dd526b7d05971756ba325e",
+      "source_bytes": 2977767,
+      "sanitized_json_sha256": "46b879f430d1b571fe4c4e1b9afd4c404d541932817619ab7e95335685923c5b",
+      "sanitized_json_bytes": 2322402,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240611_211000_q75/F4/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "68275f651f5909b4d64ae1ad5818099f33ee7e03e1d0202385abed493a401986",
+      "source_bytes": 3074985,
+      "sanitized_json_sha256": "cb01dda0b40f26dedd189b58011edb1ff2d6a00a2e8ae716747523b6da59c190",
+      "sanitized_json_bytes": 2413268,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240624_210000_q25/F1/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "212ee953d09b3794e8e113f70ca1891002888ece2e9c42e0c37cc0e262644e24",
+      "source_bytes": 1803061,
+      "sanitized_json_sha256": "99388085c7ed745da6eb6f18ca727d8773a0ebd35ee1b347aa446b6281a56519",
+      "sanitized_json_bytes": 1468814,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240624_210000_q25/F1/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "6913c99c75a9e2716d057e0d0897eae6251775e57f22335317935b0993150287",
+      "source_bytes": 2175718,
+      "sanitized_json_sha256": "f9c6514c4f4d00ad58154d451b353ead0dd085de2d7e75108c57ecf30feb9dbf",
+      "sanitized_json_bytes": 1710939,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240624_210000_q25/F1/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "08663cc0a1842cffc98fe48a78cfe2203e880875308d4f775a5f0198041146e9",
+      "source_bytes": 2257906,
+      "sanitized_json_sha256": "f172b898113b16d2a3d0e76c42328e8fa7fb43538e7bb1dd6bbd86562b713c62",
+      "sanitized_json_bytes": 1787869,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240624_210000_q25/F2/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "1f738e658d020eca9aa0376871d2c3550183ea5669779f27e036b1bda12bcccc",
+      "source_bytes": 1972380,
+      "sanitized_json_sha256": "1d87601da5a56918f0b201bff056684815e67fb4f13d6247d3d02ebd8e0e08b5",
+      "sanitized_json_bytes": 1596362,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240624_210000_q25/F2/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "8cde224ebb1e9f38e922e6f339fd0949d98291911155afa0a6014543f92fd100",
+      "source_bytes": 2353199,
+      "sanitized_json_sha256": "336661c9fbb15ec4b483ae046c12b8c85746c1e9de0ae3f63a25aa7c1308f48a",
+      "sanitized_json_bytes": 1843864,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240624_210000_q25/F2/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "9a93e064e797cc39024f3dd51590fdc5adf91bf528a55b5a82668342645c9534",
+      "source_bytes": 2437089,
+      "sanitized_json_sha256": "71c1928dc4bd1351c34425e09f84cf34d678a56f56720ba8802902b5fb317df8",
+      "sanitized_json_bytes": 1922333,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240624_210000_q25/F4/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "122978becd54303ea6bef295dfa3e838327b1f3af9458fa7e9321045dac57313",
+      "source_bytes": 2328388,
+      "sanitized_json_sha256": "abf225d2109049144997bcad31b34e05b31ca42cb1f0fd113ae5b344ee5ac4e5",
+      "sanitized_json_bytes": 1865524,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240624_210000_q25/F4/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "de851c1b3ad486abacb5ef0555e5a6ce9dc623c5a6cd40e5682c5c6398e5b475",
+      "source_bytes": 2729318,
+      "sanitized_json_sha256": "57fac9b468c653fe1a216a73626de97aa1b2068a914cc5f2bb7df9424d5b0f48",
+      "sanitized_json_bytes": 2126274,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240624_210000_q25/F4/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "2071c2d31b0e480f224c76f825821fb0a95cc630199971b66910c87d497d4dd4",
+      "source_bytes": 2816719,
+      "sanitized_json_sha256": "1bde2a84736dc0debc03f59e92baa4fd6daef8dae84b1d6ea1aca5c300cc49ea",
+      "sanitized_json_bytes": 2207960,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240702_213000_q25/F1/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "1123b3a6daa1f340215717362d704ddfc1ca8625a68dd1d3e84adcfea51597e9",
+      "source_bytes": 1729782,
+      "sanitized_json_sha256": "ddbec46b799c162483524df86cb169799344e9fd8efd6b05d09628bf0a7d1578",
+      "sanitized_json_bytes": 1413522,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240702_213000_q25/F1/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "aa003be443569dacab18f8a0f959433c8dd7c130072cbb5b9b8377497c33c50a",
+      "source_bytes": 2095369,
+      "sanitized_json_sha256": "a521643bdac376195c61469e5b00c11e3bf03f4e541385b051f5c476390151ae",
+      "sanitized_json_bytes": 1651052,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240702_213000_q25/F1/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "66f3dc27c0736b04d1cc0a46e7b4004a3f350d25e6c41c07ddf26b07a10810d6",
+      "source_bytes": 2176050,
+      "sanitized_json_sha256": "6f959238ad672a57d5c37ff1180bca56e8969ef9caf8f46abda68b42406cb62c",
+      "sanitized_json_bytes": 1726574,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240702_213000_q25/F2/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "0f2af646e8f65ab846501bb79a70a27867fe8fcaf678f864483e1a92f4c68c61",
+      "source_bytes": 1875805,
+      "sanitized_json_sha256": "c8b0b75e9c811a9b15b483d8dc13052858b674e7580660269dd88f5e690ebb49",
+      "sanitized_json_bytes": 1526834,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240702_213000_q25/F2/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "45b6dd4bfb7bfa03a7096c1a882b6a19b07abcce819d26989d2c55676ea4b08f",
+      "source_bytes": 2254201,
+      "sanitized_json_sha256": "e64be2d0d14e5a3b283c6d9492ab0d21aa410d9f45b1d5986613e0cb615558e8",
+      "sanitized_json_bytes": 1772779,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240702_213000_q25/F2/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "b6d61afcee7835fac1436adc456c22d0261d069e4b2acf2997365d7bd20698e3",
+      "source_bytes": 2337371,
+      "sanitized_json_sha256": "95605cffa9d3d63205653a41ff60ab471fef866e430c7044110e3b90924627f0",
+      "sanitized_json_bytes": 1850577,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240702_213000_q25/F4/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "901effae7cb06d4f150532bea88c65990607d07b15c0eb73f3fee795e0ae2f5a",
+      "source_bytes": 2125592,
+      "sanitized_json_sha256": "fc6acd0e708ccf9cad14b8a2e43dd599d4efa0a36747b99751e481ad81b23475",
+      "sanitized_json_bytes": 1718686,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240702_213000_q25/F4/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "3c7ed48cca84a00dbd39fa9131cda8ca259c6fd8361da0a50ec55d56d7403a1f",
+      "source_bytes": 2517112,
+      "sanitized_json_sha256": "8ffc86b15d368f40cfdb44c43ac8d4a80057770e52220100875d55fa4849bd68",
+      "sanitized_json_bytes": 1972804,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240702_213000_q25/F4/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "5e725e121b853b0a1716fe21f9db41c3efc1a85aabe663d97488ec88ce3a99ef",
+      "source_bytes": 2602993,
+      "sanitized_json_sha256": "39d9863ff8c1531ca449d3c76697831a1c4d7ef8372b5ebb022dc5bb81137364",
+      "sanitized_json_bytes": 2053030,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240718_210000_q75/F1/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "2fea46aeb625cb027d4762db5146383a1233313236eaafda1748ce62ec3ab580",
+      "source_bytes": 1922529,
+      "sanitized_json_sha256": "e8d32f8f1e3aa7244abe3cfd731362a79a45964ff18a2847de5dd727f9eb52c9",
+      "sanitized_json_bytes": 1561816,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240718_210000_q75/F1/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "08b1b50337433fb675d8b8ddc026c53fee3e630273aa19d1d89009d76a9cd001",
+      "source_bytes": 2311255,
+      "sanitized_json_sha256": "d5d013eef0046aeab5a39bf4d17c8fd047fac43027e0d9688ae9b0b470e1ee44",
+      "sanitized_json_bytes": 1814352,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240718_210000_q75/F1/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "a5677822424469a5ee5fd5f125e5339c186f0ba0dfb8c20a8ac551713f15ac16",
+      "source_bytes": 2397079,
+      "sanitized_json_sha256": "37471f7d131732e4a7474da4a871b6d5996a2526c7df1cc6701fa1db69187bde",
+      "sanitized_json_bytes": 1894687,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240718_210000_q75/F2/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "a8cdd3c3836f82c7ffc8c4c10943f860483c379b47af39486e52ac5d2113969a",
+      "source_bytes": 2140625,
+      "sanitized_json_sha256": "0b9af25d9e3fde3582866ba03e18e68d28490f6d0bc6dd409a25dff8da7e7f2f",
+      "sanitized_json_bytes": 1724376,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240718_210000_q75/F2/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "bc4cc7986f0ee5081d3d86ddd38a362f131fcb9ea350db535629c91e80659306",
+      "source_bytes": 2539083,
+      "sanitized_json_sha256": "9eb86d24b7946fc16aac531025523649dfe1f4a87c83bfda17edec8c9e042481",
+      "sanitized_json_bytes": 1983309,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240718_210000_q75/F2/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "29c7296c948680a0e4062858636dbdab3aeba99d49cf0006805a5cd53e386aad",
+      "source_bytes": 2626657,
+      "sanitized_json_sha256": "63a11aaf7735608d56885c4f145f16a229e9236add9c1c945d9867eff1eaa35a",
+      "sanitized_json_bytes": 2065264,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240718_210000_q75/F4/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "ac2daba542942a353d1942d8d45c10cf03ba94bba7d3984e0486e9e4343150fb",
+      "source_bytes": 2578461,
+      "sanitized_json_sha256": "2dff4b1a9cdf3798e36e5803b83aa629c9e6def80d7e5313311e332e59de3ca1",
+      "sanitized_json_bytes": 2050795,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240718_210000_q75/F4/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "c99dcecccd00da10d3c5c4e0e49efa42ef0099d0297c9479ce3f79201f5e9e3a",
+      "source_bytes": 2996329,
+      "sanitized_json_sha256": "f16bcc763e99c3ae6aa1a60307baf696ddaaff56d2e7156c146a93c64895c80c",
+      "sanitized_json_bytes": 2322509,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240718_210000_q75/F4/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "60914f4ee12ab0c71ebd637dbf4d48b1f8c2ea384976726e5f2b3be15c31d058",
+      "source_bytes": 3088210,
+      "sanitized_json_sha256": "ba6258da9db65db18322266f4e634e466d7c850a67c6b0260c8b6c191e1a9c3d",
+      "sanitized_json_bytes": 2408258,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240725_211000_q50/F1/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "0d3496391e3e331dce78a0dc65f464aa71d9cceac04c16e8059dbc3ee7e59a93",
+      "source_bytes": 1866854,
+      "sanitized_json_sha256": "268d55b74d38a33f71ecd17f150c3cb7ebf44f1551e1820a9d36cfbd741ee4d6",
+      "sanitized_json_bytes": 1526070,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240725_211000_q50/F1/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "de8f6bcefa4bdf4af53fa44a3f58b851bd2072534e103259d27627301edeb316",
+      "source_bytes": 2262649,
+      "sanitized_json_sha256": "51119f293f8a81b8fa1384e0ad43588eb0ae9a50b3677fdc2f39daffefb4304e",
+      "sanitized_json_bytes": 1783200,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240725_211000_q50/F1/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "ae6e44d22d425c04d2b4af74f70d086e872eede964a67b6db38d85e0580f142e",
+      "source_bytes": 2350004,
+      "sanitized_json_sha256": "5acfde43ab03a6f2823e80be22f179d57e1a4c3bef3a26a96697c7a7dd902f5c",
+      "sanitized_json_bytes": 1864977,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240725_211000_q50/F2/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "b0931d493700bd69a1ead598f30072476046e5343d551ff0b62ec48d906bc9b6",
+      "source_bytes": 1982895,
+      "sanitized_json_sha256": "e677bb9fdda178406ab65e76d6fbb4256a2af80c643b71ec3804172a563e92c0",
+      "sanitized_json_bytes": 1614662,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240725_211000_q50/F2/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "04ac7db2732f49921f9f19a2dbc47394784144db14ec2dfc0957fc1738ffe9a2",
+      "source_bytes": 2384405,
+      "sanitized_json_sha256": "9f17d897ba583467fbfadaf36470d9fa3d24226dbbe2a6981c8935bb0f950adf",
+      "sanitized_json_bytes": 1875629,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240725_211000_q50/F2/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "60b47c1e248ec2fc9387e25c78065160d79f73fb3a1d13f95f66e0c7ba52a25e",
+      "source_bytes": 2473106,
+      "sanitized_json_sha256": "aaf7baf25deabf2c78ad7b1ebc77495706499a764d63a31a525370c0cd7c4a39",
+      "sanitized_json_bytes": 1958491,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240725_211000_q50/F4/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "761d48f7cbe2528bea741e7112b76035c745c13c4fca67845bb005a7ae41ac80",
+      "source_bytes": 2245395,
+      "sanitized_json_sha256": "5ecb3167bca68d6fdb5c3b6183080626e63540e437fda63269342280451c649d",
+      "sanitized_json_bytes": 1816960,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240725_211000_q50/F4/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "e64f2f1095ea8797ca1ce211c4bf6901752114d00167181a79ff6efccbb4d91e",
+      "source_bytes": 2665853,
+      "sanitized_json_sha256": "5826df23036f8ba55157148a51b9ee204b602d7c7950699d12c4e39a2f3bf4b1",
+      "sanitized_json_bytes": 2090486,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240725_211000_q50/F4/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "89995594415ef25eea76733cffdf6d39575e226efb81b3cbfb4ba756a910c4a3",
+      "source_bytes": 2757308,
+      "sanitized_json_sha256": "092e31d0d207ff9e0d10c32a728c8783c092b9b90db9b79faf83c47e40349dc2",
+      "sanitized_json_bytes": 2175904,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240817_225000_q50/F1/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "956d0b0f0635b6661e4a45399cabe5f21ee1aad8ca58305ab7ad0a7d8e6b2a53",
+      "source_bytes": 1817781,
+      "sanitized_json_sha256": "286bc392925321a2ca718c88aceba8cf72d220bc9381fbea803e81c70e75a740",
+      "sanitized_json_bytes": 1475760,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240817_225000_q50/F1/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "5f68822bfa7240833b74a5b2664f17fea094b6d356335f4cde3b2e9e05d12d27",
+      "source_bytes": 2183347,
+      "sanitized_json_sha256": "e94ba3a49df69733528030477bbb061d07691e9cf5549c5888e5bb6cbd347699",
+      "sanitized_json_bytes": 1713269,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240817_225000_q50/F1/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "2cc3eff83b6cb389d494f0cd7cf28144e9b3c03e2320d25d1181dc1a392ef934",
+      "source_bytes": 2263995,
+      "sanitized_json_sha256": "e1114c173dc8ac4c53ecc713609872188b6e809f8eaf9780a0615174547b975a",
+      "sanitized_json_bytes": 1788758,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240817_225000_q50/F2/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "af678c37bffdf28f5e64c502a4f93c8b7066549b70359dbd376e7a8193277c73",
+      "source_bytes": 2036400,
+      "sanitized_json_sha256": "5c8e9eb41179f64ade1e297dffff1ddd9cb856bf86ace98c8f7763e56a0e1565",
+      "sanitized_json_bytes": 1638800,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240817_225000_q50/F2/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "825da075273f12757f80e4275fdb8ae7b506092c3e7174e4f63b603fb54d7023",
+      "source_bytes": 2413210,
+      "sanitized_json_sha256": "d5d4471b316084a5ee52132e8ccc7a2d46f3d05e6e05a48ff12a21191a1286eb",
+      "sanitized_json_bytes": 1883750,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240817_225000_q50/F2/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "6d9c1d6d645dc75058e1c796dd8b1079a267b40a6624a29abc73392ca6daf624",
+      "source_bytes": 2495946,
+      "sanitized_json_sha256": "ede541f8e9b3503c5eab359261c7edbb4fd2a569dc0081f9fea3474dd423b940",
+      "sanitized_json_bytes": 1961117,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240817_225000_q50/F4/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "31afc9ee78c1c48dc63af64d90d4114b8d3698847d16476782b65f6b5d11a9aa",
+      "source_bytes": 2483678,
+      "sanitized_json_sha256": "7ef06454a5f2477a65ef5bb4d6e6e26a65b340b555219a24119beb8e96c285fb",
+      "sanitized_json_bytes": 1973159,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240817_225000_q50/F4/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "549d6ec18ef045a323213c06a26ffa2733ff2c8590045e72e4e718d00c0db1fe",
+      "source_bytes": 2883789,
+      "sanitized_json_sha256": "cabff3b9b38e345dde5766f4ac3458a611618633993ffd09163d0eee4574bdb4",
+      "sanitized_json_bytes": 2233447,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240817_225000_q50/F4/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "d606c7ef53ccab21ec1e792755ee989c73aa64317a63cc693a9b55504e62d757",
+      "source_bytes": 2970873,
+      "sanitized_json_sha256": "bff27d5d03000e7c92d270abe2990fedcb54aa688c0bd686a2c8c335c1c657b7",
+      "sanitized_json_bytes": 2314789,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240821_200000_q25/F1/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "afe58ea44959a2bded5cfaeb4d9e408329986bcc9ffea3f572bfb1c95cee63e8",
+      "source_bytes": 1697891,
+      "sanitized_json_sha256": "a299d80ba034c059a50b907511063be57cf7019afdfe23802229b713422ad4c5",
+      "sanitized_json_bytes": 1382603,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240821_200000_q25/F1/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "3b640bb3cd96209ad565372c214f5334fec8a06f11f29550a1ab6200461f07e3",
+      "source_bytes": 2046294,
+      "sanitized_json_sha256": "bcbe9b4ceda902b582274940c64c8d7fb2e9ec48905fb697caceee884502b64e",
+      "sanitized_json_bytes": 1608958,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240821_200000_q25/F1/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "4a03cee40583a07b926f14fe4e8045026ec8e9d60e0402715c21181306ec6857",
+      "source_bytes": 2123270,
+      "sanitized_json_sha256": "392a3fcb143cd555ea449aea3b9686153f2b2357a9e618f674f3fbece5183b4a",
+      "sanitized_json_bytes": 1681016,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240821_200000_q25/F2/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "0ef113081f0cac9db8d0d6f13d1f303f1b3654ba097e16b7160d0fedccdd4f50",
+      "source_bytes": 1872098,
+      "sanitized_json_sha256": "7bd8f43753acf6b135d942af721d16d39656e6b8f9125619cb3df99312a20532",
+      "sanitized_json_bytes": 1514199,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240821_200000_q25/F2/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "091d8cbd8880aa9d0da35c79d05c92cebd9440eb78285d0e37bd954409a04b7e",
+      "source_bytes": 2230918,
+      "sanitized_json_sha256": "987fb3a5b90f1f88c9653b58410a148dcbb83c7608348cc419d0c5d207f51f26",
+      "sanitized_json_bytes": 1747443,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240821_200000_q25/F2/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "7e7a4186f06fbdc6d0409ad9d437334d93744f44913b64e7e06a4bb5962d9d42",
+      "source_bytes": 2309650,
+      "sanitized_json_sha256": "a3559779f13cb82051c9879f550447994cbf80e33e87c0a06407332c6a57b92a",
+      "sanitized_json_bytes": 1821098,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240821_200000_q25/F4/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "eb2f159259d44d6f3ca7d646900bfcf3b7b8fa2027f65ce15838bdbfd7334c35",
+      "source_bytes": 2248714,
+      "sanitized_json_sha256": "dfc96ebde1d7085e21e5efe3df8ba1e7b04c1cb0bbb39c0e76d37ad184c35ff5",
+      "sanitized_json_bytes": 1800167,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240821_200000_q25/F4/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "047ade9cc24d8e92478815adddc234c14c38e3ff83fbed5f2a1ead666de95e1a",
+      "source_bytes": 2626605,
+      "sanitized_json_sha256": "edb18ebbcc5ebed53b4b5f2906c8b897152642d7156d2254a279e511cd0d7fe9",
+      "sanitized_json_bytes": 2045436,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240821_200000_q25/F4/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "2774c46f3d1b233e1cc582d15b87095b019dedaac75659a779559a2e55566921",
+      "source_bytes": 2709604,
+      "sanitized_json_sha256": "2153167fefbc6a04562090c45b6d5df9ca966ebd99fae688d098b27f1358d0d3",
+      "sanitized_json_bytes": 2122957,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240828_213000_q75/F1/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "dea7a20975166d73d12a43efd2e05dbe98401a3d5ccdac0852b3fea4c7dce67d",
+      "source_bytes": 1931253,
+      "sanitized_json_sha256": "19d2af10a9fd034eb5088d06a0eba84bac90f55025b736dd103254b07de75783",
+      "sanitized_json_bytes": 1569038,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240828_213000_q75/F1/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "bdb572c2e0e0be1ca9ded5825f4402607aaefd0e7783a05598c475c345594b61",
+      "source_bytes": 2322755,
+      "sanitized_json_sha256": "8bdd473a23d718f35b9a2f1c3ca53d039cf08f7fccbdaab522f3d3373956f312",
+      "sanitized_json_bytes": 1823367,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240828_213000_q75/F1/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "3b4dc7067487fcc745d743e2719b56e39b79ceefa973a654c89b523e4b0438f6",
+      "source_bytes": 2409184,
+      "sanitized_json_sha256": "631e18dda43a6f56cc1b7f80974e02f6ecdb49535df26d961f4bb017f291936f",
+      "sanitized_json_bytes": 1904283,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240828_213000_q75/F2/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "a84d43bccb3eb5d0fa2f5b1237ca7b3e61bf169fd1cc914f32312628ac61b257",
+      "source_bytes": 2135697,
+      "sanitized_json_sha256": "319227306482fb6bee0918dac67f7399af7aec92301f9e40a847ee5e6d534b9d",
+      "sanitized_json_bytes": 1720359,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240828_213000_q75/F2/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "dd4b6946891d8d3189764f63e47701603121b1eef387d7c2d311f1d88a1ec9a0",
+      "source_bytes": 2535641,
+      "sanitized_json_sha256": "f4923fd387010214788385f89be50f52e585a4c93e2086cde5060015234339fa",
+      "sanitized_json_bytes": 1980310,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240828_213000_q75/F2/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "5cf42e50db495367fb9683ef83863225926ecc5e22712705b99a398bc2e6352b",
+      "source_bytes": 2623350,
+      "sanitized_json_sha256": "896aef56bed9af84b659479b5494846a931649a341e3093eb460b295b1451f73",
+      "sanitized_json_bytes": 2062370,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240828_213000_q75/F4/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "575ea045f1fe4e8145f76e7a3d3c24c443a0a1b335d7e572278c5b6e4a9778a1",
+      "source_bytes": 2586417,
+      "sanitized_json_sha256": "b26aac704869056f2f2298c8ebd116502598fe533eea62bc0a7b8d83b9662dfe",
+      "sanitized_json_bytes": 2057047,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240828_213000_q75/F4/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "9681c9ffbfeca163815bb29c524b903a6bb27da5f4f9e7911a53bc9f303e0bc1",
+      "source_bytes": 3007672,
+      "sanitized_json_sha256": "18e19b4e403ad413496320cc93a05e2eef79fd06c91e3c79ce53e5b79485a5aa",
+      "sanitized_json_bytes": 2331054,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240828_213000_q75/F4/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "0a137bfaf3fac2b9db663e5540b2a2d1fcc187f5d4555435c9cf6157c4ccda95",
+      "source_bytes": 3099404,
+      "sanitized_json_sha256": "e95b93243a64224f5bab6ffc7ab652e6348a1031d576bb9b26f6dc615ed79e01",
+      "sanitized_json_bytes": 2416747,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240904_200000_q75/F1/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "883ea78a2835dda2435c17b1b750c68ccc306b4f794ae536d070bfd3a1eaf84f",
+      "source_bytes": 1985016,
+      "sanitized_json_sha256": "8d526cdace89d07fe05d722388c7c1390275c3b3ac50043a34af44b4827e3754",
+      "sanitized_json_bytes": 1612998,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240904_200000_q75/F1/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "f893b619f97c4dfbe841846d31354c9f7216abb7ffce7352f8e09a4cfd29f41d",
+      "source_bytes": 2387854,
+      "sanitized_json_sha256": "e0f4b1a6a2f38bc3e9d6e51b97a449d91d7dc0369e381443b9afeae7b2a7c4a1",
+      "sanitized_json_bytes": 1874696,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240904_200000_q75/F1/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "d704aa5af2511e872792efd8d4ce4303c4da3610007acb8463d8cc94cd9b0363",
+      "source_bytes": 2476760,
+      "sanitized_json_sha256": "33ffff6ec36aa334035c884a0ac84cb4a260e052873cc6a01dbc68b33dffd3aa",
+      "sanitized_json_bytes": 1957925,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240904_200000_q75/F2/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "cfe33c3d7e6e0a6afb076f768b626e484a4285c5b97a1195c8f877aa3059c45f",
+      "source_bytes": 2204320,
+      "sanitized_json_sha256": "e2e544e313efd3247c7c292ca26a8cd73506bd406ce16b7f0d555b322130724a",
+      "sanitized_json_bytes": 1776350,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240904_200000_q75/F2/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "2299f8c46a85c0a6258be042829d1ef96e93405a1b3b7fd8eaa6a10bd92b1b8d",
+      "source_bytes": 2616839,
+      "sanitized_json_sha256": "efffe564f584f4175441aed2b980a6c2a182cade5e8d59a95b1e13d2c6d58fc9",
+      "sanitized_json_bytes": 2044435,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240904_200000_q75/F2/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "2d3470bd7f6e11f819a9f5e0145e3d7de000980b3d74bab0795dff77eb8a649d",
+      "source_bytes": 2707550,
+      "sanitized_json_sha256": "8ec4a7a865bbb00352e3a4cc3493458b4e71c086ffdbcc04b1e6a3d6ca75f35d",
+      "sanitized_json_bytes": 2129300,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240904_200000_q75/F4/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "6e2be7194622275ff4403f751a50b35cf5f24e38517e35428430cd8c3db0f3b7",
+      "source_bytes": 2643447,
+      "sanitized_json_sha256": "ec4af1ad11ac820fc366bcb648e9f1f43de781d15cf6250a21644764471ed469",
+      "sanitized_json_bytes": 2103627,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240904_200000_q75/F4/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "35ba8d247d78cf9df3a4c9c385f1796bc38f42f9edea8bae0bffccb26a4818d1",
+      "source_bytes": 3076440,
+      "sanitized_json_sha256": "ae7a1b7ea61a58af9ef02194b8c5af8135e3dbfbe262bf8f79be48f10bc9ea5c",
+      "sanitized_json_bytes": 2385247,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240904_200000_q75/F4/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "ce3b77c6c8253bc66446eed9a6b86123f3867b9228bd0c608f3a6aa1f9214c41",
+      "source_bytes": 3170707,
+      "sanitized_json_sha256": "bde690c9c49c473b75bd3feaeec9647991581703ffd2543f324f80a1a4ae1abc",
+      "sanitized_json_bytes": 2473320,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240913_221500_q50/F1/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "4614c8c1a0a35d9d22574acacf15cec368a6bcd71ebff084c7d7a596b0e91888",
+      "source_bytes": 1851797,
+      "sanitized_json_sha256": "5005a95b1c6757e941483dc1b4a071fffd3224f10273799cb2fbfabb551f4cec",
+      "sanitized_json_bytes": 1503685,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240913_221500_q50/F1/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "dc3b8f76ea74eec299cdd93a50efd2c68c40f0bfff4d8c2ad07363f6ae860c5a",
+      "source_bytes": 2220614,
+      "sanitized_json_sha256": "61f5939fa30d135b7dfc40f32a7611d32953a267054b65f6f45f1e1092ee92c2",
+      "sanitized_json_bytes": 1742700,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240913_221500_q50/F1/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "43bc4fc47549e20fce4cc0b5477dda35d616a714bf06f40897713ec2700ac4d0",
+      "source_bytes": 2302806,
+      "sanitized_json_sha256": "524b00543493ed35257fa20df0006ebb5bc6032eeb83af85e1edc54f5e273abc",
+      "sanitized_json_bytes": 1819634,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240913_221500_q50/F2/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "22bb7cd2ed26c7bf899b7ef2427a1fe90faca348e00a1d2c0942e32863dafbc5",
+      "source_bytes": 2070174,
+      "sanitized_json_sha256": "ca6032de82e91c733b767d7c5b26461836b20547503eb44e20b5b9172c6c75e4",
+      "sanitized_json_bytes": 1666434,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240913_221500_q50/F2/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "d309c8e101e9d92f0bfc9d0a820ee48db87144b15276f234207812d2b01b6c57",
+      "source_bytes": 2458284,
+      "sanitized_json_sha256": "97b03030a19878c7398349dbed605f700db7d6093ed36b7e394837217b37891a",
+      "sanitized_json_bytes": 1919288,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240913_221500_q50/F2/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "1989e4f7b4b107216e8bce11b59c38bfbe2c2d1546c5feb1aa87dbb31d49fc6a",
+      "source_bytes": 2538473,
+      "sanitized_json_sha256": "cdbdf41840964b7ff32ebc183198612c1bce445fd601e25730b6df66797013e9",
+      "sanitized_json_bytes": 1994898,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240913_221500_q50/F4/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "09a6d1b78827816589fdc6e7a349ebf5360891aacf00a37208b036c9ae550007",
+      "source_bytes": 2522000,
+      "sanitized_json_sha256": "f841c5a6049902c7d1bc3fa0690b16006c1c68ac4bdb49b83dbe81a776b9ede6",
+      "sanitized_json_bytes": 2004156,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240913_221500_q50/F4/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "df33a2702df084450da85280fe4754ed674a44e4561661da5c60d7785a4d7c02",
+      "source_bytes": 2937228,
+      "sanitized_json_sha256": "439009f5e78b7fd03222d3958c98973c80586b9d1230b0d00b221515019628e3",
+      "sanitized_json_bytes": 2275448,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240913_221500_q50/F4/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "96499f96fc6bbf70433652c290e78da9df71dea6f6f3ea74a71df6a19bddffb4",
+      "source_bytes": 3017801,
+      "sanitized_json_sha256": "bc85a308cf3dc49facb6c40a50dc49046ccb763db95dc416ca03ebe7f12e99b8",
+      "sanitized_json_bytes": 2351828,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240926_214000_q25/F1/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "a758df98ca6982016482024ce15eb01040c4cab2e4bd2e4399f978392bdd197c",
+      "source_bytes": 1766884,
+      "sanitized_json_sha256": "13fd773ecc18b9e7e31600a25f9ddbdec132dfb944bcd1d6c5c10881d25a7153",
+      "sanitized_json_bytes": 1443925,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240926_214000_q25/F1/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "518df5c54cec4ee40a56f5f46d1d342bcb03cde22c915f208510cf1727710f24",
+      "source_bytes": 2140642,
+      "sanitized_json_sha256": "eb0862acd6fd7230740ed335a959a02c2a0cb509c7cfb6fd5ed8d9f831124b98",
+      "sanitized_json_bytes": 1686800,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240926_214000_q25/F1/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "f8b6c8a4c22bba531af4127f6c74438154081ef271443360f0fce52c8357552a",
+      "source_bytes": 2222925,
+      "sanitized_json_sha256": "32fd998072b31b1e45dbd284d3025975476ba68c25898af50ab5e0484e9c777d",
+      "sanitized_json_bytes": 1763805,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240926_214000_q25/F2/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "582cd5272f7b47ce3835e7a9ab56cf781ebc2e5913f4660c95542e517f725e2c",
+      "source_bytes": 1915996,
+      "sanitized_json_sha256": "c7b3d584800ba3304718371041d88d442544be7d6366cdf29a80510ec442a372",
+      "sanitized_json_bytes": 1559862,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240926_214000_q25/F2/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "e3fc8f4d41978084d40f299b11819caba08741da73c6f29e90074201dfdef66e",
+      "source_bytes": 2302643,
+      "sanitized_json_sha256": "42f4d5c527ddf523abf1693c743a3f116a1307692bf4a866b0803ef1aed1229f",
+      "sanitized_json_bytes": 1811191,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240926_214000_q25/F2/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "25c6793db844cc623fd8c25afb323f1f6449441553ef73461e336c7adbf5ca27",
+      "source_bytes": 2388176,
+      "sanitized_json_sha256": "7a310aabb1342f3c80f05ba379c8d0eda9350f937630582b7fb366b7ff6345cf",
+      "sanitized_json_bytes": 1891074,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240926_214000_q25/F4/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "7edf29c14b4ab5a1246775ebc9e17da113a398c0bada36e3715c434d0211554b",
+      "source_bytes": 2176972,
+      "sanitized_json_sha256": "44d6314c6eb18ef6b795c3a5c8912fece76939a3d87a430fbec5dde31f62f0f0",
+      "sanitized_json_bytes": 1761134,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240926_214000_q25/F4/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "e9840bef6b704eeb65fa3f52fefc4888f473e931c4a0f457cf54b1514042db8f",
+      "source_bytes": 2580658,
+      "sanitized_json_sha256": "a91cacf6df581617162f9090672f0e7d439c0cb8df2ca362e2bdb3ea6ce8f767",
+      "sanitized_json_bytes": 2023698,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240926_214000_q25/F4/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "4f2a9b14cc9ecd182f7e380de7d686c29a6ebf7b5b3c929ae0cc4e3365f07e1c",
+      "source_bytes": 2668726,
+      "sanitized_json_sha256": "d85cac8728ffeddc1d27e412161438b24a54daeda2a5e6a5a981daaae5d48773",
+      "sanitized_json_bytes": 2105989,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20241021_200000_q25/F1/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "ee4eb58d64770da34a21bfc17a777bfd718d6f0857be69e15a67b170d7b81f8c",
+      "source_bytes": 1977023,
+      "sanitized_json_sha256": "b188b2b98ce62e268d4b5d238b8d403197d8b2f66fc1b353e9b0b977f27affda",
+      "sanitized_json_bytes": 1596983,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20241021_200000_q25/F1/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "3617c390fe41f9f758894a777641aed12ef287f4a3e41144815f55589c6e760d",
+      "source_bytes": 2359895,
+      "sanitized_json_sha256": "df9d52287dfb659bad5b46afa74e0909a10626ae84b0078d5b1bd6eda254b99a",
+      "sanitized_json_bytes": 1845707,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20241021_200000_q25/F1/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "e1d3415e378bb26cbfd1ab15494fa0f745f97e77a7842eacfd9c84dc4a2cef15",
+      "source_bytes": 2444437,
+      "sanitized_json_sha256": "31a1b99ee1856c1f055f017bb23f94ad58ee6b0707bd611bc78970e9f1bda3e3",
+      "sanitized_json_bytes": 1924857,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20241021_200000_q25/F2/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "25c328d5868d22b2207cf35a5a634c8c40bbad096c61919c1dad969f3d97081b",
+      "source_bytes": 2275853,
+      "sanitized_json_sha256": "a657ab6464d72f1d1d35c517a818b994b221936de73144c200706bda80353a39",
+      "sanitized_json_bytes": 1816150,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20241021_200000_q25/F2/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "b8c5015a1eb41ca3d1e47c3aaa5de4e5168fc6287199a37b7c757bde84a60abf",
+      "source_bytes": 2668405,
+      "sanitized_json_sha256": "d69e52b7fa25ada8e2d46871ee3ac09f9d792c030ef69df2f60aeb8d70c6aa9f",
+      "sanitized_json_bytes": 2071260,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20241021_200000_q25/F2/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "0f42e6513000f868aeda4eb2ec59fffb22249569e56601a7fc6de902ef694013",
+      "source_bytes": 2754661,
+      "sanitized_json_sha256": "86e7e339d0fb199f930a90b941faa07dff5f1b287075ab2fbadafd20f647f273",
+      "sanitized_json_bytes": 2151975,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20241021_200000_q25/F4/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "016d6ae0e8a3e5ab19c5b47146fb71317c0064ef0b6130eb5012d761124e95a0",
+      "source_bytes": 2883974,
+      "sanitized_json_sha256": "96503a6e5fdf67e0166b9033000d89457d9c9aa997f598fc98f5e04e250eb31b",
+      "sanitized_json_bytes": 2263197,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20241021_200000_q25/F4/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "d815794b958bdc568724331b7e91ad301b7f58684fac33b55548debad73ad81e",
+      "source_bytes": 3298313,
+      "sanitized_json_sha256": "0bca3acda44c16737114b5cf97110e05e5ab0ff479f9b06bfcf51b0c592eecd6",
+      "sanitized_json_bytes": 2532681,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20241021_200000_q25/F4/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "04e47f9514cd4eef711c11c791032dd5abbc6bc43d547abce6f9cfbc1e15e80e",
+      "source_bytes": 3389364,
+      "sanitized_json_sha256": "25881899a265d7b1e876c6ee26d6cfa4ab972145d26d58935ac301439d89da57",
+      "sanitized_json_bytes": 2617625,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20241030_210000_q50/F1/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "45cb2f92d276aa751121cb71ca44e83db3be5d84dfe551400011670b42e50b1a",
+      "source_bytes": 2057974,
+      "sanitized_json_sha256": "217780daaaec1a2c1998dafb134a7ffbefa08a3919c65ffab13aa0b9232d033b",
+      "sanitized_json_bytes": 1663251,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20241030_210000_q50/F1/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "c6c219f56dbda48393574f6b7df0e5aad1166bce0cd30dd67340d01d1dad3615",
+      "source_bytes": 2464850,
+      "sanitized_json_sha256": "9997ebab77f2d59e5f9e72ba3f5fc5825ee072084f6571dcc9b1d11de4292740",
+      "sanitized_json_bytes": 1928294,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20241030_210000_q50/F1/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "1c9a2428cc260d3f0d5dd87c31a07fe325d9ff17d61341f247b5f1c8dc8734ab",
+      "source_bytes": 2553477,
+      "sanitized_json_sha256": "81e4462ff5c5fe2b3f5f795e91d7c5a200f74ad7f6da5c6f835108cfb334af6d",
+      "sanitized_json_bytes": 2011246,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20241030_210000_q50/F2/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "ca2d718d5223f6af2256c3f6361b5e798db69f32834f18dd4eb65fe31e39c20f",
+      "source_bytes": 2368081,
+      "sanitized_json_sha256": "267c05d3ba7ebd19e6c87b6130c2f332b64a765ce20cf61123569b1fc7d7583e",
+      "sanitized_json_bytes": 1891444,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20241030_210000_q50/F2/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "bfb9fd88d5ea613f19c752c4ef8f4bc6e41b31f32faaffeaef3f1e771f7ff532",
+      "source_bytes": 2772330,
+      "sanitized_json_sha256": "79377ca1015d4b45beb7531bf79fd6cad7c9147fc970e1e32bc85a5452dc6d51",
+      "sanitized_json_bytes": 2152961,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20241030_210000_q50/F2/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "4696469a4e0a058d1d763c4bf74ebc35f2421a6dcd4e4f49d50f7b000ad5f7b1",
+      "source_bytes": 2862580,
+      "sanitized_json_sha256": "7b47832959c60b9922db569c042c5de124ff48b97af303db9007ef826a68dfd1",
+      "sanitized_json_bytes": 2237407,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20241202_210000_q50/F1/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "a36ba6034ee25ef28034355badd8d838007d62535604bcf71f14a44a63390605",
+      "source_bytes": 1902649,
+      "sanitized_json_sha256": "14e0eb6efd8c60f17873e71c8463d4c5fd246cd87d936a2296a04cf31692d5c2",
+      "sanitized_json_bytes": 1555341,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20241202_210000_q50/F1/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "20b754f5af2950c81c3eaa80a657d83919fc8fd29c24f679f121c557b9bb782e",
+      "source_bytes": 2307774,
+      "sanitized_json_sha256": "c9fc9061859c8f44e7d60d4cc31d96a9f476be3a794f0405f85c812b5c12ad05",
+      "sanitized_json_bytes": 1818583,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20241202_210000_q50/F1/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "b9e2867374f3806d7a0826d1b6925e0f9e9510dc66562aee2f959ae1e76a6d94",
+      "source_bytes": 2396942,
+      "sanitized_json_sha256": "77af4819632f1c893b340c77549b5d8175c35022ae3b27e021b07979926a355b",
+      "sanitized_json_bytes": 1902033,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20241202_210000_q50/F2/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "6924bd3d0fdb65d8eb08342946fc62692891240ddb16599cdae949d5347f6d32",
+      "source_bytes": 2039139,
+      "sanitized_json_sha256": "ed23b09ef792800d8361811872a6cd4b8fef60844f4d97add9c1cc076fd67d46",
+      "sanitized_json_bytes": 1660644,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20241202_210000_q50/F2/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "efd7bd9b977a824d8d43db3eb6e3f660195eb65980ba712cf474f8bc0098162e",
+      "source_bytes": 2453945,
+      "sanitized_json_sha256": "19cfb51317bffecbb533751e8014a53093b875eaacec4c54a9da7371d0069dcb",
+      "sanitized_json_bytes": 1930273,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20241202_210000_q50/F2/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "0eacfe35671c5965a53bd670d00049e83cdcf0fcc120f0f8ceae2690491d4fef",
+      "source_bytes": 2544909,
+      "sanitized_json_sha256": "c6573a5b0bfe499f08fb08214ed3b51ccde7c212a6f573e9599b523fcec881a6",
+      "sanitized_json_bytes": 2015350,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20241202_210000_q50/F4/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "a17b5ba5acd80db80493d1394faabd8ec7c74d791afad659dfbd5b67b6b6ff35",
+      "source_bytes": 2306188,
+      "sanitized_json_sha256": "c7b8cf77fa3e6ec17fd3c5bbad475737a149bb4aef1fa33a96d172cce48f305a",
+      "sanitized_json_bytes": 1866838,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20241202_210000_q50/F4/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "b16edd9e498b5f1940e45eb6e75a328dc0ae7741066b03d81e4cc734a8d8c3eb",
+      "source_bytes": 2740834,
+      "sanitized_json_sha256": "30806d7efab40e6c8b5660a8a12faa05b746873cfd85ca88dd85c35982dcdd78",
+      "sanitized_json_bytes": 2149561,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20241202_210000_q50/F4/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "cd94c241e395cc3c4b13392e206c5cd1017317bb0308d11942badb08707f4451",
+      "source_bytes": 2835408,
+      "sanitized_json_sha256": "69b02c68c21e8649daa77ef2edb8107017eaeaaee8e5480623dae29c20ea9ed0",
+      "sanitized_json_bytes": 2237919,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20241214_224500_q75/F1/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "5a0a9c122b5d2fd2b2016cfa0ab75c7507440b7a8017d0781d45033f5380340f",
+      "source_bytes": 2155254,
+      "sanitized_json_sha256": "b9079997cdedd16d9b2a457b92888325ec0b7a468bd6c31ff5288b84d8be40ae",
+      "sanitized_json_bytes": 1743287,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20241214_224500_q75/F1/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "f56205e2fd9ebbe63d824408288d9703e23f3fef176b6bd2edc8b71f743db0c1",
+      "source_bytes": 2573124,
+      "sanitized_json_sha256": "be435d3f57598ce8fd3a90d8b55e05805fe54cf61f8c5915113a440aaefd82b9",
+      "sanitized_json_bytes": 2014106,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20241214_224500_q75/F1/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "1d4d22f64774a96b54215d85ff4d3e0801a931a13fa89b2b77b55658061436bf",
+      "source_bytes": 2666267,
+      "sanitized_json_sha256": "aab18af8cdd6ce414f39f69c1f48db5d5ec6cad2016a39436c4af3bf3a2920a1",
+      "sanitized_json_bytes": 2101317,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20241214_224500_q75/F2/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "f57d668911f68ff0076dbafebc2258f8215dec7d89ba69e0fdd86e4efd8eacf8",
+      "source_bytes": 2464596,
+      "sanitized_json_sha256": "ebbf8b7f129afb9d27a394b5301b4be84fd58a0ed3b315ea8cb926481176e4d1",
+      "sanitized_json_bytes": 1971169,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20241214_224500_q75/F2/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "0273bbe593eaf254bc3bee4729152d0812cbeab748353ad3071ac62308514ff2",
+      "source_bytes": 2898358,
+      "sanitized_json_sha256": "ae8f8cbfd78d7433b1805b733c161a3aaabe1964ddd131c15abd22add9fcac33",
+      "sanitized_json_bytes": 2252990,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20241214_224500_q75/F2/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "f8adb3317f606f3f11222a2f2b7127219ae197e96810bf29bb82a0d56a8ec02f",
+      "source_bytes": 2994374,
+      "sanitized_json_sha256": "72fee2c1e89150dccf1c4d5d26248c674bcd4a7eccfe49c611ea32e27639ad4a",
+      "sanitized_json_bytes": 2342733,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20241214_224500_q75/F4/D0_greedy_seed_0.json",
+      "method": "D0_greedy",
+      "source_sha256": "23a6b9a4c37a98bfd00038e5bbc50addab18a8e330575793d476906b753c40ee",
+      "source_bytes": 3032936,
+      "sanitized_json_sha256": "95d700d72f42d7757367b229d66e382ed8e36ea803b8795e5c57f93e04733ab1",
+      "sanitized_json_bytes": 2385488,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20241214_224500_q75/F4/D1_optimizer_seed_0.json",
+      "method": "D1_optimizer",
+      "source_sha256": "1c19fb6d2cbc78e937916575d896011906dc0c8f12004ba5f3ea8a761d17f972",
+      "source_bytes": 3479073,
+      "sanitized_json_sha256": "9de626231d0377433635f0de8056496c79487f47480770a466d1b67f000bce14",
+      "sanitized_json_bytes": 2675530,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20241214_224500_q75/F4/D2_agent_optimizer_seed_0.json",
+      "method": "D2_agent_optimizer",
+      "source_sha256": "f2469ab411ebff8a5642c9ee4d57f5dea61bccdeb1f89aa4e73c7a18e1ec4332",
+      "source_bytes": 3576555,
+      "sanitized_json_sha256": "3da6a85a8f3daaa3a98be4db1c62b1f63c9888076e2652ad30d93cc2feac87dc",
+      "sanitized_json_bytes": 2766671,
+      "removed_fields": {}
+    }
+  ]
+}

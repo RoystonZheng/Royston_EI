@@ -10,6 +10,7 @@ import hashlib
 import importlib.util
 import json
 import math
+from collections import deque
 import shutil
 import sys
 from datetime import datetime, timezone
@@ -147,6 +148,89 @@ def endpoint_projection(shared_graph: dict[str, Any], point_ids: list[str]) -> d
     }
 
 
+def augment_shared_graph_for_frozen_endpoints(runner, runtime, context, raw_graph, endpoint_ids):
+    """Extend the immutable hotspot reference with exact frozen order endpoints."""
+    graph = copy.deepcopy(raw_graph)
+    points = graph["candidate_points"]
+    point_index = {str(row["point_id"]): index for index, row in enumerate(points)}
+    missing = [str(point_id) for point_id in endpoint_ids if str(point_id) not in point_index]
+    if not missing:
+        return graph, {"added_point_ids": [], "new_ordered_pair_count": 0}
+
+    r1 = runtime[0]
+    base_graph_sha = json_hash(raw_graph)
+    source_matches = {
+        str(row["point_id"]): {
+            "edge_id": str(row["edge_id"]),
+            "edge_pos_m": float(row["edge_pos_m"]),
+            "snap_distance_m": float(row["snap_distance_m"]),
+            "candidate_rank": int(row.get("candidate_rank", 1)),
+        }
+        for row in points
+    }
+    for point_id in missing:
+        match = context.match(point_id)
+        points.append({
+            "point_id": point_id,
+            "edge_id": str(match["edge_id"]),
+            "edge_pos_m": round(float(match["edge_pos_m"]), 3),
+            "snap_distance_m": round(float(match["snap_distance_m"]), 3),
+            "candidate_rank": int(match.get("candidate_rank", 1)),
+        })
+    point_index = {str(row["point_id"]): index for index, row in enumerate(points)}
+    existing_pairs = {(int(row["from"]), int(row["to"])) for row in graph["ordered_pairs"]}
+    link_index = {str(edge_id): index for index, edge_id in enumerate(graph["links"])}
+    new_pair_count = 0
+    for source_id in missing:
+        source_index = point_index[source_id]
+        for target_index, target in enumerate(points):
+            if source_index == target_index:
+                continue
+            target_id = str(target["point_id"])
+            for from_index, to_index, from_id, to_id in (
+                (source_index, target_index, source_id, target_id),
+                (target_index, source_index, target_id, source_id),
+            ):
+                key = (from_index, to_index)
+                if key in existing_pairs:
+                    continue
+                from_match = source_matches.get(from_id) or context.match(from_id)
+                to_match = source_matches.get(to_id) or context.match(to_id)
+                route = runner.static_free_flow_dijkstra(r1, context, from_match, to_match)
+                if route.get("status") != "ok":
+                    graph["ordered_pairs"].append({
+                        "from": from_index, "to": to_index, "status": "unreachable",
+                        "reason": route.get("status", "unknown"),
+                    })
+                else:
+                    path_indices = []
+                    for edge_id in route["path"]:
+                        edge_id = str(edge_id)
+                        if edge_id not in link_index:
+                            link_index[edge_id] = len(graph["links"])
+                            graph["links"].append(edge_id)
+                        path_indices.append(link_index[edge_id])
+                    graph["ordered_pairs"].append({
+                        "from": from_index, "to": to_index, "status": "ok",
+                        "links": path_indices,
+                        "distance_m": round(float(route["distance_m"]), 3),
+                        "free_flow_time_s": round(float(route["predicted_travel_time_s"]), 3),
+                    })
+                existing_pairs.add(key)
+                new_pair_count += 1
+    graph["ordered_pairs"].sort(key=lambda row: (int(row["from"]), int(row["to"])))
+    graph["pair_count"] = len(graph["ordered_pairs"])
+    graph["pair_count_expected"] = len(points) * (len(points) - 1)
+    graph["reachable_pair_count"] = sum(row["status"] == "ok" for row in graph["ordered_pairs"])
+    graph["unreachable_pair_count"] = graph["pair_count"] - graph["reachable_pair_count"]
+    graph["task_endpoint_augmentation"] = {
+        "base_shared_candidate_graph_content_sha256": base_graph_sha,
+        "added_frozen_endpoint_ids": missing,
+        "method": "exact_frozen_endpoint_bindings_plus_same_frozen_network_directed_Dijkstra",
+    }
+    return graph, {"added_point_ids": missing, "new_ordered_pair_count": new_pair_count}
+
+
 def compact_request(runner, runtime, legs, task, prompt, shared_graph, endpoint_ids):
     projected = endpoint_projection(shared_graph, endpoint_ids)
     task = copy.deepcopy(task)
@@ -167,8 +251,89 @@ def compact_request(runner, runtime, legs, task, prompt, shared_graph, endpoint_
         "Each reachable entry is [path,distance_m,free_flow_time_s], where path is dot-separated base36 indices into h.l; h.u lists unreachable projected pairs."
     )
     instructions = instructions[:start] + replacement + instructions[end:]
+    endpoint_contract = []
+    for role, key in (("vehicle_to_pickup", "vp"), ("pickup_to_dropoff", "pd")):
+        leg = legs[role]
+        endpoint_contract.append(
+            f"{role}: fixed start Link alias {leg.edge_alias[leg.start['edge_id']]}; "
+            f"fixed end Link alias {leg.edge_alias[leg.end['edge_id']]}."
+        )
+    instructions += (
+        "\nEndpoint alias rule: the evaluator inserts both endpoint Links. "
+        "intermediate_edge_ids must contain only the Links strictly between them; "
+        "never include either endpoint alias. The route must follow listed directed successors "
+        "continuously and must not repeat a Link.\n" + "\n".join(endpoint_contract)
+    )
     prompt = instructions + "\n" + json.dumps(task, ensure_ascii=False, separators=(",", ":"))
     return task, prompt
+
+
+def minimum_intermediate_link_count(leg: Any) -> int:
+    """Return the minimum number of intermediate Links on any directed path."""
+    start = leg.start["edge_id"]
+    end = leg.end["edge_id"]
+    if start == end:
+        return 0
+    queue = deque([(start, 0)])
+    seen = {start}
+    while queue:
+        node, transitions = queue.popleft()
+        for target in leg.crop.graph.successors(node):
+            if target == end:
+                return max(0, transitions)
+            if target not in seen:
+                seen.add(target)
+                queue.append((target, transitions + 1))
+    raise RuntimeError("endpoint_route_has_no_directed_path")
+
+
+def constrain_route_schema_for_endpoints(schema: dict[str, Any], task: dict[str, Any], legs: dict[str, Any]) -> dict[str, Any]:
+    """Require a complete directed path and describe its fixed endpoint aliases."""
+    role_to_task_key = {
+        "vehicle_to_pickup": "vp",
+        "pickup_to_dropoff": "pd",
+    }
+    branches = schema["properties"]["routes"]["items"].get("anyOf", [])
+    seen_roles = set()
+    for branch in branches:
+        role_values = branch.get("properties", {}).get("leg_role", {}).get("enum", [])
+        if len(role_values) != 1 or role_values[0] not in role_to_task_key:
+            raise RuntimeError("route_schema_leg_role_contract_mismatch")
+        role = role_values[0]
+        task_leg = task["g"][role_to_task_key[role]]
+        leg = legs[role]
+        prefix = "v" if role == "vehicle_to_pickup" else "p"
+        task_endpoint_aliases = {
+            prefix + str(index).upper().rjust(4, "0")
+            for index in (task_leg["a"][0], task_leg["b"][0])
+        }
+        middle = branch["properties"]["intermediate_edge_ids"]
+        minimum = minimum_intermediate_link_count(leg)
+        if minimum > middle.get("maxItems", 510):
+            raise RuntimeError("minimum_route_exceeds_schema_cap")
+        middle["minItems"] = minimum
+        # Endpoint-anchored requests have the fixed start/end Link inserted by
+        # the evaluator. Exclude those aliases from the model's intermediate
+        # list at schema level. Keep the compact alias regex: the provider
+        # rejects regex lookarounds, and a full per-edge enum bloats output.
+        endpoint_aliases = {
+            leg.edge_alias[leg.start["edge_id"]],
+            leg.edge_alias[leg.end["edge_id"]],
+        }
+        if task_endpoint_aliases != endpoint_aliases:
+            raise RuntimeError("route_schema_endpoint_alias_mapping_mismatch")
+        # Bound the answer to a plausible path length. This keeps the model
+        # from returning the entire local alias namespace as a route.
+        middle["maxItems"] = min(middle.get("maxItems", 510), minimum + 32)
+        middle["items"]["description"] = (
+            "List only Links strictly between the fixed start and end Links. "
+            "Never include endpoint aliases " + ", ".join(sorted(endpoint_aliases)) + ". "
+            "The evaluator inserts both endpoints automatically."
+        )
+        seen_roles.add(role)
+    if seen_roles != set(role_to_task_key):
+        raise RuntimeError("route_schema_missing_leg_role")
+    return schema
 
 
 def provenance(runner, runtime, source_preflight: dict[str, Any], source_manifest: dict[str, Any]) -> dict[str, Any]:
@@ -191,6 +356,7 @@ def provenance(runner, runtime, source_preflight: dict[str, Any], source_manifes
         "energy_model_module_sha256": sha256_file(ENERGY_MODULE_PATH),
         "decision_module_sha256": sha256_file(DECISION_MODULE_PATH),
         "costs_module_sha256": sha256_file(COSTS_MODULE_PATH),
+        "pilot_runner_sha256": sha256_file(Path(__file__)),
     }
 
 
@@ -225,7 +391,6 @@ def build_static_preflight(run_dir: Path) -> dict[str, Any]:
     source_preflight, source_manifest, frozen = prepare_base(run_dir, runner, runtime)
     r1, NetworkContext, RouteProblemBuilder, _score_path, validate, _verify, estimate, codex_preflight, _call_once, build_schema, serialize_schema, _output_reserve = runtime
     raw_graph = json.loads(SHARED_GRAPH_PATH.read_text(encoding="utf-8"))
-    shared_graph = runner.compact_candidate_graph_for_prompt(raw_graph)
     context = NetworkContext.load(r1, SEED)
     orders, _route_lookup = runner.orders_and_route_pairs(context)
     order = next(row for row in orders if row["order_id"] == ORDER_ID)
@@ -233,6 +398,10 @@ def build_static_preflight(run_dir: Path) -> dict[str, Any]:
     initial = {row["vehicle_id"]: row["initial_position"]["point_id"] for row in context.orders_file["vehicles"]}
     from_point_id = initial[vehicle_id]
     endpoint_ids = [from_point_id, order["pickup"]["point_id"], order["dropoff"]["point_id"]]
+    task_raw_graph, graph_augmentation = augment_shared_graph_for_frozen_endpoints(
+        runner, runtime, context, raw_graph, endpoint_ids,
+    )
+    shared_graph = runner.compact_candidate_graph_for_prompt(task_raw_graph)
     endpoints = {
         "vehicle_to_pickup": (from_point_id, order["pickup"]["point_id"]),
         "pickup_to_dropoff": (order["pickup"]["point_id"], order["dropoff"]["point_id"]),
@@ -248,7 +417,7 @@ def build_static_preflight(run_dir: Path) -> dict[str, Any]:
     task, prompt = compact_request(runner, runtime, legs, task, prompt, shared_graph, endpoint_ids)
     base_schema_path = runner.PACKAGE / runner.SCHEMA_RELATIVE
     base_schema = json.loads(base_schema_path.read_text(encoding="utf-8"))
-    schema = build_schema(base_schema, legs)
+    schema = constrain_route_schema_for_endpoints(build_schema(base_schema, legs), task, legs)
     token_estimate = int(estimate(prompt, schema))
     fallback_response = runner.candidate_fallback_response(shared_graph, legs, endpoints)
     if fallback_response is None:
@@ -266,9 +435,12 @@ def build_static_preflight(run_dir: Path) -> dict[str, Any]:
         "source_provenance": provenance(runner, runtime, source_preflight, source_manifest),
         "shared_graph_scope": {
             "full_graph_available_in_run_artifacts": True,
-            "candidate_count": source_preflight["shared_candidate_link_graph"]["candidate_count"],
-            "ordered_pair_count": source_preflight["shared_candidate_link_graph"]["ordered_pair_count"],
+            "source_shared_candidate_count": source_preflight["shared_candidate_link_graph"]["candidate_count"],
+            "source_shared_ordered_pair_count": source_preflight["shared_candidate_link_graph"]["ordered_pair_count"],
             "full_graph_sha256": source_preflight["shared_candidate_link_graph"]["sha256"],
+            "task_reference_candidate_count": len(task_raw_graph["candidate_points"]),
+            "task_reference_ordered_pair_count": task_raw_graph["pair_count"],
+            "task_endpoint_augmentation": graph_augmentation,
             "prompt_projection_endpoints": endpoint_ids,
             "projection_route_pair_count": 6,
             "fallback_validation_status": "passed",
@@ -292,6 +464,7 @@ def build_static_preflight(run_dir: Path) -> dict[str, Any]:
             "schema_bytes": len(serialize_schema(schema)),
             "estimator_is_not_actual_usage": True,
         },
+        "route_schema_policy": "intermediate_edge_ids must contain at least the minimum directed-hop path length minus fixed endpoint Links; endpoint aliases are named in each field description and forbidden by the validator",
         "codex_cli_preflight": cli_info,
         "road_turn_information": {
             "all_links_in_each_leg_crop_retained": True,
@@ -320,11 +493,14 @@ def build_static_preflight(run_dir: Path) -> dict[str, Any]:
     write_json(requests_dir / "request_0001.schema.json", schema)
     write_json(requests_dir / "request_0001.task.json", task)
     shutil.copy2(SHARED_GRAPH_PATH, preflight_dir / "shared_candidate_link_graph.json")
+    task_graph_path = preflight_dir / "task_candidate_link_graph.json"
+    write_json(task_graph_path, task_raw_graph)
     report["artifacts"] = {
         "prompt_sha256": sha256_file(requests_dir / "request_0001.prompt.txt"),
         "schema_sha256": sha256_file(requests_dir / "request_0001.schema.json"),
         "task_sha256": sha256_file(requests_dir / "request_0001.task.json"),
         "full_shared_graph_copy_sha256": sha256_file(preflight_dir / "shared_candidate_link_graph.json"),
+        "task_candidate_link_graph_sha256": sha256_file(task_graph_path),
     }
     write_json(preflight_dir / "summary.json", report)
     base_manifest = {
@@ -355,11 +531,18 @@ def run_pilot(run_dir: Path) -> dict[str, Any]:
         raise RuntimeError("zero_call_preflight_not_passed")
     if manifest.get("preflight_report_sha256") != sha256_file(preflight_path):
         raise RuntimeError("preflight_report_hash_mismatch")
+    if preflight.get("pilot_scope", {}).get("order_id") != ORDER_ID:
+        raise RuntimeError("preflight_order_id_mismatch")
+    if preflight.get("source_provenance", {}).get("pilot_runner_sha256") != sha256_file(Path(__file__)):
+        raise RuntimeError("pilot_runner_changed_after_zero_call_preflight")
 
     runner, runtime = load_runtime()
     r1, NetworkContext, RouteProblemBuilder, score_path, validate, _verify, estimate, codex_preflight, call_once, build_schema, serialize_schema, default_output_reserve = runtime
     source_preflight, source_manifest, frozen = prepare_runtime_verification(run_dir, runner, runtime, preflight)
-    shared_raw = json.loads(SHARED_GRAPH_PATH.read_text(encoding="utf-8"))
+    shared_raw_path = run_dir / "preflight/task_candidate_link_graph.json"
+    if not shared_raw_path.is_file() or sha256_file(shared_raw_path) != preflight.get("artifacts", {}).get("task_candidate_link_graph_sha256"):
+        raise RuntimeError("task_candidate_graph_hash_mismatch_after_zero_call_preflight")
+    shared_raw = json.loads(shared_raw_path.read_text(encoding="utf-8"))
     shared_graph = runner.compact_candidate_graph_for_prompt(shared_raw)
     context = NetworkContext.load(r1, SEED)
     orders, _route_lookup = runner.orders_and_route_pairs(context)
@@ -395,7 +578,9 @@ def run_pilot(run_dir: Path) -> dict[str, Any]:
         )
         task, prompt = compact_request(runner, runtime, legs, task, prompt, shared_graph, endpoint_ids)
         schema_path = runner.PACKAGE / runner.SCHEMA_RELATIVE
-        schema = build_schema(json.loads(schema_path.read_text(encoding="utf-8")), legs)
+        schema = constrain_route_schema_for_endpoints(
+            build_schema(json.loads(schema_path.read_text(encoding="utf-8")), legs), task, legs,
+        )
         estimated = int(estimate(prompt, schema))
         route_endpoints = {
             "vehicle_to_pickup": (from_point_id, order["pickup"]["point_id"]),
@@ -430,6 +615,23 @@ def run_pilot(run_dir: Path) -> dict[str, Any]:
             "route_endpoints": route_endpoints, "request_key": request_key,
         })
         return legs, task, prompt
+
+    def build_response_schema_for_current_task(base_schema, legs, max_route_items=None):
+        task = captured.get("task")
+        if not isinstance(task, dict):
+            raise RuntimeError("endpoint_task_missing_before_response_schema_build")
+        schema = build_schema(base_schema, legs, max_route_items=max_route_items)
+        schema = constrain_route_schema_for_endpoints(schema, task, captured["legs"])
+        branch_by_role = {
+            branch["properties"]["leg_role"]["enum"][0]: branch
+            for branch in schema["properties"]["routes"]["items"]["anyOf"]
+        }
+        for role, task_key in (("vehicle_to_pickup", "vp"), ("pickup_to_dropoff", "pd")):
+            required_min_items = minimum_intermediate_link_count(captured["legs"][role])
+            actual_min_items = branch_by_role[role]["properties"]["intermediate_edge_ids"].get("minItems", 0)
+            if actual_min_items != required_min_items:
+                raise RuntimeError(f"endpoint_route_schema_min_items_mismatch:{role}:{actual_min_items}:{required_min_items}")
+        return schema
 
     RouteProblemBuilder.build_order_request = build_order_request_with_scoped_h
     original_point_bindings = r1.point_bindings
@@ -478,7 +680,7 @@ def run_pilot(run_dir: Path) -> dict[str, Any]:
         "stop_reason": None,
         "call_once": call_once,
         "estimate_input_tokens": estimate,
-        "build_response_schema": build_schema,
+        "build_response_schema": build_response_schema_for_current_task,
         "output_reserve_tokens": OUTPUT_RESERVE_TOKENS,
         "pilot_route_item_cap": None,
         "validate_model_routes": validate,
@@ -518,12 +720,60 @@ def run_pilot(run_dir: Path) -> dict[str, Any]:
         if model_calls > 1:
             raise RuntimeError("pilot_call_scope_exceeded")
         manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        ledger = first_call_ledger(run_dir) or {}
+        final_response_exists = (run_dir / "codex_requests/call_0000.final.json").is_file()
+        usage_available = bool(ledger.get("usage_available")) and isinstance(ledger.get("input_tokens"), int) and isinstance(ledger.get("output_tokens"), int)
+        selected_model_legs = sum(
+            row.get("selected_route_source") == "model"
+            for row in comparison.get("legs", {}).values()
+        )
+        valid_model_legs = sum(
+            row.get("model_route_valid") is True
+            for row in comparison.get("legs", {}).values()
+        )
+        expected_route_legs = len(comparison.get("legs", {}))
+        if selected_model_legs == expected_route_legs and expected_route_legs:
+            model_outcome = "model_routes_accepted_and_selected"
+            simulation_outcome = "completed_with_model_routes"
+        elif valid_model_legs == expected_route_legs and expected_route_legs:
+            model_outcome = "model_routes_valid_but_fallback_selected"
+            simulation_outcome = "completed_with_fallback"
+        elif model_calls and terminal:
+            model_outcome = "model_routes_rejected_fallback_used"
+            simulation_outcome = "completed_with_fallback"
+        elif model_calls:
+            request_status = ledger.get("status")
+            if request_status == "provider_rejected_invalid_json_schema":
+                model_outcome = "provider_rejected_invalid_json_schema_no_model_response"
+            elif request_status == "incomplete_response_max_output_tokens":
+                model_outcome = "incomplete_response_max_output_tokens_no_model_response"
+            else:
+                model_outcome = "cli_request_failed_without_model_response"
+            simulation_outcome = "not_completed"
+        else:
+            model_outcome = "no_model_route_result"
+            simulation_outcome = "not_completed"
         manifest.update({
-            "status": "pilot_route_complete" if terminal else ("pilot_model_called_route_not_completed" if model_calls else "pilot_blocked_before_model_call"),
+            "status": (
+                "pilot_model_route_complete" if simulation_outcome == "completed_with_model_routes"
+                else "pilot_fallback_simulation_complete_model_rejected" if model_outcome == "model_routes_rejected_fallback_used"
+                else "pilot_fallback_simulation_complete_model_not_selected" if simulation_outcome == "completed_with_fallback"
+                else "pilot_provider_or_cli_request_failed_no_route" if model_calls and not final_response_exists
+                else "pilot_model_response_received_simulation_not_completed" if model_calls
+                else "pilot_blocked_before_model_call"
+            ),
+            "model_route_outcome": model_outcome,
+            "simulation_outcome": simulation_outcome,
+            "model_routes_valid_count": valid_model_legs,
+            "model_routes_selected_count": selected_model_legs,
             "model_calls": model_calls,
-            "model_request_scope": "one seed-0 FASTEST order ord_0001, with pickup and passenger legs in one request",
-            "codex_usage_tokens_observed": int(model_budget["usage_so_far"].get("tokens", 0)),
-            "codex_standard_credits_estimate": round(float(model_budget["usage_so_far"].get("credits", 0.0)), 8),
+            "model_call_attempts": model_calls,
+            "accepted_model_response_count": int(final_response_exists and ledger.get("status") == "accepted"),
+            "provider_request_status": ledger.get("status"),
+            "usage_available": usage_available,
+            "model_request_scope": f"one seed-{SEED} FASTEST order {ORDER_ID}, with pickup and passenger legs in one request",
+            "codex_usage_tokens_observed": int(model_budget["usage_so_far"].get("tokens", 0)) if usage_available else None,
+            "codex_standard_credits_estimate": round(float(model_budget["usage_so_far"].get("credits", 0.0)), 8) if usage_available else None,
             "codex_account_billing": "not reported by Codex CLI",
             "route_comparison_status": comparison.get("status"),
             "ev2_audit_status": ev2.get("status"),
@@ -552,6 +802,14 @@ def prepare_runtime_verification(run_dir, runner, runtime, preflight):
     return source_preflight, source_manifest, frozen
 
 
+def first_call_ledger(run_dir: Path) -> dict[str, Any] | None:
+    path = run_dir / "llm_call_ledger.jsonl"
+    if not path.is_file():
+        return None
+    rows = [line for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
+    return json.loads(rows[0]) if rows else None
+
+
 def write_route_comparison(runner, runtime, run_dir, captured, shared_graph, endpoints, summary):
     if not captured:
         report = {"status": "blocked_no_live_request_capture", "model_call_or_route_claim": False}
@@ -560,7 +818,15 @@ def write_route_comparison(runner, runtime, run_dir, captured, shared_graph, end
     r1, _ctx, _builder_type, score_path, validate = runtime[:5]
     response_path = run_dir / "codex_requests/call_0000.final.json"
     if not response_path.is_file():
-        report = {"status": "model_response_missing_or_not_delivered", "model_call_or_route_claim": False}
+        ledger = first_call_ledger(run_dir) or {}
+        report = {
+            "status": "no_final_model_response",
+            "request_status": ledger.get("status"),
+            "cli_exit_code": ledger.get("cli_exit_code"),
+            "usage_available": ledger.get("usage_available", False),
+            "model_response_received": False,
+            "model_call_or_route_claim": False,
+        }
         write_json(run_dir / "same_snapshot_route_comparison.json", report)
         return report
     response = json.loads(response_path.read_text(encoding="utf-8"))
@@ -625,7 +891,11 @@ def audit_energy_traces(r1, run_dir: Path) -> dict[str, Any]:
     trace_path = run_dir / "sumo_trial/sumo_motion_traces_v2.json"
     actual_path = run_dir / "sumo_trial/route_legs_actual.json"
     if not trace_path.is_file() or not actual_path.is_file():
-        report = {"status": "not_observed", "reason": "SUMO motion trace or actual route legs missing"}
+        report = {
+            "status": "not_estimable_no_executed_route_trace",
+            "signed_net_kwh": None,
+            "reason": "SUMO motion trace or actual route legs missing; do not treat empty distance or absent trace as zero energy.",
+        }
         write_json(run_dir / "ev2_trace_audit.json", report)
         return report
     trace = json.loads(trace_path.read_text(encoding="utf-8"))
@@ -700,10 +970,13 @@ def audit_v5_gate(run_dir: Path, comparison: dict[str, Any]) -> dict[str, Any]:
 
 
 def main() -> int:
+    global ORDER_ID
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("mode", choices=("preflight", "run"))
     parser.add_argument("--run-dir", type=Path, required=True)
+    parser.add_argument("--order-id", default=ORDER_ID)
     args = parser.parse_args()
+    ORDER_ID = str(args.order_id)
     run_dir = args.run_dir if args.run_dir.is_absolute() else (ROOT / args.run_dir)
     run_dir = run_dir.resolve()
     if args.mode == "preflight":
