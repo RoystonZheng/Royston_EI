@@ -1,0 +1,3069 @@
+{
+  "schema_version": "r4_formal_batch_per_segment_directed_edge_audit_v1",
+  "status": "passed",
+  "batch_manifest_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/manifest.json",
+  "batch_manifest_sha256": "69d580d52cfa5f40ced51ec77bbb103c17facdd959a52fbc01dca8e2d4820bda",
+  "batch_status_at_audit": "running",
+  "batch_updated_at_utc": "2026-10-29T03:41:39.572563+00:00",
+  "model_requests_used_at_audit": 8374,
+  "routeable_task_denominator": 129,
+  "task_status_counts_audited": {
+    "route_complete": 40,
+    "failed": 35,
+    "ready": 4,
+    "outcome_unknown": 5,
+    "active": 3
+  },
+  "states_audited": 87,
+  "states_skipped_without_output": [
+    {
+      "task_id": "task-0001-0004",
+      "status": "pending"
+    },
+    {
+      "task_id": "task-0001-0005",
+      "status": "pending"
+    },
+    {
+      "task_id": "task-0001-0006",
+      "status": "pending"
+    },
+    {
+      "task_id": "task-0001-0009",
+      "status": "pending"
+    },
+    {
+      "task_id": "task-0001-0010",
+      "status": "pending"
+    },
+    {
+      "task_id": "formal-task-0001-detour",
+      "status": "pending"
+    },
+    {
+      "task_id": "task-0002-0002",
+      "status": "pending"
+    },
+    {
+      "task_id": "task-0002-0007",
+      "status": "pending"
+    },
+    {
+      "task_id": "task-0003-0001",
+      "status": "pending"
+    },
+    {
+      "task_id": "task-0003-0003",
+      "status": "pending"
+    },
+    {
+      "task_id": "formal-task-0003-feasible",
+      "status": "pending"
+    },
+    {
+      "task_id": "formal-task-0003-detour",
+      "status": "pending"
+    },
+    {
+      "task_id": "task-0004-0003",
+      "status": "pending"
+    },
+    {
+      "task_id": "task-0004-0004",
+      "status": "pending"
+    },
+    {
+      "task_id": "task-0004-0010",
+      "status": "pending"
+    },
+    {
+      "task_id": "formal-task-0004-feasible",
+      "status": "pending"
+    },
+    {
+      "task_id": "formal-task-0004-detour",
+      "status": "pending"
+    },
+    {
+      "task_id": "task-0005-0001",
+      "status": "pending"
+    },
+    {
+      "task_id": "task-0005-0002",
+      "status": "pending"
+    },
+    {
+      "task_id": "task-0005-0003",
+      "status": "pending"
+    },
+    {
+      "task_id": "task-0005-0005",
+      "status": "pending"
+    },
+    {
+      "task_id": "task-0005-0007",
+      "status": "pending"
+    },
+    {
+      "task_id": "task-0005-0008",
+      "status": "pending"
+    },
+    {
+      "task_id": "task-0005-0009",
+      "status": "pending"
+    },
+    {
+      "task_id": "task-0005-0010",
+      "status": "pending"
+    },
+    {
+      "task_id": "formal-task-0005-feasible",
+      "status": "pending"
+    },
+    {
+      "task_id": "formal-task-0005-detour",
+      "status": "pending"
+    },
+    {
+      "task_id": "task-0006-0001",
+      "status": "pending"
+    },
+    {
+      "task_id": "task-0007-0002",
+      "status": "pending"
+    },
+    {
+      "task_id": "task-0007-0003",
+      "status": "pending"
+    },
+    {
+      "task_id": "task-0007-0006",
+      "status": "pending"
+    },
+    {
+      "task_id": "task-0007-0010",
+      "status": "pending"
+    },
+    {
+      "task_id": "formal-task-0007-detour",
+      "status": "pending"
+    },
+    {
+      "task_id": "task-0008-0002",
+      "status": "pending"
+    },
+    {
+      "task_id": "task-0008-0003",
+      "status": "pending"
+    },
+    {
+      "task_id": "task-0008-0007",
+      "status": "pending"
+    },
+    {
+      "task_id": "task-0008-0010",
+      "status": "pending"
+    },
+    {
+      "task_id": "formal-task-0008-feasible",
+      "status": "pending"
+    },
+    {
+      "task_id": "formal-task-0008-boundary",
+      "status": "pending"
+    },
+    {
+      "task_id": "task-0009-0003",
+      "status": "pending"
+    },
+    {
+      "task_id": "task-0009-0006",
+      "status": "pending"
+    },
+    {
+      "task_id": "task-0009-0010",
+      "status": "pending"
+    }
+  ],
+  "completed_routes_audited": 40,
+  "completed_routes_with_directed_edge_violation": 0,
+  "accepted_edges_audited": 8207,
+  "legs_audited_by_type": {
+    "start_to_pickup": 43,
+    "pickup_to_dropoff": 40,
+    "start_to_current_prefix": 44,
+    "pickup_to_current_prefix": 3
+  },
+  "failed_legs": [],
+  "violations": [],
+  "tasks": [
+    {
+      "task_id": "task-0000-0001",
+      "seed": 0,
+      "sample_group": "orders",
+      "status": "route_complete",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/tasks/seed_0/task-0000-0001/run_001/state.json",
+      "map_id": "grid-100x100-seed-0",
+      "map_directed_edges": 36602,
+      "preflight_sha256": "ba0b4cdf956974a3e0db0d2ecaa372aefa3ef7aa5fdee6ecdba7e20883d21215",
+      "frozen_task_id": "task-0000-0001",
+      "route_complete": true,
+      "pickup_reached": true,
+      "dropoff_reached": true,
+      "accepted_edge_count": 118,
+      "replayed_directed_edge_count": 118,
+      "legs": [
+        {
+          "leg": "start_to_pickup",
+          "start_node": "node_84_72",
+          "end_node": "node_66_35",
+          "edge_count": 75,
+          "passed": true,
+          "violations": []
+        },
+        {
+          "leg": "pickup_to_dropoff",
+          "start_node": "node_66_35",
+          "end_node": "node_58_66",
+          "edge_count": 43,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0000-0002",
+      "seed": 0,
+      "sample_group": "orders",
+      "status": "route_complete",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/tasks/seed_0/task-0000-0002/run_001/state.json",
+      "map_id": "grid-100x100-seed-0",
+      "map_directed_edges": 36602,
+      "preflight_sha256": "3ee4224f2aa1e6c7cb18232bfb0279bd5c2a805f8e72cd442a0edfac1aad0ba3",
+      "frozen_task_id": "task-0000-0002",
+      "route_complete": true,
+      "pickup_reached": true,
+      "dropoff_reached": true,
+      "accepted_edge_count": 171,
+      "replayed_directed_edge_count": 171,
+      "legs": [
+        {
+          "leg": "start_to_pickup",
+          "start_node": "node_99_66",
+          "end_node": "node_48_68",
+          "edge_count": 61,
+          "passed": true,
+          "violations": []
+        },
+        {
+          "leg": "pickup_to_dropoff",
+          "start_node": "node_48_68",
+          "end_node": "node_76_8",
+          "edge_count": 110,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0000-0003",
+      "seed": 0,
+      "sample_group": "orders",
+      "status": "route_complete",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery_addendum2/tasks/seed_0/task-0000-0003/run_002/state.json",
+      "map_id": "grid-100x100-seed-0",
+      "map_directed_edges": 36602,
+      "preflight_sha256": "5beef84b284eb71a202f982a39315c589ef4090db8f5fc1a1a813dc3f1dd3df0",
+      "frozen_task_id": "task-0000-0003",
+      "route_complete": true,
+      "pickup_reached": true,
+      "dropoff_reached": true,
+      "accepted_edge_count": 105,
+      "replayed_directed_edge_count": 105,
+      "legs": [
+        {
+          "leg": "start_to_pickup",
+          "start_node": "node_24_25",
+          "end_node": "node_32_24",
+          "edge_count": 9,
+          "passed": true,
+          "violations": []
+        },
+        {
+          "leg": "pickup_to_dropoff",
+          "start_node": "node_32_24",
+          "end_node": "node_55_93",
+          "edge_count": 96,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0000-0004",
+      "seed": 0,
+      "sample_group": "orders",
+      "status": "failed",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery_addendum2/tasks/seed_0/task-0000-0004/run_002/state.json",
+      "map_id": "grid-100x100-seed-0",
+      "map_directed_edges": 36602,
+      "preflight_sha256": "ac5135bb102c998dad776b00feab527919548ccfe318a1e9d3f13255a02c2646",
+      "frozen_task_id": "task-0000-0004",
+      "route_complete": false,
+      "pickup_reached": false,
+      "dropoff_reached": false,
+      "accepted_edge_count": 33,
+      "replayed_directed_edge_count": 33,
+      "legs": [
+        {
+          "leg": "start_to_current_prefix",
+          "start_node": "node_7_42",
+          "end_node": "node_20_62",
+          "edge_count": 33,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0000-0005",
+      "seed": 0,
+      "sample_group": "orders",
+      "status": "failed",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery_addendum2/tasks/seed_0/task-0000-0005/run_002/state.json",
+      "map_id": "grid-100x100-seed-0",
+      "map_directed_edges": 36602,
+      "preflight_sha256": "a0efe09a051bdb82a964d1fc01a9ad45dac2e322c2b415b44f88cc28c5d07eb6",
+      "frozen_task_id": "task-0000-0005",
+      "route_complete": false,
+      "pickup_reached": true,
+      "dropoff_reached": false,
+      "accepted_edge_count": 93,
+      "replayed_directed_edge_count": 93,
+      "legs": [
+        {
+          "leg": "start_to_pickup",
+          "start_node": "node_61_97",
+          "end_node": "node_92_53",
+          "edge_count": 89,
+          "passed": true,
+          "violations": []
+        },
+        {
+          "leg": "pickup_to_current_prefix",
+          "start_node": "node_92_53",
+          "end_node": "node_90_51",
+          "edge_count": 4,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0000-0006",
+      "seed": 0,
+      "sample_group": "orders",
+      "status": "route_complete",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/task-0000-0006/run_001/state.json",
+      "map_id": "grid-100x100-seed-0",
+      "map_directed_edges": 36602,
+      "preflight_sha256": "805669fd400d964fdf4ad9b29849fde1431e9e87bbeb042b1d0c5fef07e6a3af",
+      "frozen_task_id": "task-0000-0006",
+      "route_complete": true,
+      "pickup_reached": true,
+      "dropoff_reached": true,
+      "accepted_edge_count": 230,
+      "replayed_directed_edge_count": 230,
+      "legs": [
+        {
+          "leg": "start_to_pickup",
+          "start_node": "node_3_54",
+          "end_node": "node_73_80",
+          "edge_count": 96,
+          "passed": true,
+          "violations": []
+        },
+        {
+          "leg": "pickup_to_dropoff",
+          "start_node": "node_73_80",
+          "end_node": "node_57_14",
+          "edge_count": 134,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0000-0007",
+      "seed": 0,
+      "sample_group": "orders",
+      "status": "route_complete",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/task-0000-0007/run_001/state.json",
+      "map_id": "grid-100x100-seed-0",
+      "map_directed_edges": 36602,
+      "preflight_sha256": "737424eb7f8a86e3b94a5119b25ad4e34e48aad5c9eb54d8223adda7d047235a",
+      "frozen_task_id": "task-0000-0007",
+      "route_complete": true,
+      "pickup_reached": true,
+      "dropoff_reached": true,
+      "accepted_edge_count": 256,
+      "replayed_directed_edge_count": 256,
+      "legs": [
+        {
+          "leg": "start_to_pickup",
+          "start_node": "node_75_57",
+          "end_node": "node_91_2",
+          "edge_count": 105,
+          "passed": true,
+          "violations": []
+        },
+        {
+          "leg": "pickup_to_dropoff",
+          "start_node": "node_91_2",
+          "end_node": "node_7_67",
+          "edge_count": 151,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0000-0008",
+      "seed": 0,
+      "sample_group": "orders",
+      "status": "route_complete",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/task-0000-0008/run_001/state.json",
+      "map_id": "grid-100x100-seed-0",
+      "map_directed_edges": 36602,
+      "preflight_sha256": "b39833fa1fa0cb0121e99630a3715e4fcae7ffcae4ef8fcdb0c53149dd168d89",
+      "frozen_task_id": "task-0000-0008",
+      "route_complete": true,
+      "pickup_reached": true,
+      "dropoff_reached": true,
+      "accepted_edge_count": 133,
+      "replayed_directed_edge_count": 133,
+      "legs": [
+        {
+          "leg": "start_to_pickup",
+          "start_node": "node_19_27",
+          "end_node": "node_86_29",
+          "edge_count": 81,
+          "passed": true,
+          "violations": []
+        },
+        {
+          "leg": "pickup_to_dropoff",
+          "start_node": "node_86_29",
+          "end_node": "node_48_41",
+          "edge_count": 52,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0000-0009",
+      "seed": 0,
+      "sample_group": "orders",
+      "status": "failed",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/task-0000-0009/run_001/state.json",
+      "map_id": "grid-100x100-seed-0",
+      "map_directed_edges": 36602,
+      "preflight_sha256": "c977a210d9c5e94f2d90e42d92a3dd458b950199566c3ee5d0fc3306c0c07b28",
+      "frozen_task_id": "task-0000-0009",
+      "route_complete": false,
+      "pickup_reached": false,
+      "dropoff_reached": false,
+      "accepted_edge_count": 26,
+      "replayed_directed_edge_count": 26,
+      "legs": [
+        {
+          "leg": "start_to_current_prefix",
+          "start_node": "node_69_41",
+          "end_node": "node_55_53",
+          "edge_count": 26,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0000-0010",
+      "seed": 0,
+      "sample_group": "orders",
+      "status": "failed",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/task-0000-0010/run_001/state.json",
+      "map_id": "grid-100x100-seed-0",
+      "map_directed_edges": 36602,
+      "preflight_sha256": "561efc6cd45ca92730d3d105d18bf6674ffe76aea7c9e86aa7cc998b433d4a74",
+      "frozen_task_id": "task-0000-0010",
+      "route_complete": false,
+      "pickup_reached": false,
+      "dropoff_reached": false,
+      "accepted_edge_count": 47,
+      "replayed_directed_edge_count": 47,
+      "legs": [
+        {
+          "leg": "start_to_current_prefix",
+          "start_node": "node_59_62",
+          "end_node": "node_23_57",
+          "edge_count": 47,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "formal-task-0000-feasible",
+      "seed": 0,
+      "sample_group": "formal_scenarios",
+      "status": "failed",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/formal-task-0000-feasible/run_001/state.json",
+      "map_id": "grid-100x100-seed-0",
+      "map_directed_edges": 36602,
+      "preflight_sha256": "11e62075f99c21a5c3e08e9cf7554e57986be93b29f8e0851c60249074a494f8",
+      "frozen_task_id": "formal-task-0000-feasible",
+      "route_complete": false,
+      "pickup_reached": false,
+      "dropoff_reached": false,
+      "accepted_edge_count": 7,
+      "replayed_directed_edge_count": 7,
+      "legs": [
+        {
+          "leg": "start_to_current_prefix",
+          "start_node": "node_63_11",
+          "end_node": "node_67_14",
+          "edge_count": 7,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "formal-task-0000-boundary",
+      "seed": 0,
+      "sample_group": "formal_scenarios",
+      "status": "route_complete",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/formal-task-0000-boundary/run_001/state.json",
+      "map_id": "grid-100x100-seed-0",
+      "map_directed_edges": 36602,
+      "preflight_sha256": "4fd08c4c096f34029ac2d20406b4e923875353bc45fbfdb7b3b6b3ecfdd5af90",
+      "frozen_task_id": "formal-task-0000-boundary",
+      "route_complete": true,
+      "pickup_reached": true,
+      "dropoff_reached": true,
+      "accepted_edge_count": 182,
+      "replayed_directed_edge_count": 182,
+      "legs": [
+        {
+          "leg": "start_to_pickup",
+          "start_node": "node_17_0",
+          "end_node": "node_83_44",
+          "edge_count": 112,
+          "passed": true,
+          "violations": []
+        },
+        {
+          "leg": "pickup_to_dropoff",
+          "start_node": "node_83_44",
+          "end_node": "node_79_12",
+          "edge_count": 70,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "formal-task-0000-detour",
+      "seed": 0,
+      "sample_group": "formal_scenarios",
+      "status": "ready",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_03/tasks/seed_0/formal-task-0000-detour/run_001/state.json",
+      "map_id": "grid-100x100-seed-0",
+      "map_directed_edges": 36602,
+      "preflight_sha256": "231b46cab34ba218ba499e4cf45b3ff510e06a0871936155bfe80c0d59f5b68c",
+      "frozen_task_id": "formal-task-0000-detour",
+      "route_complete": false,
+      "pickup_reached": false,
+      "dropoff_reached": false,
+      "accepted_edge_count": 14,
+      "replayed_directed_edge_count": 14,
+      "legs": [
+        {
+          "leg": "start_to_current_prefix",
+          "start_node": "node_0_0",
+          "end_node": "node_2_12",
+          "edge_count": 14,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0001-0001",
+      "seed": 1,
+      "sample_group": "orders",
+      "status": "outcome_unknown",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_1/task-0001-0001/run_000/state.json",
+      "map_id": "grid-100x100-seed-1",
+      "map_directed_edges": 36652,
+      "preflight_sha256": "2ba5ee5f78753d180a48e7944127976418e9b2af14048c575f4ffc4002df4152",
+      "frozen_task_id": "task-0001-0001",
+      "route_complete": false,
+      "pickup_reached": false,
+      "dropoff_reached": false,
+      "accepted_edge_count": 68,
+      "replayed_directed_edge_count": 68,
+      "legs": [
+        {
+          "leg": "start_to_current_prefix",
+          "start_node": "node_81_95",
+          "end_node": "node_49_61",
+          "edge_count": 68,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0001-0002",
+      "seed": 1,
+      "sample_group": "orders",
+      "status": "route_complete",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_01/tasks/seed_1/task-0001-0002/run_000/state.json",
+      "map_id": "grid-100x100-seed-1",
+      "map_directed_edges": 36652,
+      "preflight_sha256": "b4fcc2cb6c6568ede47a74450d89e863cd2946266f020fcee38a30d4ac9cbfd8",
+      "frozen_task_id": "task-0001-0002",
+      "route_complete": true,
+      "pickup_reached": true,
+      "dropoff_reached": true,
+      "accepted_edge_count": 84,
+      "replayed_directed_edge_count": 84,
+      "legs": [
+        {
+          "leg": "start_to_pickup",
+          "start_node": "node_43_54",
+          "end_node": "node_11_35",
+          "edge_count": 59,
+          "passed": true,
+          "violations": []
+        },
+        {
+          "leg": "pickup_to_dropoff",
+          "start_node": "node_11_35",
+          "end_node": "node_32_39",
+          "edge_count": 25,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0001-0003",
+      "seed": 1,
+      "sample_group": "orders",
+      "status": "route_complete",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery_addendum/tasks/seed_1/task-0001-0003/run_001/state.json",
+      "map_id": "grid-100x100-seed-1",
+      "map_directed_edges": 36652,
+      "preflight_sha256": "7743807722580a95aa2d9727d9452d5c566acb48dee2d9b778eabc8e0d713a97",
+      "frozen_task_id": "task-0001-0003",
+      "route_complete": true,
+      "pickup_reached": true,
+      "dropoff_reached": true,
+      "accepted_edge_count": 208,
+      "replayed_directed_edge_count": 208,
+      "legs": [
+        {
+          "leg": "start_to_pickup",
+          "start_node": "node_14_1",
+          "end_node": "node_87_2",
+          "edge_count": 80,
+          "passed": true,
+          "violations": []
+        },
+        {
+          "leg": "pickup_to_dropoff",
+          "start_node": "node_87_2",
+          "end_node": "node_40_79",
+          "edge_count": 128,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0001-0007",
+      "seed": 1,
+      "sample_group": "orders",
+      "status": "ready",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_1/task-0001-0007/run_000/state.json",
+      "map_id": "grid-100x100-seed-1",
+      "map_directed_edges": 36652,
+      "preflight_sha256": "2c70f04decdb214acdc79790924723597e1f0534e9041c9d663c4b50511ea6d0",
+      "frozen_task_id": "task-0001-0007",
+      "route_complete": false,
+      "pickup_reached": false,
+      "dropoff_reached": false,
+      "accepted_edge_count": 19,
+      "replayed_directed_edge_count": 19,
+      "legs": [
+        {
+          "leg": "start_to_current_prefix",
+          "start_node": "node_83_31",
+          "end_node": "node_67_28",
+          "edge_count": 19,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0001-0008",
+      "seed": 1,
+      "sample_group": "orders",
+      "status": "failed",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_01/tasks/seed_1/task-0001-0008/run_000/state.json",
+      "map_id": "grid-100x100-seed-1",
+      "map_directed_edges": 36652,
+      "preflight_sha256": "38f6cf1d26416d8255bfa74221c38fa10ed5c35b6fa59a089a7fb55e7be0048a",
+      "frozen_task_id": "task-0001-0008",
+      "route_complete": false,
+      "pickup_reached": false,
+      "dropoff_reached": false,
+      "accepted_edge_count": 6,
+      "replayed_directed_edge_count": 6,
+      "legs": [
+        {
+          "leg": "start_to_current_prefix",
+          "start_node": "node_60_67",
+          "end_node": "node_63_70",
+          "edge_count": 6,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "formal-task-0001-feasible",
+      "seed": 1,
+      "sample_group": "formal_scenarios",
+      "status": "route_complete",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_01/tasks/seed_1/formal-task-0001-feasible/run_000/state.json",
+      "map_id": "grid-100x100-seed-1",
+      "map_directed_edges": 36652,
+      "preflight_sha256": "9631ae09233338af58b749c45c52bf42673c7158c5d29b5bbf9d4f8e89d3e839",
+      "frozen_task_id": "formal-task-0001-feasible",
+      "route_complete": true,
+      "pickup_reached": true,
+      "dropoff_reached": true,
+      "accepted_edge_count": 283,
+      "replayed_directed_edge_count": 283,
+      "legs": [
+        {
+          "leg": "start_to_pickup",
+          "start_node": "node_22_1",
+          "end_node": "node_89_66",
+          "edge_count": 132,
+          "passed": true,
+          "violations": []
+        },
+        {
+          "leg": "pickup_to_dropoff",
+          "start_node": "node_89_66",
+          "end_node": "node_10_14",
+          "edge_count": 151,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "formal-task-0001-boundary",
+      "seed": 1,
+      "sample_group": "formal_scenarios",
+      "status": "active",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_02/tasks/seed_1/formal-task-0001-boundary/run_000/state.json",
+      "map_id": "grid-100x100-seed-1",
+      "map_directed_edges": 36652,
+      "preflight_sha256": "1a25e6686d51c1f2c114b9f47db18fe6f020274d2374f01a05dfeb4033df7782",
+      "frozen_task_id": "formal-task-0001-boundary",
+      "route_complete": false,
+      "pickup_reached": true,
+      "dropoff_reached": false,
+      "accepted_edge_count": 136,
+      "replayed_directed_edge_count": 136,
+      "legs": [
+        {
+          "leg": "start_to_pickup",
+          "start_node": "node_16_0",
+          "end_node": "node_18_55",
+          "edge_count": 65,
+          "passed": true,
+          "violations": []
+        },
+        {
+          "leg": "pickup_to_current_prefix",
+          "start_node": "node_18_55",
+          "end_node": "node_63_31",
+          "edge_count": 71,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0002-0001",
+      "seed": 2,
+      "sample_group": "orders",
+      "status": "route_complete",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_03/tasks/seed_2/task-0002-0001/run_000/state.json",
+      "map_id": "grid-100x100-seed-2",
+      "map_directed_edges": 36713,
+      "preflight_sha256": "a4b2449dc7d4e7f318008ab884573a60269fc36c0264e2aa0ea97a6cae03d5e4",
+      "frozen_task_id": "task-0002-0001",
+      "route_complete": true,
+      "pickup_reached": true,
+      "dropoff_reached": true,
+      "accepted_edge_count": 174,
+      "replayed_directed_edge_count": 174,
+      "legs": [
+        {
+          "leg": "start_to_pickup",
+          "start_node": "node_96_3",
+          "end_node": "node_9_73",
+          "edge_count": 157,
+          "passed": true,
+          "violations": []
+        },
+        {
+          "leg": "pickup_to_dropoff",
+          "start_node": "node_9_73",
+          "end_node": "node_14_85",
+          "edge_count": 17,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0002-0003",
+      "seed": 2,
+      "sample_group": "orders",
+      "status": "route_complete",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_2/task-0002-0003/run_000/state.json",
+      "map_id": "grid-100x100-seed-2",
+      "map_directed_edges": 36713,
+      "preflight_sha256": "6c9eb8d716739f01d154e1090b973b8d57071098adcaa1cf4179d2102e0643c0",
+      "frozen_task_id": "task-0002-0003",
+      "route_complete": true,
+      "pickup_reached": true,
+      "dropoff_reached": true,
+      "accepted_edge_count": 60,
+      "replayed_directed_edge_count": 60,
+      "legs": [
+        {
+          "leg": "start_to_pickup",
+          "start_node": "node_90_24",
+          "end_node": "node_84_41",
+          "edge_count": 27,
+          "passed": true,
+          "violations": []
+        },
+        {
+          "leg": "pickup_to_dropoff",
+          "start_node": "node_84_41",
+          "end_node": "node_65_53",
+          "edge_count": 33,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0002-0004",
+      "seed": 2,
+      "sample_group": "orders",
+      "status": "outcome_unknown",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_2/task-0002-0004/run_000/state.json",
+      "map_id": "grid-100x100-seed-2",
+      "map_directed_edges": 36713,
+      "preflight_sha256": "0381f0ead54ba8d99b70ffdc57a089fd2f0e4d773036cf660d113cc438276574",
+      "frozen_task_id": "task-0002-0004",
+      "route_complete": false,
+      "pickup_reached": false,
+      "dropoff_reached": false,
+      "accepted_edge_count": 101,
+      "replayed_directed_edge_count": 101,
+      "legs": [
+        {
+          "leg": "start_to_current_prefix",
+          "start_node": "node_49_94",
+          "end_node": "node_78_38",
+          "edge_count": 101,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0002-0005",
+      "seed": 2,
+      "sample_group": "orders",
+      "status": "failed",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_03/tasks/seed_2/task-0002-0005/run_000/state.json",
+      "map_id": "grid-100x100-seed-2",
+      "map_directed_edges": 36713,
+      "preflight_sha256": "98738ac7b1ddee96ea2f828b58e638a4de72033c62007de48a31edc0a6f3af18",
+      "frozen_task_id": "task-0002-0005",
+      "route_complete": false,
+      "pickup_reached": false,
+      "dropoff_reached": false,
+      "accepted_edge_count": 1,
+      "replayed_directed_edge_count": 1,
+      "legs": [
+        {
+          "leg": "start_to_current_prefix",
+          "start_node": "node_63_69",
+          "end_node": "node_62_69",
+          "edge_count": 1,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0002-0006",
+      "seed": 2,
+      "sample_group": "orders",
+      "status": "route_complete",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_03/tasks/seed_2/task-0002-0006/run_000/state.json",
+      "map_id": "grid-100x100-seed-2",
+      "map_directed_edges": 36713,
+      "preflight_sha256": "6ea5a8c665d247d8e4889192ee6dd378718e988505ca3c06732a6d66bf4301ec",
+      "frozen_task_id": "task-0002-0006",
+      "route_complete": true,
+      "pickup_reached": true,
+      "dropoff_reached": true,
+      "accepted_edge_count": 245,
+      "replayed_directed_edge_count": 245,
+      "legs": [
+        {
+          "leg": "start_to_pickup",
+          "start_node": "node_72_47",
+          "end_node": "node_4_84",
+          "edge_count": 107,
+          "passed": true,
+          "violations": []
+        },
+        {
+          "leg": "pickup_to_dropoff",
+          "start_node": "node_4_84",
+          "end_node": "node_59_15",
+          "edge_count": 138,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0002-0008",
+      "seed": 2,
+      "sample_group": "orders",
+      "status": "route_complete",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_2/task-0002-0008/run_000/state.json",
+      "map_id": "grid-100x100-seed-2",
+      "map_directed_edges": 36713,
+      "preflight_sha256": "9525360992483a26d51bb7d485176af992d25591f82d44bce0d45982a70a6dd8",
+      "frozen_task_id": "task-0002-0008",
+      "route_complete": true,
+      "pickup_reached": true,
+      "dropoff_reached": true,
+      "accepted_edge_count": 127,
+      "replayed_directed_edge_count": 127,
+      "legs": [
+        {
+          "leg": "start_to_pickup",
+          "start_node": "node_35_5",
+          "end_node": "node_27_67",
+          "edge_count": 82,
+          "passed": true,
+          "violations": []
+        },
+        {
+          "leg": "pickup_to_dropoff",
+          "start_node": "node_27_67",
+          "end_node": "node_49_48",
+          "edge_count": 45,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0002-0009",
+      "seed": 2,
+      "sample_group": "orders",
+      "status": "active",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_03/tasks/seed_2/task-0002-0009/run_000/state.json",
+      "map_id": "grid-100x100-seed-2",
+      "map_directed_edges": 36713,
+      "preflight_sha256": "73ed5b9c239b4197cee6b3efb823698672fdcb373978cbf87e8211cf5bf76e9f",
+      "frozen_task_id": "task-0002-0009",
+      "route_complete": false,
+      "pickup_reached": false,
+      "dropoff_reached": false,
+      "accepted_edge_count": 7,
+      "replayed_directed_edge_count": 7,
+      "legs": [
+        {
+          "leg": "start_to_current_prefix",
+          "start_node": "node_85_63",
+          "end_node": "node_80_65",
+          "edge_count": 7,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0002-0010",
+      "seed": 2,
+      "sample_group": "orders",
+      "status": "active",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_2/task-0002-0010/run_001/state.json",
+      "map_id": "grid-100x100-seed-2",
+      "map_directed_edges": 36713,
+      "preflight_sha256": "c2614187a508426b5c7b31814fd2e64f8f2f9f157702cbfac96fa3dd2770d3b4",
+      "frozen_task_id": "task-0002-0010",
+      "route_complete": false,
+      "pickup_reached": true,
+      "dropoff_reached": false,
+      "accepted_edge_count": 186,
+      "replayed_directed_edge_count": 186,
+      "legs": [
+        {
+          "leg": "start_to_pickup",
+          "start_node": "node_92_77",
+          "end_node": "node_63_0",
+          "edge_count": 148,
+          "passed": true,
+          "violations": []
+        },
+        {
+          "leg": "pickup_to_current_prefix",
+          "start_node": "node_63_0",
+          "end_node": "node_60_27",
+          "edge_count": 38,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "formal-task-0002-feasible",
+      "seed": 2,
+      "sample_group": "formal_scenarios",
+      "status": "route_complete",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_01/tasks/seed_2/formal-task-0002-feasible/run_000/state.json",
+      "map_id": "grid-100x100-seed-2",
+      "map_directed_edges": 36713,
+      "preflight_sha256": "8db7256640129cbdaaf094907ffc20fe04c282cda170ae2b71de8e5aca551d34",
+      "frozen_task_id": "formal-task-0002-feasible",
+      "route_complete": true,
+      "pickup_reached": true,
+      "dropoff_reached": true,
+      "accepted_edge_count": 121,
+      "replayed_directed_edge_count": 121,
+      "legs": [
+        {
+          "leg": "start_to_pickup",
+          "start_node": "node_9_26",
+          "end_node": "node_15_55",
+          "edge_count": 45,
+          "passed": true,
+          "violations": []
+        },
+        {
+          "leg": "pickup_to_dropoff",
+          "start_node": "node_15_55",
+          "end_node": "node_13_15",
+          "edge_count": 76,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "formal-task-0002-boundary",
+      "seed": 2,
+      "sample_group": "formal_scenarios",
+      "status": "failed",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_01/tasks/seed_2/formal-task-0002-boundary/run_000/state.json",
+      "map_id": "grid-100x100-seed-2",
+      "map_directed_edges": 36713,
+      "preflight_sha256": "597cf23eb9679edcfa2d014eb268901fd6ec6d5642a70a57b34e7ad8a57ca674",
+      "frozen_task_id": "formal-task-0002-boundary",
+      "route_complete": false,
+      "pickup_reached": false,
+      "dropoff_reached": false,
+      "accepted_edge_count": 19,
+      "replayed_directed_edge_count": 19,
+      "legs": [
+        {
+          "leg": "start_to_current_prefix",
+          "start_node": "node_43_0",
+          "end_node": "node_38_10",
+          "edge_count": 19,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "formal-task-0002-detour",
+      "seed": 2,
+      "sample_group": "formal_scenarios",
+      "status": "failed",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_02/tasks/seed_2/formal-task-0002-detour/run_000/state.json",
+      "map_id": "grid-100x100-seed-2",
+      "map_directed_edges": 36713,
+      "preflight_sha256": "c53f416a0b0223556e8aad1b37c75ba22ebd0a9fb1e2231ebd44902f6bee5716",
+      "frozen_task_id": "formal-task-0002-detour",
+      "route_complete": false,
+      "pickup_reached": false,
+      "dropoff_reached": false,
+      "accepted_edge_count": 1,
+      "replayed_directed_edge_count": 1,
+      "legs": [
+        {
+          "leg": "start_to_current_prefix",
+          "start_node": "node_0_0",
+          "end_node": "node_0_1",
+          "edge_count": 1,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0003-0002",
+      "seed": 3,
+      "sample_group": "orders",
+      "status": "failed",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_3/task-0003-0002/run_000/state.json",
+      "map_id": "grid-100x100-seed-3",
+      "map_directed_edges": 36625,
+      "preflight_sha256": "7928b414af809063b2322ea60b453f463c5b463e0451457caf264e56c6d382d3",
+      "frozen_task_id": "task-0003-0002",
+      "route_complete": false,
+      "pickup_reached": false,
+      "dropoff_reached": false,
+      "accepted_edge_count": 44,
+      "replayed_directed_edge_count": 44,
+      "legs": [
+        {
+          "leg": "start_to_current_prefix",
+          "start_node": "node_7_14",
+          "end_node": "node_40_25",
+          "edge_count": 44,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0003-0004",
+      "seed": 3,
+      "sample_group": "orders",
+      "status": "failed",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_01/tasks/seed_3/task-0003-0004/run_000/state.json",
+      "map_id": "grid-100x100-seed-3",
+      "map_directed_edges": 36625,
+      "preflight_sha256": "6ef888bc68e1fccc23a67c90fc719b9f5c9b3a0cc6781a796a3719dd13f4e1de",
+      "frozen_task_id": "task-0003-0004",
+      "route_complete": false,
+      "pickup_reached": false,
+      "dropoff_reached": false,
+      "accepted_edge_count": 29,
+      "replayed_directed_edge_count": 29,
+      "legs": [
+        {
+          "leg": "start_to_current_prefix",
+          "start_node": "node_44_0",
+          "end_node": "node_59_12",
+          "edge_count": 29,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0003-0006",
+      "seed": 3,
+      "sample_group": "orders",
+      "status": "failed",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_03/tasks/seed_3/task-0003-0006/run_000/state.json",
+      "map_id": "grid-100x100-seed-3",
+      "map_directed_edges": 36625,
+      "preflight_sha256": "26d3364d56d90a39689d5a5551d7b6699c1683e71f6ad17357a0fa929d7a2ad1",
+      "frozen_task_id": "task-0003-0006",
+      "route_complete": false,
+      "pickup_reached": false,
+      "dropoff_reached": false,
+      "accepted_edge_count": 80,
+      "replayed_directed_edge_count": 80,
+      "legs": [
+        {
+          "leg": "start_to_current_prefix",
+          "start_node": "node_97_87",
+          "end_node": "node_55_53",
+          "edge_count": 80,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0003-0007",
+      "seed": 3,
+      "sample_group": "orders",
+      "status": "route_complete",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_3/task-0003-0007/run_000/state.json",
+      "map_id": "grid-100x100-seed-3",
+      "map_directed_edges": 36625,
+      "preflight_sha256": "2f63ff48a6955c0c282977017ca71bdb9c50a9d34409ba690f172bb9201eb350",
+      "frozen_task_id": "task-0003-0007",
+      "route_complete": true,
+      "pickup_reached": true,
+      "dropoff_reached": true,
+      "accepted_edge_count": 71,
+      "replayed_directed_edge_count": 71,
+      "legs": [
+        {
+          "leg": "start_to_pickup",
+          "start_node": "node_4_23",
+          "end_node": "node_10_75",
+          "edge_count": 64,
+          "passed": true,
+          "violations": []
+        },
+        {
+          "leg": "pickup_to_dropoff",
+          "start_node": "node_10_75",
+          "end_node": "node_10_72",
+          "edge_count": 7,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0003-0008",
+      "seed": 3,
+      "sample_group": "orders",
+      "status": "route_complete",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_01/tasks/seed_3/task-0003-0008/run_000/state.json",
+      "map_id": "grid-100x100-seed-3",
+      "map_directed_edges": 36625,
+      "preflight_sha256": "c6fc030e419b0c228d6d92314c7c4109d234ac6b60ce9e1c98ced25ca00bc1fd",
+      "frozen_task_id": "task-0003-0008",
+      "route_complete": true,
+      "pickup_reached": true,
+      "dropoff_reached": true,
+      "accepted_edge_count": 79,
+      "replayed_directed_edge_count": 79,
+      "legs": [
+        {
+          "leg": "start_to_pickup",
+          "start_node": "node_67_54",
+          "end_node": "node_82_46",
+          "edge_count": 31,
+          "passed": true,
+          "violations": []
+        },
+        {
+          "leg": "pickup_to_dropoff",
+          "start_node": "node_82_46",
+          "end_node": "node_99_27",
+          "edge_count": 48,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0003-0009",
+      "seed": 3,
+      "sample_group": "orders",
+      "status": "route_complete",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_03/tasks/seed_3/task-0003-0009/run_000/state.json",
+      "map_id": "grid-100x100-seed-3",
+      "map_directed_edges": 36625,
+      "preflight_sha256": "37a98fa62abdd54a79390c87991d19b3c42d56923b15d7b6710847032e9c4208",
+      "frozen_task_id": "task-0003-0009",
+      "route_complete": true,
+      "pickup_reached": true,
+      "dropoff_reached": true,
+      "accepted_edge_count": 392,
+      "replayed_directed_edge_count": 392,
+      "legs": [
+        {
+          "leg": "start_to_pickup",
+          "start_node": "node_23_96",
+          "end_node": "node_99_23",
+          "edge_count": 169,
+          "passed": true,
+          "violations": []
+        },
+        {
+          "leg": "pickup_to_dropoff",
+          "start_node": "node_99_23",
+          "end_node": "node_75_86",
+          "edge_count": 223,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0003-0010",
+      "seed": 3,
+      "sample_group": "orders",
+      "status": "failed",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_3/task-0003-0010/run_000/state.json",
+      "map_id": "grid-100x100-seed-3",
+      "map_directed_edges": 36625,
+      "preflight_sha256": "a1d3923f2b687719d712fac671ccf2f97a29f7f6257dff5c946262880729387e",
+      "frozen_task_id": "task-0003-0010",
+      "route_complete": false,
+      "pickup_reached": false,
+      "dropoff_reached": false,
+      "accepted_edge_count": 61,
+      "replayed_directed_edge_count": 61,
+      "legs": [
+        {
+          "leg": "start_to_current_prefix",
+          "start_node": "node_83_18",
+          "end_node": "node_58_52",
+          "edge_count": 61,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "formal-task-0003-boundary",
+      "seed": 3,
+      "sample_group": "formal_scenarios",
+      "status": "failed",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_01/tasks/seed_3/formal-task-0003-boundary/run_000/state.json",
+      "map_id": "grid-100x100-seed-3",
+      "map_directed_edges": 36625,
+      "preflight_sha256": "b76a9e92063d9fbd26359e5608cddcfadfe51b82587d45969731c66552911295",
+      "frozen_task_id": "formal-task-0003-boundary",
+      "route_complete": false,
+      "pickup_reached": false,
+      "dropoff_reached": false,
+      "accepted_edge_count": 4,
+      "replayed_directed_edge_count": 4,
+      "legs": [
+        {
+          "leg": "start_to_current_prefix",
+          "start_node": "node_0_66",
+          "end_node": "node_4_66",
+          "edge_count": 4,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0004-0001",
+      "seed": 4,
+      "sample_group": "orders",
+      "status": "route_complete",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_01/tasks/seed_4/task-0004-0001/run_000/state.json",
+      "map_id": "grid-100x100-seed-4",
+      "map_directed_edges": 36621,
+      "preflight_sha256": "a0998b03a6bb5044a5a4172badc5f2886f05f63b140ebbb274b32016fb305e93",
+      "frozen_task_id": "task-0004-0001",
+      "route_complete": true,
+      "pickup_reached": true,
+      "dropoff_reached": true,
+      "accepted_edge_count": 227,
+      "replayed_directed_edge_count": 227,
+      "legs": [
+        {
+          "leg": "start_to_pickup",
+          "start_node": "node_87_33",
+          "end_node": "node_12_89",
+          "edge_count": 133,
+          "passed": true,
+          "violations": []
+        },
+        {
+          "leg": "pickup_to_dropoff",
+          "start_node": "node_12_89",
+          "end_node": "node_24_39",
+          "edge_count": 94,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0004-0002",
+      "seed": 4,
+      "sample_group": "orders",
+      "status": "route_complete",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_4/task-0004-0002/run_000/state.json",
+      "map_id": "grid-100x100-seed-4",
+      "map_directed_edges": 36621,
+      "preflight_sha256": "d220bd5d98a12a14d0ae8442ff579c6ee236c1124240eb9ce33caab12fda5bb0",
+      "frozen_task_id": "task-0004-0002",
+      "route_complete": true,
+      "pickup_reached": true,
+      "dropoff_reached": true,
+      "accepted_edge_count": 186,
+      "replayed_directed_edge_count": 186,
+      "legs": [
+        {
+          "leg": "start_to_pickup",
+          "start_node": "node_50_39",
+          "end_node": "node_8_66",
+          "edge_count": 69,
+          "passed": true,
+          "violations": []
+        },
+        {
+          "leg": "pickup_to_dropoff",
+          "start_node": "node_8_66",
+          "end_node": "node_64_23",
+          "edge_count": 117,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0004-0005",
+      "seed": 4,
+      "sample_group": "orders",
+      "status": "failed",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_01/tasks/seed_4/task-0004-0005/run_000/state.json",
+      "map_id": "grid-100x100-seed-4",
+      "map_directed_edges": 36621,
+      "preflight_sha256": "9f75550c0897d2c527f5365be654ee03ed9054235862c5263e450e76bd52d455",
+      "frozen_task_id": "task-0004-0005",
+      "route_complete": false,
+      "pickup_reached": false,
+      "dropoff_reached": false,
+      "accepted_edge_count": 3,
+      "replayed_directed_edge_count": 3,
+      "legs": [
+        {
+          "leg": "start_to_current_prefix",
+          "start_node": "node_34_0",
+          "end_node": "node_33_2",
+          "edge_count": 3,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0004-0006",
+      "seed": 4,
+      "sample_group": "orders",
+      "status": "route_complete",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_4/task-0004-0006/run_000/state.json",
+      "map_id": "grid-100x100-seed-4",
+      "map_directed_edges": 36621,
+      "preflight_sha256": "02f5ffb8d90c9f38cff2b6b36d65b170311f4937c8eb70b7ae17f1a72557ce7e",
+      "frozen_task_id": "task-0004-0006",
+      "route_complete": true,
+      "pickup_reached": true,
+      "dropoff_reached": true,
+      "accepted_edge_count": 87,
+      "replayed_directed_edge_count": 87,
+      "legs": [
+        {
+          "leg": "start_to_pickup",
+          "start_node": "node_65_10",
+          "end_node": "node_49_34",
+          "edge_count": 46,
+          "passed": true,
+          "violations": []
+        },
+        {
+          "leg": "pickup_to_dropoff",
+          "start_node": "node_49_34",
+          "end_node": "node_78_44",
+          "edge_count": 41,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0004-0007",
+      "seed": 4,
+      "sample_group": "orders",
+      "status": "failed",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_01/tasks/seed_4/task-0004-0007/run_000/state.json",
+      "map_id": "grid-100x100-seed-4",
+      "map_directed_edges": 36621,
+      "preflight_sha256": "fab0094409535f47bb5f650c51e9c291d001272e39980dfac6fb6094e7dfbfa9",
+      "frozen_task_id": "task-0004-0007",
+      "route_complete": false,
+      "pickup_reached": false,
+      "dropoff_reached": false,
+      "accepted_edge_count": 1,
+      "replayed_directed_edge_count": 1,
+      "legs": [
+        {
+          "leg": "start_to_current_prefix",
+          "start_node": "node_67_60",
+          "end_node": "node_67_61",
+          "edge_count": 1,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0004-0008",
+      "seed": 4,
+      "sample_group": "orders",
+      "status": "failed",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_4/task-0004-0008/run_000/state.json",
+      "map_id": "grid-100x100-seed-4",
+      "map_directed_edges": 36621,
+      "preflight_sha256": "642ec584ae05980f103514940d48254131d978241b8bf9f98a2e22c3d1595820",
+      "frozen_task_id": "task-0004-0008",
+      "route_complete": false,
+      "pickup_reached": false,
+      "dropoff_reached": false,
+      "accepted_edge_count": 30,
+      "replayed_directed_edge_count": 30,
+      "legs": [
+        {
+          "leg": "start_to_current_prefix",
+          "start_node": "node_36_2",
+          "end_node": "node_62_4",
+          "edge_count": 30,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0004-0009",
+      "seed": 4,
+      "sample_group": "orders",
+      "status": "route_complete",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_01/tasks/seed_4/task-0004-0009/run_000/state.json",
+      "map_id": "grid-100x100-seed-4",
+      "map_directed_edges": 36621,
+      "preflight_sha256": "5513c92a259f5a9e2e8bfcdce0dffc8a0c6a7459c253d993d2abccd57d8a84e0",
+      "frozen_task_id": "task-0004-0009",
+      "route_complete": true,
+      "pickup_reached": true,
+      "dropoff_reached": true,
+      "accepted_edge_count": 64,
+      "replayed_directed_edge_count": 64,
+      "legs": [
+        {
+          "leg": "start_to_pickup",
+          "start_node": "node_50_89",
+          "end_node": "node_46_76",
+          "edge_count": 21,
+          "passed": true,
+          "violations": []
+        },
+        {
+          "leg": "pickup_to_dropoff",
+          "start_node": "node_46_76",
+          "end_node": "node_81_76",
+          "edge_count": 43,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "formal-task-0004-boundary",
+      "seed": 4,
+      "sample_group": "formal_scenarios",
+      "status": "outcome_unknown",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_01/tasks/seed_4/formal-task-0004-boundary/run_000/state.json",
+      "map_id": "grid-100x100-seed-4",
+      "map_directed_edges": 36621,
+      "preflight_sha256": "5ec35988454192ffc78ab510a840b9c971d2b22149df343ef8fd2e064ac6608e",
+      "frozen_task_id": "formal-task-0004-boundary",
+      "route_complete": false,
+      "pickup_reached": false,
+      "dropoff_reached": false,
+      "accepted_edge_count": 2,
+      "replayed_directed_edge_count": 2,
+      "legs": [
+        {
+          "leg": "start_to_current_prefix",
+          "start_node": "node_99_73",
+          "end_node": "node_98_74",
+          "edge_count": 2,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0005-0004",
+      "seed": 5,
+      "sample_group": "orders",
+      "status": "ready",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_5/task-0005-0004/run_001/state.json",
+      "map_id": "grid-100x100-seed-5",
+      "map_directed_edges": 36648,
+      "preflight_sha256": "84929e52674d8c3fad82cb8181f7e314f921516975ce725a5a1edee477d4d906",
+      "frozen_task_id": "task-0005-0004",
+      "route_complete": false,
+      "pickup_reached": false,
+      "dropoff_reached": false,
+      "accepted_edge_count": 4,
+      "replayed_directed_edge_count": 4,
+      "legs": [
+        {
+          "leg": "start_to_current_prefix",
+          "start_node": "node_11_21",
+          "end_node": "node_12_24",
+          "edge_count": 4,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0005-0006",
+      "seed": 5,
+      "sample_group": "orders",
+      "status": "route_complete",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_01/tasks/seed_5/task-0005-0006/run_000/state.json",
+      "map_id": "grid-100x100-seed-5",
+      "map_directed_edges": 36648,
+      "preflight_sha256": "3d901caf1b9c617a3154e696d7e02a5b746dbc4c79b541920fd5e08aef8c7c1b",
+      "frozen_task_id": "task-0005-0006",
+      "route_complete": true,
+      "pickup_reached": true,
+      "dropoff_reached": true,
+      "accepted_edge_count": 179,
+      "replayed_directed_edge_count": 179,
+      "legs": [
+        {
+          "leg": "start_to_pickup",
+          "start_node": "node_75_9",
+          "end_node": "node_24_68",
+          "edge_count": 110,
+          "passed": true,
+          "violations": []
+        },
+        {
+          "leg": "pickup_to_dropoff",
+          "start_node": "node_24_68",
+          "end_node": "node_76_85",
+          "edge_count": 69,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "formal-task-0005-boundary",
+      "seed": 5,
+      "sample_group": "formal_scenarios",
+      "status": "route_complete",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_02/tasks/seed_5/formal-task-0005-boundary/run_000/state.json",
+      "map_id": "grid-100x100-seed-5",
+      "map_directed_edges": 36648,
+      "preflight_sha256": "5b170827e1054b1d446702b5147f52f958f8dc21ff9e859a77a548d82c028965",
+      "frozen_task_id": "formal-task-0005-boundary",
+      "route_complete": true,
+      "pickup_reached": true,
+      "dropoff_reached": true,
+      "accepted_edge_count": 210,
+      "replayed_directed_edge_count": 210,
+      "legs": [
+        {
+          "leg": "start_to_pickup",
+          "start_node": "node_0_14",
+          "end_node": "node_75_15",
+          "edge_count": 86,
+          "passed": true,
+          "violations": []
+        },
+        {
+          "leg": "pickup_to_dropoff",
+          "start_node": "node_75_15",
+          "end_node": "node_39_97",
+          "edge_count": 124,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0006-0002",
+      "seed": 6,
+      "sample_group": "orders",
+      "status": "failed",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_02/tasks/seed_6/task-0006-0002/run_000/state.json",
+      "map_id": "grid-100x100-seed-6",
+      "map_directed_edges": 36602,
+      "preflight_sha256": "d254c7af9b7f7958caf1c405c6e55fc4afdd1936b02447f94c72b6e1fe1830e5",
+      "frozen_task_id": "task-0006-0002",
+      "route_complete": false,
+      "pickup_reached": false,
+      "dropoff_reached": false,
+      "accepted_edge_count": 1,
+      "replayed_directed_edge_count": 1,
+      "legs": [
+        {
+          "leg": "start_to_current_prefix",
+          "start_node": "node_23_48",
+          "end_node": "node_24_48",
+          "edge_count": 1,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0006-0003",
+      "seed": 6,
+      "sample_group": "orders",
+      "status": "failed",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_01/tasks/seed_6/task-0006-0003/run_000/state.json",
+      "map_id": "grid-100x100-seed-6",
+      "map_directed_edges": 36602,
+      "preflight_sha256": "cc9e85fb8cacb54f7cc76b05cc83f8bb5f56112b18b60af004ab622ad0c08078",
+      "frozen_task_id": "task-0006-0003",
+      "route_complete": false,
+      "pickup_reached": false,
+      "dropoff_reached": false,
+      "accepted_edge_count": 9,
+      "replayed_directed_edge_count": 9,
+      "legs": [
+        {
+          "leg": "start_to_current_prefix",
+          "start_node": "node_91_73",
+          "end_node": "node_89_70",
+          "edge_count": 9,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0006-0004",
+      "seed": 6,
+      "sample_group": "orders",
+      "status": "failed",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_01/tasks/seed_6/task-0006-0004/run_000/state.json",
+      "map_id": "grid-100x100-seed-6",
+      "map_directed_edges": 36602,
+      "preflight_sha256": "f4e7bd8ba735823262d23e0c412d44148e6e8493224c0af6289b821c5c8c0db1",
+      "frozen_task_id": "task-0006-0004",
+      "route_complete": false,
+      "pickup_reached": false,
+      "dropoff_reached": false,
+      "accepted_edge_count": 0,
+      "replayed_directed_edge_count": 0,
+      "legs": [
+        {
+          "leg": "start_to_current_prefix",
+          "start_node": "node_72_63",
+          "end_node": "node_72_63",
+          "edge_count": 0,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0006-0005",
+      "seed": 6,
+      "sample_group": "orders",
+      "status": "route_complete",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_01/tasks/seed_6/task-0006-0005/run_000/state.json",
+      "map_id": "grid-100x100-seed-6",
+      "map_directed_edges": 36602,
+      "preflight_sha256": "569ded562d3c4acbb45a5ce6d1df24a8b192f7b2da7b2305ed7e9343650609d5",
+      "frozen_task_id": "task-0006-0005",
+      "route_complete": true,
+      "pickup_reached": true,
+      "dropoff_reached": true,
+      "accepted_edge_count": 60,
+      "replayed_directed_edge_count": 60,
+      "legs": [
+        {
+          "leg": "start_to_pickup",
+          "start_node": "node_63_40",
+          "end_node": "node_59_46",
+          "edge_count": 10,
+          "passed": true,
+          "violations": []
+        },
+        {
+          "leg": "pickup_to_dropoff",
+          "start_node": "node_59_46",
+          "end_node": "node_23_56",
+          "edge_count": 50,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0006-0006",
+      "seed": 6,
+      "sample_group": "orders",
+      "status": "failed",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_01/tasks/seed_6/task-0006-0006/run_000/state.json",
+      "map_id": "grid-100x100-seed-6",
+      "map_directed_edges": 36602,
+      "preflight_sha256": "00fe54fe4982822c5e2ca7e1ea687c9ae82d1df4d048da41d50ccf2e5655efa8",
+      "frozen_task_id": "task-0006-0006",
+      "route_complete": false,
+      "pickup_reached": false,
+      "dropoff_reached": false,
+      "accepted_edge_count": 70,
+      "replayed_directed_edge_count": 70,
+      "legs": [
+        {
+          "leg": "start_to_current_prefix",
+          "start_node": "node_75_96",
+          "end_node": "node_36_75",
+          "edge_count": 70,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0006-0007",
+      "seed": 6,
+      "sample_group": "orders",
+      "status": "route_complete",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_6/task-0006-0007/run_000/state.json",
+      "map_id": "grid-100x100-seed-6",
+      "map_directed_edges": 36602,
+      "preflight_sha256": "ee5389da8eb3efe5f1c77545db8b9531880ac5d80032832300b54016b33345a6",
+      "frozen_task_id": "task-0006-0007",
+      "route_complete": true,
+      "pickup_reached": true,
+      "dropoff_reached": true,
+      "accepted_edge_count": 99,
+      "replayed_directed_edge_count": 99,
+      "legs": [
+        {
+          "leg": "start_to_pickup",
+          "start_node": "node_52_74",
+          "end_node": "node_23_82",
+          "edge_count": 45,
+          "passed": true,
+          "violations": []
+        },
+        {
+          "leg": "pickup_to_dropoff",
+          "start_node": "node_23_82",
+          "end_node": "node_39_54",
+          "edge_count": 54,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0006-0008",
+      "seed": 6,
+      "sample_group": "orders",
+      "status": "route_complete",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_6/task-0006-0008/run_000/state.json",
+      "map_id": "grid-100x100-seed-6",
+      "map_directed_edges": 36602,
+      "preflight_sha256": "c4271b8df8725b724d1d8ae0044684a990161d8185ddc2744bbd318890cc38bd",
+      "frozen_task_id": "task-0006-0008",
+      "route_complete": true,
+      "pickup_reached": true,
+      "dropoff_reached": true,
+      "accepted_edge_count": 243,
+      "replayed_directed_edge_count": 243,
+      "legs": [
+        {
+          "leg": "start_to_pickup",
+          "start_node": "node_39_92",
+          "end_node": "node_13_19",
+          "edge_count": 145,
+          "passed": true,
+          "violations": []
+        },
+        {
+          "leg": "pickup_to_dropoff",
+          "start_node": "node_13_19",
+          "end_node": "node_79_47",
+          "edge_count": 98,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0006-0009",
+      "seed": 6,
+      "sample_group": "orders",
+      "status": "route_complete",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_6/task-0006-0009/run_000/state.json",
+      "map_id": "grid-100x100-seed-6",
+      "map_directed_edges": 36602,
+      "preflight_sha256": "5efaf0e3115f82e87e7e3ff7e633d4b0f17cca8800a349fcc0405fa194b43c14",
+      "frozen_task_id": "task-0006-0009",
+      "route_complete": true,
+      "pickup_reached": true,
+      "dropoff_reached": true,
+      "accepted_edge_count": 156,
+      "replayed_directed_edge_count": 156,
+      "legs": [
+        {
+          "leg": "start_to_pickup",
+          "start_node": "node_38_75",
+          "end_node": "node_62_33",
+          "edge_count": 98,
+          "passed": true,
+          "violations": []
+        },
+        {
+          "leg": "pickup_to_dropoff",
+          "start_node": "node_62_33",
+          "end_node": "node_82_1",
+          "edge_count": 58,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0006-0010",
+      "seed": 6,
+      "sample_group": "orders",
+      "status": "failed",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_03/tasks/seed_6/task-0006-0010/run_000/state.json",
+      "map_id": "grid-100x100-seed-6",
+      "map_directed_edges": 36602,
+      "preflight_sha256": "066aa2d7bc840c47dc755f5d7e3b09f7308df53f7d28b615ce3f5943d6d9b339",
+      "frozen_task_id": "task-0006-0010",
+      "route_complete": false,
+      "pickup_reached": false,
+      "dropoff_reached": false,
+      "accepted_edge_count": 27,
+      "replayed_directed_edge_count": 27,
+      "legs": [
+        {
+          "leg": "start_to_current_prefix",
+          "start_node": "node_84_57",
+          "end_node": "node_66_48",
+          "edge_count": 27,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "formal-task-0006-feasible",
+      "seed": 6,
+      "sample_group": "formal_scenarios",
+      "status": "ready",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_6/formal-task-0006-feasible/run_001/state.json",
+      "map_id": "grid-100x100-seed-6",
+      "map_directed_edges": 36602,
+      "preflight_sha256": "a6ec4b926cab32d0cfbc6497681fb9d9889af249faeb8bc9a2ccea0bec8a5986",
+      "frozen_task_id": "formal-task-0006-feasible",
+      "route_complete": false,
+      "pickup_reached": false,
+      "dropoff_reached": false,
+      "accepted_edge_count": 5,
+      "replayed_directed_edge_count": 5,
+      "legs": [
+        {
+          "leg": "start_to_current_prefix",
+          "start_node": "node_94_1",
+          "end_node": "node_91_3",
+          "edge_count": 5,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "formal-task-0006-boundary",
+      "seed": 6,
+      "sample_group": "formal_scenarios",
+      "status": "route_complete",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_02/tasks/seed_6/formal-task-0006-boundary/run_000/state.json",
+      "map_id": "grid-100x100-seed-6",
+      "map_directed_edges": 36602,
+      "preflight_sha256": "8b39288b2ecfe1bd9902ea4f24cc7b5cfcbab389cd5716a024421cb3feff6018",
+      "frozen_task_id": "formal-task-0006-boundary",
+      "route_complete": true,
+      "pickup_reached": true,
+      "dropoff_reached": true,
+      "accepted_edge_count": 262,
+      "replayed_directed_edge_count": 262,
+      "legs": [
+        {
+          "leg": "start_to_pickup",
+          "start_node": "node_99_94",
+          "end_node": "node_42_17",
+          "edge_count": 142,
+          "passed": true,
+          "violations": []
+        },
+        {
+          "leg": "pickup_to_dropoff",
+          "start_node": "node_42_17",
+          "end_node": "node_5_96",
+          "edge_count": 120,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "formal-task-0006-detour",
+      "seed": 6,
+      "sample_group": "formal_scenarios",
+      "status": "failed",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_6/formal-task-0006-detour/run_000/state.json",
+      "map_id": "grid-100x100-seed-6",
+      "map_directed_edges": 36602,
+      "preflight_sha256": "b985d40f1f548a37b8a86ea0c6dbc38703b1ba6f61da36fcd2f94b3ca70dc78c",
+      "frozen_task_id": "formal-task-0006-detour",
+      "route_complete": false,
+      "pickup_reached": false,
+      "dropoff_reached": false,
+      "accepted_edge_count": 36,
+      "replayed_directed_edge_count": 36,
+      "legs": [
+        {
+          "leg": "start_to_current_prefix",
+          "start_node": "node_0_0",
+          "end_node": "node_1_35",
+          "edge_count": 36,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0007-0001",
+      "seed": 7,
+      "sample_group": "orders",
+      "status": "route_complete",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery_addendum/tasks/seed_7/task-0007-0001/run_001/state.json",
+      "map_id": "grid-100x100-seed-7",
+      "map_directed_edges": 36692,
+      "preflight_sha256": "2566ed10ec3ecaedd7fd841475143ba4ccafa855d8d0a0c5d04a451bc4ea1d47",
+      "frozen_task_id": "task-0007-0001",
+      "route_complete": true,
+      "pickup_reached": true,
+      "dropoff_reached": true,
+      "accepted_edge_count": 208,
+      "replayed_directed_edge_count": 208,
+      "legs": [
+        {
+          "leg": "start_to_pickup",
+          "start_node": "node_1_49",
+          "end_node": "node_84_12",
+          "edge_count": 124,
+          "passed": true,
+          "violations": []
+        },
+        {
+          "leg": "pickup_to_dropoff",
+          "start_node": "node_84_12",
+          "end_node": "node_64_68",
+          "edge_count": 84,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0007-0004",
+      "seed": 7,
+      "sample_group": "orders",
+      "status": "failed",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_7/task-0007-0004/run_000/state.json",
+      "map_id": "grid-100x100-seed-7",
+      "map_directed_edges": 36692,
+      "preflight_sha256": "507aeeb2c67d3b6f46a25e2d1206c18d32c41742d6952743e4ff2a7a42252b41",
+      "frozen_task_id": "task-0007-0004",
+      "route_complete": false,
+      "pickup_reached": false,
+      "dropoff_reached": false,
+      "accepted_edge_count": 28,
+      "replayed_directed_edge_count": 28,
+      "legs": [
+        {
+          "leg": "start_to_current_prefix",
+          "start_node": "node_96_57",
+          "end_node": "node_71_54",
+          "edge_count": 28,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0007-0005",
+      "seed": 7,
+      "sample_group": "orders",
+      "status": "route_complete",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_02/tasks/seed_7/task-0007-0005/run_000/state.json",
+      "map_id": "grid-100x100-seed-7",
+      "map_directed_edges": 36692,
+      "preflight_sha256": "dfb26e18be25598ab703164f6225bec1bf7daa6ee4ff2d44a370cae425bb0df4",
+      "frozen_task_id": "task-0007-0005",
+      "route_complete": true,
+      "pickup_reached": true,
+      "dropoff_reached": true,
+      "accepted_edge_count": 238,
+      "replayed_directed_edge_count": 238,
+      "legs": [
+        {
+          "leg": "start_to_pickup",
+          "start_node": "node_69_0",
+          "end_node": "node_12_86",
+          "edge_count": 147,
+          "passed": true,
+          "violations": []
+        },
+        {
+          "leg": "pickup_to_dropoff",
+          "start_node": "node_12_86",
+          "end_node": "node_87_78",
+          "edge_count": 91,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0007-0007",
+      "seed": 7,
+      "sample_group": "orders",
+      "status": "failed",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_01/tasks/seed_7/task-0007-0007/run_000/state.json",
+      "map_id": "grid-100x100-seed-7",
+      "map_directed_edges": 36692,
+      "preflight_sha256": "0a12fe16f28e158fe50ba8e09a10746e634ed15c5fed201c46990d3dd87aa1ce",
+      "frozen_task_id": "task-0007-0007",
+      "route_complete": false,
+      "pickup_reached": false,
+      "dropoff_reached": false,
+      "accepted_edge_count": 19,
+      "replayed_directed_edge_count": 19,
+      "legs": [
+        {
+          "leg": "start_to_current_prefix",
+          "start_node": "node_71_71",
+          "end_node": "node_56_75",
+          "edge_count": 19,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0007-0008",
+      "seed": 7,
+      "sample_group": "orders",
+      "status": "outcome_unknown",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_7/task-0007-0008/run_000/state.json",
+      "map_id": "grid-100x100-seed-7",
+      "map_directed_edges": 36692,
+      "preflight_sha256": "a23fa1356f8b4fa4530be5a259f55c0c1ed95c0577a637a3d471b0278dbb4cdc",
+      "frozen_task_id": "task-0007-0008",
+      "route_complete": false,
+      "pickup_reached": false,
+      "dropoff_reached": false,
+      "accepted_edge_count": 24,
+      "replayed_directed_edge_count": 24,
+      "legs": [
+        {
+          "leg": "start_to_current_prefix",
+          "start_node": "node_27_35",
+          "end_node": "node_12_44",
+          "edge_count": 24,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0007-0009",
+      "seed": 7,
+      "sample_group": "orders",
+      "status": "route_complete",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_7/task-0007-0009/run_000/state.json",
+      "map_id": "grid-100x100-seed-7",
+      "map_directed_edges": 36692,
+      "preflight_sha256": "6e46bc3793bc1044c9b30ec3542e5b94a8df0c491543011ff6b495d7069ae1aa",
+      "frozen_task_id": "task-0007-0009",
+      "route_complete": true,
+      "pickup_reached": true,
+      "dropoff_reached": true,
+      "accepted_edge_count": 179,
+      "replayed_directed_edge_count": 179,
+      "legs": [
+        {
+          "leg": "start_to_pickup",
+          "start_node": "node_92_81",
+          "end_node": "node_94_40",
+          "edge_count": 89,
+          "passed": true,
+          "violations": []
+        },
+        {
+          "leg": "pickup_to_dropoff",
+          "start_node": "node_94_40",
+          "end_node": "node_55_83",
+          "edge_count": 90,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "formal-task-0007-feasible",
+      "seed": 7,
+      "sample_group": "formal_scenarios",
+      "status": "failed",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_7/formal-task-0007-feasible/run_000/state.json",
+      "map_id": "grid-100x100-seed-7",
+      "map_directed_edges": 36692,
+      "preflight_sha256": "831b2dfc3ac3b1967ae3edf17562a98dc6a46a8e4876c3ec14f203b24ed9a708",
+      "frozen_task_id": "formal-task-0007-feasible",
+      "route_complete": false,
+      "pickup_reached": false,
+      "dropoff_reached": false,
+      "accepted_edge_count": 66,
+      "replayed_directed_edge_count": 66,
+      "legs": [
+        {
+          "leg": "start_to_current_prefix",
+          "start_node": "node_53_5",
+          "end_node": "node_28_44",
+          "edge_count": 66,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "formal-task-0007-boundary",
+      "seed": 7,
+      "sample_group": "formal_scenarios",
+      "status": "failed",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_01/tasks/seed_7/formal-task-0007-boundary/run_000/state.json",
+      "map_id": "grid-100x100-seed-7",
+      "map_directed_edges": 36692,
+      "preflight_sha256": "deef039974abdc7f5d276a59af13860e28fe7051336ac922e92677a7720c6da5",
+      "frozen_task_id": "formal-task-0007-boundary",
+      "route_complete": false,
+      "pickup_reached": false,
+      "dropoff_reached": false,
+      "accepted_edge_count": 2,
+      "replayed_directed_edge_count": 2,
+      "legs": [
+        {
+          "leg": "start_to_current_prefix",
+          "start_node": "node_99_37",
+          "end_node": "node_98_38",
+          "edge_count": 2,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0008-0001",
+      "seed": 8,
+      "sample_group": "orders",
+      "status": "route_complete",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_8/task-0008-0001/run_000/state.json",
+      "map_id": "grid-100x100-seed-8",
+      "map_directed_edges": 36569,
+      "preflight_sha256": "396ce7de446288dea3783972ab40934511f16899af63dd9b10c8c4f47a73bbd0",
+      "frozen_task_id": "task-0008-0001",
+      "route_complete": true,
+      "pickup_reached": true,
+      "dropoff_reached": true,
+      "accepted_edge_count": 62,
+      "replayed_directed_edge_count": 62,
+      "legs": [
+        {
+          "leg": "start_to_pickup",
+          "start_node": "node_77_32",
+          "end_node": "node_60_51",
+          "edge_count": 40,
+          "passed": true,
+          "violations": []
+        },
+        {
+          "leg": "pickup_to_dropoff",
+          "start_node": "node_60_51",
+          "end_node": "node_60_67",
+          "edge_count": 22,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0008-0004",
+      "seed": 8,
+      "sample_group": "orders",
+      "status": "route_complete",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_8/task-0008-0004/run_000/state.json",
+      "map_id": "grid-100x100-seed-8",
+      "map_directed_edges": 36569,
+      "preflight_sha256": "9d3fe90f59034fa49a975b48a0ad7c38f84b95c3d2cee7c2c9b889a7c50d3df5",
+      "frozen_task_id": "task-0008-0004",
+      "route_complete": true,
+      "pickup_reached": true,
+      "dropoff_reached": true,
+      "accepted_edge_count": 79,
+      "replayed_directed_edge_count": 79,
+      "legs": [
+        {
+          "leg": "start_to_pickup",
+          "start_node": "node_49_74",
+          "end_node": "node_43_94",
+          "edge_count": 26,
+          "passed": true,
+          "violations": []
+        },
+        {
+          "leg": "pickup_to_dropoff",
+          "start_node": "node_43_94",
+          "end_node": "node_12_76",
+          "edge_count": 53,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0008-0005",
+      "seed": 8,
+      "sample_group": "orders",
+      "status": "failed",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_02/tasks/seed_8/task-0008-0005/run_000/state.json",
+      "map_id": "grid-100x100-seed-8",
+      "map_directed_edges": 36569,
+      "preflight_sha256": "9141456b01a69d6f35aabae927510908c18bafffd89232347c0535c89ec7a03c",
+      "frozen_task_id": "task-0008-0005",
+      "route_complete": false,
+      "pickup_reached": false,
+      "dropoff_reached": false,
+      "accepted_edge_count": 33,
+      "replayed_directed_edge_count": 33,
+      "legs": [
+        {
+          "leg": "start_to_current_prefix",
+          "start_node": "node_7_74",
+          "end_node": "node_35_75",
+          "edge_count": 33,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0008-0006",
+      "seed": 8,
+      "sample_group": "orders",
+      "status": "route_complete",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_8/task-0008-0006/run_000/state.json",
+      "map_id": "grid-100x100-seed-8",
+      "map_directed_edges": 36569,
+      "preflight_sha256": "3fb594d68184f97d60149e79c55279ce7ed8f9033f486b0baf32278330c7ccdc",
+      "frozen_task_id": "task-0008-0006",
+      "route_complete": true,
+      "pickup_reached": true,
+      "dropoff_reached": true,
+      "accepted_edge_count": 108,
+      "replayed_directed_edge_count": 108,
+      "legs": [
+        {
+          "leg": "start_to_pickup",
+          "start_node": "node_48_39",
+          "end_node": "node_39_53",
+          "edge_count": 23,
+          "passed": true,
+          "violations": []
+        },
+        {
+          "leg": "pickup_to_dropoff",
+          "start_node": "node_39_53",
+          "end_node": "node_7_16",
+          "edge_count": 85,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0008-0008",
+      "seed": 8,
+      "sample_group": "orders",
+      "status": "outcome_unknown",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_8/task-0008-0008/run_000/state.json",
+      "map_id": "grid-100x100-seed-8",
+      "map_directed_edges": 36569,
+      "preflight_sha256": "a76f4f75d0100bc76735859e66477218b729b8ae300715eeb667f2990bfc98b5",
+      "frozen_task_id": "task-0008-0008",
+      "route_complete": false,
+      "pickup_reached": false,
+      "dropoff_reached": false,
+      "accepted_edge_count": 41,
+      "replayed_directed_edge_count": 41,
+      "legs": [
+        {
+          "leg": "start_to_current_prefix",
+          "start_node": "node_18_55",
+          "end_node": "node_51_55",
+          "edge_count": 41,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0008-0009",
+      "seed": 8,
+      "sample_group": "orders",
+      "status": "failed",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_01/tasks/seed_8/task-0008-0009/run_000/state.json",
+      "map_id": "grid-100x100-seed-8",
+      "map_directed_edges": 36569,
+      "preflight_sha256": "e5d1316821ff4fb6b4ce6a79333c99581b6dff2024642456cc8846303f835dd5",
+      "frozen_task_id": "task-0008-0009",
+      "route_complete": false,
+      "pickup_reached": false,
+      "dropoff_reached": false,
+      "accepted_edge_count": 4,
+      "replayed_directed_edge_count": 4,
+      "legs": [
+        {
+          "leg": "start_to_current_prefix",
+          "start_node": "node_22_17",
+          "end_node": "node_24_19",
+          "edge_count": 4,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "formal-task-0008-detour",
+      "seed": 8,
+      "sample_group": "formal_scenarios",
+      "status": "route_complete",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_03/tasks/seed_8/formal-task-0008-detour/run_000/state.json",
+      "map_id": "grid-100x100-seed-8",
+      "map_directed_edges": 36569,
+      "preflight_sha256": "2734bc90874e287f04fccee33653b6dfa1b3f9727582135e3524a5e8879231db",
+      "frozen_task_id": "formal-task-0008-detour",
+      "route_complete": true,
+      "pickup_reached": true,
+      "dropoff_reached": true,
+      "accepted_edge_count": 179,
+      "replayed_directed_edge_count": 179,
+      "legs": [
+        {
+          "leg": "start_to_pickup",
+          "start_node": "node_0_0",
+          "end_node": "node_0_23",
+          "edge_count": 25,
+          "passed": true,
+          "violations": []
+        },
+        {
+          "leg": "pickup_to_dropoff",
+          "start_node": "node_0_23",
+          "end_node": "node_80_97",
+          "edge_count": 154,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0009-0001",
+      "seed": 9,
+      "sample_group": "orders",
+      "status": "route_complete",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_02/tasks/seed_9/task-0009-0001/run_000/state.json",
+      "map_id": "grid-100x100-seed-9",
+      "map_directed_edges": 36613,
+      "preflight_sha256": "943727b9bfd094395d5eb7708aa5cb8f39a22d0cb691f9570810dcd831b6297d",
+      "frozen_task_id": "task-0009-0001",
+      "route_complete": true,
+      "pickup_reached": true,
+      "dropoff_reached": true,
+      "accepted_edge_count": 233,
+      "replayed_directed_edge_count": 233,
+      "legs": [
+        {
+          "leg": "start_to_pickup",
+          "start_node": "node_91_84",
+          "end_node": "node_68_9",
+          "edge_count": 150,
+          "passed": true,
+          "violations": []
+        },
+        {
+          "leg": "pickup_to_dropoff",
+          "start_node": "node_68_9",
+          "end_node": "node_54_72",
+          "edge_count": 83,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0009-0002",
+      "seed": 9,
+      "sample_group": "orders",
+      "status": "failed",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery_addendum/tasks/seed_9/task-0009-0002/run_001/state.json",
+      "map_id": "grid-100x100-seed-9",
+      "map_directed_edges": 36613,
+      "preflight_sha256": "88e247be7d64f11c63c1d182cf3d3e914e5efce4d674bccd538cde509c53bcca",
+      "frozen_task_id": "task-0009-0002",
+      "route_complete": false,
+      "pickup_reached": false,
+      "dropoff_reached": false,
+      "accepted_edge_count": 82,
+      "replayed_directed_edge_count": 82,
+      "legs": [
+        {
+          "leg": "start_to_current_prefix",
+          "start_node": "node_77_14",
+          "end_node": "node_75_84",
+          "edge_count": 82,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0009-0004",
+      "seed": 9,
+      "sample_group": "orders",
+      "status": "failed",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_01/tasks/seed_9/task-0009-0004/run_000/state.json",
+      "map_id": "grid-100x100-seed-9",
+      "map_directed_edges": 36613,
+      "preflight_sha256": "d74b341b379e52d1813374534d0c2aa4eebf5319d125138988c29c02f66b2b61",
+      "frozen_task_id": "task-0009-0004",
+      "route_complete": false,
+      "pickup_reached": false,
+      "dropoff_reached": false,
+      "accepted_edge_count": 4,
+      "replayed_directed_edge_count": 4,
+      "legs": [
+        {
+          "leg": "start_to_current_prefix",
+          "start_node": "node_26_25",
+          "end_node": "node_27_28",
+          "edge_count": 4,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0009-0005",
+      "seed": 9,
+      "sample_group": "orders",
+      "status": "route_complete",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_9/task-0009-0005/run_000/state.json",
+      "map_id": "grid-100x100-seed-9",
+      "map_directed_edges": 36613,
+      "preflight_sha256": "58c85f8b12e123df33641dfc912cf33b174004c2d664525785c1fd58d2eaa1b5",
+      "frozen_task_id": "task-0009-0005",
+      "route_complete": true,
+      "pickup_reached": true,
+      "dropoff_reached": true,
+      "accepted_edge_count": 202,
+      "replayed_directed_edge_count": 202,
+      "legs": [
+        {
+          "leg": "start_to_pickup",
+          "start_node": "node_97_77",
+          "end_node": "node_28_30",
+          "edge_count": 140,
+          "passed": true,
+          "violations": []
+        },
+        {
+          "leg": "pickup_to_dropoff",
+          "start_node": "node_28_30",
+          "end_node": "node_84_28",
+          "edge_count": 62,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0009-0007",
+      "seed": 9,
+      "sample_group": "orders",
+      "status": "failed",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_01/tasks/seed_9/task-0009-0007/run_000/state.json",
+      "map_id": "grid-100x100-seed-9",
+      "map_directed_edges": 36613,
+      "preflight_sha256": "d8ee83483eb60d2efa3d3c0a5fafeb2d05942a4f751fe0bd4b1dde9e1b49f966",
+      "frozen_task_id": "task-0009-0007",
+      "route_complete": false,
+      "pickup_reached": false,
+      "dropoff_reached": false,
+      "accepted_edge_count": 7,
+      "replayed_directed_edge_count": 7,
+      "legs": [
+        {
+          "leg": "start_to_current_prefix",
+          "start_node": "node_42_77",
+          "end_node": "node_38_80",
+          "edge_count": 7,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0009-0008",
+      "seed": 9,
+      "sample_group": "orders",
+      "status": "route_complete",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery_addendum/tasks/seed_9/task-0009-0008/run_001/state.json",
+      "map_id": "grid-100x100-seed-9",
+      "map_directed_edges": 36613,
+      "preflight_sha256": "1591c156163f37230c241c584a279e0f43f9edbb0ebd8401f021d7d822e6f74b",
+      "frozen_task_id": "task-0009-0008",
+      "route_complete": true,
+      "pickup_reached": true,
+      "dropoff_reached": true,
+      "accepted_edge_count": 268,
+      "replayed_directed_edge_count": 268,
+      "legs": [
+        {
+          "leg": "start_to_pickup",
+          "start_node": "node_49_73",
+          "end_node": "node_70_2",
+          "edge_count": 140,
+          "passed": true,
+          "violations": []
+        },
+        {
+          "leg": "pickup_to_dropoff",
+          "start_node": "node_70_2",
+          "end_node": "node_21_69",
+          "edge_count": 128,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "task-0009-0009",
+      "seed": 9,
+      "sample_group": "orders",
+      "status": "failed",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_01/tasks/seed_9/task-0009-0009/run_000/state.json",
+      "map_id": "grid-100x100-seed-9",
+      "map_directed_edges": 36613,
+      "preflight_sha256": "67f81029ba2d6e03fda6a5dcc0ffa5eebc32be4c29702a5d332f250417fcb6c6",
+      "frozen_task_id": "task-0009-0009",
+      "route_complete": false,
+      "pickup_reached": false,
+      "dropoff_reached": false,
+      "accepted_edge_count": 2,
+      "replayed_directed_edge_count": 2,
+      "legs": [
+        {
+          "leg": "start_to_current_prefix",
+          "start_node": "node_51_15",
+          "end_node": "node_50_16",
+          "edge_count": 2,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "formal-task-0009-feasible",
+      "seed": 9,
+      "sample_group": "formal_scenarios",
+      "status": "failed",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_01/tasks/seed_9/formal-task-0009-feasible/run_000/state.json",
+      "map_id": "grid-100x100-seed-9",
+      "map_directed_edges": 36613,
+      "preflight_sha256": "83e4aebc0f6e23e8eca9a6c7d40df30c7bd6c9fdf11853ebd676fd450913c7c2",
+      "frozen_task_id": "formal-task-0009-feasible",
+      "route_complete": false,
+      "pickup_reached": false,
+      "dropoff_reached": false,
+      "accepted_edge_count": 15,
+      "replayed_directed_edge_count": 15,
+      "legs": [
+        {
+          "leg": "start_to_current_prefix",
+          "start_node": "node_75_85",
+          "end_node": "node_84_79",
+          "edge_count": 15,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "formal-task-0009-boundary",
+      "seed": 9,
+      "sample_group": "formal_scenarios",
+      "status": "failed",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_01/tasks/seed_9/formal-task-0009-boundary/run_000/state.json",
+      "map_id": "grid-100x100-seed-9",
+      "map_directed_edges": 36613,
+      "preflight_sha256": "3fabb095a16728f0923e0c8e545ff3dbe8cb71faa2bd8a48afdac4301d807351",
+      "frozen_task_id": "formal-task-0009-boundary",
+      "route_complete": false,
+      "pickup_reached": false,
+      "dropoff_reached": false,
+      "accepted_edge_count": 15,
+      "replayed_directed_edge_count": 15,
+      "legs": [
+        {
+          "leg": "start_to_current_prefix",
+          "start_node": "node_19_0",
+          "end_node": "node_21_13",
+          "edge_count": 15,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    },
+    {
+      "task_id": "formal-task-0009-detour",
+      "seed": 9,
+      "sample_group": "formal_scenarios",
+      "status": "route_complete",
+      "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_9/formal-task-0009-detour/run_000/state.json",
+      "map_id": "grid-100x100-seed-9",
+      "map_directed_edges": 36613,
+      "preflight_sha256": "2d861e64d3108e891c852dba3e20953d0fbe04c33be4e6b1f20e860d483c2537",
+      "frozen_task_id": "formal-task-0009-detour",
+      "route_complete": true,
+      "pickup_reached": true,
+      "dropoff_reached": true,
+      "accepted_edge_count": 127,
+      "replayed_directed_edge_count": 127,
+      "legs": [
+        {
+          "leg": "start_to_pickup",
+          "start_node": "node_0_0",
+          "end_node": "node_0_16",
+          "edge_count": 18,
+          "passed": true,
+          "violations": []
+        },
+        {
+          "leg": "pickup_to_dropoff",
+          "start_node": "node_0_16",
+          "end_node": "node_75_18",
+          "edge_count": 109,
+          "passed": true,
+          "violations": []
+        }
+      ],
+      "replay_violations": [],
+      "errors": [],
+      "passed": true
+    }
+  ],
+  "note": "Read-only replay against each task's frozen preflight map and blocked-edge set. A route is counted compliant only when every accepted segment exists in the directed graph, matches its node sequence and direction labels, obeys pickup/dropoff order, and has no revisits."
+}

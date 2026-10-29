@@ -1,0 +1,63 @@
+{
+  "schema_version": "codex.research-checkpoint.v1",
+  "checkpoint_local": "2026-10-29 11:49 CST",
+  "classification": "partial_R4_checkpoint",
+  "source_root": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2",
+  "parent_manifest_sha256": "09ec51ce7f14233252acfb1383330e725fa3f1eb8db38bfbfbc7d91f147f46ed",
+  "parent_status_summary": {
+    "schema_version": "codex.r4-parent-status-summary.v1",
+    "snapshot_local": "2026-10-29T11:52:28+08:00",
+    "manifest_updated_at_utc": "2026-10-29T03:52:17.079090+00:00",
+    "manifest_status": "running",
+    "model_requests_used": 8515,
+    "task_status_counts": {
+      "active": 3,
+      "failed": 35,
+      "outcome_unknown": 5,
+      "pending": 41,
+      "ready": 4,
+      "route_complete": 41
+    },
+    "unresolved_delivery_records": 24,
+    "pause_reason": "All LaunchAgents for this R4 formal batch were disabled after terminal requests were committed; no in-flight delivery remains.",
+    "interpretation": "Partial status snapshot. Parent is still running; active tasks and unresolved delivery records remain. The pause reason conflicts with those fields; do not treat this as batch completion."
+  },
+  "files": [
+    {
+      "source_path": "outputs/route_layer/r4_codex_formal_batch_20261027_v2/full_flow_directed_audit_20261029T1138CST.json",
+      "archive_path": "r4_full_flow_directed_audit_20261029T1138CST_repo_relative.json",
+      "source_sha256": "b99b702e37cdaec3ddc75257a133916b4b6b8a7c307452b9837e32f932feb9a3",
+      "size_bytes": 42201
+    },
+    {
+      "source_path": "outputs/route_layer/r4_codex_formal_batch_20261027_v2/per_segment_directed_edge_audit_20261029_checkpoint_40.json",
+      "archive_path": "r4_per_segment_directed_edge_audit_20261029_checkpoint_40_repo_relative.json",
+      "source_sha256": "699bee70283bef6d9dc6d2ea198d6c06432f5cb47d28fb5a7a71b7c3b56a73e1",
+      "size_bytes": 104290
+    },
+    {
+      "source_path": "outputs/route_layer/r4_ev2_cumulative_audit_20261029T1140CST/manifest.json",
+      "archive_path": "r4_ev2_cumulative_audit_20261029T1140CST_manifest.json",
+      "source_sha256": "3e4f7dfea135dc062de2a3b9edc0050a4247e37e04185db2c253fb1bd87049e2",
+      "size_bytes": 48981
+    },
+    {
+      "source_path": "AppSupport/parallel_workers/worker_03/tasks/seed_2/task-0002-0001/run_000/final_audit.json",
+      "archive_path": "task-0002-0001_final_audit_20261029T1140CST.json",
+      "source_sha256": "40ad00089b6d7715f7cfb9c9b17635255bdbf5b072fa4419ca23f6f53b8d5622",
+      "size_bytes": 98137
+    },
+    {
+      "source_path": "AppSupport/parallel_workers/worker_03/tasks/seed_2/task-0002-0001/run_000/codex_usage_cost_reconciliation.json",
+      "archive_path": "task-0002-0001_usage_reconciliation_20261029T1140CST.json",
+      "source_sha256": "63334818e3ba65885ece869de93acb854f2dbd42c8b369df2f123f19b1584c94",
+      "size_bytes": 268730
+    }
+  ],
+  "interpretation_limits": [
+    "40 completed routes passed two distinct offline integrity audits; their edge counts use different audit scopes and are not performance metrics.",
+    "The EV2 cumulative audit covers 40/40 completed tasks with no integrity errors, no model calls, and no route reruns.",
+    "task-0002-0001 is a terminal task included in the 40-route audits; this does not mean the 129-task parent batch is complete.",
+    "Do not infer overall routing quality, model superiority, or cost ranking from this partial checkpoint."
+  ]
+}
