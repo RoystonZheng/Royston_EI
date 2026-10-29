@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "observed_at_utc": "2026-10-29T14:17:06+00:00",
+  "source_parent_manifest_sha256": "e87022d5e10dadcb0eddbe4a4e5770da1193c5ad1878f880ef6667d56b2ef2b9",
+  "status": "paused_at_parallel_checkpoint",
+  "halt_no_more_model_requests": true,
+  "halt_status": "user_requested_stop_after_inflight",
+  "pause_reason": "user_requested_after_all_current_inflight_responses_committed",
+  "model_requests_used": 12001,
+  "requests_since_last_verified_checkpoint": 202,
+  "parent_task_status_counts": {
+    "route_complete": 57,
+    "outcome_unknown": 10,
+    "failed": 6,
+    "ready": 29,
+    "pending": 27
+  },
+  "unresolved_delivery_count": 26,
+  "unresolved_delivery_status_counts": {
+    "outcome_unknown_no_retry": 26
+  },
+  "user_direction": "在途结束后停发；不得再发起新的模型请求。",
+  "local_process_audit": {
+    "workers": [
+      {
+        "worker_id": "worker_00",
+        "status": "paused_at_checkpoint_unknown_tasks_deferred",
+        "pid_alive": false
+      },
+      {
+        "worker_id": "worker_01",
+        "status": "paused_at_checkpoint",
+        "pid_alive": false
+      },
+      {
+        "worker_id": "worker_02",
+        "status": "paused_user_requested_stop_after_inflight",
+        "pid_alive": false
+      },
+      {
+        "worker_id": "worker_03",
+        "status": "paused_user_requested_stop_after_inflight",
+        "pid_alive": false
+      },
+      {
+        "worker_id": "worker_recovery",
+        "status": "paused_at_checkpoint",
+        "pid_alive": false
+      },
+      {
+        "worker_id": "worker_recovery_addendum",
+        "status": "completed_with_audited_task_outcomes",
+        "pid_alive": false
+      },
+      {
+        "worker_id": "worker_recovery_429",
+        "status": "paused_user_requested_stop_after_inflight",
+        "pid_alive": false
+      }
+    ],
+    "lock_handles": [
+      {
+        "name": ".r4_model_execution.lock",
+        "open_handle": false
+      },
+      {
+        "name": ".parent_manifest_authorization.lock",
+        "open_handle": false
+      },
+      {
+        "name": "formal_driver.pid",
+        "open_handle": false
+      }
+    ],
+    "active_worker_count": 0,
+    "open_lock_count": 0
+  },
+  "interpretation": "三条在途响应均已提交并记账，停发标志已持久化。26条投递未知保持outcome_unknown_no_retry；不代表R4正式实验完成或安全门通过。"
+}

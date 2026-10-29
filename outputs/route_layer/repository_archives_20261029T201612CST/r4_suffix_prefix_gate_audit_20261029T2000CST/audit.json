@@ -1,0 +1,57 @@
+{
+  "all_prefixes_pass": true,
+  "created_at": "2026-10-29T20:00:45+08:00",
+  "formal_runner_gate_integrated": false,
+  "limitations": [
+    "This is an offline audit of the persisted accepted prefixes only.",
+    "A bounded suffix witness proves a legal continuation for each accepted action but is not a completed model route.",
+    "The recovery worker run has one more accepted action than recorded model requests; source state is preserved and the mismatch is not reconciled here."
+  ],
+  "model_calls": 0,
+  "results": [
+    {
+      "accepted_actions": 51,
+      "all_accepted_actions_have_budget_fitting_simple_suffix_witness": true,
+      "dropoff_reached": false,
+      "map_sha256": "6a78bfe44285f5bdef00da04462909fb52dc9f4464124bcad91d617265e5bd19",
+      "new_requests_used": 51,
+      "pickup_seen": false,
+      "preflight_sha256": "f7b1bf401d21ce1cbe9806016fe5d4da5760042d9c09e0abd40f222bb0fc6bd1",
+      "run": "parallel_workers/worker_02/tasks/seed_7/task-0007-0010/run_000",
+      "state_request_action_count_mismatch": false,
+      "state_status": "ready",
+      "unique_visited_nodes": true,
+      "worker": "worker_02"
+    },
+    {
+      "accepted_actions": 49,
+      "all_accepted_actions_have_budget_fitting_simple_suffix_witness": true,
+      "dropoff_reached": false,
+      "map_sha256": "f53f42036df9ccd30bdad348d7141afc7c6311ca7ae981480bb1647d364e090d",
+      "new_requests_used": 49,
+      "pickup_seen": false,
+      "preflight_sha256": "8d726a175405cd4f7529d40af073055409c30f0ca1bfd6bdcf4572d8bd8f5716",
+      "run": "parallel_workers/worker_03/tasks/seed_1/task-0001-0006/run_000",
+      "state_request_action_count_mismatch": false,
+      "state_status": "ready",
+      "unique_visited_nodes": true,
+      "worker": "worker_03"
+    },
+    {
+      "accepted_actions": 160,
+      "all_accepted_actions_have_budget_fitting_simple_suffix_witness": true,
+      "dropoff_reached": false,
+      "map_sha256": "fc9222c6610de7d87f9f816794432807a8d0521691343855e60d24805937ebbd",
+      "new_requests_used": 159,
+      "pickup_seen": true,
+      "preflight_sha256": "c53f416a0b0223556e8aad1b37c75ba22ebd0a9fb1e2231ebd44902f6bee5716",
+      "run": "parallel_workers/worker_recovery_429/tasks/seed_2/formal-task-0002-detour/run_000",
+      "state_request_action_count_mismatch": true,
+      "state_status": "ready",
+      "unique_visited_nodes": true,
+      "worker": "worker_recovery_429"
+    }
+  ],
+  "resume_authorized_by_this_audit": false,
+  "schema": "r4-active-prefix-suffix-witness-audit-v1"
+}

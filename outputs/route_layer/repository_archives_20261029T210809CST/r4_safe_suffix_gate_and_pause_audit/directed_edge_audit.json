@@ -1,0 +1,3579 @@
+{
+  "accepted_edges_audited": 11446,
+  "batch_manifest_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/manifest.json",
+  "batch_manifest_sha256": "ca68f601f6c6d992be2c767b149b920b5d2d2854e97eb6fa82800b788107e571",
+  "batch_status_at_audit": "paused_user_requested_safety_gate",
+  "batch_updated_at_utc": "2026-10-29T11:55:52.471939+00:00",
+  "completed_routes_audited": 56,
+  "completed_routes_with_directed_edge_violation": 0,
+  "failed_legs": [],
+  "legs_audited_by_type": {
+    "pickup_to_current_prefix": 4,
+    "pickup_to_dropoff": 56,
+    "start_to_current_prefix": 42,
+    "start_to_pickup": 60
+  },
+  "model_requests_used_at_audit": 11799,
+  "note": "Read-only replay against each task's frozen preflight map and blocked-edge set. A route is counted compliant only when every accepted segment exists in the directed graph, matches its node sequence and direction labels, obeys pickup/dropoff order, and has no revisits.",
+  "routeable_task_denominator": 129,
+  "schema_version": "r4_formal_batch_per_segment_directed_edge_audit_v1",
+  "states_audited": 102,
+  "states_skipped_without_output": [
+    {
+      "status": "pending",
+      "task_id": "task-0001-0009"
+    },
+    {
+      "status": "pending",
+      "task_id": "task-0001-0010"
+    },
+    {
+      "status": "pending",
+      "task_id": "task-0002-0002"
+    },
+    {
+      "status": "pending",
+      "task_id": "task-0002-0007"
+    },
+    {
+      "status": "pending",
+      "task_id": "task-0003-0003"
+    },
+    {
+      "status": "pending",
+      "task_id": "formal-task-0003-detour"
+    },
+    {
+      "status": "pending",
+      "task_id": "task-0004-0004"
+    },
+    {
+      "status": "pending",
+      "task_id": "formal-task-0004-feasible"
+    },
+    {
+      "status": "pending",
+      "task_id": "formal-task-0004-detour"
+    },
+    {
+      "status": "pending",
+      "task_id": "task-0005-0001"
+    },
+    {
+      "status": "pending",
+      "task_id": "task-0005-0002"
+    },
+    {
+      "status": "pending",
+      "task_id": "task-0005-0007"
+    },
+    {
+      "status": "pending",
+      "task_id": "task-0005-0008"
+    },
+    {
+      "status": "pending",
+      "task_id": "task-0005-0009"
+    },
+    {
+      "status": "pending",
+      "task_id": "task-0005-0010"
+    },
+    {
+      "status": "pending",
+      "task_id": "formal-task-0005-detour"
+    },
+    {
+      "status": "pending",
+      "task_id": "task-0006-0001"
+    },
+    {
+      "status": "pending",
+      "task_id": "task-0007-0002"
+    },
+    {
+      "status": "pending",
+      "task_id": "task-0007-0006"
+    },
+    {
+      "status": "pending",
+      "task_id": "task-0008-0003"
+    },
+    {
+      "status": "pending",
+      "task_id": "task-0008-0007"
+    },
+    {
+      "status": "pending",
+      "task_id": "task-0008-0010"
+    },
+    {
+      "status": "pending",
+      "task_id": "formal-task-0008-feasible"
+    },
+    {
+      "status": "pending",
+      "task_id": "formal-task-0008-boundary"
+    },
+    {
+      "status": "pending",
+      "task_id": "task-0009-0003"
+    },
+    {
+      "status": "pending",
+      "task_id": "task-0009-0006"
+    },
+    {
+      "status": "pending",
+      "task_id": "task-0009-0010"
+    }
+  ],
+  "status": "passed",
+  "task_status_counts_audited": {
+    "failed": 6,
+    "outcome_unknown": 10,
+    "ready": 30,
+    "route_complete": 56
+  },
+  "tasks": [
+    {
+      "accepted_edge_count": 118,
+      "dropoff_reached": true,
+      "errors": [],
+      "frozen_task_id": "task-0000-0001",
+      "legs": [
+        {
+          "edge_count": 75,
+          "end_node": "node_66_35",
+          "leg": "start_to_pickup",
+          "passed": true,
+          "start_node": "node_84_72",
+          "violations": []
+        },
+        {
+          "edge_count": 43,
+          "end_node": "node_58_66",
+          "leg": "pickup_to_dropoff",
+          "passed": true,
+          "start_node": "node_66_35",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36602,
+      "map_id": "grid-100x100-seed-0",
+      "passed": true,
+      "pickup_reached": true,
+      "preflight_sha256": "ba0b4cdf956974a3e0db0d2ecaa372aefa3ef7aa5fdee6ecdba7e20883d21215",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 118,
+      "route_complete": true,
+      "sample_group": "orders",
+      "seed": 0,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/tasks/seed_0/task-0000-0001/run_001/state.json",
+      "status": "route_complete",
+      "task_id": "task-0000-0001"
+    },
+    {
+      "accepted_edge_count": 171,
+      "dropoff_reached": true,
+      "errors": [],
+      "frozen_task_id": "task-0000-0002",
+      "legs": [
+        {
+          "edge_count": 61,
+          "end_node": "node_48_68",
+          "leg": "start_to_pickup",
+          "passed": true,
+          "start_node": "node_99_66",
+          "violations": []
+        },
+        {
+          "edge_count": 110,
+          "end_node": "node_76_8",
+          "leg": "pickup_to_dropoff",
+          "passed": true,
+          "start_node": "node_48_68",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36602,
+      "map_id": "grid-100x100-seed-0",
+      "passed": true,
+      "pickup_reached": true,
+      "preflight_sha256": "3ee4224f2aa1e6c7cb18232bfb0279bd5c2a805f8e72cd442a0edfac1aad0ba3",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 171,
+      "route_complete": true,
+      "sample_group": "orders",
+      "seed": 0,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/tasks/seed_0/task-0000-0002/run_001/state.json",
+      "status": "route_complete",
+      "task_id": "task-0000-0002"
+    },
+    {
+      "accepted_edge_count": 18,
+      "dropoff_reached": false,
+      "errors": [],
+      "frozen_task_id": "task-0000-0003",
+      "legs": [
+        {
+          "edge_count": 9,
+          "end_node": "node_32_24",
+          "leg": "start_to_pickup",
+          "passed": true,
+          "start_node": "node_24_25",
+          "violations": []
+        },
+        {
+          "edge_count": 9,
+          "end_node": "node_34_31",
+          "leg": "pickup_to_current_prefix",
+          "passed": true,
+          "start_node": "node_32_24",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36602,
+      "map_id": "grid-100x100-seed-0",
+      "passed": true,
+      "pickup_reached": true,
+      "preflight_sha256": "5beef84b284eb71a202f982a39315c589ef4090db8f5fc1a1a813dc3f1dd3df0",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 18,
+      "route_complete": false,
+      "sample_group": "orders",
+      "seed": 0,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/task-0000-0003/run_001/state.json",
+      "status": "outcome_unknown",
+      "task_id": "task-0000-0003"
+    },
+    {
+      "accepted_edge_count": 10,
+      "dropoff_reached": false,
+      "errors": [],
+      "frozen_task_id": "task-0000-0004",
+      "legs": [
+        {
+          "edge_count": 10,
+          "end_node": "node_13_46",
+          "leg": "start_to_current_prefix",
+          "passed": true,
+          "start_node": "node_7_42",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36602,
+      "map_id": "grid-100x100-seed-0",
+      "passed": true,
+      "pickup_reached": false,
+      "preflight_sha256": "ac5135bb102c998dad776b00feab527919548ccfe318a1e9d3f13255a02c2646",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 10,
+      "route_complete": false,
+      "sample_group": "orders",
+      "seed": 0,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/task-0000-0004/run_001/state.json",
+      "status": "outcome_unknown",
+      "task_id": "task-0000-0004"
+    },
+    {
+      "accepted_edge_count": 23,
+      "dropoff_reached": false,
+      "errors": [],
+      "frozen_task_id": "task-0000-0005",
+      "legs": [
+        {
+          "edge_count": 23,
+          "end_node": "node_71_84",
+          "leg": "start_to_current_prefix",
+          "passed": true,
+          "start_node": "node_61_97",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36602,
+      "map_id": "grid-100x100-seed-0",
+      "passed": true,
+      "pickup_reached": false,
+      "preflight_sha256": "a0efe09a051bdb82a964d1fc01a9ad45dac2e322c2b415b44f88cc28c5d07eb6",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 23,
+      "route_complete": false,
+      "sample_group": "orders",
+      "seed": 0,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/task-0000-0005/run_001/state.json",
+      "status": "outcome_unknown",
+      "task_id": "task-0000-0005"
+    },
+    {
+      "accepted_edge_count": 230,
+      "dropoff_reached": true,
+      "errors": [],
+      "frozen_task_id": "task-0000-0006",
+      "legs": [
+        {
+          "edge_count": 96,
+          "end_node": "node_73_80",
+          "leg": "start_to_pickup",
+          "passed": true,
+          "start_node": "node_3_54",
+          "violations": []
+        },
+        {
+          "edge_count": 134,
+          "end_node": "node_57_14",
+          "leg": "pickup_to_dropoff",
+          "passed": true,
+          "start_node": "node_73_80",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36602,
+      "map_id": "grid-100x100-seed-0",
+      "passed": true,
+      "pickup_reached": true,
+      "preflight_sha256": "805669fd400d964fdf4ad9b29849fde1431e9e87bbeb042b1d0c5fef07e6a3af",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 230,
+      "route_complete": true,
+      "sample_group": "orders",
+      "seed": 0,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/task-0000-0006/run_001/state.json",
+      "status": "route_complete",
+      "task_id": "task-0000-0006"
+    },
+    {
+      "accepted_edge_count": 256,
+      "dropoff_reached": true,
+      "errors": [],
+      "frozen_task_id": "task-0000-0007",
+      "legs": [
+        {
+          "edge_count": 105,
+          "end_node": "node_91_2",
+          "leg": "start_to_pickup",
+          "passed": true,
+          "start_node": "node_75_57",
+          "violations": []
+        },
+        {
+          "edge_count": 151,
+          "end_node": "node_7_67",
+          "leg": "pickup_to_dropoff",
+          "passed": true,
+          "start_node": "node_91_2",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36602,
+      "map_id": "grid-100x100-seed-0",
+      "passed": true,
+      "pickup_reached": true,
+      "preflight_sha256": "737424eb7f8a86e3b94a5119b25ad4e34e48aad5c9eb54d8223adda7d047235a",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 256,
+      "route_complete": true,
+      "sample_group": "orders",
+      "seed": 0,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/task-0000-0007/run_001/state.json",
+      "status": "route_complete",
+      "task_id": "task-0000-0007"
+    },
+    {
+      "accepted_edge_count": 133,
+      "dropoff_reached": true,
+      "errors": [],
+      "frozen_task_id": "task-0000-0008",
+      "legs": [
+        {
+          "edge_count": 81,
+          "end_node": "node_86_29",
+          "leg": "start_to_pickup",
+          "passed": true,
+          "start_node": "node_19_27",
+          "violations": []
+        },
+        {
+          "edge_count": 52,
+          "end_node": "node_48_41",
+          "leg": "pickup_to_dropoff",
+          "passed": true,
+          "start_node": "node_86_29",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36602,
+      "map_id": "grid-100x100-seed-0",
+      "passed": true,
+      "pickup_reached": true,
+      "preflight_sha256": "b39833fa1fa0cb0121e99630a3715e4fcae7ffcae4ef8fcdb0c53149dd168d89",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 133,
+      "route_complete": true,
+      "sample_group": "orders",
+      "seed": 0,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/task-0000-0008/run_001/state.json",
+      "status": "route_complete",
+      "task_id": "task-0000-0008"
+    },
+    {
+      "accepted_edge_count": 26,
+      "dropoff_reached": false,
+      "errors": [],
+      "frozen_task_id": "task-0000-0009",
+      "legs": [
+        {
+          "edge_count": 26,
+          "end_node": "node_55_53",
+          "leg": "start_to_current_prefix",
+          "passed": true,
+          "start_node": "node_69_41",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36602,
+      "map_id": "grid-100x100-seed-0",
+      "passed": true,
+      "pickup_reached": false,
+      "preflight_sha256": "c977a210d9c5e94f2d90e42d92a3dd458b950199566c3ee5d0fc3306c0c07b28",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 26,
+      "route_complete": false,
+      "sample_group": "orders",
+      "seed": 0,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/task-0000-0009/run_001/state.json",
+      "status": "failed",
+      "task_id": "task-0000-0009"
+    },
+    {
+      "accepted_edge_count": 47,
+      "dropoff_reached": false,
+      "errors": [],
+      "frozen_task_id": "task-0000-0010",
+      "legs": [
+        {
+          "edge_count": 47,
+          "end_node": "node_23_57",
+          "leg": "start_to_current_prefix",
+          "passed": true,
+          "start_node": "node_59_62",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36602,
+      "map_id": "grid-100x100-seed-0",
+      "passed": true,
+      "pickup_reached": false,
+      "preflight_sha256": "561efc6cd45ca92730d3d105d18bf6674ffe76aea7c9e86aa7cc998b433d4a74",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 47,
+      "route_complete": false,
+      "sample_group": "orders",
+      "seed": 0,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/task-0000-0010/run_001/state.json",
+      "status": "failed",
+      "task_id": "task-0000-0010"
+    },
+    {
+      "accepted_edge_count": 7,
+      "dropoff_reached": false,
+      "errors": [],
+      "frozen_task_id": "formal-task-0000-feasible",
+      "legs": [
+        {
+          "edge_count": 7,
+          "end_node": "node_67_14",
+          "leg": "start_to_current_prefix",
+          "passed": true,
+          "start_node": "node_63_11",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36602,
+      "map_id": "grid-100x100-seed-0",
+      "passed": true,
+      "pickup_reached": false,
+      "preflight_sha256": "11e62075f99c21a5c3e08e9cf7554e57986be93b29f8e0851c60249074a494f8",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 7,
+      "route_complete": false,
+      "sample_group": "formal_scenarios",
+      "seed": 0,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/formal-task-0000-feasible/run_001/state.json",
+      "status": "failed",
+      "task_id": "formal-task-0000-feasible"
+    },
+    {
+      "accepted_edge_count": 182,
+      "dropoff_reached": true,
+      "errors": [],
+      "frozen_task_id": "formal-task-0000-boundary",
+      "legs": [
+        {
+          "edge_count": 112,
+          "end_node": "node_83_44",
+          "leg": "start_to_pickup",
+          "passed": true,
+          "start_node": "node_17_0",
+          "violations": []
+        },
+        {
+          "edge_count": 70,
+          "end_node": "node_79_12",
+          "leg": "pickup_to_dropoff",
+          "passed": true,
+          "start_node": "node_83_44",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36602,
+      "map_id": "grid-100x100-seed-0",
+      "passed": true,
+      "pickup_reached": true,
+      "preflight_sha256": "4fd08c4c096f34029ac2d20406b4e923875353bc45fbfdb7b3b6b3ecfdd5af90",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 182,
+      "route_complete": true,
+      "sample_group": "formal_scenarios",
+      "seed": 0,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_0/formal-task-0000-boundary/run_001/state.json",
+      "status": "route_complete",
+      "task_id": "formal-task-0000-boundary"
+    },
+    {
+      "accepted_edge_count": 14,
+      "dropoff_reached": false,
+      "errors": [],
+      "frozen_task_id": "formal-task-0000-detour",
+      "legs": [
+        {
+          "edge_count": 14,
+          "end_node": "node_2_12",
+          "leg": "start_to_current_prefix",
+          "passed": true,
+          "start_node": "node_0_0",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36602,
+      "map_id": "grid-100x100-seed-0",
+      "passed": true,
+      "pickup_reached": false,
+      "preflight_sha256": "231b46cab34ba218ba499e4cf45b3ff510e06a0871936155bfe80c0d59f5b68c",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 14,
+      "route_complete": false,
+      "sample_group": "formal_scenarios",
+      "seed": 0,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_03/tasks/seed_0/formal-task-0000-detour/run_001/state.json",
+      "status": "ready",
+      "task_id": "formal-task-0000-detour"
+    },
+    {
+      "accepted_edge_count": 68,
+      "dropoff_reached": false,
+      "errors": [],
+      "frozen_task_id": "task-0001-0001",
+      "legs": [
+        {
+          "edge_count": 68,
+          "end_node": "node_49_61",
+          "leg": "start_to_current_prefix",
+          "passed": true,
+          "start_node": "node_81_95",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36652,
+      "map_id": "grid-100x100-seed-1",
+      "passed": true,
+      "pickup_reached": false,
+      "preflight_sha256": "2ba5ee5f78753d180a48e7944127976418e9b2af14048c575f4ffc4002df4152",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 68,
+      "route_complete": false,
+      "sample_group": "orders",
+      "seed": 1,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_1/task-0001-0001/run_000/state.json",
+      "status": "outcome_unknown",
+      "task_id": "task-0001-0001"
+    },
+    {
+      "accepted_edge_count": 84,
+      "dropoff_reached": true,
+      "errors": [],
+      "frozen_task_id": "task-0001-0002",
+      "legs": [
+        {
+          "edge_count": 59,
+          "end_node": "node_11_35",
+          "leg": "start_to_pickup",
+          "passed": true,
+          "start_node": "node_43_54",
+          "violations": []
+        },
+        {
+          "edge_count": 25,
+          "end_node": "node_32_39",
+          "leg": "pickup_to_dropoff",
+          "passed": true,
+          "start_node": "node_11_35",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36652,
+      "map_id": "grid-100x100-seed-1",
+      "passed": true,
+      "pickup_reached": true,
+      "preflight_sha256": "b4fcc2cb6c6568ede47a74450d89e863cd2946266f020fcee38a30d4ac9cbfd8",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 84,
+      "route_complete": true,
+      "sample_group": "orders",
+      "seed": 1,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_01/tasks/seed_1/task-0001-0002/run_000/state.json",
+      "status": "route_complete",
+      "task_id": "task-0001-0002"
+    },
+    {
+      "accepted_edge_count": 208,
+      "dropoff_reached": true,
+      "errors": [],
+      "frozen_task_id": "task-0001-0003",
+      "legs": [
+        {
+          "edge_count": 80,
+          "end_node": "node_87_2",
+          "leg": "start_to_pickup",
+          "passed": true,
+          "start_node": "node_14_1",
+          "violations": []
+        },
+        {
+          "edge_count": 128,
+          "end_node": "node_40_79",
+          "leg": "pickup_to_dropoff",
+          "passed": true,
+          "start_node": "node_87_2",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36652,
+      "map_id": "grid-100x100-seed-1",
+      "passed": true,
+      "pickup_reached": true,
+      "preflight_sha256": "7743807722580a95aa2d9727d9452d5c566acb48dee2d9b778eabc8e0d713a97",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 208,
+      "route_complete": true,
+      "sample_group": "orders",
+      "seed": 1,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery_addendum/tasks/seed_1/task-0001-0003/run_001/state.json",
+      "status": "route_complete",
+      "task_id": "task-0001-0003"
+    },
+    {
+      "accepted_edge_count": 167,
+      "dropoff_reached": true,
+      "errors": [],
+      "frozen_task_id": "task-0001-0004",
+      "legs": [
+        {
+          "edge_count": 82,
+          "end_node": "node_10_32",
+          "leg": "start_to_pickup",
+          "passed": true,
+          "start_node": "node_8_74",
+          "violations": []
+        },
+        {
+          "edge_count": 85,
+          "end_node": "node_81_18",
+          "leg": "pickup_to_dropoff",
+          "passed": true,
+          "start_node": "node_10_32",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36652,
+      "map_id": "grid-100x100-seed-1",
+      "passed": true,
+      "pickup_reached": true,
+      "preflight_sha256": "fc9956f801bb80d29cd7570397304e3ea98ca97cceb75ae316152a004d239875",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 167,
+      "route_complete": true,
+      "sample_group": "orders",
+      "seed": 1,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_03/tasks/seed_1/task-0001-0004/run_000/state.json",
+      "status": "route_complete",
+      "task_id": "task-0001-0004"
+    },
+    {
+      "accepted_edge_count": 159,
+      "dropoff_reached": true,
+      "errors": [],
+      "frozen_task_id": "task-0001-0005",
+      "legs": [
+        {
+          "edge_count": 68,
+          "end_node": "node_10_32",
+          "leg": "start_to_pickup",
+          "passed": true,
+          "start_node": "node_41_53",
+          "violations": []
+        },
+        {
+          "edge_count": 91,
+          "end_node": "node_67_0",
+          "leg": "pickup_to_dropoff",
+          "passed": true,
+          "start_node": "node_10_32",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36652,
+      "map_id": "grid-100x100-seed-1",
+      "passed": true,
+      "pickup_reached": true,
+      "preflight_sha256": "14a3caa3dd4d45b13583d1d176470247088dc6569be453601ea7ece148c39bbe",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 159,
+      "route_complete": true,
+      "sample_group": "orders",
+      "seed": 1,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_02/tasks/seed_1/task-0001-0005/run_000/state.json",
+      "status": "route_complete",
+      "task_id": "task-0001-0005"
+    },
+    {
+      "accepted_edge_count": 49,
+      "dropoff_reached": false,
+      "errors": [],
+      "frozen_task_id": "task-0001-0006",
+      "legs": [
+        {
+          "edge_count": 49,
+          "end_node": "node_72_81",
+          "leg": "start_to_current_prefix",
+          "passed": true,
+          "start_node": "node_88_50",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36652,
+      "map_id": "grid-100x100-seed-1",
+      "passed": true,
+      "pickup_reached": false,
+      "preflight_sha256": "8d726a175405cd4f7529d40af073055409c30f0ca1bfd6bdcf4572d8bd8f5716",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 49,
+      "route_complete": false,
+      "sample_group": "orders",
+      "seed": 1,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_03/tasks/seed_1/task-0001-0006/run_000/state.json",
+      "status": "ready",
+      "task_id": "task-0001-0006"
+    },
+    {
+      "accepted_edge_count": 19,
+      "dropoff_reached": false,
+      "errors": [],
+      "frozen_task_id": "task-0001-0007",
+      "legs": [
+        {
+          "edge_count": 19,
+          "end_node": "node_67_28",
+          "leg": "start_to_current_prefix",
+          "passed": true,
+          "start_node": "node_83_31",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36652,
+      "map_id": "grid-100x100-seed-1",
+      "passed": true,
+      "pickup_reached": false,
+      "preflight_sha256": "2c70f04decdb214acdc79790924723597e1f0534e9041c9d663c4b50511ea6d0",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 19,
+      "route_complete": false,
+      "sample_group": "orders",
+      "seed": 1,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_1/task-0001-0007/run_000/state.json",
+      "status": "ready",
+      "task_id": "task-0001-0007"
+    },
+    {
+      "accepted_edge_count": 170,
+      "dropoff_reached": true,
+      "errors": [],
+      "frozen_task_id": "task-0001-0008",
+      "legs": [
+        {
+          "edge_count": 68,
+          "end_node": "node_88_99",
+          "leg": "start_to_pickup",
+          "passed": true,
+          "start_node": "node_60_67",
+          "violations": []
+        },
+        {
+          "edge_count": 102,
+          "end_node": "node_44_67",
+          "leg": "pickup_to_dropoff",
+          "passed": true,
+          "start_node": "node_88_99",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36652,
+      "map_id": "grid-100x100-seed-1",
+      "passed": true,
+      "pickup_reached": true,
+      "preflight_sha256": "38f6cf1d26416d8255bfa74221c38fa10ed5c35b6fa59a089a7fb55e7be0048a",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 170,
+      "route_complete": true,
+      "sample_group": "orders",
+      "seed": 1,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery_429/tasks/seed_1/task-0001-0008/run_000/state.json",
+      "status": "route_complete",
+      "task_id": "task-0001-0008"
+    },
+    {
+      "accepted_edge_count": 283,
+      "dropoff_reached": true,
+      "errors": [],
+      "frozen_task_id": "formal-task-0001-feasible",
+      "legs": [
+        {
+          "edge_count": 132,
+          "end_node": "node_89_66",
+          "leg": "start_to_pickup",
+          "passed": true,
+          "start_node": "node_22_1",
+          "violations": []
+        },
+        {
+          "edge_count": 151,
+          "end_node": "node_10_14",
+          "leg": "pickup_to_dropoff",
+          "passed": true,
+          "start_node": "node_89_66",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36652,
+      "map_id": "grid-100x100-seed-1",
+      "passed": true,
+      "pickup_reached": true,
+      "preflight_sha256": "9631ae09233338af58b749c45c52bf42673c7158c5d29b5bbf9d4f8e89d3e839",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 283,
+      "route_complete": true,
+      "sample_group": "formal_scenarios",
+      "seed": 1,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_01/tasks/seed_1/formal-task-0001-feasible/run_000/state.json",
+      "status": "route_complete",
+      "task_id": "formal-task-0001-feasible"
+    },
+    {
+      "accepted_edge_count": 175,
+      "dropoff_reached": true,
+      "errors": [],
+      "frozen_task_id": "formal-task-0001-boundary",
+      "legs": [
+        {
+          "edge_count": 65,
+          "end_node": "node_18_55",
+          "leg": "start_to_pickup",
+          "passed": true,
+          "start_node": "node_16_0",
+          "violations": []
+        },
+        {
+          "edge_count": 110,
+          "end_node": "node_82_15",
+          "leg": "pickup_to_dropoff",
+          "passed": true,
+          "start_node": "node_18_55",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36652,
+      "map_id": "grid-100x100-seed-1",
+      "passed": true,
+      "pickup_reached": true,
+      "preflight_sha256": "1a25e6686d51c1f2c114b9f47db18fe6f020274d2374f01a05dfeb4033df7782",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 175,
+      "route_complete": true,
+      "sample_group": "formal_scenarios",
+      "seed": 1,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_02/tasks/seed_1/formal-task-0001-boundary/run_000/state.json",
+      "status": "route_complete",
+      "task_id": "formal-task-0001-boundary"
+    },
+    {
+      "accepted_edge_count": 36,
+      "dropoff_reached": false,
+      "errors": [],
+      "frozen_task_id": "formal-task-0001-detour",
+      "legs": [
+        {
+          "edge_count": 7,
+          "end_node": "node_0_5",
+          "leg": "start_to_pickup",
+          "passed": true,
+          "start_node": "node_0_0",
+          "violations": []
+        },
+        {
+          "edge_count": 29,
+          "end_node": "node_15_17",
+          "leg": "pickup_to_current_prefix",
+          "passed": true,
+          "start_node": "node_0_5",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36652,
+      "map_id": "grid-100x100-seed-1",
+      "passed": true,
+      "pickup_reached": true,
+      "preflight_sha256": "1f97017b48e3bc7de15509d5c8ad29a22bbd38f0e830179e228d50ea4e2a076d",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 36,
+      "route_complete": false,
+      "sample_group": "formal_scenarios",
+      "seed": 1,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_03/tasks/seed_1/formal-task-0001-detour/run_000/state.json",
+      "status": "outcome_unknown",
+      "task_id": "formal-task-0001-detour"
+    },
+    {
+      "accepted_edge_count": 174,
+      "dropoff_reached": true,
+      "errors": [],
+      "frozen_task_id": "task-0002-0001",
+      "legs": [
+        {
+          "edge_count": 157,
+          "end_node": "node_9_73",
+          "leg": "start_to_pickup",
+          "passed": true,
+          "start_node": "node_96_3",
+          "violations": []
+        },
+        {
+          "edge_count": 17,
+          "end_node": "node_14_85",
+          "leg": "pickup_to_dropoff",
+          "passed": true,
+          "start_node": "node_9_73",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36713,
+      "map_id": "grid-100x100-seed-2",
+      "passed": true,
+      "pickup_reached": true,
+      "preflight_sha256": "a4b2449dc7d4e7f318008ab884573a60269fc36c0264e2aa0ea97a6cae03d5e4",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 174,
+      "route_complete": true,
+      "sample_group": "orders",
+      "seed": 2,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_03/tasks/seed_2/task-0002-0001/run_000/state.json",
+      "status": "route_complete",
+      "task_id": "task-0002-0001"
+    },
+    {
+      "accepted_edge_count": 60,
+      "dropoff_reached": true,
+      "errors": [],
+      "frozen_task_id": "task-0002-0003",
+      "legs": [
+        {
+          "edge_count": 27,
+          "end_node": "node_84_41",
+          "leg": "start_to_pickup",
+          "passed": true,
+          "start_node": "node_90_24",
+          "violations": []
+        },
+        {
+          "edge_count": 33,
+          "end_node": "node_65_53",
+          "leg": "pickup_to_dropoff",
+          "passed": true,
+          "start_node": "node_84_41",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36713,
+      "map_id": "grid-100x100-seed-2",
+      "passed": true,
+      "pickup_reached": true,
+      "preflight_sha256": "6c9eb8d716739f01d154e1090b973b8d57071098adcaa1cf4179d2102e0643c0",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 60,
+      "route_complete": true,
+      "sample_group": "orders",
+      "seed": 2,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_2/task-0002-0003/run_000/state.json",
+      "status": "route_complete",
+      "task_id": "task-0002-0003"
+    },
+    {
+      "accepted_edge_count": 101,
+      "dropoff_reached": false,
+      "errors": [],
+      "frozen_task_id": "task-0002-0004",
+      "legs": [
+        {
+          "edge_count": 101,
+          "end_node": "node_78_38",
+          "leg": "start_to_current_prefix",
+          "passed": true,
+          "start_node": "node_49_94",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36713,
+      "map_id": "grid-100x100-seed-2",
+      "passed": true,
+      "pickup_reached": false,
+      "preflight_sha256": "0381f0ead54ba8d99b70ffdc57a089fd2f0e4d773036cf660d113cc438276574",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 101,
+      "route_complete": false,
+      "sample_group": "orders",
+      "seed": 2,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_2/task-0002-0004/run_000/state.json",
+      "status": "outcome_unknown",
+      "task_id": "task-0002-0004"
+    },
+    {
+      "accepted_edge_count": 245,
+      "dropoff_reached": true,
+      "errors": [],
+      "frozen_task_id": "task-0002-0005",
+      "legs": [
+        {
+          "edge_count": 145,
+          "end_node": "node_15_4",
+          "leg": "start_to_pickup",
+          "passed": true,
+          "start_node": "node_63_69",
+          "violations": []
+        },
+        {
+          "edge_count": 100,
+          "end_node": "node_13_80",
+          "leg": "pickup_to_dropoff",
+          "passed": true,
+          "start_node": "node_15_4",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36713,
+      "map_id": "grid-100x100-seed-2",
+      "passed": true,
+      "pickup_reached": true,
+      "preflight_sha256": "98738ac7b1ddee96ea2f828b58e638a4de72033c62007de48a31edc0a6f3af18",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 245,
+      "route_complete": true,
+      "sample_group": "orders",
+      "seed": 2,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery_429/tasks/seed_2/task-0002-0005/run_000/state.json",
+      "status": "route_complete",
+      "task_id": "task-0002-0005"
+    },
+    {
+      "accepted_edge_count": 245,
+      "dropoff_reached": true,
+      "errors": [],
+      "frozen_task_id": "task-0002-0006",
+      "legs": [
+        {
+          "edge_count": 107,
+          "end_node": "node_4_84",
+          "leg": "start_to_pickup",
+          "passed": true,
+          "start_node": "node_72_47",
+          "violations": []
+        },
+        {
+          "edge_count": 138,
+          "end_node": "node_59_15",
+          "leg": "pickup_to_dropoff",
+          "passed": true,
+          "start_node": "node_4_84",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36713,
+      "map_id": "grid-100x100-seed-2",
+      "passed": true,
+      "pickup_reached": true,
+      "preflight_sha256": "6ea5a8c665d247d8e4889192ee6dd378718e988505ca3c06732a6d66bf4301ec",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 245,
+      "route_complete": true,
+      "sample_group": "orders",
+      "seed": 2,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_03/tasks/seed_2/task-0002-0006/run_000/state.json",
+      "status": "route_complete",
+      "task_id": "task-0002-0006"
+    },
+    {
+      "accepted_edge_count": 127,
+      "dropoff_reached": true,
+      "errors": [],
+      "frozen_task_id": "task-0002-0008",
+      "legs": [
+        {
+          "edge_count": 82,
+          "end_node": "node_27_67",
+          "leg": "start_to_pickup",
+          "passed": true,
+          "start_node": "node_35_5",
+          "violations": []
+        },
+        {
+          "edge_count": 45,
+          "end_node": "node_49_48",
+          "leg": "pickup_to_dropoff",
+          "passed": true,
+          "start_node": "node_27_67",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36713,
+      "map_id": "grid-100x100-seed-2",
+      "passed": true,
+      "pickup_reached": true,
+      "preflight_sha256": "9525360992483a26d51bb7d485176af992d25591f82d44bce0d45982a70a6dd8",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 127,
+      "route_complete": true,
+      "sample_group": "orders",
+      "seed": 2,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_2/task-0002-0008/run_000/state.json",
+      "status": "route_complete",
+      "task_id": "task-0002-0008"
+    },
+    {
+      "accepted_edge_count": 170,
+      "dropoff_reached": true,
+      "errors": [],
+      "frozen_task_id": "task-0002-0009",
+      "legs": [
+        {
+          "edge_count": 67,
+          "end_node": "node_30_75",
+          "leg": "start_to_pickup",
+          "passed": true,
+          "start_node": "node_85_63",
+          "violations": []
+        },
+        {
+          "edge_count": 103,
+          "end_node": "node_86_36",
+          "leg": "pickup_to_dropoff",
+          "passed": true,
+          "start_node": "node_30_75",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36713,
+      "map_id": "grid-100x100-seed-2",
+      "passed": true,
+      "pickup_reached": true,
+      "preflight_sha256": "73ed5b9c239b4197cee6b3efb823698672fdcb373978cbf87e8211cf5bf76e9f",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 170,
+      "route_complete": true,
+      "sample_group": "orders",
+      "seed": 2,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_03/tasks/seed_2/task-0002-0009/run_000/state.json",
+      "status": "route_complete",
+      "task_id": "task-0002-0009"
+    },
+    {
+      "accepted_edge_count": 219,
+      "dropoff_reached": false,
+      "errors": [],
+      "frozen_task_id": "task-0002-0010",
+      "legs": [
+        {
+          "edge_count": 148,
+          "end_node": "node_63_0",
+          "leg": "start_to_pickup",
+          "passed": true,
+          "start_node": "node_92_77",
+          "violations": []
+        },
+        {
+          "edge_count": 71,
+          "end_node": "node_76_42",
+          "leg": "pickup_to_current_prefix",
+          "passed": true,
+          "start_node": "node_63_0",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36713,
+      "map_id": "grid-100x100-seed-2",
+      "passed": true,
+      "pickup_reached": true,
+      "preflight_sha256": "c2614187a508426b5c7b31814fd2e64f8f2f9f157702cbfac96fa3dd2770d3b4",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 219,
+      "route_complete": false,
+      "sample_group": "orders",
+      "seed": 2,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_2/task-0002-0010/run_001/state.json",
+      "status": "failed",
+      "task_id": "task-0002-0010"
+    },
+    {
+      "accepted_edge_count": 121,
+      "dropoff_reached": true,
+      "errors": [],
+      "frozen_task_id": "formal-task-0002-feasible",
+      "legs": [
+        {
+          "edge_count": 45,
+          "end_node": "node_15_55",
+          "leg": "start_to_pickup",
+          "passed": true,
+          "start_node": "node_9_26",
+          "violations": []
+        },
+        {
+          "edge_count": 76,
+          "end_node": "node_13_15",
+          "leg": "pickup_to_dropoff",
+          "passed": true,
+          "start_node": "node_15_55",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36713,
+      "map_id": "grid-100x100-seed-2",
+      "passed": true,
+      "pickup_reached": true,
+      "preflight_sha256": "8db7256640129cbdaaf094907ffc20fe04c282cda170ae2b71de8e5aca551d34",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 121,
+      "route_complete": true,
+      "sample_group": "formal_scenarios",
+      "seed": 2,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_01/tasks/seed_2/formal-task-0002-feasible/run_000/state.json",
+      "status": "route_complete",
+      "task_id": "formal-task-0002-feasible"
+    },
+    {
+      "accepted_edge_count": 131,
+      "dropoff_reached": true,
+      "errors": [],
+      "frozen_task_id": "formal-task-0002-boundary",
+      "legs": [
+        {
+          "edge_count": 106,
+          "end_node": "node_28_73",
+          "leg": "start_to_pickup",
+          "passed": true,
+          "start_node": "node_43_0",
+          "violations": []
+        },
+        {
+          "edge_count": 25,
+          "end_node": "node_49_73",
+          "leg": "pickup_to_dropoff",
+          "passed": true,
+          "start_node": "node_28_73",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36713,
+      "map_id": "grid-100x100-seed-2",
+      "passed": true,
+      "pickup_reached": true,
+      "preflight_sha256": "597cf23eb9679edcfa2d014eb268901fd6ec6d5642a70a57b34e7ad8a57ca674",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 131,
+      "route_complete": true,
+      "sample_group": "formal_scenarios",
+      "seed": 2,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery_429/tasks/seed_2/formal-task-0002-boundary/run_000/state.json",
+      "status": "route_complete",
+      "task_id": "formal-task-0002-boundary"
+    },
+    {
+      "accepted_edge_count": 160,
+      "dropoff_reached": false,
+      "errors": [],
+      "frozen_task_id": "formal-task-0002-detour",
+      "legs": [
+        {
+          "edge_count": 56,
+          "end_node": "node_0_48",
+          "leg": "start_to_pickup",
+          "passed": true,
+          "start_node": "node_0_0",
+          "violations": []
+        },
+        {
+          "edge_count": 104,
+          "end_node": "node_70_80",
+          "leg": "pickup_to_current_prefix",
+          "passed": true,
+          "start_node": "node_0_48",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36713,
+      "map_id": "grid-100x100-seed-2",
+      "passed": true,
+      "pickup_reached": true,
+      "preflight_sha256": "c53f416a0b0223556e8aad1b37c75ba22ebd0a9fb1e2231ebd44902f6bee5716",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 160,
+      "route_complete": false,
+      "sample_group": "formal_scenarios",
+      "seed": 2,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery_429/tasks/seed_2/formal-task-0002-detour/run_000/state.json",
+      "status": "ready",
+      "task_id": "formal-task-0002-detour"
+    },
+    {
+      "accepted_edge_count": 207,
+      "dropoff_reached": true,
+      "errors": [],
+      "frozen_task_id": "task-0003-0001",
+      "legs": [
+        {
+          "edge_count": 71,
+          "end_node": "node_81_79",
+          "leg": "start_to_pickup",
+          "passed": true,
+          "start_node": "node_91_32",
+          "violations": []
+        },
+        {
+          "edge_count": 136,
+          "end_node": "node_49_15",
+          "leg": "pickup_to_dropoff",
+          "passed": true,
+          "start_node": "node_81_79",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36625,
+      "map_id": "grid-100x100-seed-3",
+      "passed": true,
+      "pickup_reached": true,
+      "preflight_sha256": "29a678f0a913c78eddaf42440d019d55bff67648644e0948b6086861b71db924",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 207,
+      "route_complete": true,
+      "sample_group": "orders",
+      "seed": 3,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_02/tasks/seed_3/task-0003-0001/run_000/state.json",
+      "status": "route_complete",
+      "task_id": "task-0003-0001"
+    },
+    {
+      "accepted_edge_count": 44,
+      "dropoff_reached": false,
+      "errors": [],
+      "frozen_task_id": "task-0003-0002",
+      "legs": [
+        {
+          "edge_count": 44,
+          "end_node": "node_40_25",
+          "leg": "start_to_current_prefix",
+          "passed": true,
+          "start_node": "node_7_14",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36625,
+      "map_id": "grid-100x100-seed-3",
+      "passed": true,
+      "pickup_reached": false,
+      "preflight_sha256": "7928b414af809063b2322ea60b453f463c5b463e0451457caf264e56c6d382d3",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 44,
+      "route_complete": false,
+      "sample_group": "orders",
+      "seed": 3,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery_429/tasks/seed_3/task-0003-0002/run_000/state.json",
+      "status": "ready",
+      "task_id": "task-0003-0002"
+    },
+    {
+      "accepted_edge_count": 29,
+      "dropoff_reached": false,
+      "errors": [],
+      "frozen_task_id": "task-0003-0004",
+      "legs": [
+        {
+          "edge_count": 29,
+          "end_node": "node_59_12",
+          "leg": "start_to_current_prefix",
+          "passed": true,
+          "start_node": "node_44_0",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36625,
+      "map_id": "grid-100x100-seed-3",
+      "passed": true,
+      "pickup_reached": false,
+      "preflight_sha256": "6ef888bc68e1fccc23a67c90fc719b9f5c9b3a0cc6781a796a3719dd13f4e1de",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 29,
+      "route_complete": false,
+      "sample_group": "orders",
+      "seed": 3,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery_429/tasks/seed_3/task-0003-0004/run_000/state.json",
+      "status": "ready",
+      "task_id": "task-0003-0004"
+    },
+    {
+      "accepted_edge_count": 80,
+      "dropoff_reached": false,
+      "errors": [],
+      "frozen_task_id": "task-0003-0006",
+      "legs": [
+        {
+          "edge_count": 80,
+          "end_node": "node_55_53",
+          "leg": "start_to_current_prefix",
+          "passed": true,
+          "start_node": "node_97_87",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36625,
+      "map_id": "grid-100x100-seed-3",
+      "passed": true,
+      "pickup_reached": false,
+      "preflight_sha256": "26d3364d56d90a39689d5a5551d7b6699c1683e71f6ad17357a0fa929d7a2ad1",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 80,
+      "route_complete": false,
+      "sample_group": "orders",
+      "seed": 3,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery_429/tasks/seed_3/task-0003-0006/run_000/state.json",
+      "status": "ready",
+      "task_id": "task-0003-0006"
+    },
+    {
+      "accepted_edge_count": 71,
+      "dropoff_reached": true,
+      "errors": [],
+      "frozen_task_id": "task-0003-0007",
+      "legs": [
+        {
+          "edge_count": 64,
+          "end_node": "node_10_75",
+          "leg": "start_to_pickup",
+          "passed": true,
+          "start_node": "node_4_23",
+          "violations": []
+        },
+        {
+          "edge_count": 7,
+          "end_node": "node_10_72",
+          "leg": "pickup_to_dropoff",
+          "passed": true,
+          "start_node": "node_10_75",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36625,
+      "map_id": "grid-100x100-seed-3",
+      "passed": true,
+      "pickup_reached": true,
+      "preflight_sha256": "2f63ff48a6955c0c282977017ca71bdb9c50a9d34409ba690f172bb9201eb350",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 71,
+      "route_complete": true,
+      "sample_group": "orders",
+      "seed": 3,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_3/task-0003-0007/run_000/state.json",
+      "status": "route_complete",
+      "task_id": "task-0003-0007"
+    },
+    {
+      "accepted_edge_count": 79,
+      "dropoff_reached": true,
+      "errors": [],
+      "frozen_task_id": "task-0003-0008",
+      "legs": [
+        {
+          "edge_count": 31,
+          "end_node": "node_82_46",
+          "leg": "start_to_pickup",
+          "passed": true,
+          "start_node": "node_67_54",
+          "violations": []
+        },
+        {
+          "edge_count": 48,
+          "end_node": "node_99_27",
+          "leg": "pickup_to_dropoff",
+          "passed": true,
+          "start_node": "node_82_46",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36625,
+      "map_id": "grid-100x100-seed-3",
+      "passed": true,
+      "pickup_reached": true,
+      "preflight_sha256": "c6fc030e419b0c228d6d92314c7c4109d234ac6b60ce9e1c98ced25ca00bc1fd",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 79,
+      "route_complete": true,
+      "sample_group": "orders",
+      "seed": 3,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_01/tasks/seed_3/task-0003-0008/run_000/state.json",
+      "status": "route_complete",
+      "task_id": "task-0003-0008"
+    },
+    {
+      "accepted_edge_count": 392,
+      "dropoff_reached": true,
+      "errors": [],
+      "frozen_task_id": "task-0003-0009",
+      "legs": [
+        {
+          "edge_count": 169,
+          "end_node": "node_99_23",
+          "leg": "start_to_pickup",
+          "passed": true,
+          "start_node": "node_23_96",
+          "violations": []
+        },
+        {
+          "edge_count": 223,
+          "end_node": "node_75_86",
+          "leg": "pickup_to_dropoff",
+          "passed": true,
+          "start_node": "node_99_23",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36625,
+      "map_id": "grid-100x100-seed-3",
+      "passed": true,
+      "pickup_reached": true,
+      "preflight_sha256": "37a98fa62abdd54a79390c87991d19b3c42d56923b15d7b6710847032e9c4208",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 392,
+      "route_complete": true,
+      "sample_group": "orders",
+      "seed": 3,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_03/tasks/seed_3/task-0003-0009/run_000/state.json",
+      "status": "route_complete",
+      "task_id": "task-0003-0009"
+    },
+    {
+      "accepted_edge_count": 61,
+      "dropoff_reached": false,
+      "errors": [],
+      "frozen_task_id": "task-0003-0010",
+      "legs": [
+        {
+          "edge_count": 61,
+          "end_node": "node_58_52",
+          "leg": "start_to_current_prefix",
+          "passed": true,
+          "start_node": "node_83_18",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36625,
+      "map_id": "grid-100x100-seed-3",
+      "passed": true,
+      "pickup_reached": false,
+      "preflight_sha256": "a1d3923f2b687719d712fac671ccf2f97a29f7f6257dff5c946262880729387e",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 61,
+      "route_complete": false,
+      "sample_group": "orders",
+      "seed": 3,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery_429/tasks/seed_3/task-0003-0010/run_000/state.json",
+      "status": "ready",
+      "task_id": "task-0003-0010"
+    },
+    {
+      "accepted_edge_count": 113,
+      "dropoff_reached": false,
+      "errors": [],
+      "frozen_task_id": "formal-task-0003-feasible",
+      "legs": [
+        {
+          "edge_count": 113,
+          "end_node": "node_98_55",
+          "leg": "start_to_current_prefix",
+          "passed": true,
+          "start_node": "node_38_98",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36625,
+      "map_id": "grid-100x100-seed-3",
+      "passed": true,
+      "pickup_reached": false,
+      "preflight_sha256": "700ac0a5e8e87bee321e946c09005d9ae078760df8992b4edd4f8548a0b3b44b",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 113,
+      "route_complete": false,
+      "sample_group": "formal_scenarios",
+      "seed": 3,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_02/tasks/seed_3/formal-task-0003-feasible/run_000/state.json",
+      "status": "failed",
+      "task_id": "formal-task-0003-feasible"
+    },
+    {
+      "accepted_edge_count": 4,
+      "dropoff_reached": false,
+      "errors": [],
+      "frozen_task_id": "formal-task-0003-boundary",
+      "legs": [
+        {
+          "edge_count": 4,
+          "end_node": "node_4_66",
+          "leg": "start_to_current_prefix",
+          "passed": true,
+          "start_node": "node_0_66",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36625,
+      "map_id": "grid-100x100-seed-3",
+      "passed": true,
+      "pickup_reached": false,
+      "preflight_sha256": "b76a9e92063d9fbd26359e5608cddcfadfe51b82587d45969731c66552911295",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 4,
+      "route_complete": false,
+      "sample_group": "formal_scenarios",
+      "seed": 3,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery_429/tasks/seed_3/formal-task-0003-boundary/run_000/state.json",
+      "status": "ready",
+      "task_id": "formal-task-0003-boundary"
+    },
+    {
+      "accepted_edge_count": 227,
+      "dropoff_reached": true,
+      "errors": [],
+      "frozen_task_id": "task-0004-0001",
+      "legs": [
+        {
+          "edge_count": 133,
+          "end_node": "node_12_89",
+          "leg": "start_to_pickup",
+          "passed": true,
+          "start_node": "node_87_33",
+          "violations": []
+        },
+        {
+          "edge_count": 94,
+          "end_node": "node_24_39",
+          "leg": "pickup_to_dropoff",
+          "passed": true,
+          "start_node": "node_12_89",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36621,
+      "map_id": "grid-100x100-seed-4",
+      "passed": true,
+      "pickup_reached": true,
+      "preflight_sha256": "a0998b03a6bb5044a5a4172badc5f2886f05f63b140ebbb274b32016fb305e93",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 227,
+      "route_complete": true,
+      "sample_group": "orders",
+      "seed": 4,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_01/tasks/seed_4/task-0004-0001/run_000/state.json",
+      "status": "route_complete",
+      "task_id": "task-0004-0001"
+    },
+    {
+      "accepted_edge_count": 186,
+      "dropoff_reached": true,
+      "errors": [],
+      "frozen_task_id": "task-0004-0002",
+      "legs": [
+        {
+          "edge_count": 69,
+          "end_node": "node_8_66",
+          "leg": "start_to_pickup",
+          "passed": true,
+          "start_node": "node_50_39",
+          "violations": []
+        },
+        {
+          "edge_count": 117,
+          "end_node": "node_64_23",
+          "leg": "pickup_to_dropoff",
+          "passed": true,
+          "start_node": "node_8_66",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36621,
+      "map_id": "grid-100x100-seed-4",
+      "passed": true,
+      "pickup_reached": true,
+      "preflight_sha256": "d220bd5d98a12a14d0ae8442ff579c6ee236c1124240eb9ce33caab12fda5bb0",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 186,
+      "route_complete": true,
+      "sample_group": "orders",
+      "seed": 4,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_4/task-0004-0002/run_000/state.json",
+      "status": "route_complete",
+      "task_id": "task-0004-0002"
+    },
+    {
+      "accepted_edge_count": 180,
+      "dropoff_reached": true,
+      "errors": [],
+      "frozen_task_id": "task-0004-0003",
+      "legs": [
+        {
+          "edge_count": 117,
+          "end_node": "node_35_16",
+          "leg": "start_to_pickup",
+          "passed": true,
+          "start_node": "node_48_90",
+          "violations": []
+        },
+        {
+          "edge_count": 63,
+          "end_node": "node_25_61",
+          "leg": "pickup_to_dropoff",
+          "passed": true,
+          "start_node": "node_35_16",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36621,
+      "map_id": "grid-100x100-seed-4",
+      "passed": true,
+      "pickup_reached": true,
+      "preflight_sha256": "16f182d17bc2c771067c270ce9aa7caf462771f99d5dfdae624e13beb0013a43",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 180,
+      "route_complete": true,
+      "sample_group": "orders",
+      "seed": 4,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_02/tasks/seed_4/task-0004-0003/run_000/state.json",
+      "status": "route_complete",
+      "task_id": "task-0004-0003"
+    },
+    {
+      "accepted_edge_count": 3,
+      "dropoff_reached": false,
+      "errors": [],
+      "frozen_task_id": "task-0004-0005",
+      "legs": [
+        {
+          "edge_count": 3,
+          "end_node": "node_33_2",
+          "leg": "start_to_current_prefix",
+          "passed": true,
+          "start_node": "node_34_0",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36621,
+      "map_id": "grid-100x100-seed-4",
+      "passed": true,
+      "pickup_reached": false,
+      "preflight_sha256": "9f75550c0897d2c527f5365be654ee03ed9054235862c5263e450e76bd52d455",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 3,
+      "route_complete": false,
+      "sample_group": "orders",
+      "seed": 4,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery_429/tasks/seed_4/task-0004-0005/run_000/state.json",
+      "status": "ready",
+      "task_id": "task-0004-0005"
+    },
+    {
+      "accepted_edge_count": 87,
+      "dropoff_reached": true,
+      "errors": [],
+      "frozen_task_id": "task-0004-0006",
+      "legs": [
+        {
+          "edge_count": 46,
+          "end_node": "node_49_34",
+          "leg": "start_to_pickup",
+          "passed": true,
+          "start_node": "node_65_10",
+          "violations": []
+        },
+        {
+          "edge_count": 41,
+          "end_node": "node_78_44",
+          "leg": "pickup_to_dropoff",
+          "passed": true,
+          "start_node": "node_49_34",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36621,
+      "map_id": "grid-100x100-seed-4",
+      "passed": true,
+      "pickup_reached": true,
+      "preflight_sha256": "02f5ffb8d90c9f38cff2b6b36d65b170311f4937c8eb70b7ae17f1a72557ce7e",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 87,
+      "route_complete": true,
+      "sample_group": "orders",
+      "seed": 4,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_4/task-0004-0006/run_000/state.json",
+      "status": "route_complete",
+      "task_id": "task-0004-0006"
+    },
+    {
+      "accepted_edge_count": 1,
+      "dropoff_reached": false,
+      "errors": [],
+      "frozen_task_id": "task-0004-0007",
+      "legs": [
+        {
+          "edge_count": 1,
+          "end_node": "node_67_61",
+          "leg": "start_to_current_prefix",
+          "passed": true,
+          "start_node": "node_67_60",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36621,
+      "map_id": "grid-100x100-seed-4",
+      "passed": true,
+      "pickup_reached": false,
+      "preflight_sha256": "fab0094409535f47bb5f650c51e9c291d001272e39980dfac6fb6094e7dfbfa9",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 1,
+      "route_complete": false,
+      "sample_group": "orders",
+      "seed": 4,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery_429/tasks/seed_4/task-0004-0007/run_000/state.json",
+      "status": "ready",
+      "task_id": "task-0004-0007"
+    },
+    {
+      "accepted_edge_count": 30,
+      "dropoff_reached": false,
+      "errors": [],
+      "frozen_task_id": "task-0004-0008",
+      "legs": [
+        {
+          "edge_count": 30,
+          "end_node": "node_62_4",
+          "leg": "start_to_current_prefix",
+          "passed": true,
+          "start_node": "node_36_2",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36621,
+      "map_id": "grid-100x100-seed-4",
+      "passed": true,
+      "pickup_reached": false,
+      "preflight_sha256": "642ec584ae05980f103514940d48254131d978241b8bf9f98a2e22c3d1595820",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 30,
+      "route_complete": false,
+      "sample_group": "orders",
+      "seed": 4,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery_429/tasks/seed_4/task-0004-0008/run_000/state.json",
+      "status": "ready",
+      "task_id": "task-0004-0008"
+    },
+    {
+      "accepted_edge_count": 64,
+      "dropoff_reached": true,
+      "errors": [],
+      "frozen_task_id": "task-0004-0009",
+      "legs": [
+        {
+          "edge_count": 21,
+          "end_node": "node_46_76",
+          "leg": "start_to_pickup",
+          "passed": true,
+          "start_node": "node_50_89",
+          "violations": []
+        },
+        {
+          "edge_count": 43,
+          "end_node": "node_81_76",
+          "leg": "pickup_to_dropoff",
+          "passed": true,
+          "start_node": "node_46_76",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36621,
+      "map_id": "grid-100x100-seed-4",
+      "passed": true,
+      "pickup_reached": true,
+      "preflight_sha256": "5513c92a259f5a9e2e8bfcdce0dffc8a0c6a7459c253d993d2abccd57d8a84e0",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 64,
+      "route_complete": true,
+      "sample_group": "orders",
+      "seed": 4,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_01/tasks/seed_4/task-0004-0009/run_000/state.json",
+      "status": "route_complete",
+      "task_id": "task-0004-0009"
+    },
+    {
+      "accepted_edge_count": 140,
+      "dropoff_reached": true,
+      "errors": [],
+      "frozen_task_id": "task-0004-0010",
+      "legs": [
+        {
+          "edge_count": 51,
+          "end_node": "node_22_46",
+          "leg": "start_to_pickup",
+          "passed": true,
+          "start_node": "node_54_27",
+          "violations": []
+        },
+        {
+          "edge_count": 89,
+          "end_node": "node_93_48",
+          "leg": "pickup_to_dropoff",
+          "passed": true,
+          "start_node": "node_22_46",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36621,
+      "map_id": "grid-100x100-seed-4",
+      "passed": true,
+      "pickup_reached": true,
+      "preflight_sha256": "bc63e93ed1f5f9e6fa8b019be223b6c2a86bde5ea731995d0e464089ff956b8a",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 140,
+      "route_complete": true,
+      "sample_group": "orders",
+      "seed": 4,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_02/tasks/seed_4/task-0004-0010/run_000/state.json",
+      "status": "route_complete",
+      "task_id": "task-0004-0010"
+    },
+    {
+      "accepted_edge_count": 2,
+      "dropoff_reached": false,
+      "errors": [],
+      "frozen_task_id": "formal-task-0004-boundary",
+      "legs": [
+        {
+          "edge_count": 2,
+          "end_node": "node_98_74",
+          "leg": "start_to_current_prefix",
+          "passed": true,
+          "start_node": "node_99_73",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36621,
+      "map_id": "grid-100x100-seed-4",
+      "passed": true,
+      "pickup_reached": false,
+      "preflight_sha256": "5ec35988454192ffc78ab510a840b9c971d2b22149df343ef8fd2e064ac6608e",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 2,
+      "route_complete": false,
+      "sample_group": "formal_scenarios",
+      "seed": 4,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_01/tasks/seed_4/formal-task-0004-boundary/run_000/state.json",
+      "status": "outcome_unknown",
+      "task_id": "formal-task-0004-boundary"
+    },
+    {
+      "accepted_edge_count": 174,
+      "dropoff_reached": true,
+      "errors": [],
+      "frozen_task_id": "task-0005-0003",
+      "legs": [
+        {
+          "edge_count": 88,
+          "end_node": "node_65_37",
+          "leg": "start_to_pickup",
+          "passed": true,
+          "start_node": "node_24_72",
+          "violations": []
+        },
+        {
+          "edge_count": 86,
+          "end_node": "node_8_10",
+          "leg": "pickup_to_dropoff",
+          "passed": true,
+          "start_node": "node_65_37",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36648,
+      "map_id": "grid-100x100-seed-5",
+      "passed": true,
+      "pickup_reached": true,
+      "preflight_sha256": "988eda0c0b67c99107028bc213dd275553494f652a51e74fc547d65834cbec5c",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 174,
+      "route_complete": true,
+      "sample_group": "orders",
+      "seed": 5,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_03/tasks/seed_5/task-0005-0003/run_000/state.json",
+      "status": "route_complete",
+      "task_id": "task-0005-0003"
+    },
+    {
+      "accepted_edge_count": 211,
+      "dropoff_reached": true,
+      "errors": [],
+      "frozen_task_id": "task-0005-0004",
+      "legs": [
+        {
+          "edge_count": 153,
+          "end_node": "node_95_88",
+          "leg": "start_to_pickup",
+          "passed": true,
+          "start_node": "node_11_21",
+          "violations": []
+        },
+        {
+          "edge_count": 58,
+          "end_node": "node_45_96",
+          "leg": "pickup_to_dropoff",
+          "passed": true,
+          "start_node": "node_95_88",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36648,
+      "map_id": "grid-100x100-seed-5",
+      "passed": true,
+      "pickup_reached": true,
+      "preflight_sha256": "84929e52674d8c3fad82cb8181f7e314f921516975ce725a5a1edee477d4d906",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 211,
+      "route_complete": true,
+      "sample_group": "orders",
+      "seed": 5,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_5/task-0005-0004/run_001/state.json",
+      "status": "route_complete",
+      "task_id": "task-0005-0004"
+    },
+    {
+      "accepted_edge_count": 130,
+      "dropoff_reached": true,
+      "errors": [],
+      "frozen_task_id": "task-0005-0005",
+      "legs": [
+        {
+          "edge_count": 52,
+          "end_node": "node_9_49",
+          "leg": "start_to_pickup",
+          "passed": true,
+          "start_node": "node_33_21",
+          "violations": []
+        },
+        {
+          "edge_count": 78,
+          "end_node": "node_59_75",
+          "leg": "pickup_to_dropoff",
+          "passed": true,
+          "start_node": "node_9_49",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36648,
+      "map_id": "grid-100x100-seed-5",
+      "passed": true,
+      "pickup_reached": true,
+      "preflight_sha256": "c3ff26ec5c5c2c2c1e80da6a77fc3c66d0f815372f3af52d4562f4f2f78d35c5",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 130,
+      "route_complete": true,
+      "sample_group": "orders",
+      "seed": 5,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_02/tasks/seed_5/task-0005-0005/run_000/state.json",
+      "status": "route_complete",
+      "task_id": "task-0005-0005"
+    },
+    {
+      "accepted_edge_count": 179,
+      "dropoff_reached": true,
+      "errors": [],
+      "frozen_task_id": "task-0005-0006",
+      "legs": [
+        {
+          "edge_count": 110,
+          "end_node": "node_24_68",
+          "leg": "start_to_pickup",
+          "passed": true,
+          "start_node": "node_75_9",
+          "violations": []
+        },
+        {
+          "edge_count": 69,
+          "end_node": "node_76_85",
+          "leg": "pickup_to_dropoff",
+          "passed": true,
+          "start_node": "node_24_68",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36648,
+      "map_id": "grid-100x100-seed-5",
+      "passed": true,
+      "pickup_reached": true,
+      "preflight_sha256": "3d901caf1b9c617a3154e696d7e02a5b746dbc4c79b541920fd5e08aef8c7c1b",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 179,
+      "route_complete": true,
+      "sample_group": "orders",
+      "seed": 5,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_01/tasks/seed_5/task-0005-0006/run_000/state.json",
+      "status": "route_complete",
+      "task_id": "task-0005-0006"
+    },
+    {
+      "accepted_edge_count": 94,
+      "dropoff_reached": false,
+      "errors": [],
+      "frozen_task_id": "formal-task-0005-feasible",
+      "legs": [
+        {
+          "edge_count": 94,
+          "end_node": "node_58_34",
+          "leg": "start_to_current_prefix",
+          "passed": true,
+          "start_node": "node_41_85",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36648,
+      "map_id": "grid-100x100-seed-5",
+      "passed": true,
+      "pickup_reached": false,
+      "preflight_sha256": "88077e4c3290db3800cbfa68a71ea58265a6ec4841e99c29984d451227e34add",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 94,
+      "route_complete": false,
+      "sample_group": "formal_scenarios",
+      "seed": 5,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_02/tasks/seed_5/formal-task-0005-feasible/run_000/state.json",
+      "status": "outcome_unknown",
+      "task_id": "formal-task-0005-feasible"
+    },
+    {
+      "accepted_edge_count": 210,
+      "dropoff_reached": true,
+      "errors": [],
+      "frozen_task_id": "formal-task-0005-boundary",
+      "legs": [
+        {
+          "edge_count": 86,
+          "end_node": "node_75_15",
+          "leg": "start_to_pickup",
+          "passed": true,
+          "start_node": "node_0_14",
+          "violations": []
+        },
+        {
+          "edge_count": 124,
+          "end_node": "node_39_97",
+          "leg": "pickup_to_dropoff",
+          "passed": true,
+          "start_node": "node_75_15",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36648,
+      "map_id": "grid-100x100-seed-5",
+      "passed": true,
+      "pickup_reached": true,
+      "preflight_sha256": "5b170827e1054b1d446702b5147f52f958f8dc21ff9e859a77a548d82c028965",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 210,
+      "route_complete": true,
+      "sample_group": "formal_scenarios",
+      "seed": 5,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_02/tasks/seed_5/formal-task-0005-boundary/run_000/state.json",
+      "status": "route_complete",
+      "task_id": "formal-task-0005-boundary"
+    },
+    {
+      "accepted_edge_count": 1,
+      "dropoff_reached": false,
+      "errors": [],
+      "frozen_task_id": "task-0006-0002",
+      "legs": [
+        {
+          "edge_count": 1,
+          "end_node": "node_24_48",
+          "leg": "start_to_current_prefix",
+          "passed": true,
+          "start_node": "node_23_48",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36602,
+      "map_id": "grid-100x100-seed-6",
+      "passed": true,
+      "pickup_reached": false,
+      "preflight_sha256": "d254c7af9b7f7958caf1c405c6e55fc4afdd1936b02447f94c72b6e1fe1830e5",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 1,
+      "route_complete": false,
+      "sample_group": "orders",
+      "seed": 6,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery_429/tasks/seed_6/task-0006-0002/run_000/state.json",
+      "status": "ready",
+      "task_id": "task-0006-0002"
+    },
+    {
+      "accepted_edge_count": 9,
+      "dropoff_reached": false,
+      "errors": [],
+      "frozen_task_id": "task-0006-0003",
+      "legs": [
+        {
+          "edge_count": 9,
+          "end_node": "node_89_70",
+          "leg": "start_to_current_prefix",
+          "passed": true,
+          "start_node": "node_91_73",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36602,
+      "map_id": "grid-100x100-seed-6",
+      "passed": true,
+      "pickup_reached": false,
+      "preflight_sha256": "cc9e85fb8cacb54f7cc76b05cc83f8bb5f56112b18b60af004ab622ad0c08078",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 9,
+      "route_complete": false,
+      "sample_group": "orders",
+      "seed": 6,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery_429/tasks/seed_6/task-0006-0003/run_000/state.json",
+      "status": "ready",
+      "task_id": "task-0006-0003"
+    },
+    {
+      "accepted_edge_count": 0,
+      "dropoff_reached": false,
+      "errors": [],
+      "frozen_task_id": "task-0006-0004",
+      "legs": [
+        {
+          "edge_count": 0,
+          "end_node": "node_72_63",
+          "leg": "start_to_current_prefix",
+          "passed": true,
+          "start_node": "node_72_63",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36602,
+      "map_id": "grid-100x100-seed-6",
+      "passed": true,
+      "pickup_reached": false,
+      "preflight_sha256": "f4e7bd8ba735823262d23e0c412d44148e6e8493224c0af6289b821c5c8c0db1",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 0,
+      "route_complete": false,
+      "sample_group": "orders",
+      "seed": 6,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery_429/tasks/seed_6/task-0006-0004/run_000/state.json",
+      "status": "ready",
+      "task_id": "task-0006-0004"
+    },
+    {
+      "accepted_edge_count": 60,
+      "dropoff_reached": true,
+      "errors": [],
+      "frozen_task_id": "task-0006-0005",
+      "legs": [
+        {
+          "edge_count": 10,
+          "end_node": "node_59_46",
+          "leg": "start_to_pickup",
+          "passed": true,
+          "start_node": "node_63_40",
+          "violations": []
+        },
+        {
+          "edge_count": 50,
+          "end_node": "node_23_56",
+          "leg": "pickup_to_dropoff",
+          "passed": true,
+          "start_node": "node_59_46",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36602,
+      "map_id": "grid-100x100-seed-6",
+      "passed": true,
+      "pickup_reached": true,
+      "preflight_sha256": "569ded562d3c4acbb45a5ce6d1df24a8b192f7b2da7b2305ed7e9343650609d5",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 60,
+      "route_complete": true,
+      "sample_group": "orders",
+      "seed": 6,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_01/tasks/seed_6/task-0006-0005/run_000/state.json",
+      "status": "route_complete",
+      "task_id": "task-0006-0005"
+    },
+    {
+      "accepted_edge_count": 70,
+      "dropoff_reached": false,
+      "errors": [],
+      "frozen_task_id": "task-0006-0006",
+      "legs": [
+        {
+          "edge_count": 70,
+          "end_node": "node_36_75",
+          "leg": "start_to_current_prefix",
+          "passed": true,
+          "start_node": "node_75_96",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36602,
+      "map_id": "grid-100x100-seed-6",
+      "passed": true,
+      "pickup_reached": false,
+      "preflight_sha256": "00fe54fe4982822c5e2ca7e1ea687c9ae82d1df4d048da41d50ccf2e5655efa8",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 70,
+      "route_complete": false,
+      "sample_group": "orders",
+      "seed": 6,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery_429/tasks/seed_6/task-0006-0006/run_000/state.json",
+      "status": "ready",
+      "task_id": "task-0006-0006"
+    },
+    {
+      "accepted_edge_count": 99,
+      "dropoff_reached": true,
+      "errors": [],
+      "frozen_task_id": "task-0006-0007",
+      "legs": [
+        {
+          "edge_count": 45,
+          "end_node": "node_23_82",
+          "leg": "start_to_pickup",
+          "passed": true,
+          "start_node": "node_52_74",
+          "violations": []
+        },
+        {
+          "edge_count": 54,
+          "end_node": "node_39_54",
+          "leg": "pickup_to_dropoff",
+          "passed": true,
+          "start_node": "node_23_82",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36602,
+      "map_id": "grid-100x100-seed-6",
+      "passed": true,
+      "pickup_reached": true,
+      "preflight_sha256": "ee5389da8eb3efe5f1c77545db8b9531880ac5d80032832300b54016b33345a6",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 99,
+      "route_complete": true,
+      "sample_group": "orders",
+      "seed": 6,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_6/task-0006-0007/run_000/state.json",
+      "status": "route_complete",
+      "task_id": "task-0006-0007"
+    },
+    {
+      "accepted_edge_count": 243,
+      "dropoff_reached": true,
+      "errors": [],
+      "frozen_task_id": "task-0006-0008",
+      "legs": [
+        {
+          "edge_count": 145,
+          "end_node": "node_13_19",
+          "leg": "start_to_pickup",
+          "passed": true,
+          "start_node": "node_39_92",
+          "violations": []
+        },
+        {
+          "edge_count": 98,
+          "end_node": "node_79_47",
+          "leg": "pickup_to_dropoff",
+          "passed": true,
+          "start_node": "node_13_19",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36602,
+      "map_id": "grid-100x100-seed-6",
+      "passed": true,
+      "pickup_reached": true,
+      "preflight_sha256": "c4271b8df8725b724d1d8ae0044684a990161d8185ddc2744bbd318890cc38bd",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 243,
+      "route_complete": true,
+      "sample_group": "orders",
+      "seed": 6,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_6/task-0006-0008/run_000/state.json",
+      "status": "route_complete",
+      "task_id": "task-0006-0008"
+    },
+    {
+      "accepted_edge_count": 156,
+      "dropoff_reached": true,
+      "errors": [],
+      "frozen_task_id": "task-0006-0009",
+      "legs": [
+        {
+          "edge_count": 98,
+          "end_node": "node_62_33",
+          "leg": "start_to_pickup",
+          "passed": true,
+          "start_node": "node_38_75",
+          "violations": []
+        },
+        {
+          "edge_count": 58,
+          "end_node": "node_82_1",
+          "leg": "pickup_to_dropoff",
+          "passed": true,
+          "start_node": "node_62_33",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36602,
+      "map_id": "grid-100x100-seed-6",
+      "passed": true,
+      "pickup_reached": true,
+      "preflight_sha256": "5efaf0e3115f82e87e7e3ff7e633d4b0f17cca8800a349fcc0405fa194b43c14",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 156,
+      "route_complete": true,
+      "sample_group": "orders",
+      "seed": 6,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_6/task-0006-0009/run_000/state.json",
+      "status": "route_complete",
+      "task_id": "task-0006-0009"
+    },
+    {
+      "accepted_edge_count": 27,
+      "dropoff_reached": false,
+      "errors": [],
+      "frozen_task_id": "task-0006-0010",
+      "legs": [
+        {
+          "edge_count": 27,
+          "end_node": "node_66_48",
+          "leg": "start_to_current_prefix",
+          "passed": true,
+          "start_node": "node_84_57",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36602,
+      "map_id": "grid-100x100-seed-6",
+      "passed": true,
+      "pickup_reached": false,
+      "preflight_sha256": "066aa2d7bc840c47dc755f5d7e3b09f7308df53f7d28b615ce3f5943d6d9b339",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 27,
+      "route_complete": false,
+      "sample_group": "orders",
+      "seed": 6,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery_429/tasks/seed_6/task-0006-0010/run_000/state.json",
+      "status": "ready",
+      "task_id": "task-0006-0010"
+    },
+    {
+      "accepted_edge_count": 276,
+      "dropoff_reached": true,
+      "errors": [],
+      "frozen_task_id": "formal-task-0006-feasible",
+      "legs": [
+        {
+          "edge_count": 153,
+          "end_node": "node_12_72",
+          "leg": "start_to_pickup",
+          "passed": true,
+          "start_node": "node_94_1",
+          "violations": []
+        },
+        {
+          "edge_count": 123,
+          "end_node": "node_79_28",
+          "leg": "pickup_to_dropoff",
+          "passed": true,
+          "start_node": "node_12_72",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36602,
+      "map_id": "grid-100x100-seed-6",
+      "passed": true,
+      "pickup_reached": true,
+      "preflight_sha256": "a6ec4b926cab32d0cfbc6497681fb9d9889af249faeb8bc9a2ccea0bec8a5986",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 276,
+      "route_complete": true,
+      "sample_group": "formal_scenarios",
+      "seed": 6,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_6/formal-task-0006-feasible/run_001/state.json",
+      "status": "route_complete",
+      "task_id": "formal-task-0006-feasible"
+    },
+    {
+      "accepted_edge_count": 262,
+      "dropoff_reached": true,
+      "errors": [],
+      "frozen_task_id": "formal-task-0006-boundary",
+      "legs": [
+        {
+          "edge_count": 142,
+          "end_node": "node_42_17",
+          "leg": "start_to_pickup",
+          "passed": true,
+          "start_node": "node_99_94",
+          "violations": []
+        },
+        {
+          "edge_count": 120,
+          "end_node": "node_5_96",
+          "leg": "pickup_to_dropoff",
+          "passed": true,
+          "start_node": "node_42_17",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36602,
+      "map_id": "grid-100x100-seed-6",
+      "passed": true,
+      "pickup_reached": true,
+      "preflight_sha256": "8b39288b2ecfe1bd9902ea4f24cc7b5cfcbab389cd5716a024421cb3feff6018",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 262,
+      "route_complete": true,
+      "sample_group": "formal_scenarios",
+      "seed": 6,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_02/tasks/seed_6/formal-task-0006-boundary/run_000/state.json",
+      "status": "route_complete",
+      "task_id": "formal-task-0006-boundary"
+    },
+    {
+      "accepted_edge_count": 36,
+      "dropoff_reached": false,
+      "errors": [],
+      "frozen_task_id": "formal-task-0006-detour",
+      "legs": [
+        {
+          "edge_count": 36,
+          "end_node": "node_1_35",
+          "leg": "start_to_current_prefix",
+          "passed": true,
+          "start_node": "node_0_0",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36602,
+      "map_id": "grid-100x100-seed-6",
+      "passed": true,
+      "pickup_reached": false,
+      "preflight_sha256": "b985d40f1f548a37b8a86ea0c6dbc38703b1ba6f61da36fcd2f94b3ca70dc78c",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 36,
+      "route_complete": false,
+      "sample_group": "formal_scenarios",
+      "seed": 6,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery_429/tasks/seed_6/formal-task-0006-detour/run_000/state.json",
+      "status": "ready",
+      "task_id": "formal-task-0006-detour"
+    },
+    {
+      "accepted_edge_count": 208,
+      "dropoff_reached": true,
+      "errors": [],
+      "frozen_task_id": "task-0007-0001",
+      "legs": [
+        {
+          "edge_count": 124,
+          "end_node": "node_84_12",
+          "leg": "start_to_pickup",
+          "passed": true,
+          "start_node": "node_1_49",
+          "violations": []
+        },
+        {
+          "edge_count": 84,
+          "end_node": "node_64_68",
+          "leg": "pickup_to_dropoff",
+          "passed": true,
+          "start_node": "node_84_12",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36692,
+      "map_id": "grid-100x100-seed-7",
+      "passed": true,
+      "pickup_reached": true,
+      "preflight_sha256": "2566ed10ec3ecaedd7fd841475143ba4ccafa855d8d0a0c5d04a451bc4ea1d47",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 208,
+      "route_complete": true,
+      "sample_group": "orders",
+      "seed": 7,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery_addendum/tasks/seed_7/task-0007-0001/run_001/state.json",
+      "status": "route_complete",
+      "task_id": "task-0007-0001"
+    },
+    {
+      "accepted_edge_count": 180,
+      "dropoff_reached": true,
+      "errors": [],
+      "frozen_task_id": "task-0007-0003",
+      "legs": [
+        {
+          "edge_count": 90,
+          "end_node": "node_71_27",
+          "leg": "start_to_pickup",
+          "passed": true,
+          "start_node": "node_93_69",
+          "violations": []
+        },
+        {
+          "edge_count": 90,
+          "end_node": "node_18_62",
+          "leg": "pickup_to_dropoff",
+          "passed": true,
+          "start_node": "node_71_27",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36692,
+      "map_id": "grid-100x100-seed-7",
+      "passed": true,
+      "pickup_reached": true,
+      "preflight_sha256": "45a34c5e547f9f7fdf53de5e862c5d676d59e68f4ae289d6cb46c4cf924776fd",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 180,
+      "route_complete": true,
+      "sample_group": "orders",
+      "seed": 7,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_03/tasks/seed_7/task-0007-0003/run_000/state.json",
+      "status": "route_complete",
+      "task_id": "task-0007-0003"
+    },
+    {
+      "accepted_edge_count": 28,
+      "dropoff_reached": false,
+      "errors": [],
+      "frozen_task_id": "task-0007-0004",
+      "legs": [
+        {
+          "edge_count": 28,
+          "end_node": "node_71_54",
+          "leg": "start_to_current_prefix",
+          "passed": true,
+          "start_node": "node_96_57",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36692,
+      "map_id": "grid-100x100-seed-7",
+      "passed": true,
+      "pickup_reached": false,
+      "preflight_sha256": "507aeeb2c67d3b6f46a25e2d1206c18d32c41742d6952743e4ff2a7a42252b41",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 28,
+      "route_complete": false,
+      "sample_group": "orders",
+      "seed": 7,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery_429/tasks/seed_7/task-0007-0004/run_000/state.json",
+      "status": "ready",
+      "task_id": "task-0007-0004"
+    },
+    {
+      "accepted_edge_count": 238,
+      "dropoff_reached": true,
+      "errors": [],
+      "frozen_task_id": "task-0007-0005",
+      "legs": [
+        {
+          "edge_count": 147,
+          "end_node": "node_12_86",
+          "leg": "start_to_pickup",
+          "passed": true,
+          "start_node": "node_69_0",
+          "violations": []
+        },
+        {
+          "edge_count": 91,
+          "end_node": "node_87_78",
+          "leg": "pickup_to_dropoff",
+          "passed": true,
+          "start_node": "node_12_86",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36692,
+      "map_id": "grid-100x100-seed-7",
+      "passed": true,
+      "pickup_reached": true,
+      "preflight_sha256": "dfb26e18be25598ab703164f6225bec1bf7daa6ee4ff2d44a370cae425bb0df4",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 238,
+      "route_complete": true,
+      "sample_group": "orders",
+      "seed": 7,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_02/tasks/seed_7/task-0007-0005/run_000/state.json",
+      "status": "route_complete",
+      "task_id": "task-0007-0005"
+    },
+    {
+      "accepted_edge_count": 19,
+      "dropoff_reached": false,
+      "errors": [],
+      "frozen_task_id": "task-0007-0007",
+      "legs": [
+        {
+          "edge_count": 19,
+          "end_node": "node_56_75",
+          "leg": "start_to_current_prefix",
+          "passed": true,
+          "start_node": "node_71_71",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36692,
+      "map_id": "grid-100x100-seed-7",
+      "passed": true,
+      "pickup_reached": false,
+      "preflight_sha256": "0a12fe16f28e158fe50ba8e09a10746e634ed15c5fed201c46990d3dd87aa1ce",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 19,
+      "route_complete": false,
+      "sample_group": "orders",
+      "seed": 7,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery_429/tasks/seed_7/task-0007-0007/run_000/state.json",
+      "status": "ready",
+      "task_id": "task-0007-0007"
+    },
+    {
+      "accepted_edge_count": 24,
+      "dropoff_reached": false,
+      "errors": [],
+      "frozen_task_id": "task-0007-0008",
+      "legs": [
+        {
+          "edge_count": 24,
+          "end_node": "node_12_44",
+          "leg": "start_to_current_prefix",
+          "passed": true,
+          "start_node": "node_27_35",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36692,
+      "map_id": "grid-100x100-seed-7",
+      "passed": true,
+      "pickup_reached": false,
+      "preflight_sha256": "a23fa1356f8b4fa4530be5a259f55c0c1ed95c0577a637a3d471b0278dbb4cdc",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 24,
+      "route_complete": false,
+      "sample_group": "orders",
+      "seed": 7,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_7/task-0007-0008/run_000/state.json",
+      "status": "outcome_unknown",
+      "task_id": "task-0007-0008"
+    },
+    {
+      "accepted_edge_count": 179,
+      "dropoff_reached": true,
+      "errors": [],
+      "frozen_task_id": "task-0007-0009",
+      "legs": [
+        {
+          "edge_count": 89,
+          "end_node": "node_94_40",
+          "leg": "start_to_pickup",
+          "passed": true,
+          "start_node": "node_92_81",
+          "violations": []
+        },
+        {
+          "edge_count": 90,
+          "end_node": "node_55_83",
+          "leg": "pickup_to_dropoff",
+          "passed": true,
+          "start_node": "node_94_40",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36692,
+      "map_id": "grid-100x100-seed-7",
+      "passed": true,
+      "pickup_reached": true,
+      "preflight_sha256": "6e46bc3793bc1044c9b30ec3542e5b94a8df0c491543011ff6b495d7069ae1aa",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 179,
+      "route_complete": true,
+      "sample_group": "orders",
+      "seed": 7,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_7/task-0007-0009/run_000/state.json",
+      "status": "route_complete",
+      "task_id": "task-0007-0009"
+    },
+    {
+      "accepted_edge_count": 51,
+      "dropoff_reached": false,
+      "errors": [],
+      "frozen_task_id": "task-0007-0010",
+      "legs": [
+        {
+          "edge_count": 51,
+          "end_node": "node_64_55",
+          "leg": "start_to_current_prefix",
+          "passed": true,
+          "start_node": "node_96_36",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36692,
+      "map_id": "grid-100x100-seed-7",
+      "passed": true,
+      "pickup_reached": false,
+      "preflight_sha256": "f7b1bf401d21ce1cbe9806016fe5d4da5760042d9c09e0abd40f222bb0fc6bd1",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 51,
+      "route_complete": false,
+      "sample_group": "orders",
+      "seed": 7,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_02/tasks/seed_7/task-0007-0010/run_000/state.json",
+      "status": "ready",
+      "task_id": "task-0007-0010"
+    },
+    {
+      "accepted_edge_count": 66,
+      "dropoff_reached": false,
+      "errors": [],
+      "frozen_task_id": "formal-task-0007-feasible",
+      "legs": [
+        {
+          "edge_count": 66,
+          "end_node": "node_28_44",
+          "leg": "start_to_current_prefix",
+          "passed": true,
+          "start_node": "node_53_5",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36692,
+      "map_id": "grid-100x100-seed-7",
+      "passed": true,
+      "pickup_reached": false,
+      "preflight_sha256": "831b2dfc3ac3b1967ae3edf17562a98dc6a46a8e4876c3ec14f203b24ed9a708",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 66,
+      "route_complete": false,
+      "sample_group": "formal_scenarios",
+      "seed": 7,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery_429/tasks/seed_7/formal-task-0007-feasible/run_000/state.json",
+      "status": "ready",
+      "task_id": "formal-task-0007-feasible"
+    },
+    {
+      "accepted_edge_count": 2,
+      "dropoff_reached": false,
+      "errors": [],
+      "frozen_task_id": "formal-task-0007-boundary",
+      "legs": [
+        {
+          "edge_count": 2,
+          "end_node": "node_98_38",
+          "leg": "start_to_current_prefix",
+          "passed": true,
+          "start_node": "node_99_37",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36692,
+      "map_id": "grid-100x100-seed-7",
+      "passed": true,
+      "pickup_reached": false,
+      "preflight_sha256": "deef039974abdc7f5d276a59af13860e28fe7051336ac922e92677a7720c6da5",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 2,
+      "route_complete": false,
+      "sample_group": "formal_scenarios",
+      "seed": 7,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery_429/tasks/seed_7/formal-task-0007-boundary/run_000/state.json",
+      "status": "ready",
+      "task_id": "formal-task-0007-boundary"
+    },
+    {
+      "accepted_edge_count": 162,
+      "dropoff_reached": true,
+      "errors": [],
+      "frozen_task_id": "formal-task-0007-detour",
+      "legs": [
+        {
+          "edge_count": 15,
+          "end_node": "node_0_13",
+          "leg": "start_to_pickup",
+          "passed": true,
+          "start_node": "node_0_0",
+          "violations": []
+        },
+        {
+          "edge_count": 147,
+          "end_node": "node_94_50",
+          "leg": "pickup_to_dropoff",
+          "passed": true,
+          "start_node": "node_0_13",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36692,
+      "map_id": "grid-100x100-seed-7",
+      "passed": true,
+      "pickup_reached": true,
+      "preflight_sha256": "e3df1a5405a3c620766695af8b6a7f941a4e13f6818fef057a84eb42ac0c9a7a",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 162,
+      "route_complete": true,
+      "sample_group": "formal_scenarios",
+      "seed": 7,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_03/tasks/seed_7/formal-task-0007-detour/run_000/state.json",
+      "status": "route_complete",
+      "task_id": "formal-task-0007-detour"
+    },
+    {
+      "accepted_edge_count": 62,
+      "dropoff_reached": true,
+      "errors": [],
+      "frozen_task_id": "task-0008-0001",
+      "legs": [
+        {
+          "edge_count": 40,
+          "end_node": "node_60_51",
+          "leg": "start_to_pickup",
+          "passed": true,
+          "start_node": "node_77_32",
+          "violations": []
+        },
+        {
+          "edge_count": 22,
+          "end_node": "node_60_67",
+          "leg": "pickup_to_dropoff",
+          "passed": true,
+          "start_node": "node_60_51",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36569,
+      "map_id": "grid-100x100-seed-8",
+      "passed": true,
+      "pickup_reached": true,
+      "preflight_sha256": "396ce7de446288dea3783972ab40934511f16899af63dd9b10c8c4f47a73bbd0",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 62,
+      "route_complete": true,
+      "sample_group": "orders",
+      "seed": 8,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_8/task-0008-0001/run_000/state.json",
+      "status": "route_complete",
+      "task_id": "task-0008-0001"
+    },
+    {
+      "accepted_edge_count": 185,
+      "dropoff_reached": true,
+      "errors": [],
+      "frozen_task_id": "task-0008-0002",
+      "legs": [
+        {
+          "edge_count": 146,
+          "end_node": "node_67_15",
+          "leg": "start_to_pickup",
+          "passed": true,
+          "start_node": "node_94_92",
+          "violations": []
+        },
+        {
+          "edge_count": 39,
+          "end_node": "node_81_34",
+          "leg": "pickup_to_dropoff",
+          "passed": true,
+          "start_node": "node_67_15",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36569,
+      "map_id": "grid-100x100-seed-8",
+      "passed": true,
+      "pickup_reached": true,
+      "preflight_sha256": "080133e8dda93f32de7d67286028e9a53f597380f0042980957b77170819baf0",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 185,
+      "route_complete": true,
+      "sample_group": "orders",
+      "seed": 8,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_03/tasks/seed_8/task-0008-0002/run_000/state.json",
+      "status": "route_complete",
+      "task_id": "task-0008-0002"
+    },
+    {
+      "accepted_edge_count": 79,
+      "dropoff_reached": true,
+      "errors": [],
+      "frozen_task_id": "task-0008-0004",
+      "legs": [
+        {
+          "edge_count": 26,
+          "end_node": "node_43_94",
+          "leg": "start_to_pickup",
+          "passed": true,
+          "start_node": "node_49_74",
+          "violations": []
+        },
+        {
+          "edge_count": 53,
+          "end_node": "node_12_76",
+          "leg": "pickup_to_dropoff",
+          "passed": true,
+          "start_node": "node_43_94",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36569,
+      "map_id": "grid-100x100-seed-8",
+      "passed": true,
+      "pickup_reached": true,
+      "preflight_sha256": "9d3fe90f59034fa49a975b48a0ad7c38f84b95c3d2cee7c2c9b889a7c50d3df5",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 79,
+      "route_complete": true,
+      "sample_group": "orders",
+      "seed": 8,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_8/task-0008-0004/run_000/state.json",
+      "status": "route_complete",
+      "task_id": "task-0008-0004"
+    },
+    {
+      "accepted_edge_count": 33,
+      "dropoff_reached": false,
+      "errors": [],
+      "frozen_task_id": "task-0008-0005",
+      "legs": [
+        {
+          "edge_count": 33,
+          "end_node": "node_35_75",
+          "leg": "start_to_current_prefix",
+          "passed": true,
+          "start_node": "node_7_74",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36569,
+      "map_id": "grid-100x100-seed-8",
+      "passed": true,
+      "pickup_reached": false,
+      "preflight_sha256": "9141456b01a69d6f35aabae927510908c18bafffd89232347c0535c89ec7a03c",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 33,
+      "route_complete": false,
+      "sample_group": "orders",
+      "seed": 8,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery_429/tasks/seed_8/task-0008-0005/run_000/state.json",
+      "status": "ready",
+      "task_id": "task-0008-0005"
+    },
+    {
+      "accepted_edge_count": 108,
+      "dropoff_reached": true,
+      "errors": [],
+      "frozen_task_id": "task-0008-0006",
+      "legs": [
+        {
+          "edge_count": 23,
+          "end_node": "node_39_53",
+          "leg": "start_to_pickup",
+          "passed": true,
+          "start_node": "node_48_39",
+          "violations": []
+        },
+        {
+          "edge_count": 85,
+          "end_node": "node_7_16",
+          "leg": "pickup_to_dropoff",
+          "passed": true,
+          "start_node": "node_39_53",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36569,
+      "map_id": "grid-100x100-seed-8",
+      "passed": true,
+      "pickup_reached": true,
+      "preflight_sha256": "3fb594d68184f97d60149e79c55279ce7ed8f9033f486b0baf32278330c7ccdc",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 108,
+      "route_complete": true,
+      "sample_group": "orders",
+      "seed": 8,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_8/task-0008-0006/run_000/state.json",
+      "status": "route_complete",
+      "task_id": "task-0008-0006"
+    },
+    {
+      "accepted_edge_count": 41,
+      "dropoff_reached": false,
+      "errors": [],
+      "frozen_task_id": "task-0008-0008",
+      "legs": [
+        {
+          "edge_count": 41,
+          "end_node": "node_51_55",
+          "leg": "start_to_current_prefix",
+          "passed": true,
+          "start_node": "node_18_55",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36569,
+      "map_id": "grid-100x100-seed-8",
+      "passed": true,
+      "pickup_reached": false,
+      "preflight_sha256": "a76f4f75d0100bc76735859e66477218b729b8ae300715eeb667f2990bfc98b5",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 41,
+      "route_complete": false,
+      "sample_group": "orders",
+      "seed": 8,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_8/task-0008-0008/run_000/state.json",
+      "status": "outcome_unknown",
+      "task_id": "task-0008-0008"
+    },
+    {
+      "accepted_edge_count": 4,
+      "dropoff_reached": false,
+      "errors": [],
+      "frozen_task_id": "task-0008-0009",
+      "legs": [
+        {
+          "edge_count": 4,
+          "end_node": "node_24_19",
+          "leg": "start_to_current_prefix",
+          "passed": true,
+          "start_node": "node_22_17",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36569,
+      "map_id": "grid-100x100-seed-8",
+      "passed": true,
+      "pickup_reached": false,
+      "preflight_sha256": "e5d1316821ff4fb6b4ce6a79333c99581b6dff2024642456cc8846303f835dd5",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 4,
+      "route_complete": false,
+      "sample_group": "orders",
+      "seed": 8,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery_429/tasks/seed_8/task-0008-0009/run_000/state.json",
+      "status": "ready",
+      "task_id": "task-0008-0009"
+    },
+    {
+      "accepted_edge_count": 179,
+      "dropoff_reached": true,
+      "errors": [],
+      "frozen_task_id": "formal-task-0008-detour",
+      "legs": [
+        {
+          "edge_count": 25,
+          "end_node": "node_0_23",
+          "leg": "start_to_pickup",
+          "passed": true,
+          "start_node": "node_0_0",
+          "violations": []
+        },
+        {
+          "edge_count": 154,
+          "end_node": "node_80_97",
+          "leg": "pickup_to_dropoff",
+          "passed": true,
+          "start_node": "node_0_23",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36569,
+      "map_id": "grid-100x100-seed-8",
+      "passed": true,
+      "pickup_reached": true,
+      "preflight_sha256": "2734bc90874e287f04fccee33653b6dfa1b3f9727582135e3524a5e8879231db",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 179,
+      "route_complete": true,
+      "sample_group": "formal_scenarios",
+      "seed": 8,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_03/tasks/seed_8/formal-task-0008-detour/run_000/state.json",
+      "status": "route_complete",
+      "task_id": "formal-task-0008-detour"
+    },
+    {
+      "accepted_edge_count": 233,
+      "dropoff_reached": true,
+      "errors": [],
+      "frozen_task_id": "task-0009-0001",
+      "legs": [
+        {
+          "edge_count": 150,
+          "end_node": "node_68_9",
+          "leg": "start_to_pickup",
+          "passed": true,
+          "start_node": "node_91_84",
+          "violations": []
+        },
+        {
+          "edge_count": 83,
+          "end_node": "node_54_72",
+          "leg": "pickup_to_dropoff",
+          "passed": true,
+          "start_node": "node_68_9",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36613,
+      "map_id": "grid-100x100-seed-9",
+      "passed": true,
+      "pickup_reached": true,
+      "preflight_sha256": "943727b9bfd094395d5eb7708aa5cb8f39a22d0cb691f9570810dcd831b6297d",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 233,
+      "route_complete": true,
+      "sample_group": "orders",
+      "seed": 9,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_02/tasks/seed_9/task-0009-0001/run_000/state.json",
+      "status": "route_complete",
+      "task_id": "task-0009-0001"
+    },
+    {
+      "accepted_edge_count": 82,
+      "dropoff_reached": false,
+      "errors": [],
+      "frozen_task_id": "task-0009-0002",
+      "legs": [
+        {
+          "edge_count": 82,
+          "end_node": "node_75_84",
+          "leg": "start_to_current_prefix",
+          "passed": true,
+          "start_node": "node_77_14",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36613,
+      "map_id": "grid-100x100-seed-9",
+      "passed": true,
+      "pickup_reached": false,
+      "preflight_sha256": "88e247be7d64f11c63c1d182cf3d3e914e5efce4d674bccd538cde509c53bcca",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 82,
+      "route_complete": false,
+      "sample_group": "orders",
+      "seed": 9,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery_addendum/tasks/seed_9/task-0009-0002/run_001/state.json",
+      "status": "failed",
+      "task_id": "task-0009-0002"
+    },
+    {
+      "accepted_edge_count": 4,
+      "dropoff_reached": false,
+      "errors": [],
+      "frozen_task_id": "task-0009-0004",
+      "legs": [
+        {
+          "edge_count": 4,
+          "end_node": "node_27_28",
+          "leg": "start_to_current_prefix",
+          "passed": true,
+          "start_node": "node_26_25",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36613,
+      "map_id": "grid-100x100-seed-9",
+      "passed": true,
+      "pickup_reached": false,
+      "preflight_sha256": "d74b341b379e52d1813374534d0c2aa4eebf5319d125138988c29c02f66b2b61",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 4,
+      "route_complete": false,
+      "sample_group": "orders",
+      "seed": 9,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery_429/tasks/seed_9/task-0009-0004/run_000/state.json",
+      "status": "ready",
+      "task_id": "task-0009-0004"
+    },
+    {
+      "accepted_edge_count": 202,
+      "dropoff_reached": true,
+      "errors": [],
+      "frozen_task_id": "task-0009-0005",
+      "legs": [
+        {
+          "edge_count": 140,
+          "end_node": "node_28_30",
+          "leg": "start_to_pickup",
+          "passed": true,
+          "start_node": "node_97_77",
+          "violations": []
+        },
+        {
+          "edge_count": 62,
+          "end_node": "node_84_28",
+          "leg": "pickup_to_dropoff",
+          "passed": true,
+          "start_node": "node_28_30",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36613,
+      "map_id": "grid-100x100-seed-9",
+      "passed": true,
+      "pickup_reached": true,
+      "preflight_sha256": "58c85f8b12e123df33641dfc912cf33b174004c2d664525785c1fd58d2eaa1b5",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 202,
+      "route_complete": true,
+      "sample_group": "orders",
+      "seed": 9,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_9/task-0009-0005/run_000/state.json",
+      "status": "route_complete",
+      "task_id": "task-0009-0005"
+    },
+    {
+      "accepted_edge_count": 7,
+      "dropoff_reached": false,
+      "errors": [],
+      "frozen_task_id": "task-0009-0007",
+      "legs": [
+        {
+          "edge_count": 7,
+          "end_node": "node_38_80",
+          "leg": "start_to_current_prefix",
+          "passed": true,
+          "start_node": "node_42_77",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36613,
+      "map_id": "grid-100x100-seed-9",
+      "passed": true,
+      "pickup_reached": false,
+      "preflight_sha256": "d8ee83483eb60d2efa3d3c0a5fafeb2d05942a4f751fe0bd4b1dde9e1b49f966",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 7,
+      "route_complete": false,
+      "sample_group": "orders",
+      "seed": 9,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery_429/tasks/seed_9/task-0009-0007/run_000/state.json",
+      "status": "ready",
+      "task_id": "task-0009-0007"
+    },
+    {
+      "accepted_edge_count": 268,
+      "dropoff_reached": true,
+      "errors": [],
+      "frozen_task_id": "task-0009-0008",
+      "legs": [
+        {
+          "edge_count": 140,
+          "end_node": "node_70_2",
+          "leg": "start_to_pickup",
+          "passed": true,
+          "start_node": "node_49_73",
+          "violations": []
+        },
+        {
+          "edge_count": 128,
+          "end_node": "node_21_69",
+          "leg": "pickup_to_dropoff",
+          "passed": true,
+          "start_node": "node_70_2",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36613,
+      "map_id": "grid-100x100-seed-9",
+      "passed": true,
+      "pickup_reached": true,
+      "preflight_sha256": "1591c156163f37230c241c584a279e0f43f9edbb0ebd8401f021d7d822e6f74b",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 268,
+      "route_complete": true,
+      "sample_group": "orders",
+      "seed": 9,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery_addendum/tasks/seed_9/task-0009-0008/run_001/state.json",
+      "status": "route_complete",
+      "task_id": "task-0009-0008"
+    },
+    {
+      "accepted_edge_count": 2,
+      "dropoff_reached": false,
+      "errors": [],
+      "frozen_task_id": "task-0009-0009",
+      "legs": [
+        {
+          "edge_count": 2,
+          "end_node": "node_50_16",
+          "leg": "start_to_current_prefix",
+          "passed": true,
+          "start_node": "node_51_15",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36613,
+      "map_id": "grid-100x100-seed-9",
+      "passed": true,
+      "pickup_reached": false,
+      "preflight_sha256": "67f81029ba2d6e03fda6a5dcc0ffa5eebc32be4c29702a5d332f250417fcb6c6",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 2,
+      "route_complete": false,
+      "sample_group": "orders",
+      "seed": 9,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery_429/tasks/seed_9/task-0009-0009/run_000/state.json",
+      "status": "ready",
+      "task_id": "task-0009-0009"
+    },
+    {
+      "accepted_edge_count": 15,
+      "dropoff_reached": false,
+      "errors": [],
+      "frozen_task_id": "formal-task-0009-feasible",
+      "legs": [
+        {
+          "edge_count": 15,
+          "end_node": "node_84_79",
+          "leg": "start_to_current_prefix",
+          "passed": true,
+          "start_node": "node_75_85",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36613,
+      "map_id": "grid-100x100-seed-9",
+      "passed": true,
+      "pickup_reached": false,
+      "preflight_sha256": "83e4aebc0f6e23e8eca9a6c7d40df30c7bd6c9fdf11853ebd676fd450913c7c2",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 15,
+      "route_complete": false,
+      "sample_group": "formal_scenarios",
+      "seed": 9,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery_429/tasks/seed_9/formal-task-0009-feasible/run_000/state.json",
+      "status": "ready",
+      "task_id": "formal-task-0009-feasible"
+    },
+    {
+      "accepted_edge_count": 15,
+      "dropoff_reached": false,
+      "errors": [],
+      "frozen_task_id": "formal-task-0009-boundary",
+      "legs": [
+        {
+          "edge_count": 15,
+          "end_node": "node_21_13",
+          "leg": "start_to_current_prefix",
+          "passed": true,
+          "start_node": "node_19_0",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36613,
+      "map_id": "grid-100x100-seed-9",
+      "passed": true,
+      "pickup_reached": false,
+      "preflight_sha256": "3fabb095a16728f0923e0c8e545ff3dbe8cb71faa2bd8a48afdac4301d807351",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 15,
+      "route_complete": false,
+      "sample_group": "formal_scenarios",
+      "seed": 9,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery_429/tasks/seed_9/formal-task-0009-boundary/run_000/state.json",
+      "status": "ready",
+      "task_id": "formal-task-0009-boundary"
+    },
+    {
+      "accepted_edge_count": 127,
+      "dropoff_reached": true,
+      "errors": [],
+      "frozen_task_id": "formal-task-0009-detour",
+      "legs": [
+        {
+          "edge_count": 18,
+          "end_node": "node_0_16",
+          "leg": "start_to_pickup",
+          "passed": true,
+          "start_node": "node_0_0",
+          "violations": []
+        },
+        {
+          "edge_count": 109,
+          "end_node": "node_75_18",
+          "leg": "pickup_to_dropoff",
+          "passed": true,
+          "start_node": "node_0_16",
+          "violations": []
+        }
+      ],
+      "map_directed_edges": 36613,
+      "map_id": "grid-100x100-seed-9",
+      "passed": true,
+      "pickup_reached": true,
+      "preflight_sha256": "2d861e64d3108e891c852dba3e20953d0fbe04c33be4e6b1f20e860d483c2537",
+      "replay_violations": [],
+      "replayed_directed_edge_count": 127,
+      "route_complete": true,
+      "sample_group": "formal_scenarios",
+      "seed": 9,
+      "state_path": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_00/tasks/seed_9/formal-task-0009-detour/run_000/state.json",
+      "status": "route_complete",
+      "task_id": "formal-task-0009-detour"
+    }
+  ],
+  "violations": []
+}

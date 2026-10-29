@@ -1,0 +1,222 @@
+{
+  "schema": "research_sync_archive_v1",
+  "captured_at_local": "2026-10-29T20:16:12+08:00",
+  "batch": "dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0",
+  "batch_state": "in progress; process observed; partial checkpoint only",
+  "source_license_status": "NYC Open Data metadata lists license as unspecified; attribution and source terms retained; no raw Parquet included",
+  "paired_audit": {
+    "official_audit_source_sha256": "c307fe6599bd1983ad5f7b692c7216941a393510fa3914324167d799942eaf60",
+    "official_audit_archive_sha256": "a7507f3c616361c19f3a59b2c7fd1689b97e03fed5795e548ff592f346dcae0a",
+    "audit_timestamp_utc": "2026-10-29T12:00:01+00:00",
+    "expected_method_runs": 630,
+    "present_method_runs": 346,
+    "valid_method_runs": 346,
+    "missing_method_run_count": 284,
+    "invalid_method_run_count": 0,
+    "all_runs_complete_and_valid": false,
+    "fingerprint_source_sha256_matches_official": true,
+    "fingerprint_audited_result_count": 346,
+    "scenario_fingerprint_mismatch_count": 0,
+    "input_hash_mismatch_count": 0,
+    "all_present_results_match_frozen_inputs_and_contract": true
+  },
+  "terminal_individual_results_count": 12,
+  "terminal_results_created_after_latest_audit": 4,
+  "sidecar": {
+    "source_manifest_sha256": "e485596967240a856981165db20b0ac3b4af5a75aa77137b0b516fd3faa54cda",
+    "source_status": "completed_segment_economics_route_choice_blocked",
+    "new_source_result_count": 4,
+    "combined_source_result_count": 337,
+    "audited_valid_method_runs": 337,
+    "new_model_calls": 0,
+    "dispatch_replayed": false,
+    "run_economics_rows": 4,
+    "segment_economics_rows": 208,
+    "usage_reconciliation_rows": 215,
+    "pre_shared_intermediate_excluded": true
+  },
+  "files": [
+    {
+      "path": "evaluation/EV_20240427_223500_q75/F4/D5_pure_llm_direct_seed_0.json",
+      "source_bytes": 3037966,
+      "source_sha256": "2aed910f152ed4be350944e66f2dd149fe3681baf9db950daf15df3e5f0a29a7",
+      "archive_bytes": 3021857,
+      "archive_sha256": "3d7a95e9e5292edb8b636ef36fd1b7d2a8756c25c2f390079c923b722d6b5d7c",
+      "partial_run": false,
+      "case_id": "EV_20240427_223500_q75",
+      "fleet_id": "F4",
+      "method_name": "D5_pure_llm_direct"
+    },
+    {
+      "path": "evaluation/EV_20240427_223500_q75/F4/D6_agent_codex_context_optimizer_seed_0.json",
+      "source_bytes": 3147260,
+      "source_sha256": "6583f146964151e7d9c069c70e8578bf2dbdc44d142691eb9715b9021c6bbe7a",
+      "archive_bytes": 3146673,
+      "archive_sha256": "b6e0206877f4716dc829ddece1c7959efee9f227d050f5d045a93010d4099eab",
+      "partial_run": false,
+      "case_id": "EV_20240427_223500_q75",
+      "fleet_id": "F4",
+      "method_name": "D6_agent_codex_context_optimizer"
+    },
+    {
+      "path": "evaluation/EV_20240427_223500_q75/F4/D7_agent_codex_capacity_shield_optimizer_seed_0.json",
+      "source_bytes": 3367684,
+      "source_sha256": "55da1eb66a60d82e99c8c8d67aa72025ee506c15c3096a25b9a4e6aafa3d755f",
+      "archive_bytes": 3367097,
+      "archive_sha256": "f29a3eaf092cd476ef4c0c73ae2e7403ddb6cd5d42ec1ba468747cafc91f3aa2",
+      "partial_run": false,
+      "case_id": "EV_20240427_223500_q75",
+      "fleet_id": "F4",
+      "method_name": "D7_agent_codex_capacity_shield_optimizer"
+    },
+    {
+      "path": "evaluation/EV_20240528_210000_q25/F1/D5_pure_llm_direct_seed_0.json",
+      "source_bytes": 2147290,
+      "source_sha256": "9c6badad576d99987cba0bd23ede54b71fe01c8f028cb800ebbb3a9666b512d6",
+      "archive_bytes": 2143532,
+      "archive_sha256": "7a886c9d09ae07009cf9481c19f907bc4e266ebc32c6083edc601c7b0b44e47d",
+      "partial_run": false,
+      "case_id": "EV_20240528_210000_q25",
+      "fleet_id": "F1",
+      "method_name": "D5_pure_llm_direct"
+    },
+    {
+      "path": "evaluation/EV_20240528_210000_q25/F1/D6_agent_codex_context_optimizer_seed_0.json",
+      "source_bytes": 2313555,
+      "source_sha256": "dbc82dd507c86234d68e5b89bfd55d7852a4da938bcf73f934f19a7db46b3118",
+      "archive_bytes": 2312968,
+      "archive_sha256": "5e5dbc244ab1cbe6891e887350b75d6381e76c7dd624e445594b0e97419714d8",
+      "partial_run": false,
+      "case_id": "EV_20240528_210000_q25",
+      "fleet_id": "F1",
+      "method_name": "D6_agent_codex_context_optimizer"
+    },
+    {
+      "path": "evaluation/EV_20240528_210000_q25/F1/D7_agent_codex_capacity_shield_optimizer_seed_0.json",
+      "source_bytes": 2496539,
+      "source_sha256": "9ed7bd0687de4fccd7faa658333504f17891796c1da6a4e318aa0e684b565b79",
+      "archive_bytes": 2495952,
+      "archive_sha256": "58bb9ee769f73eebe0335d3d46430fa7619e458902ab2b5be65bb7c91fec532d",
+      "partial_run": false,
+      "case_id": "EV_20240528_210000_q25",
+      "fleet_id": "F1",
+      "method_name": "D7_agent_codex_capacity_shield_optimizer"
+    },
+    {
+      "path": "evaluation/EV_20240528_210000_q25/F1/D8_agent_codex_nn_capacity_shield_optimizer_seed_0.json",
+      "source_bytes": 2927614,
+      "source_sha256": "41b6de2e5e8ca65730920f9d3f36fa9df890a79e34882626e0bb64ad00c8446a",
+      "archive_bytes": 2926976,
+      "archive_sha256": "adbfcbb9a7d801bdc57c217688b77d30c28c9843752a06be3f8dc939686bc027",
+      "partial_run": false,
+      "case_id": "EV_20240528_210000_q25",
+      "fleet_id": "F1",
+      "method_name": "D8_agent_codex_nn_capacity_shield_optimizer"
+    },
+    {
+      "path": "evaluation/EV_20240528_210000_q25/F2/D5_pure_llm_direct_seed_0.json",
+      "source_bytes": 2409393,
+      "source_sha256": "392dc007868db504034c627241d2cae77c79e4b578bd4149ffb4e867484173d1",
+      "archive_bytes": 2400802,
+      "archive_sha256": "96a2fe22d9776fb946e8ddaf717aaa4c9168e4c28ef492f079dfbebb3c183b73",
+      "partial_run": false,
+      "case_id": "EV_20240528_210000_q25",
+      "fleet_id": "F2",
+      "method_name": "D5_pure_llm_direct"
+    },
+    {
+      "path": "evaluation/EV_20240528_210000_q25/F2/D6_agent_codex_context_optimizer_seed_0.json",
+      "source_bytes": 2542379,
+      "source_sha256": "df68a82efd56c9f6697652aec93b3650698cd72f3467a94ed66d077dc28a18ab",
+      "archive_bytes": 2541792,
+      "archive_sha256": "609511036ba80c1b630d3254646af2c09fd268a5075cac0ad3eeef73f2340b85",
+      "partial_run": false,
+      "case_id": "EV_20240528_210000_q25",
+      "fleet_id": "F2",
+      "method_name": "D6_agent_codex_context_optimizer"
+    },
+    {
+      "path": "evaluation/EV_20240528_210000_q25/F2/D7_agent_codex_capacity_shield_optimizer_seed_0.json",
+      "source_bytes": 2728890,
+      "source_sha256": "ab1fbdbe5b4224330bb76e64ed361957d6af5a599e944790d3952393e018981d",
+      "archive_bytes": 2728303,
+      "archive_sha256": "2dc60dca768d243a7b2e61dd37c554762ab26bacff12c823f8f3dbc6aa957602",
+      "partial_run": false,
+      "case_id": "EV_20240528_210000_q25",
+      "fleet_id": "F2",
+      "method_name": "D7_agent_codex_capacity_shield_optimizer"
+    },
+    {
+      "path": "evaluation/EV_20240528_210000_q25/F2/D8_agent_codex_nn_capacity_shield_optimizer_seed_0.json",
+      "source_bytes": 3188238,
+      "source_sha256": "ed962d6d77ee52bd0dd27f94c4751fa94cc6b16fbde41181ae9a08a4ebd037fa",
+      "archive_bytes": 3187600,
+      "archive_sha256": "1a1c06212ced1d62aa034632e444feb7039fd563f14e41004d0fd02b91682b4f",
+      "partial_run": false,
+      "case_id": "EV_20240528_210000_q25",
+      "fleet_id": "F2",
+      "method_name": "D8_agent_codex_nn_capacity_shield_optimizer"
+    },
+    {
+      "path": "evaluation/EV_20240528_210000_q25/F4/D8_agent_codex_nn_capacity_shield_optimizer_seed_0.json",
+      "source_bytes": 3791484,
+      "source_sha256": "cb7b9dfeff7c6620d5c6a11fbd648b20c0aa8b1f83f12cef5c2cfb5db4cab084",
+      "archive_bytes": 3790846,
+      "archive_sha256": "1dab663f7f9dd895bde3a0b82752050289c82833be25a2d593e94c19de270102",
+      "partial_run": false,
+      "case_id": "EV_20240528_210000_q25",
+      "fleet_id": "F4",
+      "method_name": "D8_agent_codex_nn_capacity_shield_optimizer"
+    },
+    {
+      "path": "audit_snapshots/ev2_segment_ledger_audit_20261029115956Z_goal.json",
+      "source_bytes": 1210352,
+      "source_sha256": "c307fe6599bd1983ad5f7b692c7216941a393510fa3914324167d799942eaf60",
+      "archive_bytes": 1142777,
+      "archive_sha256": "a7507f3c616361c19f3a59b2c7fd1689b97e03fed5795e548ff592f346dcae0a",
+      "kind": "paired_official_audit"
+    },
+    {
+      "path": "audit_snapshots/ev2_matrix_fingerprint_audit_20261029115956Z_goal.json",
+      "source_bytes": 756419,
+      "source_sha256": "731bf2cbf36b9556f341eb647ab02ded26edc7fcb46b072d05c14e0550b582d8",
+      "archive_bytes": 738722,
+      "archive_sha256": "c8ec41b1f2e8f63447e44adb70b08bb539c82354a0535611a5b4830e501adbc0",
+      "kind": "paired_official_audit"
+    },
+    {
+      "path": "time_money_v5_segment_sidecar_20261029T1128UTC_delta_from333_to337/run_economics_v5.jsonl",
+      "source_bytes": 250654,
+      "source_sha256": "fda68352afb9e8650673f9f114b5eae4258d762b468208584b177cc70cfcb827",
+      "archive_bytes": 250450,
+      "archive_sha256": "7b6657cff3866662ec22e776160a8c3a97db1882b3acf85fea62569c3c0e68b3",
+      "kind": "final_sidecar_output"
+    },
+    {
+      "path": "time_money_v5_segment_sidecar_20261029T1128UTC_delta_from333_to337/segment_economics_v5.jsonl",
+      "source_bytes": 440811,
+      "source_sha256": "22422c576b3cdbdd263e122e0b2ff4024aa7083fd5c67941c3c2956bbfb68b94",
+      "archive_bytes": 430203,
+      "archive_sha256": "ea769d82dba7a4e2a41e070b19f95b5bfc3b9ddc89e3c88649129964497469a4",
+      "kind": "final_sidecar_output"
+    },
+    {
+      "path": "time_money_v5_segment_sidecar_20261029T1128UTC_delta_from333_to337/usage_attribution_reconciliation.json",
+      "source_bytes": 13398,
+      "source_sha256": "bb9d3805abf75fc1cf4360eae3a448663eaf3a8a6caba20b7efba7c6e1d59551",
+      "archive_bytes": 12378,
+      "archive_sha256": "6322df740d610565860160db8db63f22cb485a29379f1f428ae39cb3fbeb37ca",
+      "kind": "final_sidecar_output"
+    }
+  ],
+  "sanitization": [
+    "removed user_config and credential/prompt/raw-request/raw-state fields",
+    "converted workspace absolute paths to project-relative references and redacted other local paths"
+  ],
+  "excluded": [
+    "active progress/log files",
+    "raw prompt/context-policy traces",
+    "superseded pre_shared_usage_reconciliation intermediate",
+    "raw sidecar manifest"
+  ]
+}

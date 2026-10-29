@@ -37,6 +37,29 @@ def parse_optional_int(value: str):
         return None
     return int(value)
 TERMINAL = {"route_complete", "failed", "preflight_blocked"}
+RUNNABLE_TASK_STATUSES = {"pending", "ready", "active", "budget_paused"}
+
+
+def _has_runnable_tasks(worker_manifest: Dict[str, Any]) -> bool:
+    """Do not restart a shard whose remaining rows are all audited terminal states.
+
+    In particular, outcome_unknown rows are retained for the final audit and are
+    never replayed automatically. They must not keep an otherwise exhausted
+    worker alive as a no-op process.
+    """
+    return any(
+        task.get("status") in RUNNABLE_TASK_STATUSES
+        for task in worker_manifest.get("tasks", [])
+    )
+
+
+def _route_safety_gate_block_reason(master_manifest: Dict[str, Any]) -> Optional[str]:
+    """Fail closed when this batch declares a route-safety gate that has not passed."""
+    gate = master_manifest.get("route_safety_gate")
+    if not isinstance(gate, dict) or gate.get("formal_continuation_permitted") is True:
+        return None
+    status = gate.get("status") or "unspecified"
+    return "r4_route_safety_gate_not_passed:" + str(status)
 
 
 def _launchd_print(label: str) -> tuple[bool, str]:
@@ -49,7 +72,10 @@ def _launchd_active(label: str) -> bool:
     loaded, details = _launchd_print(label)
     if not loaded:
         return False
-    return "state = running" in details or "state = spawn scheduled" in details
+    # "spawn scheduled" only means launchd intends another attempt; the last
+    # child may already have failed. refresh_master checks the exact worker argv
+    # in the process table after this returns False.
+    return "state = running" in details
 
 
 def _unknown_delivery_key(row: Dict[str, Any]) -> tuple[Any, ...]:
@@ -453,6 +479,9 @@ def start_workers(
     _assert_original_runner_stopped(batch_root)
     master_path = batch_root / "manifest.json"
     master = _read(master_path)
+    gate_block = _route_safety_gate_block_reason(master)
+    if gate_block:
+        raise RuntimeError(gate_block)
     if master.get("in_flight"):
         raise RuntimeError("master_manifest_has_in_flight_request")
     if usage_stop_percent is not None and usage_baseline_percent >= usage_stop_percent:
@@ -487,7 +516,7 @@ def start_workers(
         worker_manifest = _read(worker_root / "manifest.json")
         if worker_manifest.get("in_flight"):
             raise RuntimeError("worker_has_in_flight_request:" + worker["worker_id"])
-        if all(task.get("status") in TERMINAL for task in worker_manifest.get("tasks", [])):
+        if not _has_runnable_tasks(worker_manifest):
             worker["status"] = "completed"
             continue
         if worker_manifest.get("status") not in {
@@ -526,7 +555,8 @@ def start_workers(
                    "--request-limit", str(worker["request_limit"]),
                    "--usage-baseline-percent", str(usage_baseline_percent),
                    "--usage-stop-percent", "none" if usage_stop_percent is None else str(usage_stop_percent),
-                   "--pilot-audit", str(Path(pilot_audit).resolve())]
+                   "--pilot-audit", str(Path(pilot_audit).resolve()),
+                   "--max-new-requests-per-invocation", str(max_new_requests_per_invocation)]
         log_path = log_dir / f"{worker['worker_id']}.log"
         plist_path = _start_launch_agent(label, command, log_path, log_path)
         worker["launch_agent_plist"] = str(plist_path)
@@ -737,6 +767,7 @@ def refresh_master(batch_root: Path) -> Dict[str, Any]:
     active = [task for task in master["tasks"] if task.get("status") not in TERMINAL]
     master["current_task_id"] = active[0]["task_id"] if active else None
     all_terminal = not active
+    gate_block = _route_safety_gate_block_reason(master)
     jobs_alive = []
     for worker in plan.get("workers", []):
         label = worker.get("service_label")
@@ -771,7 +802,15 @@ def refresh_master(batch_root: Path) -> Dict[str, Any]:
         except OSError:
             pass
     aggregator_label = plan.get("aggregator_service_label")
-    if all_terminal:
+    if gate_block:
+        master["halt_no_more_model_requests"] = True
+        master["halt_status"] = "user_requested_one_way_safety_gate_pending"
+        master["pause_reason"] = gate_block
+        master["status"] = (
+            "running" if in_flight or jobs_alive else "paused_user_requested_safety_gate"
+        )
+        master["route_safety_gate"]["formal_continuation_permitted"] = False
+    elif all_terminal:
         master["status"] = "completed_with_audited_task_outcomes"
     elif jobs_alive:
         master["status"] = "running"

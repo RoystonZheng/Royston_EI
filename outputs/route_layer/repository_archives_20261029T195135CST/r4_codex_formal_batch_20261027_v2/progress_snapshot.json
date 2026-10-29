@@ -1,0 +1,110 @@
+{
+  "schema": "r4_safe_progress_snapshot_v1",
+  "snapshot_time_local": "2026-10-29T19:53:08+08:00",
+  "snapshot_time_utc": "2026-10-29T11:53:08+00:00",
+  "source_path": "~/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2",
+  "batch_state": "paused_at_parallel_checkpoint; not a final result",
+  "manifest_summaries": {
+    "root": {
+      "manifest_sha256": "55a60f5adbd009cf86a4a036fbf5edcd98e59404502ea6ac96722ae9e4c7fa43",
+      "status": "paused_at_parallel_checkpoint",
+      "model_requests_used": 11799,
+      "task_status_counts": {
+        "route_complete": 56,
+        "outcome_unknown": 10,
+        "failed": 6,
+        "ready": 30,
+        "pending": 27
+      },
+      "unresolved_in_flight_status_counts": {
+        "outcome_unknown_no_retry": 26
+      },
+      "manifest_bytes": 338466
+    },
+    "worker_00": {
+      "manifest_sha256": "20e00e3eb186b04d1c07280523e838a4314f361b19828a03601e8aca1f744fec",
+      "status": "paused_at_checkpoint_unknown_tasks_deferred",
+      "model_requests_used": 2337,
+      "task_status_counts": {
+        "outcome_unknown": 9,
+        "route_complete": 14,
+        "failed": 6
+      },
+      "unresolved_in_flight_status_counts": {
+        "outcome_unknown_no_retry": 8,
+        "reconciled_complete_response_from_saved_trace": 1
+      },
+      "manifest_bytes": 519714
+    },
+    "worker_01": {
+      "manifest_sha256": "9bf8572be639ccf39e49b80af8dee8720aec66a3927b2683a098dbd33b1b77e3",
+      "status": "paused_at_checkpoint",
+      "model_requests_used": 1350,
+      "task_status_counts": {
+        "route_complete": 8,
+        "outcome_unknown": 4,
+        "failed": 17
+      },
+      "unresolved_in_flight_status_counts": {
+        "outcome_unknown_no_retry": 5
+      },
+      "manifest_bytes": 318311
+    },
+    "worker_02": {
+      "manifest_sha256": "5f52869f3fc93a3544b4d09ecbc1efd905ce76206661fb98e24cf582d0e4bd10",
+      "status": "paused_at_checkpoint_user_requested_safety_gate",
+      "model_requests_used": 2230,
+      "task_status_counts": {
+        "route_complete": 10,
+        "failed": 4,
+        "outcome_unknown": 1,
+        "ready": 1,
+        "pending": 13
+      },
+      "unresolved_in_flight_status_counts": {
+        "outcome_unknown_no_retry": 2,
+        "reconciled_complete_response_from_saved_trace": 1
+      },
+      "manifest_bytes": 485517
+    },
+    "worker_03": {
+      "manifest_sha256": "8cc10844cc1e9601746879f5ef684b1dbcb19f545f22c0329ca55df74fb06d9e",
+      "status": "paused_at_checkpoint_user_requested_safety_gate",
+      "model_requests_used": 2238,
+      "task_status_counts": {
+        "route_complete": 10,
+        "failed": 3,
+        "outcome_unknown": 1,
+        "ready": 2,
+        "pending": 14
+      },
+      "unresolved_in_flight_status_counts": {
+        "outcome_unknown_no_retry": 2
+      },
+      "manifest_bytes": 478859
+    },
+    "worker_recovery_429": {
+      "manifest_sha256": "e20e401859813dad7e1e8fd537d2a95665374b1320b9b61f7029d03130f89782",
+      "status": "paused_at_checkpoint_user_requested_safety_gate",
+      "model_requests_used": 679,
+      "task_status_counts": {
+        "route_complete": 3,
+        "ready": 26
+      },
+      "unresolved_in_flight_status_counts": {},
+      "manifest_bytes": 115207
+    }
+  },
+  "process_observations": {
+    "formal_driver_pid_file_present": true,
+    "formal_driver_process_alive": false,
+    "worker_lock_open": {
+      "worker_00": false,
+      "worker_01": false,
+      "worker_02": false,
+      "worker_03": false,
+      "worker_recovery_429": false
+    }
+  },
+  "scope_note": "Parent and worker manifests are separate scopes; their request counts and task states are not summed. This snapshot contains aggregate statuses and manifest hashes only, not raw manifests, task rows, prompts, traces, or runtime state."
+}

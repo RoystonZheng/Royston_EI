@@ -38,6 +38,8 @@ from route_experiment.r4_constraints import build_r4_route_output_constraint  # 
 from route_experiment.r4_stepwise import (  # noqa: E402
     _local_check,
     _model_self_check_mismatch_fields,
+    accepted_prefix_sha256,
+    audit_accepted_prefix_suffix_witnesses,
     audit_r4_stepwise_map_equivalence,
     build_r4_step_output_constraint,
     build_r4_stepwise_messages,
@@ -110,6 +112,88 @@ def _attempt_usage_record(raw_usage: Dict[str, Any], state: Dict[str, Any], sess
         "latency_ms": raw_usage.get("latency_ms"),
         "account_cost": "not_reported_by_cli",
     }
+
+
+def _rollback_rejected_action_one_node(
+    state: Dict[str, Any],
+    *,
+    current_node_id: str,
+    rejected_direction: Optional[str],
+    rejected_target_node_id: Optional[str],
+    rejection_code: str,
+) -> Dict[str, Any]:
+    """Reject a proposed edge, then backtrack exactly one accepted edge if possible."""
+    nodes = state.get("accepted_nodes")
+    edges = state.get("accepted_edges")
+    directions = state.get("accepted_directions")
+    if not isinstance(nodes, list) or not nodes or nodes[-1] != current_node_id:
+        raise ValueError("r4_rejected_action_current_node_mismatch")
+    if not isinstance(edges, list) or not isinstance(directions, list):
+        raise ValueError("r4_rejected_action_prefix_malformed")
+    if len(edges) != len(directions) or len(nodes) != len(edges) + 1:
+        raise ValueError("r4_rejected_action_prefix_length_mismatch")
+
+    rejected_by_node = state.setdefault("rejected_directions_by_node", {})
+    rejected = rejected_by_node.setdefault(current_node_id, [])
+    if rejected_direction in {"E", "W", "N", "S"} and rejected_direction not in rejected:
+        rejected.append(rejected_direction)
+        rejected.sort()
+
+    rejected_edge = {
+        "from_node_id": current_node_id,
+        "to_node_id": rejected_target_node_id,
+        "direction": rejected_direction,
+        "reason": rejection_code,
+    }
+    recovery: Dict[str, Any] = {
+        "event": "reject_candidate_backtrack_one_legal_node_and_research",
+        "rejected_edge": rejected_edge,
+        "rejected_edge_added_to_route": False,
+        "rejection_code": rejection_code,
+        "rollback_count_nodes": 0,
+        "rollback_node_id": current_node_id,
+        "removed_accepted_edge": None,
+        "retry_from_node_id": current_node_id,
+        "re_search_required": True,
+    }
+
+    if edges:
+        predecessor = nodes[-2]
+        removed_edge = {
+            "from_node_id": predecessor,
+            "to_node_id": current_node_id,
+            "edge_id": edges[-1],
+            "direction": directions[-1],
+        }
+        edges.pop()
+        directions.pop()
+        nodes.pop()
+        backtracked = state.setdefault("backtracked_directions_by_node", {})
+        at_checkpoint = backtracked.setdefault(predecessor, [])
+        if removed_edge["direction"] not in at_checkpoint:
+            at_checkpoint.append(removed_edge["direction"])
+            at_checkpoint.sort()
+        recovery.update({
+            "rollback_count_nodes": 1,
+            "rollback_node_id": predecessor,
+            "removed_accepted_edge": removed_edge,
+            "retry_from_node_id": predecessor,
+            "backtracked_direction_at_checkpoint": removed_edge["direction"],
+        })
+        if "pickup_node_id" in state:
+            state["pickup_seen"] = state["pickup_node_id"] in nodes
+
+    state.setdefault("route_recovery_events", []).append(recovery)
+    state["pending_route_research_feedback"] = {
+        "code": "rejected_candidate_and_backtracked_one_node",
+        "rejected_edge": rejected_edge,
+        "rollback_node_id": recovery["rollback_node_id"],
+        "retry_from_node_id": recovery["retry_from_node_id"],
+        "backtracked_direction_at_checkpoint": recovery.get(
+            "backtracked_direction_at_checkpoint"
+        ),
+    }
+    return recovery
 
 
 def _summarize_attempt_usage(attempts: List[Dict[str, Any]], new_requests: int) -> Dict[str, Any]:
@@ -226,6 +310,11 @@ def _natural_simple_path_limit(package: Any) -> int:
     return max(1, len(node_ids) - 1)
 
 
+def _is_formal_batch_task_id(task_id: str) -> bool:
+    """Recognize both order tasks and formal-scenario tasks in the frozen matrix."""
+    return task_id.startswith(("task-", "formal-task-"))
+
+
 def _has_explicit_unbounded_authorization(state: Dict[str, Any]) -> bool:
     if not state.get("additional_model_requests_authorized", False):
         return False
@@ -333,6 +422,7 @@ def _initial_state(
         visited_node_ids=[task.start_node_id],
         remaining_action_budget=initial_completion_budget,
         include_objective_cost_guidance=enable_progress_guidance,
+        require_suffix_witness=True,
     )
     initial_stop_reason = _authorized_call_budget_stop_reason(
         initial_constraint.remaining_minimum_moves, authorized_request_limit
@@ -411,6 +501,15 @@ def _initial_state(
         "route_input_protocol": input_protocol,
         "compact_visited_state": compact_visited_state,
         "enable_progress_guidance": enable_progress_guidance,
+        "suffix_witness_gate_version": "r4-suffix-witness-gate-v1",
+        "suffix_witness_gate_enabled": True,
+        "rejected_directions_by_node": {},
+        "suffix_witness_prefix_audit": {
+            "passed": True,
+            "accepted_action_count": 0,
+            "prefix_sha256": accepted_prefix_sha256([task.start_node_id], []),
+            "model_calls": 0,
+        },
         "retry_count": 0,
         "accepted_nodes": [task.start_node_id],
         "accepted_edges": [],
@@ -422,7 +521,7 @@ def _initial_state(
         "map_equivalence_audit": map_audit,
         "initial_continuation_allowed_directions": sorted(initial_constraint.edge_by_direction),
         "initial_remaining_minimum_moves": initial_constraint.remaining_minimum_moves,
-        "scope": "Fresh stepwise Codex pilot on the exact frozen preflight task; one direction per request; no inherited route action; no local route repair.",
+        "scope": "Fresh stepwise Codex pilot on the exact frozen preflight task; one direction per request; no inherited route action; invalid moves do not advance state and trigger re-search from the last legal checkpoint with the rejected direction excluded.",
     }
     if user_authorized_task9_experiment:
         if road_map.size != 100 or task.task_id != "task-0000-0009":
@@ -529,6 +628,131 @@ def _safe_unexecuted_self_check_mismatch_parent(
     )
 
 
+_PREFIX_SUFFIX_RECOVERABLE_REASONS = {
+    "suffix_witness_not_found",
+    "current_prefix_has_no_certified_continuation",
+    "action_budget_insufficient",
+    "remaining_action_budget_insufficient",
+}
+
+
+def _recover_resume_prefix_to_last_certified_checkpoint(
+    package: Any,
+    full_constraint: Any,
+    *,
+    accepted_nodes: List[str],
+    accepted_edges: List[str],
+    accepted_directions: List[str],
+    route_action_budget: int,
+) -> Dict[str, Any]:
+    """Keep the latest old checkpoint from which a full suffix is certified.
+
+    Only suffix-feasibility failures are recoverable. Structural problems in
+    an accepted edge remain fatal. Parent state and call history are read-only;
+    the caller records the removed suffix in the new continuation state.
+    """
+    original_audit = audit_accepted_prefix_suffix_witnesses(
+        package,
+        full_constraint,
+        accepted_nodes=list(accepted_nodes),
+        accepted_edges=list(accepted_edges),
+        accepted_directions=list(accepted_directions),
+        route_action_budget=route_action_budget,
+    )
+    if original_audit.get("passed"):
+        return {
+            "passed": True,
+            "accepted_nodes": list(accepted_nodes),
+            "accepted_edges": list(accepted_edges),
+            "accepted_directions": list(accepted_directions),
+            "prefix_audit": original_audit,
+            "rollback": None,
+        }
+
+    failure_reason = original_audit.get("reason")
+    if failure_reason not in _PREFIX_SUFFIX_RECOVERABLE_REASONS:
+        return {
+            "passed": False,
+            "reason": failure_reason,
+            "failure_audit": original_audit,
+            "rollback": None,
+        }
+
+    failed_step = original_audit.get("step")
+    checkpoint_edge_count = (
+        int(failed_step) - 1
+        if isinstance(failed_step, int) and not isinstance(failed_step, bool)
+        else len(accepted_edges) - 1
+    )
+    while checkpoint_edge_count >= 0:
+        candidate_nodes = list(accepted_nodes[: checkpoint_edge_count + 1])
+        candidate_edges = list(accepted_edges[:checkpoint_edge_count])
+        candidate_directions = list(accepted_directions[:checkpoint_edge_count])
+        candidate_audit = audit_accepted_prefix_suffix_witnesses(
+            package,
+            full_constraint,
+            accepted_nodes=candidate_nodes,
+            accepted_edges=candidate_edges,
+            accepted_directions=candidate_directions,
+            route_action_budget=route_action_budget,
+        )
+        if candidate_audit.get("passed"):
+            rollback = {
+                "event": "rollback_to_last_certified_checkpoint",
+                "reason": failure_reason,
+                "failure_step": failed_step,
+                "original_action_count": len(accepted_edges),
+                "original_prefix_sha256": accepted_prefix_sha256(
+                    accepted_nodes, accepted_edges
+                ),
+                "checkpoint_action_count": checkpoint_edge_count,
+                "checkpoint_node_id": candidate_nodes[-1],
+                "checkpoint_prefix_sha256": candidate_audit.get("prefix_sha256"),
+                "removed_action_count": len(accepted_edges) - checkpoint_edge_count,
+                "removed_node_sequence": list(accepted_nodes[checkpoint_edge_count + 1 :]),
+                "removed_edge_sequence": list(accepted_edges[checkpoint_edge_count:]),
+                "removed_direction_sequence": list(
+                    accepted_directions[checkpoint_edge_count:]
+                ),
+                "rejected_parent_action_replayed": False,
+                "model_calls": 0,
+            }
+            return {
+                "passed": True,
+                "accepted_nodes": candidate_nodes,
+                "accepted_edges": candidate_edges,
+                "accepted_directions": candidate_directions,
+                "prefix_audit": candidate_audit,
+                "failure_audit": original_audit,
+                "rollback": rollback,
+            }
+
+        candidate_reason = candidate_audit.get("reason")
+        if candidate_reason not in _PREFIX_SUFFIX_RECOVERABLE_REASONS:
+            return {
+                "passed": False,
+                "reason": candidate_reason,
+                "failure_audit": original_audit,
+                "checkpoint_failure_audit": candidate_audit,
+                "rollback": None,
+            }
+        earlier_failed_step = candidate_audit.get("step")
+        next_checkpoint = (
+            int(earlier_failed_step) - 1
+            if isinstance(earlier_failed_step, int)
+            and not isinstance(earlier_failed_step, bool)
+            else checkpoint_edge_count - 1
+        )
+        checkpoint_edge_count = min(checkpoint_edge_count - 1, next_checkpoint)
+
+    return {
+        "passed": False,
+        "reason": "no_certified_resume_checkpoint",
+        "failure_audit": original_audit,
+        "rollback": None,
+    }
+
+
 def _resume_state(
     parent_dir: Path,
     allow_unexecuted_self_check_mismatch: bool = False,
@@ -585,7 +809,13 @@ def _resume_state(
         if user_authorized_user_stop_resume or user_authorized_formal_task_resume
         else []
     )
+    provider_rejected_parent_request_numbers = (
+        _safe_provider_rejection_resume_parent(parent, parent_audit)
+        if user_authorized_formal_task_resume
+        else []
+    )
     safe_unresolved_delivery_resume = bool(unresolved_parent_request_numbers)
+    safe_provider_rejection_resume = bool(provider_rejected_parent_request_numbers)
     quota_guard = parent.get("account_usage_guard") or {}
     if not isinstance(quota_guard, dict):
         quota_guard = {}
@@ -604,7 +834,7 @@ def _resume_state(
     } or clean_quota_stop or (
         (user_authorized_user_stop_resume or user_authorized_formal_task_resume)
         and parent.get("status") == "stopped_by_user_instruction"
-    ) or safe_unresolved_delivery_resume
+    ) or safe_unresolved_delivery_resume or safe_provider_rejection_resume
     if not clean_budget_stop and not safe_self_check_resume:
         if allow_unexecuted_self_check_mismatch:
             raise RuntimeError("resume_self_check_mismatch_parent_not_safe")
@@ -633,6 +863,7 @@ def _resume_state(
         int(parent.get("new_requests_used", 0))
         - int(safe_self_check_resume)
         - len(unresolved_parent_request_numbers)
+        - len(provider_rejected_parent_request_numbers)
     )
     if len(accepted_attempts) != expected_accepted_attempts or any(
         item.get("tool_item_types") or item.get("retry_count") != 0
@@ -658,6 +889,11 @@ def _resume_state(
                 and parent_audit.get("tool_audit_complete") is False
                 and set(parent_audit.get("tool_audit_unknown_request_numbers", []))
                 == set(unresolved_parent_request_numbers)
+            )
+            and not (
+                safe_provider_rejection_resume
+                and parent_audit.get("tool_events") is None
+                and parent_audit.get("tool_audit_complete") is False
             )
         )
     ):
@@ -686,12 +922,14 @@ def _resume_state(
             raise RuntimeError("resume_user_stopped_parent_scope_mismatch")
     if user_authorized_formal_task_resume and (
         road_map.size != 100
-        or not task.task_id.startswith("task-")
+        or not _is_formal_batch_task_id(task.task_id)
         or selected_input_protocol != "r4-step-v3"
     ):
         raise RuntimeError("resume_formal_batch_parent_scope_mismatch")
 
-    current = parent["accepted_nodes"][-1]
+    resume_nodes = list(parent["accepted_nodes"])
+    resume_edges = list(parent["accepted_edges"])
+    resume_directions = list(parent["accepted_directions"])
     full_constraint = build_r4_route_output_constraint(
         package, parent["pickup_node_id"], parent["dropoff_node_id"], allow_failed=False
     )
@@ -699,21 +937,52 @@ def _resume_state(
         natural_limit if unbounded_resume
         else int(parent.get("route_action_budget", ROUTE_ACTION_BUDGET))
     )
-    route_action_budget = route_action_total - len(parent["accepted_edges"])
+    prefix_recovery = _recover_resume_prefix_to_last_certified_checkpoint(
+        package,
+        full_constraint,
+        accepted_nodes=resume_nodes,
+        accepted_edges=resume_edges,
+        accepted_directions=resume_directions,
+        route_action_budget=route_action_total,
+    )
+    if not prefix_recovery.get("passed"):
+        failure_audit = prefix_recovery.get("failure_audit") or {}
+        raise RuntimeError(
+            "resume_parent_suffix_witness_audit_failed:{0}".format(
+                prefix_recovery.get("reason") or failure_audit.get("reason")
+            )
+        )
+    resume_nodes = prefix_recovery["accepted_nodes"]
+    resume_edges = prefix_recovery["accepted_edges"]
+    resume_directions = prefix_recovery["accepted_directions"]
+    rollback_event = prefix_recovery.get("rollback")
+    current = resume_nodes[-1]
+    route_action_budget = route_action_total - len(resume_edges)
     resume_completion_budget = min(authorized_request_limit, route_action_budget)
+    parent_prefix_audit = prefix_recovery["prefix_audit"]
+    rejected_directions_by_node = copy.deepcopy(
+        parent.get("rejected_directions_by_node", {})
+    )
+    if rollback_event:
+        rejected_directions_by_node.pop(current, None)
     step_constraint = build_r4_step_output_constraint(
         package,
         full_constraint,
         current_node_id=current,
-        pickup_seen=bool(parent["pickup_seen"]),
-        visited_node_ids=parent["accepted_nodes"],
+        pickup_seen=package.pickup_node_id in resume_nodes,
+        visited_node_ids=resume_nodes,
         remaining_action_budget=resume_completion_budget,
         include_objective_cost_guidance=enable_progress_guidance,
+        require_suffix_witness=True,
+        rejected_directions=rejected_directions_by_node.get(current, ()),
     )
     resume_stop_reason = _authorized_call_budget_stop_reason(
         step_constraint.remaining_minimum_moves, authorized_request_limit
     )
     if not step_constraint.edge_by_direction and not resume_stop_reason:
+        no_action_reason = _no_action_stop_status(step_constraint)
+        if no_action_reason != "local_pre_request_no_allowed_action":
+            raise RuntimeError("resume_parent_" + no_action_reason)
         raise RuntimeError("resume_parent_has_no_legal_continuation")
     messages = build_r4_stepwise_messages(
         package,
@@ -721,9 +990,9 @@ def _resume_state(
         parent["pickup_node_id"],
         parent["dropoff_node_id"],
         current_node_id=current,
-        visited_node_ids=parent["accepted_nodes"],
-        pickup_seen=bool(parent["pickup_seen"]),
-        accepted_directions=parent["accepted_directions"],
+        visited_node_ids=resume_nodes,
+        pickup_seen=package.pickup_node_id in resume_nodes,
+        accepted_directions=resume_directions,
         remaining_action_budget=resume_completion_budget,
         route_feature_context=parent.get("route_feature_context"),
         compact_visited_state=compact_visited_state,
@@ -739,6 +1008,24 @@ def _resume_state(
         raise RuntimeError("resume_map_equivalence_failed")
 
     state = copy.deepcopy(parent)
+    state["accepted_nodes"] = list(resume_nodes)
+    state["accepted_edges"] = list(resume_edges)
+    state["accepted_directions"] = list(resume_directions)
+    state["pickup_seen"] = package.pickup_node_id in resume_nodes
+    state["suffix_witness_gate_version"] = "r4-suffix-witness-gate-v1"
+    state["suffix_witness_gate_enabled"] = True
+    state["rejected_directions_by_node"] = rejected_directions_by_node
+    state["resume_prefix_rollbacks"] = copy.deepcopy(
+        parent.get("resume_prefix_rollbacks", [])
+    )
+    if rollback_event:
+        rollback_event["cleared_rejected_directions_at_checkpoint"] = copy.deepcopy(
+            parent.get("rejected_directions_by_node", {}).get(current, [])
+        )
+        rollback_event["parent_state_sha256"] = hashlib.sha256(
+            parent_state_path.read_bytes()
+        ).hexdigest()
+        state["resume_prefix_rollbacks"].append(rollback_event)
     parent_account_usage_guard = state.pop("account_usage_guard", None)
     parent_usage = parent.get("usage_totals", {})
     parent_experiment_id = str(parent.get("experiment_id", ""))
@@ -819,6 +1106,10 @@ def _resume_state(
         "route_input_protocol": selected_input_protocol,
         "compact_visited_state": compact_visited_state,
         "enable_progress_guidance": enable_progress_guidance,
+        "suffix_witness_gate_version": "r4-suffix-witness-gate-v1",
+        "suffix_witness_gate_enabled": True,
+        "rejected_directions_by_node": rejected_directions_by_node,
+        "suffix_witness_prefix_audit": parent_prefix_audit,
         "attempts": [],
         "map_equivalence_audit": map_audit,
         "initial_continuation_allowed_directions": sorted(step_constraint.edge_by_direction),
@@ -835,6 +1126,8 @@ def _resume_state(
         "source_preflight_sha256": hashlib.sha256(selected_preflight.read_bytes()).hexdigest(),
         "parent_account_usage_guard": parent_account_usage_guard,
         "unresolved_parent_request_numbers_not_replayed": unresolved_parent_request_numbers,
+        "provider_rejected_parent_request_numbers_not_replayed": provider_rejected_parent_request_numbers,
+        "provider_rejected_parent_usage_unknown_request_numbers": provider_rejected_parent_request_numbers,
         **(
             {
                 "user_authorization_status": "granted_for_task9_continuation",
@@ -873,6 +1166,15 @@ def _resume_state(
                 "rejected_parent_action_replayed": False,
             }
             if safe_self_check_resume
+            else {}
+        ),
+        **(
+            {
+                "resume_reason": "confirmed_provider_rate_limit_or_capacity_rejection",
+                "rejected_parent_action_replayed": False,
+                "provider_rejection_usage_remains_unknown": True,
+            }
+            if safe_provider_rejection_resume
             else {}
         ),
         "usage_totals": {
@@ -967,6 +1269,107 @@ def _safe_unresolved_delivery_resume_parent(
     return unknown_request_numbers
 
 
+def _safe_provider_rejection_resume_parent(
+    parent: Dict[str, Any], parent_audit: Dict[str, Any]
+) -> List[int]:
+    """Return a single, trace-verified provider rejection eligible for resuming.
+
+    The rejected invocation stays in its original run and its usage remains
+    unknown. A continuation may inherit only the already validator-accepted
+    route prefix; the rejected invocation is never replayed.
+    """
+    if parent.get("status") != "stopped_request_error":
+        return []
+    attempts = parent.get("attempts", [])
+    request_count = int(parent.get("new_requests_used", 0) or 0)
+    if (
+        not attempts
+        or len(attempts) != request_count
+        or parent.get("retry_count") != 0
+        or parent_audit.get("retries") != 0
+        or parent_audit.get("status") != "partial_legal_prefix_not_complete"
+        or parent_audit.get("route_complete") is True
+        or parent_audit.get("route_continuity_violations")
+        or parent_audit.get("actual_model_requests_this_continuation") != request_count
+        or parent_audit.get("codex_cli_invocations_this_continuation") != request_count
+        or parent_audit.get("accepted_move_count_including_prior_smoke")
+        != len(parent.get("accepted_edges", []))
+        or parent_audit.get("current_node")
+        != (parent.get("accepted_nodes") or [None])[-1]
+    ):
+        return []
+    for prior in attempts[:-1]:
+        provider = prior.get("provider_record") or {}
+        event_audit = provider.get("event_audit") or {}
+        if (
+            prior.get("status") != "accepted_legal_step"
+            or prior.get("retry_count") != 0
+            or prior.get("tool_item_types") != []
+            or event_audit.get("tool_usage_detected") is not False
+            or event_audit.get("tool_item_types") != []
+        ):
+            return []
+
+    failed = attempts[-1]
+    provider = failed.get("provider_record") or {}
+    event_audit = provider.get("event_audit") or {}
+    if (
+        failed.get("status") != "stopped_request_error"
+        or failed.get("request_number") != request_count
+        or failed.get("retry_count") != 0
+        or failed.get("tool_item_types") != []
+        or failed.get("response") is not None
+        or failed.get("validation") is not None
+        or any(failed.get("usage", {}).get(key) is not None for key in (
+            "input_tokens", "cached_input_tokens", "output_tokens"
+        ))
+        or provider.get("backend") != "codex_cli"
+        or provider.get("status") != "cli_error"
+        or provider.get("cli_exit_code") != 1
+        or provider.get("retry_count") != 0
+        or provider.get("canonical_final_json_present") is not False
+        or provider.get("agent_message_count") != 0
+        or provider.get("usage_available") is not False
+        or event_audit.get("tool_usage_detected") is not False
+        or event_audit.get("tool_item_types") != []
+        or event_audit.get("item_types") != []
+        or event_audit.get("usage_event_count") != 0
+    ):
+        return []
+
+    trace_path_value = provider.get("trace_jsonl_path")
+    trace_sha256 = provider.get("trace_jsonl_sha256")
+    if not trace_path_value or not trace_sha256:
+        return []
+    trace_path = Path(trace_path_value)
+    try:
+        trace_bytes = trace_path.read_bytes()
+        if hashlib.sha256(trace_bytes).hexdigest() != trace_sha256:
+            return []
+        rows = [json.loads(line) for line in trace_bytes.decode("utf-8").splitlines() if line.strip()]
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError):
+        return []
+    event_types = [row.get("type") for row in rows]
+    if event_types != ["thread.started", "turn.started", "error", "turn.failed"]:
+        return []
+    if event_audit.get("event_types") != event_types:
+        return []
+    error_messages = []
+    for row in rows:
+        if row.get("type") == "error":
+            error_messages.append(row.get("message", ""))
+        elif row.get("type") == "turn.failed":
+            error = row.get("error") or {}
+            error_messages.append(error.get("message", "") if isinstance(error, dict) else str(error))
+    if not error_messages or not all(
+        "429 Too Many Requests" in message
+        or "Selected model is at capacity" in message
+        for message in error_messages
+    ):
+        return []
+    return [request_count]
+
+
 def preflight_only(
     resume_from: Path = None,
     allow_unexecuted_self_check_mismatch: bool = False,
@@ -1035,13 +1438,13 @@ def preflight_only(
             else "candidate_safety_cap_not_user_authorization"
         ),
         "candidate_run_limits": (
-            "No artificial per-task request/action quota; maximum is unique frozen graph nodes minus one under no-revisit validation. Zero retry; stop on tool event, illegal action, give_up, or call error."
+            "No artificial per-task request/action quota; maximum is unique frozen graph nodes minus one under no-revisit validation. Each offered direction requires a complete suffix witness. Invalid moves do not advance state and are re-searched from the last legal node with that direction excluded; zero CLI retries; stop on tool event, give_up, or call error."
             if state.get("unbounded_authorization_applied")
-            else "formal-batch-authorized R4 task: at most {0} one-step requests under the protocol's per-task candidate ceiling; zero retry; stop on tool event, illegal action, give_up, or call error; stop early if the shortest remaining route exceeds unused candidate calls"
+            else "formal-batch-authorized R4 task: at most {0} one-step requests under the protocol's per-task candidate ceiling; every offered direction needs a complete suffix witness; invalid moves are excluded and re-searched from the last legal node; zero CLI retries; stop on tool event, give_up, or call error"
             if state.get("user_authorization_status") == "granted_for_formal_r4_batch_pilot"
-            else "user-authorized task9-only pilot: at most {0} one-step requests under this candidate safety cap; zero retry; stop on tool event, illegal action, give_up, or call error; stop early if the shortest remaining route exceeds unused candidate calls"
+            else "user-authorized task9-only pilot: at most {0} one-step requests under this candidate safety cap; every offered direction needs a complete suffix witness; invalid moves are excluded and re-searched from the last legal node; zero CLI retries; stop on tool event, give_up, or call error"
             if state.get("user_authorization_status") == "granted_for_task9_continuation"
-            else "if separately authorized: up to {0} sequential one-step requests; zero retry; stop on tool event, illegal action, give_up, or call error; stop early if the shortest remaining route exceeds unused candidate calls"
+            else "if separately authorized: up to {0} sequential one-step requests; every offered direction needs a complete suffix witness; invalid moves are excluded and re-searched from the last legal node; zero CLI retries; stop on tool event, give_up, or call error"
         ).format(state["authorized_new_request_limit"]),
         "candidate_request_limit": state["authorized_new_request_limit"],
         "model": MODEL,
@@ -1055,6 +1458,9 @@ def preflight_only(
         "route_input_protocol": state.get("route_input_protocol", "r4-step-v2"),
         "compact_visited_state": bool(state.get("compact_visited_state", False)),
         "objective_progress_guidance": bool(state.get("enable_progress_guidance", False)),
+        "suffix_witness_gate_version": state.get("suffix_witness_gate_version"),
+        "suffix_witness_gate_enabled": bool(state.get("suffix_witness_gate_enabled")),
+        "suffix_witness_prefix_audit": state.get("suffix_witness_prefix_audit"),
         "codex_cli_session_storage": (
             "one isolated Codex CLI conversation per route task; session ID stored in local state"
             if state.get("codex_session_mode") == "persistent_per_task"
@@ -1085,6 +1491,7 @@ def preflight_only(
                 state["initial_remaining_minimum_moves"] <= state["authorized_new_request_limit"]
             ),
             "early_stop_if_remaining_route_exceeds_unused_candidate_calls": True,
+            "suffix_witness_gate_version": state.get("suffix_witness_gate_version"),
         },
         "parent_run": state.get("parent_run"),
         "parent_requests": state.get("parent_requests", 0),
@@ -1181,7 +1588,11 @@ def _authorized_call_budget_stop_reason(
 def _no_action_stop_status(constraint: Any) -> str:
     """Distinguish a request-budget stop from a true local dead end."""
     reasons = set((getattr(constraint, "filtered_directions", {}) or {}).values())
-    if reasons == {"remaining_action_budget_insufficient"}:
+    budget_reasons = {
+        "remaining_action_budget_insufficient",
+        "action_budget_insufficient",
+    }
+    if reasons and reasons.issubset(budget_reasons):
         return "insufficient_authorized_budget_for_remaining_route"
     if reasons == {"remaining_route_unreachable"}:
         return "remaining_route_unreachable"
@@ -1227,7 +1638,7 @@ def one_step() -> None:
                 "request_limit_semantics": "user_authorized_unbounded; finite graph-derived simple-path bound",
                 "candidate_run_limits": (
                     "No artificial per-task request/action quota; natural maximum is unique frozen graph nodes minus one. "
-                    "Zero retry; deterministic validator and no-revisit constraint remain active."
+                    "Each offered direction requires a complete suffix witness. Invalid moves do not advance state and are re-searched from the last legal node with that direction excluded; zero CLI retries."
                 ),
                 "unbounded_authorization_applied": state["unbounded_authorization_applied"],
             })
@@ -1259,6 +1670,74 @@ def one_step() -> None:
     full_constraint = build_r4_route_output_constraint(
         package, state["pickup_node_id"], state["dropoff_node_id"], allow_failed=False
     )
+    current_prefix_hash = accepted_prefix_sha256(
+        state["accepted_nodes"], state["accepted_edges"]
+    )
+    stored_prefix_audit = state.get("suffix_witness_prefix_audit") or {}
+    if (
+        state.get("suffix_witness_gate_version") != "r4-suffix-witness-gate-v1"
+        or not state.get("suffix_witness_gate_enabled")
+        or stored_prefix_audit.get("prefix_sha256") != current_prefix_hash
+    ):
+        prefix_recovery = _recover_resume_prefix_to_last_certified_checkpoint(
+            package,
+            full_constraint,
+            accepted_nodes=list(state["accepted_nodes"]),
+            accepted_edges=list(state["accepted_edges"]),
+            accepted_directions=list(state["accepted_directions"]),
+            route_action_budget=int(state.get("route_action_budget", ROUTE_ACTION_BUDGET)),
+        )
+        if not prefix_recovery.get("passed"):
+            prefix_audit = prefix_recovery.get("failure_audit") or {
+                "passed": False,
+                "reason": prefix_recovery.get("reason"),
+            }
+            state["status"] = "paused_suffix_witness_gate_failed"
+            state["stop_diagnostics"] = prefix_audit
+            _write_json(OUTPUT_DIR / "state.json", state)
+            _refresh_replay()
+            raise RuntimeError("accepted_prefix_suffix_witness_audit_failed")
+        prefix_audit = prefix_recovery["prefix_audit"]
+        rollback_event = prefix_recovery.get("rollback")
+        if rollback_event:
+            state["accepted_nodes"] = list(prefix_recovery["accepted_nodes"])
+            state["accepted_edges"] = list(prefix_recovery["accepted_edges"])
+            state["accepted_directions"] = list(prefix_recovery["accepted_directions"])
+            state["pickup_seen"] = package.pickup_node_id in state["accepted_nodes"]
+            current = state["accepted_nodes"][-1]
+            route_action_budget = int(
+                state.get("route_action_budget", ROUTE_ACTION_BUDGET)
+            ) - len(state["accepted_edges"])
+            effective_completion_budget = min(
+                route_action_budget, remaining_authorized_calls
+            )
+            rejected = state.setdefault("rejected_directions_by_node", {})
+            rollback_event["cleared_rejected_directions_at_checkpoint"] = copy.deepcopy(
+                rejected.pop(current, [])
+            )
+            state.setdefault("resume_prefix_rollbacks", []).append(rollback_event)
+            current_prefix_hash = rollback_event["checkpoint_prefix_sha256"]
+        state["suffix_witness_gate_version"] = "r4-suffix-witness-gate-v1"
+        state["suffix_witness_gate_enabled"] = True
+        state.setdefault("rejected_directions_by_node", {})
+        state["suffix_witness_prefix_audit"] = prefix_audit
+        state.setdefault("offline_reconciliation_events", [])
+        state["suffix_witness_gate_migrations"] = state.get(
+            "suffix_witness_gate_migrations", []
+        ) + [{
+            "event": (
+                "rollback_to_last_certified_checkpoint_and_enable_suffix_gate"
+                if rollback_event
+                else "suffix_witness_gate_enabled_after_zero_call_prefix_audit"
+            ),
+            "at_utc": datetime.now(timezone.utc).isoformat(),
+            "prefix_sha256": current_prefix_hash,
+            "accepted_action_count": len(state["accepted_edges"]),
+            "rollback": rollback_event,
+            "model_calls": 0,
+        }]
+        _write_json(OUTPUT_DIR / "state.json", state)
+        _refresh_replay()
     constraint = build_r4_step_output_constraint(
         package,
         full_constraint,
@@ -1267,6 +1746,11 @@ def one_step() -> None:
         visited_node_ids=state["accepted_nodes"],
         remaining_action_budget=effective_completion_budget,
         include_objective_cost_guidance=bool(state.get("enable_progress_guidance", False)),
+        require_suffix_witness=True,
+        rejected_directions=sorted(
+            set(state.get("rejected_directions_by_node", {}).get(current, ()))
+            | set(state.get("backtracked_directions_by_node", {}).get(current, ()))
+        ),
     )
     budget_stop_reason = _authorized_call_budget_stop_reason(
         constraint.remaining_minimum_moves, remaining_authorized_calls
@@ -1326,6 +1810,7 @@ def one_step() -> None:
         visited_node_ids=state["accepted_nodes"],
         pickup_seen=bool(state["pickup_seen"]),
         accepted_directions=state["accepted_directions"],
+        feedback=state.get("pending_route_research_feedback"),
         remaining_action_budget=effective_completion_budget,
         route_feature_context=state.get("route_feature_context"),
         compact_visited_state=bool(state.get("compact_visited_state", False)),
@@ -1371,6 +1856,22 @@ def one_step() -> None:
         "allowed_directions": sorted(constraint.edge_by_direction),
         "allowed_edge_ids": {
             direction: edge.edge_id for direction, edge in constraint.edge_by_direction.items()
+        },
+        "suffix_witness_gate_version": "r4-suffix-witness-gate-v1",
+        "suffix_witness_by_direction": constraint.suffix_witness_by_direction,
+        "route_research_trigger": copy.deepcopy(
+            state.get("pending_route_research_feedback")
+        ),
+        "rollback_checkpoint": {
+            "node_id": current,
+            "accepted_edge_count": len(state["accepted_edges"]),
+            "accepted_prefix_sha256": hashlib.sha256(
+                json.dumps(
+                    {"nodes": state["accepted_nodes"], "edges": state["accepted_edges"]},
+                    sort_keys=True,
+                    separators=(",", ":"),
+                ).encode("utf-8")
+            ).hexdigest(),
         },
         "messages_sha256": hashlib.sha256(
             json.dumps(messages, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
@@ -1436,6 +1937,7 @@ def one_step() -> None:
         return
 
     state["new_requests_used"] += 1
+    state["pending_route_research_feedback"] = None
     if state.get("codex_session_mode") == "persistent_per_task":
         state["codex_session_id"] = response.session_id
     attempt["codex_session_id"] = response.session_id
@@ -1470,6 +1972,7 @@ def one_step() -> None:
             set(package.blocked_edge_ids),
             full_constraint,
             remaining_action_budget=effective_completion_budget,
+            require_suffix_witness=True,
         )
         self_check_mismatch_fields = (
             _model_self_check_mismatch_fields(
@@ -1494,6 +1997,7 @@ def one_step() -> None:
             "deterministic_local_check": {
                 key: value for key, value in local_check.items() if key != "edge"
             },
+            "suffix_witness_gate_passed": bool(local_check.get("suffix_witness")),
         }
         accepted = (
             fields_ok
@@ -1501,11 +2005,48 @@ def one_step() -> None:
             and direction in constraint.edge_by_direction
             and self_check_well_formed
             and local_check["passed"]
+            and bool(local_check.get("suffix_witness"))
         )
         attempt["validation"] = validation
         if not accepted:
             attempt["status"] = "stopped_illegal_or_invalid_action"
-            state["status"] = attempt["status"]
+            rejection_code = (
+                local_check.get("errors", ["candidate_rejected"])[0]
+                if local_check.get("errors")
+                else "candidate_rejected"
+            )
+            recovery = _rollback_rejected_action_one_node(
+                state,
+                current_node_id=current,
+                rejected_direction=(direction if isinstance(direction, str) else None),
+                rejected_target_node_id=local_check.get("expected_target_node_id"),
+                rejection_code=rejection_code,
+            )
+            attempt["route_recovery"] = recovery
+            attempt["rollback_to_last_legal_checkpoint"] = True
+            attempt["rejected_direction_at_checkpoint"] = (
+                direction if direction in {"E", "W", "N", "S"} else None
+            )
+            attempt["status"] = "rejected_and_reroute_from_last_legal_node"
+            attempt["reroute_checkpoint_prefix_sha256"] = accepted_prefix_sha256(
+                state["accepted_nodes"], state["accepted_edges"]
+            )
+            recovery_prefix_audit = audit_accepted_prefix_suffix_witnesses(
+                package,
+                full_constraint,
+                accepted_nodes=list(state["accepted_nodes"]),
+                accepted_edges=list(state["accepted_edges"]),
+                accepted_directions=list(state["accepted_directions"]),
+                route_action_budget=int(
+                    state.get("route_action_budget", ROUTE_ACTION_BUDGET)
+                ),
+            )
+            state["suffix_witness_prefix_audit"] = recovery_prefix_audit
+            if recovery_prefix_audit.get("passed"):
+                state["status"] = "ready"
+            else:
+                state["status"] = "paused_suffix_witness_gate_failed"
+                state["stop_diagnostics"] = recovery_prefix_audit
         else:
             edge = constraint.edge_by_direction[direction]
             attempt["selected_edge_id"] = edge.edge_id
@@ -1515,6 +2056,16 @@ def one_step() -> None:
             state["accepted_directions"].append(direction)
             state["accepted_nodes"].append(edge.to_node)
             state["pickup_seen"] = bool(state["pickup_seen"] or edge.to_node == state["pickup_node_id"])
+            attempt["suffix_witness_after_selected_action"] = local_check.get("suffix_witness")
+            state["suffix_witness_prefix_audit"] = {
+                "passed": bool(local_check.get("suffix_witness")),
+                "accepted_action_count": len(state["accepted_edges"]),
+                "prefix_sha256": accepted_prefix_sha256(
+                    state["accepted_nodes"], state["accepted_edges"]
+                ),
+                "last_step_witness": local_check.get("suffix_witness"),
+                "model_calls": 0,
+            }
             if edge.to_node == state["dropoff_node_id"]:
                 if not state["pickup_seen"]:
                     attempt["status"] = "stopped_illegal_endpoint_order"
