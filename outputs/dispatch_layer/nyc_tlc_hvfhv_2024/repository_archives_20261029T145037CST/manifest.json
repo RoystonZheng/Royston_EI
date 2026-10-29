@@ -1,0 +1,636 @@
+{
+  "schema_version": "nyc_ev2_seed0_incremental_archive_v1",
+  "created_at_local": "2026-10-29T14:50:37.389061+08:00",
+  "classification": "partial_running_checkpoint",
+  "remote_base_commit": "d2be953e68abefdd456e4e35feb788a93d4a7b29",
+  "source_audit_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/audit_snapshots/ev2_segment_ledger_audit_20261029T0647UTC_live.json",
+  "source_audit_sha256": "da5b1a6142776d6241f38493250d2ee8f98f1bbca92eb2eec55b488c7f0a5ad1",
+  "normalized_audit_path": "ev2_segment_ledger_audit_20261029T0647UTC_live_repo_relative.json",
+  "normalized_audit_sha256": "ad9d5bb5273c7c950d02703235e4a9bf46a71e05c721499001419a2126b0f209",
+  "source_input_fingerprint_audit_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/audit_snapshots/ev2_input_fingerprint_audit_20261029T0647UTC.json",
+  "source_input_fingerprint_audit_sha256": "79436b1c5b5f9f3b0318be233ec68e6a771d22a35ec4c74a0519bfd6d0c1ec00",
+  "normalized_input_fingerprint_audit_path": "ev2_input_fingerprint_audit_20261029T0647UTC_repo_relative.json",
+  "normalized_input_fingerprint_audit_sha256": "3631beb87c900b97dee2715ffbcea24e871d5d3c5ed37e4551a6db2f4dc55e67",
+  "matrix": {
+    "expected_method_runs": 630,
+    "present_method_runs": 322,
+    "valid_method_runs": 322,
+    "missing_method_runs": 308,
+    "invalid_method_runs": 0,
+    "all_runs_complete_and_valid": false,
+    "complete_seven_method_cells": 12,
+    "scenario_fingerprint_mismatches": 0,
+    "input_hash_mismatches": 0
+  },
+  "previously_covered_source_results": 274,
+  "new_source_results": 48,
+  "new_source_bytes": 132133808,
+  "removed_field_counts": {
+    "user_config": 180,
+    "api_key_environment_variables_removed": 180,
+    "stderr_tail": 163,
+    "prompt_path": 27
+  },
+  "files": [
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F1/D5_pure_llm_direct_seed_0.json",
+      "source_sha256": "823c0435e020076c75c1d58e2261cb47514cfd143191b7a2fbaace525cde80ac",
+      "source_bytes": 2206671,
+      "archive_member": "artifacts/seed_0/evaluation/EV_20240321_220000_q50/F1/D5_pure_llm_direct_seed_0.json",
+      "sanitized_sha256": "99d7ecd25b0dd100bc6cdcd170fe8f6121a435e68c5198b339af22af01c95374",
+      "sanitized_bytes": 1791084,
+      "removed_fields": {
+        "user_config": 6,
+        "api_key_environment_variables_removed": 6,
+        "stderr_tail": 6
+      }
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F1/D6_agent_codex_context_optimizer_seed_0.json",
+      "source_sha256": "ef69117ee989a3dae5a9a68aab801c320bd835aea004eed0bad02c39138dd1f7",
+      "source_bytes": 2380244,
+      "archive_member": "artifacts/seed_0/evaluation/EV_20240321_220000_q50/F1/D6_agent_codex_context_optimizer_seed_0.json",
+      "sanitized_sha256": "255a8efe6054270aa72997fbc8a64da14343e656a454429ed3b8e92c4da82b25",
+      "sanitized_bytes": 1880479,
+      "removed_fields": {
+        "user_config": 1,
+        "api_key_environment_variables_removed": 1,
+        "prompt_path": 1
+      }
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F1/D7_agent_codex_capacity_shield_optimizer_seed_0.json",
+      "source_sha256": "8f92922faefc627a8ee2fd45c55db49df31a2f5673aefad31bf4532fc8faa140",
+      "source_bytes": 2573655,
+      "archive_member": "artifacts/seed_0/evaluation/EV_20240321_220000_q50/F1/D7_agent_codex_capacity_shield_optimizer_seed_0.json",
+      "sanitized_sha256": "03b5144e82ef7273a4f81d436a41fbedf7ee6a92a4a8a32ec2b539676ecd3f27",
+      "sanitized_bytes": 2010797,
+      "removed_fields": {
+        "user_config": 1,
+        "api_key_environment_variables_removed": 1,
+        "prompt_path": 1
+      }
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F1/D8_agent_codex_nn_capacity_shield_optimizer_seed_0.json",
+      "source_sha256": "325991bfc79677fd09b54276c73a309ffae806010e01d6260be072a81da2ab7b",
+      "source_bytes": 3019158,
+      "archive_member": "artifacts/seed_0/evaluation/EV_20240321_220000_q50/F1/D8_agent_codex_nn_capacity_shield_optimizer_seed_0.json",
+      "sanitized_sha256": "0261153f7ae9dae7dddfab8a122f6b079c505d3990500a2f7b2705dc1cddd95d",
+      "sanitized_bytes": 2367641,
+      "removed_fields": {
+        "user_config": 1,
+        "api_key_environment_variables_removed": 1,
+        "prompt_path": 1,
+        "stderr_tail": 1
+      }
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F2/D5_pure_llm_direct_seed_0.json",
+      "source_sha256": "984b4c4029adc5314501677bb796e2300aa265617e5261a7b9bb14f6554fa755",
+      "source_bytes": 2471432,
+      "archive_member": "artifacts/seed_0/evaluation/EV_20240321_220000_q50/F2/D5_pure_llm_direct_seed_0.json",
+      "sanitized_sha256": "1d77d1415c38ccbafbbe4e6169c18f2ce221273ed820f8e8e9ed8f833cf85710",
+      "sanitized_bytes": 1985880,
+      "removed_fields": {
+        "user_config": 13,
+        "api_key_environment_variables_removed": 13,
+        "stderr_tail": 13
+      }
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F2/D6_agent_codex_context_optimizer_seed_0.json",
+      "source_sha256": "5235b818b2e6c62684c3bd3be27f8767e9c390fa335865f0965888dd93da5c41",
+      "source_bytes": 2615173,
+      "archive_member": "artifacts/seed_0/evaluation/EV_20240321_220000_q50/F2/D6_agent_codex_context_optimizer_seed_0.json",
+      "sanitized_sha256": "cd8bb7dd9db8a940aa41b039eb359a1820a6c3ea43d2b5df70a4fe499687fc65",
+      "sanitized_bytes": 2055342,
+      "removed_fields": {
+        "user_config": 1,
+        "api_key_environment_variables_removed": 1,
+        "prompt_path": 1
+      }
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F2/D7_agent_codex_capacity_shield_optimizer_seed_0.json",
+      "source_sha256": "d6aaee3a0d68eda453b8d71e241227cc827e4b6e8b8675aa9240d96b89b17592",
+      "source_bytes": 2808354,
+      "archive_member": "artifacts/seed_0/evaluation/EV_20240321_220000_q50/F2/D7_agent_codex_capacity_shield_optimizer_seed_0.json",
+      "sanitized_sha256": "8acb512e7f772b131bca64948ce070952a1a6e31626781a6ab2751577690107c",
+      "sanitized_bytes": 2184933,
+      "removed_fields": {
+        "user_config": 1,
+        "api_key_environment_variables_removed": 1,
+        "prompt_path": 1
+      }
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F2/D8_agent_codex_nn_capacity_shield_optimizer_seed_0.json",
+      "source_sha256": "036ea641f96190943fc077bb0fc4c8c1c9c10b576bd491098884795ff88b9e57",
+      "source_bytes": 3291404,
+      "archive_member": "artifacts/seed_0/evaluation/EV_20240321_220000_q50/F2/D8_agent_codex_nn_capacity_shield_optimizer_seed_0.json",
+      "sanitized_sha256": "31f6feaf0d2c7b53ab0d2f01cbd326176cb3df7c7584ea5568847420de43ac25",
+      "sanitized_bytes": 2569624,
+      "removed_fields": {
+        "user_config": 1,
+        "api_key_environment_variables_removed": 1,
+        "prompt_path": 1,
+        "stderr_tail": 1
+      }
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F4/D5_pure_llm_direct_seed_0.json",
+      "source_sha256": "5260dea8a70726aa771ccd1d3940af8b36d73514cb5eec6700cfd48abe80221b",
+      "source_bytes": 2971366,
+      "archive_member": "artifacts/seed_0/evaluation/EV_20240321_220000_q50/F4/D5_pure_llm_direct_seed_0.json",
+      "sanitized_sha256": "e0c430c5c81209511835fdad72bf8ddfc93908934df4e445c7eba0caff2580c2",
+      "sanitized_bytes": 2350604,
+      "removed_fields": {
+        "user_config": 28,
+        "api_key_environment_variables_removed": 28,
+        "stderr_tail": 28
+      }
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F4/D6_agent_codex_context_optimizer_seed_0.json",
+      "source_sha256": "a29aa2d440905621afb0881e85e30d164d274b215a51a944b9efc8de03ab3405",
+      "source_bytes": 3069276,
+      "archive_member": "artifacts/seed_0/evaluation/EV_20240321_220000_q50/F4/D6_agent_codex_context_optimizer_seed_0.json",
+      "sanitized_sha256": "51c46171cf3d98a260ecc8c019f8a2d129ff21b005d22e8e94517e939c6e673e",
+      "sanitized_bytes": 2392446,
+      "removed_fields": {
+        "user_config": 1,
+        "api_key_environment_variables_removed": 1,
+        "prompt_path": 1
+      }
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F4/D7_agent_codex_capacity_shield_optimizer_seed_0.json",
+      "source_sha256": "d4c19f9bf68fd44edca989243be2604899689ebf39750e536f44fba3c42b6a42",
+      "source_bytes": 3269509,
+      "archive_member": "artifacts/seed_0/evaluation/EV_20240321_220000_q50/F4/D7_agent_codex_capacity_shield_optimizer_seed_0.json",
+      "sanitized_sha256": "aef72677e8cbc5e2a9c8fe50293edbdb71671a89a2db51a2f87a26f14a3c1219",
+      "sanitized_bytes": 2526767,
+      "removed_fields": {
+        "user_config": 1,
+        "api_key_environment_variables_removed": 1,
+        "prompt_path": 1
+      }
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F4/D8_agent_codex_nn_capacity_shield_optimizer_seed_0.json",
+      "source_sha256": "172c78e6edfe0cd267a0d8fd494767b37127373742474ded9b3e7746f33d28b6",
+      "source_bytes": 3869265,
+      "archive_member": "artifacts/seed_0/evaluation/EV_20240321_220000_q50/F4/D8_agent_codex_nn_capacity_shield_optimizer_seed_0.json",
+      "sanitized_sha256": "efa48137cbbfd61a8b790c43e2f23da99064583d68ba9caf531948bbfce91c3b",
+      "sanitized_bytes": 2997053,
+      "removed_fields": {
+        "user_config": 1,
+        "api_key_environment_variables_removed": 1,
+        "prompt_path": 1,
+        "stderr_tail": 1
+      }
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240330_200500_q75/F1/D5_pure_llm_direct_seed_0.json",
+      "source_sha256": "8f5c5dc28cfc7e1f7463f1f5a1bff8401d1a8a6448a225c3ea5124506e7c8265",
+      "source_bytes": 2399228,
+      "archive_member": "artifacts/seed_0/evaluation/EV_20240330_200500_q75/F1/D5_pure_llm_direct_seed_0.json",
+      "sanitized_sha256": "db38e8eaca044e178cb2a4d1a2d13ebab3fd54b50c546236c5672573997c9d77",
+      "sanitized_bytes": 1938227,
+      "removed_fields": {
+        "user_config": 7,
+        "api_key_environment_variables_removed": 7,
+        "stderr_tail": 7
+      }
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240330_200500_q75/F1/D6_agent_codex_context_optimizer_seed_0.json",
+      "source_sha256": "608553f16e7704cd80da42977563359cf444aa3c032a22fd679eb58f7aa3be04",
+      "source_bytes": 2582046,
+      "archive_member": "artifacts/seed_0/evaluation/EV_20240330_200500_q75/F1/D6_agent_codex_context_optimizer_seed_0.json",
+      "sanitized_sha256": "c04af2ef46b64e637bbb7882a1fab4cfd4bcad1b1a02c5a0319a0e7006e7d0cb",
+      "sanitized_bytes": 2033332,
+      "removed_fields": {
+        "user_config": 1,
+        "api_key_environment_variables_removed": 1,
+        "prompt_path": 1
+      }
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240330_200500_q75/F1/D7_agent_codex_capacity_shield_optimizer_seed_0.json",
+      "source_sha256": "f8950f10b6f2a071f7caf523270e2a7072bec040266016074bfdab80d4a0a9cf",
+      "source_bytes": 2780709,
+      "archive_member": "artifacts/seed_0/evaluation/EV_20240330_200500_q75/F1/D7_agent_codex_capacity_shield_optimizer_seed_0.json",
+      "sanitized_sha256": "9188937f953f18c9c78155fe2ce4c923fabb5511fecdab1344ff700552d0deb0",
+      "sanitized_bytes": 2166599,
+      "removed_fields": {
+        "user_config": 1,
+        "api_key_environment_variables_removed": 1,
+        "prompt_path": 1
+      }
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240330_200500_q75/F1/D8_agent_codex_nn_capacity_shield_optimizer_seed_0.json",
+      "source_sha256": "687873fd0bc2275e25a6c4124c13ad7536faa32c82d423169d24d954f254f997",
+      "source_bytes": 3248129,
+      "archive_member": "artifacts/seed_0/evaluation/EV_20240330_200500_q75/F1/D8_agent_codex_nn_capacity_shield_optimizer_seed_0.json",
+      "sanitized_sha256": "4f842b8ee7caaf109eb33df4114bee54b894a06cbd71b1706bcf87deb3a34e2d",
+      "sanitized_bytes": 2540989,
+      "removed_fields": {
+        "user_config": 1,
+        "api_key_environment_variables_removed": 1,
+        "prompt_path": 1,
+        "stderr_tail": 1
+      }
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240330_200500_q75/F4/D5_pure_llm_direct_seed_0.json",
+      "source_sha256": "4dc8a0d0930c616fdd1d2e7f8098c3a9f9dc63e5ab555bdb32ca6887a29da49f",
+      "source_bytes": 3441119,
+      "archive_member": "artifacts/seed_0/evaluation/EV_20240330_200500_q75/F4/D5_pure_llm_direct_seed_0.json",
+      "sanitized_sha256": "870dc011e7b6a588894b417eb84eb6f6b096d5ab8bebc2ddda645de0a762c035",
+      "sanitized_bytes": 2696644,
+      "removed_fields": {
+        "user_config": 28,
+        "api_key_environment_variables_removed": 28,
+        "stderr_tail": 28
+      }
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240330_200500_q75/F4/D6_agent_codex_context_optimizer_seed_0.json",
+      "source_sha256": "46b0f87a5997a271489b574805fdd36a6104911da74341472bef5c7f6a3d9d86",
+      "source_bytes": 3518305,
+      "archive_member": "artifacts/seed_0/evaluation/EV_20240330_200500_q75/F4/D6_agent_codex_context_optimizer_seed_0.json",
+      "sanitized_sha256": "3d507e25982392f1c014db9d852c3e47aa9ed869f0d9f097690b8b29b907da70",
+      "sanitized_bytes": 2719184,
+      "removed_fields": {
+        "user_config": 1,
+        "api_key_environment_variables_removed": 1,
+        "prompt_path": 1
+      }
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240330_200500_q75/F4/D7_agent_codex_capacity_shield_optimizer_seed_0.json",
+      "source_sha256": "e458cea644a48e5faa71d4ef813676305a7263be6bae30145cbf0d06c4b29ae6",
+      "source_bytes": 3726382,
+      "archive_member": "artifacts/seed_0/evaluation/EV_20240330_200500_q75/F4/D7_agent_codex_capacity_shield_optimizer_seed_0.json",
+      "sanitized_sha256": "12c312bb4fbc9a96c6763f9fd9b317c2fbaeae6a737a9769463daec20a637270",
+      "sanitized_bytes": 2858769,
+      "removed_fields": {
+        "user_config": 1,
+        "api_key_environment_variables_removed": 1,
+        "prompt_path": 1
+      }
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240401_200000_q25/F1/D5_pure_llm_direct_seed_0.json",
+      "source_sha256": "d8a08013668418f6dcf70afcc02967f89651c51b1b37482299658d65056ab9d1",
+      "source_bytes": 2183333,
+      "archive_member": "artifacts/seed_0/evaluation/EV_20240401_200000_q25/F1/D5_pure_llm_direct_seed_0.json",
+      "sanitized_sha256": "716efeb95e00e4c47b14877f9003a8f44a2de9d125fa91aa44d6f1ec88144380",
+      "sanitized_bytes": 1769407,
+      "removed_fields": {
+        "user_config": 9,
+        "api_key_environment_variables_removed": 9,
+        "stderr_tail": 9
+      }
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240401_200000_q25/F1/D6_agent_codex_context_optimizer_seed_0.json",
+      "source_sha256": "9706cfde6a0d8e0b2ca1ef06480bf3577c1393a85f74a36a32a92b9487d31f5c",
+      "source_bytes": 2345011,
+      "archive_member": "artifacts/seed_0/evaluation/EV_20240401_200000_q25/F1/D6_agent_codex_context_optimizer_seed_0.json",
+      "sanitized_sha256": "ee9223a700fb2d613006f583d134ce7dcb7fe58959870a07f0f53c175d4f9bb7",
+      "sanitized_bytes": 1852214,
+      "removed_fields": {
+        "user_config": 1,
+        "api_key_environment_variables_removed": 1,
+        "prompt_path": 1
+      }
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240401_200000_q25/F1/D7_agent_codex_capacity_shield_optimizer_seed_0.json",
+      "source_sha256": "ef67a90051e12aef15457081d219ab08a69e4f0529530196e0cd7cab9f249767",
+      "source_bytes": 2530346,
+      "archive_member": "artifacts/seed_0/evaluation/EV_20240401_200000_q25/F1/D7_agent_codex_capacity_shield_optimizer_seed_0.json",
+      "sanitized_sha256": "08e6634914599d3656175985e25f52e8a6f2a2f07023db114a181f7c835f5e70",
+      "sanitized_bytes": 1976539,
+      "removed_fields": {
+        "user_config": 1,
+        "api_key_environment_variables_removed": 1,
+        "prompt_path": 1
+      }
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240401_200000_q25/F1/D8_agent_codex_nn_capacity_shield_optimizer_seed_0.json",
+      "source_sha256": "1a791151eebf2243ad2cde47e1a94abbbdefdc4640eed2ecb81fbd76e7d62c37",
+      "source_bytes": 2966680,
+      "archive_member": "artifacts/seed_0/evaluation/EV_20240401_200000_q25/F1/D8_agent_codex_nn_capacity_shield_optimizer_seed_0.json",
+      "sanitized_sha256": "79070cf682bf445f383e2e0c0897c8be16e4fcd7c7a4f7b51e49b178ec869501",
+      "sanitized_bytes": 2325989,
+      "removed_fields": {
+        "user_config": 1,
+        "api_key_environment_variables_removed": 1,
+        "prompt_path": 1,
+        "stderr_tail": 1
+      }
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240401_200000_q25/F2/D5_pure_llm_direct_seed_0.json",
+      "source_sha256": "686be61ab8fb6409b92f37071dc731a128d71cd6e3f1892d0e647f81b2f45a65",
+      "source_bytes": 2470323,
+      "archive_member": "artifacts/seed_0/evaluation/EV_20240401_200000_q25/F2/D5_pure_llm_direct_seed_0.json",
+      "sanitized_sha256": "0782fb9ee6664f8c7ac673e33fe8f09cd908dbfd8443f985e69e2b0d169c8289",
+      "sanitized_bytes": 1978745,
+      "removed_fields": {
+        "user_config": 20,
+        "api_key_environment_variables_removed": 20,
+        "stderr_tail": 20
+      }
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240401_200000_q25/F2/D6_agent_codex_context_optimizer_seed_0.json",
+      "source_sha256": "96e9211b685864a338290e98e209ea45e52bc15a70a2bb3c5dfbc9878acdc67a",
+      "source_bytes": 2591721,
+      "archive_member": "artifacts/seed_0/evaluation/EV_20240401_200000_q25/F2/D6_agent_codex_context_optimizer_seed_0.json",
+      "sanitized_sha256": "2632aa0a7d04578cd36fa33ea6892612200a68c3a25e9f60c5aeaca82eb0d0ef",
+      "sanitized_bytes": 2036119,
+      "removed_fields": {
+        "user_config": 1,
+        "api_key_environment_variables_removed": 1,
+        "prompt_path": 1
+      }
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240401_200000_q25/F2/D7_agent_codex_capacity_shield_optimizer_seed_0.json",
+      "source_sha256": "45695dbd41657cd4e0d4bf89a60fdb98f78b36fe632711857646e428a6a11c2f",
+      "source_bytes": 2782153,
+      "archive_member": "artifacts/seed_0/evaluation/EV_20240401_200000_q25/F2/D7_agent_codex_capacity_shield_optimizer_seed_0.json",
+      "sanitized_sha256": "fe8c93e30484743f355bfbca3f5b69ba97dfdfed3fcc1e83c9674626ac4426ad",
+      "sanitized_bytes": 2163864,
+      "removed_fields": {
+        "user_config": 1,
+        "api_key_environment_variables_removed": 1,
+        "prompt_path": 1
+      }
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240401_200000_q25/F2/D8_agent_codex_nn_capacity_shield_optimizer_seed_0.json",
+      "source_sha256": "98468d473c24e9907cebb0499829c79450fb852eb2dbda8a062e168381c3feae",
+      "source_bytes": 3249356,
+      "archive_member": "artifacts/seed_0/evaluation/EV_20240401_200000_q25/F2/D8_agent_codex_nn_capacity_shield_optimizer_seed_0.json",
+      "sanitized_sha256": "569c9a67370330d5fef6050d4c2e670537c707b43a317fb87fba1e6ee5a8c9d4",
+      "sanitized_bytes": 2536240,
+      "removed_fields": {
+        "user_config": 1,
+        "api_key_environment_variables_removed": 1,
+        "prompt_path": 1,
+        "stderr_tail": 1
+      }
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240401_200000_q25/F4/D5_pure_llm_direct_seed_0.json",
+      "source_sha256": "540dad1623b0e760bd99f6332b3c47625d5c9ad81c44ac119d7c810add2c37a0",
+      "source_bytes": 3024087,
+      "archive_member": "artifacts/seed_0/evaluation/EV_20240401_200000_q25/F4/D5_pure_llm_direct_seed_0.json",
+      "sanitized_sha256": "3145fe230029f8cb91e54dae3243742e0dd38208ec322f87bde6d5f62a951589",
+      "sanitized_bytes": 2387043,
+      "removed_fields": {
+        "user_config": 36,
+        "api_key_environment_variables_removed": 36,
+        "stderr_tail": 36
+      }
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240401_200000_q25/F4/D6_agent_codex_context_optimizer_seed_0.json",
+      "source_sha256": "3cb9909e48448a64edbb1cf7bc3683a110d00758d25aa137f51cc9141cbfcd50",
+      "source_bytes": 3077224,
+      "archive_member": "artifacts/seed_0/evaluation/EV_20240401_200000_q25/F4/D6_agent_codex_context_optimizer_seed_0.json",
+      "sanitized_sha256": "b383ee78d76da3f1d24504e9f0b73a017fa8a9f3eeec2099618ecdde64ac99c6",
+      "sanitized_bytes": 2397952,
+      "removed_fields": {
+        "user_config": 1,
+        "api_key_environment_variables_removed": 1,
+        "prompt_path": 1,
+        "stderr_tail": 1
+      }
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240401_200000_q25/F4/D7_agent_codex_capacity_shield_optimizer_seed_0.json",
+      "source_sha256": "024edf3333b647d276bf924077939ed45a6a80f4f7cbc51eb7229909b9b8f6ac",
+      "source_bytes": 3286848,
+      "archive_member": "artifacts/seed_0/evaluation/EV_20240401_200000_q25/F4/D7_agent_codex_capacity_shield_optimizer_seed_0.json",
+      "sanitized_sha256": "65fbfe4ee8882772517ff381c774485a2db3f542b86c934d7bd3c6d31d5de9b0",
+      "sanitized_bytes": 2539755,
+      "removed_fields": {
+        "user_config": 1,
+        "api_key_environment_variables_removed": 1,
+        "prompt_path": 1
+      }
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240401_200000_q25/F4/D8_agent_codex_nn_capacity_shield_optimizer_seed_0.json",
+      "source_sha256": "af38a8afa87261f7b9e1b13ca2318057fcdb9eff29ecece053473b5816bcc863",
+      "source_bytes": 3857017,
+      "archive_member": "artifacts/seed_0/evaluation/EV_20240401_200000_q25/F4/D8_agent_codex_nn_capacity_shield_optimizer_seed_0.json",
+      "sanitized_sha256": "0dd6367b5ac1e6423b6f167b9a4bf108f3ef314cdd80e0ee000780d2d15c9067",
+      "sanitized_bytes": 2987176,
+      "removed_fields": {
+        "user_config": 1,
+        "api_key_environment_variables_removed": 1,
+        "prompt_path": 1,
+        "stderr_tail": 1
+      }
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240411_200000_q50/F1/D5_pure_llm_direct_seed_0.json",
+      "source_sha256": "47a7ccbe72053b9dd126a516440e95ae510ce05e192424ffad6540ed36dc9883",
+      "source_bytes": 2449934,
+      "archive_member": "artifacts/seed_0/evaluation/EV_20240411_200000_q50/F1/D5_pure_llm_direct_seed_0.json",
+      "sanitized_sha256": "2216c757efe9c54a2fda89655229b5f5f30acfa3b9e06fb067a3e642457b3c4c",
+      "sanitized_bytes": 1986083,
+      "removed_fields": {
+        "user_config": 6,
+        "api_key_environment_variables_removed": 6,
+        "stderr_tail": 6
+      }
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240411_200000_q50/F1/D6_agent_codex_context_optimizer_seed_0.json",
+      "source_sha256": "f6bececd20b65248ca2d1e26786051311329c3c982ac1cf5e174a305adec65c4",
+      "source_bytes": 2643035,
+      "archive_member": "artifacts/seed_0/evaluation/EV_20240411_200000_q50/F1/D6_agent_codex_context_optimizer_seed_0.json",
+      "sanitized_sha256": "babb07d6c74588387688ca9acdcdd1dcd67be7750921fd714ea8e59d47a882cb",
+      "sanitized_bytes": 2085584,
+      "removed_fields": {
+        "user_config": 1,
+        "api_key_environment_variables_removed": 1,
+        "prompt_path": 1
+      }
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240411_200000_q50/F1/D7_agent_codex_capacity_shield_optimizer_seed_0.json",
+      "source_sha256": "f474bcbf5fcd3aacd4c8ed32d7e3c91b437f7e7dc061f70a6cd752a8fc4f8410",
+      "source_bytes": 2851107,
+      "archive_member": "artifacts/seed_0/evaluation/EV_20240411_200000_q50/F1/D7_agent_codex_capacity_shield_optimizer_seed_0.json",
+      "sanitized_sha256": "4087bf761da4c05726f7d926ed54cbbd8021a242974f8fb466b014d463f67260",
+      "sanitized_bytes": 2225164,
+      "removed_fields": {
+        "user_config": 1,
+        "api_key_environment_variables_removed": 1,
+        "prompt_path": 1
+      }
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240411_200000_q50/F1/D8_agent_codex_nn_capacity_shield_optimizer_seed_0.json",
+      "source_sha256": "0d2663bb800a2610698c6fa1eab9335fb5ed26b67f8e879326de2d5187fe3d09",
+      "source_bytes": 3340028,
+      "archive_member": "artifacts/seed_0/evaluation/EV_20240411_200000_q50/F1/D8_agent_codex_nn_capacity_shield_optimizer_seed_0.json",
+      "sanitized_sha256": "b1cd4b82ed1a3a8e145be154158bb2de1a8d2c49e522fdd2b3ac905314b201b5",
+      "sanitized_bytes": 2616812,
+      "removed_fields": {
+        "user_config": 1,
+        "api_key_environment_variables_removed": 1,
+        "prompt_path": 1,
+        "stderr_tail": 1
+      }
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240411_200000_q50/F2/D8_agent_codex_nn_capacity_shield_optimizer_seed_0.json",
+      "source_sha256": "04f2900b95d23e02ecff80ac511b7d4ece91d0801942cee47f5f133893d5a50e",
+      "source_bytes": 3672037,
+      "archive_member": "artifacts/seed_0/evaluation/EV_20240411_200000_q50/F2/D8_agent_codex_nn_capacity_shield_optimizer_seed_0.json",
+      "sanitized_sha256": "8d7cdf5e781bbb8459966f66764ff26840b0948fc14798ef44bee6d1244b8e16",
+      "sanitized_bytes": 2862447,
+      "removed_fields": {
+        "user_config": 1,
+        "api_key_environment_variables_removed": 1,
+        "prompt_path": 1,
+        "stderr_tail": 1
+      }
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20241115_224000_q75/F2/D0_greedy_seed_0.json",
+      "source_sha256": "ba1b899198032fd586f6cfd02ddd6fc553c93dc7518e2827e2a64d4831bdb1ba",
+      "source_bytes": 2099685,
+      "archive_member": "artifacts/seed_0/evaluation/EV_20241115_224000_q75/F2/D0_greedy_seed_0.json",
+      "sanitized_sha256": "1b49237c09ca94aae87a8ad899e7f0514b3d00e29eb7a7e19ba16f3ae0b26965",
+      "sanitized_bytes": 1710690,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20241115_224000_q75/F2/D1_optimizer_seed_0.json",
+      "source_sha256": "4ea349b37ed701eaefd223710c9e1b0f5564a213f747ef41597e346b0b634c5c",
+      "source_bytes": 2527552,
+      "archive_member": "artifacts/seed_0/evaluation/EV_20241115_224000_q75/F2/D1_optimizer_seed_0.json",
+      "sanitized_sha256": "3a18189b288bc4023dcfec159145f051a9e1ad3b276a3339c486b499c0017041",
+      "sanitized_bytes": 1988740,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20241115_224000_q75/F2/D2_agent_optimizer_seed_0.json",
+      "source_sha256": "958be781aa42f516e1ee44020cfc58ca4b07961a95c4b18ec8ec80f3797c3b36",
+      "source_bytes": 2621579,
+      "archive_member": "artifacts/seed_0/evaluation/EV_20241115_224000_q75/F2/D2_agent_optimizer_seed_0.json",
+      "sanitized_sha256": "a076052b7330b1e9b29ff916edf2af0bd2086909accf6a797cb87bcc1a06247b",
+      "sanitized_bytes": 2076721,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20241115_224000_q75/F4/D0_greedy_seed_0.json",
+      "source_sha256": "0124a7276852d28b104f5e20eec067419153718a25635a9fe69bdbc32460ecf7",
+      "source_bytes": 2357223,
+      "archive_member": "artifacts/seed_0/evaluation/EV_20241115_224000_q75/F4/D0_greedy_seed_0.json",
+      "sanitized_sha256": "6b9e894fd2fb2febf17a7f4826e61639b75eb12ee9ad7b512bd823498c8fb45c",
+      "sanitized_bytes": 1908843,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20241115_224000_q75/F4/D1_optimizer_seed_0.json",
+      "source_sha256": "bce72bb0d228f360bc9caf357957c7262df5ceeb3ea81a4658199a07e6cdd117",
+      "source_bytes": 2802143,
+      "archive_member": "artifacts/seed_0/evaluation/EV_20241115_224000_q75/F4/D1_optimizer_seed_0.json",
+      "sanitized_sha256": "2168093eb473881dc4cb23f514f4fc1d5a926b4625c9983eac052484d43a1a35",
+      "sanitized_bytes": 2198183,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20241115_224000_q75/F4/D2_agent_optimizer_seed_0.json",
+      "source_sha256": "6bf5c8ae889b68c538aa92b5793d4870ad4b0bb1714329f4a7fe75d31bd8febe",
+      "source_bytes": 2899299,
+      "archive_member": "artifacts/seed_0/evaluation/EV_20241115_224000_q75/F4/D2_agent_optimizer_seed_0.json",
+      "sanitized_sha256": "fe377e3ee495c002598800c146f68918cbdbe0d548a152c811811f73af3ada2f",
+      "sanitized_bytes": 2288969,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20241222_205500_q25/F1/D0_greedy_seed_0.json",
+      "source_sha256": "ab7c8db836cb1ce05c3cf2e4d80ad3f4e37df3cf38281f77074a3d4b25047d5c",
+      "source_bytes": 1555190,
+      "archive_member": "artifacts/seed_0/evaluation/EV_20241222_205500_q25/F1/D0_greedy_seed_0.json",
+      "sanitized_sha256": "e81588d4b69f2164de34526b7479c5fca5d7cd9a7354478950f2cecab71c910e",
+      "sanitized_bytes": 1270298,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20241222_205500_q25/F1/D1_optimizer_seed_0.json",
+      "source_sha256": "c825838b87efb9f83dc8bbd9b879ffe2a600ed391b96efcb32a9a3d5bd000135",
+      "source_bytes": 1882322,
+      "archive_member": "artifacts/seed_0/evaluation/EV_20241222_205500_q25/F1/D1_optimizer_seed_0.json",
+      "sanitized_sha256": "15aa89e10024663847aca15f62d9349e6d8f34d67a761e439d5c6230951fe0d5",
+      "sanitized_bytes": 1482889,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20241222_205500_q25/F1/D2_agent_optimizer_seed_0.json",
+      "source_sha256": "833439716fb4dbf0d77e0e6b219a1e27344bdeb6a80ea9a8e889db45e80b7ed3",
+      "source_bytes": 1954304,
+      "archive_member": "artifacts/seed_0/evaluation/EV_20241222_205500_q25/F1/D2_agent_optimizer_seed_0.json",
+      "sanitized_sha256": "c3d1d86e410cb822d443bf5b1a1fd46f5954b6c7c6c06c35fb447a0d37daf776",
+      "sanitized_bytes": 1550262,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20241222_205500_q25/F2/D0_greedy_seed_0.json",
+      "source_sha256": "1abea973587dfec823dddd4e8cb57bc89fa53a64fdc8627ebdf529d49c571153",
+      "source_bytes": 1706048,
+      "archive_member": "artifacts/seed_0/evaluation/EV_20241222_205500_q25/F2/D0_greedy_seed_0.json",
+      "sanitized_sha256": "e6309faee5c096a54985c517ac13c60d0d548f13a7c551e5b6157b769ea4bcb2",
+      "sanitized_bytes": 1387526,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20241222_205500_q25/F2/D1_optimizer_seed_0.json",
+      "source_sha256": "3d2d55955a58fb23f8cf875ce167164ffa7817a2c5d11cd916e4b96b97c04a63",
+      "source_bytes": 2046084,
+      "archive_member": "artifacts/seed_0/evaluation/EV_20241222_205500_q25/F2/D1_optimizer_seed_0.json",
+      "sanitized_sha256": "2f1ec3a312698f75379191ce3fbcfba18282908d4a450f8f6cc7d49e629ab277",
+      "sanitized_bytes": 1608627,
+      "removed_fields": {}
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20241222_205500_q25/F2/D2_agent_optimizer_seed_0.json",
+      "source_sha256": "19d504b0b695109ba1c327e50eace682d29fc5e00526ffa5e8b1af651b855cd3",
+      "source_bytes": 2120714,
+      "archive_member": "artifacts/seed_0/evaluation/EV_20241222_205500_q25/F2/D2_agent_optimizer_seed_0.json",
+      "sanitized_sha256": "03da9d685bcea232181915b94fea3f9908b006914dee10bdf71feaa22d76dd62",
+      "sanitized_bytes": 1678405,
+      "removed_fields": {}
+    }
+  ],
+  "compressed_archive": {
+    "path": "nyc_ev2_v4_seed0_increment_48_runs_20261029T145037CST.tar.gz",
+    "sha256": "c10a1fe308fe54bde525544445d4ea9964eaa5183d12f8659e039d85d115ad7d",
+    "bytes": 2143629,
+    "compression": "gzip tar; normalized result JSON with prompt-path/config/stderr fields removed"
+  },
+  "lfs_objects_expected": 0,
+  "no_remote_deletions": true,
+  "limitations": [
+    "The source experiment is still incomplete.",
+    "This checkpoint does not support an overall method ranking or final-effect claim.",
+    "Only audited complete source-hash-matching files without open handles are included."
+  ],
+  "source_license_note": "Derived simulation result JSONs only; raw NYC TLC trip records are not included. Refer to data/dispatch/nyc_tlc_hvfhv_2024/README.md for attribution and source-term notes."
+}

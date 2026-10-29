@@ -1,0 +1,99 @@
+{
+  "classification": "partial_running_checkpoint",
+  "compressed_archive": {
+    "bytes": 162976,
+    "members": 3,
+    "path": "nyc_ev2_v4_seed0_increment_3_runs_20261029T150538CST.tar.gz",
+    "sha256": "934b06e26242e6ec1eb7e5221035f4179c51d89bb4f8f0508968b2c6a9344942"
+  },
+  "created_at_local": "2026-10-29T15:05:38.371837+08:00",
+  "files": [
+    {
+      "archive_member": "artifacts/evaluation/EV_20240411_200000_q50/F2/D5_pure_llm_direct_seed_0.json",
+      "case_id": "EV_20240411_200000_q50",
+      "fleet_id": "F2",
+      "method": "D5_pure_llm_direct",
+      "removed_fields": {
+        "api_key_environment_variables_removed": 15,
+        "stderr_tail": 15,
+        "user_config": 15
+      },
+      "sanitized_bytes": 2758996,
+      "sanitized_sha256": "07466ca4d56160ae8919718941b0cbce4e22904941de7aa1f3c1a0035c32b0b0",
+      "source_bytes": 2765880,
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240411_200000_q50/F2/D5_pure_llm_direct_seed_0.json",
+      "source_sha256": "1acbbdda1b8f3e8759f8a4013380847c6df4c2e5ff4ff9e9bdfa91eeb9290c3a"
+    },
+    {
+      "archive_member": "artifacts/evaluation/EV_20240411_200000_q50/F2/D6_agent_codex_context_optimizer_seed_0.json",
+      "case_id": "EV_20240411_200000_q50",
+      "fleet_id": "F2",
+      "method": "D6_agent_codex_context_optimizer",
+      "removed_fields": {
+        "api_key_environment_variables_removed": 1,
+        "prompt_path": 1,
+        "user_config": 1
+      },
+      "sanitized_bytes": 2930463,
+      "sanitized_sha256": "f8afa06e36620d287df982905cbf034cfa7ac81e042d899f35242925d4796977",
+      "source_bytes": 2931169,
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240411_200000_q50/F2/D6_agent_codex_context_optimizer_seed_0.json",
+      "source_sha256": "a54e1640f3ddfe25842a15c7e6b41cfaab35c28d04859ffc5e03247ba37e75c6"
+    },
+    {
+      "archive_member": "artifacts/evaluation/EV_20240411_200000_q50/F2/D7_agent_codex_capacity_shield_optimizer_seed_0.json",
+      "case_id": "EV_20240411_200000_q50",
+      "fleet_id": "F2",
+      "method": "D7_agent_codex_capacity_shield_optimizer",
+      "removed_fields": {
+        "api_key_environment_variables_removed": 1,
+        "prompt_path": 1,
+        "user_config": 1
+      },
+      "sanitized_bytes": 3143631,
+      "sanitized_sha256": "75ecaef9a50c0238e8afb17b38294245f279e73f028000219ecb64b8ece38327",
+      "source_bytes": 3144337,
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240411_200000_q50/F2/D7_agent_codex_capacity_shield_optimizer_seed_0.json",
+      "source_sha256": "565fab176218a3a3815861d5d982e6cc2405b7a9c9566728965a08e2e0f63957"
+    }
+  ],
+  "lfs_objects_expected": 0,
+  "limitations": [
+    "The source experiment is still incomplete.",
+    "This checkpoint does not support an overall method ranking or final-effect claim.",
+    "Only newly added complete, source-hash-matching files without open handles are included.",
+    "Raw prompts, context traces, mutable state, and raw TLC records are excluded."
+  ],
+  "matrix": {
+    "complete_seven_method_cells": 13,
+    "expected_method_runs": 630,
+    "input_hash_cell_mismatch_count": 0,
+    "invalid_method_runs": 0,
+    "missing_method_runs": 305,
+    "present_method_runs": 325,
+    "scenario_fingerprint_cell_mismatch_count": 0,
+    "total_scenario_fleet_cells": 90,
+    "valid_method_runs": 325
+  },
+  "new_source_bytes": 8841386,
+  "new_source_results": 3,
+  "no_remote_deletions": true,
+  "normalized_audit_path": "audits/ev2_segment_ledger_audit_20261029T0703UTC_live.json",
+  "normalized_audit_sha256": "5f35f11578c93c13319e0522db474c4d45eb5bc181a430cdd177b1f6a934777f",
+  "normalized_input_fingerprint_audit_path": "audits/ev2_input_fingerprint_audit_20261029T0703UTC_live.json",
+  "normalized_input_fingerprint_audit_sha256": "9721bd657a57533ea5774d8889196b05f0f36296a0c44fc277d9783c3d57da27",
+  "previously_covered_source_results": 322,
+  "remote_base_commit": "d2be953e68abefdd456e4e35feb788a93d4a7b29",
+  "removed_field_counts": {
+    "api_key_environment_variables_removed": 17,
+    "prompt_path": 2,
+    "stderr_tail": 15,
+    "user_config": 17
+  },
+  "schema_version": 1,
+  "source_audit_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/audit_snapshots/ev2_segment_ledger_audit_20261029T0703UTC_live.json",
+  "source_audit_sha256": "b988a8d2d8caa96e7c79ef9302952de2ed84af9868bb7829259ede18e4221d57",
+  "source_input_fingerprint_audit_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/audit_snapshots/ev2_input_fingerprint_audit_20261029T0703UTC_live.json",
+  "source_input_fingerprint_audit_sha256": "2e238e3bd9b0894e72fb4b3126030a77e671975f0afffbd249b354cafef1e1d7",
+  "source_license_note": "Derived simulation outputs only; raw TLC source records are excluded. The local source README states the raw-data license is unspecified; review source terms before redistribution."
+}

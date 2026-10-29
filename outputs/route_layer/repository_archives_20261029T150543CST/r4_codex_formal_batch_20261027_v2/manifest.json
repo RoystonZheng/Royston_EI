@@ -1,0 +1,159 @@
+{
+  "classification": "timestamped_running_progress_checkpoint",
+  "created_at_local": "2026-10-29T15:05:43.256621+08:00",
+  "exact_source_root": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2",
+  "excluded": [
+    "raw prompts",
+    "state files",
+    "traces",
+    "logs",
+    "locks",
+    "PID contents",
+    "active task result files"
+  ],
+  "lfs_objects_expected": 0,
+  "no_remote_deletions": true,
+  "parent_scope_only": {
+    "current_task_id": "formal-task-0000-detour",
+    "frozen_task_count": 150,
+    "model_requests_used": 11473,
+    "scope": "parent",
+    "source_manifest_mtime_utc": "2026-10-29T07:05:37.160781+00:00",
+    "source_manifest_path": "manifest.json",
+    "source_manifest_sha256": "a3d97f6b28b8d5ae8c520698a19a1d96415d053cdca63070fc7dd097fc5ac6a6",
+    "status": "running",
+    "task_records": 129,
+    "task_status_counts": {
+      "active": 2,
+      "failed": 8,
+      "outcome_unknown": 5,
+      "pending": 30,
+      "ready": 28,
+      "route_complete": 56
+    },
+    "unresolved_in_flight_count": 24
+  },
+  "progress_snapshot_sha256": "19c452a21b4d5f190d09423078fba899dd92e01bc00aa3ae1193da828bfc4928",
+  "runtime_indicators": {
+    "formal_driver_pid_alive": false,
+    "formal_driver_pid_file_present": true,
+    "lock_files": [
+      {
+        "name": ".r4_model_execution.lock",
+        "open_handle_count": 0,
+        "present": true
+      },
+      {
+        "name": ".parent_manifest_authorization.lock",
+        "open_handle_count": 0,
+        "present": true
+      }
+    ]
+  },
+  "schema_version": 1,
+  "source_manifests": [
+    {
+      "mtime_utc": "2026-10-29T07:05:37.160781+00:00",
+      "path": "manifest.json",
+      "scope": "parent",
+      "sha256": "a3d97f6b28b8d5ae8c520698a19a1d96415d053cdca63070fc7dd097fc5ac6a6"
+    },
+    {
+      "mtime_utc": "2026-10-28T17:09:46.076150+00:00",
+      "path": "parallel_workers/worker_00/manifest.json",
+      "scope": "worker_00",
+      "sha256": "20e00e3eb186b04d1c07280523e838a4314f361b19828a03601e8aca1f744fec"
+    },
+    {
+      "mtime_utc": "2026-10-29T03:05:48.465756+00:00",
+      "path": "parallel_workers/worker_01/manifest.json",
+      "scope": "worker_01",
+      "sha256": "9bf8572be639ccf39e49b80af8dee8720aec66a3927b2683a098dbd33b1b77e3"
+    },
+    {
+      "mtime_utc": "2026-10-29T07:05:39.920325+00:00",
+      "path": "parallel_workers/worker_02/manifest.json",
+      "scope": "worker_02",
+      "sha256": "70ef380a7e9ddb957f16c88e60ff59f023d9d8223625159ff2654daf99389969"
+    },
+    {
+      "mtime_utc": "2026-10-29T07:05:28.591954+00:00",
+      "path": "parallel_workers/worker_03/manifest.json",
+      "scope": "worker_03",
+      "sha256": "24f30a793d2c741441dcc80adcf8bc876db5c131428be70fcac9f2d0bd417640"
+    }
+  ],
+  "worker_scopes_separate": [
+    {
+      "current_task_id": "task-0008-0001",
+      "frozen_task_count": 29,
+      "model_requests_used": 2337,
+      "scope": "worker_00",
+      "source_manifest_mtime_utc": "2026-10-28T17:09:46.076150+00:00",
+      "source_manifest_path": "parallel_workers/worker_00/manifest.json",
+      "source_manifest_sha256": "20e00e3eb186b04d1c07280523e838a4314f361b19828a03601e8aca1f744fec",
+      "status": "paused_at_checkpoint_unknown_tasks_deferred",
+      "task_records": 29,
+      "task_status_counts": {
+        "failed": 6,
+        "outcome_unknown": 9,
+        "route_complete": 14
+      },
+      "unresolved_in_flight_count": 9
+    },
+    {
+      "current_task_id": "task-0004-0009",
+      "frozen_task_count": 29,
+      "model_requests_used": 1350,
+      "scope": "worker_01",
+      "source_manifest_mtime_utc": "2026-10-29T03:05:48.465756+00:00",
+      "source_manifest_path": "parallel_workers/worker_01/manifest.json",
+      "source_manifest_sha256": "9bf8572be639ccf39e49b80af8dee8720aec66a3927b2683a098dbd33b1b77e3",
+      "status": "paused_at_checkpoint",
+      "task_records": 29,
+      "task_status_counts": {
+        "failed": 17,
+        "outcome_unknown": 4,
+        "route_complete": 8
+      },
+      "unresolved_in_flight_count": 5
+    },
+    {
+      "current_task_id": "formal-task-0005-feasible",
+      "frozen_task_count": 29,
+      "model_requests_used": 2122,
+      "scope": "worker_02",
+      "source_manifest_mtime_utc": "2026-10-29T07:05:39.920325+00:00",
+      "source_manifest_path": "parallel_workers/worker_02/manifest.json",
+      "source_manifest_sha256": "70ef380a7e9ddb957f16c88e60ff59f023d9d8223625159ff2654daf99389969",
+      "status": "running",
+      "task_records": 29,
+      "task_status_counts": {
+        "active": 1,
+        "failed": 4,
+        "pending": 14,
+        "route_complete": 10
+      },
+      "unresolved_in_flight_count": 2
+    },
+    {
+      "current_task_id": "task-0001-0004",
+      "frozen_task_count": 30,
+      "model_requests_used": 2126,
+      "scope": "worker_03",
+      "source_manifest_mtime_utc": "2026-10-29T07:05:28.591954+00:00",
+      "source_manifest_path": "parallel_workers/worker_03/manifest.json",
+      "source_manifest_sha256": "24f30a793d2c741441dcc80adcf8bc876db5c131428be70fcac9f2d0bd417640",
+      "status": "running",
+      "task_records": 30,
+      "task_status_counts": {
+        "active": 1,
+        "failed": 3,
+        "pending": 16,
+        "ready": 1,
+        "route_complete": 9
+      },
+      "unresolved_in_flight_count": 1
+    }
+  ]
+}
