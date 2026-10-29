@@ -1,0 +1,142 @@
+{
+  "schema_version": "nyc-formal-cell-execution-record-v1",
+  "recorded_at_local": "2026-10-28T22:05:12+08:00",
+  "execution_kind": "formal_missing_matrix_cell",
+  "preflight_state": "all three method result files were absent before launch",
+  "command": [
+    "python3",
+    "-u",
+    "scripts/run_nyc_tlc_dispatch_benchmark_ev2_proxy_v3.py",
+    "--package",
+    "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/dispatch_formal_multimonth_v1",
+    "--case",
+    "EV_20241222_205500_q25",
+    "--fleet-id",
+    "F4",
+    "--methods",
+    "D0_greedy",
+    "D1_optimizer",
+    "D2_agent_optimizer",
+    "--seed",
+    "0",
+    "--output-dir",
+    "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation",
+    "--codex-model",
+    "gpt-5.6-luna",
+    "--pickup-energy-proxy-mode",
+    "centroid_start_stop_ev2_v1",
+    "--compact-records",
+    "--observed-fares-json",
+    "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/dispatch_ev2_proxy_v3_inputs/nyc_tlc_observed_fares_partial_from_audited_sidecar_v1.json"
+  ],
+  "exit_code": 0,
+  "case_id": "EV_20241222_205500_q25",
+  "fleet_id": "F4",
+  "seed": 0,
+  "scenario_fingerprint_sha256": "6c9052a46b4a2e2a60562b95d69478a342cf63ffce6a8c080ecc558bf4d91c49",
+  "input_hashes": {
+    "scenario_json": "f2cd55e357ddafb65a0d252701c0fbcd9b13e59db209bf5c8e8aa791fadf6775",
+    "orders_json": "d34a13677468e3e0f38a33cbccdb3f42021a0297b99d620b04502a4c16c4a3b0",
+    "zone_od_cost_matrix": "2be04d3d22099acbb5ee95b3d0e3aedf41fec63fe2177da7b21c12b2e8906d81",
+    "pickup_cost_policy": "5948706ef027d9fe38f7924f8e064bd040a58d5bc1c9d5ec92637e9cefde763b",
+    "zone_centroids": "605ac3dbc29c29eef8ec28825f37e7814ee8f3dd7eb12e7ef26ffe6360b8c92b",
+    "observed_fare_crosswalk": "025d4be5aa7942362d1b90b81f2f7d6ae88a4b072d8f22486201df4ac356b7e4",
+    "available_fare_crosswalk_parquet": "531cdd7b96b39fb528b36e759616fe72f1887e338fd809a3503135c5bb5c21e0",
+    "available_fare_reconciliation_manifest": "5c4004f6787ce044d716d4691812e5126482da7ca4c7161235f9c502b0ce598c"
+  },
+  "results": {
+    "D0_greedy": {
+      "sha256": "8f482a78db36bc28ca9ad3a0e624f13d5acf637a427a6fc4795ddaae4d83eb64",
+      "mtime_local": "2026-10-28T21:53:36+08:00",
+      "summary": {
+        "vehicle_count": 48,
+        "order_count": 348,
+        "served_orders": 49,
+        "unserved_orders": 299,
+        "service_rate": 0.14080459770114942,
+        "average_pickup_wait_sec": 101.48569689929138,
+        "p95_pickup_wait_sec": 273.50373888067566,
+        "max_pickup_wait_sec": 297.7704424181356,
+        "total_empty_distance_m": 23698.995740326387,
+        "total_energy_kwh": 33.38440479998108,
+        "total_dispatch_rounds": 443,
+        "total_llm_calls": 0,
+        "total_codex_cli_invocations": 0,
+        "total_decision_time_ms": 153735.67591399993,
+        "optimizer_time_ms": 227.31520600010813,
+        "candidate_count_before_filter": 2406321,
+        "candidate_count_after_filter": 2406321,
+        "fallback_count": 0,
+        "commitment_violations": 0
+      }
+    },
+    "D1_optimizer": {
+      "sha256": "fec33b9441270c92515cd44ea3f06550c072218ef9b02fe42f722c2873d7b7af",
+      "mtime_local": "2026-10-28T21:56:22+08:00",
+      "summary": {
+        "vehicle_count": 48,
+        "order_count": 348,
+        "served_orders": 49,
+        "unserved_orders": 299,
+        "service_rate": 0.14080459770114942,
+        "average_pickup_wait_sec": 101.48569689929138,
+        "p95_pickup_wait_sec": 273.50373888067566,
+        "max_pickup_wait_sec": 297.7704424181356,
+        "total_empty_distance_m": 23698.995740326387,
+        "total_energy_kwh": 33.38440479998108,
+        "total_dispatch_rounds": 443,
+        "total_llm_calls": 0,
+        "total_codex_cli_invocations": 0,
+        "total_decision_time_ms": 163123.5739179991,
+        "optimizer_time_ms": 282.49486600046225,
+        "candidate_count_before_filter": 2406321,
+        "candidate_count_after_filter": 2406321,
+        "fallback_count": 0,
+        "commitment_violations": 0
+      }
+    },
+    "D2_agent_optimizer": {
+      "sha256": "edf58fa754fa8c8014cf3cc27325136b6847f2b55e5796d385a783a487654489",
+      "mtime_local": "2026-10-28T21:59:21+08:00",
+      "summary": {
+        "vehicle_count": 48,
+        "order_count": 348,
+        "served_orders": 49,
+        "unserved_orders": 299,
+        "service_rate": 0.14080459770114942,
+        "average_pickup_wait_sec": 101.50610506255668,
+        "p95_pickup_wait_sec": 273.50373888067566,
+        "max_pickup_wait_sec": 297.7704424181356,
+        "total_empty_distance_m": 23698.995740326387,
+        "total_energy_kwh": 33.38440479998108,
+        "total_dispatch_rounds": 443,
+        "total_llm_calls": 0,
+        "total_codex_cli_invocations": 0,
+        "total_decision_time_ms": 175555.60999499972,
+        "optimizer_time_ms": 8.114580999745158,
+        "candidate_count_before_filter": 2406346,
+        "candidate_count_after_filter": 335,
+        "fallback_count": 26,
+        "commitment_violations": 0
+      }
+    }
+  },
+  "audit_snapshot": {
+    "path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/audit_snapshots/ev2_fullmatrix_audit_20261028T2158CST.json",
+    "sha256": "00c92e7ef95b6beec01d0b29d93da7c1c025ff7e844e689be298d41500210bf6",
+    "audited_at_utc": "2026-10-28T13:59:30+00:00",
+    "valid_method_runs": 245,
+    "expected_method_runs": 630
+  },
+  "execution_limits": {
+    "llm_calls": 0,
+    "codex_cli_invocations": 0,
+    "commitment_violations": 0
+  },
+  "interpretation_limits": [
+    "NYC zone-centroid OD dispatch proxy, not street-network routes or telemetry.",
+    "Generic EV2 model estimate, not vehicle energy measurements.",
+    "Partial observed-fare crosswalk does not support reliable money ranking.",
+    "A single formal matrix cell is not a full-matrix performance conclusion."
+  ]
+}

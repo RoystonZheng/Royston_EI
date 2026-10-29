@@ -1,0 +1,49 @@
+{
+  "captured_at_utc": "2026-10-29T03:32:12.795542+00:00",
+  "source_manifest_sha256": "a270529ebcf4c13b806249d891a2bf54216e513e012e5598c25642580a886541",
+  "source_manifest_updated_at_utc": "2026-10-29T03:32:03.125822+00:00",
+  "status": "running",
+  "model_requests_used": 8239,
+  "routeable_task_count": 129,
+  "task_status_counts": {
+    "route_complete": 39,
+    "failed": 35,
+    "ready": 4,
+    "outcome_unknown": 5,
+    "pending": 43,
+    "active": 3
+  },
+  "unresolved_delivery_record_count": 24,
+  "pause_reason": "All LaunchAgents for this R4 formal batch were disabled after terminal requests were committed; no in-flight delivery remains.",
+  "workers": {
+    "worker_00": {
+      "status": "paused_at_checkpoint_unknown_tasks_deferred",
+      "model_requests_used": 2337
+    },
+    "worker_01": {
+      "status": "paused_at_checkpoint",
+      "model_requests_used": 1350
+    },
+    "worker_02": {
+      "status": "running",
+      "model_requests_used": 1069
+    },
+    "worker_03": {
+      "status": "running",
+      "model_requests_used": 1078
+    },
+    "worker_recovery": {
+      "status": "running",
+      "model_requests_used": 1097
+    },
+    "worker_recovery_addendum": {
+      "status": "completed_with_audited_task_outcomes",
+      "model_requests_used": 767
+    },
+    "worker_recovery_addendum2": {
+      "status": "paused_for_r4_oneway_guard_repair_and_full_flow_gate",
+      "model_requests_used": 182
+    }
+  },
+  "note": "Timestamped state summary; unresolved delivery records are not equivalent to outcome_unknown task count."
+}

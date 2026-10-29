@@ -1,0 +1,113 @@
+{
+  "batch_manifest_sha256_at_scan": "a2c476a89e5fabe1dbe3a93a13a4106fee969c4c00066b7ce895a4591c0406ca",
+  "batch_root": "outputs/route_layer/r4_codex_formal_batch_20261027_v2",
+  "created_at_utc": "2026-10-29T03:15:33.496122+00:00",
+  "energy_model": {
+    "equations": {
+      "negative_wheel_power": "min(-wheel_power * regenerative_efficiency, regenerative_power_cap)",
+      "net_battery_energy": "propulsion_draw - regenerated_energy + auxiliary_energy",
+      "positive_wheel_power": "wheel_power / propulsion_efficiency",
+      "wheel_force": "(m + rotating_mass)*acceleration + 0.5*rho*Cd*A*v^2 + Crr*m*g*cos(slope) + m*g*sin(slope)"
+    },
+    "model_version": "ev_longitudinal_v2",
+    "profile": {
+      "air_density_kg_m3": 1.225,
+      "auxiliary_power_w": 800.0,
+      "curb_mass_kg": 1900.0,
+      "drag_coefficient": 0.26,
+      "frontal_area_m2": 2.35,
+      "gravity_mps2": 9.80665,
+      "max_acceleration_mps2": 1.2,
+      "max_deceleration_mps2": 2.0,
+      "model_version": "ev_longitudinal_v2",
+      "passenger_load_kg": 75.0,
+      "profile_id": "generic_reference_ev_v1",
+      "propulsion_efficiency": 0.9,
+      "regenerative_efficiency": 0.65,
+      "regenerative_power_cap_w": 50000.0,
+      "rolling_resistance_coefficient": 0.009,
+      "rotating_mass_kg": 50.0
+    },
+    "profile_id": "generic_reference_ev_v1",
+    "profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee"
+  },
+  "error_count": 0,
+  "errors": [],
+  "frozen_sample_denominator_changed": false,
+  "model_calls": 0,
+  "previous_sidecar_manifests": [
+    {
+      "path": "outputs/route_layer/r4_codex_formal_batch_20261027_v2/ev2_payload_phase_sidecars_20261027_v1/manifest.json",
+      "sha256": "d12b5586421f90b3269d0131f3f11531c9fcf193864cc00f615fab1d07e4332f"
+    },
+    {
+      "path": "outputs/route_layer/r4_codex_formal_batch_20261027_v2/ev2_payload_phase_sidecars_20261027_v2/manifest.json",
+      "sha256": "ffe07e3f22d45e3b204d231e9311f41ed66c5a560b34538ba2f3354fe256c854"
+    },
+    {
+      "path": "outputs/route_layer/r4_codex_formal_batch_20261027_v2/ev2_payload_phase_sidecars_20261027_v3/manifest.json",
+      "sha256": "865585e14e83084f57853e5e6e7b04617720cb233644035103a426e1bb7afaf2"
+    },
+    {
+      "path": "outputs/route_layer/r4_codex_formal_batch_20261027_v2/ev2_payload_phase_sidecars_20261027_v4/manifest.json",
+      "sha256": "6af25bdd0b69e412f4706c16a5602e5fa0370d551d5ce93ccabb0315e2986c70"
+    },
+    {
+      "path": "outputs/route_layer/r4_codex_formal_batch_20261027_v2/ev2_payload_phase_sidecars_20261027_v5/manifest.json",
+      "sha256": "a81eb78ccfad870ae87bf693165532ec98fa81b3f6b12c29d425dd9fbf35300a"
+    },
+    {
+      "path": "outputs/route_layer/r4_codex_formal_batch_20261027_v2/ev2_payload_phase_sidecars_20261027_v6/manifest.json",
+      "sha256": "3f7c260be633b45ded7c8675f5458e04a726f69bef6f937afc1b2aecb9e5f101"
+    },
+    {
+      "path": "outputs/route_layer/r4_codex_formal_batch_20261027_v2/ev2_payload_phase_sidecars_20261027_v7/manifest.json",
+      "sha256": "0b9939efddb4c0a435f03e666e404e6fd2587bd798a0d03062fc824ce1986968"
+    },
+    {
+      "path": "outputs/route_layer/r4_codex_formal_batch_20261027_v2/ev2_payload_phase_sidecars_20261027_v8/manifest.json",
+      "sha256": "1c37dcbe19f0959077f7e040a63ecb6d27e54826cc6914875edab284dbbf6368"
+    },
+    {
+      "path": "outputs/route_layer/r4_codex_formal_batch_20261027_v2/ev2_payload_phase_sidecars_20261027_v9/manifest.json",
+      "sha256": "973b2eb7b40d1b71144106b3b23dcd97effbba7a9304ca86cc603ebd9daab5b9"
+    },
+    {
+      "path": "outputs/route_layer/r4_codex_formal_batch_20261027_v2/ev2_payload_phase_sidecars_20261027_v10/manifest.json",
+      "sha256": "1cf3ed2f46ea9bc1b5360ade7343ddd5521aab1303b1384ea133eed4cf2eaeb9"
+    },
+    {
+      "path": "outputs/route_layer/r4_codex_formal_batch_20261027_v2/ev2_payload_phase_sidecars_20261027_v11/manifest.json",
+      "sha256": "a88a780ea0a865b86b395e5002c1a7b032d76d2e8cff5e9240c52fd5e4d8c770"
+    },
+    {
+      "path": "outputs/route_layer/r4_codex_formal_batch_20261027_v2/ev2_payload_phase_sidecars_20261027_v12/manifest.json",
+      "sha256": "733358e7fbee9ee20f95a1c25ce107b030551a3f742cef2519a0735a10122683"
+    },
+    {
+      "path": "outputs/route_layer/r4_codex_formal_batch_20261027_v2/ev2_payload_phase_sidecars_20261029_v13/manifest.json",
+      "sha256": "ac98590a0fbeb8a9a81149f73d6df32a662724416c8fe6b43da5edb074fdf6e8"
+    },
+    {
+      "path": "outputs/route_layer/r4_codex_formal_batch_20261027_v2/ev2_payload_phase_sidecars_20261029_v14/manifest.json",
+      "sha256": "2942a1735959c613596f636d77b8b00e392317050a14a9b6822771154823cf8b"
+    }
+  ],
+  "recalculated_route_count": 1,
+  "route_algorithm_rerun": false,
+  "route_complete_source_run_count_scanned": 1,
+  "runs": [
+    {
+      "output": "outputs/route_layer/r4_codex_formal_batch_20261027_v2/ev2_payload_phase_sidecars_20261029_v15/seed_9/task-0009-0001/run_000.json",
+      "output_sha256": "f53563469a9b3d0b075bac5205bc5a8946a53e41e30442413dc11496368ecf85",
+      "sample_group": "orders",
+      "seed": 9,
+      "source_run_dir": "outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_02/tasks/seed_9/task-0009-0001/run_000",
+      "source_state_sha256": "ce7b23c3fba217b6f3802bac76178a2d8df603c4c8acd360ff7bea5893637d20",
+      "status": "offline_recalculated_completed_route",
+      "task_id": "task-0009-0001"
+    }
+  ],
+  "schema_version": "r4_formal_batch_ev2_payload_phase_sidecar_v1",
+  "status": "passed"
+}
