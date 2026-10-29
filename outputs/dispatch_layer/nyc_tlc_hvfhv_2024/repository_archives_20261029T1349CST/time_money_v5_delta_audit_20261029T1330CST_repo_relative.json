@@ -1,0 +1,39 @@
+{
+  "schema_version": "nyc_tlc_ev2_time_money_v5_delta_formula_audit_v1",
+  "source_audit_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/audit_snapshots/ev2_segment_ledger_audit_20261029T1326CST.json",
+  "source_audit_sha256": "c26f52a78f3691580970cbfd5efde515d45c1f9b0aec45ca1b3ce2ca2ce1d654",
+  "fingerprint_audit_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/audit_snapshots/ev2_input_fingerprint_audit_20261029T1327CST.json",
+  "fingerprint_audit_sha256": "310eacbd494c7698e0ff7e8cce9b315055b4aa605d4ef3f41e22367280dead0c",
+  "prior_coverage_manifest_sha256": "52167af4d84d3dac20e902a00df4d5e7b0a31641d9a9ad21b73bcd718d3b99d6",
+  "sidecar_manifest_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/time_money_v5_segment_sidecar_20261029T1329CST_unique_delta_1/manifest.json",
+  "sidecar_manifest_sha256": "1f69b2f0e5d09b8c913569a5bb97ef0fdf9649d35fa6301bb06952149f43880e",
+  "cell": "EV_20240330_200500_q75/F2/seed0",
+  "new_sources": 1,
+  "segment_rows": 52,
+  "segment_types": {
+    "deadhead": 26,
+    "passenger": 26
+  },
+  "complete_energy_segments": 52,
+  "max_abs_billable_energy_formula_delta_kwh": 0.0,
+  "source_hashes_match_official_audit": true,
+  "passenger_fare_preserved_once": true,
+  "deadhead_revenue_zero": true,
+  "method_cost_accounting": "method-level once per run",
+  "electricity_costs_null_without_frozen_tariff": true,
+  "profitability_or_route_choice_scored": false,
+  "missing_inputs": [
+    "scenario-specific electricity tariff",
+    "complete hash-audited observed fare crosswalk",
+    "frozen method-level compute-cost rate",
+    "complete shared feasible route candidate pool"
+  ],
+  "rankings": 0,
+  "new_model_calls": 0,
+  "sumo_reruns": 0,
+  "source_results_modified": false,
+  "coverage_index_manifest_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/time_money_v5_source_coverage_index_20261029T1330CST_301/manifest.json",
+  "coverage_index_source_count": 301,
+  "coverage_index_run_jsonl_sha256": "14ffe558042c0e5afa5939cbb62a0fb822d289140341db8229c0056af5f45933",
+  "audit_errors": []
+}

@@ -1,0 +1,630 @@
+{
+  "cell": {
+    "case_id": "EV_20240321_220000_q50",
+    "fleet_id": "F1",
+    "method_count": 7,
+    "seed": 0
+  },
+  "created_at_local": "2026-10-29T12:32:49+08:00",
+  "ev2_profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee",
+  "experiment_manifest_sha256": "de59b38a80b03ea6320b870cb34dc89d9bfcc7e4c9229ee0991731e2cdb50a6f",
+  "fingerprint_audit": {
+    "path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/audit_snapshots/ev2_input_fingerprint_audit_20261029T1229CST.json",
+    "sha256": "29044c304d4d5a1ff848a4193d5494fdf15fe4e32126b2312c3ed3c9be6904cd"
+  },
+  "limits": [
+    "This is one matched case-fleet cell, not a matrix-wide performance result.",
+    "The D5 objective exposes EV2 segment signed-net energy to the LLM but applies no deterministic global energy optimizer.",
+    "D0 greedy does not optimize energy; the D1/D2/D6/D7/D8 frozen lexicographic objective and per-method contract remain in the source result files.",
+    "Monetary route-choice ranking remains blocked by missing frozen electricity tariff, complete fare crosswalk, method compute rates, and a shared alternative-route pool."
+  ],
+  "methods": {
+    "D0_greedy": {
+      "decision_function": {
+        "energy_dependency": "not_used_by_the_assignment_rule",
+        "energy_input_contract": {
+          "fare_usage": "observed fare is recorded on the passenger service segment; partial joins remain explicitly null and never remove candidates",
+          "method_cost_scope": "Codex/API usage and compute cost are recorded once per method, never apportioned to route segments",
+          "missing_positive_distance_edge_sequence": "fail_closed_unless_explicit_synthetic_pickup_proxy",
+          "model_version": "ev_longitudinal_v2",
+          "monetary_score_status": "not_applied_to_assignment; any time-money route-choice score is blocked without frozen electricity tariff, method cost rates, and a common alternative-route pool",
+          "observed_fare_basis": "NYC TLC base_passenger_fare in USD; signed values retained; historical proxy, not realized revenue",
+          "optimizer_energy_basis": "sum_of_signed_net_pickup_and_ride_kwh",
+          "pickup_leg": "synthetic_zone_centroid_distance_time_with_ev_v2_start_stop_motion_profile",
+          "ride_leg": "direct_observed_zone_od_edge_conditions_with_ev_v2",
+          "segment_billing_basis": "sum_signed_link_energy_within_segment_then_max(net_kwh,0)"
+        },
+        "final_assignment_rule": "deterministic_greedy_v1",
+        "hard_constraints": [
+          "pickup and ride routes are reachable",
+          "predicted pickup wait is at most max_pickup_wait_sec",
+          "one vehicle serves at most one order per dispatch round",
+          "one order is assigned to at most one vehicle per dispatch round",
+          "existing vehicle commitments and reservation limits are preserved"
+        ],
+        "method_name": "D0_greedy",
+        "method_steps": [
+          "Keep only candidates satisfying route, commitment, one-to-one, and max-wait hard constraints.",
+          "Sort by request arrival time, predicted pickup wait, empty distance, order ID, then vehicle ID.",
+          "Accept the first candidate for each unused vehicle and order."
+        ],
+        "schema": "nyc_dispatch_decision_contract_v4",
+        "uses_global_optimizer": false
+      },
+      "hard_constraint_error_count": 0,
+      "one_to_one_invalid_rounds": 0,
+      "partial_run": false,
+      "result_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F1/D0_greedy_seed_0.json",
+      "result_sha256": "4a801966e3de48bf20a18b2ac623ee91c82ea7224048b2e4400979fbd5d64b72",
+      "round_audit_count": 482,
+      "summary": {
+        "average_pickup_wait_sec": 107.11487317434138,
+        "commitment_violations": 0,
+        "fallback_count": 0,
+        "served_orders": 12,
+        "service_rate": 0.02390438247011952,
+        "total_api_equivalent_usd": null,
+        "total_billable_energy_kwh": 9.810618079197592,
+        "total_codex_standard_credit_equivalent": null,
+        "total_dispatch_rounds": 482,
+        "total_empty_distance_m": 6426.892390460483,
+        "total_llm_cached_input_tokens": null,
+        "total_llm_calls": 0,
+        "total_llm_input_tokens": null,
+        "total_llm_output_tokens": null,
+        "total_llm_tokens": null,
+        "unserved_orders": 490
+      },
+      "validator_status_counts": {
+        "valid": 482
+      }
+    },
+    "D1_optimizer": {
+      "decision_function": {
+        "energy_dependency": "pickup_and_ride_ev_v2_signed_net_energy_sum_is_the_last_global_optimizer_objective_tier",
+        "energy_input_contract": {
+          "fare_usage": "observed fare is recorded on the passenger service segment; partial joins remain explicitly null and never remove candidates",
+          "method_cost_scope": "Codex/API usage and compute cost are recorded once per method, never apportioned to route segments",
+          "missing_positive_distance_edge_sequence": "fail_closed_unless_explicit_synthetic_pickup_proxy",
+          "model_version": "ev_longitudinal_v2",
+          "monetary_score_status": "not_applied_to_assignment; any time-money route-choice score is blocked without frozen electricity tariff, method cost rates, and a common alternative-route pool",
+          "observed_fare_basis": "NYC TLC base_passenger_fare in USD; signed values retained; historical proxy, not realized revenue",
+          "optimizer_energy_basis": "sum_of_signed_net_pickup_and_ride_kwh",
+          "pickup_leg": "synthetic_zone_centroid_distance_time_with_ev_v2_start_stop_motion_profile",
+          "ride_leg": "direct_observed_zone_od_edge_conditions_with_ev_v2",
+          "segment_billing_basis": "sum_signed_link_energy_within_segment_then_max(net_kwh,0)"
+        },
+        "final_assignment_rule": "global_min_cost_flow_lexicographic_v2",
+        "global_optimizer": {
+          "per_round_integer_scales": "recorded_in_each_round_audit",
+          "priority_order": [
+            "maximize_served_orders",
+            "minimize_total_pickup_wait",
+            "minimize_total_empty_distance",
+            "minimize_total_ev_energy"
+          ],
+          "version": "global_min_cost_flow_lexicographic_v2"
+        },
+        "hard_constraints": [
+          "pickup and ride routes are reachable",
+          "predicted pickup wait is at most max_pickup_wait_sec",
+          "one vehicle serves at most one order per dispatch round",
+          "one order is assigned to at most one vehicle per dispatch round",
+          "existing vehicle commitments and reservation limits are preserved"
+        ],
+        "method_name": "D1_optimizer",
+        "method_steps": [
+          "Keep only hard-feasible vehicle-order candidates.",
+          "Solve a one-to-one minimum-cost bipartite flow with the exact lexicographic objective recorded per round."
+        ],
+        "schema": "nyc_dispatch_decision_contract_v4",
+        "uses_global_optimizer": true
+      },
+      "hard_constraint_error_count": 0,
+      "one_to_one_invalid_rounds": 0,
+      "partial_run": false,
+      "result_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F1/D1_optimizer_seed_0.json",
+      "result_sha256": "6a23e6db24d0f767dba65361e3c25ae09c579230b96f60b56518681155fcd0bd",
+      "round_audit_count": 483,
+      "summary": {
+        "average_pickup_wait_sec": 135.2625380214095,
+        "commitment_violations": 0,
+        "fallback_count": 0,
+        "served_orders": 12,
+        "service_rate": 0.02390438247011952,
+        "total_api_equivalent_usd": null,
+        "total_billable_energy_kwh": 9.8224963475153,
+        "total_codex_standard_credit_equivalent": null,
+        "total_dispatch_rounds": 483,
+        "total_empty_distance_m": 8115.752281284571,
+        "total_llm_cached_input_tokens": null,
+        "total_llm_calls": 0,
+        "total_llm_input_tokens": null,
+        "total_llm_output_tokens": null,
+        "total_llm_tokens": null,
+        "unserved_orders": 490
+      },
+      "validator_status_counts": {
+        "valid": 483
+      }
+    },
+    "D2_agent_optimizer": {
+      "decision_function": {
+        "energy_dependency": "pickup_and_ride_ev_v2_signed_net_energy_sum_is_the_last_global_optimizer_objective_tier",
+        "energy_input_contract": {
+          "fare_usage": "observed fare is recorded on the passenger service segment; partial joins remain explicitly null and never remove candidates",
+          "method_cost_scope": "Codex/API usage and compute cost are recorded once per method, never apportioned to route segments",
+          "missing_positive_distance_edge_sequence": "fail_closed_unless_explicit_synthetic_pickup_proxy",
+          "model_version": "ev_longitudinal_v2",
+          "monetary_score_status": "not_applied_to_assignment; any time-money route-choice score is blocked without frozen electricity tariff, method cost rates, and a common alternative-route pool",
+          "observed_fare_basis": "NYC TLC base_passenger_fare in USD; signed values retained; historical proxy, not realized revenue",
+          "optimizer_energy_basis": "sum_of_signed_net_pickup_and_ride_kwh",
+          "pickup_leg": "synthetic_zone_centroid_distance_time_with_ev_v2_start_stop_motion_profile",
+          "ride_leg": "direct_observed_zone_od_edge_conditions_with_ev_v2",
+          "segment_billing_basis": "sum_signed_link_energy_within_segment_then_max(net_kwh,0)"
+        },
+        "final_assignment_rule": "global_min_cost_flow_lexicographic_v2",
+        "global_optimizer": {
+          "per_round_integer_scales": "recorded_in_each_round_audit",
+          "priority_order": [
+            "maximize_served_orders",
+            "minimize_total_pickup_wait",
+            "minimize_total_empty_distance",
+            "minimize_total_ev_energy"
+          ],
+          "version": "global_min_cost_flow_lexicographic_v2"
+        },
+        "hard_constraints": [
+          "pickup and ride routes are reachable",
+          "predicted pickup wait is at most max_pickup_wait_sec",
+          "one vehicle serves at most one order per dispatch round",
+          "one order is assigned to at most one vehicle per dispatch round",
+          "existing vehicle commitments and reservation limits are preserved"
+        ],
+        "method_name": "D2_agent_optimizer",
+        "method_steps": [
+          "Each vehicle agent builds pickup and ride candidates and applies the bounded manual linear-clip context function.",
+          "If the context function removes every hard-feasible candidate for an agent, restore that agent's hard-feasible candidates.",
+          "Apply the exact lexicographic global optimizer to the remaining candidates."
+        ],
+        "schema": "nyc_dispatch_decision_contract_v4",
+        "uses_global_optimizer": true
+      },
+      "hard_constraint_error_count": 0,
+      "one_to_one_invalid_rounds": 0,
+      "partial_run": false,
+      "result_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F1/D2_agent_optimizer_seed_0.json",
+      "result_sha256": "a8e039ae65bbd1f8324052aa0c1939f836696b772f61b4ae4a5e84fb6bae3531",
+      "round_audit_count": 482,
+      "summary": {
+        "average_pickup_wait_sec": 107.11487317434138,
+        "commitment_violations": 0,
+        "fallback_count": 4,
+        "served_orders": 12,
+        "service_rate": 0.02390438247011952,
+        "total_api_equivalent_usd": null,
+        "total_billable_energy_kwh": 9.810618079197592,
+        "total_codex_standard_credit_equivalent": null,
+        "total_dispatch_rounds": 482,
+        "total_empty_distance_m": 6426.892390460483,
+        "total_llm_cached_input_tokens": null,
+        "total_llm_calls": 0,
+        "total_llm_input_tokens": null,
+        "total_llm_output_tokens": null,
+        "total_llm_tokens": null,
+        "unserved_orders": 490
+      },
+      "validator_status_counts": {
+        "valid": 482
+      }
+    },
+    "D5_pure_llm_direct": {
+      "decision_function": {
+        "energy_dependency": "pickup_and_ride_signed_net_energy_are_visible_to_the_llm_but_no_deterministic_energy_objective_is_applied",
+        "energy_input_contract": {
+          "fare_usage": "observed fare is recorded on the passenger service segment; partial joins remain explicitly null and never remove candidates",
+          "method_cost_scope": "Codex/API usage and compute cost are recorded once per method, never apportioned to route segments",
+          "missing_positive_distance_edge_sequence": "fail_closed_unless_explicit_synthetic_pickup_proxy",
+          "model_version": "ev_longitudinal_v2",
+          "monetary_score_status": "not_applied_to_assignment; any time-money route-choice score is blocked without frozen electricity tariff, method cost rates, and a common alternative-route pool",
+          "observed_fare_basis": "NYC TLC base_passenger_fare in USD; signed values retained; historical proxy, not realized revenue",
+          "optimizer_energy_basis": "sum_of_signed_net_pickup_and_ride_kwh",
+          "pickup_leg": "synthetic_zone_centroid_distance_time_with_ev_v2_start_stop_motion_profile",
+          "ride_leg": "direct_observed_zone_od_edge_conditions_with_ev_v2",
+          "segment_billing_basis": "sum_signed_link_energy_within_segment_then_max(net_kwh,0)"
+        },
+        "final_assignment_rule": "codex_direct_assignment_with_deterministic_validator_v1",
+        "hard_constraints": [
+          "pickup and ride routes are reachable",
+          "predicted pickup wait is at most max_pickup_wait_sec",
+          "one vehicle serves at most one order per dispatch round",
+          "one order is assigned to at most one vehicle per dispatch round",
+          "existing vehicle commitments and reservation limits are preserved"
+        ],
+        "method_name": "D5_pure_llm_direct",
+        "method_steps": [
+          "Codex CLI proposes vehicle-order assignments from the shared candidate facts, including pickup and passenger-segment EV v2 signed-net energy.",
+          "The deterministic validator rejects unknown, duplicate, unreachable, over-wait, or commitment-violating assignments.",
+          "No global mathematical optimizer is applied after the LLM response."
+        ],
+        "schema": "nyc_dispatch_decision_contract_v4",
+        "uses_global_optimizer": false
+      },
+      "hard_constraint_error_count": 0,
+      "one_to_one_invalid_rounds": 0,
+      "partial_run": false,
+      "result_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F1/D5_pure_llm_direct_seed_0.json",
+      "result_sha256": "823c0435e020076c75c1d58e2261cb47514cfd143191b7a2fbaace525cde80ac",
+      "round_audit_count": 483,
+      "summary": {
+        "average_pickup_wait_sec": 135.2625380214095,
+        "commitment_violations": 0,
+        "fallback_count": 0,
+        "served_orders": 12,
+        "service_rate": 0.02390438247011952,
+        "total_api_equivalent_usd": 0.010030600000000002,
+        "total_billable_energy_kwh": 9.8224963475153,
+        "total_codex_standard_credit_equivalent": 0.250765,
+        "total_dispatch_rounds": 483,
+        "total_empty_distance_m": 8115.752281284571,
+        "total_llm_cached_input_tokens": 63360,
+        "total_llm_calls": 6,
+        "total_llm_input_tokens": 99143,
+        "total_llm_output_tokens": 1339,
+        "total_llm_tokens": 100482,
+        "unserved_orders": 490
+      },
+      "validator_status_counts": {
+        "valid": 483
+      }
+    },
+    "D6_agent_codex_context_optimizer": {
+      "decision_function": {
+        "energy_dependency": "pickup_and_ride_ev_v2_signed_net_energy_sum_is_the_last_global_optimizer_objective_tier",
+        "energy_input_contract": {
+          "fare_usage": "observed fare is recorded on the passenger service segment; partial joins remain explicitly null and never remove candidates",
+          "method_cost_scope": "Codex/API usage and compute cost are recorded once per method, never apportioned to route segments",
+          "missing_positive_distance_edge_sequence": "fail_closed_unless_explicit_synthetic_pickup_proxy",
+          "model_version": "ev_longitudinal_v2",
+          "monetary_score_status": "not_applied_to_assignment; any time-money route-choice score is blocked without frozen electricity tariff, method cost rates, and a common alternative-route pool",
+          "observed_fare_basis": "NYC TLC base_passenger_fare in USD; signed values retained; historical proxy, not realized revenue",
+          "optimizer_energy_basis": "sum_of_signed_net_pickup_and_ride_kwh",
+          "pickup_leg": "synthetic_zone_centroid_distance_time_with_ev_v2_start_stop_motion_profile",
+          "ride_leg": "direct_observed_zone_od_edge_conditions_with_ev_v2",
+          "segment_billing_basis": "sum_signed_link_energy_within_segment_then_max(net_kwh,0)"
+        },
+        "final_assignment_rule": "global_min_cost_flow_lexicographic_v2",
+        "global_optimizer": {
+          "per_round_integer_scales": "recorded_in_each_round_audit",
+          "priority_order": [
+            "maximize_served_orders",
+            "minimize_total_pickup_wait",
+            "minimize_total_empty_distance",
+            "minimize_total_ev_energy"
+          ],
+          "version": "global_min_cost_flow_lexicographic_v2"
+        },
+        "hard_constraints": [
+          "pickup and ride routes are reachable",
+          "predicted pickup wait is at most max_pickup_wait_sec",
+          "one vehicle serves at most one order per dispatch round",
+          "one order is assigned to at most one vehicle per dispatch round",
+          "existing vehicle commitments and reservation limits are preserved"
+        ],
+        "method_name": "D6_agent_codex_context_optimizer",
+        "method_steps": [
+          "Codex CLI supplies bounded linear-clip context parameters for vehicle agents; parameters cannot alter hard constraints.",
+          "Agents retain candidates whose predicted pickup wait is within the generated threshold.",
+          "If a vehicle has no context-approved candidate, restore its hard-feasible candidates.",
+          "Apply the exact lexicographic global optimizer."
+        ],
+        "schema": "nyc_dispatch_decision_contract_v4",
+        "uses_global_optimizer": true
+      },
+      "hard_constraint_error_count": 0,
+      "one_to_one_invalid_rounds": 0,
+      "partial_run": false,
+      "result_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F1/D6_agent_codex_context_optimizer_seed_0.json",
+      "result_sha256": "ef69117ee989a3dae5a9a68aab801c320bd835aea004eed0bad02c39138dd1f7",
+      "round_audit_count": 482,
+      "summary": {
+        "average_pickup_wait_sec": 107.11487317434138,
+        "commitment_violations": 0,
+        "fallback_count": 5,
+        "served_orders": 12,
+        "service_rate": 0.02390438247011952,
+        "total_api_equivalent_usd": 0.0028854,
+        "total_billable_energy_kwh": 9.810618079197592,
+        "total_codex_standard_credit_equivalent": 0.072135,
+        "total_dispatch_rounds": 482,
+        "total_empty_distance_m": 6426.892390460483,
+        "total_llm_cached_input_tokens": 0,
+        "total_llm_calls": 1,
+        "total_llm_input_tokens": 13455,
+        "total_llm_output_tokens": 162,
+        "total_llm_tokens": 13617,
+        "unserved_orders": 490
+      },
+      "validator_status_counts": {
+        "valid": 482
+      }
+    },
+    "D7_agent_codex_capacity_shield_optimizer": {
+      "decision_function": {
+        "energy_dependency": "pickup_and_ride_ev_v2_signed_net_energy_sum_is_the_last_global_optimizer_objective_tier",
+        "energy_input_contract": {
+          "fare_usage": "observed fare is recorded on the passenger service segment; partial joins remain explicitly null and never remove candidates",
+          "method_cost_scope": "Codex/API usage and compute cost are recorded once per method, never apportioned to route segments",
+          "missing_positive_distance_edge_sequence": "fail_closed_unless_explicit_synthetic_pickup_proxy",
+          "model_version": "ev_longitudinal_v2",
+          "monetary_score_status": "not_applied_to_assignment; any time-money route-choice score is blocked without frozen electricity tariff, method cost rates, and a common alternative-route pool",
+          "observed_fare_basis": "NYC TLC base_passenger_fare in USD; signed values retained; historical proxy, not realized revenue",
+          "optimizer_energy_basis": "sum_of_signed_net_pickup_and_ride_kwh",
+          "pickup_leg": "synthetic_zone_centroid_distance_time_with_ev_v2_start_stop_motion_profile",
+          "ride_leg": "direct_observed_zone_od_edge_conditions_with_ev_v2",
+          "segment_billing_basis": "sum_signed_link_energy_within_segment_then_max(net_kwh,0)"
+        },
+        "final_assignment_rule": "global_min_cost_flow_lexicographic_v2",
+        "global_optimizer": {
+          "per_round_integer_scales": "recorded_in_each_round_audit",
+          "priority_order": [
+            "maximize_served_orders",
+            "minimize_total_pickup_wait",
+            "minimize_total_empty_distance",
+            "minimize_total_ev_energy"
+          ],
+          "version": "global_min_cost_flow_lexicographic_v2"
+        },
+        "hard_constraints": [
+          "pickup and ride routes are reachable",
+          "predicted pickup wait is at most max_pickup_wait_sec",
+          "one vehicle serves at most one order per dispatch round",
+          "one order is assigned to at most one vehicle per dispatch round",
+          "existing vehicle commitments and reservation limits are preserved"
+        ],
+        "method_name": "D7_agent_codex_capacity_shield_optimizer",
+        "method_steps": [
+          "Apply the D6 Codex context policy.",
+          "Restore rejected hard-feasible candidates in frozen priority order until the filtered graph preserves the original maximum one-to-one matching cardinality.",
+          "Apply the exact lexicographic global optimizer."
+        ],
+        "schema": "nyc_dispatch_decision_contract_v4",
+        "uses_global_optimizer": true
+      },
+      "hard_constraint_error_count": 0,
+      "one_to_one_invalid_rounds": 0,
+      "partial_run": false,
+      "result_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F1/D7_agent_codex_capacity_shield_optimizer_seed_0.json",
+      "result_sha256": "8f92922faefc627a8ee2fd45c55db49df31a2f5673aefad31bf4532fc8faa140",
+      "round_audit_count": 483,
+      "summary": {
+        "average_pickup_wait_sec": 135.2625380214095,
+        "commitment_violations": 0,
+        "fallback_count": 5,
+        "served_orders": 12,
+        "service_rate": 0.02390438247011952,
+        "total_api_equivalent_usd": 0.0028854,
+        "total_billable_energy_kwh": 9.8224963475153,
+        "total_codex_standard_credit_equivalent": 0.072135,
+        "total_dispatch_rounds": 483,
+        "total_empty_distance_m": 8115.752281284571,
+        "total_llm_cached_input_tokens": 0,
+        "total_llm_calls": 1,
+        "total_llm_input_tokens": 13455,
+        "total_llm_output_tokens": 162,
+        "total_llm_tokens": 13617,
+        "unserved_orders": 490
+      },
+      "validator_status_counts": {
+        "valid": 483
+      }
+    },
+    "D8_agent_codex_nn_capacity_shield_optimizer": {
+      "decision_function": {
+        "energy_dependency": "pickup_and_ride_ev_v2_signed_net_energy_sum_is_the_last_global_optimizer_objective_tier",
+        "energy_input_contract": {
+          "fare_usage": "observed fare is recorded on the passenger service segment; partial joins remain explicitly null and never remove candidates",
+          "method_cost_scope": "Codex/API usage and compute cost are recorded once per method, never apportioned to route segments",
+          "missing_positive_distance_edge_sequence": "fail_closed_unless_explicit_synthetic_pickup_proxy",
+          "model_version": "ev_longitudinal_v2",
+          "monetary_score_status": "not_applied_to_assignment; any time-money route-choice score is blocked without frozen electricity tariff, method cost rates, and a common alternative-route pool",
+          "observed_fare_basis": "NYC TLC base_passenger_fare in USD; signed values retained; historical proxy, not realized revenue",
+          "optimizer_energy_basis": "sum_of_signed_net_pickup_and_ride_kwh",
+          "pickup_leg": "synthetic_zone_centroid_distance_time_with_ev_v2_start_stop_motion_profile",
+          "ride_leg": "direct_observed_zone_od_edge_conditions_with_ev_v2",
+          "segment_billing_basis": "sum_signed_link_energy_within_segment_then_max(net_kwh,0)"
+        },
+        "final_assignment_rule": "global_min_cost_flow_lexicographic_v2",
+        "global_optimizer": {
+          "per_round_integer_scales": "recorded_in_each_round_audit",
+          "priority_order": [
+            "maximize_served_orders",
+            "minimize_total_pickup_wait",
+            "minimize_total_empty_distance",
+            "minimize_total_ev_energy"
+          ],
+          "version": "global_min_cost_flow_lexicographic_v2"
+        },
+        "hard_constraints": [
+          "pickup and ride routes are reachable",
+          "predicted pickup wait is at most max_pickup_wait_sec",
+          "one vehicle serves at most one order per dispatch round",
+          "one order is assigned to at most one vehicle per dispatch round",
+          "existing vehicle commitments and reservation limits are preserved"
+        ],
+        "method_name": "D8_agent_codex_nn_capacity_shield_optimizer",
+        "method_steps": [
+          "Apply the D7 Codex context policy.",
+          "Score hard-feasible candidates with the frozen D1-imitation MLP and retain the configured Top-K candidates per vehicle, prioritizing context-approved candidates.",
+          "Apply the maximum-cardinality shield so pruning cannot reduce feasible matching capacity.",
+          "Apply the exact lexicographic global optimizer."
+        ],
+        "schema": "nyc_dispatch_decision_contract_v4",
+        "uses_global_optimizer": true
+      },
+      "hard_constraint_error_count": 0,
+      "one_to_one_invalid_rounds": 0,
+      "partial_run": false,
+      "result_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F1/D8_agent_codex_nn_capacity_shield_optimizer_seed_0.json",
+      "result_sha256": "325991bfc79677fd09b54276c73a309ffae806010e01d6260be072a81da2ab7b",
+      "round_audit_count": 483,
+      "summary": {
+        "average_pickup_wait_sec": 135.2625380214095,
+        "commitment_violations": 0,
+        "fallback_count": 5,
+        "served_orders": 12,
+        "service_rate": 0.02390438247011952,
+        "total_api_equivalent_usd": 0.0028854,
+        "total_billable_energy_kwh": 9.8224963475153,
+        "total_codex_standard_credit_equivalent": 0.072135,
+        "total_dispatch_rounds": 483,
+        "total_empty_distance_m": 8115.752281284571,
+        "total_llm_cached_input_tokens": 0,
+        "total_llm_calls": 1,
+        "total_llm_input_tokens": 13455,
+        "total_llm_output_tokens": 162,
+        "total_llm_tokens": 13617,
+        "unserved_orders": 490
+      },
+      "validator_status_counts": {
+        "valid": 483
+      }
+    }
+  },
+  "official_audit": {
+    "path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/audit_snapshots/ev2_fullmatrix_audit_20261029T1229CST.json",
+    "sha256": "fde185b1b834a267f163573621f89f777dd92508335f0021c22179d0b6d72ce7"
+  },
+  "schema_version": "nyc_ev2_unique_invocation_audit_v1",
+  "unique_invocations": {
+    "actual_account_billing": null,
+    "actual_account_billing_status": "not_reported_by_codex_cli",
+    "api_equivalent_usd_estimate": 0.012916000000000002,
+    "codex_standard_credit_equivalent_estimate": 0.3229,
+    "d5_independent_live_calls": [
+      {
+        "cached_input_tokens": 12672,
+        "final_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F1/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0001.final.json",
+        "final_sha256": "80c80af7e57b492dfb88aa3ff47d9b96accdcdf3e28f0cb1289b7760ce0616b3",
+        "input_tokens": 18976,
+        "last_event_type": "turn.completed",
+        "output_tokens": 310,
+        "trace_path": "<excluded raw prompt/state/trace artifact path>",
+        "trace_sha256": "45bb6fa7d873ff472c995f168851f013fdefabdf7ae113b0918a628d3a2d19f4"
+      },
+      {
+        "cached_input_tokens": 12672,
+        "final_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F1/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0002.final.json",
+        "final_sha256": "8e59fa734b6b3cc99c41e8f09ccbabf5dde1f91168bf976c7b706d40fa9b677d",
+        "input_tokens": 15594,
+        "last_event_type": "turn.completed",
+        "output_tokens": 78,
+        "trace_path": "<excluded raw prompt/state/trace artifact path>",
+        "trace_sha256": "d363a25d5cf170b14df92b0ae20eca327808246531bb757b0b17f3f981ee09e5"
+      },
+      {
+        "cached_input_tokens": 12672,
+        "final_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F1/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0003.final.json",
+        "final_sha256": "b550537f9183fa09a9ee38c5254129a0c512260b632b00d5687cce2753d71af4",
+        "input_tokens": 15634,
+        "last_event_type": "turn.completed",
+        "output_tokens": 95,
+        "trace_path": "<excluded raw prompt/state/trace artifact path>",
+        "trace_sha256": "b57bf2695c2ec0307ca433c045182d9de96ffd299fa013a34c23226b58689f0e"
+      },
+      {
+        "cached_input_tokens": 0,
+        "final_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F1/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0004.final.json",
+        "final_sha256": "a07bd7448972ccacf1fec02374d58d4d79b922c32eea9ea1d716b580707e5212",
+        "input_tokens": 15703,
+        "last_event_type": "turn.completed",
+        "output_tokens": 153,
+        "trace_path": "<excluded raw prompt/state/trace artifact path>",
+        "trace_sha256": "51d4eff6aa45c738578b1d46b0cd2d97e416cb39a44220680d69e90c4ad03d59"
+      },
+      {
+        "cached_input_tokens": 12672,
+        "final_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F1/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0005.final.json",
+        "final_sha256": "e43f9747c0031dbbff2fb83e7ecb983d519beae64842b2a9b14134c33184ec10",
+        "input_tokens": 18243,
+        "last_event_type": "turn.completed",
+        "output_tokens": 631,
+        "trace_path": "<excluded raw prompt/state/trace artifact path>",
+        "trace_sha256": "a8460362baf4ca29a838c82b70f44bab5da7e445fe30b2b90900ea71fe4ac2d2"
+      },
+      {
+        "cached_input_tokens": 12672,
+        "final_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F1/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0006.final.json",
+        "final_sha256": "1ea02733490643fb851ddb97e01b3dd180bd3c5b74480f5b1ff9b9bb53cc1007",
+        "input_tokens": 14993,
+        "last_event_type": "turn.completed",
+        "output_tokens": 72,
+        "trace_path": "<excluded raw prompt/state/trace artifact path>",
+        "trace_sha256": "93907e58618bdd50f5a33748fd463be96ff7e779d4c0f34627a750e0d623579d"
+      }
+    ],
+    "d6_d7_policy_replay": {
+      "additional_live_calls": 0,
+      "command": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "<workspace>/scripts/run_nyc_tlc_dispatch_benchmark_ev2_proxy_v3.py",
+        "--package",
+        "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/dispatch_formal_multimonth_v1",
+        "--case",
+        "EV_20240321_220000_q50",
+        "--fleet-id",
+        "F1",
+        "--methods",
+        "D6_agent_codex_context_optimizer",
+        "D7_agent_codex_capacity_shield_optimizer",
+        "--seed",
+        "0",
+        "--output-dir",
+        "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation",
+        "--codex-model",
+        "gpt-5.6-luna",
+        "--pickup-energy-proxy-mode",
+        "centroid_start_stop_ev2_v1",
+        "--compact-records",
+        "--codex-policy-replay",
+        "<workspace>/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F1/codex_context_policy_traces/D8_agent_codex_nn_capacity_shield_optimizer/context_policy_0001.final.json",
+        "--observed-fares-json",
+        "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/dispatch_ev2_proxy_v3_inputs/nyc_tlc_observed_fares_partial_from_audited_sidecar_v1.json"
+      ],
+      "note": "D6 and D7 replay the exact frozen shared D8 response; their result summaries repeat the same one-call usage, which is not charged again.",
+      "progress_finish_results": {
+        "D6_agent_codex_context_optimizer": {
+          "complete": true,
+          "exists": true,
+          "path": "<workspace>/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F1/D6_agent_codex_context_optimizer_seed_0.json",
+          "sha256": "ef69117ee989a3dae5a9a68aab801c320bd835aea004eed0bad02c39138dd1f7"
+        },
+        "D7_agent_codex_capacity_shield_optimizer": {
+          "complete": true,
+          "exists": true,
+          "path": "<workspace>/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F1/D7_agent_codex_capacity_shield_optimizer_seed_0.json",
+          "sha256": "8f92922faefc627a8ee2fd45c55db49df31a2f5673aefad31bf4532fc8faa140"
+        }
+      },
+      "progress_finish_status": "complete",
+      "progress_start_live_model_call_possible": false
+    },
+    "d8_shared_context_live_call": {
+      "cached_input_tokens": 0,
+      "final_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F1/codex_context_policy_traces/D8_agent_codex_nn_capacity_shield_optimizer/context_policy_0001.final.json",
+      "final_sha256": "f79077aa430f7cb6dde07459212961755995ee23448e912d83b90c8a95bef25e",
+      "input_tokens": 13455,
+      "last_event_type": "turn.completed",
+      "output_tokens": 162,
+      "prompt_path": "<excluded raw prompt/state/trace artifact path>",
+      "prompt_sha256": "6c8a0e364efa278dd71ae82988edb86eb20cde7d6815e1d187b1f6847928d343",
+      "trace_path": "<excluded raw prompt/state/trace artifact path>",
+      "trace_sha256": "f6c70f63d69820c0bec9950deb076cd366a57b385ec42bb1c815c06b9b6aefba"
+    },
+    "unique_cached_input_tokens": 63360,
+    "unique_call_count": 7,
+    "unique_input_tokens": 112598,
+    "unique_output_tokens": 1501,
+    "unique_total_tokens": 114099
+  }
+}

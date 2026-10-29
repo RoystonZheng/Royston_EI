@@ -1,0 +1,85 @@
+{
+  "snapshot_created_at_cst": "2026-10-29T13:49:50.180991+08:00",
+  "evidence_state": "official_partial_matrix_audit",
+  "official_audit": {
+    "path": "results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/audit_snapshots/ev2_segment_ledger_audit_20261029T1335CST.json",
+    "sha256": "5243ca5966e63b519722f1ff383455104cae99bec0555ccda4a5292c5b9b92cc",
+    "valid": 302,
+    "expected": 630,
+    "missing": 328,
+    "invalid": 0,
+    "all_complete": false
+  },
+  "input_fingerprint_audit": {
+    "sha256": "fee6920774776f58e8e71e4d8c9512e3b37831fff5364d4e492678bf75f683db",
+    "audited_result_count": 302,
+    "scenario_fingerprint_cell_mismatch_count": 0,
+    "input_hash_cell_mismatch_count": 0,
+    "all_present_results_match_frozen_inputs_and_contract": true
+  },
+  "method_result_counts": {
+    "D0_greedy": 90,
+    "D1_optimizer": 90,
+    "D2_agent_optimizer": 90,
+    "D5_pure_llm_direct": 7,
+    "D6_agent_codex_context_optimizer": 8,
+    "D7_agent_codex_capacity_shield_optimizer": 8,
+    "D8_agent_codex_nn_capacity_shield_optimizer": 9
+  },
+  "fully_complete_seven_method_cells": [
+    "EV_20240312_200000_q25/F1",
+    "EV_20240312_200000_q25/F2",
+    "EV_20240321_220000_q50/F1",
+    "EV_20240321_220000_q50/F2",
+    "EV_20240321_220000_q50/F4",
+    "EV_20240330_200500_q75/F1",
+    "EV_20240330_200500_q75/F2"
+  ],
+  "incremental_vs_T1326": {
+    "previous_valid": 301,
+    "current_valid": 302,
+    "added": 1,
+    "changed_existing": 0,
+    "removed": 0,
+    "new_result": {
+      "case_id": "EV_20240330_200500_q75",
+      "fleet_id": "F4",
+      "method": "D8_agent_codex_nn_capacity_shield_optimizer",
+      "sha256": "7a1045cf0a704728d44c8e0edcaa458cd403dae6e93e9dab7fdf1644cc53f41e",
+      "round_count": 531,
+      "segment_count": 106,
+      "llm_invocations": 1,
+      "llm_total_tokens": 13650
+    }
+  },
+  "v5_offline_sidecars": {
+    "deltas": {
+      "time_money_v5_segment_sidecar_20261029T1322CST_unique_delta_3": {
+        "new_source_result_count": 3,
+        "segment_row_count": 162,
+        "status": "completed_segment_economics_route_choice_blocked",
+        "manifest_sha256": "4f3656881e4a26137b596dc782d2aada89b083738c19bfc0d20d11ff9dc307b2"
+      },
+      "time_money_v5_segment_sidecar_20261029T1329CST_unique_delta_1": {
+        "new_source_result_count": 1,
+        "segment_row_count": 52,
+        "status": "completed_segment_economics_route_choice_blocked",
+        "manifest_sha256": "1f69b2f0e5d09b8c913569a5bb97ef0fdf9649d35fa6301bb06952149f43880e"
+      },
+      "time_money_v5_segment_sidecar_20261029T1335CST_unique_delta_1": {
+        "new_source_result_count": 1,
+        "segment_row_count": 106,
+        "status": "completed_segment_economics_route_choice_blocked",
+        "manifest_sha256": "53600f410c4f42b3b714967c577372a0ab729e5985a7e6c8ac4df64a271afe5d"
+      }
+    },
+    "latest_delta_audit_sha256": "6e9c7defd0a8c3301bf4d98b693ceab3c5f081a5c221ef6ca1940543b264bf24",
+    "latest_delta_audit_errors": [],
+    "route_choice_or_profit_scored": false,
+    "rankings": 0,
+    "new_model_calls": 0,
+    "sumo_reruns": 0,
+    "source_results_modified": false
+  },
+  "interpretation": "T1335 is a partial matrix snapshot; the new D8 F4 run is one method result and does not complete that seven-method cell or support overall ranking."
+}

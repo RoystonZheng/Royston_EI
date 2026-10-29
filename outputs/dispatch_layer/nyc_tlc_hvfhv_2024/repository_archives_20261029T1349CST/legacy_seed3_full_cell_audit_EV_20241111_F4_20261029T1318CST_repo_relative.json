@@ -1,0 +1,1086 @@
+{
+  "schema_version": "nyc_legacy_seed3_full_cell_audit_v1",
+  "created_at_local": "2026-10-29T13:19:38+08:00",
+  "isolation": "legacy dispatch-agent-v1 seed3; not EV2 v4 seed0",
+  "cell": {
+    "case_id": "EV_20241111_200000_q25",
+    "fleet_id": "F4",
+    "seed": 3,
+    "method_count": 7
+  },
+  "same_scenario_fingerprint_across_methods": true,
+  "same_input_hashes_across_methods": true,
+  "scenario_fingerprint_sha256": "2c8b6e86fbcb9a96a88fbfe50944823546275317804382ca6695b1153c377429",
+  "methods": {
+    "D0_greedy": {
+      "path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/D0_greedy_seed_3.json",
+      "sha256": "2de6c687e7a2cb89049f4f7572eec7ef751f5227062a5eb0f1d4dfe0a1b1ef0b",
+      "schema_version": "dispatch-agent-v1",
+      "partial_run": false,
+      "round_audit_count": 509,
+      "validator_status_counts": {
+        "valid": 509
+      },
+      "hard_constraint_error_count": 0,
+      "one_to_one_invalid_rounds": 0,
+      "scenario_fingerprint_sha256": "2c8b6e86fbcb9a96a88fbfe50944823546275317804382ca6695b1153c377429",
+      "input_hashes": {
+        "scenario_json": "27ec9035464298ee822abad699e401ce1c444629330be7f77f4ebd4908146e23",
+        "orders_json": "d2ce639d3c4008dbc9917ddf0ac2915d0ad624ae899e1828aecdf54b24cef9bf",
+        "zone_od_cost_matrix": "2be04d3d22099acbb5ee95b3d0e3aedf41fec63fe2177da7b21c12b2e8906d81"
+      },
+      "summary": {
+        "experiment_run_id": "run-seed-3",
+        "method_name": "D0_greedy",
+        "seed": 3,
+        "map_id": "nyc_tlc_zone_od_proxy_v1",
+        "vehicle_count": 48,
+        "order_count": 393,
+        "served_orders": 48,
+        "unserved_orders": 345,
+        "cancelled_orders": 0,
+        "service_rate": 0.12213740458015267,
+        "average_pickup_wait_sec": 116.32494819454412,
+        "p95_pickup_wait_sec": 291.3564256919457,
+        "max_pickup_wait_sec": 297.7704424181356,
+        "total_empty_distance_m": 27917.987566690583,
+        "total_energy_kwh": 28.16824901336527,
+        "total_dispatch_rounds": 509,
+        "total_llm_calls": 0,
+        "total_llm_input_tokens": null,
+        "total_llm_cached_input_tokens": null,
+        "total_llm_output_tokens": null,
+        "total_llm_tokens": null,
+        "llm_usage_status": "not_recorded",
+        "total_codex_cli_invocations": 0,
+        "total_api_cost": 0.0,
+        "total_api_cost_usd": null,
+        "total_codex_standard_credit_equivalent": null,
+        "total_api_equivalent_usd": null,
+        "codex_cost_estimate_status": "not_recorded",
+        "total_decision_time_ms": 190055.91829499995,
+        "optimizer_time_ms": 307.39915799996396,
+        "candidate_count_before_filter": 3235798,
+        "candidate_count_after_filter": 3235798,
+        "fallback_count": 0,
+        "commitment_violations": 0,
+        "status_counts": {
+          "completed": 48,
+          "unserved": 345
+        }
+      },
+      "audit_errors": []
+    },
+    "D1_optimizer": {
+      "path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/D1_optimizer_seed_3.json",
+      "sha256": "4b6aa15c62a350218e456172d91bc2cffac076e2efea79c8a0b57ec4407a329c",
+      "schema_version": "dispatch-agent-v1",
+      "partial_run": false,
+      "round_audit_count": 509,
+      "validator_status_counts": {
+        "valid": 509
+      },
+      "hard_constraint_error_count": 0,
+      "one_to_one_invalid_rounds": 0,
+      "scenario_fingerprint_sha256": "2c8b6e86fbcb9a96a88fbfe50944823546275317804382ca6695b1153c377429",
+      "input_hashes": {
+        "scenario_json": "27ec9035464298ee822abad699e401ce1c444629330be7f77f4ebd4908146e23",
+        "orders_json": "d2ce639d3c4008dbc9917ddf0ac2915d0ad624ae899e1828aecdf54b24cef9bf",
+        "zone_od_cost_matrix": "2be04d3d22099acbb5ee95b3d0e3aedf41fec63fe2177da7b21c12b2e8906d81"
+      },
+      "summary": {
+        "experiment_run_id": "run-seed-3",
+        "method_name": "D1_optimizer",
+        "seed": 3,
+        "map_id": "nyc_tlc_zone_od_proxy_v1",
+        "vehicle_count": 48,
+        "order_count": 393,
+        "served_orders": 48,
+        "unserved_orders": 345,
+        "cancelled_orders": 0,
+        "service_rate": 0.12213740458015267,
+        "average_pickup_wait_sec": 116.32494819454412,
+        "p95_pickup_wait_sec": 291.3564256919457,
+        "max_pickup_wait_sec": 297.7704424181356,
+        "total_empty_distance_m": 27917.987566690583,
+        "total_energy_kwh": 28.16824901336527,
+        "total_dispatch_rounds": 509,
+        "total_llm_calls": 0,
+        "total_llm_input_tokens": null,
+        "total_llm_cached_input_tokens": null,
+        "total_llm_output_tokens": null,
+        "total_llm_tokens": null,
+        "llm_usage_status": "not_recorded",
+        "total_codex_cli_invocations": 0,
+        "total_api_cost": 0.0,
+        "total_api_cost_usd": null,
+        "total_codex_standard_credit_equivalent": null,
+        "total_api_equivalent_usd": null,
+        "codex_cost_estimate_status": "not_recorded",
+        "total_decision_time_ms": 206392.49499100025,
+        "optimizer_time_ms": 316.5972959995429,
+        "candidate_count_before_filter": 3240646,
+        "candidate_count_after_filter": 3240646,
+        "fallback_count": 0,
+        "commitment_violations": 0,
+        "status_counts": {
+          "completed": 48,
+          "unserved": 345
+        }
+      },
+      "audit_errors": []
+    },
+    "D2_agent_optimizer": {
+      "path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/D2_agent_optimizer_seed_3.json",
+      "sha256": "338682caa6f6c355ca0c5f8c399d855fa4e162c9ed12245b0e1e2a71fab21d5d",
+      "schema_version": "dispatch-agent-v1",
+      "partial_run": false,
+      "round_audit_count": 509,
+      "validator_status_counts": {
+        "valid": 509
+      },
+      "hard_constraint_error_count": 0,
+      "one_to_one_invalid_rounds": 0,
+      "scenario_fingerprint_sha256": "2c8b6e86fbcb9a96a88fbfe50944823546275317804382ca6695b1153c377429",
+      "input_hashes": {
+        "scenario_json": "27ec9035464298ee822abad699e401ce1c444629330be7f77f4ebd4908146e23",
+        "orders_json": "d2ce639d3c4008dbc9917ddf0ac2915d0ad624ae899e1828aecdf54b24cef9bf",
+        "zone_od_cost_matrix": "2be04d3d22099acbb5ee95b3d0e3aedf41fec63fe2177da7b21c12b2e8906d81"
+      },
+      "summary": {
+        "experiment_run_id": "run-seed-3",
+        "method_name": "D2_agent_optimizer",
+        "seed": 3,
+        "map_id": "nyc_tlc_zone_od_proxy_v1",
+        "vehicle_count": 48,
+        "order_count": 393,
+        "served_orders": 48,
+        "unserved_orders": 345,
+        "cancelled_orders": 0,
+        "service_rate": 0.12213740458015267,
+        "average_pickup_wait_sec": 116.32494819454412,
+        "p95_pickup_wait_sec": 291.3564256919457,
+        "max_pickup_wait_sec": 297.7704424181356,
+        "total_empty_distance_m": 27917.987566690583,
+        "total_energy_kwh": 28.16824901336527,
+        "total_dispatch_rounds": 509,
+        "total_llm_calls": 0,
+        "total_llm_input_tokens": null,
+        "total_llm_cached_input_tokens": null,
+        "total_llm_output_tokens": null,
+        "total_llm_tokens": null,
+        "llm_usage_status": "not_recorded",
+        "total_codex_cli_invocations": 0,
+        "total_api_cost": 0.0,
+        "total_api_cost_usd": null,
+        "total_codex_standard_credit_equivalent": null,
+        "total_api_equivalent_usd": null,
+        "codex_cost_estimate_status": "not_recorded",
+        "total_decision_time_ms": 208513.16320499976,
+        "optimizer_time_ms": 8.147871000120821,
+        "candidate_count_before_filter": 3240646,
+        "candidate_count_after_filter": 318,
+        "fallback_count": 33,
+        "commitment_violations": 0,
+        "status_counts": {
+          "completed": 48,
+          "unserved": 345
+        }
+      },
+      "audit_errors": []
+    },
+    "D5_pure_llm_direct": {
+      "path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/D5_pure_llm_direct_seed_3.json",
+      "sha256": "f22f5f2dc87698193796f0e70aa401284d61acef9ef6025088fe671546d760f2",
+      "schema_version": "dispatch-agent-v1",
+      "partial_run": false,
+      "round_audit_count": 507,
+      "validator_status_counts": {
+        "valid": 507
+      },
+      "hard_constraint_error_count": 0,
+      "one_to_one_invalid_rounds": 0,
+      "scenario_fingerprint_sha256": "2c8b6e86fbcb9a96a88fbfe50944823546275317804382ca6695b1153c377429",
+      "input_hashes": {
+        "scenario_json": "27ec9035464298ee822abad699e401ce1c444629330be7f77f4ebd4908146e23",
+        "orders_json": "d2ce639d3c4008dbc9917ddf0ac2915d0ad624ae899e1828aecdf54b24cef9bf",
+        "zone_od_cost_matrix": "2be04d3d22099acbb5ee95b3d0e3aedf41fec63fe2177da7b21c12b2e8906d81"
+      },
+      "summary": {
+        "experiment_run_id": "run-seed-3",
+        "method_name": "D5_pure_llm_direct",
+        "seed": 3,
+        "map_id": "nyc_tlc_zone_od_proxy_v1",
+        "vehicle_count": 48,
+        "order_count": 393,
+        "served_orders": 48,
+        "unserved_orders": 345,
+        "cancelled_orders": 0,
+        "service_rate": 0.12213740458015267,
+        "average_pickup_wait_sec": 114.44097186766186,
+        "p95_pickup_wait_sec": 291.3564256919457,
+        "max_pickup_wait_sec": 297.7704424181356,
+        "total_empty_distance_m": 27460.83324823884,
+        "total_energy_kwh": 28.187518697607125,
+        "total_dispatch_rounds": 507,
+        "total_llm_calls": 34,
+        "total_llm_input_tokens": 664950,
+        "total_llm_cached_input_tokens": 405504,
+        "total_llm_output_tokens": 4327,
+        "total_llm_tokens": 669277,
+        "llm_usage_status": "available_best_effort",
+        "total_codex_cli_invocations": 34,
+        "total_api_cost": null,
+        "total_api_cost_usd": null,
+        "total_codex_standard_credit_equivalent": 1.6297920000000004,
+        "total_api_equivalent_usd": 0.06519168,
+        "codex_cost_estimate_status": "estimated_from_official_standard_rate_card",
+        "total_decision_time_ms": 526323.592135,
+        "optimizer_time_ms": 0.0,
+        "candidate_count_before_filter": 3223125,
+        "candidate_count_after_filter": 3223125,
+        "fallback_count": 0,
+        "commitment_violations": 0,
+        "status_counts": {
+          "completed": 48,
+          "unserved": 345
+        }
+      },
+      "audit_errors": []
+    },
+    "D6_agent_codex_context_optimizer": {
+      "path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/D6_agent_codex_context_optimizer_seed_3.json",
+      "sha256": "24078e1afc17bd2bdc49a5f9a402668c52d26e6544c0057808f46d6e75a25e5a",
+      "schema_version": "dispatch-agent-v1",
+      "partial_run": false,
+      "round_audit_count": 509,
+      "validator_status_counts": {
+        "valid": 509
+      },
+      "hard_constraint_error_count": 0,
+      "one_to_one_invalid_rounds": 0,
+      "scenario_fingerprint_sha256": "2c8b6e86fbcb9a96a88fbfe50944823546275317804382ca6695b1153c377429",
+      "input_hashes": {
+        "scenario_json": "27ec9035464298ee822abad699e401ce1c444629330be7f77f4ebd4908146e23",
+        "orders_json": "d2ce639d3c4008dbc9917ddf0ac2915d0ad624ae899e1828aecdf54b24cef9bf",
+        "zone_od_cost_matrix": "2be04d3d22099acbb5ee95b3d0e3aedf41fec63fe2177da7b21c12b2e8906d81"
+      },
+      "summary": {
+        "experiment_run_id": "run-seed-3",
+        "method_name": "D6_agent_codex_context_optimizer",
+        "seed": 3,
+        "map_id": "nyc_tlc_zone_od_proxy_v1",
+        "vehicle_count": 48,
+        "order_count": 393,
+        "served_orders": 48,
+        "unserved_orders": 345,
+        "cancelled_orders": 0,
+        "service_rate": 0.12213740458015267,
+        "average_pickup_wait_sec": 116.32494819454412,
+        "p95_pickup_wait_sec": 291.3564256919457,
+        "max_pickup_wait_sec": 297.7704424181356,
+        "total_empty_distance_m": 27917.987566690583,
+        "total_energy_kwh": 28.16824901336527,
+        "total_dispatch_rounds": 509,
+        "total_llm_calls": 1,
+        "total_llm_input_tokens": 13453,
+        "total_llm_cached_input_tokens": 0,
+        "total_llm_output_tokens": 158,
+        "total_llm_tokens": 13611,
+        "llm_usage_status": "available_best_effort",
+        "total_codex_cli_invocations": 1,
+        "total_api_cost": null,
+        "total_api_cost_usd": null,
+        "total_codex_standard_credit_equivalent": 0.072005,
+        "total_api_equivalent_usd": 0.0028802000000000003,
+        "codex_cost_estimate_status": "estimated_from_official_standard_rate_card",
+        "total_decision_time_ms": 208000.68695600014,
+        "optimizer_time_ms": 7.649096999664318,
+        "candidate_count_before_filter": 3240646,
+        "candidate_count_after_filter": 306,
+        "fallback_count": 33,
+        "commitment_violations": 0,
+        "status_counts": {
+          "completed": 48,
+          "unserved": 345
+        }
+      },
+      "audit_errors": []
+    },
+    "D7_agent_codex_capacity_shield_optimizer": {
+      "path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/D7_agent_codex_capacity_shield_optimizer_seed_3.json",
+      "sha256": "696b2d53e9e3e514141759b668fa854c1812001ae93e6ab54ac954a9378b3286",
+      "schema_version": "dispatch-agent-v1",
+      "partial_run": false,
+      "round_audit_count": 509,
+      "validator_status_counts": {
+        "valid": 509
+      },
+      "hard_constraint_error_count": 0,
+      "one_to_one_invalid_rounds": 0,
+      "scenario_fingerprint_sha256": "2c8b6e86fbcb9a96a88fbfe50944823546275317804382ca6695b1153c377429",
+      "input_hashes": {
+        "scenario_json": "27ec9035464298ee822abad699e401ce1c444629330be7f77f4ebd4908146e23",
+        "orders_json": "d2ce639d3c4008dbc9917ddf0ac2915d0ad624ae899e1828aecdf54b24cef9bf",
+        "zone_od_cost_matrix": "2be04d3d22099acbb5ee95b3d0e3aedf41fec63fe2177da7b21c12b2e8906d81"
+      },
+      "summary": {
+        "experiment_run_id": "run-seed-3",
+        "method_name": "D7_agent_codex_capacity_shield_optimizer",
+        "seed": 3,
+        "map_id": "nyc_tlc_zone_od_proxy_v1",
+        "vehicle_count": 48,
+        "order_count": 393,
+        "served_orders": 48,
+        "unserved_orders": 345,
+        "cancelled_orders": 0,
+        "service_rate": 0.12213740458015267,
+        "average_pickup_wait_sec": 116.32494819454412,
+        "p95_pickup_wait_sec": 291.3564256919457,
+        "max_pickup_wait_sec": 297.7704424181356,
+        "total_empty_distance_m": 27917.987566690583,
+        "total_energy_kwh": 28.16824901336527,
+        "total_dispatch_rounds": 509,
+        "total_llm_calls": 1,
+        "total_llm_input_tokens": 13453,
+        "total_llm_cached_input_tokens": 0,
+        "total_llm_output_tokens": 158,
+        "total_llm_tokens": 13611,
+        "llm_usage_status": "available_best_effort",
+        "total_codex_cli_invocations": 1,
+        "total_api_cost": null,
+        "total_api_cost_usd": null,
+        "total_codex_standard_credit_equivalent": 0.072005,
+        "total_api_equivalent_usd": 0.0028802000000000003,
+        "codex_cost_estimate_status": "estimated_from_official_standard_rate_card",
+        "total_decision_time_ms": 202057.00272099962,
+        "optimizer_time_ms": 6.723100999607823,
+        "candidate_count_before_filter": 3240646,
+        "candidate_count_after_filter": 306,
+        "fallback_count": 33,
+        "commitment_violations": 0,
+        "status_counts": {
+          "completed": 48,
+          "unserved": 345
+        }
+      },
+      "audit_errors": []
+    },
+    "D8_agent_codex_nn_capacity_shield_optimizer": {
+      "path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/D8_agent_codex_nn_capacity_shield_optimizer_seed_3.json",
+      "sha256": "8218f35dff48815537ce80611828f4f8cf66c258905b7c6e9a5074addbcff11f",
+      "schema_version": "dispatch-agent-v1",
+      "partial_run": false,
+      "round_audit_count": 507,
+      "validator_status_counts": {
+        "valid": 507
+      },
+      "hard_constraint_error_count": 0,
+      "one_to_one_invalid_rounds": 0,
+      "scenario_fingerprint_sha256": "2c8b6e86fbcb9a96a88fbfe50944823546275317804382ca6695b1153c377429",
+      "input_hashes": {
+        "scenario_json": "27ec9035464298ee822abad699e401ce1c444629330be7f77f4ebd4908146e23",
+        "orders_json": "d2ce639d3c4008dbc9917ddf0ac2915d0ad624ae899e1828aecdf54b24cef9bf",
+        "zone_od_cost_matrix": "2be04d3d22099acbb5ee95b3d0e3aedf41fec63fe2177da7b21c12b2e8906d81"
+      },
+      "summary": {
+        "experiment_run_id": "run-seed-3",
+        "method_name": "D8_agent_codex_nn_capacity_shield_optimizer",
+        "seed": 3,
+        "map_id": "nyc_tlc_zone_od_proxy_v1",
+        "vehicle_count": 48,
+        "order_count": 393,
+        "served_orders": 48,
+        "unserved_orders": 345,
+        "cancelled_orders": 0,
+        "service_rate": 0.12213740458015267,
+        "average_pickup_wait_sec": 114.42013853432852,
+        "p95_pickup_wait_sec": 291.3564256919457,
+        "max_pickup_wait_sec": 297.7704424181356,
+        "total_empty_distance_m": 27460.83324823884,
+        "total_energy_kwh": 28.330112914396267,
+        "total_dispatch_rounds": 507,
+        "total_llm_calls": 1,
+        "total_llm_input_tokens": 13453,
+        "total_llm_cached_input_tokens": 0,
+        "total_llm_output_tokens": 158,
+        "total_llm_tokens": 13611,
+        "llm_usage_status": "available_best_effort",
+        "total_codex_cli_invocations": 1,
+        "total_api_cost": null,
+        "total_api_cost_usd": null,
+        "total_codex_standard_credit_equivalent": 0.072005,
+        "total_api_equivalent_usd": 0.0028802000000000003,
+        "codex_cost_estimate_status": "estimated_from_official_standard_rate_card",
+        "total_decision_time_ms": 217067.81282699978,
+        "optimizer_time_ms": 7.138423999908383,
+        "candidate_count_before_filter": 3228103,
+        "candidate_count_after_filter": 269,
+        "fallback_count": 32,
+        "commitment_violations": 0,
+        "status_counts": {
+          "completed": 48,
+          "unserved": 345
+        }
+      },
+      "audit_errors": []
+    }
+  },
+  "unique_invocations": {
+    "live_trace_count": 35,
+    "d5_calls": 34,
+    "d8_calls": 1,
+    "d6_d7_additional_live_calls": 0,
+    "unique_call_count": 35,
+    "input_tokens": 678403,
+    "cached_input_tokens": 405504,
+    "output_tokens": 4485,
+    "total_tokens": 682888,
+    "codex_standard_credit_equivalent_estimate": 1.7017970000000004,
+    "api_equivalent_usd_estimate": 0.06807188,
+    "actual_account_billing": null,
+    "actual_account_billing_status": "not_reported_by_codex_cli",
+    "turn_completed": 35,
+    "turn_failed": 0,
+    "cli_error_events": 0,
+    "malformed_lines": 0,
+    "trace_inventory": [
+      {
+        "method": "D5_pure_llm_direct",
+        "trace_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0001.jsonl",
+        "trace_sha256": "6d8ccd443d3a81e37f556fc2492274a27b468ba858959e723f54f8ce0c837801",
+        "final_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0001.final.json",
+        "final_sha256": "9baeb1b7d31d6f4c6cd39b2dd9488a58d12a5279ed8aa219fd3d3bcd79a9148f",
+        "trace_event_types": [
+          "thread.started",
+          "turn.started",
+          "item.completed",
+          "item.completed",
+          "turn.completed"
+        ],
+        "input_tokens": 28048,
+        "cached_input_tokens": 12672,
+        "output_tokens": 216,
+        "retry_count": 0
+      },
+      {
+        "method": "D5_pure_llm_direct",
+        "trace_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0002.jsonl",
+        "trace_sha256": "4b4b06f2c45a787746c372de5f1f16d690946bc40aae85c2be5981bf3a64a076",
+        "final_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0002.final.json",
+        "final_sha256": "25a02fb3540b2d285ba9294263b1135605f68bd9e5bd80e792b2434d596b3eb6",
+        "trace_event_types": [
+          "thread.started",
+          "turn.started",
+          "item.completed",
+          "item.completed",
+          "turn.completed"
+        ],
+        "input_tokens": 26009,
+        "cached_input_tokens": 12672,
+        "output_tokens": 242,
+        "retry_count": 0
+      },
+      {
+        "method": "D5_pure_llm_direct",
+        "trace_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0003.jsonl",
+        "trace_sha256": "8509b08daaee7d3922a4a900827260cc09fcc70872dee2b0deca1b02ce8f911b",
+        "final_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0003.final.json",
+        "final_sha256": "3f42c04176719765202ea1df6343d8e8bea678c6c9a1cb519a7ef2afb5df4f9c",
+        "trace_event_types": [
+          "thread.started",
+          "turn.started",
+          "item.completed",
+          "item.completed",
+          "turn.completed"
+        ],
+        "input_tokens": 19386,
+        "cached_input_tokens": 12672,
+        "output_tokens": 91,
+        "retry_count": 0
+      },
+      {
+        "method": "D5_pure_llm_direct",
+        "trace_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0004.jsonl",
+        "trace_sha256": "f8bda28b046a5ab9785e3248bfd6e05a852df4e501d35a0fff71f7b911ac2f8e",
+        "final_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0004.final.json",
+        "final_sha256": "684d9a64c295f664f16878abd3d78878a2ca875710b7ef92401a16b7a7e77288",
+        "trace_event_types": [
+          "thread.started",
+          "turn.started",
+          "item.completed",
+          "item.completed",
+          "turn.completed"
+        ],
+        "input_tokens": 18482,
+        "cached_input_tokens": 0,
+        "output_tokens": 106,
+        "retry_count": 0
+      },
+      {
+        "method": "D5_pure_llm_direct",
+        "trace_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0005.jsonl",
+        "trace_sha256": "70d847fc532a3b3a731681aa008b10cfebacb3a24197a85fad11ad0077b2ca97",
+        "final_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0005.final.json",
+        "final_sha256": "f82a32eec1008922c411ed032e032080ff44696b0e92d2f1b7dded13c092a7f6",
+        "trace_event_types": [
+          "thread.started",
+          "turn.started",
+          "item.completed",
+          "item.completed",
+          "turn.completed"
+        ],
+        "input_tokens": 21354,
+        "cached_input_tokens": 0,
+        "output_tokens": 166,
+        "retry_count": 0
+      },
+      {
+        "method": "D5_pure_llm_direct",
+        "trace_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0006.jsonl",
+        "trace_sha256": "135dbb99f067d2204f7183bdfb141cd32de8a7ad3543fe538bb652e6a3c3d07a",
+        "final_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0006.final.json",
+        "final_sha256": "b49d1c0438f8db3bb04a336eb7bbcd23f55893de14c650267441b8efefb30ac1",
+        "trace_event_types": [
+          "thread.started",
+          "turn.started",
+          "item.completed",
+          "item.completed",
+          "turn.completed"
+        ],
+        "input_tokens": 22790,
+        "cached_input_tokens": 12672,
+        "output_tokens": 289,
+        "retry_count": 0
+      },
+      {
+        "method": "D5_pure_llm_direct",
+        "trace_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0007.jsonl",
+        "trace_sha256": "c5893fd811145a91aed076de1bb8b57cd1f3e61126c6bd1b391ce37beee83097",
+        "final_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0007.final.json",
+        "final_sha256": "79364fe97dfda417cde585302a8c96f06147bc53f910d309b359ebf6b0895c31",
+        "trace_event_types": [
+          "thread.started",
+          "turn.started",
+          "item.completed",
+          "item.completed",
+          "turn.completed"
+        ],
+        "input_tokens": 18435,
+        "cached_input_tokens": 12672,
+        "output_tokens": 55,
+        "retry_count": 0
+      },
+      {
+        "method": "D5_pure_llm_direct",
+        "trace_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0008.jsonl",
+        "trace_sha256": "98e9111e76242511c65e313e36ee2b8aa9de15be33988410180c22e0be10c4d8",
+        "final_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0008.final.json",
+        "final_sha256": "a082190cc5aafa43ecba175d188a22de1f674ae31b61f381f8d0f45eb2ec2694",
+        "trace_event_types": [
+          "thread.started",
+          "turn.started",
+          "item.completed",
+          "item.completed",
+          "turn.completed"
+        ],
+        "input_tokens": 17405,
+        "cached_input_tokens": 12672,
+        "output_tokens": 102,
+        "retry_count": 0
+      },
+      {
+        "method": "D5_pure_llm_direct",
+        "trace_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0009.jsonl",
+        "trace_sha256": "ba51475a25b9ad4fd35d43c649a3248f3065c1d9a9ddac64ffe054f05691f2c8",
+        "final_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0009.final.json",
+        "final_sha256": "bab9ce2dab2ac9378e8010a10a28b6798af6ca5431e5887bf35491ae1a71e1a2",
+        "trace_event_types": [
+          "thread.started",
+          "turn.started",
+          "item.completed",
+          "item.completed",
+          "turn.completed"
+        ],
+        "input_tokens": 17998,
+        "cached_input_tokens": 12672,
+        "output_tokens": 92,
+        "retry_count": 0
+      },
+      {
+        "method": "D5_pure_llm_direct",
+        "trace_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0010.jsonl",
+        "trace_sha256": "fd8013443e1f29ac6bfe92ab7ad6781686fef7362993232b87dc06a0d71e8fd4",
+        "final_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0010.final.json",
+        "final_sha256": "3a077ea1d885042361163e489849060751228b600e8bab734cceafac6d00d8fa",
+        "trace_event_types": [
+          "thread.started",
+          "turn.started",
+          "item.completed",
+          "item.completed",
+          "turn.completed"
+        ],
+        "input_tokens": 17876,
+        "cached_input_tokens": 12672,
+        "output_tokens": 84,
+        "retry_count": 0
+      },
+      {
+        "method": "D5_pure_llm_direct",
+        "trace_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0011.jsonl",
+        "trace_sha256": "fad75b63e73f9778459e9152acb40e6412be78af7091e27ecf4092a2e5a20da8",
+        "final_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0011.final.json",
+        "final_sha256": "d114329c9dc91253e94a2d3e5b505bd813831f599648b8a42c69ba7b33cec928",
+        "trace_event_types": [
+          "thread.started",
+          "turn.started",
+          "item.completed",
+          "item.completed",
+          "turn.completed"
+        ],
+        "input_tokens": 18054,
+        "cached_input_tokens": 12672,
+        "output_tokens": 94,
+        "retry_count": 0
+      },
+      {
+        "method": "D5_pure_llm_direct",
+        "trace_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0012.jsonl",
+        "trace_sha256": "1563322c40068cdc4908e67e81c7d8533373997769dd499fb5c3acae317aab7a",
+        "final_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0012.final.json",
+        "final_sha256": "dddcbf5d0ba0cbccae68836701257de34fdffac7cef7dc3efc9ee9e3eee62ac6",
+        "trace_event_types": [
+          "thread.started",
+          "turn.started",
+          "item.completed",
+          "item.completed",
+          "turn.completed"
+        ],
+        "input_tokens": 18365,
+        "cached_input_tokens": 12672,
+        "output_tokens": 174,
+        "retry_count": 0
+      },
+      {
+        "method": "D5_pure_llm_direct",
+        "trace_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0013.jsonl",
+        "trace_sha256": "7a3790a026376ece7204ad6aadd6db78ef276148dfd3613983bd2621da6e05ef",
+        "final_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0013.final.json",
+        "final_sha256": "92cfcb486c1007e9dbff87cdf3337865d0b3f334b1ca1803041ae07539c56a54",
+        "trace_event_types": [
+          "thread.started",
+          "turn.started",
+          "item.completed",
+          "item.completed",
+          "turn.completed"
+        ],
+        "input_tokens": 18830,
+        "cached_input_tokens": 12672,
+        "output_tokens": 147,
+        "retry_count": 0
+      },
+      {
+        "method": "D5_pure_llm_direct",
+        "trace_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0014.jsonl",
+        "trace_sha256": "ce520b77a837736bef462ce684b972884546196876586924467c6101cc8670aa",
+        "final_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0014.final.json",
+        "final_sha256": "140f59ec156c2e4b053502e410638c919792aa12582d77b09e837101b1c4ef00",
+        "trace_event_types": [
+          "thread.started",
+          "turn.started",
+          "item.completed",
+          "item.completed",
+          "turn.completed"
+        ],
+        "input_tokens": 18029,
+        "cached_input_tokens": 12672,
+        "output_tokens": 155,
+        "retry_count": 0
+      },
+      {
+        "method": "D5_pure_llm_direct",
+        "trace_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0015.jsonl",
+        "trace_sha256": "b8e56cbeffcd3388ca822b4678a570485dbfed924987424acbdfb297673baefa",
+        "final_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0015.final.json",
+        "final_sha256": "2e2e7bbc98028ccc2fe46bfabb79cc2c5b82a6e2cd1deb107af8e5525e5763e4",
+        "trace_event_types": [
+          "thread.started",
+          "turn.started",
+          "item.completed",
+          "item.completed",
+          "turn.completed"
+        ],
+        "input_tokens": 17480,
+        "cached_input_tokens": 12672,
+        "output_tokens": 184,
+        "retry_count": 0
+      },
+      {
+        "method": "D5_pure_llm_direct",
+        "trace_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0016.jsonl",
+        "trace_sha256": "d89753f5cce3ed14245e456539e1d03ecf71d6acbd8112ddc1a74c318f433f7c",
+        "final_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0016.final.json",
+        "final_sha256": "3c6d8e2e4d932e3ee5a9d3d45f58f7ef80d633b3f77b0fc2a92c96af094cb69d",
+        "trace_event_types": [
+          "thread.started",
+          "turn.started",
+          "item.completed",
+          "item.completed",
+          "turn.completed"
+        ],
+        "input_tokens": 18607,
+        "cached_input_tokens": 12672,
+        "output_tokens": 78,
+        "retry_count": 0
+      },
+      {
+        "method": "D5_pure_llm_direct",
+        "trace_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0017.jsonl",
+        "trace_sha256": "8275e0f301533c23aa9c1188130313867929068c566e0024a3e8ee09793b2251",
+        "final_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0017.final.json",
+        "final_sha256": "7df28bfd39314472732f412136103d117d4152ad612ac1dfcedda30be632550b",
+        "trace_event_types": [
+          "thread.started",
+          "turn.started",
+          "item.completed",
+          "item.completed",
+          "turn.completed"
+        ],
+        "input_tokens": 18949,
+        "cached_input_tokens": 12672,
+        "output_tokens": 91,
+        "retry_count": 0
+      },
+      {
+        "method": "D5_pure_llm_direct",
+        "trace_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0018.jsonl",
+        "trace_sha256": "d9b2a2bf02a23b86343e6ecdae670db5084b1e6939006cd16ca21621f49b4570",
+        "final_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0018.final.json",
+        "final_sha256": "a8a7830612960b6027ae47ff2e532191d3aa352e841595bbf68d47be0c787d0f",
+        "trace_event_types": [
+          "thread.started",
+          "turn.started",
+          "item.completed",
+          "item.completed",
+          "turn.completed"
+        ],
+        "input_tokens": 18767,
+        "cached_input_tokens": 12672,
+        "output_tokens": 55,
+        "retry_count": 0
+      },
+      {
+        "method": "D5_pure_llm_direct",
+        "trace_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0019.jsonl",
+        "trace_sha256": "c31bd3f3cacd5a15e61cbe51535fa11b55a8a658a5381763d3c3d6265d883c0a",
+        "final_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0019.final.json",
+        "final_sha256": "c0b8a5eca930d518824236782946b2943f1fa0e7cd2f6231fe734f61f38fcd4c",
+        "trace_event_types": [
+          "thread.started",
+          "turn.started",
+          "item.completed",
+          "item.completed",
+          "turn.completed"
+        ],
+        "input_tokens": 19283,
+        "cached_input_tokens": 12672,
+        "output_tokens": 122,
+        "retry_count": 0
+      },
+      {
+        "method": "D5_pure_llm_direct",
+        "trace_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0020.jsonl",
+        "trace_sha256": "9925c668c328ce6b232733e148cee389158488de4869a5b630b970c733c8439b",
+        "final_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0020.final.json",
+        "final_sha256": "e885d598284179e1d9d58b1f282b4aa17dc6a3106728df5481a2fa6e2bc60399",
+        "trace_event_types": [
+          "thread.started",
+          "turn.started",
+          "item.completed",
+          "item.completed",
+          "turn.completed"
+        ],
+        "input_tokens": 19432,
+        "cached_input_tokens": 12672,
+        "output_tokens": 226,
+        "retry_count": 0
+      },
+      {
+        "method": "D5_pure_llm_direct",
+        "trace_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0021.jsonl",
+        "trace_sha256": "a08239b08e1dc0830f3aeac9363a6c47f0a423490bc3f9eac0890d7f42a127ad",
+        "final_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0021.final.json",
+        "final_sha256": "09314d31ab7ce1f98336492ed0349d58e9babddc4873f0db2e58c9b37a9c57d7",
+        "trace_event_types": [
+          "thread.started",
+          "turn.started",
+          "item.completed",
+          "item.completed",
+          "turn.completed"
+        ],
+        "input_tokens": 18364,
+        "cached_input_tokens": 12672,
+        "output_tokens": 99,
+        "retry_count": 0
+      },
+      {
+        "method": "D5_pure_llm_direct",
+        "trace_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0022.jsonl",
+        "trace_sha256": "dcd8076cb3cd1b216e47757ff616245e3b40022b750fd29a26aaedd546211822",
+        "final_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0022.final.json",
+        "final_sha256": "cb1cde071e9227a7602281bcb0f66139d47a602df451d80c7811fa2d80f46eae",
+        "trace_event_types": [
+          "thread.started",
+          "turn.started",
+          "item.completed",
+          "item.completed",
+          "turn.completed"
+        ],
+        "input_tokens": 18608,
+        "cached_input_tokens": 12672,
+        "output_tokens": 105,
+        "retry_count": 0
+      },
+      {
+        "method": "D5_pure_llm_direct",
+        "trace_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0023.jsonl",
+        "trace_sha256": "9ac4fc316e8915acb7c0a4704ff58c1b8b2bb5ea32f7ad5dee3e18403d83272b",
+        "final_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0023.final.json",
+        "final_sha256": "52a59ff1f1813dfadd3de865ee3b20b6be87c3fdbad46ee8ecfbb99505c2cc09",
+        "trace_event_types": [
+          "thread.started",
+          "turn.started",
+          "item.completed",
+          "item.completed",
+          "turn.completed"
+        ],
+        "input_tokens": 20759,
+        "cached_input_tokens": 12672,
+        "output_tokens": 283,
+        "retry_count": 0
+      },
+      {
+        "method": "D5_pure_llm_direct",
+        "trace_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0024.jsonl",
+        "trace_sha256": "7387ee227cc9b400f7cef7885749e16b911a4474a058862fa126c018ea40f052",
+        "final_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0024.final.json",
+        "final_sha256": "1f62e045e7021bccf3f6c527913acfdfa6ffe2fbe5212727b41a36fb759b1352",
+        "trace_event_types": [
+          "thread.started",
+          "turn.started",
+          "item.completed",
+          "item.completed",
+          "turn.completed"
+        ],
+        "input_tokens": 18370,
+        "cached_input_tokens": 12672,
+        "output_tokens": 84,
+        "retry_count": 0
+      },
+      {
+        "method": "D5_pure_llm_direct",
+        "trace_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0025.jsonl",
+        "trace_sha256": "bcdb4a8bb8a695c892cb4cec7bec9e700d257ee60bdf4229d5f42ad0d3150d30",
+        "final_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0025.final.json",
+        "final_sha256": "50e99c51ecc47bbf041694bf77b97b28cf1cdc51532f94fc444a392cbea551e7",
+        "trace_event_types": [
+          "thread.started",
+          "turn.started",
+          "item.completed",
+          "item.completed",
+          "turn.completed"
+        ],
+        "input_tokens": 19106,
+        "cached_input_tokens": 12672,
+        "output_tokens": 107,
+        "retry_count": 0
+      },
+      {
+        "method": "D5_pure_llm_direct",
+        "trace_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0026.jsonl",
+        "trace_sha256": "0e07bee901ef1c5081ce4e681bd9473a0897e6e795e421fc621548472d840c6e",
+        "final_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0026.final.json",
+        "final_sha256": "aa45890a6fbf750eec7c9abd30066eb5c678d9d7218e1c55e760b656c2ff48be",
+        "trace_event_types": [
+          "thread.started",
+          "turn.started",
+          "item.completed",
+          "item.completed",
+          "turn.completed"
+        ],
+        "input_tokens": 18482,
+        "cached_input_tokens": 12672,
+        "output_tokens": 72,
+        "retry_count": 0
+      },
+      {
+        "method": "D5_pure_llm_direct",
+        "trace_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0027.jsonl",
+        "trace_sha256": "74e969ce64a71a0e62382de04180745adec610afadcae21f70813de58ac1d327",
+        "final_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0027.final.json",
+        "final_sha256": "16fe03c289d0d63ca2197ce94bdb3f040a5fa4dae4dda170924b45bb73b0bac7",
+        "trace_event_types": [
+          "thread.started",
+          "turn.started",
+          "item.completed",
+          "item.completed",
+          "turn.completed"
+        ],
+        "input_tokens": 19158,
+        "cached_input_tokens": 12672,
+        "output_tokens": 125,
+        "retry_count": 0
+      },
+      {
+        "method": "D5_pure_llm_direct",
+        "trace_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0028.jsonl",
+        "trace_sha256": "daf462f6ba6b6b05a00f9954c1be64da9936fc35854f35ab4504e2d4fad97f38",
+        "final_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0028.final.json",
+        "final_sha256": "70d1c5ab645ef8b5d3bdc95fd25bbb50278a37a2a3ddf51a8ebed2c906d6800b",
+        "trace_event_types": [
+          "thread.started",
+          "turn.started",
+          "item.completed",
+          "item.completed",
+          "turn.completed"
+        ],
+        "input_tokens": 19009,
+        "cached_input_tokens": 12672,
+        "output_tokens": 55,
+        "retry_count": 0
+      },
+      {
+        "method": "D5_pure_llm_direct",
+        "trace_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0029.jsonl",
+        "trace_sha256": "065756a02ce61140b0e0657c637ff606bc533722b7a5d7e6869608bb887212fb",
+        "final_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0029.final.json",
+        "final_sha256": "bcff1e60bcac6e925246769ba01707179aada5faa7982f086ba2cfdcf62ffbda",
+        "trace_event_types": [
+          "thread.started",
+          "turn.started",
+          "item.completed",
+          "item.completed",
+          "turn.completed"
+        ],
+        "input_tokens": 19800,
+        "cached_input_tokens": 12672,
+        "output_tokens": 106,
+        "retry_count": 0
+      },
+      {
+        "method": "D5_pure_llm_direct",
+        "trace_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0030.jsonl",
+        "trace_sha256": "cc7b1ce367ac4933ba42a873a980c6c03f4b346b2f2ae41dbcb8a72505dba025",
+        "final_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0030.final.json",
+        "final_sha256": "f7a8c01ded36b5ad7658c3348ef7b7f672eb168fc93ea46a1e0daded6e7c4ca9",
+        "trace_event_types": [
+          "thread.started",
+          "turn.started",
+          "item.completed",
+          "item.completed",
+          "turn.completed"
+        ],
+        "input_tokens": 19480,
+        "cached_input_tokens": 12672,
+        "output_tokens": 55,
+        "retry_count": 0
+      },
+      {
+        "method": "D5_pure_llm_direct",
+        "trace_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0031.jsonl",
+        "trace_sha256": "4f78059dcd5d76d6f448a1a88939d4d08e66480e6e8a7ab45de441d1429fb4e5",
+        "final_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0031.final.json",
+        "final_sha256": "0766a4b7e46584856e42992f4a23542f39f069470d074314693695f507e1c9ff",
+        "trace_event_types": [
+          "thread.started",
+          "turn.started",
+          "item.completed",
+          "item.completed",
+          "turn.completed"
+        ],
+        "input_tokens": 19599,
+        "cached_input_tokens": 12672,
+        "output_tokens": 189,
+        "retry_count": 0
+      },
+      {
+        "method": "D5_pure_llm_direct",
+        "trace_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0032.jsonl",
+        "trace_sha256": "8f95084d9b9459e2463d44516366e8ee0a58054e3eb5b7763cd822e504413288",
+        "final_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0032.final.json",
+        "final_sha256": "cf74356fb813c0b46c9bf090f04ae577d4eaf361790d4c52975f7848ba865c2a",
+        "trace_event_types": [
+          "thread.started",
+          "turn.started",
+          "item.completed",
+          "item.completed",
+          "turn.completed"
+        ],
+        "input_tokens": 19898,
+        "cached_input_tokens": 12672,
+        "output_tokens": 55,
+        "retry_count": 0
+      },
+      {
+        "method": "D5_pure_llm_direct",
+        "trace_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0033.jsonl",
+        "trace_sha256": "3656a8064d3c2af470298f8c16dc30cee913c58e2eaf5da00e838cd7406bead5",
+        "final_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0033.final.json",
+        "final_sha256": "597a45300855de4201f44ffdc120c7fbe14862e41c56b828d6ef823eebcac1b0",
+        "trace_event_types": [
+          "thread.started",
+          "turn.started",
+          "item.completed",
+          "item.completed",
+          "turn.completed"
+        ],
+        "input_tokens": 19992,
+        "cached_input_tokens": 12672,
+        "output_tokens": 105,
+        "retry_count": 0
+      },
+      {
+        "method": "D5_pure_llm_direct",
+        "trace_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0034.jsonl",
+        "trace_sha256": "f878d95c989a17d10ee1523530349c13c7a62d45694d987cb991e3e7842fa8e5",
+        "final_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0034.final.json",
+        "final_sha256": "db6bb509f6d35448d4d774d6fb84382efe19d173f01e16320c954bb39f6c7333",
+        "trace_event_types": [
+          "thread.started",
+          "turn.started",
+          "item.completed",
+          "item.completed",
+          "turn.completed"
+        ],
+        "input_tokens": 20746,
+        "cached_input_tokens": 12672,
+        "output_tokens": 118,
+        "retry_count": 0
+      },
+      {
+        "method": "D8_agent_codex_nn_capacity_shield_optimizer",
+        "trace_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_context_policy_traces/D8_agent_codex_nn_capacity_shield_optimizer/context_policy_0001.jsonl",
+        "trace_sha256": "96c13b8a545b6aa3b017db8619a6261b191db8666888ef6a6e79d243451c0add",
+        "final_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241111_200000_q25/F4/codex_context_policy_traces/D8_agent_codex_nn_capacity_shield_optimizer/context_policy_0001.final.json",
+        "final_sha256": "6c699990d6181ab789b813d30999100a5cc051d7066c30f45e5197bb1668741f",
+        "trace_event_types": [
+          "thread.started",
+          "turn.started",
+          "item.completed",
+          "item.completed",
+          "turn.completed"
+        ],
+        "input_tokens": 13453,
+        "cached_input_tokens": 0,
+        "output_tokens": 158,
+        "retry_count": 0
+      }
+    ]
+  },
+  "audit_errors": [],
+  "limits": [
+    "One complete matched legacy cell under dispatch-agent-v1, separate from EV2 v4 seed0.",
+    "NYC order mapping remains zone-level OD proxy, not street routing.",
+    "Single-cell descriptive metrics do not establish a matrix-wide ranking."
+  ]
+}

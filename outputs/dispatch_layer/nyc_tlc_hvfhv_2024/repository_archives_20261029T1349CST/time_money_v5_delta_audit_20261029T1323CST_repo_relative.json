@@ -1,0 +1,40 @@
+{
+  "schema_version": "nyc_tlc_ev2_time_money_v5_delta_formula_audit_v1",
+  "source_audit_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/audit_snapshots/ev2_segment_ledger_audit_20261029T1320CST.json",
+  "source_audit_sha256": "6f21bf1315a915cc53d2ea0026d124576ca8cf3c8a76c71f380d6a46c0745e3f",
+  "fingerprint_audit_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/audit_snapshots/ev2_input_fingerprint_audit_20261029T1321CST.json",
+  "fingerprint_audit_sha256": "1c173fca9b788dbf23238abd7f3e9e805c03023ff92b1125e5d85b1eea817b72",
+  "prior_coverage_manifest_sha256": "2be2a07edc6e52fcfcd9fdaded2f0d1ce26b5cd4543b790366e49376002e2e4a",
+  "sidecar_manifest_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/time_money_v5_segment_sidecar_20261029T1322CST_unique_delta_3/manifest.json",
+  "sidecar_manifest_sha256": "4f3656881e4a26137b596dc782d2aada89b083738c19bfc0d20d11ff9dc307b2",
+  "cell": "EV_20240330_200500_q75/F2/seed0",
+  "new_sources": 3,
+  "segment_rows": 162,
+  "segment_types": {
+    "deadhead": 81,
+    "passenger": 81
+  },
+  "complete_energy_segments": 162,
+  "max_abs_billable_energy_formula_delta_kwh": 0.0,
+  "source_hashes_match_official_audit": true,
+  "signed_energy_match": true,
+  "passenger_fare_preserved_once": true,
+  "deadhead_revenue_zero": true,
+  "method_cost_accounting": "method-level once per run",
+  "electricity_costs_null_without_frozen_tariff": true,
+  "profitability_or_route_choice_scored": false,
+  "missing_inputs": [
+    "scenario-specific electricity tariff",
+    "complete hash-audited observed fare crosswalk",
+    "frozen method-level compute-cost rate",
+    "complete shared feasible route candidate pool"
+  ],
+  "rankings": 0,
+  "new_model_calls": 0,
+  "sumo_reruns": 0,
+  "source_results_modified": false,
+  "coverage_index_manifest_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/time_money_v5_source_coverage_index_20261029T1323CST_300/manifest.json",
+  "coverage_index_source_count": 300,
+  "coverage_index_run_jsonl_sha256": "f0cf096a081d8d74bd9ca4f7a2bce90f5c4e3f8eeab61ca78b9d267bb2c32844",
+  "audit_errors": []
+}

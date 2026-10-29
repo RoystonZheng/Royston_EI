@@ -1,0 +1,181 @@
+{
+  "batch_manifest_sha256_at_scan": "09ad39a65688f2282f74f155f57d31ecfc1fe857023b0be363d5e190605f4cc3",
+  "batch_root": "<workspace>/outputs/route_layer/r4_formal_parent_snapshot_20261029T1300CST",
+  "created_at_utc": "2026-10-29T04:56:19.831207+00:00",
+  "energy_model": {
+    "equations": {
+      "negative_wheel_power": "min(-wheel_power * regenerative_efficiency, regenerative_power_cap)",
+      "net_battery_energy": "propulsion_draw - regenerated_energy + auxiliary_energy",
+      "positive_wheel_power": "wheel_power / propulsion_efficiency",
+      "wheel_force": "(m + rotating_mass)*acceleration + 0.5*rho*Cd*A*v^2 + Crr*m*g*cos(slope) + m*g*sin(slope)"
+    },
+    "model_version": "ev_longitudinal_v2",
+    "profile": {
+      "air_density_kg_m3": 1.225,
+      "auxiliary_power_w": 800.0,
+      "curb_mass_kg": 1900.0,
+      "drag_coefficient": 0.26,
+      "frontal_area_m2": 2.35,
+      "gravity_mps2": 9.80665,
+      "max_acceleration_mps2": 1.2,
+      "max_deceleration_mps2": 2.0,
+      "model_version": "ev_longitudinal_v2",
+      "passenger_load_kg": 75.0,
+      "profile_id": "generic_reference_ev_v1",
+      "propulsion_efficiency": 0.9,
+      "regenerative_efficiency": 0.65,
+      "regenerative_power_cap_w": 50000.0,
+      "rolling_resistance_coefficient": 0.009,
+      "rotating_mass_kg": 50.0
+    },
+    "profile_id": "generic_reference_ev_v1",
+    "profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee"
+  },
+  "error_count": 0,
+  "errors": [],
+  "frozen_sample_denominator_changed": false,
+  "model_calls": 0,
+  "previous_sidecar_manifests": [
+    {
+      "path": "<r4_app_support>/ev2_payload_phase_sidecars_20261027_v1/manifest.json",
+      "sha256": "d12b5586421f90b3269d0131f3f11531c9fcf193864cc00f615fab1d07e4332f"
+    },
+    {
+      "path": "<r4_app_support>/ev2_payload_phase_sidecars_20261027_v10/manifest.json",
+      "sha256": "1cf3ed2f46ea9bc1b5360ade7343ddd5521aab1303b1384ea133eed4cf2eaeb9"
+    },
+    {
+      "path": "<r4_app_support>/ev2_payload_phase_sidecars_20261027_v11/manifest.json",
+      "sha256": "a88a780ea0a865b86b395e5002c1a7b032d76d2e8cff5e9240c52fd5e4d8c770"
+    },
+    {
+      "path": "<r4_app_support>/ev2_payload_phase_sidecars_20261027_v12/manifest.json",
+      "sha256": "733358e7fbee9ee20f95a1c25ce107b030551a3f742cef2519a0735a10122683"
+    },
+    {
+      "path": "<r4_app_support>/ev2_payload_phase_sidecars_20261027_v2/manifest.json",
+      "sha256": "ffe07e3f22d45e3b204d231e9311f41ed66c5a560b34538ba2f3354fe256c854"
+    },
+    {
+      "path": "<r4_app_support>/ev2_payload_phase_sidecars_20261027_v3/manifest.json",
+      "sha256": "865585e14e83084f57853e5e6e7b04617720cb233644035103a426e1bb7afaf2"
+    },
+    {
+      "path": "<r4_app_support>/ev2_payload_phase_sidecars_20261027_v4/manifest.json",
+      "sha256": "6af25bdd0b69e412f4706c16a5602e5fa0370d551d5ce93ccabb0315e2986c70"
+    },
+    {
+      "path": "<r4_app_support>/ev2_payload_phase_sidecars_20261027_v5/manifest.json",
+      "sha256": "a81eb78ccfad870ae87bf693165532ec98fa81b3f6b12c29d425dd9fbf35300a"
+    },
+    {
+      "path": "<r4_app_support>/ev2_payload_phase_sidecars_20261027_v6/manifest.json",
+      "sha256": "3f7c260be633b45ded7c8675f5458e04a726f69bef6f937afc1b2aecb9e5f101"
+    },
+    {
+      "path": "<r4_app_support>/ev2_payload_phase_sidecars_20261027_v7/manifest.json",
+      "sha256": "0b9939efddb4c0a435f03e666e404e6fd2587bd798a0d03062fc824ce1986968"
+    },
+    {
+      "path": "<r4_app_support>/ev2_payload_phase_sidecars_20261027_v8/manifest.json",
+      "sha256": "1c37dcbe19f0959077f7e040a63ecb6d27e54826cc6914875edab284dbbf6368"
+    },
+    {
+      "path": "<r4_app_support>/ev2_payload_phase_sidecars_20261027_v9/manifest.json",
+      "sha256": "973b2eb7b40d1b71144106b3b23dcd97effbba7a9304ca86cc603ebd9daab5b9"
+    },
+    {
+      "path": "<r4_app_support>/ev2_payload_phase_sidecars_20261028_v13/manifest.json",
+      "sha256": "439375fc2ae53a791bb83c1cf3102012e201493ff81a31e640ba95b20d2a3b03"
+    },
+    {
+      "path": "<r4_app_support>/ev2_payload_phase_sidecars_20261028_v14/manifest.json",
+      "sha256": "f48bcb7f398f77358f0af5a91fbf6fd2dfbbdc85dce0bb570cf2b3b01880c88c"
+    },
+    {
+      "path": "<r4_app_support>/ev2_payload_phase_sidecars_20261028_v15/manifest.json",
+      "sha256": "80f3d20544d96e3998fed36d2f51f37ebe4137b32a418242665d633533f8961f"
+    },
+    {
+      "path": "<r4_app_support>/ev2_payload_phase_sidecars_20261028_v16/manifest.json",
+      "sha256": "2afacfdfbbe0a8292ac751265e3ae1ebbebf8d87f3e7ca578cfd38c9d912cafa"
+    },
+    {
+      "path": "<r4_app_support>/ev2_payload_phase_sidecars_20261028_v17_worker00_incremental/manifest.json",
+      "sha256": "e233e5074521b31e54e8df11f0cfde12b1f9967ed9426d123d9054dd32dae941"
+    },
+    {
+      "path": "<r4_app_support>/ev2_payload_phase_sidecars_20261028_v18_worker00_incremental/manifest.json",
+      "sha256": "2a33cab6ad0bb4f0020e86d01ed09caa3f88b759ffc86bdeccffc97be690fc27"
+    },
+    {
+      "path": "<r4_app_support>/ev2_payload_phase_sidecars_20261028_v19_worker00_incremental/manifest.json",
+      "sha256": "e626fba11af144ed88729c713b095bfb5a3f3420164bc71431f0cf6b27cdc17f"
+    },
+    {
+      "path": "<r4_app_support>/ev2_payload_phase_sidecars_20261028_v20_worker01/manifest.json",
+      "sha256": "cf069ec0235ebc25338a412bb7fca13fcba33500112492d84f0c89073525caed"
+    },
+    {
+      "path": "<r4_app_support>/ev2_payload_phase_sidecars_20261028_v21_worker01/manifest.json",
+      "sha256": "cdcc800e59479ab23daf77c9eb6afe0a888c8570d8aa8bc8115b513b22d6be12"
+    },
+    {
+      "path": "<r4_app_support>/ev2_payload_phase_sidecars_20261028_v22/manifest.json",
+      "sha256": "a50ccdab9ca48786e6af7420c8960bc73825c6ef7b2bdd7a2c033c7121f85f27"
+    },
+    {
+      "path": "<r4_app_support>/ev2_payload_phase_sidecars_20261029_v13/manifest.json",
+      "sha256": "ac98590a0fbeb8a9a81149f73d6df32a662724416c8fe6b43da5edb074fdf6e8"
+    },
+    {
+      "path": "<r4_app_support>/ev2_payload_phase_sidecars_20261029_v14/manifest.json",
+      "sha256": "2942a1735959c613596f636d77b8b00e392317050a14a9b6822771154823cf8b"
+    },
+    {
+      "path": "<r4_app_support>/ev2_payload_phase_sidecars_20261029_v15/manifest.json",
+      "sha256": "ecbe07ee61341d6143daeae7dd8366f23f9220fdf32d7ce745f5737c301593df"
+    },
+    {
+      "path": "<r4_app_support>/ev2_payload_phase_sidecars_20261029_v16/manifest.json",
+      "sha256": "939bf008f2aa65cdc7df64a65187744850e0432f7ff10c494729e324f66ba624"
+    },
+    {
+      "path": "<r4_app_support>/ev2_payload_phase_sidecars_20261029_v17/manifest.json",
+      "sha256": "9a919669b6340bdc0c05e754c53c0df9db17b4e5840a30de1a7dcadb931edc85"
+    },
+    {
+      "path": "<workspace>/outputs/route_layer/r4_ev2_incremental_20261029T1151CST/manifest.json",
+      "sha256": "977d7a61ea4569c1fc7fb33a37023f2ea578dcf85d94fac695ebdef4f3dfd299"
+    },
+    {
+      "path": "<workspace>/outputs/route_layer/r4_ev2_incremental_20261029T1214CST/manifest.json",
+      "sha256": "400a4a549b8b19bc6884a52e6d3e2670b6803009d9356426e540ad5021b11d18"
+    },
+    {
+      "path": "<workspace>/outputs/route_layer/r4_ev2_incremental_20261029T1241CST/manifest.json",
+      "sha256": "239af78ef7cad39571c031bc077f87a4820ebcc869f486ca99583bc785259a67"
+    },
+    {
+      "path": "<workspace>/outputs/route_layer/r4_ev2_incremental_20261029T1250CST/manifest.json",
+      "sha256": "0d784f81a4eafd015185599febbbcdabe07cd835e9fefa4774cdf227283a1e2e"
+    }
+  ],
+  "recalculated_route_count": 1,
+  "route_algorithm_rerun": false,
+  "route_complete_source_run_count_scanned": 1,
+  "runs": [
+    {
+      "output": "<workspace>/outputs/route_layer/r4_ev2_incremental_20261029T1300CST/seed_3/task-0003-0001/run_000.json",
+      "output_sha256": "4e5c7953058a59b937fd57160754711b644351dfe89e14c49605403a52550b3f",
+      "sample_group": "orders",
+      "seed": 3,
+      "source_run_dir": "<r4_app_support>/parallel_workers/worker_02/tasks/seed_3/task-0003-0001/run_000",
+      "source_state_sha256": "f90bd53cffe2018f96af7f9da28563f1a6f1dfb92983b8b57a112639b648249e",
+      "status": "offline_recalculated_completed_route",
+      "task_id": "task-0003-0001"
+    }
+  ],
+  "schema_version": "r4_formal_batch_ev2_payload_phase_sidecar_v1",
+  "status": "passed"
+}

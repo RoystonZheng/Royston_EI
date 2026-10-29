@@ -1,0 +1,672 @@
+{
+  "schema_version": "nyc_tlc_ev2_full_cell_audit_v1",
+  "audited_at_local": "2026-10-29T13:09:06.152964+08:00",
+  "case_id": "EV_20240321_220000_q50",
+  "fleet_id": "F4",
+  "seed": 0,
+  "classification": "complete formal EV2 v4 seven-method cell; descriptive paired evidence only",
+  "source_fullmatrix_audit_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/audit_snapshots/ev2_fullmatrix_audit_20261029T1305CST.json",
+  "source_fullmatrix_audit_sha256": "d8e9394e359c682eb757c91267fa815e913b843e53145dc8fb9984ed421012f2",
+  "source_fingerprint_audit_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/audit_snapshots/ev2_input_fingerprint_audit_20261029T1305CST.json",
+  "source_fingerprint_audit_sha256": "88c4e5b712444b759c71ecc995f3c0dcd1a57dfb8133d72c450368d38964449a",
+  "scenario_fingerprint_sha256": "af87cc977c51920fc8808757c11dfaaab17d8f4d59ea57599a53ec735cc9eb43",
+  "shared_input_hashes": true,
+  "expected_methods": [
+    "D0_greedy",
+    "D1_optimizer",
+    "D2_agent_optimizer",
+    "D5_pure_llm_direct",
+    "D6_agent_codex_context_optimizer",
+    "D7_agent_codex_capacity_shield_optimizer",
+    "D8_agent_codex_nn_capacity_shield_optimizer"
+  ],
+  "present_method_count": 7,
+  "all_complete_seed_matched_and_valid": true,
+  "all_validators_pass": true,
+  "all_hard_constraint_errors_zero": true,
+  "all_one_to_one_failures_zero": true,
+  "all_commitment_violations_zero": true,
+  "profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee",
+  "unique_invocations": {
+    "unique_invocation_count": 29,
+    "D5_pure_llm_direct": {
+      "turn_started": 28,
+      "turn_completed": 28,
+      "turn_failed": 0,
+      "usage_turns": 28,
+      "input_tokens": 645710,
+      "cached_input_tokens": 316800,
+      "output_tokens": 4180,
+      "malformed_lines": 0,
+      "trace_sha256": [
+        {
+          "path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0001.jsonl",
+          "sha256": "a09eb70f13c8974958814a1c780e29499679e0196a21182daeac9d541be22bae"
+        },
+        {
+          "path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0002.jsonl",
+          "sha256": "82390cea7131695bf24e553fbadf8e5141811b05ac0910fc4d85f5f1f23215e3"
+        },
+        {
+          "path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0003.jsonl",
+          "sha256": "123df2e4c09891bd720f9eaabac74a6f9315c24864c4c8d9cf22d05c11b720eb"
+        },
+        {
+          "path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0004.jsonl",
+          "sha256": "3100bea7c1bae8caec3c56b74f059d89090bbefd1b2ba6eab191e165283b6f27"
+        },
+        {
+          "path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0005.jsonl",
+          "sha256": "98a59cf310f82e35fbab825db2d46ab7ff99dd4c08ee89919a4f31a9dbbfc657"
+        },
+        {
+          "path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0006.jsonl",
+          "sha256": "8dd7473ce4523e6cd4b7782e61638e2fbb9e56a354a7c93ccfdbcc0fdceb8843"
+        },
+        {
+          "path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0007.jsonl",
+          "sha256": "4df05604483fe87a3fdd2240da22cb78b5de76342425283447006b2cef879d1b"
+        },
+        {
+          "path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0008.jsonl",
+          "sha256": "37b1e1b52ce74525682840f0744e3329b30a129694ce788b5e858ff73297410d"
+        },
+        {
+          "path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0009.jsonl",
+          "sha256": "cca686610e190a67dfd5df2900429db83de1c0079f2817c5fee893dee9845e75"
+        },
+        {
+          "path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0010.jsonl",
+          "sha256": "d902abb9684ba597243bf1eca086086d8a95a464b9400f29e65b712e8dc42418"
+        },
+        {
+          "path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0011.jsonl",
+          "sha256": "21776e487d804906dde0bcd935ac22525fc68b73a06580a2aae9b6add4500748"
+        },
+        {
+          "path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0012.jsonl",
+          "sha256": "a32ea98b92b141597e41945822d89cd608479d02618d25666d2960026c3505e2"
+        },
+        {
+          "path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0013.jsonl",
+          "sha256": "d3e2c469b27f1a33f47047d4c6eec41e5a964675edf6a81079810d1ef00e3387"
+        },
+        {
+          "path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0014.jsonl",
+          "sha256": "89e9039b79a8ec10deb9b7ef74efd73750e7b031cf37b2f2a3ac2e1d65c6989b"
+        },
+        {
+          "path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0015.jsonl",
+          "sha256": "8bb2a86b67626dca4effc2db362b130016bdd41f1032549f1765b36b9f4f54d8"
+        },
+        {
+          "path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0016.jsonl",
+          "sha256": "36d3d3efd289dbaeb95579910b09bd59690bc2f8449c23fa5c6f9746b7c43cab"
+        },
+        {
+          "path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0017.jsonl",
+          "sha256": "5806ae31e7c42555e26f15f7a23d7df0d71c53cb3e48cecd1f1d195859cb3fb6"
+        },
+        {
+          "path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0018.jsonl",
+          "sha256": "521e6cf2b698af5a61e827717c813c5011c1cb58e0b7a4368a119d8a90b8cc56"
+        },
+        {
+          "path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0019.jsonl",
+          "sha256": "4cf37efcff1e13581821c9d9952e6edfddd5a25916eecb02dd74dbb1e2b2174d"
+        },
+        {
+          "path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0020.jsonl",
+          "sha256": "1e353950ea558cc1f6209698c0b3eb7b71adce14889b58d9612df2d360e38482"
+        },
+        {
+          "path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0021.jsonl",
+          "sha256": "dd999e78c836e791c7ba028bf6b0e8663f912e5f47bd1cedeec932c2b9ff6854"
+        },
+        {
+          "path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0022.jsonl",
+          "sha256": "81b01daa5c48acbf270e94d8be63589c1de80d053154e7f2e43ad0672b506052"
+        },
+        {
+          "path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0023.jsonl",
+          "sha256": "be0881730635dd9890cdd748f0ee5650fb592bad1ade352fdd2601c9049640c2"
+        },
+        {
+          "path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0024.jsonl",
+          "sha256": "4463f1a90d39fec5bda0f42373ea8ab590be3cc93dea79223fab4a3a5f149f6c"
+        },
+        {
+          "path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0025.jsonl",
+          "sha256": "905a0c15633f1f14105aa539fdbc3b958c409c45c076aaf1fdbfe64523e836b7"
+        },
+        {
+          "path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0026.jsonl",
+          "sha256": "e5a1d0ec7870959f26adfa6434e8581c6aab5997882b463b52c14cf1bb6edeb8"
+        },
+        {
+          "path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0027.jsonl",
+          "sha256": "fa95c59bd68a2c2adf3c296464c92069b373e21faa81b0279f93a5959408c92f"
+        },
+        {
+          "path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F4/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0028.jsonl",
+          "sha256": "24e446c191ab1dd6e62eab992fefa429629151a70b6a0364b74cb9d79df696e3"
+        }
+      ],
+      "final_output_count": 28
+    },
+    "D8_shared_policy_call": {
+      "turn_started": 1,
+      "turn_completed": 1,
+      "turn_failed": 0,
+      "usage_turns": 1,
+      "input_tokens": 13449,
+      "cached_input_tokens": 0,
+      "output_tokens": 223,
+      "malformed_lines": 0,
+      "trace_sha256": [
+        {
+          "path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F4/codex_context_policy_traces/D8_agent_codex_nn_capacity_shield_optimizer/context_policy_0001.jsonl",
+          "sha256": "644a4e07e4ef9eff28448be15d2990b1dfd6ffa8a6b5e142509ed6479c40e006"
+        }
+      ],
+      "final_output_count": 1
+    },
+    "D6_D7_live_calls": 0,
+    "D6_D7_replay_uses_D8_response": true,
+    "unique_input_tokens": 659159,
+    "unique_cached_input_tokens": 316800,
+    "unique_output_tokens": 4403,
+    "unique_total_tokens": 663562,
+    "codex_standard_credit_equivalent_estimate": 2.002285,
+    "api_equivalent_usd_estimate": 0.08009140000000001,
+    "actual_account_charge_usd": null,
+    "failed_or_unknown_invocations_in_this_cell": 0,
+    "retry_count": 0
+  },
+  "methods": [
+    {
+      "method": "D0_greedy",
+      "result_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F4/D0_greedy_seed_0.json",
+      "result_sha256": "55fccfb1c8b5d3da28cc5465ce17eb4b69ba9e7433165fce528d76cdb92a8fe5",
+      "scenario_fingerprint_sha256": "af87cc977c51920fc8808757c11dfaaab17d8f4d59ea57599a53ec735cc9eb43",
+      "input_hashes": {
+        "scenario_json": "311b82e8b2d934fc415e62841ef5c93fc819f2311fa3ea7aae5d12a71595502f",
+        "orders_json": "a87b497ddcd3def2a91c334f36ce4e29e0ec3f5d46b7b07accb31e598c7f6421",
+        "zone_od_cost_matrix": "2be04d3d22099acbb5ee95b3d0e3aedf41fec63fe2177da7b21c12b2e8906d81",
+        "pickup_cost_policy": "5948706ef027d9fe38f7924f8e064bd040a58d5bc1c9d5ec92637e9cefde763b",
+        "zone_centroids": "605ac3dbc29c29eef8ec28825f37e7814ee8f3dd7eb12e7ef26ffe6360b8c92b",
+        "observed_fare_crosswalk": "025d4be5aa7942362d1b90b81f2f7d6ae88a4b072d8f22486201df4ac356b7e4",
+        "available_fare_crosswalk_parquet": "531cdd7b96b39fb528b36e759616fe72f1887e338fd809a3503135c5bb5c21e0",
+        "available_fare_reconciliation_manifest": "5c4004f6787ce044d716d4691812e5126482da7ca4c7161235f9c502b0ce598c"
+      },
+      "complete": true,
+      "seed_match": true,
+      "validator_round_count": 511,
+      "invalid_rounds": 0,
+      "hard_constraint_errors": 0,
+      "one_to_one_failures": 0,
+      "commitment_violations": 0,
+      "segment_count": 96,
+      "decision_contract": "nyc_dispatch_decision_contract_v4",
+      "decision_function_method_steps": [
+        "Keep only candidates satisfying route, commitment, one-to-one, and max-wait hard constraints.",
+        "Sort by request arrival time, predicted pickup wait, empty distance, order ID, then vehicle ID.",
+        "Accept the first candidate for each unused vehicle and order."
+      ],
+      "summary": {
+        "order_count": 502,
+        "vehicle_count": 48,
+        "served_orders": 48,
+        "unserved_orders": 454,
+        "service_rate": 0.09561752988047809,
+        "average_pickup_wait_sec": 102.21356679908197,
+        "p95_pickup_wait_sec": 246.3977585950468,
+        "total_empty_distance_m": 24531.25603177967,
+        "total_energy_kwh": 35.97642500049535,
+        "total_pickup_net_energy_kwh": 2.5917075894342236,
+        "total_ride_net_energy_kwh": 33.384717411061125,
+        "total_dispatch_rounds": 511,
+        "total_llm_calls": 0,
+        "total_llm_input_tokens": null,
+        "total_llm_cached_input_tokens": null,
+        "total_llm_output_tokens": null,
+        "total_llm_tokens": null,
+        "total_codex_standard_credit_equivalent": null,
+        "total_api_equivalent_usd": null,
+        "total_api_cost_usd": null,
+        "commitment_violations": 0
+      },
+      "policy_audit": {
+        "accepted_policy_count": 0,
+        "replayed_policy_count": 0,
+        "policy_new_invocation_records": 0,
+        "accepted_live_invocation_count": 0,
+        "nonaccepted_live_invocation_count": 0,
+        "accepted_replay_record_count": 0,
+        "nonaccepted_replay_record_count": 0,
+        "policy_prompt_hashes": []
+      }
+    },
+    {
+      "method": "D1_optimizer",
+      "result_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F4/D1_optimizer_seed_0.json",
+      "result_sha256": "f6fc234b0c643218a66cc48bcb4b2610867fe33af6095bbbf519518ed72979d6",
+      "scenario_fingerprint_sha256": "af87cc977c51920fc8808757c11dfaaab17d8f4d59ea57599a53ec735cc9eb43",
+      "input_hashes": {
+        "scenario_json": "311b82e8b2d934fc415e62841ef5c93fc819f2311fa3ea7aae5d12a71595502f",
+        "orders_json": "a87b497ddcd3def2a91c334f36ce4e29e0ec3f5d46b7b07accb31e598c7f6421",
+        "zone_od_cost_matrix": "2be04d3d22099acbb5ee95b3d0e3aedf41fec63fe2177da7b21c12b2e8906d81",
+        "pickup_cost_policy": "5948706ef027d9fe38f7924f8e064bd040a58d5bc1c9d5ec92637e9cefde763b",
+        "zone_centroids": "605ac3dbc29c29eef8ec28825f37e7814ee8f3dd7eb12e7ef26ffe6360b8c92b",
+        "observed_fare_crosswalk": "025d4be5aa7942362d1b90b81f2f7d6ae88a4b072d8f22486201df4ac356b7e4",
+        "available_fare_crosswalk_parquet": "531cdd7b96b39fb528b36e759616fe72f1887e338fd809a3503135c5bb5c21e0",
+        "available_fare_reconciliation_manifest": "5c4004f6787ce044d716d4691812e5126482da7ca4c7161235f9c502b0ce598c"
+      },
+      "complete": true,
+      "seed_match": true,
+      "validator_round_count": 511,
+      "invalid_rounds": 0,
+      "hard_constraint_errors": 0,
+      "one_to_one_failures": 0,
+      "commitment_violations": 0,
+      "segment_count": 96,
+      "decision_contract": "nyc_dispatch_decision_contract_v4",
+      "decision_function_method_steps": [
+        "Keep only hard-feasible vehicle-order candidates.",
+        "Solve a one-to-one minimum-cost bipartite flow with the exact lexicographic objective recorded per round."
+      ],
+      "summary": {
+        "order_count": 502,
+        "vehicle_count": 48,
+        "served_orders": 48,
+        "unserved_orders": 454,
+        "service_rate": 0.09561752988047809,
+        "average_pickup_wait_sec": 102.21356679908197,
+        "p95_pickup_wait_sec": 246.3977585950468,
+        "total_empty_distance_m": 24531.25603177967,
+        "total_energy_kwh": 35.97642500049534,
+        "total_pickup_net_energy_kwh": 2.5917075894342236,
+        "total_ride_net_energy_kwh": 33.384717411061125,
+        "total_dispatch_rounds": 511,
+        "total_llm_calls": 0,
+        "total_llm_input_tokens": null,
+        "total_llm_cached_input_tokens": null,
+        "total_llm_output_tokens": null,
+        "total_llm_tokens": null,
+        "total_codex_standard_credit_equivalent": null,
+        "total_api_equivalent_usd": null,
+        "total_api_cost_usd": null,
+        "commitment_violations": 0
+      },
+      "policy_audit": {
+        "accepted_policy_count": 0,
+        "replayed_policy_count": 0,
+        "policy_new_invocation_records": 0,
+        "accepted_live_invocation_count": 0,
+        "nonaccepted_live_invocation_count": 0,
+        "accepted_replay_record_count": 0,
+        "nonaccepted_replay_record_count": 0,
+        "policy_prompt_hashes": []
+      }
+    },
+    {
+      "method": "D2_agent_optimizer",
+      "result_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F4/D2_agent_optimizer_seed_0.json",
+      "result_sha256": "5f521417ba9416c74b11d916a0de919082fa12910025e5142b8cb11124c1ab5d",
+      "scenario_fingerprint_sha256": "af87cc977c51920fc8808757c11dfaaab17d8f4d59ea57599a53ec735cc9eb43",
+      "input_hashes": {
+        "scenario_json": "311b82e8b2d934fc415e62841ef5c93fc819f2311fa3ea7aae5d12a71595502f",
+        "orders_json": "a87b497ddcd3def2a91c334f36ce4e29e0ec3f5d46b7b07accb31e598c7f6421",
+        "zone_od_cost_matrix": "2be04d3d22099acbb5ee95b3d0e3aedf41fec63fe2177da7b21c12b2e8906d81",
+        "pickup_cost_policy": "5948706ef027d9fe38f7924f8e064bd040a58d5bc1c9d5ec92637e9cefde763b",
+        "zone_centroids": "605ac3dbc29c29eef8ec28825f37e7814ee8f3dd7eb12e7ef26ffe6360b8c92b",
+        "observed_fare_crosswalk": "025d4be5aa7942362d1b90b81f2f7d6ae88a4b072d8f22486201df4ac356b7e4",
+        "available_fare_crosswalk_parquet": "531cdd7b96b39fb528b36e759616fe72f1887e338fd809a3503135c5bb5c21e0",
+        "available_fare_reconciliation_manifest": "5c4004f6787ce044d716d4691812e5126482da7ca4c7161235f9c502b0ce598c"
+      },
+      "complete": true,
+      "seed_match": true,
+      "validator_round_count": 511,
+      "invalid_rounds": 0,
+      "hard_constraint_errors": 0,
+      "one_to_one_failures": 0,
+      "commitment_violations": 0,
+      "segment_count": 96,
+      "decision_contract": "nyc_dispatch_decision_contract_v4",
+      "decision_function_method_steps": [
+        "Each vehicle agent builds pickup and ride candidates and applies the bounded manual linear-clip context function.",
+        "If the context function removes every hard-feasible candidate for an agent, restore that agent's hard-feasible candidates.",
+        "Apply the exact lexicographic global optimizer to the remaining candidates."
+      ],
+      "summary": {
+        "order_count": 502,
+        "vehicle_count": 48,
+        "served_orders": 48,
+        "unserved_orders": 454,
+        "service_rate": 0.09561752988047809,
+        "average_pickup_wait_sec": 102.21356679908197,
+        "p95_pickup_wait_sec": 246.3977585950468,
+        "total_empty_distance_m": 24531.25603177967,
+        "total_energy_kwh": 35.97642500049534,
+        "total_pickup_net_energy_kwh": 2.5917075894342236,
+        "total_ride_net_energy_kwh": 33.384717411061125,
+        "total_dispatch_rounds": 511,
+        "total_llm_calls": 0,
+        "total_llm_input_tokens": null,
+        "total_llm_cached_input_tokens": null,
+        "total_llm_output_tokens": null,
+        "total_llm_tokens": null,
+        "total_codex_standard_credit_equivalent": null,
+        "total_api_equivalent_usd": null,
+        "total_api_cost_usd": null,
+        "commitment_violations": 0
+      },
+      "policy_audit": {
+        "accepted_policy_count": 0,
+        "replayed_policy_count": 0,
+        "policy_new_invocation_records": 0,
+        "accepted_live_invocation_count": 0,
+        "nonaccepted_live_invocation_count": 0,
+        "accepted_replay_record_count": 0,
+        "nonaccepted_replay_record_count": 0,
+        "policy_prompt_hashes": []
+      }
+    },
+    {
+      "method": "D5_pure_llm_direct",
+      "result_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F4/D5_pure_llm_direct_seed_0.json",
+      "result_sha256": "5260dea8a70726aa771ccd1d3940af8b36d73514cb5eec6700cfd48abe80221b",
+      "scenario_fingerprint_sha256": "af87cc977c51920fc8808757c11dfaaab17d8f4d59ea57599a53ec735cc9eb43",
+      "input_hashes": {
+        "scenario_json": "311b82e8b2d934fc415e62841ef5c93fc819f2311fa3ea7aae5d12a71595502f",
+        "orders_json": "a87b497ddcd3def2a91c334f36ce4e29e0ec3f5d46b7b07accb31e598c7f6421",
+        "zone_od_cost_matrix": "2be04d3d22099acbb5ee95b3d0e3aedf41fec63fe2177da7b21c12b2e8906d81",
+        "pickup_cost_policy": "5948706ef027d9fe38f7924f8e064bd040a58d5bc1c9d5ec92637e9cefde763b",
+        "zone_centroids": "605ac3dbc29c29eef8ec28825f37e7814ee8f3dd7eb12e7ef26ffe6360b8c92b",
+        "observed_fare_crosswalk": "025d4be5aa7942362d1b90b81f2f7d6ae88a4b072d8f22486201df4ac356b7e4",
+        "available_fare_crosswalk_parquet": "531cdd7b96b39fb528b36e759616fe72f1887e338fd809a3503135c5bb5c21e0",
+        "available_fare_reconciliation_manifest": "5c4004f6787ce044d716d4691812e5126482da7ca4c7161235f9c502b0ce598c"
+      },
+      "complete": true,
+      "seed_match": true,
+      "validator_round_count": 511,
+      "invalid_rounds": 0,
+      "hard_constraint_errors": 0,
+      "one_to_one_failures": 0,
+      "commitment_violations": 0,
+      "segment_count": 96,
+      "decision_contract": "nyc_dispatch_decision_contract_v4",
+      "decision_function_method_steps": [
+        "Codex CLI proposes vehicle-order assignments from the shared candidate facts, including pickup and passenger-segment EV v2 signed-net energy.",
+        "The deterministic validator rejects unknown, duplicate, unreachable, over-wait, or commitment-violating assignments.",
+        "No global mathematical optimizer is applied after the LLM response."
+      ],
+      "summary": {
+        "order_count": 502,
+        "vehicle_count": 48,
+        "served_orders": 48,
+        "unserved_orders": 454,
+        "service_rate": 0.09561752988047809,
+        "average_pickup_wait_sec": 102.2344001324153,
+        "p95_pickup_wait_sec": 246.3977585950468,
+        "total_empty_distance_m": 24531.25603177967,
+        "total_energy_kwh": 35.97642500049534,
+        "total_pickup_net_energy_kwh": 2.5917075894342236,
+        "total_ride_net_energy_kwh": 33.384717411061125,
+        "total_dispatch_rounds": 511,
+        "total_llm_calls": 28,
+        "total_llm_input_tokens": 645710,
+        "total_llm_cached_input_tokens": 316800,
+        "total_llm_output_tokens": 4180,
+        "total_llm_tokens": 649890,
+        "total_codex_standard_credit_equivalent": 1.92835,
+        "total_api_equivalent_usd": 0.07713400000000001,
+        "total_api_cost_usd": null,
+        "commitment_violations": 0
+      },
+      "policy_audit": {
+        "accepted_policy_count": 28,
+        "replayed_policy_count": 0,
+        "policy_new_invocation_records": 28,
+        "accepted_live_invocation_count": 28,
+        "nonaccepted_live_invocation_count": 0,
+        "accepted_replay_record_count": 0,
+        "nonaccepted_replay_record_count": 0,
+        "policy_prompt_hashes": [
+          "73f7c4d11c01709daca4f3bf3fac741f15c598e2130e4723d14451ac32dd3d93",
+          "d08f8d102b6acdc65bb05bd80ee629c4387c795f25360dd2799ace063a318f33",
+          "f04632a4cf7a5f87b52decf8c05db81679e44f8bdca0569eab5e7b92edc14015",
+          "1314ef296d7ed75df8adc06d7e1a452a08abb13bff40899372916e2d92afb5c2",
+          "e4a2c3a0bb66545fe1d597e24061d53d778ebf0898fa390b5acb4d975315da10",
+          "a9e61b2ee24c8b3de8fadcf2a0994fe556febc7e3f34c14eddb7283ceeccebd5",
+          "b654dddeb311ce4dfc0d9b287b5964b6bf5aaac3ded43e31b6249504091e3439",
+          "a213d2d373f8370934101864d9b71daaecf7f2124e61877c7c2adb398069de39",
+          "f798e78801b44cf8c41c7b7dffa726be3d121a337d0a7ffbdd7ba194a5320dac",
+          "9213e52e3ab8279a046d8afd9eeb62c00f62b782ad25171df8fc95964210a932",
+          "44ed8e4173f243f80161f620f0a8cacc55146481ab344365390a5bb15cfd19dd",
+          "af4e4fa7f24abb8baf138abfc3c63b1f4c19aebf660843bbc05837d95e8228c3",
+          "1915a61f40070a306b46c6002c26aae65a26051ca30602e5d281aadab25db1a5",
+          "d10e1ad8f829f5d52b0f215e8d166e5a40ba6454f732f0de7af943d86e1023f5",
+          "2bf05e27d9172c7d71f47dc9746abf9ca0763ee7029160b080c8fad85219df90",
+          "e20e743daf3ada25f1c111a6e01a4d188f6281e824553723ae0ec594765faf54",
+          "4073e2029960f3030d80c605e3faac2d62726e41708d4f6a80f4e8a956dc49c2",
+          "ae23dd44d2a16311fec71ee74279de37fa8924caa072bb8175bc2906de02a29e",
+          "46687905cd65d0fe3c808e0363688494d44c5728f5a202f88d653bf5b5aebfd9",
+          "dff35b73f54a4fd85919295d602ed136fc4eb692c11a2c23f9c74c2f26657f10",
+          "f590cf561f71e976a4b56e3a0fa475de14003844a84537274016cbac165b75be",
+          "198f238bc64ace2d6049819e17c45e318ad0dfdfc63189c8cdebc1412fd68fe0",
+          "e5af6e6fb2dd224d769f0e0490852a33afc41f275a3c3b5a384034262ea3b8e6",
+          "57bad36a2ece98e923dc0658ac10a0a961cdf93767eaa25bc5c82c1083319f9a",
+          "1a67a731e26d5e6ef255651c8506f0719fdc5767762b977dd05677e6e88cb357",
+          "d9786e2841de9eb1ae4a3b28e2f6357afddcafe43b63c5e6b8e98df3cbec0c37",
+          "1658ad6cf5891f71bb0b24ee70628ef272db26c7675cdb99a1126ac6be00cce8",
+          "a6733f2c93b755ed8dc4d9e622e1718b6fd8bbb4ba97480ddfe9ba4237ff51e1"
+        ]
+      }
+    },
+    {
+      "method": "D6_agent_codex_context_optimizer",
+      "result_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F4/D6_agent_codex_context_optimizer_seed_0.json",
+      "result_sha256": "a29aa2d440905621afb0881e85e30d164d274b215a51a944b9efc8de03ab3405",
+      "scenario_fingerprint_sha256": "af87cc977c51920fc8808757c11dfaaab17d8f4d59ea57599a53ec735cc9eb43",
+      "input_hashes": {
+        "scenario_json": "311b82e8b2d934fc415e62841ef5c93fc819f2311fa3ea7aae5d12a71595502f",
+        "orders_json": "a87b497ddcd3def2a91c334f36ce4e29e0ec3f5d46b7b07accb31e598c7f6421",
+        "zone_od_cost_matrix": "2be04d3d22099acbb5ee95b3d0e3aedf41fec63fe2177da7b21c12b2e8906d81",
+        "pickup_cost_policy": "5948706ef027d9fe38f7924f8e064bd040a58d5bc1c9d5ec92637e9cefde763b",
+        "zone_centroids": "605ac3dbc29c29eef8ec28825f37e7814ee8f3dd7eb12e7ef26ffe6360b8c92b",
+        "observed_fare_crosswalk": "025d4be5aa7942362d1b90b81f2f7d6ae88a4b072d8f22486201df4ac356b7e4",
+        "available_fare_crosswalk_parquet": "531cdd7b96b39fb528b36e759616fe72f1887e338fd809a3503135c5bb5c21e0",
+        "available_fare_reconciliation_manifest": "5c4004f6787ce044d716d4691812e5126482da7ca4c7161235f9c502b0ce598c"
+      },
+      "complete": true,
+      "seed_match": true,
+      "validator_round_count": 511,
+      "invalid_rounds": 0,
+      "hard_constraint_errors": 0,
+      "one_to_one_failures": 0,
+      "commitment_violations": 0,
+      "segment_count": 96,
+      "decision_contract": "nyc_dispatch_decision_contract_v4",
+      "decision_function_method_steps": [
+        "Codex CLI supplies bounded linear-clip context parameters for vehicle agents; parameters cannot alter hard constraints.",
+        "Agents retain candidates whose predicted pickup wait is within the generated threshold.",
+        "If a vehicle has no context-approved candidate, restore its hard-feasible candidates.",
+        "Apply the exact lexicographic global optimizer."
+      ],
+      "summary": {
+        "order_count": 502,
+        "vehicle_count": 48,
+        "served_orders": 48,
+        "unserved_orders": 454,
+        "service_rate": 0.09561752988047809,
+        "average_pickup_wait_sec": 102.21356679908197,
+        "p95_pickup_wait_sec": 246.3977585950468,
+        "total_empty_distance_m": 24531.25603177967,
+        "total_energy_kwh": 35.97642500049534,
+        "total_pickup_net_energy_kwh": 2.5917075894342236,
+        "total_ride_net_energy_kwh": 33.384717411061125,
+        "total_dispatch_rounds": 511,
+        "total_llm_calls": 1,
+        "total_llm_input_tokens": 13449,
+        "total_llm_cached_input_tokens": 0,
+        "total_llm_output_tokens": 223,
+        "total_llm_tokens": 13672,
+        "total_codex_standard_credit_equivalent": 0.073935,
+        "total_api_equivalent_usd": 0.0029574000000000002,
+        "total_api_cost_usd": null,
+        "commitment_violations": 0
+      },
+      "policy_audit": {
+        "accepted_policy_count": 1,
+        "replayed_policy_count": 1,
+        "policy_new_invocation_records": 0,
+        "accepted_live_invocation_count": 0,
+        "nonaccepted_live_invocation_count": 0,
+        "accepted_replay_record_count": 1,
+        "nonaccepted_replay_record_count": 0,
+        "policy_prompt_hashes": [
+          "e25aed739997ff4f689f43371be59b1cb109bcd724d31cde28b50346cdeb5f93"
+        ]
+      }
+    },
+    {
+      "method": "D7_agent_codex_capacity_shield_optimizer",
+      "result_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F4/D7_agent_codex_capacity_shield_optimizer_seed_0.json",
+      "result_sha256": "d4c19f9bf68fd44edca989243be2604899689ebf39750e536f44fba3c42b6a42",
+      "scenario_fingerprint_sha256": "af87cc977c51920fc8808757c11dfaaab17d8f4d59ea57599a53ec735cc9eb43",
+      "input_hashes": {
+        "scenario_json": "311b82e8b2d934fc415e62841ef5c93fc819f2311fa3ea7aae5d12a71595502f",
+        "orders_json": "a87b497ddcd3def2a91c334f36ce4e29e0ec3f5d46b7b07accb31e598c7f6421",
+        "zone_od_cost_matrix": "2be04d3d22099acbb5ee95b3d0e3aedf41fec63fe2177da7b21c12b2e8906d81",
+        "pickup_cost_policy": "5948706ef027d9fe38f7924f8e064bd040a58d5bc1c9d5ec92637e9cefde763b",
+        "zone_centroids": "605ac3dbc29c29eef8ec28825f37e7814ee8f3dd7eb12e7ef26ffe6360b8c92b",
+        "observed_fare_crosswalk": "025d4be5aa7942362d1b90b81f2f7d6ae88a4b072d8f22486201df4ac356b7e4",
+        "available_fare_crosswalk_parquet": "531cdd7b96b39fb528b36e759616fe72f1887e338fd809a3503135c5bb5c21e0",
+        "available_fare_reconciliation_manifest": "5c4004f6787ce044d716d4691812e5126482da7ca4c7161235f9c502b0ce598c"
+      },
+      "complete": true,
+      "seed_match": true,
+      "validator_round_count": 511,
+      "invalid_rounds": 0,
+      "hard_constraint_errors": 0,
+      "one_to_one_failures": 0,
+      "commitment_violations": 0,
+      "segment_count": 96,
+      "decision_contract": "nyc_dispatch_decision_contract_v4",
+      "decision_function_method_steps": [
+        "Apply the D6 Codex context policy.",
+        "Restore rejected hard-feasible candidates in frozen priority order until the filtered graph preserves the original maximum one-to-one matching cardinality.",
+        "Apply the exact lexicographic global optimizer."
+      ],
+      "summary": {
+        "order_count": 502,
+        "vehicle_count": 48,
+        "served_orders": 48,
+        "unserved_orders": 454,
+        "service_rate": 0.09561752988047809,
+        "average_pickup_wait_sec": 102.21356679908197,
+        "p95_pickup_wait_sec": 246.3977585950468,
+        "total_empty_distance_m": 24531.25603177967,
+        "total_energy_kwh": 35.97642500049534,
+        "total_pickup_net_energy_kwh": 2.5917075894342236,
+        "total_ride_net_energy_kwh": 33.384717411061125,
+        "total_dispatch_rounds": 511,
+        "total_llm_calls": 1,
+        "total_llm_input_tokens": 13449,
+        "total_llm_cached_input_tokens": 0,
+        "total_llm_output_tokens": 223,
+        "total_llm_tokens": 13672,
+        "total_codex_standard_credit_equivalent": 0.073935,
+        "total_api_equivalent_usd": 0.0029574000000000002,
+        "total_api_cost_usd": null,
+        "commitment_violations": 0
+      },
+      "policy_audit": {
+        "accepted_policy_count": 1,
+        "replayed_policy_count": 1,
+        "policy_new_invocation_records": 0,
+        "accepted_live_invocation_count": 0,
+        "nonaccepted_live_invocation_count": 0,
+        "accepted_replay_record_count": 1,
+        "nonaccepted_replay_record_count": 0,
+        "policy_prompt_hashes": [
+          "e25aed739997ff4f689f43371be59b1cb109bcd724d31cde28b50346cdeb5f93"
+        ]
+      }
+    },
+    {
+      "method": "D8_agent_codex_nn_capacity_shield_optimizer",
+      "result_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240321_220000_q50/F4/D8_agent_codex_nn_capacity_shield_optimizer_seed_0.json",
+      "result_sha256": "172c78e6edfe0cd267a0d8fd494767b37127373742474ded9b3e7746f33d28b6",
+      "scenario_fingerprint_sha256": "af87cc977c51920fc8808757c11dfaaab17d8f4d59ea57599a53ec735cc9eb43",
+      "input_hashes": {
+        "scenario_json": "311b82e8b2d934fc415e62841ef5c93fc819f2311fa3ea7aae5d12a71595502f",
+        "orders_json": "a87b497ddcd3def2a91c334f36ce4e29e0ec3f5d46b7b07accb31e598c7f6421",
+        "zone_od_cost_matrix": "2be04d3d22099acbb5ee95b3d0e3aedf41fec63fe2177da7b21c12b2e8906d81",
+        "pickup_cost_policy": "5948706ef027d9fe38f7924f8e064bd040a58d5bc1c9d5ec92637e9cefde763b",
+        "zone_centroids": "605ac3dbc29c29eef8ec28825f37e7814ee8f3dd7eb12e7ef26ffe6360b8c92b",
+        "observed_fare_crosswalk": "025d4be5aa7942362d1b90b81f2f7d6ae88a4b072d8f22486201df4ac356b7e4",
+        "available_fare_crosswalk_parquet": "531cdd7b96b39fb528b36e759616fe72f1887e338fd809a3503135c5bb5c21e0",
+        "available_fare_reconciliation_manifest": "5c4004f6787ce044d716d4691812e5126482da7ca4c7161235f9c502b0ce598c"
+      },
+      "complete": true,
+      "seed_match": true,
+      "validator_round_count": 515,
+      "invalid_rounds": 0,
+      "hard_constraint_errors": 0,
+      "one_to_one_failures": 0,
+      "commitment_violations": 0,
+      "segment_count": 96,
+      "decision_contract": "nyc_dispatch_decision_contract_v4",
+      "decision_function_method_steps": [
+        "Apply the D7 Codex context policy.",
+        "Score hard-feasible candidates with the frozen D1-imitation MLP and retain the configured Top-K candidates per vehicle, prioritizing context-approved candidates.",
+        "Apply the maximum-cardinality shield so pruning cannot reduce feasible matching capacity.",
+        "Apply the exact lexicographic global optimizer."
+      ],
+      "summary": {
+        "order_count": 502,
+        "vehicle_count": 48,
+        "served_orders": 48,
+        "unserved_orders": 454,
+        "service_rate": 0.09561752988047809,
+        "average_pickup_wait_sec": 105.18406731509367,
+        "p95_pickup_wait_sec": 246.3977585950468,
+        "total_empty_distance_m": 25244.17615562248,
+        "total_energy_kwh": 36.0093208019282,
+        "total_pickup_net_energy_kwh": 2.661890785839768,
+        "total_ride_net_energy_kwh": 33.34743001608844,
+        "total_dispatch_rounds": 515,
+        "total_llm_calls": 1,
+        "total_llm_input_tokens": 13449,
+        "total_llm_cached_input_tokens": 0,
+        "total_llm_output_tokens": 223,
+        "total_llm_tokens": 13672,
+        "total_codex_standard_credit_equivalent": 0.073935,
+        "total_api_equivalent_usd": 0.0029574000000000002,
+        "total_api_cost_usd": null,
+        "commitment_violations": 0
+      },
+      "policy_audit": {
+        "accepted_policy_count": 1,
+        "replayed_policy_count": 0,
+        "policy_new_invocation_records": 1,
+        "accepted_live_invocation_count": 1,
+        "nonaccepted_live_invocation_count": 0,
+        "accepted_replay_record_count": 0,
+        "nonaccepted_replay_record_count": 0,
+        "policy_prompt_hashes": [
+          "e25aed739997ff4f689f43371be59b1cb109bcd724d31cde28b50346cdeb5f93"
+        ]
+      }
+    }
+  ],
+  "interpretation_limits": [
+    "This is one selected TLC date and F4 fleet cell, not an overall method ranking or a citywide effect estimate.",
+    "NYC TLC trips are mapped to zone-level OD cost proxies with a synthetic centroid pickup proxy; not street-network routing, real-time ETA or vehicle telemetry.",
+    "D0 does not optimize energy. D5 is pure LLM assignment and does not apply deterministic global energy optimization. D1/D2/D6/D7/D8 use EV2 signed-net total energy as the final lexicographic objective tier.",
+    "The v5 time-money accounting remains an offline sidecar; missing tariff, complete fare crosswalk, frozen compute cost and shared feasible candidate pool block profitability/ranking.",
+    "Actual Codex account billing is unavailable; token totals and rate-card equivalents are estimates."
+  ]
+}

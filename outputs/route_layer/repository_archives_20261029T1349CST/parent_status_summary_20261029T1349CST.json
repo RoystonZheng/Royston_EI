@@ -1,0 +1,120 @@
+{
+  "snapshot_created_at_cst": "2026-10-29T13:49:50.180991+08:00",
+  "source_scope": "exact App Support R4 output directory only",
+  "source_parent_manifest_sha256": "3cb1c82b6bd52aedea7d4a81bff59e13cf48af2653705c738b8e440bc262cfa7",
+  "source_parent_manifest_updated_at_utc": "2026-10-29T05:49:50.586529+00:00",
+  "status": "running",
+  "parent_model_requests_used": 10380,
+  "requests_with_unknown_delivery": 24,
+  "parent_task_status_counts": {
+    "route_complete": 49,
+    "failed": 8,
+    "ready": 30,
+    "outcome_unknown": 5,
+    "pending": 35,
+    "active": 2
+  },
+  "workers": {
+    "worker_00": {
+      "status": "paused_at_checkpoint_unknown_tasks_deferred",
+      "updated_at_utc": "2026-10-28T17:09:45.999271+00:00",
+      "model_requests_used": 2337,
+      "requests_with_unknown_delivery": 9,
+      "task_status_counts": {
+        "outcome_unknown": 9,
+        "route_complete": 14,
+        "failed": 6
+      }
+    },
+    "worker_01": {
+      "status": "paused_at_checkpoint",
+      "updated_at_utc": "2026-10-29T03:05:48.461735+00:00",
+      "model_requests_used": 1350,
+      "requests_with_unknown_delivery": 5,
+      "task_status_counts": {
+        "route_complete": 8,
+        "outcome_unknown": 4,
+        "failed": 17
+      }
+    },
+    "worker_02": {
+      "status": "running",
+      "updated_at_utc": "2026-10-29T05:37:17.931744+00:00",
+      "model_requests_used": 1745,
+      "requests_with_unknown_delivery": 1,
+      "task_status_counts": {
+        "route_complete": 7,
+        "failed": 4,
+        "active": 1,
+        "pending": 17
+      }
+    },
+    "worker_03": {
+      "status": "running",
+      "updated_at_utc": "2026-10-29T05:37:31.853885+00:00",
+      "model_requests_used": 1768,
+      "requests_with_unknown_delivery": 1,
+      "task_status_counts": {
+        "route_complete": 7,
+        "failed": 3,
+        "active": 1,
+        "pending": 18,
+        "ready": 1
+      }
+    },
+    "worker_recovery": {
+      "status": "paused_at_checkpoint",
+      "updated_at_utc": "2026-10-29T05:33:07.560681+00:00",
+      "model_requests_used": 1655,
+      "requests_with_unknown_delivery": 3,
+      "task_status_counts": {
+        "outcome_unknown": 3,
+        "route_complete": 6,
+        "failed": 4,
+        "duplicate_suppressed": 3
+      }
+    },
+    "worker_recovery_429": {
+      "status": "running",
+      "updated_at_utc": "2026-10-29T05:49:45.365911+00:00",
+      "model_requests_used": 215,
+      "requests_with_unknown_delivery": null,
+      "task_status_counts": {
+        "route_complete": 1,
+        "ready": 28
+      }
+    },
+    "worker_recovery_addendum": {
+      "status": "completed_with_audited_task_outcomes",
+      "updated_at_utc": "2026-10-29T03:18:51.926597+00:00",
+      "model_requests_used": 767,
+      "requests_with_unknown_delivery": 3,
+      "task_status_counts": {
+        "route_complete": 3,
+        "failed": 1
+      }
+    },
+    "worker_recovery_addendum2": {
+      "status": "paused_for_r4_oneway_guard_repair_and_full_flow_gate",
+      "updated_at_utc": "2026-10-28T15:37:51.947426+00:00",
+      "model_requests_used": 182,
+      "requests_with_unknown_delivery": null,
+      "task_status_counts": {
+        "route_complete": 1,
+        "failed": 2
+      }
+    }
+  },
+  "worker_counts_are_separate_from_parent_and_must_not_be_added": true,
+  "full_flow_audit": {
+    "path": "r4_full_flow_audit_20261029T1400CST_repo_relative.json",
+    "source_sha256": "9dc881a3527c48c6c2f0e39afd994aa7dda320986803c350f1ad4051791da030",
+    "source_parent_snapshot_sha256": "b67a2b067dc534a65fc9953a9d200d6ff2f239e88273a7d1c1bad1b7224c433f",
+    "validated_routes": 49,
+    "directed_edges": 8438,
+    "audit_requests": 0,
+    "gate_passed": true
+  },
+  "raw_parent_manifest_worker_manifests_locks_pids_prompts_states_traces_attempts_and_replays_included": false,
+  "interpretation": "The formal parent remains running. Parent task counts are distinct from worker counts. The 49-route full-flow audit is a bounded route-complete checkpoint, not final completion of the 150-task formal batch."
+}

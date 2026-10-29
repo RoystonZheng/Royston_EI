@@ -1,0 +1,67 @@
+{
+  "artifacts": [
+    {
+      "bytes": 4485,
+      "path": "pilot_source_manifest.json",
+      "sanitized_sha256": "6e19dda0ef47642f08a9e64fb8f0b156553f0726510a6ec905f25fa33677d54b",
+      "source_sha256": "6e19dda0ef47642f08a9e64fb8f0b156553f0726510a6ec905f25fa33677d54b",
+      "source_status": "pilot_route_guard_failed"
+    },
+    {
+      "bytes": 59598,
+      "path": "decision_v5_candidate_gate.json",
+      "sanitized_sha256": "57910226667f06ec68605f06935927f42499b1ff821751a6e173c0593ecfbddb",
+      "source_sha256": "3f530401f5a594783afbfde5076881957cecdc689d8a0319b3e394b19425d76b",
+      "source_status": "blocked_or_failed_full_flow_gate"
+    },
+    {
+      "bytes": 49543,
+      "path": "decision_v5_candidate_pool_and_rankings.json",
+      "sanitized_sha256": "c7fb90924c296b9a92f14100e135918e360b111863ba078a074c68f8c1b706a1",
+      "source_sha256": "c7fb90924c296b9a92f14100e135918e360b111863ba078a074c68f8c1b706a1",
+      "source_status": "selected_both_profiles"
+    },
+    {
+      "bytes": 6044,
+      "path": "pilot_gate_reconciliation.json",
+      "sanitized_sha256": "f2850a0aed276b3eefa338548802e49346ea56322e16cca46b8812718ce12d0f",
+      "source_sha256": "f2850a0aed276b3eefa338548802e49346ea56322e16cca46b8812718ce12d0f",
+      "source_status": "passed_two_profile_r4_gate_after_deterministic_replay_reconciliation"
+    },
+    {
+      "bytes": 2599,
+      "path": "pre_sumo_oneway_segment_audit.json",
+      "sanitized_sha256": "e2675c7f3c89ac7233f627237d06ffb6a9d07e9d27048ba1fa4714b739028dc2",
+      "source_sha256": "e2675c7f3c89ac7233f627237d06ffb6a9d07e9d27048ba1fa4714b739028dc2",
+      "source_status": null
+    },
+    {
+      "bytes": 6890,
+      "path": "same_snapshot_route_comparison.json",
+      "sanitized_sha256": "ab7d634e43d953ad4b7bc814e44afb170ed5ca51231d4fbe8a20a0baa7cfe785",
+      "source_sha256": "ab7d634e43d953ad4b7bc814e44afb170ed5ca51231d4fbe8a20a0baa7cfe785",
+      "source_status": "v5_online_selected_route_executed_and_oneway_verified"
+    },
+    {
+      "bytes": 3355,
+      "path": "oneway_recovery_fixture.json",
+      "sanitized_sha256": "30c432a573cc31550d9860b1dec58fcc442e53555f9c2e985ebf7f756170e483",
+      "source_sha256": "30c432a573cc31550d9860b1dec58fcc442e53555f9c2e985ebf7f756170e483",
+      "source_status": "passed"
+    },
+    {
+      "bytes": 4952,
+      "path": "zero_call_fullflow_gate.json",
+      "sanitized_sha256": "8599c59bd339bd501c846dc0c253a24ddf6ff72065177a7762b57f64293e1387",
+      "source_sha256": "8599c59bd339bd501c846dc0c253a24ddf6ff72065177a7762b57f64293e1387",
+      "source_status": "passed_zero_call_full_flow_no_oneway_violation"
+    }
+  ],
+  "excluded": [
+    "runner source containing prompt templates",
+    "LLM call ledger",
+    "raw prompts/context/state"
+  ],
+  "schema_version": "porto_r4_v5_safe_pilot_archive_v1",
+  "scope": "single pilot; no formal ranking"
+}

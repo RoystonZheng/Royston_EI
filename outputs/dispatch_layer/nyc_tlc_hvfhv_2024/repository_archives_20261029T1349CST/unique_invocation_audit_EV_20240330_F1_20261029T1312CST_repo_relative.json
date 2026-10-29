@@ -1,0 +1,97 @@
+{
+  "schema_version": "nyc_tlc_unique_invocation_audit_v1",
+  "audited_at_local": "2026-10-29T13:13:27.698215+08:00",
+  "case_id": "EV_20240330_200500_q75",
+  "fleet_id": "F1",
+  "seed": 0,
+  "unique_invocation_count": 8,
+  "unique_usage": {
+    "unique_input_tokens": 147955,
+    "unique_cached_input_tokens": 101376,
+    "unique_output_tokens": 1358,
+    "unique_total_tokens": 149313,
+    "codex_standard_credit_equivalent_estimate": 0.32432300000000003,
+    "api_equivalent_usd_estimate": 0.012972919999999999,
+    "actual_account_charge_usd": null
+  },
+  "D5": {
+    "trace_count": 7,
+    "turn_started": 7,
+    "turn_completed": 7,
+    "turn_failed": 0,
+    "usage_turns": 7,
+    "input_tokens": 134502,
+    "cached_input_tokens": 88704,
+    "output_tokens": 1029,
+    "malformed_lines": 0,
+    "final_outputs": 7
+  },
+  "D8_shared_policy": {
+    "trace_count": 1,
+    "turn_started": 1,
+    "turn_completed": 1,
+    "turn_failed": 0,
+    "usage_turns": 1,
+    "input_tokens": 13453,
+    "cached_input_tokens": 12672,
+    "output_tokens": 329,
+    "malformed_lines": 0,
+    "final_outputs": 1
+  },
+  "D6_D7_replay": {
+    "live_invocations": 0,
+    "same_policy_prompt_hash_as_D8": true,
+    "counted_again": false
+  },
+  "failed_or_unknown_invocations": 0,
+  "retry_count": 0,
+  "trace_hashes": {
+    "D5": [
+      {
+        "path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240330_200500_q75/F1/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0001.jsonl",
+        "sha256": "fda1ce188e3543605f214750191f2a18c293799621ba05b7bd5b41076534c918"
+      },
+      {
+        "path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240330_200500_q75/F1/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0002.jsonl",
+        "sha256": "8f0a20acb8b5e6e581b7aa2ddfd0c2c09a3746fc965f5a07f4570908d3d8993d"
+      },
+      {
+        "path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240330_200500_q75/F1/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0003.jsonl",
+        "sha256": "f536737c95f80b458d213f8918a9643fe569e38ebc2cf5a586f68c688478f74c"
+      },
+      {
+        "path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240330_200500_q75/F1/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0004.jsonl",
+        "sha256": "cbc704903077fb1182679e40b1c0a4e5df3a3e47661f10432770d3d48f71bcb7"
+      },
+      {
+        "path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240330_200500_q75/F1/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0005.jsonl",
+        "sha256": "a9d36e900d63cc610b987f9abddd472ae5868050f048db7cdbb7785d6872f8b6"
+      },
+      {
+        "path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240330_200500_q75/F1/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0006.jsonl",
+        "sha256": "62f5366b1ba0bc1d7ae921d53b903658b8de39dddbce271d0aadda93a4df9f1d"
+      },
+      {
+        "path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240330_200500_q75/F1/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0007.jsonl",
+        "sha256": "4f92b68ff2806385502a5d9345b86a8319e9e51852ac1f4fc487a7a318beb782"
+      }
+    ],
+    "D8": [
+      {
+        "path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240330_200500_q75/F1/codex_context_policy_traces/D8_agent_codex_nn_capacity_shield_optimizer/context_policy_0001.jsonl",
+        "sha256": "016f8d9fbca0e5221faccc7d5f229cafe4a027f1dfce92e552a918091faba89a"
+      }
+    ]
+  },
+  "source_result_hashes": {
+    "D0_greedy": "9b23073560ebe0ec9bbe7b9b5fbb9f7aa2b74e6b228ce91aed73a3dddc0ac7f3",
+    "D1_optimizer": "bec51c350e92b1932378a431bf5a972db31817d7f3b632479a8974683303c09d",
+    "D2_agent_optimizer": "f77ddf900abfcd31ff607e84796902c5ac5fc00804df2662518faa30fbc8ff59",
+    "D5_pure_llm_direct": "8f5c5dc28cfc7e1f7463f1f5a1bff8401d1a8a6448a225c3ea5124506e7c8265",
+    "D6_agent_codex_context_optimizer": "608553f16e7704cd80da42977563359cf444aa3c032a22fd679eb58f7aa3be04",
+    "D7_agent_codex_capacity_shield_optimizer": "f8950f10b6f2a071f7caf523270e2a7072bec040266016074bfdab80d4a0a9cf",
+    "D8_agent_codex_nn_capacity_shield_optimizer": "687873fd0bc2275e25a6c4124c13ad7536faa32c82d423169d24d954f254f997"
+  },
+  "source_full_cell_audit_sha256": "7f70e298566544d0eb2a8fa4dddc5b9f06c36e226e907ae83afea3349ddd927b",
+  "interpretation": "Raw Codex CLI usage; rate-card estimates only. Actual account charge is unknown; D6/D7 replay a shared D8 response."
+}
