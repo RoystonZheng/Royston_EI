@@ -33,3 +33,11 @@ The active NYC v4 output, paused R4 control/state files, historical monitor snap
 After commit `3e9143917cae5ebe15fa44c78f01d58d77623a83`, the current Route/EV2 shared-link SUMO batch at `outputs/route_layer/r4_all_shared_link_profiles_sumo_ev2_20261030_v1` was still marked `running`: 107 of 129 expected tasks were completed or failed, with 0 failed/blocked at the observed snapshot. The batch is not a final result; evolving outputs remain excluded until individual tasks are terminal and files are stable. NYC dispatch v4 also remains active and is excluded. The designated App Support R4 batch remains `paused_user_requested_safety_gate` with no files changed since the previous sync check.
 
 Two stable current paper files changed after the previous commit and are included in the next sync. Updated research-memory metadata preserves task paths and records zero credential redactions. The 30-minute heartbeat is active and now tracks the shared-link SUMO batch explicitly.
+
+## 2026-10-30 14:43 CST monitoring update
+
+The shared-link SUMO batch at `outputs/route_layer/r4_all_shared_link_profiles_sumo_ev2_20261030_v1` reached terminal `passed`: 129/129 batch task records passed, 0 failed/blocked; all 99 available per-task manifests also passed. `lsof` found no open handles under the batch output, and no lock/PID files remained.
+
+The archived package is `outputs/repository_archives_20261030T1443CST/r4_all_shared_link_profiles_sumo_ev2_20261030_v1`: 1,222 JSON/XML files, 11,311,239,178 source bytes, losslessly compressed to three parts totaling 214,166,752 bytes. The 528 log/text files were excluded. Every member SHA-256 was verified after full decompression. This is a passed simulation batch, not comparative route-performance, fleet-dispatch, production, or economic-effect evidence.
+
+The GitHub heartbeat remains ACTIVE at the currently observed 10-minute cadence. It also checks the still-running NYC v4 output and the paused designated R4 output; neither is treated as a final snapshot.
