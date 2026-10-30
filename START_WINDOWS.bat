@@ -3,63 +3,25 @@ setlocal
 chcp 65001 >nul
 cd /d "%~dp0"
 
-where py >nul 2>nul
-if not errorlevel 1 (
-  set "PY_CMD=py -3"
-) else (
-  where python >nul 2>nul
-  if errorlevel 1 (
-    echo 未找到 Python。请先安装 Python 3.9 或更高版本，并勾选 Add Python to PATH。
-    pause
-    exit /b 1
-  )
-  set "PY_CMD=python"
+set "RESTORE_SCRIPT=%~dp0output\windows_migration_20261030\RESTORE_FULL_WINDOWS.ps1"
+set "DOWNLOAD_DIR=%~dp0output\windows_migration_20261030\downloaded_delta_parts"
+
+if not exist "%RESTORE_SCRIPT%" (
+  echo 未找到迁移恢复脚本：%RESTORE_SCRIPT%
+  pause
+  exit /b 1
 )
 
-echo 正在检查并准备项目虚拟环境……
-%PY_CMD% setup_env.py --locked
-if errorlevel 1 goto :failed
-
-:menu
+echo 此入口只下载、校验并恢复迁移文件，不会启动实验或调用模型。
+echo 请确认目标磁盘有足够空间，并已安装 zstd.exe。
 echo.
-echo ===== Windows 实验入口 =====
-echo 1. 路线层传统基线（seed 0，100x100，离线）
-echo 2. 调度层 D0/D1 基线（seed 0，离线）
-echo 0. 退出
-set "CHOICE="
-set /p "CHOICE=请选择要启动的实验: "
-if "%CHOICE%"=="1" goto :route
-if "%CHOICE%"=="2" goto :dispatch
-if "%CHOICE%"=="0" exit /b 0
-goto :menu
-
-:route
-for /f %%I in ('powershell -NoProfile -Command "Get-Date -Format yyyyMMdd_HHmmss"') do set "RUN_ID=%%I"
-if not defined RUN_ID set "RUN_ID=route_seed0"
-echo 启动路线层离线基线；结果写入 outputs\windows_runs\traditional_%RUN_ID%
-".venv\Scripts\python.exe" scripts\run_traditional_experiment.py --seeds 0 --size 100 --output-dir "outputs\windows_runs\traditional_%RUN_ID%"
-set "RUN_RESULT=%ERRORLEVEL%"
-goto :finished
-
-:dispatch
-for /f %%I in ('powershell -NoProfile -Command "Get-Date -Format yyyyMMdd_HHmmss"') do set "RUN_ID=%%I"
-if not defined RUN_ID set "RUN_ID=dispatch_seed0"
-echo 启动调度层 D0/D1 离线基线；结果写入 outputs\windows_runs\dispatch_%RUN_ID%
-".venv\Scripts\python.exe" scripts\run_dispatch_matrix.py --seeds 0 --methods D0_greedy D1_optimizer --feedback-mode none --output-dir "outputs\windows_runs\dispatch_%RUN_ID%"
-set "RUN_RESULT=%ERRORLEVEL%"
-goto :finished
-
-:finished
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File "%RESTORE_SCRIPT%" -Destination "%~dp0" -DownloadDirectory "%DOWNLOAD_DIR%"
+set "RESTORE_RESULT=%ERRORLEVEL%"
 echo.
-if "%RUN_RESULT%"=="0" (
-  echo 实验进程已正常结束。请检查输出目录中的 manifest 和结果文件。
+if "%RESTORE_RESULT%"=="0" (
+  echo Windows 迁移文件已恢复并通过归档校验；本入口未启动实验。
 ) else (
-  echo 实验进程退出码：%RUN_RESULT%。请保存此窗口中的错误信息。
+  echo 恢复未完成，退出码：%RESTORE_RESULT%。可保留已下载分卷后重新运行。
 )
 pause
-exit /b %RUN_RESULT%
-
-:failed
-echo 环境准备失败。请保留错误信息并检查 Python 版本及网络连接。
-pause
-exit /b 1
+exit /b %RESTORE_RESULT%

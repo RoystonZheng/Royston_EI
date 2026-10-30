@@ -6,7 +6,7 @@
 
 - [项目协作规则](AGENTS.md)
 - [研究记忆库](output/paper/研究记忆库.md)：已确认边界、方案状态、证据限制及最新进度
-- [Windows 实验入口](START_WINDOWS.bat)：准备锁定的 Python 环境，并启动一个 seed 的离线路线层或 D0/D1 调度层基线
+- [Windows 迁移入口](START_WINDOWS.bat)：下载、校验并恢复完整实验文件；此入口不会启动实验
 - [Agent 工作流设计稿](output/paper/第三次课_Agent工作流完善稿.md)
 - [两层实验总览](EXPERIMENT_DESIGN.md)
 

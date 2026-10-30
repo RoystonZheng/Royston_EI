@@ -21,9 +21,9 @@ Latest assembled at 2026-10-30 16:16:01 CST. Main branch contains the project co
 
 The delta contains paths up to 316 characters, including 573 paths at or above the traditional 260-character limit. Use a short destination such as `C:\EI` and enable Windows long-path support before extraction.
 
-## Start an offline run on Windows
+## Windows entry: restore only
 
-After restoring the complete project tree, double-click `START_WINDOWS.bat`. It prepares the locked Python environment and offers two seed-0 offline runs: the traditional route baseline or the D0/D1 dispatch baseline. Each run writes to a new timestamped folder under `outputs/windows_runs/`. These entries do not make live model/API calls. Live NYC and R4 checkpoints remain frozen; do not replay their incomplete requests or treat partial outputs as completed results.
+Clone the repository and double-click `START_WINDOWS.bat`. The entry calls `RESTORE_FULL_WINDOWS.ps1`, downloads all full-delta parts, verifies their GitHub SHA-256 values, and restores the project files. It does not prepare an experiment environment, start a runner, or call a model. The full delta contains 511,432 files and 69,414,105,294 source bytes. Live NYC and R4 checkpoints remain frozen; do not replay their incomplete requests or treat partial outputs as completed results.
 
 ## Current stop boundary
 
