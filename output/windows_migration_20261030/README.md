@@ -18,6 +18,10 @@ Latest assembled at 2026-10-30 16:16:01 CST. Main branch contains the project co
 3. For the stable outputs archive, run `copy /b part-001+part-002+part-003+part-004+part-005 unaligned_research_outputs_20261030.tar.zst`, then decompress with `zstd` and extract with `tar`.
 4. Download the R4 full archive release asset and run `RESTORE_R4_WINDOWS.ps1 -ArchivePath <tar.zst> -Destination <checkpoint-folder>`. Extract the R4 link-fallback archive separately. Read each `STOP_AND_MIGRATION_STATE.json` before making a future run decision.
 
+## Start an offline run on Windows
+
+After restoring the complete project tree, double-click `START_WINDOWS.bat`. It prepares the locked Python environment and offers two seed-0 offline runs: the traditional route baseline or the D0/D1 dispatch baseline. Each run writes to a new timestamped folder under `outputs/windows_runs/`. These entries do not make live model/API calls. Live NYC and R4 checkpoints remain frozen; do not replay their incomplete requests or treat partial outputs as completed results.
+
 ## Current stop boundary
 
 The Windows checkpoint is frozen. NYC F1/D5 has 15 raw round traces and no official result; NYC F2/D8 has a completed raw response trace but no official method result. R4 parent and worker manifests retain their original values even where the process scan found no runner. Do not replay uncertain or completed requests, and do not treat a partial route prefix as a completed result.
