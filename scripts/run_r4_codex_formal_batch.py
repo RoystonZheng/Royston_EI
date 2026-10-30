@@ -28,6 +28,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT / "scripts") not in sys.path:
     sys.path.insert(0, str(ROOT / "scripts"))
 from r4_execution_lock import acquire_execution_lock, release_execution_lock
+from r4_route_safety_gate import route_safety_gate_block_reason
 from run_r4_codex_pilot_continuation import _load_frozen_task, _natural_simple_path_limit
 
 DEFAULT_SOURCE = ROOT / "outputs/route_layer/r4_codex_batch_preflights_20261024_v1/manifest.json"
@@ -229,14 +230,22 @@ def _render_index(manifest: Dict[str, Any], output_dir: Path) -> None:
         )
     status = html.escape(str(manifest["status"]))
     document = """<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>R4 Codex 路线批次</title>
-<style>body{font:15px/1.5 -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;margin:24px;color:#172033;background:#f5f7fb}main{max-width:1500px;margin:auto}header,section{background:#fff;border:1px solid #dce3ee;border-radius:10px;padding:18px;margin:14px 0}header{background:#172554;color:white}table{border-collapse:collapse;width:100%;background:white;font-size:13px}th,td{padding:8px;border-bottom:1px solid #e2e8f0;text-align:left}th{background:#edf2fc;position:sticky;top:0}a{color:#1d4ed8} .wrap{overflow:auto}</style><main><header><h1>R4 Codex 路线批次</h1><div>状态：__STATUS__ · 请求数：__USED__/__LIMIT__ · 冻结样本：__FROZEN__ · 可路由：__COUNT__ · 跳过：__SKIPPED__ · 已终态：__DONE__/__COUNT__</div><p>每个方向由模型单独提议；本地确定性校验决定是否接纳。工具调用、非法动作和失败均保留审计。</p></header><section><h2>可路由任务</h2>__TABLES__</section><section><h2>预检跳过项</h2><table><thead><tr><th>Seed</th><th>任务</th><th>端点门禁</th><th>路线门禁</th><th>原因</th></tr></thead><tbody>__SKIPPED_ROWS__</tbody></table></section></main></html>"""
-    done = sum(task["status"] in {"route_complete", "failed", "preflight_blocked"} for task in manifest["tasks"])
+<style>body{font:15px/1.5 -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;margin:24px;color:#172033;background:#f5f7fb}main{max-width:1500px;margin:auto}header,section{background:#fff;border:1px solid #dce3ee;border-radius:10px;padding:18px;margin:14px 0}header{background:#172554;color:white}table{border-collapse:collapse;width:100%;background:white;font-size:13px}th,td{padding:8px;border-bottom:1px solid #e2e8f0;text-align:left}th{background:#edf2fc;position:sticky;top:0}a{color:#1d4ed8} .wrap{overflow:auto}</style><main><header><h1>R4 Codex 路线批次</h1><div>状态：__STATUS__ · 请求数：__USED__/__LIMIT__ · 冻结样本：__FROZEN__ · 可路由：__COUNT__ · 跳过：__SKIPPED__ · 已终态：__DONE__/__COUNT__</div><p>完整路线：__ROUTE_COMPLETE__ · 失败：__FAILED__ · 结果未知：__UNKNOWN__ · 可续：__READY__ · 待运行：__PENDING__</p><p>每个方向由模型单独提议；本地确定性校验决定是否接纳。工具调用、非法动作和失败均保留审计。</p></header><section><h2>可路由任务</h2>__TABLES__</section><section><h2>预检跳过项</h2><table><thead><tr><th>Seed</th><th>任务</th><th>端点门禁</th><th>路线门禁</th><th>原因</th></tr></thead><tbody>__SKIPPED_ROWS__</tbody></table></section></main></html>"""
+    statuses = [str(task.get("status", "missing")) for task in manifest["tasks"]]
+    status_counts = {status: statuses.count(status) for status in ("route_complete", "failed", "outcome_unknown", "ready", "pending")}
+    terminal_statuses = {"route_complete", "failed", "outcome_unknown", "preflight_blocked", "duplicate_suppressed"}
+    done = sum(status in terminal_statuses for status in statuses)
     document = document.replace("__STATUS__", status)
     document = document.replace("__USED__", str(manifest.get("model_requests_used", 0)))
     document = document.replace("__LIMIT__", str(manifest.get("request_limit_display") or manifest.get("authorized_request_limit") or "未授权"))
     document = document.replace("__FROZEN__", str(manifest.get("frozen_task_count", 0)))
     document = document.replace("__SKIPPED__", str(manifest.get("skipped_task_count", 0)))
     document = document.replace("__DONE__", str(done)).replace("__COUNT__", str(len(manifest["tasks"])))
+    document = document.replace("__ROUTE_COMPLETE__", str(status_counts["route_complete"]))
+    document = document.replace("__FAILED__", str(status_counts["failed"]))
+    document = document.replace("__UNKNOWN__", str(status_counts["outcome_unknown"]))
+    document = document.replace("__READY__", str(status_counts["ready"]))
+    document = document.replace("__PENDING__", str(status_counts["pending"]))
     document = document.replace("__TABLES__", "\n".join(rows))
     document = document.replace("__SKIPPED_ROWS__", "\n".join(skipped_rows))
     (output_dir / "index.html").write_text(document, encoding="utf-8")
@@ -511,6 +520,27 @@ def execute_batch(
         or manifest.get("route_input_protocol") != REQUIRED_ROUTE_INPUT_PROTOCOL
     ):
         raise RuntimeError("batch_method_version_mismatch")
+    route_gate_block = route_safety_gate_block_reason(manifest, ROOT)
+    if route_gate_block:
+        manifest["status"] = "paused_user_requested_safety_gate"
+        manifest["halt_no_more_model_requests"] = True
+        manifest["halt_status"] = route_gate_block
+        manifest["current_authorization_status"] = (
+            "paused_user_requested_safety_gate_no_model_requests_until_gate_passed"
+        )
+        manifest["pause_reason"] = route_gate_block
+        events = manifest.setdefault("events", [])
+        if not events or events[-1].get("event") != "formal_execute_blocked_by_current_route_safety_gate":
+            events.append({
+                "event": "formal_execute_blocked_by_current_route_safety_gate",
+                "reason": route_gate_block,
+                "model_requests_started": 0,
+                "at_utc": datetime.now(timezone.utc).isoformat(),
+            })
+        manifest["updated_at_utc"] = datetime.now(timezone.utc).isoformat()
+        write_json(manifest_path, manifest)
+        _render_index(manifest, output_dir)
+        return manifest
     # Current direct user authorization permits R4 continuation without a
     # project-level request, account-usage, or fee cap. Keep usage as an
     # observation; provider limits and the no-replay policy remain in force.

@@ -74,3 +74,21 @@ The user-provided Tencent share link was re-read through its read-only minutes d
 The excerpt confirms the teacher's sequence: model physical EV cost in each route interval, sum the intervals for a candidate path, measure a minimum-cost reference on a simple or grid map, then compare the path cost and expected gain against that reference. The 5%/15% profit targets and 3–4 CNY/km examples are illustrative. At 54:00 the two discrete weights are expressly electricity/token `(0.6, 0.4)` and `(0.4, 0.6)`. The teacher mentions switching around a profit threshold, but the threshold, denominator, and branch wording do not form a fully executable rule; at 54:50 the teacher also says continuous per-node weights may add computation time and recommends two combinations. Thus the profiles are suitable for separate sensitivity reporting; an automatic threshold switch remains blocked pending a defined rule.
 
 This E/token objective is distinct from the already approved time/money scorer. Existing `route_experiment/decision.py` has time/money profiles and segment accounting helpers; the E/token profiles have not been ranked in a new shared experiment sidecar as of this note. Revenue should be recorded once per passenger order/segment boundary when observed, while electricity is priced after summing signed-net Link energy within the journey segment. Token/model-call cost belongs to the route-generation request/method ledger, not each road Link.
+
+
+## 2026-10-28 speaker-label provenance correction
+
+The raw 49:08–55:10 ASR excerpt is `meeting_transcript_excerpt_20261028_49-55_raw.md` (SHA-256 `d4e11ecfb4d0a34c5aba075be47639ba86315392d59b94da02b66d9c398a4fc8`). Its returned speaker label is `chen`; the source explicitly says the speaker identity was not voice-verified. Earlier S1/S2 role mapping in this note is an inference from conversational wording, not verified identity. Attribute the content to “the meeting transcript / speaker label chen” unless independently confirmed. The extract supports electricity/token weights, but leaves the threshold trigger, revenue definition, profit denominator, and normalization unresolved. The separately user-approved time/money v5 profiles remain a distinct design decision.
+
+## 2026-10-30 follow-up: segment economics and experiment scope
+
+The user asked whether the discussion near minute 50 should be included. The Tencent share page was reopened in the browser and the 47:15–55:11 transcript was read directly. It confirms that this belongs in the research plan as a separate electricity/token and order-reward objective. The 5%/15% target and 3–4 CNY/km price are examples only; the transcript does not freeze a revenue denominator, cost normalization, baseline metric, or executable threshold-switch direction.
+
+The current `route_experiment/decision.py` (SHA-256 `6b383157aa3287faa0049f13bbf0ff7765e903367a63305fd826e89dc83a0375`) already exposes `calculate_segment_economics` and `aggregate_route_segment_economics`: deadhead revenue is known zero, a passenger fare can be supplied at the order/segment boundary, and `net_economic_cost = electricity_cost - fare_revenue` stays null when required data are missing. `score_route_candidates` separately implements the user-approved time/money profiles. These helpers do not implement an electricity/token weighted objective or threshold-driven switch.
+
+Keep the two design tracks separate:
+
+- **Time/money v5:** user-approved weights remain time/money `(0.6, 0.4)` and `(0.4, 0.6)`; this is a distinct candidate-selection experiment.
+- **Electricity/token plus order reward:** retain journey-segment EV2 energy and tariff, one passenger-order revenue amount, and token/compute cost at the method/request level. The transcript's `(0.6, 0.4)` and `(0.4, 0.6)` pair electricity/token. Report them as separate static sensitivity profiles only after a common baseline, rate card, units, and candidate set are frozen. Do not encode automatic switching until the threshold rule is specified.
+
+For V7, the 2026-10-30 phase sidecar provides only failed-attempt legal-prefix simulation estimates; all 150 actual complete-route EV2 fields remain null. Those prefixes cannot support a completed-order fare/reward calculation, and invalid proposal energy stays counterfactual. No experiment inputs or active selector should be rewritten from this audit.

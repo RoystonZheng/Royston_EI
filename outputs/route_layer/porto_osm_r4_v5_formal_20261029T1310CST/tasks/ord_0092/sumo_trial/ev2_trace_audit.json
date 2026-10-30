@@ -1,0 +1,46 @@
+{
+  "energy_model_module_sha256": "a53ac3860e7a9d169b5ceb0f8ca853a0cb73061cc106ba0ec235f1e3c600e893",
+  "energy_model_version": "ev_longitudinal_v2",
+  "legs": [
+    {
+      "auxiliary_kwh": 0.050399999999999716,
+      "billable_kwh": 0.7620774091336181,
+      "leg_role": "vehicle_to_pickup",
+      "matches_source_within_1e-8_wh": true,
+      "missing_grade_steps": 2268,
+      "model_version": "ev_longitudinal_v2",
+      "module_recalculated_net_wh": 762.0774091336181,
+      "profile_id": "generic_reference_ev_v1",
+      "profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee",
+      "propulsion_draw_kwh": 1.3163053417208264,
+      "regenerated_kwh": 0.6046279325872079,
+      "signed_net_kwh": 0.7620774091336181,
+      "source_route_ledger_net_wh": 762.0774091336181,
+      "trace_fidelity": "observed_sumo_speed_trace_grade_missing",
+      "trace_samples": 2268,
+      "trip_id": "exp_veh_10_ord_0092_deadhead"
+    },
+    {
+      "auxiliary_kwh": 0.07615555555555938,
+      "billable_kwh": 0.8425295793998145,
+      "leg_role": "pickup_to_dropoff",
+      "matches_source_within_1e-8_wh": true,
+      "missing_grade_steps": 3427,
+      "model_version": "ev_longitudinal_v2",
+      "module_recalculated_net_wh": 842.5295793998146,
+      "profile_id": "generic_reference_ev_v1",
+      "profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee",
+      "propulsion_draw_kwh": 1.383850981047207,
+      "regenerated_kwh": 0.6174769572029519,
+      "signed_net_kwh": 0.8425295793998145,
+      "source_route_ledger_net_wh": 842.5295793998146,
+      "trace_fidelity": "observed_sumo_speed_trace_grade_missing",
+      "trace_samples": 3427,
+      "trip_id": "exp_veh_10_ord_0092_passenger"
+    }
+  ],
+  "limitation": "SUMO simulated motion; missing grade treated as flat; not measured production vehicle energy",
+  "profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee",
+  "route_leg_count": 2,
+  "status": "passed"
+}

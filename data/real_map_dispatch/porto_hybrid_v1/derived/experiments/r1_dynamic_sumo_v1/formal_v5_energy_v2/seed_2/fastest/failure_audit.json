@@ -1,0 +1,45 @@
+{
+  "background_demand_sha256": "2bc2e6588fab14ab698d40d39de1a2415d0067a40541ca1e5e6de11804378fcb",
+  "completed_trip_count": 369,
+  "created_at_utc": "2026-10-27T09:12:36.310561+00:00",
+  "elapsed_wall_s": 976.563,
+  "failure_message": "SUMO run exceeded 24 simulated hours",
+  "interpretation": "Two experimental vehicle legs did not arrive before the 24 simulated hour safety limit. Their measured wait exceeds 82,000 s; this cell is a simulator gridlock/stall failure, not a route-energy observation. Preserve as failed in the frozen matrix denominator; do not rerun the unchanged deterministic scenario.",
+  "objective": "FASTEST",
+  "protocol_sha256": "84407a37b780f4c676045e14162ac283964864faf0e472f38930aa549f938e46",
+  "rerun_decision": "not_retried; no demonstrated execution defect within the frozen protocol",
+  "route_file_sha256": "e2d6967cc3f4a378e4ddd47d055b4157cffc9d209a4aacd70f116ddaa6382a4d",
+  "runner_error": "runner_exit_nonzero_or_summary_missing",
+  "runner_exit_code": 1,
+  "runner_sha256": "dda71ccc0ea75c08d12a29968870a99dfad3cbf491786fe4acd43bbef05b2e05",
+  "schema_version": "porto_r1_sumo_failure_audit_v1",
+  "seed": 2,
+  "simulated_time_limit_h": 24,
+  "status": "failed_incomplete_simulation_not_energy_result",
+  "task_id": "seed_02_fastest",
+  "tripinfo_row_count": 371,
+  "tripinfo_sha256": "30f39d2ffd2aa3b892d31e39a8406d9798fdd821cb16f1ffbf15248808154655",
+  "unfinished_experimental_vehicle_count": 2,
+  "unfinished_vehicles": [
+    {
+      "arrival_s": -1.0,
+      "depart_s": 3417.6,
+      "duration_s": 82982.4,
+      "route_length_m": 1662.63,
+      "vaporized": "end",
+      "vehicle_id": "exp_veh_03_ord_0028_passenger",
+      "waiting_count": 2,
+      "waiting_time_s": 82834.3
+    },
+    {
+      "arrival_s": -1.0,
+      "depart_s": 3540.1,
+      "duration_s": 82859.9,
+      "route_length_m": 133.01,
+      "vaporized": "end",
+      "vehicle_id": "exp_veh_07_ord_0068_deadhead",
+      "waiting_count": 1,
+      "waiting_time_s": 82838.9
+    }
+  ]
+}

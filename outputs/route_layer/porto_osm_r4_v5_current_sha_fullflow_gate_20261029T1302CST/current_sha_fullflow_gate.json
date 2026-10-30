@@ -1,0 +1,192 @@
+{
+  "candidate_ids_by_profile": {
+    "money_priority_0_4_0_6": "signed_net_ev2",
+    "time_priority_0_6_0_4": "signed_net_ev2"
+  },
+  "candidate_pool_sha256": "5099d5035ad4955c535e7458e6e7eae9ad08807c59af0a46e5e531538bf0bd69",
+  "candidate_pool_shared_across_profiles": true,
+  "created_at_utc": "2026-10-29T05:07:25.113026+00:00",
+  "distinct_feasible_route_pair_count": 2,
+  "fare_assumption": {
+    "basis": "explicit scenario assumption authorized by user; not observed Porto fare",
+    "fare_per_passenger_km_cny": 3.5
+  },
+  "layer": "route planning; fixed vehicle/order assignment, no dispatch optimization",
+  "map_type": "real OSM-derived Porto SUMO network",
+  "model_calls": 0,
+  "oneway_recovery_fixture_path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/porto_osm_r4_v5_current_sha_fullflow_gate_20261029T1302CST/oneway_recovery_fixture.json",
+  "oneway_recovery_fixture_sha256": "002acbe6372a73873216fb33498e3db3f04692702aa2d37b4080f51c00cbb1d4",
+  "preflight_summary_sha256": "90043589926f48c1f7446d96834b167f0852dffa889224e256206994793573d0",
+  "profiles": {
+    "money_priority_0_4_0_6": {
+      "candidate_id": "signed_net_ev2",
+      "energy_audit": {
+        "energy_model_module_sha256": "a53ac3860e7a9d169b5ceb0f8ca853a0cb73061cc106ba0ec235f1e3c600e893",
+        "energy_model_version": "ev_longitudinal_v2",
+        "legs": [
+          {
+            "auxiliary_kwh": 0.03702222222222202,
+            "billable_kwh": 0.17797381030684012,
+            "leg_role": "vehicle_to_pickup",
+            "matches_source_within_1e-8_wh": true,
+            "missing_grade_steps": 1666,
+            "model_version": "ev_longitudinal_v2",
+            "module_recalculated_net_wh": 177.9738103068401,
+            "profile_id": "generic_reference_ev_v1",
+            "profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee",
+            "propulsion_draw_kwh": 0.25480470799412086,
+            "regenerated_kwh": 0.11385311990950274,
+            "signed_net_kwh": 0.17797381030684012,
+            "source_route_ledger_net_wh": 177.9738103068401,
+            "trace_fidelity": "observed_sumo_speed_trace_grade_missing",
+            "trace_samples": 1666,
+            "trip_id": "exp_veh_01_ord_0001_deadhead"
+          },
+          {
+            "auxiliary_kwh": 0.04468888888888864,
+            "billable_kwh": 0.44529381358250997,
+            "leg_role": "pickup_to_dropoff",
+            "matches_source_within_1e-8_wh": true,
+            "missing_grade_steps": 2011,
+            "model_version": "ev_longitudinal_v2",
+            "module_recalculated_net_wh": 445.29381358251,
+            "profile_id": "generic_reference_ev_v1",
+            "profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee",
+            "propulsion_draw_kwh": 0.7567457667741393,
+            "regenerated_kwh": 0.356140842080518,
+            "signed_net_kwh": 0.44529381358250997,
+            "source_route_ledger_net_wh": 445.29381358251,
+            "trace_fidelity": "observed_sumo_speed_trace_grade_missing",
+            "trace_samples": 2011,
+            "trip_id": "exp_veh_01_ord_0001_passenger"
+          }
+        ],
+        "limitation": "SUMO simulated motion; missing grade treated as flat; not measured production vehicle energy",
+        "profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee",
+        "route_leg_count": 2,
+        "status": "passed"
+      },
+      "execution_audit": {
+        "candidate_id": "signed_net_ev2",
+        "execution_legs": {
+          "pickup_to_dropoff": {
+            "executed_matches_selected_candidate": true,
+            "executed_path_sha256": "124695fc6f9db16470c7a545956ab13c322a402f5e107b3c9916e0ce79ec2393",
+            "oneway_failure": null,
+            "oneway_guard_status": "passed",
+            "selected_path_sha256": "124695fc6f9db16470c7a545956ab13c322a402f5e107b3c9916e0ce79ec2393",
+            "status": "passed"
+          },
+          "vehicle_to_pickup": {
+            "executed_matches_selected_candidate": true,
+            "executed_path_sha256": "5c0b24e5faa66610c1a6c58c37bb9dc574700d874f411c56e2c685c9347f31e4",
+            "oneway_failure": null,
+            "oneway_guard_status": "passed",
+            "selected_path_sha256": "5c0b24e5faa66610c1a6c58c37bb9dc574700d874f411c56e2c685c9347f31e4",
+            "status": "passed"
+          }
+        },
+        "model_calls": 0,
+        "orders_completed": 1,
+        "profile_id": "money_priority_0_4_0_6",
+        "route_legs_actual_sha256": "ea29ee03586c6c1b0df39bfae87da4d8ea76aa79572094ec59d66d0e30ab0598",
+        "status": "passed",
+        "summary_sha256": "0fecb0220a6f03b0ceadab1de2732e7d54879602bd373bbe6446b302ad2602be",
+        "terminal_order_count": 1
+      },
+      "route_legs_actual_sha256": "ea29ee03586c6c1b0df39bfae87da4d8ea76aa79572094ec59d66d0e30ab0598",
+      "summary_sha256": "0fecb0220a6f03b0ceadab1de2732e7d54879602bd373bbe6446b302ad2602be"
+    },
+    "time_priority_0_6_0_4": {
+      "candidate_id": "signed_net_ev2",
+      "energy_audit": {
+        "energy_model_module_sha256": "a53ac3860e7a9d169b5ceb0f8ca853a0cb73061cc106ba0ec235f1e3c600e893",
+        "energy_model_version": "ev_longitudinal_v2",
+        "legs": [
+          {
+            "auxiliary_kwh": 0.03711111111111091,
+            "billable_kwh": 0.178062699195729,
+            "leg_role": "vehicle_to_pickup",
+            "matches_source_within_1e-8_wh": true,
+            "missing_grade_steps": 1670,
+            "model_version": "ev_longitudinal_v2",
+            "module_recalculated_net_wh": 178.062699195729,
+            "profile_id": "generic_reference_ev_v1",
+            "profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee",
+            "propulsion_draw_kwh": 0.25480470799412086,
+            "regenerated_kwh": 0.11385311990950274,
+            "signed_net_kwh": 0.178062699195729,
+            "source_route_ledger_net_wh": 178.062699195729,
+            "trace_fidelity": "observed_sumo_speed_trace_grade_missing",
+            "trace_samples": 1670,
+            "trip_id": "exp_veh_01_ord_0001_deadhead"
+          },
+          {
+            "auxiliary_kwh": 0.04468888888888864,
+            "billable_kwh": 0.44529381358250997,
+            "leg_role": "pickup_to_dropoff",
+            "matches_source_within_1e-8_wh": true,
+            "missing_grade_steps": 2011,
+            "model_version": "ev_longitudinal_v2",
+            "module_recalculated_net_wh": 445.29381358251,
+            "profile_id": "generic_reference_ev_v1",
+            "profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee",
+            "propulsion_draw_kwh": 0.7567457667741393,
+            "regenerated_kwh": 0.356140842080518,
+            "signed_net_kwh": 0.44529381358250997,
+            "source_route_ledger_net_wh": 445.29381358251,
+            "trace_fidelity": "observed_sumo_speed_trace_grade_missing",
+            "trace_samples": 2011,
+            "trip_id": "exp_veh_01_ord_0001_passenger"
+          }
+        ],
+        "limitation": "SUMO simulated motion; missing grade treated as flat; not measured production vehicle energy",
+        "profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee",
+        "route_leg_count": 2,
+        "status": "passed"
+      },
+      "execution_audit": {
+        "candidate_id": "signed_net_ev2",
+        "execution_legs": {
+          "pickup_to_dropoff": {
+            "executed_matches_selected_candidate": true,
+            "executed_path_sha256": "124695fc6f9db16470c7a545956ab13c322a402f5e107b3c9916e0ce79ec2393",
+            "oneway_failure": null,
+            "oneway_guard_status": "passed",
+            "selected_path_sha256": "124695fc6f9db16470c7a545956ab13c322a402f5e107b3c9916e0ce79ec2393",
+            "status": "passed"
+          },
+          "vehicle_to_pickup": {
+            "executed_matches_selected_candidate": true,
+            "executed_path_sha256": "5c0b24e5faa66610c1a6c58c37bb9dc574700d874f411c56e2c685c9347f31e4",
+            "oneway_failure": null,
+            "oneway_guard_status": "passed",
+            "selected_path_sha256": "5c0b24e5faa66610c1a6c58c37bb9dc574700d874f411c56e2c685c9347f31e4",
+            "status": "passed"
+          }
+        },
+        "model_calls": 0,
+        "orders_completed": 1,
+        "profile_id": "time_priority_0_6_0_4",
+        "route_legs_actual_sha256": "739b29a576ac9892eeb788297c776d209e66451bd92ee53dd27de9735ced7d70",
+        "status": "passed",
+        "summary_sha256": "9f27abd2ee44a223aee4d748c7a87db93404914ec71b228a7ca5c3088e41d025",
+        "terminal_order_count": 1
+      },
+      "route_legs_actual_sha256": "739b29a576ac9892eeb788297c776d209e66451bd92ee53dd27de9735ced7d70",
+      "summary_sha256": "9f27abd2ee44a223aee4d748c7a87db93404914ec71b228a7ca5c3088e41d025"
+    }
+  },
+  "recovery_assertions": {
+    "illegal_segment_executed": false,
+    "last_legal_link_rollback": true,
+    "repaired_route_all_segments_pass": true,
+    "reverse_only_transition": true
+  },
+  "runner_path": "/Users/didi/Documents/personalcodexfile/第二次课/scripts/run_porto_r4_osm_first_pilot.py",
+  "runner_sha256": "db82670714f4f2eef4ca97a6b46e880b5fb0a688ce7640cbf9c32dff751e4c9d",
+  "schema_version": "porto_r4_current_sha_oneway_dualprofile_zero_call_fullflow_gate_v1",
+  "scope_limit": "zero-call recovery fixture plus one-order deterministic SUMO and EV2 replay; does not count as formal model experiment or prove model response quality",
+  "shared_link_candidate_present": true,
+  "status": "passed"
+}

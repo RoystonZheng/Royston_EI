@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- generated on 2026-10-30T00:46:10.988585+08:00 by Eclipse SUMO sumo 1.28.0
+<sumoConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/sumoConfiguration.xsd">
+
+    <input>
+        <net-file value="/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/r4_grid_route_sumo_acceptance_20261030T004602CST/grid.net.xml"/>
+        <route-files value="/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/r4_grid_route_sumo_acceptance_20261030T004602CST/pilot_route.rou.xml"/>
+    </input>
+
+    <output>
+        <summary-output value="/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/r4_grid_route_sumo_acceptance_20261030T004602CST/sumo_summary.xml"/>
+        <tripinfo-output value="/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/r4_grid_route_sumo_acceptance_20261030T004602CST/tripinfo.xml"/>
+        <vehroute-output value="/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/r4_grid_route_sumo_acceptance_20261030T004602CST/vehroute.xml"/>
+    </output>
+
+    <time>
+        <end value="5000"/>
+        <step-length value="0.5"/>
+    </time>
+
+    <processing>
+        <time-to-teleport value="-1"/>
+    </processing>
+
+    <report>
+        <duration-log.disable value="true"/>
+        <no-step-log value="true"/>
+    </report>
+
+    <random_number>
+        <seed value="0"/>
+    </random_number>
+
+</sumoConfiguration>
+-->
+
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/routes_file.xsd">
+    <vehicle id="r4_pilot_vehicle" type="r4_ev" depart="0.00" departLane="0" departSpeed="11.163" speedFactor="1.1163" arrival="1084.50">
+        <route edges="edge_node_69_41_node_69_42 edge_node_69_42_node_68_42 edge_node_68_42_node_67_42 edge_node_67_42_node_66_42 edge_node_66_42_node_66_43 edge_node_66_43_node_65_43 edge_node_65_43_node_64_43 edge_node_64_43_node_64_44 edge_node_64_44_node_64_45 edge_node_64_45_node_64_46 edge_node_64_46_node_63_46 edge_node_63_46_node_62_46 edge_node_62_46_node_61_46 edge_node_61_46_node_61_47 edge_node_61_47_node_60_47 edge_node_60_47_node_59_47 edge_node_59_47_node_58_47 edge_node_58_47_node_58_48 edge_node_58_48_node_58_49 edge_node_58_49_node_58_50 edge_node_58_50_node_57_50 edge_node_57_50_node_57_51 edge_node_57_51_node_56_51 edge_node_56_51_node_56_52 edge_node_56_52_node_56_53 edge_node_56_53_node_55_53 edge_node_55_53_node_54_53 edge_node_54_53_node_54_54 edge_node_54_54_node_53_54 edge_node_53_54_node_52_54 edge_node_52_54_node_51_54 edge_node_51_54_node_51_55 edge_node_51_55_node_50_55 edge_node_50_55_node_50_56 edge_node_50_56_node_49_56 edge_node_49_56_node_49_57 edge_node_49_57_node_48_57 edge_node_48_57_node_47_57 edge_node_47_57_node_46_57 edge_node_46_57_node_46_58 edge_node_46_58_node_46_59 edge_node_46_59_node_46_60 edge_node_46_60_node_45_60 edge_node_45_60_node_45_61 edge_node_45_61_node_44_61 edge_node_44_61_node_44_62 edge_node_44_62_node_43_62 edge_node_43_62_node_42_62 edge_node_42_62_node_42_63 edge_node_42_63_node_41_63 edge_node_41_63_node_40_63 edge_node_40_63_node_39_63 edge_node_39_63_node_38_63 edge_node_38_63_node_37_63 edge_node_37_63_node_36_63 edge_node_36_63_node_35_63 edge_node_35_63_node_34_63 edge_node_34_63_node_33_63 edge_node_33_63_node_33_64 edge_node_33_64_node_32_64 edge_node_32_64_node_31_64 edge_node_31_64_node_30_64 edge_node_30_64_node_29_64 edge_node_29_64_node_29_65 edge_node_29_65_node_28_65 edge_node_28_65_node_27_65 edge_node_27_65_node_27_66 edge_node_27_66_node_26_66 edge_node_26_66_node_25_66 edge_node_25_66_node_24_66 edge_node_24_66_node_24_65 edge_node_24_65_node_25_65 edge_node_25_65_node_25_64 edge_node_25_64_node_26_64 edge_node_26_64_node_26_63 edge_node_26_63_node_27_63 edge_node_27_63_node_27_62 edge_node_27_62_node_28_62 edge_node_28_62_node_29_62 edge_node_29_62_node_30_62 edge_node_30_62_node_31_62 edge_node_31_62_node_31_61 edge_node_31_61_node_31_60 edge_node_31_60_node_32_60 edge_node_32_60_node_32_59 edge_node_32_59_node_32_58 edge_node_32_58_node_33_58 edge_node_33_58_node_33_57 edge_node_33_57_node_34_57 edge_node_34_57_node_34_56 edge_node_34_56_node_34_55 edge_node_34_55_node_34_54 edge_node_34_54_node_35_54 edge_node_35_54_node_35_53 edge_node_35_53_node_35_52 edge_node_35_52_node_36_52 edge_node_36_52_node_36_51 edge_node_36_51_node_37_51 edge_node_37_51_node_38_51 edge_node_38_51_node_38_50 edge_node_38_50_node_39_50 edge_node_39_50_node_39_49 edge_node_39_49_node_40_49 edge_node_40_49_node_40_48 edge_node_40_48_node_41_48 edge_node_41_48_node_41_47 edge_node_41_47_node_42_47 edge_node_42_47_node_42_46 edge_node_42_46_node_43_46 edge_node_43_46_node_43_45 edge_node_43_45_node_42_45 edge_node_42_45_node_42_44 edge_node_42_44_node_42_43"/>
+        <stop edge="edge_node_26_66_node_25_66" endPos="84.60" duration="10.00"/>
+        <stop edge="edge_node_42_44_node_42_43" endPos="84.60" duration="10.00"/>
+    </vehicle>
+
+</routes>

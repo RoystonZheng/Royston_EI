@@ -1,0 +1,46 @@
+{
+  "energy_model_module_sha256": "a53ac3860e7a9d169b5ceb0f8ca853a0cb73061cc106ba0ec235f1e3c600e893",
+  "energy_model_version": "ev_longitudinal_v2",
+  "legs": [
+    {
+      "auxiliary_kwh": 0.03417777777777759,
+      "billable_kwh": 0.4555270095706634,
+      "leg_role": "vehicle_to_pickup",
+      "matches_source_within_1e-8_wh": true,
+      "missing_grade_steps": 1538,
+      "model_version": "ev_longitudinal_v2",
+      "module_recalculated_net_wh": 455.5270095706634,
+      "profile_id": "generic_reference_ev_v1",
+      "profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee",
+      "propulsion_draw_kwh": 0.7987788399981116,
+      "regenerated_kwh": 0.3774296082052258,
+      "signed_net_kwh": 0.4555270095706634,
+      "source_route_ledger_net_wh": 455.5270095706634,
+      "trace_fidelity": "observed_sumo_speed_trace_grade_missing",
+      "trace_samples": 1538,
+      "trip_id": "exp_veh_04_ord_0034_deadhead"
+    },
+    {
+      "auxiliary_kwh": 0.0803111111111162,
+      "billable_kwh": 0.9248109821018335,
+      "leg_role": "pickup_to_dropoff",
+      "matches_source_within_1e-8_wh": true,
+      "missing_grade_steps": 3614,
+      "model_version": "ev_longitudinal_v2",
+      "module_recalculated_net_wh": 924.8109821018336,
+      "profile_id": "generic_reference_ev_v1",
+      "profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee",
+      "propulsion_draw_kwh": 1.480566945717349,
+      "regenerated_kwh": 0.6360670747266316,
+      "signed_net_kwh": 0.9248109821018335,
+      "source_route_ledger_net_wh": 924.8109821018336,
+      "trace_fidelity": "observed_sumo_speed_trace_grade_missing",
+      "trace_samples": 3614,
+      "trip_id": "exp_veh_04_ord_0034_passenger"
+    }
+  ],
+  "limitation": "SUMO simulated motion; missing grade treated as flat; not measured production vehicle energy",
+  "profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee",
+  "route_leg_count": 2,
+  "status": "passed"
+}

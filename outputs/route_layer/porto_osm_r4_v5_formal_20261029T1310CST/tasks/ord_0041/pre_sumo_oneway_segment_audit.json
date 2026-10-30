@@ -1,0 +1,56 @@
+{
+  "layer": "route planning; route validation occurs before SUMO order execution",
+  "map_type": "real OSM-derived Porto SUMO network",
+  "model_proposal_and_repair_checks": {
+    "pickup_to_dropoff": {
+      "discarded_unverified_suffix_link_count": 99,
+      "final_route_segment_count": 85,
+      "final_route_sha256": "3cb3d4b64377be1eb65aa0e176e4989439a6f9bb75188a8bc426f78ba50d8ba8",
+      "illegal_model_segment_executed": false,
+      "proposal_status": "rejected_at_directed_segment_and_researched",
+      "proposed_link_count": 101,
+      "proposed_route_sha256": "dbca7e9a6c6586b1964b30fc52a4e2269970be3dc0d69e47a3a20ac075e291c6",
+      "rejected_segment": {
+        "from_link": "715176795#2",
+        "reason": "illegal_directed_turn",
+        "segment_index": 1,
+        "to_link": "8366901#2"
+      },
+      "repair_segment_count": 85,
+      "repair_segments_validated_before_execution": true,
+      "repair_source": "directed_dijkstra_from_last_legal_link",
+      "repaired_link_count": 86,
+      "repaired_route_sha256": "3cb3d4b64377be1eb65aa0e176e4989439a6f9bb75188a8bc426f78ba50d8ba8",
+      "rollback_link": "715176795#2",
+      "verified_model_prefix_segment_count": 0
+    },
+    "vehicle_to_pickup": {
+      "discarded_unverified_suffix_link_count": 123,
+      "final_route_segment_count": 99,
+      "final_route_sha256": "7385bbec6da2baf702cba2891558ebb83e43f3557a42e55999b546832313e394",
+      "illegal_model_segment_executed": false,
+      "proposal_status": "rejected_at_directed_segment_and_researched",
+      "proposed_link_count": 125,
+      "proposed_route_sha256": "194542502a41e8bd54dc44ace6aeff69e583e986c6c8c6156493659c93b36ca6",
+      "rejected_segment": {
+        "from_link": "1188369998#0",
+        "reason": "illegal_directed_turn",
+        "segment_index": 1,
+        "to_link": "31573135#3"
+      },
+      "repair_segment_count": 99,
+      "repair_segments_validated_before_execution": true,
+      "repair_source": "directed_dijkstra_from_last_legal_link",
+      "repaired_link_count": 100,
+      "repaired_route_sha256": "7385bbec6da2baf702cba2891558ebb83e43f3557a42e55999b546832313e394",
+      "rollback_link": "1188369998#0",
+      "verified_model_prefix_segment_count": 0
+    }
+  },
+  "request_key": "s0:FASTEST:ord_0041:0000",
+  "schema_version": "r4_porto_osm_incremental_directed_route_audit_v1",
+  "selected_route_segments_guarded_before_sumo": true,
+  "source_network_sha256": "9481618cfdc0f0fa2a4300a38db6fe7f13321dfc22c554feb1cf91b4f8aa7387",
+  "v5_selected_candidate_id": "signed_net_ev2",
+  "v5_selected_profile_id": "money_priority_0_4_0_6"
+}

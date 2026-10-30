@@ -22,6 +22,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from route_experiment.codex_cli_adapter import CodexCliRouteStepClient  # noqa: E402
+from r4_route_safety_gate import route_safety_gate_block_reason_for_path  # noqa: E402
 from codex_cli_support import normalize_session_cumulative_usage  # noqa: E402
 from route_experiment.costs import evaluate_route_candidate  # noqa: E402
 from route_experiment.models import (  # noqa: E402
@@ -298,10 +299,59 @@ def _load_frozen_task(preflight_path: Optional[Path] = None):
     return source, road_map, task, package
 
 
+def _load_shared_candidate_routes(pool_path: Optional[Path], package: Any, task: VehicleOrderTask):
+    if pool_path is None:
+        return [], None
+    pool_path = Path(pool_path).expanduser().resolve()
+    manifest_path = pool_path.parent / "manifest.json"
+    manifest = _read_json(manifest_path)
+    if manifest.get("schema_version") != "r4_shared_candidate_pool_v2":
+        raise RuntimeError("shared_candidate_pool_schema_mismatch")
+    if manifest.get("candidate_pools_path") != pool_path.name:
+        raise RuntimeError("shared_candidate_pool_path_mismatch")
+    pool_sha = hashlib.sha256(pool_path.read_bytes()).hexdigest()
+    if pool_sha != manifest.get("candidate_pools_sha256"):
+        raise RuntimeError("shared_candidate_pool_hash_mismatch")
+    edge_by_id = {edge.edge_id: edge for edge in package.edges}
+    blocked = set(package.blocked_edge_ids)
+    links = []
+    with pool_path.open("r", encoding="utf-8") as handle:
+        for line in handle:
+            row = json.loads(line)
+            if row.get("task_id") != task.task_id or row.get("feasible") is not True:
+                continue
+            edge_ids = list(row.get("edge_sequence") or [])
+            nodes = list(row.get("node_sequence") or [])
+            if not edge_ids or len(nodes) != len(edge_ids) + 1:
+                raise RuntimeError("shared_candidate_route_shape_invalid:" + str(row.get("route_id")))
+            if nodes[0] != task.start_node_id or task.pickup_node_id not in nodes or task.dropoff_node_id not in nodes:
+                raise RuntimeError("shared_candidate_route_endpoint_mismatch:" + str(row.get("route_id")))
+            if nodes.index(task.pickup_node_id) >= nodes.index(task.dropoff_node_id) or len(nodes) != len(set(nodes)):
+                raise RuntimeError("shared_candidate_route_order_or_revisit_invalid:" + str(row.get("route_id")))
+            for index, edge_id in enumerate(edge_ids):
+                edge = edge_by_id.get(edge_id)
+                if edge is None or edge_id in blocked or edge.from_node != nodes[index] or edge.to_node != nodes[index + 1]:
+                    raise RuntimeError("shared_candidate_route_edge_invalid:" + str(row.get("route_id")))
+            links.append({
+                "route_id": row.get("route_id"),
+                "method_sources": row.get("method_sources"),
+                "edge_sequence_sha256": row.get("edge_sequence_sha256"),
+                "node_sequence": nodes,
+                "edge_sequence": edge_ids,
+                "travel_time_sec": row.get("travel_time_sec"),
+                "route_distance_m": row.get("route_distance_m"),
+                "energy_kwh": row.get("energy_kwh"),
+                "energy_model_version": row.get("energy_model_version"),
+            })
+    if not links:
+        raise RuntimeError("shared_candidate_pool_has_no_feasible_route_for_task")
+    return links, pool_sha
+
+
 def _input_protocol_flags(input_protocol: str):
-    if input_protocol not in {"r4-step-v2", "r4-step-v3"}:
+    if input_protocol not in {"r4-step-v2", "r4-step-v3", "r4-step-v4-link-fallback"}:
         raise ValueError("route_input_protocol_invalid")
-    enabled = input_protocol == "r4-step-v3"
+    enabled = input_protocol in {"r4-step-v3", "r4-step-v4-link-fallback"}
     return enabled, enabled
 
 
@@ -382,13 +432,21 @@ def _initial_state(
     input_protocol: str = "r4-step-v2",
     user_authorized_task9_experiment: bool = False,
     user_authorized_formal_batch_pilot: bool = False,
+    shared_candidate_pool_path: Optional[Path] = None,
 ) -> Dict[str, Any]:
     if codex_session_mode not in {"ephemeral_per_request", "persistent_per_task"}:
         raise ValueError("codex_session_mode_invalid")
+    if shared_candidate_pool_path and input_protocol != "r4-step-v4-link-fallback":
+        raise ValueError("shared_candidate_pool_requires_r4_step_v4_link_fallback")
+    if input_protocol == "r4-step-v4-link-fallback" and not shared_candidate_pool_path:
+        raise ValueError("r4_step_v4_requires_shared_candidate_pool")
     compact_visited_state, enable_progress_guidance = _input_protocol_flags(input_protocol)
     authorized_request_limit = int(authorized_request_limit)
     source_path = Path(preflight_path or PREFLIGHT_PATH).resolve()
     source, road_map, task, package = _load_frozen_task(source_path)
+    shared_candidate_routes, shared_candidate_pool_sha256 = _load_shared_candidate_routes(
+        shared_candidate_pool_path, package, task
+    )
     route_search = source.get("route_search", {})
     if route_search.get("generation_mode", "stepwise") != "stepwise":
         raise RuntimeError("frozen_preflight_is_not_stepwise")
@@ -446,8 +504,26 @@ def _initial_state(
             if enable_progress_guidance
             else None
         ),
+        shared_candidate_routes=shared_candidate_routes if shared_candidate_pool_path else None,
     )
     preflight_payload = json.loads(preflight_messages[-1]["content"])
+    initial_shared_links = preflight_payload.get("l")
+    initial_link_routes = (
+        initial_shared_links.get("routes", [])
+        if isinstance(initial_shared_links, dict)
+        else []
+    )
+    initial_link_routes_sha256 = hashlib.sha256(
+        json.dumps(
+            initial_link_routes,
+            ensure_ascii=False,
+            sort_keys=True,
+            separators=(",", ":"),
+        ).encode("utf-8")
+    ).hexdigest()
+    initial_user_message_sha256 = hashlib.sha256(
+        preflight_messages[-1]["content"].encode("utf-8")
+    ).hexdigest()
     compact_map = preflight_payload["m"]
     map_audit = audit_r4_stepwise_map_equivalence(package, compact_map)
     if not map_audit["passed"] or map_audit["expected_directed_edge_count"] != len(package.edges):
@@ -517,11 +593,26 @@ def _initial_state(
         "pickup_seen": pickup_seen,
         "route_action_budget": route_action_budget,
         "route_feature_context": route_feature_context,
+        "shared_candidate_routes": shared_candidate_routes,
+        "shared_candidate_pool_sha256": shared_candidate_pool_sha256,
+        "initial_prompt_sha256": initial_user_message_sha256,
+        "initial_prompt_shared_link_policy": (
+            initial_shared_links.get("policy")
+            if isinstance(initial_shared_links, dict)
+            else None
+        ),
+        "initial_prompt_shared_link_version": (
+            initial_shared_links.get("v")
+            if isinstance(initial_shared_links, dict)
+            else None
+        ),
+        "initial_prompt_shared_link_route_count": len(initial_link_routes),
+        "initial_prompt_shared_link_routes_sha256": initial_link_routes_sha256,
         "attempts": [],
         "map_equivalence_audit": map_audit,
         "initial_continuation_allowed_directions": sorted(initial_constraint.edge_by_direction),
         "initial_remaining_minimum_moves": initial_constraint.remaining_minimum_moves,
-        "scope": "Fresh stepwise Codex pilot on the exact frozen preflight task; one direction per request; no inherited route action; invalid moves do not advance state and trigger re-search from the last legal checkpoint with the rejected direction excluded.",
+        "scope": "Fresh stepwise Codex task on the exact frozen preflight; shared candidate links are exposed before the first request as fallback-only references; one direction per request; invalid moves do not advance state and trigger re-search from the last legal checkpoint.",
     }
     if user_authorized_task9_experiment:
         if road_map.size != 100 or task.task_id != "task-0000-0009":
@@ -923,7 +1014,7 @@ def _resume_state(
     if user_authorized_formal_task_resume and (
         road_map.size != 100
         or not _is_formal_batch_task_id(task.task_id)
-        or selected_input_protocol != "r4-step-v3"
+        or selected_input_protocol not in {"r4-step-v3", "r4-step-v4-link-fallback"}
     ):
         raise RuntimeError("resume_formal_batch_parent_scope_mismatch")
 
@@ -1001,6 +1092,7 @@ def _resume_state(
             if enable_progress_guidance
             else None
         ),
+        shared_candidate_routes=parent.get("shared_candidate_routes") if parent.get("shared_candidate_pool_sha256") else None,
     )
     compact_map = json.loads(messages[-1]["content"])["m"]
     map_audit = audit_r4_stepwise_map_equivalence(package, compact_map)
@@ -1382,6 +1474,7 @@ def preflight_only(
     user_authorized_task9_experiment: bool = False,
     user_authorized_formal_batch_pilot: bool = False,
     user_authorized_formal_task_resume: bool = False,
+    shared_candidate_pool_path: Optional[Path] = None,
 ) -> None:
     if OUTPUT_DIR.exists():
         raise FileExistsError("continuation_output_already_exists")
@@ -1391,6 +1484,8 @@ def preflight_only(
         raise ValueError("experiment_id_override_only_supported_for_fresh_run")
     if resume_from and (user_authorized_task9_experiment or user_authorized_formal_batch_pilot):
         raise ValueError("fresh_authorization_flag_cannot_be_used_on_resume")
+    if resume_from and shared_candidate_pool_path:
+        raise ValueError("shared_candidate_pool_cannot_be_changed_on_resume")
     state = (
         _resume_state(
             resume_from,
@@ -1411,6 +1506,7 @@ def preflight_only(
             input_protocol or "r4-step-v2",
             user_authorized_task9_experiment,
             user_authorized_formal_batch_pilot,
+            shared_candidate_pool_path,
         )
     )
     OUTPUT_DIR.mkdir(parents=True, exist_ok=False)
@@ -1456,6 +1552,8 @@ def preflight_only(
         "retry_count": 0,
         "codex_cli_session_mode": state.get("codex_session_mode", "ephemeral_per_request"),
         "route_input_protocol": state.get("route_input_protocol", "r4-step-v2"),
+        "shared_candidate_pool_sha256": state.get("shared_candidate_pool_sha256"),
+        "shared_candidate_route_count": len(state.get("shared_candidate_routes") or []),
         "compact_visited_state": bool(state.get("compact_visited_state", False)),
         "objective_progress_guidance": bool(state.get("enable_progress_guidance", False)),
         "suffix_witness_gate_version": state.get("suffix_witness_gate_version"),
@@ -1474,9 +1572,9 @@ def preflight_only(
             else "full compact map and current q/s state are sent on every isolated request"
         ),
         "per_step_resume_fields": (
-            ["q", "s", "allowed_directions", "r", "f"]
+            ["q", "s", "allowed_directions", "r", "f", "l"]
             if state.get("enable_progress_guidance")
-            else ["q", "s", "allowed_directions", "f"]
+            else ["q", "s", "allowed_directions", "f", "l"]
         ),
         "initial_state": {
             "current_node": state["accepted_nodes"][-1],
@@ -1600,6 +1698,9 @@ def _no_action_stop_status(constraint: Any) -> str:
 
 
 def one_step() -> None:
+    route_gate_block = route_safety_gate_block_reason_for_path(OUTPUT_DIR, ROOT)
+    if route_gate_block:
+        raise RuntimeError(route_gate_block)
     if not (OUTPUT_DIR / "state.json").exists():
         raise RuntimeError("run_preflight_first")
     state = _read_json(OUTPUT_DIR / "state.json")
@@ -1819,6 +1920,7 @@ def one_step() -> None:
             if state.get("enable_progress_guidance", False)
             else None
         ),
+        shared_candidate_routes=state.get("shared_candidate_routes") if state.get("shared_candidate_pool_sha256") else None,
     )
     call_number = int(state["new_requests_used"]) + 1
     attempt_log_index = len(state["attempts"]) + 1
@@ -2162,9 +2264,15 @@ def main() -> None:
     )
     parser.add_argument(
         "--route-input-protocol",
-        choices=("r4-step-v2", "r4-step-v3"),
+        choices=("r4-step-v2", "r4-step-v3", "r4-step-v4-link-fallback"),
         default=None,
         help="Version the prompt protocol for a fresh pilot; a resumed route cannot switch protocols",
+    )
+    parser.add_argument(
+        "--shared-candidate-pool",
+        type=Path,
+        default=None,
+        help="Verified candidate_pools.jsonl from an r4_shared_candidate_pool_v2 artifact; required by r4-step-v4-link-fallback",
     )
     parser.add_argument(
         "--record-user-authorized-task9-experiment",
@@ -2214,6 +2322,8 @@ def main() -> None:
         parser.error("formal task resume and task9 user-stop resume are mutually exclusive")
     if args.resume_from and args.experiment_id:
         parser.error("--experiment-id is only supported for a fresh pilot")
+    if args.shared_candidate_pool and not args.shared_candidate_pool.is_absolute():
+        args.shared_candidate_pool = ROOT / args.shared_candidate_pool
     if args.request_limit < 1:
         parser.error("--request-limit must be a positive integer")
     if args.preflight_only:
@@ -2229,6 +2339,7 @@ def main() -> None:
             args.record_user_authorized_task9_experiment,
             args.record_user_authorized_formal_batch_pilot,
             args.user_authorized_formal_task_resume,
+            args.shared_candidate_pool,
         )
     else:
         one_step()

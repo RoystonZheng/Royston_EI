@@ -426,6 +426,7 @@ def build_r4_stepwise_messages(
     route_feature_context: Optional[Dict[str, Any]] = None,
     compact_visited_state: bool = False,
     progress_guidance: Optional[Dict[str, Any]] = None,
+    shared_candidate_routes: Optional[List[Dict[str, Any]]] = None,
 ) -> List[Dict[str, str]]:
     """Build the slim route request and current authoritative step state."""
 
@@ -472,8 +473,15 @@ def build_r4_stepwise_messages(
             raise ValueError("r4_stepwise_accepted_state_route_mismatch")
 
     protocol_v3 = bool(compact_visited_state or progress_guidance is not None)
+    protocol_v4 = shared_candidate_routes is not None
     user_payload: Dict[str, Any] = {
-        "v": "r4-step-v3" if protocol_v3 else "r4-step-v2",
+        "v": (
+            "r4-step-v4-link-fallback"
+            if protocol_v4
+            else "r4-step-v3"
+            if protocol_v3
+            else "r4-step-v2"
+        ),
         "m": compact_map,
         "q": {
             "s": start_node_id,
@@ -514,6 +522,26 @@ def build_r4_stepwise_messages(
         except (TypeError, ValueError) as error:
             raise ValueError("r4_stepwise_progress_guidance_invalid") from error
         user_payload["r"] = normalized_progress_guidance
+    if shared_candidate_routes is not None:
+        try:
+            links_json = json.dumps(
+                shared_candidate_routes,
+                ensure_ascii=False,
+                sort_keys=True,
+                separators=(",", ":"),
+                allow_nan=False,
+            )
+            normalized_links = json.loads(links_json)
+        except (TypeError, ValueError) as error:
+            raise ValueError("r4_stepwise_shared_candidate_routes_invalid") from error
+        if any(not isinstance(link, dict) for link in normalized_links):
+            raise ValueError("r4_stepwise_shared_candidate_routes_invalid")
+        user_payload["l"] = {
+            "v": "shared-candidate-links-v1",
+            "policy": "fallback_only",
+            "money_cost_status": "blocked_missing_frozen_tariff_fare_and_method_rates",
+            "routes": normalized_links,
+        }
     if remaining_action_budget is not None:
         user_payload["s"]["b"] = int(remaining_action_budget)
     if feedback is not None:
@@ -559,6 +587,8 @@ def build_r4_stepwise_messages(
         "目标顺序是 q.s→q.p→q.d，首次在已上车后到达 q.d 即结束。不得重复访问节点，不得越界，不得逆单行。"
         "q.o 要求优先降低总行驶秒数，再降低距离。先规划完整的剩余路线，再只提交该路线的下一步；不要只按局部方向贪心。"
         "若 s.b 存在，它表示含本次请求在内的剩余动作调用预算，路线必须在预算耗尽前到达下车点。"
+        "若有 l，它列出实验开始前已生成并对所有方法共享的候选link路径，仅作为兜底参考；你可以使用地图自行提出其他合法路线，"
+        "但不得修改或伪造link事实。当前 money_cost_status 为blocked时，不得声称已按费用优化或比较费用；只能依据明确提供的地图时间/距离成本选择。"
         "若有 i，它是已通过白名单校验的 RoadFeatureInputProtocol v1 相关语义片段和地点意图；"
         "它只说明 q 中固定端点的道路特征依据，不得据此修改 q 的端点，也不能把未列出的道路边当成存在。"
         "输出 submit_r4_route 工具参数：action=move 时只给一个 direction；"

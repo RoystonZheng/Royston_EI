@@ -232,6 +232,8 @@ def main() -> int:
         "schema_version": "traditional_grid_ev_v2_payload_phase_recalculation_v1",
         "status": "passed" if not failures else "completed_with_errors",
         "created_at_utc": datetime.now(timezone.utc).isoformat(),
+        "calculation_script": str(Path(__file__).resolve()),
+        "calculation_script_sha256": sha256(Path(__file__).resolve()),
         "source_root": str(source_root), "energy_v2_root": str(energy_root),
         "source_manifest_sha256": sha256(source_manifest_path),
         "energy_v2_manifest_sha256": sha256(energy_manifest_path),

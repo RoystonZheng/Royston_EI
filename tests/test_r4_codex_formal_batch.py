@@ -155,6 +155,26 @@ class R4CodexFormalBatchTests(unittest.TestCase):
         self.assertIn("原地图", index)
         self.assertIn("冻结样本：1", index)
 
+    def test_formal_execute_stays_paused_when_old_offline_gate_is_declared_passed(self):
+        manifest = self._prepare()
+        manifest["route_safety_gate"] = {
+            "status": "passed_offline_directed_graph_route_search",
+            "formal_continuation_permitted": True,
+        }
+        (self.output / "manifest.json").write_text(json.dumps(manifest), encoding="utf-8")
+        calls = []
+        result = execute_batch(
+            self.output,
+            authorized_request_limit=None,
+            usage_baseline_percent=0,
+            usage_stop_percent=None,
+            pilot_audit_path=self.pilot_audit_path,
+            runner=lambda *args, **kwargs: calls.append(args),
+        )
+        self.assertEqual(result["status"], "paused_user_requested_safety_gate")
+        self.assertTrue(result["halt_no_more_model_requests"])
+        self.assertEqual(calls, [])
+
     def test_usage_gate_stops_before_any_child_process(self):
         self._prepare()
         calls = []

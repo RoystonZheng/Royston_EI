@@ -24,6 +24,7 @@ if str(ROOT / "scripts") not in sys.path:
     sys.path.insert(0, str(ROOT / "scripts"))
 
 import run_r4_codex_formal_batch as batch  # noqa: E402
+from r4_route_safety_gate import route_safety_gate_block_reason as _current_gate_block_reason  # noqa: E402
 
 DEFAULT_ROOT = ROOT / "outputs/route_layer/r4_codex_formal_batch_20261027_v2"
 DEFAULT_SOURCE = ROOT / "outputs/route_layer/r4_codex_batch_preflights_20261024_v1/manifest.json"
@@ -54,12 +55,8 @@ def _has_runnable_tasks(worker_manifest: Dict[str, Any]) -> bool:
 
 
 def _route_safety_gate_block_reason(master_manifest: Dict[str, Any]) -> Optional[str]:
-    """Fail closed when this batch declares a route-safety gate that has not passed."""
-    gate = master_manifest.get("route_safety_gate")
-    if not isinstance(gate, dict) or gate.get("formal_continuation_permitted") is True:
-        return None
-    status = gate.get("status") or "unspecified"
-    return "r4_route_safety_gate_not_passed:" + str(status)
+    """Fail closed on stale or incomplete safety evidence for this formal batch."""
+    return _current_gate_block_reason(master_manifest, ROOT)
 
 
 def _launchd_print(label: str) -> tuple[bool, str]:
@@ -788,7 +785,9 @@ def refresh_master(batch_root: Path) -> Dict[str, Any]:
         except subprocess.CalledProcessError:
             process_table = ""
         if any(
-            "run_r4_formal_chunk_driver.py" in line and worker_root in line
+            ("run_r4_formal_chunk_driver.py" in line
+             or "run_r4_resilient_chunk_supervisor.py" in line)
+            and worker_root in line
             for line in process_table.splitlines()
         ):
             jobs_alive.append("screen:" + worker.get("worker_id", worker_root))

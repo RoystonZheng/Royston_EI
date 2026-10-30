@@ -18,6 +18,7 @@ from r4_parallel_formal_batch import (  # noqa: E402
     start_workers,
 )
 from run_r4_formal_chunk_driver import route_safety_gate_block_reason as shard_gate_block_reason  # noqa: E402
+from r4_route_safety_gate import REQUIRED_SOURCE_FILES  # noqa: E402
 
 
 class R4ParallelSavedResponseReconciliationTests(unittest.TestCase):
@@ -136,14 +137,76 @@ class R4ParallelSafetyGateTests(unittest.TestCase):
                 "in_flight": None,
             }), encoding="utf-8")
             with mock.patch("r4_parallel_formal_batch._assert_original_runner_stopped"):
-                with self.assertRaisesRegex(RuntimeError, "r4_route_safety_gate_not_passed:pending"):
+                with self.assertRaisesRegex(RuntimeError, "r4_route_safety_gate_not_passed"):
                     start_workers(root, 53, None, root / "pilot.json", 128)
 
-    def test_passed_or_undeclared_safety_gate_does_not_block_legacy_batches(self):
+    def test_undeclared_safety_gate_does_not_block_legacy_batches(self):
         self.assertIsNone(_route_safety_gate_block_reason({}))
-        self.assertIsNone(_route_safety_gate_block_reason({
+        self.assertIsNotNone(_route_safety_gate_block_reason({
             "route_safety_gate": {"status": "passed", "formal_continuation_permitted": True}
         }))
+
+    def test_only_current_complete_acceptance_evidence_unlocks_gate(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            profiles = {
+                "time_priority_0_6_0_4": {
+                    "candidate_count": 3, "selected_candidate_id": "fast",
+                    "selection_reason": "minimum normalized score", "ev2_status": "passed",
+                    "sumo_status": "passed", "sumo_one_way_violations": 0,
+                },
+                "money_priority_0_4_0_6": {
+                    "candidate_count": 3, "selected_candidate_id": "efficient",
+                    "selection_reason": "minimum normalized score", "ev2_status": "passed",
+                    "sumo_status": "passed", "sumo_one_way_violations": 0,
+                },
+            }
+            evidence = {
+                "schema_version": "r4_route_safety_acceptance_v2", "status": "passed", "model_calls": 0,
+                "checks": {
+                    "online_step_chain": {"status": "passed", "formal_entrypoint_guarded": True,
+                        "direct_one_step_guarded": True, "local_edge_validator_enabled": True},
+                    "zero_call_recovery_replay": {"status": "passed", "model_calls": 0,
+                        "illegal_candidate_rejected": True, "rollback_count_nodes": 1,
+                        "reroute_from_rollback_node": True, "completed_route": True, "one_way_violations": 0},
+                    "full_flow_sumo": {"status": "passed", "vehicle_completed": True,
+                        "route_edge_sequence_matched": True, "one_way_violations": 0,
+                        "sumo_log_sha256": "a" * 64, "validator_audit_sha256": "b" * 64},
+                    "paired_candidate_decision": {"status": "passed", "candidate_pool_sha256": "c" * 64,
+                        "profiles": profiles},
+                },
+                "source_sha256": {
+                    relative: hashlib.sha256((ROOT / relative).read_bytes()).hexdigest()
+                    for relative in REQUIRED_SOURCE_FILES
+                },
+                "config_sha256": {"frozen_input": "d" * 64},
+            }
+            artifact_path = root / "acceptance.json"
+            artifact_path.write_text(json.dumps(evidence), encoding="utf-8")
+            artifact_sha = hashlib.sha256(artifact_path.read_bytes()).hexdigest()
+            gate = {
+                "schema_version": "r4_route_safety_gate_v2", "status": "passed",
+                "formal_continuation_permitted": True,
+                "acceptance_artifact": {"path": str(artifact_path), "sha256": artifact_sha},
+            }
+            self.assertIsNone(_route_safety_gate_block_reason({"route_safety_gate": gate}))
+            for profile in profiles.values():
+                profile["candidate_count"] = 1
+                profile["single_candidate_no_weight_effect"] = True
+                profile["selection_reason"] = "only feasible candidate; profile weights have no comparative effect"
+            evidence["checks"]["paired_candidate_decision"]["profiles"] = profiles
+            artifact_path.write_text(json.dumps(evidence), encoding="utf-8")
+            gate["acceptance_artifact"]["sha256"] = hashlib.sha256(artifact_path.read_bytes()).hexdigest()
+            self.assertIsNone(_route_safety_gate_block_reason({"route_safety_gate": gate}))
+            profiles["time_priority_0_6_0_4"]["single_candidate_no_weight_effect"] = False
+            artifact_path.write_text(json.dumps(evidence), encoding="utf-8")
+            gate["acceptance_artifact"]["sha256"] = hashlib.sha256(artifact_path.read_bytes()).hexdigest()
+            self.assertIn("single_candidate_weight_effect_not_disclosed", _route_safety_gate_block_reason({"route_safety_gate": gate}))
+            profiles.pop("money_priority_0_4_0_6")
+            evidence["checks"]["paired_candidate_decision"]["profiles"] = profiles
+            artifact_path.write_text(json.dumps(evidence), encoding="utf-8")
+            gate["acceptance_artifact"]["sha256"] = hashlib.sha256(artifact_path.read_bytes()).hexdigest()
+            self.assertIsNotNone(_route_safety_gate_block_reason({"route_safety_gate": gate}))
 
     def test_direct_shard_launch_reads_and_honors_parent_safety_gate(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -159,7 +222,7 @@ class R4ParallelSafetyGateTests(unittest.TestCase):
             }), encoding="utf-8")
             self.assertEqual(
                 shard_gate_block_reason(worker),
-                "r4_route_safety_gate_not_passed:pending",
+                "r4_route_safety_gate_not_passed:current_acceptance_evidence_missing",
             )
             parent.write_text(json.dumps({
                 "route_safety_gate": {
@@ -167,7 +230,10 @@ class R4ParallelSafetyGateTests(unittest.TestCase):
                     "formal_continuation_permitted": True,
                 },
             }), encoding="utf-8")
-            self.assertIsNone(shard_gate_block_reason(worker))
+            self.assertEqual(
+                shard_gate_block_reason(worker),
+                "r4_route_safety_gate_not_passed:current_acceptance_evidence_missing",
+            )
 
     def test_launchd_spawn_scheduled_is_not_counted_as_a_live_worker(self):
         with mock.patch(

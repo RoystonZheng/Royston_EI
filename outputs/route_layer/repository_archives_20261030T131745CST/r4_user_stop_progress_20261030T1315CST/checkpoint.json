@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "captured_at_local": "2026-10-30T13:17:47+08:00",
+  "source_scope": "sanitized status and audit fields from the designated R4 formal batch only",
+  "parent_manifest_sha256": "dd94dd25edcf793dae9cfb0ffec503c4b682ca9374d4bba41fc71fd9f98f0c1d",
+  "parent_status": "paused_at_parallel_checkpoint",
+  "parent_halt_no_more_model_requests": true,
+  "parent_model_requests_used": 12242,
+  "sum_of_task_requests_used": 12227,
+  "duplicate_suppressed_requests": 15,
+  "task_status_counts": {
+    "duplicate_suppressed": 3,
+    "failed": 47,
+    "outcome_unknown": 10,
+    "pending": 1,
+    "ready": 10,
+    "route_complete": 58
+  },
+  "parent_parallel_in_flight_count": 0,
+  "worker_count": 8,
+  "workers": [
+    {
+      "worker_id": "worker_00",
+      "status": "stopped_provider_or_tool_contract_failure",
+      "halt_no_more_model_requests": true,
+      "in_flight": null,
+      "model_requests_used": 2340
+    },
+    {
+      "worker_id": "worker_01",
+      "status": "paused_at_checkpoint",
+      "halt_no_more_model_requests": true,
+      "in_flight": null,
+      "model_requests_used": 1350
+    },
+    {
+      "worker_id": "worker_02",
+      "status": "stopped_provider_or_tool_contract_failure",
+      "halt_no_more_model_requests": true,
+      "in_flight": null,
+      "model_requests_used": 2383
+    },
+    {
+      "worker_id": "worker_03",
+      "status": "stopped_provider_or_tool_contract_failure",
+      "halt_no_more_model_requests": true,
+      "in_flight": null,
+      "model_requests_used": 2384
+    },
+    {
+      "worker_id": "worker_recovery",
+      "status": "paused_at_checkpoint",
+      "halt_no_more_model_requests": true,
+      "in_flight": null,
+      "model_requests_used": 1655
+    },
+    {
+      "worker_id": "worker_recovery_429",
+      "status": "stopped_provider_or_tool_contract_failure",
+      "halt_no_more_model_requests": true,
+      "in_flight": null,
+      "model_requests_used": 820
+    },
+    {
+      "worker_id": "worker_recovery_addendum",
+      "status": "completed_with_audited_task_outcomes",
+      "halt_no_more_model_requests": true,
+      "in_flight": null,
+      "model_requests_used": 767
+    },
+    {
+      "worker_id": "worker_recovery_addendum2",
+      "status": "paused_for_r4_oneway_guard_repair_and_full_flow_gate",
+      "halt_no_more_model_requests": true,
+      "in_flight": null,
+      "model_requests_used": 182
+    }
+  ],
+  "last_reassertion_audit_sha256": "5a824922989d228096903d7466693131fd3fb03607fdbc48eeb15f8ce1466929",
+  "requests_during_reassertion": 0,
+  "unknown_records_replayed": false,
+  "worker_request_delta_since_prior_finalization_total": 19,
+  "parent_count_before_reassertion": 12223,
+  "parent_task_request_sum_before_reassertion": 12208,
+  "parent_vs_task_difference_before_reassertion": 15,
+  "raw_prompts_or_traces_included": false
+}

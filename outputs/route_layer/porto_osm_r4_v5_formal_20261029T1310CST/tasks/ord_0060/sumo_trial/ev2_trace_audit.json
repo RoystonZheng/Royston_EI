@@ -1,0 +1,46 @@
+{
+  "energy_model_module_sha256": "a53ac3860e7a9d169b5ceb0f8ca853a0cb73061cc106ba0ec235f1e3c600e893",
+  "energy_model_version": "ev_longitudinal_v2",
+  "legs": [
+    {
+      "auxiliary_kwh": 0.056555555555555234,
+      "billable_kwh": 0.5593730896110206,
+      "leg_role": "vehicle_to_pickup",
+      "matches_source_within_1e-8_wh": true,
+      "missing_grade_steps": 2545,
+      "model_version": "ev_longitudinal_v2",
+      "module_recalculated_net_wh": 559.3730896110206,
+      "profile_id": "generic_reference_ev_v1",
+      "profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee",
+      "propulsion_draw_kwh": 0.9097892274292966,
+      "regenerated_kwh": 0.4069716933738312,
+      "signed_net_kwh": 0.5593730896110206,
+      "source_route_ledger_net_wh": 559.3730896110206,
+      "trace_fidelity": "observed_sumo_speed_trace_grade_missing",
+      "trace_samples": 2545,
+      "trip_id": "exp_veh_06_ord_0060_deadhead"
+    },
+    {
+      "auxiliary_kwh": 0.03555555555555536,
+      "billable_kwh": 0.4151528565121964,
+      "leg_role": "pickup_to_dropoff",
+      "matches_source_within_1e-8_wh": true,
+      "missing_grade_steps": 1600,
+      "model_version": "ev_longitudinal_v2",
+      "module_recalculated_net_wh": 415.1528565121964,
+      "profile_id": "generic_reference_ev_v1",
+      "profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee",
+      "propulsion_draw_kwh": 0.6629286926902616,
+      "regenerated_kwh": 0.2833313917336205,
+      "signed_net_kwh": 0.4151528565121964,
+      "source_route_ledger_net_wh": 415.1528565121964,
+      "trace_fidelity": "observed_sumo_speed_trace_grade_missing",
+      "trace_samples": 1600,
+      "trip_id": "exp_veh_06_ord_0060_passenger"
+    }
+  ],
+  "limitation": "SUMO simulated motion; missing grade treated as flat; not measured production vehicle energy",
+  "profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee",
+  "route_leg_count": 2,
+  "status": "passed"
+}

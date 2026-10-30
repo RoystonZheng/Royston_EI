@@ -1,7 +1,10 @@
 import json
+import hashlib
 import sys
 import tempfile
 import unittest
+from contextlib import redirect_stdout
+from io import StringIO
 from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import patch
@@ -11,6 +14,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 import run_r4_codex_pilot_continuation as pilot  # noqa: E402
 import render_r4_codex_pilot_replay as replay  # noqa: E402
+from route_experiment.models import Edge, Node, RoadMap, RouteInputPackage, VehicleOrderTask  # noqa: E402
 
 
 def _grant_mocked_test_requests(state):
@@ -53,6 +57,241 @@ class FakeStepClient:
 
 
 class R4CodexPilotAcceptanceTests(unittest.TestCase):
+    def test_direct_online_one_step_is_blocked_by_stale_passed_offline_batch_gate(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir) / "formal_batch"
+            run_dir = root / "parallel_workers" / "worker_02" / "tasks" / "seed_0" / "task" / "run_000"
+            run_dir.mkdir(parents=True)
+            (root / "manifest.json").write_text(json.dumps({
+                "route_safety_gate": {
+                    "status": "passed_offline_directed_graph_route_search",
+                    "formal_continuation_permitted": True,
+                },
+            }), encoding="utf-8")
+            with patch.object(pilot, "OUTPUT_DIR", run_dir):
+                with self.assertRaisesRegex(RuntimeError, "r4_route_safety_gate_not_passed"):
+                    pilot.one_step()
+
+    def test_formal_online_step_path_rejects_oneway_reverse_backtracks_once_and_reroutes(self):
+        nodes = [
+            Node("node_0_0", 0, 0),
+            Node("node_1_0", 1, 0),
+            Node("node_0_1", 0, 1),
+            Node("node_1_1", 1, 1),
+            Node("node_0_2", 0, 2, legal_pickup=True),
+            Node("node_1_2", 1, 2, legal_dropoff=True),
+        ]
+        edges = [
+            Edge("edge_start_east_oneway", "node_0_0", "node_1_0", 100, 10, one_way=True),
+            Edge("edge_start_north", "node_0_0", "node_0_1", 100, 10),
+            Edge("edge_east_north", "node_1_0", "node_1_1", 100, 10),
+            Edge("edge_center_west", "node_1_1", "node_0_1", 100, 10),
+            Edge("edge_north_pickup", "node_0_1", "node_0_2", 100, 10),
+            Edge("edge_pickup_dropoff", "node_0_2", "node_1_2", 100, 10),
+        ]
+        road_map = RoadMap(
+            map_id="synthetic-oneway-map",
+            version="v1",
+            size=3,
+            nodes=nodes,
+            edges=edges,
+            boundary={"min_x": 0, "max_x": 1, "min_y": 0, "max_y": 2},
+        )
+        task = VehicleOrderTask(
+            task_id="synthetic-oneway-task",
+            vehicle_id="vehicle-1",
+            order_id="order-1",
+            start_node_id="node_0_0",
+            pickup_node_id="node_0_2",
+            dropoff_node_id="node_1_2",
+        )
+        package = RouteInputPackage(
+            package_id="synthetic-oneway-package",
+            map_id=road_map.map_id,
+            map_version=road_map.version,
+            road_state_version=road_map.road_state_version,
+            random_seed=0,
+            start_node_id=task.start_node_id,
+            pickup_node_id=task.pickup_node_id,
+            dropoff_node_id=task.dropoff_node_id,
+            task_type="exact_node",
+            pickup_text=None,
+            dropoff_text=None,
+            nodes=nodes,
+            edges=edges,
+            expansion_count=len(nodes),
+            serialized_token_estimate=0,
+            boundary=road_map.boundary,
+        )
+        directions = ["E", "W", "N", "N", "E"]
+        captured = []
+
+        class OfflineResponseSequenceClient:
+            def __init__(self, **kwargs):
+                self.route_constraint = kwargs["route_constraint"]
+                self.last_record = {}
+
+            def chat(self, messages):
+                direction = directions[len(captured)]
+                allowed = sorted(self.route_constraint.edge_by_direction)
+                captured.append({
+                    "direction": direction,
+                    "allowed": allowed,
+                    "request": json.loads(messages[-1]["content"]),
+                })
+                return SimpleNamespace(
+                    content=json.dumps({
+                        "action": "move",
+                        "direction": direction,
+                        "failure_reason_code": "none",
+                        "self_check": {
+                            "allowed_directed_edge": True,
+                            "starts_at_current": True,
+                            "inside_boundary": True,
+                            "pickup_order_ok": True,
+                            "target_node_is_new": True,
+                        },
+                    }),
+                    provider_audit={"event_audit": {"tool_item_types": []}},
+                    input_tokens=0,
+                    cached_input_tokens=0,
+                    output_tokens=0,
+                    latency_ms=0,
+                    session_id=None,
+                )
+
+            @staticmethod
+            def _redact_diagnostics(text):
+                return text
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            run_dir = Path(temp_dir) / "run"
+            run_dir.mkdir()
+            preflight = Path(temp_dir) / "preflight.json"
+            preflight.write_text(json.dumps({
+                "map": {
+                    "map_id": road_map.map_id,
+                    "version": road_map.version,
+                    "size": road_map.size,
+                    "nodes": [vars(node) for node in nodes],
+                    "edges": [vars(edge) for edge in edges],
+                    "boundary": road_map.boundary,
+                }
+            }), encoding="utf-8")
+            state = {
+                "status": "ready",
+                "source_preflight": str(preflight),
+                "source_preflight_sha256": hashlib.sha256(preflight.read_bytes()).hexdigest(),
+                "map_id": road_map.map_id,
+                "task_id": task.task_id,
+                "start_node_id": task.start_node_id,
+                "pickup_node_id": task.pickup_node_id,
+                "dropoff_node_id": task.dropoff_node_id,
+                "accepted_nodes": [task.start_node_id],
+                "accepted_edges": [],
+                "accepted_directions": [],
+                "pickup_seen": False,
+                "route_action_budget": 10,
+                "authorized_new_request_limit": 10,
+                "effective_authorized_new_request_limit": 10,
+                "additional_model_requests_authorized": True,
+                "new_requests_used": 0,
+                "attempts": [],
+                "retry_count": 0,
+                "codex_session_mode": "ephemeral_per_request",
+                "codex_session_id": None,
+                "route_feature_context": None,
+                "compact_visited_state": False,
+                "enable_progress_guidance": False,
+                "suffix_witness_gate_version": "r4-suffix-witness-gate-v1",
+                "suffix_witness_gate_enabled": True,
+                "rejected_directions_by_node": {},
+                "backtracked_directions_by_node": {},
+                "suffix_witness_prefix_audit": {
+                    "passed": True,
+                    "accepted_action_count": 0,
+                    "prefix_sha256": pilot.accepted_prefix_sha256([task.start_node_id], []),
+                    "model_calls": 0,
+                },
+            }
+            (run_dir / "state.json").write_text(json.dumps(state), encoding="utf-8")
+            with (
+                patch.object(pilot, "OUTPUT_DIR", run_dir),
+                patch.object(pilot, "_load_frozen_task", return_value=({}, road_map, task, package)),
+                patch.object(pilot, "CodexCliRouteStepClient", OfflineResponseSequenceClient),
+                patch.object(pilot, "_refresh_replay"),
+            ):
+                with redirect_stdout(StringIO()):
+                    for _ in directions:
+                        pilot.one_step()
+            final = json.loads((run_dir / "state.json").read_text(encoding="utf-8"))
+            (run_dir / "traces").mkdir(exist_ok=True)
+            replay_path = replay.render(run_dir, run_dir / "replay.html")
+            replay_html = replay_path.read_text(encoding="utf-8")
+
+        self.assertEqual(final["status"], "route_complete")
+        self.assertEqual(final["accepted_nodes"], ["node_0_0", "node_0_1", "node_0_2", "node_1_2"])
+        self.assertEqual(final["accepted_edges"], ["edge_start_north", "edge_north_pickup", "edge_pickup_dropoff"])
+        self.assertEqual(final["pickup_seen"], True)
+        self.assertEqual(len(final["route_recovery_events"]), 1)
+        recovery = final["route_recovery_events"][0]
+        self.assertEqual(recovery["rejected_edge"]["reason"], "one_way_direction")
+        self.assertEqual(recovery["rollback_count_nodes"], 1)
+        self.assertEqual(recovery["rollback_node_id"], "node_0_0")
+        self.assertEqual(recovery["removed_accepted_edge"]["edge_id"], "edge_start_east_oneway")
+        self.assertEqual(captured[2]["allowed"], ["N"])
+        self.assertEqual(captured[2]["request"]["f"]["code"], "rejected_candidate_and_backtracked_one_node")
+        self.assertEqual(final["attempts"][1]["status"], "rejected_and_reroute_from_last_legal_node")
+        self.assertEqual(final["route_recovery_events"][0]["rejected_edge_added_to_route"], False)
+        self.assertIn("安全回退", replay_html)
+        self.assertIn("one_way_direction", replay_html)
+        self.assertIn("撤销上一段已接纳边", replay_html)
+
+    def test_rejected_reverse_one_way_action_rolls_back_one_node_and_preserves_reroute_audit(self):
+        state = {
+            "task_id": "synthetic-one-way-task",
+            "start_node_id": "node_0_0",
+            "pickup_node_id": "node_1_0",
+            "dropoff_node_id": "node_2_0",
+            "accepted_nodes": ["node_0_0", "node_1_0"],
+            "accepted_edges": ["edge_0_1_one_way_east"],
+            "accepted_directions": ["E"],
+            "pickup_seen": True,
+        }
+
+        recovery = pilot._rollback_rejected_action_one_node(
+            state,
+            current_node_id="node_1_0",
+            rejected_direction="W",
+            rejected_target_node_id="node_0_0",
+            rejection_code="directed_edge_missing",
+        )
+
+        self.assertEqual(state["accepted_nodes"], ["node_0_0"])
+        self.assertEqual(state["accepted_edges"], [])
+        self.assertEqual(state["accepted_directions"], [])
+        self.assertFalse(state["pickup_seen"])
+        self.assertEqual(recovery["rollback_node_id"], "node_0_0")
+        self.assertEqual(recovery["rollback_count_nodes"], 1)
+        self.assertEqual(recovery["rejected_edge"], {
+            "from_node_id": "node_1_0",
+            "to_node_id": "node_0_0",
+            "direction": "W",
+            "reason": "directed_edge_missing",
+        })
+        self.assertEqual(recovery["removed_accepted_edge"], {
+            "from_node_id": "node_0_0",
+            "to_node_id": "node_1_0",
+            "edge_id": "edge_0_1_one_way_east",
+            "direction": "E",
+        })
+        self.assertEqual(state["backtracked_directions_by_node"], {"node_0_0": ["E"]})
+        self.assertEqual(state["route_recovery_events"], [recovery])
+        self.assertEqual(
+            state["pending_route_research_feedback"]["retry_from_node_id"],
+            "node_0_0",
+        )
+
     def test_explicit_unbounded_authorization_replaces_512_with_simple_path_bound(self):
         state = {
             "additional_model_requests_authorized": True,
