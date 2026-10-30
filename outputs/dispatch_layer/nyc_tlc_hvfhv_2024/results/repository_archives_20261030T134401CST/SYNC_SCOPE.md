@@ -27,3 +27,9 @@ The GitHub `main` baseline was `80b451819224fbed1f595f4fecf9211512455547`. Added
 The archived NYC multi-month parent audit remains 89/90 paired cells with one D7 unavailable. Replicate evidence remains seed 1 90/90, seed 2 88/90, pooled 267/270, with seed-3 analysis pending. Offline energy recalculation is marked `completed_with_expected_gaps`; it is not a complete route-choice or economics result. The workspace Porto R4 v5 safe subset and latest GridRoute/SUMO acceptance were already byte-aligned with GitHub and were not duplicated.
 
 The active NYC v4 output, paused R4 control/state files, historical monitor snapshots, raw request/prompt/trace/log files, legacy seed-4 runs, superseded route sidecars, and credential configuration remain excluded. No remote files are removed. The public research-memory copy now preserves task identifiers; the three earlier `sk-` matches were substrings of task paths, not credentials. The sanitization manifest records zero credential redactions.
+
+## 2026-10-30 14:38 CST monitoring update
+
+After commit `3e9143917cae5ebe15fa44c78f01d58d77623a83`, the current Route/EV2 shared-link SUMO batch at `outputs/route_layer/r4_all_shared_link_profiles_sumo_ev2_20261030_v1` was still marked `running`: 107 of 129 expected tasks were completed or failed, with 0 failed/blocked at the observed snapshot. The batch is not a final result; evolving outputs remain excluded until individual tasks are terminal and files are stable. NYC dispatch v4 also remains active and is excluded. The designated App Support R4 batch remains `paused_user_requested_safety_gate` with no files changed since the previous sync check.
+
+Two stable current paper files changed after the previous commit and are included in the next sync. Updated research-memory metadata preserves task paths and records zero credential redactions. The 30-minute heartbeat is active and now tracks the shared-link SUMO batch explicitly.
