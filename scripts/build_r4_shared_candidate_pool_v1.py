@@ -35,7 +35,7 @@ from route_experiment.routing import run_traditional_route
 
 
 DEFAULT_PARENT = Path(
-    "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/"
+    "[LOCAL_HOME]/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/"
     "r4_codex_formal_batch_20261027_v2/manifest.json"
 )
 

@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import argparse
 import sys
 from pathlib import Path
 from typing import Any, Dict
@@ -35,9 +36,30 @@ def load_road_map(value: Dict[str, Any]) -> RoadMap:
 
 
 def main() -> int:
+    parser = argparse.ArgumentParser(
+        description=(
+            "Recalculate saved local R4 routes and prefixes into a new immutable "
+            "sidecar directory. Source run folders are never modified."
+        )
+    )
+    parser.add_argument(
+        "--output-dir",
+        type=Path,
+        required=True,
+        help="New output directory for per-run EV v2 JSON files and manifest; must not already exist.",
+    )
+    args = parser.parse_args()
+    output_dir = args.output_dir.expanduser()
+    if not output_dir.is_absolute():
+        output_dir = ROOT / output_dir
+    output_dir = output_dir.resolve()
+    if output_dir.exists():
+        raise SystemExit(f"refusing_to_overwrite:{output_dir}")
+
     profile = EnergyModelConfig()
     config = EvaluationConfig(energy_profile=profile)
     rows = []
+    sidecar_payloads = []
     for state_path in sorted((ROOT / "outputs/route_layer").glob("r4_codex_*/state.json")):
         state = json.loads(state_path.read_text(encoding="utf-8"))
         edge_ids = list(state.get("accepted_edges") or [])
@@ -102,10 +124,7 @@ def main() -> int:
                 "source_preflight_sha256": sha256(source_path),
                 "final_audit_sha256": sha256(final_audit_path) if final_audit_path.is_file() else None,
             }
-            (state_path.parent / "energy_v2_recalculation.json").write_text(
-                json.dumps({"energy_model": model_metadata(profile), "result": row}, ensure_ascii=False, sort_keys=True, indent=2) + "\n",
-                encoding="utf-8",
-            )
+            sidecar_payloads.append((state_path.parent.name, {"energy_model": model_metadata(profile), "result": row}))
             rows.append(row)
         except Exception as exc:
             rows.append({
@@ -114,13 +133,25 @@ def main() -> int:
                 "edge_count": len(edge_ids),
                 "reason": str(exc),
             })
-    output = ROOT / "outputs/route_layer/r4_energy_v2_recalculation_manifest.json"
+    output_dir.mkdir(parents=True, exist_ok=False)
+    for run_name, payload in sidecar_payloads:
+        sidecar_path = output_dir / run_name / "energy_v2_recalculation.json"
+        sidecar_path.parent.mkdir(parents=True, exist_ok=False)
+        encoded = json.dumps(payload, ensure_ascii=False, sort_keys=True, indent=2) + "\n"
+        sidecar_path.write_text(encoded, encoding="utf-8")
+        row = next(item for item in rows if item.get("run") == run_name and item.get("status", "").startswith("recalculated_"))
+        row["sidecar_path"] = str(sidecar_path)
+        row["sidecar_sha256"] = sha256(sidecar_path)
+
+    output = output_dir / "manifest.json"
     output.write_text(
         json.dumps({
             "schema_version": "r4_grid_energy_recalculation_v2",
             "status": "completed_offline_recalculation",
             "energy_model": model_metadata(profile),
             "route_algorithm_rerun": False,
+            "source_results_modified": False,
+            "output_dir": str(output_dir),
             "scope_note": "Every reported non-complete result is a validated prefix or a preflight state; only route_complete is a completed route.",
             "completed_routes": sum(1 for row in rows if row.get("is_complete_route")),
             "legal_prefixes": sum(1 for row in rows if row.get("status") == "recalculated_legal_prefix"),

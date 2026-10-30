@@ -7,7 +7,7 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
-APP = Path("/Users/didi/Library/Application Support/CodexR4Formal20261027")
+APP = Path("[LOCAL_HOME]/Library/Application Support/CodexR4Formal20261027")
 BATCH = APP / "outputs/route_layer/r4_codex_formal_batch_20261027_v2"
 WORKER = BATCH / "parallel_workers/worker_00"
 MANIFEST = WORKER / "manifest.json"

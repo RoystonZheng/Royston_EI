@@ -18,7 +18,7 @@ from zoneinfo import ZoneInfo
 WORKSPACE = Path(__file__).resolve().parents[1]
 ROUTE_OUTPUTS = WORKSPACE / "outputs/route_layer"
 APP_BATCH_ROOT = Path(
-    "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/"
+    "[LOCAL_HOME]/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/"
     "r4_codex_formal_batch_20261027_v2"
 )
 PARENT_MANIFEST = APP_BATCH_ROOT / "manifest.json"

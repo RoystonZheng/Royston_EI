@@ -3,16 +3,106 @@ import json
 import shutil
 import tempfile
 import unittest
+import hashlib
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from finalize_r4_codex_pilot_continuation import finalize  # noqa: E402
-from render_r4_codex_pilot_replay import render  # noqa: E402
+from render_r4_codex_pilot_replay import (  # noqa: E402
+    _verified_provider_failure_detail,
+    render,
+)
 
 
 class R4CodexPilotReplayRendererTests(unittest.TestCase):
+    def test_replay_recognizes_hash_verified_model_capacity_error(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            run_dir = Path(temp_dir)
+            trace = run_dir / "trace.jsonl"
+            raw = b'{"type":"error","message":"Selected model is at capacity. Please try a different model."}\n'
+            trace.write_bytes(raw)
+
+            detail = _verified_provider_failure_detail(run_dir, {
+                "trace_jsonl_path": str(trace),
+                "trace_jsonl_sha256": hashlib.sha256(raw).hexdigest(),
+            })
+
+        self.assertIn("模型服务容量已满", detail)
+
+    def test_finalizer_refreshes_replay_after_writing_final_audit(self):
+        source_run = ROOT / "outputs/route_layer/r4_codex_independent_pilot_v9"
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            run_dir = Path(temp_dir) / "run"
+            shutil.copytree(source_run, run_dir)
+            replay = run_dir / "replay.html"
+            if replay.exists():
+                replay.unlink()
+
+            finalize(run_dir, None, "gpt-5.6-luna")
+
+            self.assertTrue(replay.is_file())
+            html = replay.read_text(encoding="utf-8")
+            self.assertIn("final_audit.json", html)
+
+    def test_replay_shows_provider_429_and_handles_unestimable_prefix(self):
+        source_run = ROOT / "outputs/route_layer/r4_codex_pilot_continuation_v4"
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            run_dir = Path(temp_dir) / "run"
+            shutil.copytree(source_run, run_dir)
+            state_path = run_dir / "state.json"
+            state = json.loads(state_path.read_text(encoding="utf-8"))
+            start = state["accepted_nodes"][0]
+            state["accepted_nodes"] = [start]
+            state["accepted_edges"] = []
+            state["route_metrics"]["accepted_prefix_distance_m"] = None
+            state["route_metrics"]["accepted_prefix_energy_kwh"] = None
+            state.pop("prior_smoke_result", None)
+            state.pop("prior_action_reconciliation", None)
+            state["parent_run"] = None
+            trace = run_dir / "traces" / "r4_step_0001.jsonl"
+            trace.parent.mkdir(parents=True, exist_ok=True)
+            trace_bytes = (
+                b'{"type":"error","message":"exceeded retry limit, last status: 429 Too Many Requests"}\n'
+                b'{"type":"turn.failed","error":{"message":"exceeded retry limit, last status: 429 Too Many Requests"}}\n'
+            )
+            trace.write_bytes(trace_bytes)
+            state["attempts"] = [{
+                "request_number": 1,
+                "current_node_id": start,
+                "status": "stopped_request_error",
+                "response": None,
+                "validation": {},
+                "usage": {"input_tokens": None, "output_tokens": None},
+                "provider_record": {
+                    "trace_jsonl_path": str(trace),
+                    "trace_jsonl_sha256": hashlib.sha256(trace_bytes).hexdigest(),
+                    "event_audit": {"event_types": ["error", "turn.failed"]},
+                },
+            }]
+            state_path.write_text(json.dumps(state), encoding="utf-8")
+            audit_path = run_dir / "final_audit.json"
+            audit = json.loads(audit_path.read_text(encoding="utf-8"))
+            audit["status"] = "partial_legal_prefix_not_complete"
+            audit["delivery_unknown_request_numbers"] = [1]
+            audit["usage_unknown_request_numbers"] = [1]
+            audit_path.write_text(json.dumps(audit), encoding="utf-8")
+
+            replay = Path(temp_dir) / "replay.html"
+            render(run_dir, replay)
+            html = replay.read_text(encoding="utf-8")
+            data = json.loads(html.split("const D=", 1)[1].split(";\nconst esc", 1)[0])
+
+        failed = data["steps"][-1]
+        self.assertIsNone(failed["local_valid"])
+        self.assertIn("429 Too Many Requests", failed["failure_detail"])
+        self.assertIn("投递与用量未知", failed["failure_detail"])
+        self.assertIsNone(data["metrics"]["prefix_energy_kwh"])
+        self.assertIn("不可估（没有已接纳路线移动）", html)
+
     def test_replay_distinguishes_cli_sigterm_from_a_rejected_route_action(self):
         run_dir = ROOT / "outputs/route_layer/r4_codex_task9_fresh_r4_step_v3_pilot_20261027_v2"
         finalize(run_dir, None, "gpt-5.6-luna")

@@ -14,7 +14,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 PARENT_DEFAULT = Path(
-    "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/"
+    "[LOCAL_HOME]/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/"
     "r4_codex_formal_batch_20261027_v2/manifest.json"
 )
 POOL_DEFAULT = ROOT / "outputs/route_layer/r4_shared_candidate_pool_v2_20261030T1230CST/candidate_pools.jsonl"

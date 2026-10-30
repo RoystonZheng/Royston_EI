@@ -44,6 +44,22 @@ class R4SuffixWitnessTests(unittest.TestCase):
         self.assertEqual(witness.node_sequence, ["A", "P", "B", "D"])
         self.assertEqual(len(witness.node_sequence), len(set(witness.node_sequence)))
 
+    def test_second_leg_must_not_loop_back_through_current_checkpoint(self):
+        edges = [
+            Edge("a-p", "A", "P", 1, 1),
+            Edge("p-a", "P", "A", 1, 1),
+            Edge("a-d", "A", "D", 1, 1),
+            Edge("p-x", "P", "X", 1, 1),
+            Edge("x-d", "X", "D", 1, 1),
+        ]
+
+        witness = build_waypoint_suffix_witness(
+            edges, "A", "P", "D", visited_node_ids=["S", "A"]
+        )
+
+        self.assertIsNotNone(witness)
+        self.assertEqual(witness.node_sequence, ["A", "P", "X", "D"])
+
     def test_no_witness_is_reported_without_claiming_global_unreachability(self):
         edges = [
             Edge("s-p", "S", "P", 1, 1),

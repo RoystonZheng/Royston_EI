@@ -6,16 +6,20 @@ import unittest
 from contextlib import redirect_stdout
 from io import StringIO
 from pathlib import Path
+from types import SimpleNamespace
 from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
+import run_r4_codex_pilot_continuation as r4_runner  # noqa: E402
+from run_r4_provider_rejection_recoveries import _valid_zero_call_continuation_preflight  # noqa: E402
 from run_r4_codex_pilot_continuation import (  # noqa: E402
     _authorized_call_budget_stop_reason,
     _load_frozen_task,
     _initial_state,
     _natural_simple_path_limit,
+    _is_formal_batch_task_id,
     _summarize_attempt_usage,
     _model_self_check_all_true,
     _model_self_check_is_well_formed,
@@ -27,6 +31,272 @@ from run_r4_codex_pilot_continuation import (  # noqa: E402
 
 
 class R4CodexPilotResumeTests(unittest.TestCase):
+    def test_recovery_preflight_gate_requires_frozen_authorized_zero_call_state(self):
+        state = {
+            "status": "ready",
+            "additional_model_requests_authorized": True,
+            "route_input_protocol": "r4-step-v3",
+            "task_id": "formal-task-0000-feasible",
+            "parent_state_sha256": "a" * 64,
+            "parent_final_audit_sha256": "b" * 64,
+            "new_requests_used": 0,
+            "attempts": [],
+            "authorized_new_request_limit": 9999,
+            "effective_authorized_new_request_limit": 9999,
+        }
+        args = (
+            state,
+            "formal-task-0000-feasible",
+            "a" * 64,
+            "b" * 64,
+            9999,
+        )
+        self.assertTrue(_valid_zero_call_continuation_preflight(*args))
+
+        invalid_variants = [
+            {**state, "status": "failed"},
+            {**state, "additional_model_requests_authorized": False},
+            {**state, "route_input_protocol": "r4-step-v2"},
+            {**state, "new_requests_used": 1},
+            {**state, "attempts": [{"request_number": 1}]},
+            {**state, "parent_state_sha256": "c" * 64},
+            {**state, "authorized_new_request_limit": 128},
+        ]
+        for invalid in invalid_variants:
+            with self.subTest(state=invalid):
+                self.assertFalse(_valid_zero_call_continuation_preflight(
+                    invalid,
+                    "formal-task-0000-feasible",
+                    "a" * 64,
+                    "b" * 64,
+                    9999,
+                ))
+
+    def test_formal_resume_accepts_both_frozen_matrix_task_id_families(self):
+        self.assertTrue(_is_formal_batch_task_id("task-0002-0005"))
+        self.assertTrue(_is_formal_batch_task_id("formal-task-0003-feasible"))
+        self.assertFalse(_is_formal_batch_task_id("ad-hoc-task-0001"))
+
+    def _provider_rejection_parent(self, directory, error_message):
+        trace_path = Path(directory) / "provider-error.jsonl"
+        rows = [
+            {"type": "thread.started"},
+            {"type": "turn.started"},
+            {"type": "error", "message": error_message},
+            {"type": "turn.failed", "error": {"message": error_message}},
+        ]
+        trace_path.write_text(
+            "\n".join(json.dumps(row) for row in rows) + "\n",
+            encoding="utf-8",
+        )
+        import hashlib
+
+        trace_sha = hashlib.sha256(trace_path.read_bytes()).hexdigest()
+        failed_attempt = {
+            "request_number": 2,
+            "status": "stopped_request_error",
+            "retry_count": 0,
+            "tool_item_types": [],
+            "response": None,
+            "validation": None,
+            "provider_record": {
+                "backend": "codex_cli",
+                "status": "cli_error",
+                "cli_exit_code": 1,
+                "retry_count": 0,
+                "canonical_final_json_present": False,
+                "agent_message_count": 0,
+                "usage_available": False,
+                "trace_jsonl_path": str(trace_path),
+                "trace_jsonl_sha256": trace_sha,
+                "event_audit": {
+                    "event_types": [
+                        "thread.started", "turn.started", "error", "turn.failed"
+                    ],
+                    "tool_item_types": [],
+                    "tool_usage_detected": False,
+                    "usage_event_count": 0,
+                    "item_types": [],
+                },
+            },
+        }
+        accepted_attempt = {
+            "request_number": 1,
+            "status": "accepted_legal_step",
+            "retry_count": 0,
+            "tool_item_types": [],
+            "provider_record": {
+                "event_audit": {
+                    "tool_item_types": [],
+                    "tool_usage_detected": False,
+                }
+            },
+        }
+        parent = {
+            "status": "stopped_request_error",
+            "new_requests_used": 2,
+            "retry_count": 0,
+            "accepted_nodes": ["node_0_0", "node_0_1"],
+            "accepted_edges": ["edge_0_0_0_1"],
+            "attempts": [accepted_attempt, failed_attempt],
+        }
+        audit = {
+            "status": "partial_legal_prefix_not_complete",
+            "retries": 0,
+            "actual_model_requests_this_continuation": 2,
+            "codex_cli_invocations_this_continuation": 2,
+            "route_continuity_violations": [],
+            "accepted_move_count_including_prior_smoke": 1,
+            "current_node": "node_0_1",
+            "tool_events": None,
+            "tool_audit_complete": False,
+        }
+        return parent, audit, failed_attempt
+
+    def test_confirmed_provider_rate_limit_can_resume_without_replaying_failed_request(self):
+        with tempfile.TemporaryDirectory() as directory:
+            parent, audit, failed_attempt = self._provider_rejection_parent(
+                directory, "exceeded retry limit, last status: 429 Too Many Requests"
+            )
+
+            rejected = r4_runner._safe_provider_rejection_resume_parent(parent, audit)
+
+        self.assertEqual(rejected, [2])
+        self.assertEqual(failed_attempt["status"], "stopped_request_error")
+
+    def test_provider_capacity_rejection_can_resume_from_only_the_accepted_prefix(self):
+        with tempfile.TemporaryDirectory() as directory:
+            parent, audit, _ = self._provider_rejection_parent(
+                directory, "Selected model is at capacity. Please try a different model."
+            )
+
+            rejected = r4_runner._safe_provider_rejection_resume_parent(parent, audit)
+
+        self.assertEqual(rejected, [2])
+
+    def test_provider_error_resume_rejects_unknown_or_unhashed_terminal_calls(self):
+        with tempfile.TemporaryDirectory() as directory:
+            parent, audit, failed_attempt = self._provider_rejection_parent(
+                directory, "network connection lost"
+            )
+            self.assertEqual(r4_runner._safe_provider_rejection_resume_parent(parent, audit), [])
+
+            failed_attempt["provider_record"]["trace_jsonl_sha256"] = "0" * 64
+            self.assertEqual(r4_runner._safe_provider_rejection_resume_parent(parent, audit), [])
+
+    def test_provider_error_resume_rejects_tool_or_completed_turn_events(self):
+        with tempfile.TemporaryDirectory() as directory:
+            parent, audit, failed_attempt = self._provider_rejection_parent(
+                directory, "429 Too Many Requests"
+            )
+            trace_path = Path(failed_attempt["provider_record"]["trace_jsonl_path"])
+            import hashlib
+
+            rows = [
+                {"type": "thread.started"},
+                {"type": "turn.started"},
+                {"type": "item.completed", "item": {"type": "shell"}},
+                {"type": "error", "message": "429 Too Many Requests"},
+                {"type": "turn.failed", "error": {"message": "429 Too Many Requests"}},
+            ]
+            trace_path.write_text(
+                "\n".join(json.dumps(row) for row in rows) + "\n",
+                encoding="utf-8",
+            )
+            failed_attempt["provider_record"]["trace_jsonl_sha256"] = hashlib.sha256(
+                trace_path.read_bytes()
+            ).hexdigest()
+
+            self.assertEqual(r4_runner._safe_provider_rejection_resume_parent(parent, audit), [])
+
+            rows[2] = {"type": "turn.completed", "usage": {"input_tokens": 1}}
+            trace_path.write_text(
+                "\n".join(json.dumps(row) for row in rows) + "\n",
+                encoding="utf-8",
+            )
+            failed_attempt["provider_record"]["trace_jsonl_sha256"] = hashlib.sha256(
+                trace_path.read_bytes()
+            ).hexdigest()
+            self.assertEqual(r4_runner._safe_provider_rejection_resume_parent(parent, audit), [])
+
+    def test_formal_provider_rejection_resume_requires_authorization_and_keeps_usage_unknown(self):
+        source = ROOT / "outputs/route_layer/r4_codex_task9_fresh_r4_step_v3_pilot_20261027_v8"
+        with tempfile.TemporaryDirectory() as directory:
+            parent = Path(directory) / "formal-parent"
+            shutil.copytree(source, parent)
+            state_path = parent / "state.json"
+            state = json.loads(state_path.read_text(encoding="utf-8"))
+            state["user_authorization_status"] = "granted_for_formal_r4_batch_pilot"
+            state["status"] = "stopped_request_error"
+            failed = state["attempts"][-1]
+            trace_path = parent / "traces" / "synthetic_provider_rejection.jsonl"
+            rows = [
+                {"type": "thread.started"},
+                {"type": "turn.started"},
+                {"type": "error", "message": "429 Too Many Requests"},
+                {"type": "turn.failed", "error": {"message": "429 Too Many Requests"}},
+            ]
+            trace_path.write_text(
+                "\n".join(json.dumps(row) for row in rows) + "\n",
+                encoding="utf-8",
+            )
+            import hashlib
+
+            failed.update({
+                "status": "stopped_request_error",
+                "retry_count": 0,
+                "tool_item_types": [],
+                "response": None,
+                "validation": None,
+                "usage": {
+                    "input_tokens": None,
+                    "cached_input_tokens": None,
+                    "output_tokens": None,
+                },
+                "provider_record": {
+                    "backend": "codex_cli",
+                    "status": "cli_error",
+                    "cli_exit_code": 1,
+                    "retry_count": 0,
+                    "canonical_final_json_present": False,
+                    "agent_message_count": 0,
+                    "usage_available": False,
+                    "trace_jsonl_path": str(trace_path),
+                    "trace_jsonl_sha256": hashlib.sha256(trace_path.read_bytes()).hexdigest(),
+                    "event_audit": {
+                        "event_types": [
+                            "thread.started", "turn.started", "error", "turn.failed"
+                        ],
+                        "tool_item_types": [],
+                        "tool_usage_detected": False,
+                        "usage_event_count": 0,
+                        "item_types": [],
+                    },
+                },
+            })
+            state_path.write_text(json.dumps(state), encoding="utf-8")
+
+            with self.assertRaisesRegex(RuntimeError, "resume_parent_not_cleanly_capped"):
+                _resume_state(parent, authorized_request_limit=512)
+
+            resumed = _resume_state(
+                parent,
+                authorized_request_limit=512,
+                user_authorized_formal_task_resume=True,
+            )
+
+        self.assertEqual(resumed["status"], "ready")
+        self.assertEqual(resumed["new_requests_used"], 0)
+        self.assertEqual(resumed["unresolved_parent_request_numbers_not_replayed"], [])
+        self.assertEqual(
+            resumed["provider_rejected_parent_request_numbers_not_replayed"], [5]
+        )
+        self.assertEqual(
+            resumed["provider_rejected_parent_usage_unknown_request_numbers"], [5]
+        )
+        self.assertEqual(resumed["resume_reason"], "confirmed_provider_rate_limit_or_capacity_rejection")
+        self.assertFalse(resumed["rejected_parent_action_replayed"])
+
     def test_usage_summary_keeps_missing_request_usage_unknown(self):
         summary = _summarize_attempt_usage(
             [
@@ -209,7 +479,7 @@ class R4CodexPilotResumeTests(unittest.TestCase):
                 patch("run_r4_codex_pilot_continuation.OUTPUT_DIR", output_dir),
                 redirect_stdout(StringIO()),
             ):
-                preflight_only(resume_from=parent, authorized_request_limit=108)
+                preflight_only(resume_from=parent, authorized_request_limit=112)
             resumed = json.loads((output_dir / "state.json").read_text(encoding="utf-8"))
             manifest = json.loads((output_dir / "manifest.json").read_text(encoding="utf-8"))
 
@@ -217,7 +487,7 @@ class R4CodexPilotResumeTests(unittest.TestCase):
         self.assertEqual(resumed["accepted_nodes"][-1], "node_68_41")
         self.assertEqual(len(resumed["accepted_edges"]), 1)
         self.assertEqual(resumed["parent_requests"], 1)
-        self.assertEqual(resumed["authorized_new_request_limit"], 108)
+        self.assertEqual(resumed["authorized_new_request_limit"], 112)
         self.assertEqual(resumed["initial_remaining_minimum_moves"], 108)
         self.assertEqual(resumed["map_equivalence_audit"]["expected_directed_edge_count"], 10853)
         self.assertIsNone(resumed.get("account_usage_guard"))
@@ -235,7 +505,7 @@ class R4CodexPilotResumeTests(unittest.TestCase):
             ):
                 preflight_only(
                     resume_from=parent,
-                    authorized_request_limit=108,
+                    authorized_request_limit=112,
                     codex_session_mode="persistent_per_task",
                 )
             resumed = json.loads((output_dir / "state.json").read_text(encoding="utf-8"))
@@ -264,41 +534,120 @@ class R4CodexPilotResumeTests(unittest.TestCase):
             with self.assertRaisesRegex(RuntimeError, "resume_parent_not_cleanly_capped"):
                 _resume_state(parent, authorized_request_limit=108)
 
+    def test_resume_reports_when_suffix_witness_exceeds_authorized_budget(self):
+        parent = ROOT / "outputs/route_layer/r4_codex_stepwise_formal_task9_pilot_v1"
+        with self.assertRaisesRegex(
+            RuntimeError,
+            "resume_parent_insufficient_authorized_budget_for_remaining_route",
+        ):
+            _resume_state(parent, authorized_request_limit=108)
+
     def test_user_stopped_task9_parent_requires_fresh_explicit_authorization_to_resume(self):
         parent = ROOT / "outputs/route_layer/r4_codex_task9_stateless_run_20261026_v5"
 
         with self.assertRaisesRegex(RuntimeError, "resume_parent_not_cleanly_capped"):
             _resume_state(parent, authorized_request_limit=296)
 
+        parent_state_path = parent / "state.json"
+        parent_state_before = json.loads(parent_state_path.read_text(encoding="utf-8"))
         resumed = _resume_state(
             parent,
             authorized_request_limit=296,
             user_authorized_user_stop_resume=True,
         )
+        parent_state_after = json.loads(parent_state_path.read_text(encoding="utf-8"))
 
+        self.assertEqual(parent_state_after, parent_state_before)
         self.assertEqual(resumed["status"], "ready")
-        self.assertEqual(resumed["parent_requests"], 80)
         self.assertEqual(len(resumed["accepted_edges"]), 216)
-        self.assertEqual(resumed["authorized_new_request_limit"], 296)
-        self.assertEqual(resumed["effective_authorized_new_request_limit"], 296)
-        self.assertTrue(resumed["additional_model_requests_authorized"])
-        self.assertEqual(resumed["user_authorization_status"], "granted_for_task9_continuation")
-        self.assertEqual(
-            resumed["authorization_scope"],
-            "continue only the frozen seed-0 task9 route from its accepted prefix; "
-            "do not replay unresolved parent calls; no ten-seed batch",
-        )
+        self.assertEqual(resumed["accepted_nodes"][-1], "node_15_33")
+        self.assertEqual(resumed["pickup_seen"], False)
+        self.assertEqual(resumed["parent_requests"], 80)
+        self.assertEqual(resumed["cumulative_parent_cli_invocations"], 216)
+        self.assertEqual(resumed["unresolved_parent_request_numbers_not_replayed"], [])
+        self.assertEqual(resumed.get("resume_prefix_rollbacks", []), [])
+        self.assertTrue(resumed["suffix_witness_prefix_audit"]["passed"])
+        self.assertEqual(resumed["suffix_witness_prefix_audit"]["accepted_action_count"], 216)
+        self.assertGreater(resumed["suffix_witness_prefix_audit"]["minimum_witnessed_remaining_moves"], 0)
+        self.assertGreater(len(resumed["initial_continuation_allowed_directions"]), 0)
+
+    def test_one_step_keeps_certified_old_prefix_before_searching_again(self):
+        source = ROOT / "outputs/route_layer/r4_codex_task9_stateless_run_20261026_v5"
+        state = json.loads((source / "state.json").read_text(encoding="utf-8"))
+        state.update({
+            "status": "ready",
+            "additional_model_requests_authorized": True,
+            "authorized_new_request_limit": 512,
+            "effective_authorized_new_request_limit": 512,
+        })
+        directions_seen = []
+
+        class FakeClient:
+            def __init__(self, **kwargs):
+                self.route_constraint = kwargs["route_constraint"]
+                self.call_count = 0
+
+            def chat(self, messages):
+                direction = sorted(self.route_constraint.edge_by_direction)[0]
+                directions_seen.append(direction)
+                return SimpleNamespace(
+                    content=json.dumps({
+                        "action": "move",
+                        "direction": direction,
+                        "self_check": {
+                            "allowed_directed_edge": True,
+                            "starts_at_current": True,
+                            "inside_boundary": True,
+                            "pickup_order_ok": True,
+                            "target_node_is_new": True,
+                        },
+                        "failure_reason_code": "none",
+                    }),
+                    provider_audit={"event_audit": {"tool_item_types": []}},
+                    session_id=None,
+                    input_tokens=10,
+                    cached_input_tokens=0,
+                    output_tokens=10,
+                    latency_ms=1.0,
+                )
+
+        with tempfile.TemporaryDirectory() as directory:
+            output_dir = Path(directory)
+            (output_dir / "state.json").write_text(
+                json.dumps(state), encoding="utf-8"
+            )
+            with (
+                patch("run_r4_codex_pilot_continuation.OUTPUT_DIR", output_dir),
+                patch("run_r4_codex_pilot_continuation._refresh_replay"),
+                patch(
+                    "run_r4_codex_pilot_continuation.CodexCliRouteStepClient",
+                    FakeClient,
+                ),
+                redirect_stdout(StringIO()),
+            ):
+                one_step()
+            resumed = json.loads((output_dir / "state.json").read_text(encoding="utf-8"))
+
+        self.assertEqual(directions_seen.__len__(), 1)
+        self.assertEqual(len(resumed["accepted_edges"]), 217)
+        self.assertEqual(resumed["attempts"][-1]["current_node_id"], state["accepted_nodes"][-1])
+        self.assertEqual(resumed["accepted_nodes"][-2], state["accepted_nodes"][-1])
+        self.assertEqual(resumed["attempts"][-1]["target_node_id"], resumed["accepted_nodes"][-1])
+        self.assertEqual(resumed["attempts"][-1]["status"], "accepted_legal_step")
+        self.assertEqual(resumed["attempts"][-1]["rollback_checkpoint"]["accepted_edge_count"], 216)
+        self.assertEqual(resumed.get("resume_prefix_rollbacks", []), [])
+        self.assertTrue(resumed["suffix_witness_prefix_audit"]["passed"])
 
     def test_user_stopped_resume_sets_effective_authorized_request_limit(self):
-        parent = ROOT / "outputs/route_layer/r4_codex_task9_stateless_run_20261026_v5"
+        parent = ROOT / "outputs/route_layer/r4_codex_task9_fresh_r4_step_v3_pilot_20261027_v8"
 
         resumed = _resume_state(
             parent,
-            authorized_request_limit=296,
+            authorized_request_limit=512,
             user_authorized_user_stop_resume=True,
         )
 
-        self.assertEqual(resumed["effective_authorized_new_request_limit"], 296)
+        self.assertEqual(resumed["effective_authorized_new_request_limit"], 512)
         self.assertTrue(resumed["additional_model_requests_authorized"])
         self.assertEqual(resumed["current_authorization_status"], "user_authorized_resume")
 
@@ -444,9 +793,9 @@ class R4CodexPilotResumeTests(unittest.TestCase):
 
     def test_resume_without_explicit_authorization_keeps_effective_limit_at_zero(self):
         parent = ROOT / "outputs/route_layer/r4_codex_stepwise_formal_task9_pilot_v1"
-        resumed = _resume_state(parent, authorized_request_limit=108)
+        resumed = _resume_state(parent, authorized_request_limit=112)
 
-        self.assertEqual(resumed["authorized_new_request_limit"], 108)
+        self.assertEqual(resumed["authorized_new_request_limit"], 112)
         self.assertEqual(resumed["effective_authorized_new_request_limit"], 0)
         self.assertFalse(resumed["additional_model_requests_authorized"])
 

@@ -20,3 +20,10 @@ This record describes the current GitHub reconciliation. It includes stable, res
 The first inventory found 18,573 candidate path differences totaling 19,609,760,280 bytes. Candidate status alone does not establish that a file is terminal or suitable for publication. This synchronization stages only stable paths passing research relevance, activity, size, and secret filters; the recurring monitor continues with newly terminal outputs.
 
 The private App Support output prefix is replaced with `[R4_APP_SUPPORT_OUTPUT_ROOT]` in public copies. Source and published hashes are recorded in `SYNC_SANITIZATION_MANIFEST.json`; workspace originals are unchanged.
+## 2026-10-30 14:26 CST update
+
+The GitHub `main` baseline was `80b451819224fbed1f595f4fecf9211512455547`. Added four lossless archives under `repository_archives/20261030T142615CST_sync_wave2`: 4,637 files from stable NYC dispatch runs, seed-1/2/3 pooled checks, offline energy recalculation, and five traditional-dispatch baseline updates. The source payload totals 2,666,081,354 bytes; compressed archives total 37,973,487 bytes. Every archive member has source and stored SHA-256 values and passed a full decompression/hash round trip.
+
+The archived NYC multi-month parent audit remains 89/90 paired cells with one D7 unavailable. Replicate evidence remains seed 1 90/90, seed 2 88/90, pooled 267/270, with seed-3 analysis pending. Offline energy recalculation is marked `completed_with_expected_gaps`; it is not a complete route-choice or economics result. The workspace Porto R4 v5 safe subset and latest GridRoute/SUMO acceptance were already byte-aligned with GitHub and were not duplicated.
+
+The active NYC v4 output, paused R4 control/state files, historical monitor snapshots, raw request/prompt/trace/log files, legacy seed-4 runs, superseded route sidecars, and credential configuration remain excluded. No remote files are removed. The public research-memory copy now preserves task identifiers; the three earlier `sk-` matches were substrings of task paths, not credentials. The sanitization manifest records zero credential redactions.

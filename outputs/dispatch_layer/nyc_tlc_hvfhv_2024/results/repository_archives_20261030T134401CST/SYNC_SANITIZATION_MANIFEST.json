@@ -3,17 +3,17 @@
   "replacement_label": "[R4_APP_SUPPORT_OUTPUT_ROOT]",
   "credential_replacement_label": "[REDACTED_CREDENTIAL]",
   "file_count": 64,
-  "redaction_count": 306,
+  "redaction_count": 336,
   "app_support_path_redactions": 303,
-  "credential_pattern_redactions": 3,
+  "credential_pattern_redactions": 0,
   "files": [
     {
       "repo_path": "output/paper/研究记忆库.md",
-      "source_sha256": "5bb61e2194546eb59f2fdf288b592534fd89fb193ebb9d74efe9cbaf99bb88d8",
-      "published_sha256": "c9cff76a5277efee7db1b645b932d303a2152c12a681db3ca0766617f3caa4e1",
-      "redactions": 57,
+      "source_sha256": "9e35c59901ccb5b7b337cb47b24dade974729e824c73d977d2503e94318fa5d1",
+      "published_sha256": "22587ab4dc8792ab66a777093a56edbc89e4a48a459045c9a65ce7fe10f1e2a8",
+      "redactions": 87,
       "app_support_path_redactions": 54,
-      "credential_pattern_redactions": 3
+      "credential_pattern_redactions": 0
     },
     {
       "repo_path": "outputs/route_layer/r4_ev2_payload_phase_reconciliation_20261030_v2/manifest.json",
@@ -519,5 +519,7 @@
       "app_support_path_redactions": 1,
       "credential_pattern_redactions": 0
     }
-  ]
+  ],
+  "corrected_at_utc": "2026-10-30T07:26:00Z",
+  "correction_note": "Removed three false-positive credential redactions: the matched text was the substring sk- in task- identifiers. Current published research memory preserves those identifiers and substitutes only the designated App Support path."
 }

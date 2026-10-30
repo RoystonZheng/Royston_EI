@@ -29,14 +29,14 @@ const steps=D.steps;
 document.getElementById('subtitle').textContent=`${D.map.map_id} · ${D.task.task_id} · gpt-5.6-luna · 独立试跑 · ${D.metrics.new_requests} 次模型请求`;
 document.getElementById('notice').textContent=D.notice;
 const adjustment=D.task_adjustment;document.getElementById('adjustmentTitle').textContent=adjustment?'任务调整说明':'方向映射更正';document.getElementById('correction').textContent=adjustment?`为把路线下界控制在本次授权的 8 次请求内，起点从 ${adjustment.start_node_changed_from} 调整为 ${adjustment.start_node_changed_to}；上车点 ${adjustment.pickup_node_unchanged} 和下车点 ${adjustment.dropoff_node_unchanged} 沿用原任务。原起点至少需 ${adjustment.original_start_minimum_moves} 步，新起点至少需 ${adjustment.new_start_minimum_moves} 步。此任务只验证 Codex CLI 调用链，不纳入正式组间比较。`:D.correction?`旧 v5 记录把方向 N 关联为 ${D.correction.reported_edge_id} → ${D.correction.reported_target}。按冻结地图及代码方向定义，N 实际对应 ${D.correction.correct_edge_id} → ${D.correction.correct_target}；方向动作本身合法，旧边 ID 归属错误。原始 v5 文件保留未改。`:'本次是独立任务，没有前置 smoke，也没有需要修正的方向映射。';
-const metricRows=[['起点',start],['上车点',pickup],['下车点',drop],['已接纳移动',String(D.metrics.accepted_moves)],['当前节点',D.metrics.current_node],['是否到达上车点',D.metrics.pickup_seen?'是':'否'],['剩余最短步数（拓扑下界）',String(D.metrics.minimum_remaining_moves)],['确认模型请求 / 当前授权上限',`${D.metrics.new_requests} / ${D.metrics.authorized_limit}`],['CLI 调用 / 未观测到模型 turn',`${D.metrics.cli_invocations} / ${D.metrics.cli_invocations_without_model_turn}`],['当前调用授权',D.metrics.additional_model_requests_authorized===false?'无后续调用授权':String(D.metrics.current_authorization_status||'未记录')],['重试 / 工具事件',`${D.metrics.retries} / ${D.metrics.tool_events==null?'未知':D.metrics.tool_events}`],['原始工具事件审计缺失请求',String(D.metrics.tool_audit_unknown_request_count)],['停止动作',String(D.metrics.stopped_actions.length)],['模型自检与本地事实不一致',String(D.metrics.self_check_discrepancy_count)],['自检不一致但本地校验后接纳',String(D.metrics.accepted_self_check_discrepancy_count)],['模型失败码被本地校验覆盖',String(D.metrics.model_failure_code_override_count)],['停止动作实际车辆耗电',`${D.metrics.rejected_vehicle_energy_kwh.toFixed(3)} kWh`],['停止动作若执行的估算耗电',`${D.metrics.hypothetical_rejected_energy_kwh.toFixed(3)} kWh（未实际消耗）`],['token 用量',`${D.metrics.input_tokens==null?'未提供':D.metrics.input_tokens.toLocaleString()} 输入 / ${D.metrics.output_tokens==null?'未提供':D.metrics.output_tokens.toLocaleString()} 输出${D.metrics.token_usage_complete?'':'（已知小计，完整用量未知）'}`],['累计 API 标价等值',`$${D.metrics.api_equivalent_usd==null?'未提供':'$'+D.metrics.api_equivalent_usd.toFixed(6)}（不是账单）`],['CLI 请求耗时合计',`${(D.metrics.latency_ms/1000).toFixed(1)} 秒`],['合法前缀长度',`${D.metrics.prefix_distance_m} 米`],['合法前缀仿真能耗',`${D.metrics.prefix_energy_kwh.toFixed(3)} kWh`],['账户现金费用','CLI 未提供']];document.getElementById('summary').innerHTML=metricRows.map(([k,v])=>`<div class="label">${esc(k)}</div><div class="value">${esc(v)}</div>`).join('');
+const metricRows=[['起点',start],['上车点',pickup],['下车点',drop],['已接纳移动',String(D.metrics.accepted_moves)],['当前节点',D.metrics.current_node],['是否到达上车点',D.metrics.pickup_seen?'是':'否'],['剩余最短步数（拓扑下界）',String(D.metrics.minimum_remaining_moves)],['确认模型请求 / 当前授权上限',`${D.metrics.new_requests} / ${D.metrics.authorized_limit}`],['CLI 调用 / 未观测到模型 turn',`${D.metrics.cli_invocations} / ${D.metrics.cli_invocations_without_model_turn}`],['当前调用授权',D.metrics.additional_model_requests_authorized===false?'无后续调用授权':String(D.metrics.current_authorization_status||'未记录')],['重试 / 工具事件',`${D.metrics.retries} / ${D.metrics.tool_events==null?'未知':D.metrics.tool_events}`],['原始工具事件审计缺失请求',String(D.metrics.tool_audit_unknown_request_count)],['停止动作',String(D.metrics.stopped_actions.length)],['模型自检与本地事实不一致',String(D.metrics.self_check_discrepancy_count)],['自检不一致但本地校验后接纳',String(D.metrics.accepted_self_check_discrepancy_count)],['模型失败码被本地校验覆盖',String(D.metrics.model_failure_code_override_count)],['停止动作实际车辆耗电',`${D.metrics.rejected_vehicle_energy_kwh.toFixed(3)} kWh`],['停止动作若执行的估算耗电',`${D.metrics.hypothetical_rejected_energy_kwh.toFixed(3)} kWh（未实际消耗）`],['token 用量',`${D.metrics.input_tokens==null?'未提供':D.metrics.input_tokens.toLocaleString()} 输入 / ${D.metrics.output_tokens==null?'未提供':D.metrics.output_tokens.toLocaleString()} 输出${D.metrics.token_usage_complete?'':'（已知小计，完整用量未知）'}`],['累计 API 标价等值',`$${D.metrics.api_equivalent_usd==null?'未提供':'$'+D.metrics.api_equivalent_usd.toFixed(6)}（不是账单）`],['CLI 请求耗时合计',`${D.metrics.latency_ms==null?'未知':(D.metrics.latency_ms/1000).toFixed(1)+' 秒'}`],['合法前缀长度',D.metrics.prefix_distance_m==null?(D.metrics.accepted_moves===0?'不可估（没有已接纳路线移动）':'不可估（EV v2 路线能耗未评估）'):`${D.metrics.prefix_distance_m} 米`],['合法前缀仿真能耗',D.metrics.prefix_energy_kwh==null?(D.metrics.accepted_moves===0?'不可估（没有已接纳路线移动）':'不可估（EV v2 路线能耗未评估）'):`${D.metrics.prefix_energy_kwh.toFixed(3)} kWh`],['账户现金费用','CLI 未提供']];document.getElementById('summary').innerHTML=metricRows.map(([k,v])=>`<div class="label">${esc(k)}</div><div class="value">${esc(v)}</div>`).join('');
 const summaryChildren=Array.from(document.getElementById('summary').children);const latencyLabelIndex=summaryChildren.findIndex(el=>el.classList.contains('label')&&el.textContent==='CLI 请求耗时合计');if(latencyLabelIndex>=0){const latencyValue=summaryChildren[latencyLabelIndex+1];latencyValue.textContent=D.metrics.latency_ms==null?'未知（未记录可核验的 CLI 时延）':`${(D.metrics.latency_ms/1000).toFixed(1)} 秒${D.metrics.latency_complete?'':'（已知小计，未决调用时延未知）'}`;}
 function draw(endIndex){const W=760,H=700,pad=58,dx=(W-2*pad)/(D.map.size-1),dy=(H-2*pad)/(D.map.size-1),pt=n=>({x:pad+n.x*dx,y:H-pad-n.y*dy});const offset=(a,b)=>{const p=pt(a),q=pt(b),vx=q.x-p.x,vy=q.y-p.y,L=Math.hypot(vx,vy)||1,o=2.8;return{x1:p.x-vy/L*o,y1:p.y+vx/L*o,x2:q.x-vy/L*o,y2:q.y+vx/L*o}};const shownEdges=new Set(steps.slice(0,endIndex+1).filter(s=>s.accepted).map(s=>s.edge_id));let html=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="__MAP_SIZE__乘__MAP_SIZE__有向道路地图与路线回放"><defs><marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#929aaa"/></marker><marker id="routeArr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#0f766e"/></marker><marker id="rejectArr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#dc2626"/></marker></defs>`;
 for(const e of D.map.edges){const a=ns.get(e.from_node),b=ns.get(e.to_node);if(!a||!b)continue;const o=offset(a,b),active=shownEdges.has(e.edge_id);html+=`<line x1="${o.x1}" y1="${o.y1}" x2="${o.x2}" y2="${o.y2}" stroke="${active?'#0f766e':'#a4acba'}" stroke-width="${active?4:1.15}" opacity="${active?1:.48}" marker-end="url(#${active?'routeArr':'arr'})"/>`;}
 const active=steps[endIndex],candidate=active&&!active.accepted&&active.candidate_visible_on_map?active:null;if(candidate){const a=ns.get(candidate.from_node),b=ns.get(candidate.to_node);if(a&&b){const o=offset(a,b);html+=`<line x1="${o.x1}" y1="${o.y1}" x2="${o.x2}" y2="${o.y2}" stroke="#dc2626" stroke-width="4" stroke-dasharray="8 6" marker-end="url(#rejectArr)"/>`;}}
 for(let y=0;y<D.map.size;y++)for(let x=0;x<D.map.size;x++){const n=ns.get(`node_${x}_${y}`);if(!n)continue;const p=pt(n),isStart=n.node_id===start,isPickup=n.node_id===pickup,isDrop=n.node_id===drop,currentNode=steps[endIndex].accepted?steps[endIndex].to_node:steps[endIndex].from_node,isCurrent=n.node_id===currentNode;const color=isCurrent?'#2563eb':isStart?'#f59e0b':isPickup?'#22c55e':isDrop?'#a855f7':'#64748b';const r=isStart||isPickup||isDrop||isCurrent?8:3.1;html+=`<circle cx="${p.x}" cy="${p.y}" r="${r}" fill="${color}" stroke="#fff" stroke-width="2"/>`;if(isStart||isPickup||isDrop||isCurrent){const label=isCurrent?'当前':isStart?'起点':isPickup?'上车':'下车';html+=`<text x="${p.x+10}" y="${p.y-9}" font-size="13" font-weight="700" fill="#1f2937">${label} ${n.node_id}</text>`}else if(n.landmark_name){html+=`<text x="${p.x+5}" y="${p.y-5}" font-size="9" fill="#475569">${esc(n.landmark_name)}</text>`}}
 html+='</svg>';document.getElementById('map').innerHTML=html;document.getElementById('stepLabel').textContent=`${endIndex} / ${steps.length-1}`;document.querySelectorAll('.step').forEach((el,i)=>el.classList.toggle('active',i===endIndex));}
-document.getElementById('steps').innerHTML=steps.map((s,i)=>`<div class="step" data-i="${i}"><div><b>${s.is_start?'任务起点（无模型请求）':s.is_bootstrap?'先前单步 smoke':'模型请求 '+s.request_number}</b>　<span class="pill">${esc(s.status)}</span></div><div class="code">${esc(s.from_node)}${s.direction?' —'+esc(s.direction)+'→ '+esc(s.to_node):''}${s.edge_id?' · '+esc(s.edge_id):''}</div>${s.is_start||s.is_bootstrap?'':`<div class="small">候选方向：${esc((s.allowed_directions||[]).join('、'))}；用量：${s.usage_audit_available?esc(s.input_tokens)+' 输入 / '+esc(s.output_tokens)+' 输出':'用量未知（CLI 原始事件日志缺失）'}；本地约束检查：${s.local_valid===null?'未运行（未收到模型路线动作）':s.local_valid?'通过':'未通过'}；${s.accepted?'已接纳并执行':s.action_received?'收到动作，候选边未执行':'没有收到模型路线动作'}${s.failure_reason_code&&s.failure_reason_code!=='none'?`；模型返回失败代码：${esc(s.failure_reason_code)}`:''}${s.model_failure_code_overridden_by_local_validation?'；本地校验覆盖模型失败声明':''}；工具事件：${s.tool_audit_available?esc((s.tool_item_types||[]).join(', ')||'无'):'CLI 原始事件日志缺失，无法审计'}${s.errors?.length?`；本地拒绝原因：${esc(s.errors.join('、'))}`:''}${s.self_check_false_fields?.length?`；模型自检为 false：${esc(s.self_check_false_fields.join('、'))}`:''}${s.model_self_check_mismatch_fields?.length?`；自检与本地事实不一致：${esc(s.model_self_check_mismatch_fields.join('、'))}`:''}${s.failure_detail?`；${esc(s.failure_detail)}`:''}${s.accepted?'':`；车辆耗电：${Number(s.vehicle_energy_consumed_kwh||0).toFixed(3)} kWh；${s.action_received?`候选边若执行估算：${s.hypothetical_step_energy_kwh==null?'未知':Number(s.hypothetical_step_energy_kwh).toFixed(3)+' kWh（未实际消耗）'}`:'没有收到路线动作，无法估算候选边能耗'}${s.hypothetical_energy_basis?.reverse_edge_inferred_moves?'；估算依据为反向道路属性':''}${s.hypothetical_energy_basis?.proxy_edge_moves?'；估算依据含地图中位路段属性':''}`}</div>`}</div>`).join('');
+document.getElementById('steps').innerHTML=steps.map((s,i)=>`<div class="step" data-i="${i}"><div><b>${s.is_start?'任务起点（无模型请求）':s.is_bootstrap?'先前单步 smoke':'模型请求 '+s.request_number}</b>　<span class="pill">${esc(s.status)}</span></div><div class="code">${esc(s.from_node)}${s.direction?' —'+esc(s.direction)+'→ '+esc(s.to_node):''}${s.edge_id?' · '+esc(s.edge_id):''}</div>${s.is_start||s.is_bootstrap?'':`<div class="small">候选方向：${esc((s.allowed_directions||[]).join('、'))}；用量：${s.usage_audit_available?esc(s.input_tokens)+' 输入 / '+esc(s.output_tokens)+' 输出':'用量未知（CLI 原始事件日志缺失）'}；本地约束检查：${s.local_valid===null?'未运行（未收到模型路线动作）':s.local_valid?'通过':'未通过'}；${s.accepted?'已接纳并执行':s.action_received?'收到动作，候选边未执行':'没有收到模型路线动作'}${s.failure_reason_code&&s.failure_reason_code!=='none'?`；模型返回失败代码：${esc(s.failure_reason_code)}`:''}${s.model_failure_code_overridden_by_local_validation?'；本地校验覆盖模型失败声明':''}；工具事件：${s.tool_audit_available?esc((s.tool_item_types||[]).join(', ')||'无'):'CLI 原始事件日志缺失，无法审计'}${s.errors?.length?`；本地拒绝原因：${esc(s.errors.join('、'))}`:''}${s.route_recovery?`；安全回退：拒绝候选边 ${esc(s.route_recovery.rejected_edge?.from_node_id||'未知')} —${esc(s.route_recovery.rejected_edge?.direction||'?')}→ ${esc(s.route_recovery.rejected_edge?.to_node_id||'未知')}（${esc(s.route_recovery.rejected_edge?.reason||'本地校验失败')}），该边未进入路线；从 ${esc(s.route_recovery.rollback_node_id||'未知')} 回退 ${esc(s.route_recovery.rollback_count_nodes)} 个节点后重新检索${s.route_recovery.removed_accepted_edge?`；撤销上一段已接纳边 ${esc(s.route_recovery.removed_accepted_edge.from_node_id)} → ${esc(s.route_recovery.removed_accepted_edge.to_node_id)}`:''}`:''}${s.self_check_false_fields?.length?`；模型自检为 false：${esc(s.self_check_false_fields.join('、'))}`:''}${s.model_self_check_mismatch_fields?.length?`；自检与本地事实不一致：${esc(s.model_self_check_mismatch_fields.join('、'))}`:''}${s.failure_detail?`；${esc(s.failure_detail)}`:''}${s.accepted?'':`；车辆耗电：${Number(s.vehicle_energy_consumed_kwh||0).toFixed(3)} kWh；${s.action_received?`候选边若执行估算：${s.hypothetical_step_energy_kwh==null?'未知':Number(s.hypothetical_step_energy_kwh).toFixed(3)+' kWh（未实际消耗）'}`:'没有收到路线动作，无法估算候选边能耗'}${s.hypothetical_energy_basis?.reverse_edge_inferred_moves?'；估算依据为反向道路属性':''}${s.hypothetical_energy_basis?.proxy_edge_moves?'；估算依据含地图中位路段属性':''}`}</div>`}</div>`).join('');
 const slider=document.getElementById('slider');slider.addEventListener('input',()=>draw(Number(slider.value)));draw(Number(slider.value));
 </script></body></html>'''
 
@@ -96,6 +96,44 @@ def _turn_started_count(event_audit):
     event_types = event_audit.get("event_types")
     if isinstance(event_types, list):
         return event_types.count("turn.started")
+    return None
+
+
+def _verified_provider_failure_detail(attempt_run_dir, provider_record):
+    """Read only concise, recognized failure data from a hash-verified trace."""
+    trace_reference = provider_record.get("trace_jsonl_path") or provider_record.get("trace_path")
+    expected_hash = provider_record.get("trace_jsonl_sha256") or provider_record.get("trace_sha256")
+    if not trace_reference or not expected_hash:
+        return None
+    trace_path = Path(trace_reference)
+    if not trace_path.is_absolute():
+        trace_path = Path(attempt_run_dir) / trace_path
+    try:
+        raw = trace_path.read_bytes()
+    except OSError:
+        return None
+    if hashlib.sha256(raw).hexdigest() != expected_hash:
+        return None
+    messages = []
+    for line in raw.splitlines():
+        try:
+            event = json.loads(line)
+        except (UnicodeDecodeError, json.JSONDecodeError):
+            continue
+        if not isinstance(event, dict):
+            continue
+        if event.get("type") == "error" and isinstance(event.get("message"), str):
+            messages.append(event["message"])
+        error = event.get("error")
+        if isinstance(error, dict) and isinstance(error.get("message"), str):
+            messages.append(error["message"])
+    joined = " ".join(messages).lower()
+    if "429" in joined and "too many requests" in joined:
+        return "原始 trace 的 SHA-256 已核验：CLI 记录服务端返回 429 Too Many Requests，且内部重试已耗尽。"
+    if "selected model is at capacity" in joined:
+        return "原始 trace 的 SHA-256 已核验：模型服务容量已满，CLI 未返回路线动作。"
+    if "ssl" in joined or "tls" in joined or "handshake" in joined:
+        return "原始 trace 的 SHA-256 已核验：CLI 记录 TLS/SSL 连接或握手中断。"
     return None
 
 
@@ -300,6 +338,21 @@ def render(run_dir, output, parent_run=None):
                     "CLI 退出码 {0}（{1}）；未观测到模型 turn 或路线动作。投递与用量未知，未重试。"
                     .format(exit_code, signal_label or "信号来源未记录")
                 )
+        provider_failure_detail = _verified_provider_failure_detail(
+            attempt_run_dir, attempt.get("provider_record", {})
+        )
+        if provider_failure_detail:
+            failure_detail = " ".join(
+                part for part in (provider_failure_detail, failure_detail) if part
+            )
+            if not direction:
+                status_label = (
+                    "服务端 429；未收到路线动作"
+                    if "429 Too Many Requests" in provider_failure_detail
+                    else "模型服务容量已满；未收到路线动作"
+                    if "容量已满" in provider_failure_detail
+                    else "CLI 连接中断；未收到路线动作"
+                )
         if (
             not accepted
             and local.get("passed") is True
@@ -336,7 +389,7 @@ def render(run_dir, output, parent_run=None):
             "allowed_directions": attempt.get("allowed_directions", []),
             "status": status_label,
             "accepted": accepted,
-            "local_valid": None if request_unknown else bool(local.get("passed")),
+            "local_valid": None if request_unknown or not direction else bool(local.get("passed")),
             "self_check_false_fields": false_fields,
             "model_self_check_mismatch_fields": discrepancy.get(
                 "model_self_check_mismatch_fields",
@@ -359,6 +412,7 @@ def render(run_dir, output, parent_run=None):
             "hypothetical_step_energy_kwh": diagnostic.get("hypothetical_step_energy_kwh") if not accepted else None,
             "hypothetical_energy_basis": diagnostic.get("hypothetical_energy_basis") if not accepted else None,
             "errors": diagnostic.get("errors", local.get("errors", [])) if not accepted else [],
+            "route_recovery": attempt.get("route_recovery"),
         })
 
     bootstrap_included = any(
@@ -610,7 +664,7 @@ def render(run_dir, output, parent_run=None):
             "另有{0} CLI 调用因中断未收到回执，投递与用量未知；"
             "它未计作路线动作，且用量与工具审计不作零值处理。"
         ).format(request_label)
-    if bootstrap_included:
+    if bootstrap_included and state.get("accepted_edges"):
         initial_edge = state["accepted_edges"][0]
         edges_by_id = {edge["edge_id"]: edge for edge in map_data["edges"]}
         first_edge = edges_by_id[initial_edge]

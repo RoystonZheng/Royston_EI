@@ -294,3 +294,27 @@ NYC仍是TLC真实订单映射到zone-level OD成本代理，接驾为质心代�
 - v5离线time-money侧账最近快照为T1410单run/50段（SHA `027e28d17305f63f50e46b726628bab2a57b679c0804edb63a39f752758a6d1c`）；T1405合计8 runs/360段（SHA `6e41f9e75cec3e5a676443789252b5f12eda40134ca8a40174056711f3f73d4d`）。已纳入源结果按每段`max(signed_net_kwh,0)`计量，乘客收入按段一次、空驶收入0、缺失票价留null；源结果未改、错误列表为空、没有排序、模型调用或SUMO重跑。侧账coverage index仍为313个结果（manifest SHA `7a671920df430eb00812bf93ba83f2fb230092c64433ad81250179c4015d189a`），早于T0705的326项账本；费率、完整共同候选池仍缺，route-choice/profit保持blocked/null。
 - T0705矩阵D5累计201条CLI trace中，189条turn.completed、12条turn.failed且带HTTP429/retry-limit记录；usage coverage不完整。失败保留failed，不重试。本轮新增EV2 F2 D5和seed3 F2 D5 trace均正常完成，不增加失败数。至07:12 UTC，EV2 seed0 F4/D6-D7确定性复放与legacy seed3 F4/D0-D1基线都仍在运行；两者均无新模型调用。
 - NYC输入仍是TLC真实订单需求映射到zone-level OD成本代理，pickup使用合成质心代理，不是街道级路网或实车遥测。D0不以能耗优化，D5不使用确定性全局能耗目标；总体结果尚不支持方法排名。
+
+
+## 2026-10-29 15:36 CST 增量：NYC EV2新增完整格，seed0与隔离legacy seed3继续运行
+
+证据类型：NYC EV2正式segment-ledger和输入指纹审计；已完成D5单元逐轮校验与Codex trace；time-money v5离线侧车增量审计；隔离legacy seed3运行状态快照。
+
+- **EV2正式seed0**：最新segment-ledger `audit_snapshots/ev2_segment_ledger_audit_20261029T0733UTC_live.json` SHA-256 `5370b506d90fd634008cc14b33911297c7b87bcf5cc15820ce882f36566e97ec`：332/630项有效、298缺失、0无效；D0/D1/D2各90，D5为14，D6/D7/D8各16。七方法完整格14/90，整体矩阵仍不完整。匹配指纹审计 `ev2_input_fingerprint_audit_20261029T0733UTC_live.json` SHA `66019e1b86b7ab9335097368107581d48204893be295115a8bc71f30e105dc30`：332项场景指纹、冻结输入和契约均匹配，mismatch/逐项错误均0；EV2 profile SHA统一为 `b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee`。
+- 新完成D5单元 `EV_20240411_200000_q50/F4`结果SHA `accba0298ee82118de30e165e21a16b7ab5ca4214e7916511e0ca180a2de959a`：563轮、`partial_run=false`，563/563轮validator通过、硬约束错误0、一对一错误0；49/540单完成，平均接驾92.077秒，P95 273.504秒，模拟EV2能耗30.725348 kWh。该格由此成为第14个七方法齐备格。D5 30条唯一Codex调用trace均turn.completed，0失败/未知/429/重试，728,226 input（380,160 cached）+4,667 output=732,893 tokens；28条策略输出被接受，2条返回不可行候选并被拒，未重试。D5全矩阵12条历史HTTP 429仍保持failed。D5累计231调用/219成功/12失败、0未知，4,868,505可用tokens；因12条失败无usage，usage coverage仍不完整。
+- **time-money v5离线侧车**：截至332个有效源结果的去重覆盖索引 `time_money_v5_source_coverage_index_20261029T0735UTC_332/manifest.json` SHA `13629c6bfbc4d95a252f9f15dfcc56194cee862905ad75758b603faa2062090c`。本轮增量为3个源结果、78条行程分段；审计 `audit_snapshots/time_money_v5_delta_audit_20261029T0735UTC.json` SHA `4ee56e7111e78d3b62c120829db327ede956bc0d78b2c272795f0c37df03fe6f`：逐段 `max(signed_net_kwh,0)`差异0、重复乘客收入0、空驶非零收入0，源哈希复核通过且结果未修改；缺冻结电价/完整共同候选池，路线选择和利润仍blocked/null，0排序、0新模型调用、0 SUMO重跑。侧车不是在线selector。
+- **EV2运行中状态**：D8在 `EV_20240427_223500_q75/F1` 完成后，D6/D7复用该D8策略的确定性回放于07:33:49Z完成；三项结果每项527轮均通过validator、13/527订单服务，回放不增加模型调用。随后seed0进入该格D5 live；截至07:35Z已有8条trace全部turn.completed、0失败/未知，usage为153,641 input（88,704 cached）+1,039 output，仿真仍运行。seed0进度JSONL显示parent PID 71952及当前唯一D5子进程PID 13536。
+- **隔离legacy seed3**：`EV_20241115_224000_q75/F4` 的D0/D1/D2均已完整结束，554轮逐轮validator均通过，0硬约束/一对一错误，每法49/572单；该批继续单独于EV2统计。D8请求trace已完成1次（13,451 input+216 output tokens，无失败/未知），但仿真尚未落最终结果；截至07:35Z子进程PID 11176仍运行。
+- **状态记录差异**：EV2 `experiment_manifest.json` SHA `de59b38a80b03ea6320b870cb34dc89d9bfcc7e4c9229ee0991731e2cdb50a6f`最后更新于04:19Z，虽status为running，`phases.evaluation`仍标`interrupted_for_shared_cli_contention`；其后progress JSONL和唯一活跃parent/child显示评估已经继续。未改manifest/官方seed文件，未启动第二个seed0 owner。
+- 研究边界不变：TLC真实订单只映射zone-level OD成本代理，接驾为质心代理，不是街道级路网/真实ETA；D0无能耗目标，D5无确定性全局能耗优化，D1/D2/D6/D7/D8仍按冻结词典序把EV2 signed-net能耗置于末级。
+
+
+## 2026-10-29 15:40 CST 增量：EV2 seed0第二个新增七法完整格
+
+证据类型：seed0官方segment-ledger和指纹审计；F1/D5完整结果与逐轮validator、Codex trace；对应time-money v5离线侧车；两条仍在运行的NYC批次进度记录。
+
+- 最新seed0正式账本 `audit_snapshots/ev2_segment_ledger_audit_20261029T0738UTC_live.json` SHA `c4c4e402347e947f2932a148ea5c676db31383d238dbe24bd036277643407ec2`：333/630有效、297缺失、0无效；D0/D1/D2各90，D5为15，D6/D7/D8各16；七方法齐备格15/90。指纹审计SHA `74078a33667ba3eff5a825e65c54e11d0d301c3b452e0f223d5a7e7f68757e6e`覆盖333项，冻结输入、场景/同格指纹、契约和profile匹配，错误0；profile SHA `b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee`。
+- 新完成单元 `EV_20240427_223500_q75/F1/D5` SHA `dc1631311df7072b72e9021cbafed5fa800559125f0dd0bcf3209f2669cb1612`：527轮、`partial_run=false`、527/527 validator valid、硬约束和一对一错误0；13/573单完成，平均接驾145.182秒。8次Codex CLI调用全部turn.completed且策略输出8/8接受，0失败/未知/重试，154,680 tokens（153,641 input，88,704 cached，1,039 output），估算0.400207 credits，账户实际扣费未知。该格补齐第15个完整七法cell；单格仍不用于整体排序或性能结论。
+- 侧车以333个有效源结果建立覆盖索引，manifest SHA `ac9b04e001a50e1439993aab9bce7ad4d5d16ab4e6396ac68c45f1a2c90681e0`。本次只给新D5结果追加26个EV2分段（13空驶、13载客）；增量审计SHA `e2670ea824c7681181c28e6a2736cdb55995542b878bffc3188cfdcde7382d0a`确认signed-net截断公式0差异、重复收入0、源结果未改；电价/共同路线池仍不完整，成本和路线选择阻断、利润null、无排名，0模型请求/0 SUMO。
+- **在途**：seed0进度已从F1 D5推进到 `EV_20240427_223500_q75/F2/D8_live`（07:36:42Z开始）。截至07:38:42Z，该格已产生1条完成trace（13,451 input含12,672 cached +191 output），仿真尚未完成；不计入333项账本。隔离legacy seed3的 `EV_20241115_224000_q75/F4/D8`已完成：557轮validator全valid、1次响应接受、49/572单、13,667 tokens；D6/D7确定性回放于07:37:06Z后继续，尚未完成，仍独立统计。
+- D5全矩阵的12个历史HTTP429失败保持不重试；本次D5 F1单元无429。NYC仍是TLC真实订单映射到zone-level OD代理、合成质心接驾代理，不代表街道级路网或实时ETA。

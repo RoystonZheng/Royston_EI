@@ -20,7 +20,7 @@ from typing import Any
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
-SUPPORT_ROOT = Path("/Users/didi/Library/Application Support/CodexR4Formal20261027")
+SUPPORT_ROOT = Path("[LOCAL_HOME]/Library/Application Support/CodexR4Formal20261027")
 for item in (SUPPORT_ROOT, SUPPORT_ROOT / "scripts"):
     if str(item) not in sys.path:
         sys.path.insert(0, str(item))

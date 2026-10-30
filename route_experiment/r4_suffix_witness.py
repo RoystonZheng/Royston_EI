@@ -232,7 +232,7 @@ def build_waypoint_suffix_witness(
             edge_list,
             pickup_node_id,
             dropoff_node_id,
-            prior_nodes | first_leg_internal,
+            prior_nodes | first_leg_internal | {current_node_id},
             blocked,
         )
         if second_leg is not None:

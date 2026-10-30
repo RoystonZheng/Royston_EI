@@ -28,11 +28,11 @@ import run_r4_codex_pilot_continuation as continuation  # noqa: E402
 from r4_execution_lock import acquire_execution_lock, release_execution_lock  # noqa: E402
 
 DEFAULT_BATCH_ROOT = Path(
-    "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/"
+    "[LOCAL_HOME]/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/"
     "r4_codex_formal_batch_20261027_v2"
 )
 DEFAULT_SOURCE = Path(
-    "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/"
+    "[LOCAL_HOME]/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/"
     "r4_codex_batch_preflights_20261024_v1/manifest.json"
 )
 DEFAULT_PILOT = ROOT / "outputs/route_layer/r4_codex_formal_task9_pilot_20261027_v3/final_audit.json"
