@@ -1,0 +1,62 @@
+{
+  "schema": "windows_migration_r4_stop_state_v1",
+  "captured_at_local": "2026-10-30T16:14:53+08:00",
+  "evidence_types": [
+    "user instruction",
+    "local process scan",
+    "source manifests and raw trace"
+  ],
+  "scope": "Synthetic-grid R4 formal batch and worker_recovery_429 checkpoint",
+  "process_scan": {
+    "matching_R4_runner_process_found": false,
+    "checked_at_local": "2026-10-30T16:14:53+08:00"
+  },
+  "source_status_as_stored": {
+    "parent_manifest_status": "running",
+    "parent_manifest_updated_at_utc": "2026-10-30T08:09:42.913992+00:00",
+    "worker_recovery_429_status": "stopped_provider_or_tool_contract_failure",
+    "worker_updated_at_utc": "2026-10-30T08:13:14.807456+00:00"
+  },
+  "latest_task_run": {
+    "task_id": "task-0009-0004",
+    "run_id": "run_000",
+    "state_status": "stopped_request_error",
+    "run_manifest_status": "partial_legal_prefix_not_complete",
+    "trace_last_event": "turn.completed",
+    "trace_usage": {
+      "input_tokens": 18122,
+      "cached_input_tokens": 0,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 175,
+      "reasoning_output_tokens": 114
+    }
+  },
+  "handling": "Preserve files exactly. Do not replay this request or infer a completed route from the trace. Parent manifest still says running, while worker status is stopped and no matching process was found; the independent stop record documents the process snapshot without rewriting either manifest.",
+  "source_files": {
+    "parent_manifest.json": {
+      "source_relative_path": "manifest.json",
+      "bytes": 413561,
+      "sha256": "10dbcb6c5809f72561d40b693ca2000ae493e6a90fdf6021a98c2bc5041e58ad"
+    },
+    "worker_recovery_429_manifest.json": {
+      "source_relative_path": "parallel_workers/worker_recovery_429/manifest.json",
+      "bytes": 166042,
+      "sha256": "a4c867363b1ada1b8edfa88b48d5c35d53ccc61bb4bce769a640f19138952a8e"
+    },
+    "task_run_state.json": {
+      "source_relative_path": "parallel_workers/worker_recovery_429/tasks/seed_9/task-0009-0004/run_000/state.json",
+      "bytes": 137747,
+      "sha256": "adea9edd8fb991d04608cfb7ffddf7e422fd0fe8313c0cd709149f997a7ea769"
+    },
+    "task_run_manifest.json": {
+      "source_relative_path": "parallel_workers/worker_recovery_429/tasks/seed_9/task-0009-0004/run_000/manifest.json",
+      "bytes": 5070,
+      "sha256": "7e865dfe5285d21cda90c197b8cc0fb8b9c12a693c34577d7f755eacf8d1cdf8"
+    },
+    "latest_step_trace.jsonl": {
+      "source_relative_path": "parallel_workers/worker_recovery_429/tasks/seed_9/task-0009-0004/run_000/traces/r4_step_0002.jsonl",
+      "bytes": 570,
+      "sha256": "5ca055ae0833c7808bfd42cedd21d68186fde477a9e9e6c5f9e1a06f23218c2b"
+    }
+  }
+}
