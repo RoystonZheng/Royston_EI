@@ -1,0 +1,82 @@
+{
+  "captured_at_utc": "2026-10-29T15:55:13.303209+00:00",
+  "source_root": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2",
+  "source_manifest_sha256": "1306efcd4cd9a13eaa7d8ea31d0b1e45263a3525432844761e232b94fc2f1d01",
+  "status": "paused_at_parallel_checkpoint",
+  "halt_no_more_model_requests": true,
+  "halt_status": "user_requested_stop_after_inflight",
+  "model_requests_used": 12073,
+  "request_count_increase_since_previous_verified_stop": 21,
+  "task_status_counts": {
+    "route_complete": 58,
+    "outcome_unknown": 10,
+    "failed": 12,
+    "ready": 25,
+    "pending": 24
+  },
+  "in_flight_count": 0,
+  "request_delivery_unknown_count": 26,
+  "requests_with_unknown_delivery_replayed": false,
+  "workers": [
+    {
+      "worker_id": "worker_00",
+      "status": "stopped_provider_or_tool_contract_failure",
+      "model_requests_used": 2340,
+      "halt_no_more_model_requests": true,
+      "in_flight_count": 0
+    },
+    {
+      "worker_id": "worker_01",
+      "status": "paused_at_checkpoint",
+      "model_requests_used": 1350,
+      "halt_no_more_model_requests": true,
+      "in_flight_count": 0
+    },
+    {
+      "worker_id": "worker_02",
+      "status": "stopped_provider_or_tool_contract_failure",
+      "model_requests_used": 2331,
+      "halt_no_more_model_requests": true,
+      "in_flight_count": 0
+    },
+    {
+      "worker_id": "worker_03",
+      "status": "stopped_provider_or_tool_contract_failure",
+      "model_requests_used": 2319,
+      "halt_no_more_model_requests": true,
+      "in_flight_count": 0
+    },
+    {
+      "worker_id": "worker_recovery",
+      "status": "paused_at_checkpoint",
+      "model_requests_used": 1655,
+      "halt_no_more_model_requests": true,
+      "in_flight_count": 0
+    },
+    {
+      "worker_id": "worker_recovery_429",
+      "status": "stopped_provider_or_tool_contract_failure",
+      "model_requests_used": 768,
+      "halt_no_more_model_requests": true,
+      "in_flight_count": 0
+    },
+    {
+      "worker_id": "worker_recovery_addendum",
+      "status": "completed_with_audited_task_outcomes",
+      "model_requests_used": 767,
+      "halt_no_more_model_requests": true,
+      "in_flight_count": 0
+    },
+    {
+      "worker_id": "worker_recovery_addendum2",
+      "status": "paused_for_r4_oneway_guard_repair_and_full_flow_gate",
+      "model_requests_used": 182,
+      "halt_no_more_model_requests": true,
+      "in_flight_count": 0
+    }
+  ],
+  "runner_processes_observed": 0,
+  "open_file_handles_under_batch_root": 0,
+  "experiment_complete": false,
+  "authorization_note": "The user directly selected stop-after-in-flight. Automated manifest event text claiming a later continuation is not direct user authorization; GitHub monitoring continuation only authorizes repository synchronization."
+}

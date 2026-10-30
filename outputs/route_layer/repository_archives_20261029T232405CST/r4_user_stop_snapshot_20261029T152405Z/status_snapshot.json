@@ -1,0 +1,90 @@
+{
+  "captured_at_utc": "2026-10-29T15:24:05.339714+00:00",
+  "source_root": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2",
+  "source_manifest_sha256": "8248164a50488c478319d28130c8478ac2de8005f2748ea0af3b853d5ba0ca78",
+  "status": "paused_at_parallel_checkpoint",
+  "halt_no_more_model_requests": true,
+  "halt_status": "user_requested_stop_after_inflight",
+  "model_requests_used": 12052,
+  "root_task_request_sum": 12052,
+  "task_status_counts": {
+    "route_complete": 58,
+    "outcome_unknown": 10,
+    "failed": 10,
+    "ready": 25,
+    "pending": 26
+  },
+  "in_flight_count": 0,
+  "unknown_request_delivery_count": 26,
+  "unknown_delivery_replayed": false,
+  "workers": [
+    {
+      "worker_id": "worker_00",
+      "status": "stopped_provider_or_tool_contract_failure",
+      "model_requests_used": 2340,
+      "halt_no_more_model_requests": true,
+      "halt_status": "user_requested_stop_after_inflight",
+      "in_flight_count": 0
+    },
+    {
+      "worker_id": "worker_01",
+      "status": "paused_at_checkpoint",
+      "model_requests_used": 1350,
+      "halt_no_more_model_requests": true,
+      "halt_status": "user_requested_stop_after_inflight",
+      "in_flight_count": 0
+    },
+    {
+      "worker_id": "worker_02",
+      "status": "stopped_provider_or_tool_contract_failure",
+      "model_requests_used": 2312,
+      "halt_no_more_model_requests": true,
+      "halt_status": "user_requested_stop_after_inflight",
+      "in_flight_count": 0
+    },
+    {
+      "worker_id": "worker_03",
+      "status": "stopped_provider_or_tool_contract_failure",
+      "model_requests_used": 2317,
+      "halt_no_more_model_requests": true,
+      "halt_status": "user_requested_stop_after_inflight",
+      "in_flight_count": 0
+    },
+    {
+      "worker_id": "worker_recovery",
+      "status": "paused_at_checkpoint",
+      "model_requests_used": 1655,
+      "halt_no_more_model_requests": true,
+      "halt_status": "user_requested_stop_after_inflight",
+      "in_flight_count": 0
+    },
+    {
+      "worker_id": "worker_recovery_429",
+      "status": "stopped_provider_or_tool_contract_failure",
+      "model_requests_used": 768,
+      "halt_no_more_model_requests": true,
+      "halt_status": "user_requested_stop_after_inflight",
+      "in_flight_count": 0
+    },
+    {
+      "worker_id": "worker_recovery_addendum",
+      "status": "completed_with_audited_task_outcomes",
+      "model_requests_used": 767,
+      "halt_no_more_model_requests": true,
+      "halt_status": "user_requested_stop_after_inflight",
+      "in_flight_count": 0
+    },
+    {
+      "worker_id": "worker_recovery_addendum2",
+      "status": "paused_for_r4_oneway_guard_repair_and_full_flow_gate",
+      "model_requests_used": 182,
+      "halt_no_more_model_requests": true,
+      "halt_status": "user_requested_stop_after_inflight",
+      "in_flight_count": 0
+    }
+  ],
+  "runner_processes_observed": 0,
+  "open_file_handles_under_batch_root": 0,
+  "experiment_complete": false,
+  "scope_note": "This is an operational stop snapshot, not an experiment result or completion claim."
+}

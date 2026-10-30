@@ -1,0 +1,46 @@
+{
+  "created_at_utc": "2026-10-29T15:31:58.844550+00:00",
+  "source_experiment_root": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0",
+  "checkpoint": "EV2_seed0_checkpoint_20261029T1524UTC",
+  "artifact_count": 6,
+  "artifacts": [
+    {
+      "source_path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/audit_snapshots/ev2_segment_ledger_audit_20261029T152450Z_heartbeat.json",
+      "archive_path": "audits/ev2_segment_ledger_audit_20261029T152450Z_heartbeat.json",
+      "size_bytes": 1405993,
+      "sha256": "009f30c642b88c4caa9de659d58b8b8d33e4e66f3338bdf0762ea549d6c6e741"
+    },
+    {
+      "source_path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/audit_snapshots/ev2_matrix_fingerprint_audit_20261029T152450Z_heartbeat.json",
+      "archive_path": "audits/ev2_matrix_fingerprint_audit_20261029T152450Z_heartbeat.json",
+      "size_bytes": 861185,
+      "sha256": "24a80b67ada09ff40f75a28d66ed3ed7429d29ea8b3d14f2e90a54fcf976866e"
+    },
+    {
+      "source_path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/audit_snapshots/ev2_unique_trace_usage_audit_20261029T1523UTC_heartbeat.json",
+      "archive_path": "audits/ev2_unique_trace_usage_audit_20261029T1523UTC_heartbeat.json",
+      "size_bytes": 954655,
+      "sha256": "6a6e9e634df4ea50d0480d8b6919858cc24b267a9d312cfa26915851c2e9b5ab"
+    },
+    {
+      "source_path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/time_money_v5_segment_sidecar_20261029T1522UTC_delta_from354_current/manifest.json",
+      "archive_path": "time_money_v5_segment_sidecar_20261029T1522UTC_delta_from354_current/manifest.json",
+      "size_bytes": 3615,
+      "sha256": "0014d061feedc8d00a76a63c2ff7d2e315b6b812b961e6bc8c4d47e28d331ce4"
+    },
+    {
+      "source_path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/time_money_v5_segment_sidecar_20261029T1522UTC_delta_from354_current/segment_economics_v5.jsonl",
+      "archive_path": "time_money_v5_segment_sidecar_20261029T1522UTC_delta_from354_current/segment_economics_v5.jsonl",
+      "size_bytes": 4513919,
+      "sha256": "05a985e25e90444cf4337b08c688c21598464456d1718ff39b5a5969f105d8de"
+    },
+    {
+      "source_path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/time_money_v5_segment_sidecar_20261029T1522UTC_delta_from354_current/run_economics_v5.jsonl",
+      "archive_path": "time_money_v5_segment_sidecar_20261029T1522UTC_delta_from354_current/run_economics_v5.jsonl",
+      "size_bytes": 2528410,
+      "sha256": "e74817614514ec545ed3ca01e78b4bf1362331f73df00466e8f1c623ac12b790"
+    }
+  ],
+  "interpretation_note": "15:24 UTC官方ledger为394/630有效、0无效、236缺失；同一时点输入指纹394项全匹配。15:23 UTC unique-trace与15:22 UTC v5侧车只覆盖392项，落后官方ledger两项；侧车排名关闭、共同候选池不可用、电价缺失时成本为null。该checkpoint为进行中时间点，NYC批次仍有runner，不代表最终结果。",
+  "scope": "stable audit and offline sidecar artifacts only; not an experiment-finalization archive"
+}

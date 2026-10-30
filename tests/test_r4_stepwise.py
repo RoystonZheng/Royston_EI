@@ -8,6 +8,7 @@ from route_experiment.models import Edge, Node, RoadMap, RouteInputPackage, Vehi
 from route_experiment.r4_constraints import build_r4_route_output_constraint
 from route_experiment.routing import edge_travel_time_sec
 from route_experiment.r4_stepwise import (
+    audit_accepted_prefix_suffix_witnesses,
     audit_r4_stepwise_map_equivalence,
     build_r4_step_output_constraint,
     build_r4_stepwise_messages,
@@ -447,6 +448,60 @@ class R4StepwiseTests(unittest.TestCase):
             ["none"],
         )
         self.assertTrue(constraint.tool_definition()["function"]["strict"])
+
+    def test_suffix_gate_certifies_each_exposed_direction_and_prefix_action(self):
+        constraint = build_r4_step_output_constraint(
+            self.package,
+            self.full_constraint,
+            current_node_id=self.task.start_node_id,
+            pickup_seen=False,
+            visited_node_ids=[self.task.start_node_id],
+            remaining_action_budget=2,
+            require_suffix_witness=True,
+        )
+        self.assertTrue(constraint.require_suffix_witness)
+        self.assertEqual(set(constraint.edge_by_direction), {"N"})
+        self.assertEqual(
+            constraint.suffix_witness_by_direction["N"]["node_sequence"],
+            ["node_0_1", "node_1_1"],
+        )
+        audit = audit_accepted_prefix_suffix_witnesses(
+            self.package,
+            self.full_constraint,
+            accepted_nodes=["node_0_0", "node_0_1"],
+            accepted_edges=["edge_0_1"],
+            accepted_directions=["N"],
+            route_action_budget=2,
+        )
+        self.assertTrue(audit["passed"])
+        self.assertTrue(audit["all_steps_have_suffix_witness"])
+        self.assertFalse(audit["dropoff_reached"])
+        self.assertEqual(audit["model_calls"], 0)
+
+    def test_invalid_action_researches_from_last_legal_node_without_advancing_prefix(self):
+        client = StepSequenceClient([self._move("S"), self._move("N"), self._move("E")])
+        client.route_constraint = self.full_constraint
+
+        result = run_r4_stepwise_route_search(
+            client,
+            self.package,
+            self.road_map,
+            self.task,
+            self.task.pickup_node_id,
+            self.task.dropoff_node_id,
+            max_api_calls=3,
+        )
+
+        self.assertEqual(result["status"], "route_validated")
+        self.assertEqual(result["route"]["node_sequence"], [
+            "node_0_0", "node_0_1", "node_1_1"
+        ])
+        self.assertEqual(result["attempts"][0]["status"], "step_invalid")
+        self.assertTrue(result["attempts"][0]["rollback_to_last_legal_checkpoint"])
+        self.assertEqual(result["attempts"][0]["rollback_checkpoint_node_id"], "node_0_0")
+        self.assertEqual(result["attempts"][1]["request_state"]["n"], "node_0_0")
+        self.assertEqual(result["attempts"][1]["allowed_directions"], ["N"])
+        self.assertEqual(result["api_request_count"], 3)
 
         no_early_dropoff = build_r4_step_output_constraint(
             self.package,

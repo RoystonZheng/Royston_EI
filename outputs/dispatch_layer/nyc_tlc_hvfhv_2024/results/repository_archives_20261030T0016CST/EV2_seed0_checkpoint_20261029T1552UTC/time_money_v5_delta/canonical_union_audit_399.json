@@ -1,0 +1,74 @@
+{
+  "schema_version": "nyc_time_money_v5_ev2_canonical_union_audit_v1",
+  "status": "passed_partial_matrix",
+  "created_at_utc": "2026-10-29T15:56:13.592016+00:00",
+  "official_ledger_path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/audit_snapshots/ev2_segment_ledger_audit_20261029T1551UTC_checkpoint.json",
+  "official_ledger_sha256": "3dbc19b9edebc77fc1d1cd3e00d1e62635bbeb30ad67aeeed390f8dccee3a829",
+  "fingerprint_audit_path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/audit_snapshots/ev2_matrix_fingerprint_audit_20261029T1551UTC_checkpoint.json",
+  "fingerprint_audit_sha256": "65af777e973118746fb1c0e8dc1ee2644e72256ec99cbd427c68d30058665a23",
+  "expected_method_runs": 630,
+  "valid_method_runs": 399,
+  "missing_method_runs": 231,
+  "canonical_sidecars": [
+    {
+      "manifest": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/time_money_v5_segment_sidecar_20261029123253Z_full_current/manifest.json",
+      "manifest_sha256": "5d9f9e6865e01484efd4343e6abe8cf1e9a85e6951565a13c0e0f2032d9a0f46",
+      "rows": 354,
+      "segments": 20398,
+      "new_source_result_count": 354,
+      "source_audit_sha256": "1deceffd221a106907c344ebbc4785b86bb1a2043b6219dde4932fd58cf37b41",
+      "electricity_price_per_kwh": null,
+      "rankings_emitted": false,
+      "new_model_calls": 0,
+      "source_results_modified": false
+    },
+    {
+      "manifest": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/time_money_v5_segment_sidecar_20261029T1437UTC_delta_from354_canonical/manifest.json",
+      "manifest_sha256": "038dc12356c9153423778fcd68604113a97ad4d949255b91de4fde4aa0087a1e",
+      "rows": 30,
+      "segments": 1614,
+      "new_source_result_count": 30,
+      "source_audit_sha256": "edb23f2291b4e54cee457f793d6ac9d4641814a2015074e3b2db6a53f5cc5da2",
+      "electricity_price_per_kwh": null,
+      "rankings_emitted": false,
+      "new_model_calls": 0,
+      "source_results_modified": false
+    },
+    {
+      "manifest": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/time_money_v5_segment_sidecar_20261029T1551UTC_delta_from384/manifest.json",
+      "manifest_sha256": "78d76922d384203e0b6b3b1b27b86ba802c60d9114ac20070b2761b2b2a2e93a",
+      "rows": 15,
+      "segments": 950,
+      "new_source_result_count": 15,
+      "source_audit_sha256": "3dbc19b9edebc77fc1d1cd3e00d1e62635bbeb30ad67aeeed390f8dccee3a829",
+      "electricity_price_per_kwh": null,
+      "rankings_emitted": false,
+      "new_model_calls": 0,
+      "source_results_modified": false
+    }
+  ],
+  "unique_union": 399,
+  "duplicates_or_conflicts": [],
+  "missing_sources": 0,
+  "extra_sources": 0,
+  "source_hash_mismatches": [],
+  "all_source_hashes_match": true,
+  "exact_official_ledger_source_set_match": true,
+  "method_economics_status_counts": {
+    "blocked_no_complete_shared_route_candidate_pool": 399
+  },
+  "total_source_segments": 22962,
+  "electricity_price_per_kwh": null,
+  "rankings_emitted": 0,
+  "new_model_calls": 0,
+  "dispatch_replayed": false,
+  "decision_model_version": "route_time_money_segment_v5_signed_fare_audit",
+  "decision_module_sha256": "6b383157aa3287faa0049f13bbf0ff7765e903367a63305fd826e89dc83a0375",
+  "energy_model_sha256": "a53ac3860e7a9d169b5ceb0f8ca853a0cb73061cc106ba0ec235f1e3c600e893",
+  "limitations": [
+    "Only 399 of 630 method runs are present; matrix incomplete.",
+    "No ranking emitted because full economic inputs and common candidate sets are not available.",
+    "NYC trips use zone-level OD proxy and centroid pickup, not street-level route reconstruction.",
+    "EV2 battery energy is simulated, not vehicle telemetry."
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "checkpoint_type": "r4_stop_control_state",
+  "created_at_local": "2026-10-30T12:26:58.176093+08:00",
+  "created_at_utc": "2026-10-30T04:26:58.176093+00:00",
+  "user_instruction": "在途结束后停发",
+  "batch_root": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2",
+  "model_requests_used_at_enforcement": 12102,
+  "parent_in_flight": [],
+  "parent_manifest_sha256_before_reassertion": "52dd1ca2d0e1b377a5c511a3a0615fdd4619d43f5858366f35df1e06c20dbaaf",
+  "parent_manifest_sha256_after_reassertion": "f198a3e2860740ea01557cfbb3e72abf5d1596a6b6e1fd33bcfe75d4b904f232",
+  "parallel_plan_sha256_after_reassertion": "69852ea5f48d9b6db581f4a89d2fffb86e0351961329061786c091624d64df70",
+  "worker_manifests": [
+    {
+      "path": "parallel_workers/worker_00/manifest.json",
+      "sha256": "55e14e738947581d72922cfbcee53cc683d6193b4f110ff5ac30d9bfe601f7a8",
+      "halt": true
+    },
+    {
+      "path": "parallel_workers/worker_01/manifest.json",
+      "sha256": "cf10241b17319b4d4025dd4e24c0c7d3c88e40c831ccf2eca4c48f0b8e45876c",
+      "halt": true
+    },
+    {
+      "path": "parallel_workers/worker_02/manifest.json",
+      "sha256": "06227fd50d05a1f9afd660f0b6200ed8274e70d13e0b36b7a9e202c899e4317e",
+      "halt": true
+    },
+    {
+      "path": "parallel_workers/worker_03/manifest.json",
+      "sha256": "2dd9cd31d77bbe8d7ce5e6252bc37f083ac5693060c58fc8a9596c8c3ac420c2",
+      "halt": true
+    },
+    {
+      "path": "parallel_workers/worker_recovery/manifest.json",
+      "sha256": "d84b8e1d79dd065257d4f92bc1f987fa63dced776fa2907a196e69e008a64346",
+      "halt": true
+    },
+    {
+      "path": "parallel_workers/worker_recovery_429/manifest.json",
+      "sha256": "c365fe8ce6bc0d809e4c085ef0c083a39aebe6336a7872c8e2019215589272a8",
+      "halt": true
+    },
+    {
+      "path": "parallel_workers/worker_recovery_addendum/manifest.json",
+      "sha256": "692646e0fb31762d7d9b27f9531e499683ba339bfd966ec0da2a06905c96f159",
+      "halt": true
+    },
+    {
+      "path": "parallel_workers/worker_recovery_addendum2/manifest.json",
+      "sha256": "a163a0e9a233b72b2064f76dd92ac0f54282927e9c071c91e3fbe62fd159909d",
+      "halt": true
+    }
+  ],
+  "workers_halted": 8,
+  "worker_count": 8,
+  "active_r4_runner_processes": 0,
+  "open_handles": 0,
+  "model_requests_during_enforcement": 0,
+  "historical_authorization_fields_preserved": true,
+  "experiment_terminal": false,
+  "latest_verified_read": {
+    "at_local": "2026-10-30T12:28:12.046731+08:00",
+    "parent_manifest_sha256": "ad5fe511967cad35012bd259db7549a2e9d87eb97bfba52aea3d0eed8d834561",
+    "parent_request_count": 12102,
+    "parent_task_counts": {
+      "route_complete": 58,
+      "failed": 18,
+      "outcome_unknown": 10,
+      "ready": 24,
+      "pending": 19
+    },
+    "parent_halt": true,
+    "parent_status": "paused_at_parallel_checkpoint",
+    "parent_authorization_status": "paused_user_requested_safety_gate_no_model_requests_until_gate_passed",
+    "parent_in_flight": [],
+    "plan_halt": true,
+    "plan_authorization_status": "user_requested_stop_after_inflight",
+    "all_workers_halted": true,
+    "all_worker_pid_null": true,
+    "active_runner_processes": 0,
+    "open_handles": 0,
+    "formal_driver_pidfile": "54222",
+    "formal_driver_pid_running": false,
+    "request_count_unchanged_since_enforcement": true
+  }
+}

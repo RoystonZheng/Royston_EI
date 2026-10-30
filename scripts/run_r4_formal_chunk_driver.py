@@ -25,6 +25,18 @@ def read_manifest(path):
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def route_safety_gate_block_reason(batch_dir):
+    """Read the parent batch's gate so a direct shard launch cannot bypass it."""
+    parent_manifest = Path(batch_dir).resolve().parent.parent / "manifest.json"
+    if not parent_manifest.is_file():
+        return None
+    master = read_manifest(parent_manifest)
+    gate = master.get("route_safety_gate")
+    if not isinstance(gate, dict) or gate.get("formal_continuation_permitted") is True:
+        return None
+    return "r4_route_safety_gate_not_passed:" + str(gate.get("status") or "unspecified")
+
+
 def log(path, event):
     event["at_utc"] = datetime.now(timezone.utc).isoformat()
     with path.open("a", encoding="utf-8") as handle:
@@ -110,6 +122,11 @@ def main():
                    "max_new_requests_per_invocation": args.max_new_requests_per_invocation})
 
     while True:
+        gate_block = route_safety_gate_block_reason(batch_dir)
+        if gate_block:
+            log(log_path, {"event": "driver_stopped_route_safety_gate_pending", "reason": gate_block})
+            print("R4 shard held at pending route-safety gate; no model request issued", flush=True)
+            return 0
         manifest = read_manifest(manifest_path)
         runnable = [item for item in manifest["tasks"] if item.get("status") in {"pending", "ready", "active", "budget_paused"}]
         if not runnable:

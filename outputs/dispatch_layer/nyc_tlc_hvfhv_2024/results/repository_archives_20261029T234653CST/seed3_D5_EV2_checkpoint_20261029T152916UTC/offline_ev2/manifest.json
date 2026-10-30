@@ -1,0 +1,98 @@
+{
+  "created_at_local": "2026-10-29T23:35:58+08:00",
+  "energy_model": {
+    "module_path": "/Users/didi/Documents/personalcodexfile/第二次课/route_experiment/energy_model.py",
+    "module_sha256": "a53ac3860e7a9d169b5ceb0f8ca853a0cb73061cc106ba0ec235f1e3c600e893",
+    "profile_id": "generic_reference_ev_v1",
+    "profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee",
+    "version": "ev_longitudinal_v2"
+  },
+  "energy_model_source_binding": {
+    "bound_at_utc": "2026-10-29T15:41:11.710402+00:00",
+    "import_statement_verified": true,
+    "module_path": "/Users/didi/Documents/personalcodexfile/第二次课/route_experiment/energy_model.py",
+    "module_sha256": "a53ac3860e7a9d169b5ceb0f8ca853a0cb73061cc106ba0ec235f1e3c600e893",
+    "recalculation_script_path": "/Users/didi/Documents/personalcodexfile/第二次课/scripts/recalculate_nyc_dispatch_energy_offline_v2.py",
+    "recalculation_script_sha256": "e15bea9197790c24830f230c8279e0ee4038e62c318c48c487ded6d4b9c1dab3",
+    "runtime_import_module": "route_experiment.energy_model",
+    "runtime_import_verified": true
+  },
+  "excluded": [],
+  "excluded_count": 0,
+  "excluded_preexisting_output_count": 0,
+  "excluded_preexisting_outputs": [],
+  "expected_missing_result_count": 629,
+  "included_result_count": 1,
+  "indexed_result_output_count": 1,
+  "input_result_count": 1,
+  "limitations": [
+    "recalculated energies apply to frozen legacy assignments and do not imply v2-aware decisions",
+    "the synthetic centroid pickup proxy is converted to a virtual flat segment at the frozen proxy speed",
+    "zone OD ride edges lack grade, signal, and time-varying congestion observations",
+    "the generic reference EV profile is not calibrated to a production vehicle"
+  ],
+  "model_calls": 0,
+  "newly_recalculated_this_invocation_count": 1,
+  "output_artifact_file_count": 1,
+  "output_coverage_complete": true,
+  "policy_rerun": false,
+  "recalculated_count": 1,
+  "recalculation_method": "fixed_assignment_route_reconstruction_v2_online_ev2_reconciliation_virtual_pickup_segment",
+  "recalculation_script": "/Users/didi/Documents/personalcodexfile/第二次课/scripts/recalculate_nyc_dispatch_energy_offline_v2.py",
+  "recalculation_script_sha256": "e15bea9197790c24830f230c8279e0ee4038e62c318c48c487ded6d4b9c1dab3",
+  "results": [
+    {
+      "assignment_count": 48,
+      "case_id": "EV_20241214_224500_q75",
+      "corrected_fixed_assignment_ev_longitudinal_v2_energy_kwh": 27.515739157175492,
+      "decision_energy_dependency": "candidate_energy_is_visible_to_the_llm_but_no_deterministic_energy_objective_is_applied",
+      "fleet_id": "F4",
+      "input_hashes": {
+        "orders_json": "e84abbed6158f1f9c4e9fed98501a3e28e1fb978d9602e1f4135ade1eb89fc97",
+        "scenario_json": "4811b24aa29c4fcd963bf8bc2daccd321603a4442e89bb739c9e77f00b26e9d0",
+        "zone_od_cost_matrix": "2be04d3d22099acbb5ee95b3d0e3aedf41fec63fe2177da7b21c12b2e8906d81"
+      },
+      "method_name": "D5_pure_llm_direct",
+      "output": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_energy_v2_offline_20261029_seed3_D5_single/seed_3/EV_20241214_224500_q75/F4/D5_pure_llm_direct_seed_3.energy_v2_offline.json",
+      "pickup_proxy_correction_kwh": 2.322980547151886,
+      "seed": 3,
+      "source": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241214_224500_q75/F4/D5_pure_llm_direct_seed_3.json",
+      "source_sha256": "7a03ba049d39929227c68673814f6541b6b7d423fa4fce1c224796d1d7c7fe51",
+      "status": "recalculated",
+      "stored_online_ev_longitudinal_v2_energy_kwh": 25.192758610023606
+    }
+  ],
+  "reused_verified_count": 0,
+  "schema_version": "nyc_dispatch_energy_recalculation_manifest_v1",
+  "scope": "post-hoc energy accounting for saved, complete dispatch assignments; no policy rerun or model calls",
+  "seed_manifest_paths": [
+    "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_energy_v2_offline_20261029_seed3_D5_single/seed_3/manifest.json"
+  ],
+  "seed_summaries": [
+    {
+      "eligible_evaluation_cells": 90,
+      "manifest": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_energy_v2_offline_20261029_seed3_D5_single/seed_3/manifest.json",
+      "missing_by_method": {
+        "D0_greedy": 90,
+        "D1_optimizer": 90,
+        "D2_agent_optimizer": 90,
+        "D5_pure_llm_direct": 89,
+        "D6_agent_codex_context_optimizer": 90,
+        "D7_agent_codex_capacity_shield_optimizer": 90,
+        "D8_agent_codex_nn_capacity_shield_optimizer": 90
+      },
+      "missing_expected_method_result_count": 629,
+      "output_coverage_complete": true,
+      "paired_completed_cells": 0,
+      "recalculated_output_count": 1,
+      "seed": 3,
+      "source_result_count": 1,
+      "status": "incomplete_with_expected_gaps"
+    }
+  ],
+  "source_result_modified": false,
+  "status": "completed_with_expected_gaps",
+  "unreadable_unindexed_outputs": [],
+  "unrecomputable": [],
+  "unrecomputable_count": 0
+}

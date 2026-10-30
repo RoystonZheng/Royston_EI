@@ -1,0 +1,47 @@
+{
+  "created_at_utc": "2026-10-29T15:34:21.129561+00:00",
+  "checkpoint": "R4_EV2_delta_task_0007_0010_20261029T2320CST",
+  "source_sidecar_status": "passed",
+  "route_complete_source_run_count_scanned": 1,
+  "recalculated_route_count": 1,
+  "error_count": 0,
+  "model_calls": 0,
+  "route_algorithm_rerun": false,
+  "output_status": "offline_recalculated_completed_route",
+  "route_status": "route_complete",
+  "metrics": {
+    "account_cash_cost": null,
+    "electricity_tariff": null,
+    "empty_auxiliary_kwh": 0.22824472842703916,
+    "empty_leg_billable_energy_kwh": 1.090603165433275,
+    "empty_leg_duration_sec": 1027.101277921676,
+    "empty_leg_signed_net_energy_kwh": 1.090603165433275,
+    "empty_propulsion_draw_kwh": 1.1994875826097011,
+    "empty_regenerated_kwh": 0.3371291456034653,
+    "passenger_auxiliary_kwh": 0.0874393606919425,
+    "passenger_leg_billable_energy_kwh": 0.3926505768011197,
+    "passenger_leg_duration_sec": 393.47712311374124,
+    "passenger_leg_signed_net_energy_kwh": 0.3926505768011197,
+    "passenger_propulsion_draw_kwh": 0.43719877626875914,
+    "passenger_regenerated_kwh": 0.13198756015958196,
+    "prior_full_route_passenger_payload_energy_kwh": 1.5001454966325454,
+    "total_billable_energy_kwh": 1.4832537422343948,
+    "total_duration_sec": 1420.5784010354173,
+    "total_signed_net_energy_kwh": 1.4832537422343948
+  },
+  "artifacts": [
+    {
+      "source_path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/r4_ev2_payload_phase_authoritative_20261029T2320CST_delta_from57/manifest.json",
+      "archive_path": "manifest.json",
+      "size_bytes": 2855,
+      "sha256": "8c1f6919c29d30d74b0cf346ed5d86aea270ef899ef1ae7da1fb690898a2f709"
+    },
+    {
+      "source_path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/r4_ev2_payload_phase_authoritative_20261029T2320CST_delta_from57/seed_7/task-0007-0010/run_000.json",
+      "archive_path": "seed_7/task-0007-0010/run_000.json",
+      "size_bytes": 4759,
+      "sha256": "05ffc4f31b5e7c48101c29a9ae60a24d1964a0500b3fa3d92ea3f4cb26faa7c1"
+    }
+  ],
+  "interpretation_note": "One incremental completed-route EV2 v2 payload-phase recalculation relative to the earlier 57-route sidecar. The source sidecar records 1 route scanned/recalculated, 0 errors, 0 new model calls, and no route algorithm rerun. The recalculation uses generic_reference_ev_v1; its 1.483253742 kWh signed/billable energy is an offline model estimate, not measured vehicle energy. Cash cost and tariff remain null. The overall R4 formal batch remains halted and incomplete."
+}

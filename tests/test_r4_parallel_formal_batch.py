@@ -3,15 +3,21 @@ import json
 import sys
 import tempfile
 import unittest
+from unittest import mock
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from r4_parallel_formal_batch import (  # noqa: E402
+    _has_runnable_tasks,
+    _launchd_active,
     _reconciled_saved_response_evidence,
+    _route_safety_gate_block_reason,
     _task_with_reconciled_saved_state,
+    start_workers,
 )
+from run_r4_formal_chunk_driver import route_safety_gate_block_reason as shard_gate_block_reason  # noqa: E402
 
 
 class R4ParallelSavedResponseReconciliationTests(unittest.TestCase):
@@ -98,6 +104,82 @@ class R4ParallelSavedResponseReconciliationTests(unittest.TestCase):
         }
         repaired = _task_with_reconciled_saved_state(task, self.worker_root)
         self.assertEqual(repaired, task)
+
+
+class R4ParallelWorkerResumeTests(unittest.TestCase):
+    def test_unknown_and_duplicate_suppressed_rows_do_not_restart_a_shard(self):
+        manifest = {
+            "tasks": [
+                {"status": "route_complete"},
+                {"status": "failed"},
+                {"status": "outcome_unknown"},
+                {"status": "duplicate_suppressed"},
+            ]
+        }
+        self.assertFalse(_has_runnable_tasks(manifest))
+
+    def test_pending_or_resumable_rows_keep_a_shard_runnable(self):
+        for status in ("pending", "ready", "active", "budget_paused"):
+            with self.subTest(status=status):
+                self.assertTrue(_has_runnable_tasks({"tasks": [{"status": status}]}))
+
+
+class R4ParallelSafetyGateTests(unittest.TestCase):
+    def test_pending_safety_gate_blocks_parallel_worker_start(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "manifest.json").write_text(json.dumps({
+                "route_safety_gate": {
+                    "status": "pending",
+                    "formal_continuation_permitted": False,
+                },
+                "in_flight": None,
+            }), encoding="utf-8")
+            with mock.patch("r4_parallel_formal_batch._assert_original_runner_stopped"):
+                with self.assertRaisesRegex(RuntimeError, "r4_route_safety_gate_not_passed:pending"):
+                    start_workers(root, 53, None, root / "pilot.json", 128)
+
+    def test_passed_or_undeclared_safety_gate_does_not_block_legacy_batches(self):
+        self.assertIsNone(_route_safety_gate_block_reason({}))
+        self.assertIsNone(_route_safety_gate_block_reason({
+            "route_safety_gate": {"status": "passed", "formal_continuation_permitted": True}
+        }))
+
+    def test_direct_shard_launch_reads_and_honors_parent_safety_gate(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            worker = root / "parallel_workers" / "worker_02"
+            worker.mkdir(parents=True)
+            parent = root / "manifest.json"
+            parent.write_text(json.dumps({
+                "route_safety_gate": {
+                    "status": "pending",
+                    "formal_continuation_permitted": False,
+                },
+            }), encoding="utf-8")
+            self.assertEqual(
+                shard_gate_block_reason(worker),
+                "r4_route_safety_gate_not_passed:pending",
+            )
+            parent.write_text(json.dumps({
+                "route_safety_gate": {
+                    "status": "passed",
+                    "formal_continuation_permitted": True,
+                },
+            }), encoding="utf-8")
+            self.assertIsNone(shard_gate_block_reason(worker))
+
+    def test_launchd_spawn_scheduled_is_not_counted_as_a_live_worker(self):
+        with mock.patch(
+            "r4_parallel_formal_batch._launchd_print",
+            return_value=(True, "state = spawn scheduled\nlast exit code = 2\n"),
+        ):
+            self.assertFalse(_launchd_active("worker-test"))
+        with mock.patch(
+            "r4_parallel_formal_batch._launchd_print",
+            return_value=(True, "state = running\n"),
+        ):
+            self.assertTrue(_launchd_active("worker-test"))
 
 
 if __name__ == "__main__":

@@ -1,0 +1,44 @@
+{
+  "schema_version": "nyc-tlc-ev2-time-money-v5-sidecar-archive-v1",
+  "source_manifest_sha256": "5d9f9e6865e01484efd4343e6abe8cf1e9a85e6951565a13c0e0f2032d9a0f46",
+  "source_status": "completed_segment_economics_route_choice_blocked",
+  "created_at_utc": "2026-10-29T12:33:10.442448+00:00",
+  "expected_method_runs": 630,
+  "audited_valid_method_runs": 354,
+  "audited_missing_method_runs": 276,
+  "new_source_result_count": 354,
+  "combined_source_result_count": 354,
+  "run_row_count": 354,
+  "new_model_calls": 0,
+  "dispatch_replayed": false,
+  "files": [
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/time_money_v5_segment_sidecar_20261029123253Z_full_current/segment_economics_v5.jsonl",
+      "archive_path": "ev2_time_money_v5_sidecar_20261029123253Z/segment_economics_v5.jsonl.gz",
+      "source_sha256": "7d51ad7f0a0633e29098fee380f1ca0e4f7b113ff87f1f5594b2006cadd96fe4",
+      "sanitized_uncompressed_sha256": "cd1ab68572381af7fe21ed00c034b6fd440e9b058a787092b38325c9098899e8",
+      "compressed_sha256": "b406f12c43dd747cf68a5c72ac1f84bda853ea65455347d37e327aa6bbe868bd",
+      "source_bytes": 42549757,
+      "archive_bytes": 1112683,
+      "rows": 20398,
+      "compression": "gzip level 9, mtime=0; lossless after path and sensitive-field normalization"
+    },
+    {
+      "source_path": "outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/time_money_v5_segment_sidecar_20261029123253Z_full_current/run_economics_v5.jsonl",
+      "archive_path": "ev2_time_money_v5_sidecar_20261029123253Z/run_economics_v5.jsonl.gz",
+      "source_sha256": "1ba2719f56580a2a33a3b9e12d47a259d95beacc75c3957f9a4519b901aa239a",
+      "sanitized_uncompressed_sha256": "47739028b736ef1f252b7c35cf6fd640bf7f4481c75ce1e754dd9c084a51298c",
+      "compressed_sha256": "e5803d7e4b27d67fa19882774f82b7166b65bccac6cc1064c6fee62d72e79c95",
+      "source_bytes": 24138373,
+      "archive_bytes": 880869,
+      "rows": 354,
+      "compression": "gzip level 9, mtime=0; lossless after path and sensitive-field normalization"
+    }
+  ],
+  "limitations": [
+    "Historical 354/630 sidecar; later official audit is 360/630.",
+    "Route-choice economics are blocked by source-data limitations.",
+    "Trace-usage attribution requires deduplication; do not use aggregate cost for method ranking.",
+    "This archive does not contain raw prompts, raw traces, or credentials."
+  ]
+}

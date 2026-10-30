@@ -1,0 +1,215 @@
+{
+  "after": {
+    "accounted_invocations_by_method": {
+      "D5_pure_llm_direct": 15,
+      "D6_agent_codex_context_optimizer": 0,
+      "D7_agent_codex_capacity_shield_optimizer": 0,
+      "D8_agent_codex_nn_capacity_shield_optimizer": 1
+    },
+    "run_economics_sha256": "fda68352afb9e8650673f9f114b5eae4258d762b468208584b177cc70cfcb827",
+    "segment_economics_sha256": "22422c576b3cdbdd263e122e0b2ff4024aa7083fd5c67941c3c2956bbfb68b94"
+  },
+  "aggregate_unique_usage": {
+    "actual_account_charge_amount": null,
+    "cached_input_tokens": 63360,
+    "cli_invocations": 16,
+    "codex_standard_credit_equivalent_estimate": 1.50519,
+    "input_tokens": 342900,
+    "output_tokens": 2527,
+    "rate_card_estimate_usd": 0.06020759999999999,
+    "total_tokens": 345427
+  },
+  "before": {
+    "accounted_invocations_by_method": {
+      "D5_pure_llm_direct": 15,
+      "D6_agent_codex_context_optimizer": 1,
+      "D7_agent_codex_capacity_shield_optimizer": 1,
+      "D8_agent_codex_nn_capacity_shield_optimizer": 1
+    },
+    "run_economics_sha256": "37b9856479b320e02a8ed5c984e3bea9ee5428f44cff8818ecfa095429901af0",
+    "segment_economics_sha256": "22422c576b3cdbdd263e122e0b2ff4024aa7083fd5c67941c3c2956bbfb68b94",
+    "sidecar_manifest_sha256": "b7b8a6676b2778a53dc9ccb79c00a0425bbd2d38a0ff7c9a8ca903baedc544ee"
+  },
+  "created_at_utc": "2026-10-29T11:31:46.984915+00:00",
+  "decision_model_version": "route_time_money_segment_v5_signed_fare_audit",
+  "decision_module_sha256": "6b383157aa3287faa0049f13bbf0ff7765e903367a63305fd826e89dc83a0375",
+  "deterministic_replay_methods": {
+    "D6_agent_codex_context_optimizer": {
+      "incremental_calls": 0,
+      "shared_trace_jsonl_sha256": "d51fe974570936f22eac374cefe45c463f9760b97c6e304b4b5f0866e686dded"
+    },
+    "D7_agent_codex_capacity_shield_optimizer": {
+      "incremental_calls": 0,
+      "shared_trace_jsonl_sha256": "d51fe974570936f22eac374cefe45c463f9760b97c6e304b4b5f0866e686dded"
+    }
+  },
+  "energy_model_sha256": "a53ac3860e7a9d169b5ceb0f8ca853a0cb73061cc106ba0ec235f1e3c600e893",
+  "input_fingerprint_audit": {
+    "audited_at_utc": "2026-10-29T11:27:17+00:00",
+    "audited_result_count": 337,
+    "input_hash_mismatch_count": 0,
+    "path": "./outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/audit_snapshots/ev2_input_fingerprint_audit_20261029T1126UTC_heartbeat.json",
+    "scenario_mismatch_count": 0,
+    "sha256": "7f8f58726b8a280197f781dc0c14f0c6fe3722df103884162f4cd610088c9f0f"
+  },
+  "model_calls_during_sidecar_recalculation": 0,
+  "notes": [
+    "D5 has 15 distinct JSONL traces; each contains one turn.completed event with usage.",
+    "D8 owns one unique completed response trace. D6 and D7 mark that identical D8 JSONL trace as replayed_from_existing_call.",
+    "Only usage attribution in the generated sidecar is corrected; four source results and 208 segment economics rows remain unchanged.",
+    "D5-only audit was not used as the incremental source; the full 337-run heartbeat audit and 337-result fingerprint audit are bound above.",
+    "Rate-card and Codex standard-credit values are estimates; actual account charge remains unknown."
+  ],
+  "official_source_audit": {
+    "audited_at_utc": "2026-10-29T11:27:06+00:00",
+    "invalid_method_runs": 0,
+    "path": "./outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/audit_snapshots/ev2_segment_ledger_audit_20261029T1126UTC_heartbeat.json",
+    "sha256": "57c7aca5ad886e800a0395003fcc411a41d66655c33793abb84d53589a3a24b0",
+    "valid_method_runs": 337
+  },
+  "ranking_status": "blocked_no_complete_shared_route_candidate_pool_and_tariff",
+  "rankings_emitted": false,
+  "schema_version": 1,
+  "scope": {
+    "case_id": "EV_20240427_223500_q75",
+    "combined_source_result_count": 337,
+    "fleet_id": "F2",
+    "new_source_result_count": 4,
+    "previously_covered_source_result_count": 333,
+    "seed": 0,
+    "segment_row_count": 208
+  },
+  "source_coverage_base": {
+    "path": "./outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/time_money_v5_source_coverage_index_20261029T0740UTC_333/manifest.json",
+    "sha256": "ac9b04e001a50e1439993aab9bce7ad4d5d16ab4e6396ac68c45f1a2c90681e0",
+    "source_result_count": 333
+  },
+  "source_result_sha256": {
+    "D5_pure_llm_direct": "6ab7b40d4a96a6a9bcdfcbc175bb9c9a690159891024185a1e88726d98819b1a",
+    "D6_agent_codex_context_optimizer": "b36e7b0cb38a347331d629531f26ca846e9acc4b72be673f104d305ac33e1429",
+    "D7_agent_codex_capacity_shield_optimizer": "9cc2a7550e193c70b16ddc73294eee48ae8883304d7ed3ac9f08d7eed0e5e53a",
+    "D8_agent_codex_nn_capacity_shield_optimizer": "2c605fadda41c2fcedc45890b712a0ef3047918181a02b9c445a7e8bff560831"
+  },
+  "source_results_modified": false,
+  "status": "completed_usage_attributed_once",
+  "sumo_reruns": 0,
+  "unique_usage_owners": {
+    "D5_pure_llm_direct": {
+      "calls": 15,
+      "usage_traces": [
+        {
+          "cached_input_tokens": 0,
+          "input_tokens": 22458,
+          "output_tokens": 163,
+          "path": "./outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240427_223500_q75/F2/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0001.jsonl",
+          "sha256": "7fdaa193d82690d8740f4bd8d72bd8717086679ba6b577dc8e2bf9e706e492f3"
+        },
+        {
+          "cached_input_tokens": 12672,
+          "input_tokens": 21535,
+          "output_tokens": 138,
+          "path": "./outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240427_223500_q75/F2/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0002.jsonl",
+          "sha256": "176e1fdd88846772e3d8a6651ea9c46488b31f3351fdb043473eb4e2dbefae50"
+        },
+        {
+          "cached_input_tokens": 0,
+          "input_tokens": 17240,
+          "output_tokens": 106,
+          "path": "./outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240427_223500_q75/F2/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0003.jsonl",
+          "sha256": "05788de4041b4ed7902189e4d0dd61c88ca3a1ce654783cad74ed9d40ce84385"
+        },
+        {
+          "cached_input_tokens": 0,
+          "input_tokens": 22104,
+          "output_tokens": 133,
+          "path": "./outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240427_223500_q75/F2/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0004.jsonl",
+          "sha256": "fcfe3c338385dadfff02861284beaac6c29f270c53967b97b51b458f94630b44"
+        },
+        {
+          "cached_input_tokens": 0,
+          "input_tokens": 19820,
+          "output_tokens": 197,
+          "path": "./outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240427_223500_q75/F2/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0005.jsonl",
+          "sha256": "8669bf185e8f11c7126118000dabbcd2f2363e0af720f80e330079f44f7470a3"
+        },
+        {
+          "cached_input_tokens": 12672,
+          "input_tokens": 17902,
+          "output_tokens": 169,
+          "path": "./outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240427_223500_q75/F2/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0006.jsonl",
+          "sha256": "28b5f1dd74f79765453238d3ff9b3637f6d85e7ba9a91194bcd5b838d519b052"
+        },
+        {
+          "cached_input_tokens": 0,
+          "input_tokens": 19950,
+          "output_tokens": 319,
+          "path": "./outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240427_223500_q75/F2/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0007.jsonl",
+          "sha256": "66a470982f4a40f9546938d9080333efd40edf5b70b56955866b32d2cfd42616"
+        },
+        {
+          "cached_input_tokens": 0,
+          "input_tokens": 21482,
+          "output_tokens": 302,
+          "path": "./outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240427_223500_q75/F2/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0008.jsonl",
+          "sha256": "25373874bc13b843aa7fd9e89ff1efd5d1b3f68f7546acdb02b87cbb87ab5aa6"
+        },
+        {
+          "cached_input_tokens": 0,
+          "input_tokens": 15726,
+          "output_tokens": 73,
+          "path": "./outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240427_223500_q75/F2/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0009.jsonl",
+          "sha256": "f5834b4fb8d63ae3d20516cfc2d5a58b760db5fe00d740374d83623c920c13aa"
+        },
+        {
+          "cached_input_tokens": 0,
+          "input_tokens": 16462,
+          "output_tokens": 122,
+          "path": "./outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240427_223500_q75/F2/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0010.jsonl",
+          "sha256": "5f00a4dc11537b9a1264feab221793698071cd9f54bde9dcb807319af77f7132"
+        },
+        {
+          "cached_input_tokens": 12672,
+          "input_tokens": 19578,
+          "output_tokens": 277,
+          "path": "./outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240427_223500_q75/F2/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0011.jsonl",
+          "sha256": "ac8d75746eaa085bf0fdb941e54676eb38074dfa645a234521aef7ffcb048695"
+        },
+        {
+          "cached_input_tokens": 0,
+          "input_tokens": 16172,
+          "output_tokens": 70,
+          "path": "./outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240427_223500_q75/F2/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0012.jsonl",
+          "sha256": "0a5a0dbbcda3be6bfe409e76cc759bf4daba5aee13cb93f54cf0980bd9e5188f"
+        },
+        {
+          "cached_input_tokens": 0,
+          "input_tokens": 16822,
+          "output_tokens": 55,
+          "path": "./outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240427_223500_q75/F2/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0013.jsonl",
+          "sha256": "93412bb5a29ca9093f5ae64a736913442f12aef71372dab77b40d767183fe3ca"
+        },
+        {
+          "cached_input_tokens": 0,
+          "input_tokens": 40570,
+          "output_tokens": 75,
+          "path": "./outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240427_223500_q75/F2/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0014.jsonl",
+          "sha256": "5815a594cccb7a70a289640cdb0d2c83788791f40d336d6652bc087b842cd0e0"
+        },
+        {
+          "cached_input_tokens": 12672,
+          "input_tokens": 41628,
+          "output_tokens": 137,
+          "path": "./outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240427_223500_q75/F2/codex_cli_traces/D5_pure_llm_direct/dispatch_round_0015.jsonl",
+          "sha256": "3c23a6ed3b4ece3c5fe81042d49dcf25a986f95080ce59e032624c64d642b259"
+        }
+      ]
+    },
+    "D8_agent_codex_nn_capacity_shield_optimizer": {
+      "calls": 1,
+      "trace_final_path": "./outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240427_223500_q75/F2/codex_context_policy_traces/D8_agent_codex_nn_capacity_shield_optimizer/context_policy_0001.final.json",
+      "trace_final_sha256": "d09d9cdc57fe20a035d882d50bf0fbc31aa990dbd917cbac72c691f7baf5f95a",
+      "trace_jsonl_path": "./outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/evaluation/EV_20240427_223500_q75/F2/codex_context_policy_traces/D8_agent_codex_nn_capacity_shield_optimizer/context_policy_0001.jsonl",
+      "trace_jsonl_sha256": "d51fe974570936f22eac374cefe45c463f9760b97c6e304b4b5f0866e686dded"
+    }
+  }
+}

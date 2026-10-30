@@ -1,0 +1,46 @@
+{
+  "schema_version": "nyc_time_money_v5_ev2_union_coverage_audit_v1",
+  "status": "passed_partial_matrix",
+  "created_at_local": "2026-10-29T22:40:00+08:00",
+  "official_ledger_path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/audit_snapshots/ev2_segment_ledger_audit_20261029T1437UTC_heartbeat.json",
+  "official_ledger_sha256": "edb23f2291b4e54cee457f793d6ac9d4641814a2015074e3b2db6a53f5cc5da2",
+  "fingerprint_audit_path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/audit_snapshots/ev2_matrix_fingerprint_audit_20261029T1437UTC_heartbeat.json",
+  "fingerprint_audit_sha256": "65f18a7252c5ada27faee454ddad61961dd64249c4f41d4eaee0b926ed6c6785",
+  "canonical_sidecars": [
+    {
+      "manifest_path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/time_money_v5_segment_sidecar_20261029123253Z_full_current/manifest.json",
+      "manifest_sha256": "5d9f9e6865e01484efd4343e6abe8cf1e9a85e6951565a13c0e0f2032d9a0f46",
+      "rows": 354
+    },
+    {
+      "manifest_path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/time_money_v5_segment_sidecar_20261029T1437UTC_delta_from354_canonical/manifest.json",
+      "manifest_sha256": "038dc12356c9153423778fcd68604113a97ad4d949255b91de4fde4aa0087a1e",
+      "rows": 30
+    }
+  ],
+  "expected_method_runs": 630,
+  "valid_method_runs": 384,
+  "missing_method_runs": 246,
+  "unique_union": 384,
+  "duplicates": 0,
+  "all_source_hashes_match": true,
+  "exact_official_ledger_source_set_match": true,
+  "missing_sources": 0,
+  "extra_sources": 0,
+  "hash_conflicts": 0,
+  "all_present_results_match_frozen_inputs": true,
+  "decision_model_version": "route_time_money_segment_v5_signed_fare_audit",
+  "decision_module_sha256": "6b383157aa3287faa0049f13bbf0ff7765e903367a63305fd826e89dc83a0375",
+  "energy_model_sha256": "a53ac3860e7a9d169b5ceb0f8ca853a0cb73061cc106ba0ec235f1e3c600e893",
+  "electricity_price_per_kwh": null,
+  "rankings_emitted": 0,
+  "new_model_calls": 0,
+  "dispatch_replayed": false,
+  "limitations": [
+    "Only 384 of 630 method runs are present; the matrix is incomplete.",
+    "No rankings emitted because complete economic inputs and common candidate sets are not available.",
+    "NYC TLC demand is zone-level OD proxy, not street routing.",
+    "EV2 energy is simulated, not vehicle telemetry."
+  ],
+  "errors": []
+}

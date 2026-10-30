@@ -1,0 +1,72 @@
+{
+  "created_at_utc": "2026-10-29T15:46:53.985167+00:00",
+  "checkpoint": "seed3_D5_EV2_checkpoint_20261029T152916UTC",
+  "artifact_count": 7,
+  "artifacts": [
+    {
+      "source_path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241214_224500_q75/F4/D5_pure_llm_direct_seed_3.json",
+      "archive_path": "source_result/D5_pure_llm_direct_seed_3.json",
+      "source_size_bytes": 2148469,
+      "source_sha256": "7a03ba049d39929227c68673814f6541b6b7d423fa4fce1c224796d1d7c7fe51",
+      "archive_size_bytes": 2148469,
+      "archive_sha256": "7a03ba049d39929227c68673814f6541b6b7d423fa4fce1c224796d1d7c7fe51",
+      "losslessly_compressed": false
+    },
+    {
+      "source_path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_energy_v2_offline_20261029_seed3_D5_single/manifest.json",
+      "archive_path": "offline_ev2/manifest.json",
+      "source_size_bytes": 5295,
+      "source_sha256": "dab3b508501660d95000310e99a4031e044749a3379b4cec0729c57fdb5f498d",
+      "archive_size_bytes": 5295,
+      "archive_sha256": "dab3b508501660d95000310e99a4031e044749a3379b4cec0729c57fdb5f498d",
+      "losslessly_compressed": false
+    },
+    {
+      "source_path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_energy_v2_offline_20261029_seed3_D5_single/energy_model_source_binding_audit.json",
+      "archive_path": "offline_ev2/energy_model_source_binding_audit.json",
+      "source_size_bytes": 2687,
+      "source_sha256": "fffbf727d86a54089e590263bca8facbde1348f85749db75fa47ad0ea3480d1b",
+      "archive_size_bytes": 2687,
+      "archive_sha256": "fffbf727d86a54089e590263bca8facbde1348f85749db75fa47ad0ea3480d1b",
+      "losslessly_compressed": false
+    },
+    {
+      "source_path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_energy_v2_offline_20261029_seed3_D5_single/recalculation_index.jsonl",
+      "archive_path": "offline_ev2/recalculation_index.jsonl",
+      "source_size_bytes": 1334,
+      "source_sha256": "ea5c566928a76e32e7cbbdb652fe817def8a97512c2ee7f176a46f4255084687",
+      "archive_size_bytes": 1334,
+      "archive_sha256": "ea5c566928a76e32e7cbbdb652fe817def8a97512c2ee7f176a46f4255084687",
+      "losslessly_compressed": false
+    },
+    {
+      "source_path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_energy_v2_offline_20261029_seed3_D5_single/seed_3/manifest.json",
+      "archive_path": "offline_ev2/seed_3/manifest.json",
+      "source_size_bytes": 85205,
+      "source_sha256": "6614448cf47351c202014663c29e3c274d065791b0a69333c32ab935e7094626",
+      "archive_size_bytes": 85205,
+      "archive_sha256": "6614448cf47351c202014663c29e3c274d065791b0a69333c32ab935e7094626",
+      "losslessly_compressed": false
+    },
+    {
+      "source_path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_energy_v2_offline_20261029_seed3_D5_single/seed_3/EV_20241214_224500_q75/F4/D5_pure_llm_direct_seed_3.energy_v2_offline.json",
+      "archive_path": "offline_ev2/seed_3/D5_pure_llm_direct_seed_3.energy_v2_offline.json",
+      "source_size_bytes": 218591,
+      "source_sha256": "e468e1f8e8aa6c228b403334f0747452887a7b7eb9458cdd6cfbae4b7a0187c7",
+      "archive_size_bytes": 218591,
+      "archive_sha256": "e468e1f8e8aa6c228b403334f0747452887a7b7eb9458cdd6cfbae4b7a0187c7",
+      "losslessly_compressed": false
+    },
+    {
+      "source_path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_energy_v2_offline_20261029_seed3_D5_single/v2_integrity_audit.json",
+      "archive_path": "offline_ev2/v2_integrity_audit.json",
+      "source_size_bytes": 2205,
+      "source_sha256": "e465341adbbfc4a3ab33d49fadc7d1b55fbaab242f12bcafcd273abf997c8eae",
+      "archive_size_bytes": 2205,
+      "archive_sha256": "e465341adbbfc4a3ab33d49fadc7d1b55fbaab242f12bcafcd273abf997c8eae",
+      "losslessly_compressed": false
+    }
+  ],
+  "excluded_source_files": [],
+  "interpretation_note": "One terminal NYC multimonth seed3 D5 cell (EV_20241214_224500_q75/F4) with a separately verified, fixed-assignment offline EV2 v2 recalculation. The original result records 559 completed simulation rounds and 48 assigned orders out of 623 (575 unserved); it has 24 CLI invocations with 11 failed turns, including HTTP 429, and performance_claim=false. The EV2 sidecar integrity audit passes for the one output, makes 0 model calls, does not rerun dispatch policy, and recalculates 48 assigned orders. This is a single cell with 629 expected method results missing, not a complete seed3 matrix or an EV2 energy-optimized policy result. No prompt bodies, raw traces, progress logs, or state files are archived."
+}

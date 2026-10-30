@@ -1,0 +1,76 @@
+{
+  "schema_version": "r4_ev_v2_payload_phase_recalculation_v1",
+  "status": "offline_recalculated_completed_route",
+  "task_id": "task-0007-0003",
+  "seed": 7,
+  "sample_group": "orders",
+  "source_run_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_03/tasks/seed_7/task-0007-0003/run_000",
+  "route_status": "route_complete",
+  "route_selection_objective": "travel_time_then_distance",
+  "route_algorithm_rerun": false,
+  "model_calls": 0,
+  "energy_model": {
+    "model_version": "ev_longitudinal_v2",
+    "profile_id": "generic_reference_ev_v1",
+    "profile": {
+      "profile_id": "generic_reference_ev_v1",
+      "curb_mass_kg": 1900.0,
+      "passenger_load_kg": 75.0,
+      "rotating_mass_kg": 50.0,
+      "rolling_resistance_coefficient": 0.009,
+      "drag_coefficient": 0.26,
+      "frontal_area_m2": 2.35,
+      "air_density_kg_m3": 1.225,
+      "propulsion_efficiency": 0.9,
+      "regenerative_efficiency": 0.65,
+      "auxiliary_power_w": 800.0,
+      "max_acceleration_mps2": 1.2,
+      "max_deceleration_mps2": 2.0,
+      "regenerative_power_cap_w": 50000.0,
+      "gravity_mps2": 9.80665,
+      "model_version": "ev_longitudinal_v2"
+    },
+    "profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee",
+    "equations": {
+      "wheel_force": "(m + rotating_mass)*acceleration + 0.5*rho*Cd*A*v^2 + Crr*m*g*cos(slope) + m*g*sin(slope)",
+      "positive_wheel_power": "wheel_power / propulsion_efficiency",
+      "negative_wheel_power": "min(-wheel_power * regenerative_efficiency, regenerative_power_cap)",
+      "net_battery_energy": "propulsion_draw - regenerated_energy + auxiliary_energy"
+    }
+  },
+  "energy_profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee",
+  "payload_phase_definition": {
+    "empty_leg_payload_mass_kg": 0.0,
+    "passenger_leg_payload_mass_kg": 75.0,
+    "split_node_id": "node_71_27",
+    "empty_edge_count": 90,
+    "passenger_edge_count": 90,
+    "boundary_convention": "edges ending at pickup are empty; edges leaving pickup are passenger-loaded"
+  },
+  "metrics": {
+    "empty_leg_signed_net_energy_kwh": 1.1147145154844376,
+    "passenger_leg_signed_net_energy_kwh": 0.9948341799459592,
+    "total_signed_net_energy_kwh": 2.109548695430397,
+    "empty_leg_billable_energy_kwh": 1.1147145154844376,
+    "passenger_leg_billable_energy_kwh": 0.9948341799459592,
+    "total_billable_energy_kwh": 2.109548695430397,
+    "prior_full_route_passenger_payload_energy_kwh": 2.131119796762004,
+    "same_route_all_passenger_payload_recalculated_kwh": 2.131119796762004,
+    "payload_split_delta_vs_prior_final_audit_kwh": -0.02157110133160689,
+    "account_cash_cost": null,
+    "electricity_tariff": null
+  },
+  "evidence": {
+    "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_03/tasks/seed_7/task-0007-0003/run_000/state.json",
+    "state_sha256": "d2c8170889bae7f4906711286f7ec526780f564d020b1d670d53d85f57e4690d",
+    "final_audit_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_03/tasks/seed_7/task-0007-0003/run_000/final_audit.json",
+    "final_audit_sha256": "32e4264ed4c615a62afb03e3cd592fda0275a789d38624db62fe7039f5302d85",
+    "preflight_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_batch_preflights_20261024_v1/tasks/seed_7/task-0007-0003/preflight.json",
+    "preflight_sha256": "45a34c5e547f9f7fdf53de5e862c5d676d59e68f4ae289d6cb46c4cf924776fd",
+    "map_id": "grid-100x100-seed-7",
+    "map_version": "grid-v1-100",
+    "map_content_sha256": "84d7fc50937e5bf6b726356f8812881a1e7d382035649a55420022cf34a86032",
+    "accepted_nodes_sha256": "e0979147d9b35fe491c422f8033f5f0cccb5a62fb15fef7c47abd10a9875bc48",
+    "accepted_edges_sha256": "bb81850bac292274f610ef0e91ffd5b14308a0f958b67e36bfaf7f7f6506b08a"
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "batch_manifest_sha256_at_scan": "fabda3d48c825481c368193573e3a29a029df9373c136431d97254cf77927c21",
+  "batch_root": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2",
+  "created_at_utc": "2026-10-29T15:19:22.550458+00:00",
+  "energy_model": {
+    "equations": {
+      "negative_wheel_power": "min(-wheel_power * regenerative_efficiency, regenerative_power_cap)",
+      "net_battery_energy": "propulsion_draw - regenerated_energy + auxiliary_energy",
+      "positive_wheel_power": "wheel_power / propulsion_efficiency",
+      "wheel_force": "(m + rotating_mass)*acceleration + 0.5*rho*Cd*A*v^2 + Crr*m*g*cos(slope) + m*g*sin(slope)"
+    },
+    "model_version": "ev_longitudinal_v2",
+    "profile": {
+      "air_density_kg_m3": 1.225,
+      "auxiliary_power_w": 800.0,
+      "curb_mass_kg": 1900.0,
+      "drag_coefficient": 0.26,
+      "frontal_area_m2": 2.35,
+      "gravity_mps2": 9.80665,
+      "max_acceleration_mps2": 1.2,
+      "max_deceleration_mps2": 2.0,
+      "model_version": "ev_longitudinal_v2",
+      "passenger_load_kg": 75.0,
+      "profile_id": "generic_reference_ev_v1",
+      "propulsion_efficiency": 0.9,
+      "regenerative_efficiency": 0.65,
+      "regenerative_power_cap_w": 50000.0,
+      "rolling_resistance_coefficient": 0.009,
+      "rotating_mass_kg": 50.0
+    },
+    "profile_id": "generic_reference_ev_v1",
+    "profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee"
+  },
+  "error_count": 0,
+  "errors": [],
+  "frozen_sample_denominator_changed": false,
+  "model_calls": 0,
+  "previous_sidecar_manifests": [
+    {
+      "path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/r4_ev2_payload_phase_authoritative_20261029T2215CST/manifest.json",
+      "sha256": "c85273b45da32c931d3ff6ff2721bdbc007883b0246ab91eab8072330bdf8b0b"
+    }
+  ],
+  "recalculated_route_count": 1,
+  "route_algorithm_rerun": false,
+  "route_complete_source_run_count_scanned": 1,
+  "runs": [
+    {
+      "output": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/r4_ev2_payload_phase_authoritative_20261029T2320CST_delta_from57/seed_7/task-0007-0010/run_000.json",
+      "output_sha256": "05ffc4f31b5e7c48101c29a9ae60a24d1964a0500b3fa3d92ea3f4cb26faa7c1",
+      "sample_group": "orders",
+      "seed": 7,
+      "source_run_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_02/tasks/seed_7/task-0007-0010/run_000",
+      "source_state_sha256": "d4ee7736c61fef55dc7be7420be08888a0f2588e8f706297c67373e0063e1102",
+      "status": "offline_recalculated_completed_route",
+      "task_id": "task-0007-0010"
+    }
+  ],
+  "schema_version": "r4_formal_batch_ev2_payload_phase_sidecar_v1",
+  "status": "passed"
+}

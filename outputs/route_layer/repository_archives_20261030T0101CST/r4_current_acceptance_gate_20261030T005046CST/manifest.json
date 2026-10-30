@@ -1,0 +1,161 @@
+{
+  "schema_version": "r4_current_acceptance_gate_audit_v1",
+  "created_at_asia_shanghai": "2026-10-30T00:51:53.484844+08:00",
+  "status": "blocked_before_formal_resume",
+  "formal_model_calls_this_audit": 0,
+  "frozen_design_unchanged": true,
+  "zero_call_online_path_replay": {
+    "status": "passed",
+    "fresh_command_exit_code": 0,
+    "fresh_log_sha256": "cbc7d61112bbb2bf5888776a90f423a54fb20783d8bda0a29f97563ba8b98397",
+    "targeted_test": "tests/test_r4_codex_pilot_acceptance.py::R4CodexPilotAcceptanceTests::test_formal_online_step_path_rejects_oneway_reverse_backtracks_once_and_reroutes",
+    "historical_suite_status": ".................................................................... [ 62%]\n.........................................                         [100%]\n109 passed, 11 subtests passed in 23.52s",
+    "historical_suite_log_sha256": "6db1f822dbba8edd87d04aeef2e6e8b16f9965c6e69698453db70a6c5c3f583f",
+    "rejected_direction": "W",
+    "rejection_reason": "one_way_direction",
+    "rollback_count_nodes": 1,
+    "rollback_node_id": "node_0_0",
+    "reroute_next_allowed_directions": [
+      "N"
+    ],
+    "reroute_final_status": "route_complete",
+    "source_sha256": {
+      "route_experiment/r4_stepwise.py": "c839424cabce4181439a560690d1153f793a9781005b02f74a8d9134436e443d",
+      "route_experiment/r4_suffix_witness.py": "4c62dc3f883c3af2a1e30d9537a93dd654daa7a66b9f880a1acfcb5680b3f2b1",
+      "scripts/run_r4_codex_pilot_continuation.py": "6c14c0eb6d56c747346367c0df076f4a809079cc6846d1129030894e80a71684",
+      "scripts/run_r4_formal_chunk_driver.py": "6d164a09bccc2be6f1c5ad6719e783b91c8620103c7e5513e85a21f7713ee5b7",
+      "scripts/run_r4_codex_formal_batch.py": "316b2f01bc31bb762f76f220b4cde8c62e1ed5b47b88566228e9d6af3cce32da",
+      "scripts/render_r4_codex_pilot_replay.py": "efa4353c9d14f3efab20f4b5eea347694bb52b366b661f52e22d8e256fc76b53",
+      "tests/test_r4_codex_pilot_acceptance.py": "6d9f39cd0f6bf8e124a4a82fb5cbfcba37668085909a1514b93218ee8e088766",
+      "tests/test_r4_codex_pilot_resume.py": "9b05407f0764eacce0764961eed739a5da31c0e92879167e6d8d95de4356c616"
+    },
+    "artifact": "outputs/route_layer/r4_oneway_rollback_gate_20261029T2145CST/manifest.json",
+    "artifact_sha256": "11e63de23ce7a209266d73d2ef16b5d717b0c51c31743e0acbb1d0f5e0fc5cf5"
+  },
+  "full_route_sumo_replay": {
+    "status": "passed",
+    "artifact": "outputs/route_layer/r4_grid_route_sumo_acceptance_20261030T004602CST/manifest.json",
+    "artifact_sha256": "a77ee416ffe32132a2b040f7ca9631ae997cb2f2d8a18a90d436e8c06b56bcb9",
+    "scope": "zero-model-call SUMO replay of one archived, completed 100x100 grid R4 pilot route; not a new model experiment",
+    "map_id": "grid-100x100-seed-0",
+    "map_sha256": "bdf7da792ecf78ae393f5441055d592f3585674bea48d4f12d2d2d1ce632adbe",
+    "pilot_task_id": "task-0000-0009",
+    "route_edge_count": 113,
+    "route_edge_sequence_sha256": "98b052aeada2149e9324fe3585b0a6cc82c6582f7701c66ce65c856a668e15f3",
+    "vehicle_completed": true,
+    "route_edge_sequence_matched": true,
+    "one_way_violations": 0,
+    "sumo_version": "Eclipse SUMO sumo 1.28.0",
+    "simulated_route_length_m": 11096.57,
+    "duration_s": 1084.5,
+    "model_calls": 0,
+    "limitations": [
+      "SUMO replay validates an archived completed pilot route against a network projected from the same synthetic directed map.",
+      "The model's online step path is covered by the zero-call mocked-client acceptance test; no new model request was issued.",
+      "SUMO replay is a gate check, not an additional route-performance sample."
+    ]
+  },
+  "decision_and_economics_gate": {
+    "status": "blocked_not_integrated_into_codex_r4_formal_route_flow",
+    "decision_module_version": "route_time_money_segment_v5_signed_fare_audit",
+    "profiles": {
+      "time_priority_0_6_0_4": {
+        "time_weight": 0.6,
+        "money_weight": 0.4
+      },
+      "money_priority_0_4_0_6": {
+        "time_weight": 0.4,
+        "money_weight": 0.6
+      }
+    },
+    "r4_formal_selector_call_sites": [],
+    "fare_assumption_cny_per_passenger_km": 3.5,
+    "fare_assumption_is_observed_price": false,
+    "reason": "Codex R4 stepwise runner returns one completed route and does not call score_route_candidates; no same-task multi-route candidate set, paired 4:6/6:4 ranking, selection rationale, or selected-route EV2/SUMO evidence is attached to the formal R4 runs."
+  },
+  "formal_batch_snapshot": {
+    "manifest_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/manifest.json",
+    "manifest_sha256": "23b87def7ac1ebc238eadec69e8fee93915a0428181f5cf76a17e5c9ca5988a4",
+    "status": "paused_at_parallel_checkpoint",
+    "halt_no_more_model_requests": true,
+    "current_authorization_status": "user_requested_stop_after_inflight",
+    "pause_reason": "Direct user stop after in-flight; reasserted after a second automatic resume state change without newer direct user authorization.",
+    "model_requests_used": 12089,
+    "requests_with_unknown_delivery": 26,
+    "task_status_counts": {
+      "route_complete": 58,
+      "outcome_unknown": 10,
+      "failed": 14,
+      "ready": 25,
+      "pending": 22
+    },
+    "parallel_in_flight": [],
+    "workers": [
+      {
+        "worker": "worker_00",
+        "manifest_sha256": "1593b5ec23428920d3720803b636dd1e4a87d855b051b3396f1a0f47c7c88d86",
+        "status": "stopped_provider_or_tool_contract_failure",
+        "halt_no_more_model_requests": true,
+        "in_flight_count": 0
+      },
+      {
+        "worker": "worker_01",
+        "manifest_sha256": "8c6c1d0ae12621485a1382accf9d0f0a1669afa40d860db3e62b3391be963dfd",
+        "status": "paused_at_checkpoint",
+        "halt_no_more_model_requests": true,
+        "in_flight_count": 0
+      },
+      {
+        "worker": "worker_02",
+        "manifest_sha256": "c5f767ae061dff1b15485b181897abe7dab37efd755d4736c8ac6de5d2c25148",
+        "status": "waiting_provider_429_cooldown",
+        "halt_no_more_model_requests": true,
+        "in_flight_count": 0
+      },
+      {
+        "worker": "worker_03",
+        "manifest_sha256": "75ad4ab7d558e50d607d39636e934029988d4d11a8d938f2d3ef2689a5860290",
+        "status": "stopped_provider_or_tool_contract_failure",
+        "halt_no_more_model_requests": true,
+        "in_flight_count": 0
+      },
+      {
+        "worker": "worker_recovery",
+        "manifest_sha256": "658f6dd2cad55f1e79e3ee45c6aec4957805d5414d57d733af85a23f847e5af5",
+        "status": "paused_at_checkpoint",
+        "halt_no_more_model_requests": true,
+        "in_flight_count": 0
+      },
+      {
+        "worker": "worker_recovery_429",
+        "manifest_sha256": "241f072f7c32f48483f46ebab44ad18064021b4d1be4bf400a9c9e897ef59fe9",
+        "status": "stopped_provider_or_tool_contract_failure",
+        "halt_no_more_model_requests": true,
+        "in_flight_count": 0
+      },
+      {
+        "worker": "worker_recovery_addendum",
+        "manifest_sha256": "86da7bbeafd4d56beb36528fc6f48f65daaec32c4f916963e70f8e635074de28",
+        "status": "completed_with_audited_task_outcomes",
+        "halt_no_more_model_requests": true,
+        "in_flight_count": 0
+      },
+      {
+        "worker": "worker_recovery_addendum2",
+        "manifest_sha256": "8f20c32a2c4fc6b347546a535bab1ec57852fcffd2a0d190643d2fbe4c9e356c",
+        "status": "paused_for_r4_oneway_guard_repair_and_full_flow_gate",
+        "halt_no_more_model_requests": true,
+        "in_flight_count": 0
+      }
+    ]
+  },
+  "source_sha256": {
+    "/Users/didi/Documents/personalcodexfile/第二次课/route_experiment/r4_stepwise.py": "c839424cabce4181439a560690d1153f793a9781005b02f74a8d9134436e443d",
+    "/Users/didi/Documents/personalcodexfile/第二次课/route_experiment/r4_suffix_witness.py": "4c62dc3f883c3af2a1e30d9537a93dd654daa7a66b9f880a1acfcb5680b3f2b1",
+    "/Users/didi/Documents/personalcodexfile/第二次课/route_experiment/decision.py": "6b383157aa3287faa0049f13bbf0ff7765e903367a63305fd826e89dc83a0375",
+    "/Users/didi/Documents/personalcodexfile/第二次课/scripts/run_r4_codex_pilot_continuation.py": "6c14c0eb6d56c747346367c0df076f4a809079cc6846d1129030894e80a71684",
+    "/Users/didi/Documents/personalcodexfile/第二次课/scripts/run_r4_grid_route_sumo_acceptance.py": "09d595dc3cc8893ce96c1db5719d1c00f436e5f5d07c64f5e0ddbc2829b979b3",
+    "/Users/didi/Documents/personalcodexfile/第二次课/tests/test_r4_codex_pilot_acceptance.py": "6d9f39cd0f6bf8e124a4a82fb5cbfcba37668085909a1514b93218ee8e088766"
+  },
+  "gate_decision": "Do not resume the 129-task formal matrix until candidate generation/pool and both decision profiles are integrated and audited on the selected route path; rerun full SUMO acceptance for routes chosen by the paired profiles with zero one-way violations."
+}

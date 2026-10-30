@@ -1,0 +1,75 @@
+{
+  "schema_version": "nyc_ev2_integrated_time_money_usage_checkpoint_v1",
+  "audit_status": "passed_partial_matrix_decision_and_usage_limited",
+  "created_at_utc": "2026-10-29T15:59:58.263221+00:00",
+  "artifacts": {
+    "ledger": {
+      "path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/audit_snapshots/ev2_segment_ledger_audit_20261029T1551UTC_checkpoint.json",
+      "sha256": "3dbc19b9edebc77fc1d1cd3e00d1e62635bbeb30ad67aeeed390f8dccee3a829"
+    },
+    "fingerprint": {
+      "path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/audit_snapshots/ev2_matrix_fingerprint_audit_20261029T1551UTC_checkpoint.json",
+      "sha256": "65af777e973118746fb1c0e8dc1ee2644e72256ec99cbd427c68d30058665a23"
+    },
+    "unique_trace": {
+      "path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/audit_snapshots/unique_trace_usage_audit_20261029T1552UTC_checkpoint.json",
+      "sha256": "6fe662190192da41b883d367f0160c2669c27bc9ec4f3993a994ee1cf00b5ef9"
+    },
+    "v5_delta_manifest": {
+      "path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/time_money_v5_segment_sidecar_20261029T1551UTC_delta_from384/manifest.json",
+      "sha256": "78d76922d384203e0b6b3b1b27b86ba802c60d9114ac20070b2761b2b2a2e93a"
+    },
+    "v5_union": {
+      "path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/time_money_v5_segment_sidecar_20261029T1551UTC_delta_from384/canonical_union_audit_399.json",
+      "sha256": "12615d2dbca8f892630f5b6e2870bb08043728fcc317865b12266daa13263b41"
+    }
+  },
+  "coverage": {
+    "expected_method_runs": 630,
+    "present_valid_method_runs": 399,
+    "invalid_method_runs": 0,
+    "missing_method_runs": 231,
+    "fingerprint_errors": 0,
+    "v5_canonical_unique_source_count": 399,
+    "v5_source_hash_mismatches": 0,
+    "v5_missing_sources": 0,
+    "v5_extra_sources": 0
+  },
+  "ev2": {
+    "energy_model_sha256": "a53ac3860e7a9d169b5ceb0f8ca853a0cb73061cc106ba0ec235f1e3c600e893",
+    "source_energy_complete_segments_in_delta": 950,
+    "v5_total_segment_rows_in_delta": 950,
+    "electricity_tariff_per_kwh": null,
+    "cash_electricity_cost": null
+  },
+  "decision_function": {
+    "version": "route_time_money_segment_v5_signed_fare_audit",
+    "module_sha256": "6b383157aa3287faa0049f13bbf0ff7765e903367a63305fd826e89dc83a0375",
+    "shared_route_pool_available": false,
+    "weighted_rankings_emitted": false,
+    "blocked_status_counts": {
+      "blocked_no_complete_shared_route_candidate_pool": 399
+    },
+    "reason": "full common feasible candidate pool and complete economic inputs are unavailable"
+  },
+  "unique_trace_usage": {
+    "trace_references": 622,
+    "unique_trace_paths": 561,
+    "unique_content_traces": 561,
+    "duplicate_references_not_double_counted": 61,
+    "shared_trace_paths": 33,
+    "known_usage_turns": 534,
+    "failed_turns_without_complete_usage": 27,
+    "input_tokens": 11465630,
+    "cached_input_tokens": 5668736,
+    "output_tokens": 84091,
+    "invoice_amount": null,
+    "usage_complete": false
+  },
+  "work_performed": {
+    "model_calls": 0,
+    "dispatch_or_simulation_replayed": false,
+    "source_result_files_modified": false
+  },
+  "interpretation": "EV2 and v5 economics were recalculated offline for the 15 newly present runs and unioned with 384 previously covered runs. This is a partial 399/630 result snapshot. Route ranking remains blocked; electricity cash cost remains null. The trace ledger has 27 failed turns without usage; count only the 534 unique completed turns with reported usage, do not treat missing usage as zero or as invoice."
+}

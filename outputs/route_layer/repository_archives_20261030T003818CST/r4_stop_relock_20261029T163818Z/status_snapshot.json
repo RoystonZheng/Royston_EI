@@ -1,0 +1,29 @@
+{
+  "schema_version": "r4_stop_relock_snapshot_v1",
+  "observed_at_utc": "2026-10-29T16:38:18+00:00",
+  "parent_status": "paused_at_parallel_checkpoint",
+  "parent_halt_no_more_model_requests": true,
+  "parent_halt_status": "user_requested_stop_after_inflight",
+  "current_authorization_status": "user_requested_stop_after_inflight",
+  "model_requests_used": 12089,
+  "requests_with_unknown_delivery": 26,
+  "task_status_counts": {
+    "route_complete": 58,
+    "outcome_unknown": 10,
+    "failed": 14,
+    "ready": 25,
+    "pending": 22
+  },
+  "parallel_status": "paused_at_parallel_checkpoint",
+  "parallel_halt_no_more_model_requests": true,
+  "in_flight_count": 0,
+  "worker_manifest_count": 8,
+  "all_worker_halts_true": true,
+  "all_worker_current_authorization_stop": true,
+  "prior_unintended_resume_event": "worker_02 halt was cleared; model_requests_used rose by 5 since the 12,084 re-lock",
+  "route_complete_change_since_previous_relock": 0,
+  "live_aggregator_pid": false,
+  "worker_lock_holder": false,
+  "open_handles": 0,
+  "source_parent_manifest_sha256": "23b87def7ac1ebc238eadec69e8fee93915a0428181f5cf76a17e5c9ca5988a4"
+}

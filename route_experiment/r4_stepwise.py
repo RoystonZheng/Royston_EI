@@ -17,6 +17,7 @@ from .llm_adapter import build_r4_route_search_messages, validate_llm_route
 from .models import RoadMap, RouteCandidate, RouteInputPackage, VehicleOrderTask
 from .r4_agent import _safe_error
 from .r4_constraints import R4RouteOutputConstraint, build_r4_route_output_constraint
+from .r4_suffix_witness import audit_next_edges
 from .routing import edge_travel_time_sec
 
 
@@ -585,6 +586,8 @@ class R4StepOutputConstraint:
     remaining_objective_cost_lower_bound: Optional[Dict[str, float]]
     objective_cost_lower_bound_by_direction: Dict[str, Dict[str, Dict[str, float]]]
     remaining_action_budget: Optional[int]
+    suffix_witness_by_direction: Dict[str, Dict[str, Any]]
+    require_suffix_witness: bool = False
     can_give_up: bool = True
 
     @property
@@ -667,6 +670,133 @@ class R4StepOutputConstraint:
         return len(raw.encode("utf-8"))
 
 
+def accepted_prefix_sha256(accepted_nodes: Iterable[str], accepted_edges: Iterable[str]) -> str:
+    raw = json.dumps(
+        {"nodes": list(accepted_nodes), "edges": list(accepted_edges)},
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+    )
+    return hashlib.sha256(raw.encode("utf-8")).hexdigest()
+
+
+def audit_accepted_prefix_suffix_witnesses(
+    package: RouteInputPackage,
+    full_constraint: R4RouteOutputConstraint,
+    *,
+    accepted_nodes: List[str],
+    accepted_edges: List[str],
+    accepted_directions: List[str],
+    route_action_budget: int,
+) -> Dict[str, Any]:
+    """Verify that every accepted step still has a witnessed full suffix.
+
+    This is an offline checkpoint audit. It does not repair state or make a
+    model request; a failure prevents the runner from advancing the prefix.
+    """
+    if (
+        not accepted_nodes
+        or len(accepted_nodes) != len(accepted_edges) + 1
+        or len(accepted_edges) != len(accepted_directions)
+        or len(set(accepted_nodes)) != len(accepted_nodes)
+    ):
+        return {"passed": False, "reason": "accepted_prefix_shape_invalid"}
+    node_by_id = {node.node_id: node for node in package.nodes}
+    edge_by_id = {edge.edge_id: edge for edge in package.edges}
+    if any(node_id not in node_by_id for node_id in accepted_nodes):
+        return {"passed": False, "reason": "accepted_prefix_node_missing"}
+    if accepted_nodes[0] not in node_by_id:
+        return {"passed": False, "reason": "accepted_prefix_start_missing"}
+    visited = {accepted_nodes[0]}
+    pickup_seen = accepted_nodes[0] == full_constraint.pickup_node_id
+    remaining_witnessed_action_counts = []
+    for index, (source_id, target_id, edge_id, direction) in enumerate(
+        zip(accepted_nodes, accepted_nodes[1:], accepted_edges, accepted_directions)
+    ):
+        if source_id != accepted_nodes[index] or target_id in visited:
+            return {
+                "passed": False,
+                "reason": "accepted_prefix_revisit_or_discontinuity",
+                "step": index + 1,
+            }
+        edge = edge_by_id.get(edge_id)
+        if edge is None or edge.from_node != source_id or edge.to_node != target_id:
+            return {
+                "passed": False,
+                "reason": "accepted_prefix_edge_mismatch",
+                "step": index + 1,
+            }
+        delta = (
+            node_by_id[target_id].x - node_by_id[source_id].x,
+            node_by_id[target_id].y - node_by_id[source_id].y,
+        )
+        if _DIRECTION_DELTAS.get(direction) != delta:
+            return {
+                "passed": False,
+                "reason": "accepted_prefix_direction_mismatch",
+                "step": index + 1,
+            }
+        if target_id == full_constraint.dropoff_node_id and not pickup_seen:
+            return {
+                "passed": False,
+                "reason": "accepted_prefix_dropoff_before_pickup",
+                "step": index + 1,
+            }
+        if accepted_nodes[-1] != full_constraint.dropoff_node_id and source_id == full_constraint.dropoff_node_id:
+            return {
+                "passed": False,
+                "reason": "accepted_prefix_moved_after_dropoff",
+                "step": index + 1,
+            }
+        remaining_budget = int(route_action_budget) - index
+        certification = audit_next_edges(
+            package.edges,
+            source_id,
+            full_constraint.pickup_node_id,
+            full_constraint.dropoff_node_id,
+            visited_node_ids=visited,
+            blocked_edge_ids=package.blocked_edge_ids,
+            remaining_action_budget=remaining_budget,
+        )
+        selected = next(
+            (item for item in certification.certified_edges if item.edge.edge_id == edge_id),
+            None,
+        )
+        if selected is None:
+            return {
+                "passed": False,
+                "reason": certification.filtered_edge_reasons.get(edge_id, "accepted_edge_not_certified"),
+                "step": index + 1,
+            }
+        remaining_witnessed_action_counts.append(selected.total_moves_to_dropoff)
+        visited.add(target_id)
+        pickup_seen = pickup_seen or target_id == full_constraint.pickup_node_id
+    current_node_id = accepted_nodes[-1]
+    if current_node_id != full_constraint.dropoff_node_id:
+        certification = audit_next_edges(
+            package.edges,
+            current_node_id,
+            full_constraint.pickup_node_id,
+            full_constraint.dropoff_node_id,
+            visited_node_ids=visited,
+            blocked_edge_ids=package.blocked_edge_ids,
+            remaining_action_budget=int(route_action_budget) - len(accepted_edges),
+        )
+        if not certification.certified_edges:
+            return {"passed": False, "reason": "current_prefix_has_no_certified_continuation"}
+    return {
+        "passed": True,
+        "accepted_action_count": len(accepted_edges),
+        "pickup_seen": pickup_seen,
+        "dropoff_reached": current_node_id == full_constraint.dropoff_node_id,
+        "all_steps_have_suffix_witness": len(remaining_witnessed_action_counts) == len(accepted_edges),
+        "prefix_sha256": accepted_prefix_sha256(accepted_nodes, accepted_edges),
+        "minimum_witnessed_remaining_moves": min(remaining_witnessed_action_counts, default=0),
+        "maximum_witnessed_remaining_moves": max(remaining_witnessed_action_counts, default=0),
+        "model_calls": 0,
+    }
+
+
 def build_r4_step_output_constraint(
     package: RouteInputPackage,
     full_constraint: R4RouteOutputConstraint,
@@ -677,6 +807,8 @@ def build_r4_step_output_constraint(
     blocked_edge_ids: Iterable[str] = (),
     remaining_action_budget: Optional[int] = None,
     include_objective_cost_guidance: bool = False,
+    require_suffix_witness: bool = False,
+    rejected_directions: Iterable[str] = (),
 ) -> R4StepOutputConstraint:
     node_by_id = {node.node_id: node for node in package.nodes}
     if current_node_id not in node_by_id:
@@ -719,6 +851,24 @@ def build_r4_step_output_constraint(
     )
     edge_by_direction: Dict[str, Any] = {}
     filtered_directions: Dict[str, str] = {}
+    rejected = set(rejected_directions)
+    suffix_witness_by_direction: Dict[str, Dict[str, Any]] = {}
+    certification_by_edge_id = {}
+    suffix_filter_reasons: Dict[str, str] = {}
+    if require_suffix_witness:
+        certification = audit_next_edges(
+            package.edges,
+            current_node_id,
+            full_constraint.pickup_node_id,
+            full_constraint.dropoff_node_id,
+            visited_node_ids=visited,
+            blocked_edge_ids=blocked,
+            remaining_action_budget=remaining_action_budget,
+        )
+        certification_by_edge_id = {
+            item.edge.edge_id: item for item in certification.certified_edges
+        }
+        suffix_filter_reasons = certification.filtered_edge_reasons
     objective_cost_lower_bound_by_direction: Dict[
         str, Dict[str, Dict[str, float]]
     ] = {}
@@ -759,6 +909,22 @@ def build_r4_step_output_constraint(
             and next_minimum_moves > int(remaining_action_budget) - 1
         ):
             filtered_directions[direction] = "remaining_action_budget_insufficient"
+            continue
+        if require_suffix_witness:
+            certified = certification_by_edge_id.get(edge.edge_id)
+            if certified is None:
+                filtered_directions[direction] = suffix_filter_reasons.get(
+                    edge.edge_id, "suffix_witness_not_found"
+                )
+                continue
+            suffix_witness_by_direction[direction] = {
+                "node_sequence": list(certified.suffix_witness.node_sequence),
+                "edge_sequence": list(certified.suffix_witness.edge_sequence),
+                "total_moves_to_dropoff": int(certified.total_moves_to_dropoff),
+            }
+        if direction in rejected:
+            filtered_directions[direction] = "rejected_after_invalid_proposal"
+            suffix_witness_by_direction.pop(direction, None)
             continue
         edge_by_direction[direction] = edge
         if include_objective_cost_guidance:
@@ -814,6 +980,8 @@ def build_r4_step_output_constraint(
             if remaining_action_budget is not None
             else None
         ),
+        suffix_witness_by_direction=suffix_witness_by_direction,
+        require_suffix_witness=bool(require_suffix_witness),
         can_give_up=can_give_up,
     )
 
@@ -828,6 +996,7 @@ def _local_check(
     blocked_edge_ids: Set[str],
     full_constraint: R4RouteOutputConstraint,
     remaining_action_budget: Optional[int] = None,
+    require_suffix_witness: bool = False,
 ) -> Dict[str, Any]:
     delta = _DIRECTION_DELTAS.get(direction)
     current_node = node_by_id.get(current_node_id)
@@ -845,6 +1014,14 @@ def _local_check(
         if expected_target is not None
         else None
     )
+    reverse_edge = (
+        edge_by_pair.get((expected_target, current_node_id))
+        if expected_target is not None
+        else None
+    )
+    reverse_oneway_forbidden = bool(
+        global_edge is None and reverse_edge is not None and reverse_edge.one_way
+    )
     edge_exists = delta is not None and global_edge is not None
     starts_at_current = bool(global_edge and global_edge.from_node == current_node_id)
     inside_boundary = bool(global_edge and global_edge.to_node in node_by_id)
@@ -861,6 +1038,7 @@ def _local_check(
     )
     flags = {
         "edge_exists": edge_exists,
+        "reverse_oneway_forbidden": reverse_oneway_forbidden,
         "allowed_directed_edge": bool(
             edge_exists
             and starts_at_current
@@ -879,7 +1057,9 @@ def _local_check(
     }
     errors = []
     if not edge_exists:
-        errors.append("directed_edge_missing")
+        errors.append(
+            "one_way_direction" if reverse_oneway_forbidden else "directed_edge_missing"
+        )
     elif not starts_at_current:
         errors.append("edge_not_allowed_from_current")
     elif not inside_boundary:
@@ -893,6 +1073,7 @@ def _local_check(
     elif not stop_rule_ok:
         errors.append("move_after_dropoff")
     remaining_minimum_moves_after_move = None
+    suffix_witness = None
     if not errors and global_edge is not None:
         next_pickup_seen = pickup_seen or global_edge.to_node == full_constraint.pickup_node_id
         remaining_minimum_moves_after_move = _minimum_remaining_move_lower_bound(
@@ -911,6 +1092,32 @@ def _local_check(
             and remaining_minimum_moves_after_move > remaining_action_budget - 1
         ):
             errors.append("move_exceeds_remaining_action_budget")
+        if require_suffix_witness and not errors:
+            certification = audit_next_edges(
+                list(edge_by_pair.values()),
+                current_node_id,
+                full_constraint.pickup_node_id,
+                full_constraint.dropoff_node_id,
+                visited_node_ids=visited_node_ids,
+                blocked_edge_ids=blocked_edge_ids,
+                remaining_action_budget=remaining_action_budget,
+            )
+            certified = next(
+                (
+                    item
+                    for item in certification.certified_edges
+                    if item.edge.edge_id == global_edge.edge_id
+                ),
+                None,
+            )
+            if certified is None:
+                errors.append("move_leaves_no_certified_suffix")
+            else:
+                suffix_witness = {
+                    "node_sequence": list(certified.suffix_witness.node_sequence),
+                    "edge_sequence": list(certified.suffix_witness.edge_sequence),
+                    "total_moves_to_dropoff": int(certified.total_moves_to_dropoff),
+                }
     return {
         "passed": not errors,
         "flags": flags,
@@ -918,6 +1125,7 @@ def _local_check(
         "edge": global_edge,
         "expected_target_node_id": expected_target,
         "remaining_minimum_moves_after_move": remaining_minimum_moves_after_move,
+        "suffix_witness": suffix_witness,
     }
 
 
@@ -1083,6 +1291,7 @@ def run_r4_stepwise_route_search(
     final_validation = None
     total_input_bytes = 0
     feedback_for_next_request = None
+    rejected_directions_by_node: Dict[str, Set[str]] = {}
     input_protocol = (
         "r4-step-v3"
         if compact_visited_state or enable_progress_guidance
@@ -1149,6 +1358,8 @@ def run_r4_stepwise_route_search(
             blocked_edge_ids=blocked,
             remaining_action_budget=remaining_action_budget,
             include_objective_cost_guidance=enable_progress_guidance,
+            require_suffix_witness=True,
+            rejected_directions=rejected_directions_by_node.get(current, ()),
         )
         client.route_constraint = constraint
         progress_guidance = None
@@ -1405,6 +1616,7 @@ def run_r4_stepwise_route_search(
                     blocked,
                     full_constraint,
                     remaining_action_budget=remaining_action_budget,
+                    require_suffix_witness=True,
                 )
                 local["flags"]["model_self_check_passed"] = all(model_self_check.values())
                 model_self_check_mismatch_fields = _model_self_check_mismatch_fields(
@@ -1454,6 +1666,10 @@ def run_r4_stepwise_route_search(
                 )
                 if not local["passed"]:
                     attempt["status"] = "step_invalid"
+                    rejected_directions_by_node.setdefault(current, set()).add(direction)
+                    attempt["rollback_to_last_legal_checkpoint"] = True
+                    attempt["rollback_checkpoint_node_id"] = current
+                    attempt["rejected_direction_at_checkpoint"] = direction
                     feedback_code = local["errors"][0]
                     attempt["feedback"] = {
                         "code": feedback_code,

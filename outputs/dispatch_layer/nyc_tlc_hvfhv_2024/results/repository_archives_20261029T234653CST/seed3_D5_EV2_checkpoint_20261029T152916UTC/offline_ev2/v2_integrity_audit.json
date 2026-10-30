@@ -1,0 +1,38 @@
+{
+  "schema_version": "nyc_dispatch_energy_recalculation_v2_integrity_audit_v1",
+  "status": "passed",
+  "audited_at_local": "2026-10-29T23:41:11+08:00",
+  "source_manifest": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_energy_v2_offline_20261029_seed3_D5_single/manifest.json",
+  "source_manifest_sha256": "dab3b508501660d95000310e99a4031e044749a3379b4cec0729c57fdb5f498d",
+  "source_manifest_status": "completed_with_expected_gaps",
+  "input_result_count": 1,
+  "excluded_count": 0,
+  "unrecomputable_count": 0,
+  "verified_output_count": 1,
+  "physical_output_count": 1,
+  "output_coverage_complete": true,
+  "energy_profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee",
+  "source_official_audit": null,
+  "model_calls": 0,
+  "dispatch_policy_rerun": false,
+  "limitations": [
+    "EV v2 energy is an offline estimate for frozen assignments, not measured vehicle telemetry.",
+    "The synthetic centroid pickup proxy is not a measured road-level pickup trajectory.",
+    "The corrected energy values do not show that EV v2 energy affected the original dispatch decision.",
+    "Missing evaluation cells remain missing and are not inferred from the recalculation sidecar."
+  ],
+  "errors": [],
+  "verified_outputs": [
+    {
+      "source": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_replicates_v1/seed_3/evaluation/EV_20241214_224500_q75/F4/D5_pure_llm_direct_seed_3.json",
+      "source_sha256": "7a03ba049d39929227c68673814f6541b6b7d423fa4fce1c224796d1d7c7fe51",
+      "output": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_multimonth_energy_v2_offline_20261029_seed3_D5_single/seed_3/EV_20241214_224500_q75/F4/D5_pure_llm_direct_seed_3.energy_v2_offline.json",
+      "output_sha256": "e468e1f8e8aa6c228b403334f0747452887a7b7eb9458cdd6cfbae4b7a0187c7",
+      "seed": 3,
+      "case_id": "EV_20241214_224500_q75",
+      "fleet_id": "F4",
+      "method_name": "D5_pure_llm_direct",
+      "assignment_count": 48
+    }
+  ]
+}

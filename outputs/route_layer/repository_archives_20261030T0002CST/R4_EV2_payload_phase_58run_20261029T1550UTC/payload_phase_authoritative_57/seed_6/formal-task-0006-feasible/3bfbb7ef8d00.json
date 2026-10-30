@@ -1,0 +1,76 @@
+{
+  "schema_version": "r4_ev_v2_payload_phase_recalculation_v1",
+  "status": "offline_recalculated_completed_route",
+  "task_id": "formal-task-0006-feasible",
+  "seed": 6,
+  "sample_group": "formal_scenarios",
+  "source_run_dir": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_6/formal-task-0006-feasible/run_001",
+  "route_status": "route_complete",
+  "route_selection_objective": "travel_time_then_distance",
+  "route_algorithm_rerun": false,
+  "model_calls": 0,
+  "energy_model": {
+    "model_version": "ev_longitudinal_v2",
+    "profile_id": "generic_reference_ev_v1",
+    "profile": {
+      "profile_id": "generic_reference_ev_v1",
+      "curb_mass_kg": 1900.0,
+      "passenger_load_kg": 75.0,
+      "rotating_mass_kg": 50.0,
+      "rolling_resistance_coefficient": 0.009,
+      "drag_coefficient": 0.26,
+      "frontal_area_m2": 2.35,
+      "air_density_kg_m3": 1.225,
+      "propulsion_efficiency": 0.9,
+      "regenerative_efficiency": 0.65,
+      "auxiliary_power_w": 800.0,
+      "max_acceleration_mps2": 1.2,
+      "max_deceleration_mps2": 2.0,
+      "regenerative_power_cap_w": 50000.0,
+      "gravity_mps2": 9.80665,
+      "model_version": "ev_longitudinal_v2"
+    },
+    "profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee",
+    "equations": {
+      "wheel_force": "(m + rotating_mass)*acceleration + 0.5*rho*Cd*A*v^2 + Crr*m*g*cos(slope) + m*g*sin(slope)",
+      "positive_wheel_power": "wheel_power / propulsion_efficiency",
+      "negative_wheel_power": "min(-wheel_power * regenerative_efficiency, regenerative_power_cap)",
+      "net_battery_energy": "propulsion_draw - regenerated_energy + auxiliary_energy"
+    }
+  },
+  "energy_profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee",
+  "payload_phase_definition": {
+    "empty_leg_payload_mass_kg": 0.0,
+    "passenger_leg_payload_mass_kg": 75.0,
+    "split_node_id": "node_12_72",
+    "empty_edge_count": 153,
+    "passenger_edge_count": 123,
+    "boundary_convention": "edges ending at pickup are empty; edges leaving pickup are passenger-loaded"
+  },
+  "metrics": {
+    "empty_leg_signed_net_energy_kwh": 1.619254475577273,
+    "passenger_leg_signed_net_energy_kwh": 1.4451411399313001,
+    "total_signed_net_energy_kwh": 3.064395615508573,
+    "empty_leg_billable_energy_kwh": 1.619254475577273,
+    "passenger_leg_billable_energy_kwh": 1.4451411399313001,
+    "total_billable_energy_kwh": 3.064395615508573,
+    "prior_full_route_passenger_payload_energy_kwh": 3.098295218416437,
+    "same_route_all_passenger_payload_recalculated_kwh": 3.098295218416437,
+    "payload_split_delta_vs_prior_final_audit_kwh": -0.03389960290786398,
+    "account_cash_cost": null,
+    "electricity_tariff": null
+  },
+  "evidence": {
+    "state_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_6/formal-task-0006-feasible/run_001/state.json",
+    "state_sha256": "b0c49f69e6cc4b8cbdecaa07854a0fc6ceab0467e4cd2bf04ce0d5cafba76f9d",
+    "final_audit_path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2/parallel_workers/worker_recovery/tasks/seed_6/formal-task-0006-feasible/run_001/final_audit.json",
+    "final_audit_sha256": "070b2009827a22076ef4ac6b6eff0ee0c3216d5f945fe6222624ccd06a102ae9",
+    "preflight_path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/r4_codex_batch_preflights_20261024_v1/tasks/seed_6/formal-task-0006-feasible/preflight.json",
+    "preflight_sha256": "a6ec4b926cab32d0cfbc6497681fb9d9889af249faeb8bc9a2ccea0bec8a5986",
+    "map_id": "grid-100x100-seed-6",
+    "map_version": "grid-v1-100",
+    "map_content_sha256": "e0ed7bbd738587ad01edae2696e3eff20587d4474477dc18085ae9620715cf83",
+    "accepted_nodes_sha256": "04e6d37c81677515000efaf95d20d750064a6a099b8c27cf059cc50127775517",
+    "accepted_edges_sha256": "54d4ff9e0855c3d03b474bab7c494208e5db1a9140dc4ff873bd9b04717cc384"
+  }
+}
