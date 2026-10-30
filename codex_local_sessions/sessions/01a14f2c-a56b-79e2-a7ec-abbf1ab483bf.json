@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "conversation_id": "01a14f2c-a56b-79e2-a7ec-abbf1ab483bf",
+  "thread_id": "01a14f2c-a56b-79e2-a7ec-abbf1ab483bf",
+  "parent_thread_id": null,
+  "title": "筛选路线层实验预训练模型",
+  "source": "user",
+  "agent_name": null,
+  "started_at": "2026-10-18T13:21:31.604Z",
+  "last_message_at": "2026-10-18T13:30:19.841Z",
+  "source_log_parts": 1,
+  "message_count": 11,
+  "omitted_attachment_blocks": {},
+  "messages": [
+    {
+      "sequence": 1,
+      "message_id": "msg_01a14f2c-b1d3-7331-8caa-49a67d31b34d",
+      "timestamp": "2026-10-18T13:21:31.604Z",
+      "role": "user",
+      "text": "# AGENTS.md instructions for ~/Documents/personalcodexfile/第二次课\n\n<INSTRUCTIONS>\n## 写作风格\n\n当任务涉及“去 AI 味”“说人话”“自然一点”“别像模板”这类改写时，使用本地 skill `shuorenhua`。\n对外文本优先按它处理；代码、日志、配置和命令输出不套这个 skill。\n\n--- project-doc ---\n\n# 第二次课项目协作规则\n\n本工作区包含课程资料和多个输出子项目。以下研究规则适用于无人网约车论文、引言、相关工作、方法及实验设计等任务；与该论文无关的编码或其他项目任务不必加载研究记忆库。\n\n## 研究记忆库入口与自动维护\n\n- 每次在本工作区开启与无人网约车论文有关的新对话，开始处理前先阅读 output/paper/研究记忆库.md，并以最新用户指示为准。\n- 每个相关对话在完成当前任务前，都要检查是否产生了新的稳定结论、用户纠正、教师反馈、文献事实或实验结果。若有，主动增量更新研究记忆库，并在“更新记录”中写入日期和更新内容；若没有，不要为了形式制造空改动。\n- 更新时标明证据类型：用户确认、教师建议、出版方论文事实、方案待验证、已完成实验。保留来源链接、课程时间戳或本地材料路径。\n- 用户最新指示优先于旧记忆。遇到冲突时，记录新决定及其日期，并把旧结论标为“已被更新”，不要静默删除历史。\n- 不得把设想、Demo 复现、模拟结果、真实部署结果混为一谈；没有实验数据和可复现记录时，不得写成效果结论。\n- 不得仅凭“多 Agent”“LLM+优化器”或“Agent 友好地图”等组合宣称首创。相关新颖性和性能主张须有文献比较或实验支持。\n- 未决事项继续逐项澄清，一次只向用户提出一个问题；若不妨碍当前起草，先写明暂定假设并继续。\n\n## 引言与相关工作的文稿分工\n\n- 无人网约车论文的新对话先阅读 `output/paper/研究记忆库.md`；处理相关工作时，以 `output/paper/相关工作_正式稿_20261006.md` 为当前主稿继续修订，并检查其中的来源和未决研究差异。\n- 引言保持精简，集中写研究对象与边界、主要问题、文献支持的研究定位、总体 Agent—优化器流程和本文研究重点。不要逐篇罗列作者、重复综述已有方法，也不要塞入完整基线清单、指标定义、模型/API 版本、能耗公式等方法和实验细节。\n- 文献脉络、代表性方法及其任务差异放在“相关工作”中按主题综合；优先写研究线索和差异，再用引文支持，避免每句话都以作者姓名开头。\n- 实验基线、评价指标、模型调用额度、电动车能耗与优化目标的计量规则放在研究记忆库中暂存，进入论文时归入方法或实验设计；只有用于说明既有工作的研究差异时，才在相关工作中简要提及。\n- 引言和相关工作目前是分开的草稿，参考文献编号各自独立；合并全文时统一编号并去重。\n\n## 写作风格\n\n- 用户提出“去 AI 味”“说人话”“自然一点”“别像模板”等要求时，使用本地 skill shuorenhua。对外文本优先按它处理；代码、日志、配置和命令输出不套用该 skill。\n\n</INSTRUCTIONS>\n<environment_context>\n  <cwd>~/Documents/personalcodexfile/第二次课</cwd>\n  <shell>bash</shell>\n  <current_date>2026-10-18</current_date>\n  <timezone>Asia/Shanghai</timezone>\n  <filesystem><workspace_roots><root>~/Documents/personalcodexfile/第二次课</root><root>~/.codex/visualizations/2026/10/18/01a14f2c-a56b-79e2-a7ec-abbf1ab483bf</root></workspace_roots><permission_profile type=\"disabled\"><file_system type=\"unrestricted\" /></permission_profile></filesystem>\n</environment_context>"
+    },
+    {
+      "sequence": 2,
+      "message_id": "msg_01a14f2c-b24f-7dd0-9d12-2051cd02a654",
+      "timestamp": "2026-10-18T13:21:31.727Z",
+      "role": "user",
+      "text": "<external_codex_apps_open_page>{\"page_id\":null}</external_codex_apps_open_page>"
+    },
+    {
+      "sequence": 3,
+      "message_id": "msg_01a14f2c-b2a7-7120-9963-6b8ccd78f7fe",
+      "timestamp": "2026-10-18T13:21:31.815Z",
+      "role": "user",
+      "text": "为我选择一些huggingface上·适合路线层实验的预训练模型\n"
+    },
+    {
+      "sequence": 4,
+      "message_id": "msg_0c946b8c05d56d52016ad4c7df6150819691264f45cd4dc475",
+      "timestamp": "2026-10-18T13:21:35.967Z",
+      "role": "assistant",
+      "text": "我会先对照这项无人网约车研究的记忆库，确认“路线层实验”的输入、输出和实验边界，再核对 Hugging Face 上仍可用的模型与许可证信息，最后给出一组可直接比较的候选。"
+    },
+    {
+      "sequence": 5,
+      "message_id": "msg_0c946b8c05d56d52016ad4c7f69a4c819685a64a513ff83130",
+      "timestamp": "2026-10-18T13:21:59.757Z",
+      "role": "assistant",
+      "text": "研究记忆库把路线层实验限定为：所有模型共用同一份地图、起终点和校验器，只负责单车路线生成/评估；核心对照是传统算法、纯 LLM、车辆 Agent 工作流。模型要固定在对照组间，所以我会优先挑几种规模接近、可本地复现的指令模型，并把“基础预训练权重”和“可按提示完成路线任务的指令权重”区分开。"
+    },
+    {
+      "sequence": 6,
+      "message_id": "msg_0c946b8c05d56d52016ad4c866befc8196bb30530a6bc6c6fe",
+      "timestamp": "2026-10-18T13:23:51.512Z",
+      "role": "assistant",
+      "text": "我看到路线实验方案已经记录了首轮 150 个 graph-only 任务中纯 LLM 合法路线为 0/150。因此我会把这些 HF 候选定位为“待比较的模型配置”，不会把它们描述成能解决路线违规的保证；同时保留传统路线算法作为有效性参照。"
+    },
+    {
+      "sequence": 7,
+      "message_id": "msg_0c946b8c05d56d52016ad4c931259c819690c0b3fd0be17f35",
+      "timestamp": "2026-10-18T13:27:19.451Z",
+      "role": "assistant",
+      "text": "我建议选 **3 个正式候选 + 1 个可选大模型**。这些都是经过指令或推理后训练的权重，适合直接按提示生成路线结构；不建议拿纯 `Base` 权重直接做路线输出。\n\n| 用途 | 模型 | 选择理由 |\n|---|---|---|\n| **主模型** | [Qwen/Qwen3-8B](https://huggingface.co/Qwen/Qwen3-8B) | 中文和多语言指令能力较合适，也支持 Agent 工具调用。主实验建议先固定为非思考模式；思考模式另作消融。 |\n| **轻量对照** | [Qwen/Qwen3-4B-Instruct-2507](https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507) | 4B、仅非思考模式，适合和 8B 做较接近的规模对照。 |\n| **推理型对照** | [deepseek-ai/DeepSeek-R1-Distill-Qwen-7B](https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-7B) | 可检验推理型后训练对路线合法率的影响；要限制生成长度，并分别统计解析失败和路线违规。 |\n| **可选高资源对照** | [openai/gpt-oss-20b](https://huggingface.co/openai/gpt-oss-20b) | 支持结构化输出和可调推理强度；官方模型卡称 MXFP4 权重可在 16GB 内存运行，适合作为额外参照。 |\n\n当前路线层 graph-only 纯 LLM 已有 **150 个任务、合法路线 0 条**的结果，所以这些模型是待比较候选，不代表换模型就能解决问题。[路线层方案与结果记录](~/Documents/personalcodexfile/第二次课/output/paper/路线层实验方案_20261009.md:354)\n\n正式比较前，建议先用独立开发任务定好提示和推理设置，再固定模型 revision、量化/精度、解码参数、输出格式和 token 上限。比较纯 LLM 与 Agent 工作流时，同一组使用同一个模型；这样路线方法差异才不会和模型差异混在一起。\n\n我已把四个模型的固定 Hugging Face revision 和使用边界写入[路线层实验方案](~/Documents/personalcodexfile/第二次课/output/paper/路线层实验方案_20261009.md:369)，并更新了[研究记忆库](~/Documents/personalcodexfile/第二次课/output/paper/研究记忆库.md:198)。模型卡说明了 Qwen3 的思考模式与工具调用、4B 版的非思考设置、DeepSeek 蒸馏模型的推理特征，以及 GPT-OSS 的结构化输出能力；这些都不能替代路线实验实测。\n\n<oai-mem-citation>\n<citation_entries>\nMEMORY.md:1527-1530|note=[路线层方法共用输入包和校验器]\nrollout_summaries/2026-10-08T06-18-54-T07J-dispatch_experiment_fields_github_sync.md:20-32|note=[路线层实验边界与控制变量]\n</citation_entries>\n<rollout_ids>\n01a11a2a-2f58-7a92-91eb-af6eb0edd1a7\n</rollout_ids>\n</oai-mem-citation>"
+    },
+    {
+      "sequence": 8,
+      "message_id": "msg_01a14f33-c72d-7b81-bc77-cabd69b344b7",
+      "timestamp": "2026-10-18T13:29:15.821Z",
+      "role": "user",
+      "text": "我需要免费的路线检索模型\n"
+    },
+    {
+      "sequence": 9,
+      "message_id": "msg_0c946b8c05d56d52016ad4c9b3987c819685b69dc9793016ee",
+      "timestamp": "2026-10-18T13:29:24.336Z",
+      "role": "assistant",
+      "text": "明白，你要的是**不产生模型/API 调用费**的候选。我会按“可免费下载权重、本地运行”的口径筛选，并核对模型许可证；HF 在线推理是否免费、额度多少会变化，我也会单独区分，避免把免费权重误说成免费托管。"
+    },
+    {
+      "sequence": 10,
+      "message_id": "msg_0c946b8c05d56d52016ad4c9cdb6b881968baf16ef2948da89",
+      "timestamp": "2026-10-18T13:29:50.839Z",
+      "role": "assistant",
+      "text": "我按“本地运行、不付 API 费”来筛选。HF 的在线 Inference Providers 目前只有每月 0.10 美元的免费额度且可变，超额会按量收费；所以它不适合作为 150 条正式路线任务的稳定免费运行方式。模型权重免费下载和本地运行才符合你的要求。"
+    },
+    {
+      "sequence": 11,
+      "message_id": "msg_0c946b8c05d56d52016ad4c9e7848c81969c1b45d996eee5ed",
+      "timestamp": "2026-10-18T13:30:19.841Z",
+      "role": "assistant",
+      "text": "如果你要**不付 API 费**，首选本地运行 [Qwen3-4B-Instruct-2507](https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507)。它的权重可下载，采用 Apache-2.0 许可证，适合作为低资源起步模型。机器资源够的话，再试 [Qwen3-8B](https://huggingface.co/Qwen/Qwen3-8B)。\n\n如果你说的“路线检索”是要在路网上**稳定找出合法路线**，直接用项目里的 Dijkstra 或 A* 更合适：免费、确定性强，也不需要模型调用。Qwen 适合做 LLM 路线规划对照，但不能保证路线合法；当前纯 LLM 实验在 150 个任务中没有生成合法路线。[现有实验记录](~/Documents/personalcodexfile/第二次课/output/paper/路线层实验方案_20261009.md:354)\n\nHF 在线推理不等于免费无限用：官方目前列出的免费额度是每月 0.10 美元，可能调整，超出后按量计费。[HF 计费说明](https://huggingface.co/docs/inference-providers/pricing) 要避免 API 费，就下载权重本地运行；本地硬件和电费仍需考虑。\n\n我已把方案调整为 **Qwen3-4B 本地首选、Qwen3-8B 升级候选**，并记录了固定 revision：[路线层方案](~/Documents/personalcodexfile/第二次课/output/paper/路线层实验方案_20261009.md:369)、[研究记忆库](~/Documents/personalcodexfile/第二次课/output/paper/研究记忆库.md:198)。\n\n<oai-mem-citation>\n<citation_entries>\nMEMORY.md:1527-1530|note=[路线层比较共用输入包和校验器]\nrollout_summaries/2026-10-08T06-18-54-T07J-dispatch_experiment_fields_github_sync.md:20-32|note=[路线层实验控制背景]\n</citation_entries>\n<rollout_ids>\n01a11a2a-2f58-7a92-91eb-af6eb0edd1a7\n</rollout_ids>\n</oai-mem-citation>"
+    }
+  ]
+}
