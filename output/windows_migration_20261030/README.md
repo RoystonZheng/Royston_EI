@@ -16,7 +16,10 @@ Latest assembled at 2026-10-30 16:16:01 CST. Main branch contains the project co
 1. Clone `RoystonZheng/Royston_EI` and extract the NYC historical base bundle into the project copy.
 2. Extract the NYC checkpoint overlay. Run its `RESTORE_WINDOWS.ps1 -ProjectRoot <project-root>` from PowerShell. It verifies hashes and copies files; it does not start a runner.
 3. For the stable outputs archive, run `copy /b part-001+part-002+part-003+part-004+part-005 unaligned_research_outputs_20261030.tar.zst`, then decompress with `zstd` and extract with `tar`.
-4. Download the R4 full archive release asset and run `RESTORE_R4_WINDOWS.ps1 -ArchivePath <tar.zst> -Destination <checkpoint-folder>`. Extract the R4 link-fallback archive separately. Read each `STOP_AND_MIGRATION_STATE.json` before making a future run decision.
+4. The full project delta is supplied as `experiment-delta-20261030.tar.zst.part-*` Release assets. From the cloned project root, run `powershell -ExecutionPolicy Bypass -File output/windows_migration_20261030/RESTORE_FULL_WINDOWS.ps1 -Destination C:\EI -DownloadDirectory D:\EI_migration_parts`. The script downloads every part, verifies the GitHub SHA-256 digests, joins and checks the archive, then extracts it into the destination. The expanded delta is about 69.4 GB. Install `zstd.exe` on `PATH`; Windows `tar.exe` is also required.
+5. The separate R4 full archive and link-fallback archive are convenient standalone copies. The full project delta also contains the complete R4 checkpoint. Read each `STOP_AND_MIGRATION_STATE.json` before any future run decision.
+
+The delta contains paths up to 316 characters, including 573 paths at or above the traditional 260-character limit. Use a short destination such as `C:\EI` and enable Windows long-path support before extraction.
 
 ## Start an offline run on Windows
 
