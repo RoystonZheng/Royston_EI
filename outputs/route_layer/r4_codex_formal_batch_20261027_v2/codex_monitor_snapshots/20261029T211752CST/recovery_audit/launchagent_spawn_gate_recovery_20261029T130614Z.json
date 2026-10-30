@@ -1,0 +1,88 @@
+{
+  "actions": [
+    {
+      "action": "disabled existing worker_02, worker_03, and worker_recovery_429 LaunchAgents after confirming no R4 runner process and no in-flight request; launchctl disable returned 0 for all three."
+    },
+    {
+      "action": "ran the existing zero-model-request aggregator refresh; it reconciled the parent to paused_user_requested_safety_gate, halt_no_more_model_requests=true, with request counts unchanged."
+    },
+    {
+      "action": "added fail-closed route-safety checks in parallel start and direct shard-driver paths; launchd spawn scheduled is no longer counted as a live worker."
+    },
+    {
+      "action": "improved resume diagnostics for a certified suffix that exceeds a small authorized budget; older v5 prefix fixtures that have no certified suffix remain intentionally blocked."
+    }
+  ],
+  "audited_at_utc": "2026-10-29T13:06:14.654635+00:00",
+  "authoritative_index_sha256": "361be170efedf463a24a45ba8fd1414bd11768854222d874deb047e1a9d82103",
+  "batch_manifest_sha256": "e1910bcd8192b45114d4b2c59550e29ef85689e4dae5ea5fc3dc0a4d3668c835",
+  "batch_root": "<local-path> Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_batch_20261027_v2",
+  "final_halt_no_more_model_requests": true,
+  "final_parent_status": "paused_user_requested_safety_gate",
+  "in_flight": null,
+  "model_requests_used": 11799,
+  "observed_blockers": [
+    "LaunchAgent subprocesses repeatedly failed before runner execution with macOS Operation not permitted while opening scripts/run_r4_formal_chunk_driver.py under Documents; KeepAlive restarted unsuccessful exits (code 2).",
+    "Aggregator treated launchd state spawn scheduled as a live worker, so it could report running without a live shard process.",
+    "The batch route_safety_gate remains pending; no complete end-to-end SUMO verification for the current suffix-witness/backtrack flow is evidenced, so formal model continuation remains disallowed."
+  ],
+  "remaining_gate": {
+    "formal_batch_complete": false,
+    "formal_continuation_permitted": false,
+    "required": "complete an end-to-end route/SUMO validation of current directed-edge checking and rollback/re-search with zero one-way violations.",
+    "status": "pending"
+  },
+  "requests_with_unknown_delivery": 26,
+  "route_safety_gate": {
+    "evidence": "three active workers stopped at USER_STOP_REQUESTED sentinels after their current requests; blocked next steps verified pre-dispatch and reconciled to ready",
+    "formal_continuation_permitted": false,
+    "latest_user_requirement": "validate each discovered directed road segment; if continuation fails, backtrack one node and search again; complete an end-to-end route/SUMO test with zero one-way errors before formal continuation",
+    "prior_no_project_level_quota_authorization": "remains applicable after this gate passes",
+    "status": "pending",
+    "updated_at_utc": "2026-10-29T11:55:52.471939+00:00"
+  },
+  "schema_version": "r4_launchagent_spawn_gate_recovery_audit_v1",
+  "source_sha256": {
+    "scripts/r4_parallel_formal_batch.py": "23bd1a93449484e59ff281870fd862bec2a6565a1ca98c565e9b370640573390",
+    "scripts/run_r4_codex_pilot_continuation.py": "519e8d6bea963804aa8687ef30965dbf7a0b60d45aa899800ae746379a996197",
+    "scripts/run_r4_formal_chunk_driver.py": "6d164a09bccc2be6f1c5ad6719e783b91c8620103c7e5513e85a21f7713ee5b7",
+    "tests/test_r4_codex_pilot_resume.py": "9645dfec7d2d15a98f7882f6d796eccf6d131b80ec89f3e6e57bf5b8f3c837be",
+    "tests/test_r4_parallel_formal_batch.py": "35ebf6a44aa367c7622cb83fa93226d56df763578ae5d2e89f48e5f57408ac3c"
+  },
+  "task_status_counts": {
+    "failed": 6,
+    "outcome_unknown": 10,
+    "pending": 27,
+    "ready": 30,
+    "route_complete": 56
+  },
+  "unresolved_in_flight_count": 26,
+  "verification": {
+    "existing_directed_edge_audit": {
+      "accepted_edges_audited": 11446,
+      "completed_routes_audited": 56,
+      "completed_routes_with_directed_edge_violation": 0,
+      "limitation": "does not establish the required end-to-end SUMO gate for the current continuation flow",
+      "path": "outputs/route_layer/r4_directed_edge_audit_20261029T2040CST.json",
+      "status": "passed"
+    },
+    "model_api_calls_this_turn": 0,
+    "no_call_direct_shard_gate_smoke": {
+      "chunk_runner_created": false,
+      "events": [
+        "driver_started",
+        "driver_stopped_route_safety_gate_pending"
+      ],
+      "exit_code": 0,
+      "passed": true
+    },
+    "project_index": "already displays the paused 11,799-request state and trace-integrity note; not overwritten to preserve its App Support links and warning.",
+    "tests": {
+      "passed_total": 72,
+      "test_r4_codex_pilot_resume.py": 31,
+      "test_r4_parallel_formal_batch.py": 10,
+      "test_r4_stepwise.py": 26,
+      "test_r4_suffix_witness.py": 5
+    }
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "batch_parent_manifest_sha256": "ca68f601f6c6d992be2c767b149b920b5d2d2854e97eb6fa82800b788107e571",
+  "batch_status": "paused_user_requested_safety_gate",
+  "created_at_utc": "2026-10-29T12:05:00Z",
+  "finding": "Both manifest trace hashes equal the first two JSONL events at unknown_request_deferred time. The CLI trace files were appended shortly afterward with item.completed and turn.completed/usage. The final response can be deterministically checked as an allowed directed edge and non-revisit, but the run state and attempt file were not committed; therefore official request/task status remains unknown and no route completion or energy metric is inferred.",
+  "model_calls_made_during_audit": 0,
+  "parent_model_requests_used": 11799,
+  "replayed_requests": 0,
+  "request_level_unknown_count": 26,
+  "schema": "r4_trace_append_integrity_audit_v1",
+  "tasks": [
+    {
+      "accepted_nodes_before_count": 95,
+      "attempt_artifact_exists": false,
+      "captured_action": "move",
+      "captured_direction": "W",
+      "current_node_before": "node_58_34",
+      "defer_event_at_utc": "2026-10-29T07:17:51.724108+00:00",
+      "defer_hash_equals_sha256_of_first_two_events": true,
+      "manifest_status": "outcome_unknown_no_retry",
+      "manifest_trace_sha256_at_defer": "1ca8823ce23d8cdd59c1480ca9db358e0dc99af75996c4e21a0f73bc2cdd4fcd",
+      "official_reconciliation": "unchanged_outcome_unknown_no_retry; response and usage are captured in raw trace but not committed to the run state; do not count as accepted or complete",
+      "offline_directed_edge_check": {
+        "directed_edge_exists": true,
+        "dropoff_node_id": "node_86_7",
+        "edge_id": "edge_node_58_34_node_57_34",
+        "pickup_dropoff_order_ok": true,
+        "pickup_node_id": "node_57_32",
+        "pickup_seen_before": false,
+        "target_node_exists": true,
+        "target_unvisited": true
+      },
+      "provider_usage_available_in_manifest": false,
+      "request_number": 95,
+      "response_item_type": "agent_message",
+      "response_sha256": "f238f2025b62ea9aeb1c4055daacc2bb80ce663853b5c0bc9edefcaac642cbd3",
+      "state_new_requests_used_before": 94,
+      "state_status": "request_in_progress",
+      "suffix_witness_rechecked": false,
+      "task_id": "formal-task-0005-feasible",
+      "trace_sha256_after_late_append": "75759b7bb6b9918efece56d2cbe173fbb0b17969b3e543d96c126f9410326368",
+      "turn_completed_usage": {
+        "cache_write_input_tokens": 0,
+        "cached_input_tokens": 8320,
+        "input_tokens": 22788,
+        "output_tokens": 700,
+        "reasoning_output_tokens": 639
+      },
+      "worker_id": "worker_02"
+    },
+    {
+      "accepted_nodes_before_count": 37,
+      "attempt_artifact_exists": false,
+      "captured_action": "move",
+      "captured_direction": "N",
+      "current_node_before": "node_15_17",
+      "defer_event_at_utc": "2026-10-29T07:17:52.106165+00:00",
+      "defer_hash_equals_sha256_of_first_two_events": true,
+      "manifest_status": "outcome_unknown_no_retry",
+      "manifest_trace_sha256_at_defer": "e70973eb77efd266b0c495f454aa01f8775e4485b51bc7924d3562888994826b",
+      "official_reconciliation": "unchanged_outcome_unknown_no_retry; response and usage are captured in raw trace but not committed to the run state; do not count as accepted or complete",
+      "offline_directed_edge_check": {
+        "directed_edge_exists": true,
+        "dropoff_node_id": "node_62_63",
+        "edge_id": "edge_node_15_17_node_15_18",
+        "pickup_dropoff_order_ok": true,
+        "pickup_node_id": "node_0_5",
+        "pickup_seen_before": true,
+        "target_node_exists": true,
+        "target_unvisited": true
+      },
+      "provider_usage_available_in_manifest": false,
+      "request_number": 37,
+      "response_item_type": "agent_message",
+      "response_sha256": "30752f9e766717f14246e5e169b771c0109eb11d90ff52655a344b5b8474d810",
+      "state_new_requests_used_before": 36,
+      "state_status": "request_in_progress",
+      "suffix_witness_rechecked": false,
+      "task_id": "formal-task-0001-detour",
+      "trace_sha256_after_late_append": "4c66c0476aee6a3dfc9dbfd4d8e43df35c5c78f3d3963738ea57fbe30239e48a",
+      "turn_completed_usage": {
+        "cache_write_input_tokens": 0,
+        "cached_input_tokens": 8320,
+        "input_tokens": 20325,
+        "output_tokens": 391,
+        "reasoning_output_tokens": 330
+      },
+      "worker_id": "worker_03"
+    }
+  ]
+}

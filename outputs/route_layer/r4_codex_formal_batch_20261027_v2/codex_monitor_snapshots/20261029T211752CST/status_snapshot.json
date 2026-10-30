@@ -1,0 +1,103 @@
+{
+  "schema_version": "codex-safe-monitor-snapshot-v1",
+  "observed_at_utc": "2026-10-29T13:17:52+00:00",
+  "observed_at_cst": "20261029T211752CST",
+  "source_parent_manifest_sha256": "e1910bcd8192b45114d4b2c59550e29ef85689e4dae5ea5fc3dc0a4d3668c835",
+  "parent_manifest_updated_at_utc": "2026-10-29T12:56:22.231648+00:00",
+  "parent_status": "paused_user_requested_safety_gate",
+  "halt_no_more_model_requests": true,
+  "halt_status": "user_requested_one_way_safety_gate_pending",
+  "pause_reason": "r4_route_safety_gate_not_passed:pending",
+  "model_requests_used_parent_scope": 11799,
+  "parent_task_status_counts": {
+    "route_complete": 56,
+    "outcome_unknown": 10,
+    "failed": 6,
+    "ready": 30,
+    "pending": 27
+  },
+  "active_or_running_parent_task_count": 0,
+  "unresolved_unknown_no_retry_count": 26,
+  "unresolved_unknown_statuses": [
+    "outcome_unknown_no_retry"
+  ],
+  "worker_statuses": [
+    {
+      "worker_id": "worker_00",
+      "status": "paused_at_checkpoint_unknown_tasks_deferred",
+      "model_requests_used": 2337,
+      "listed_process_alive": false,
+      "execution_lock_exists": true,
+      "execution_lock_open": false
+    },
+    {
+      "worker_id": "worker_01",
+      "status": "paused_at_checkpoint",
+      "model_requests_used": 1350,
+      "listed_process_alive": false,
+      "execution_lock_exists": true,
+      "execution_lock_open": false
+    },
+    {
+      "worker_id": "worker_02",
+      "status": "paused_at_checkpoint",
+      "model_requests_used": 2230,
+      "listed_process_alive": false,
+      "execution_lock_exists": true,
+      "execution_lock_open": false
+    },
+    {
+      "worker_id": "worker_03",
+      "status": "paused_at_checkpoint",
+      "model_requests_used": 2238,
+      "listed_process_alive": false,
+      "execution_lock_exists": true,
+      "execution_lock_open": false
+    },
+    {
+      "worker_id": "worker_recovery",
+      "status": "paused_at_checkpoint",
+      "model_requests_used": 1655,
+      "listed_process_alive": false,
+      "execution_lock_exists": true,
+      "execution_lock_open": false
+    },
+    {
+      "worker_id": "worker_recovery_addendum",
+      "status": "completed_with_audited_task_outcomes",
+      "model_requests_used": 767,
+      "listed_process_alive": false,
+      "execution_lock_exists": true,
+      "execution_lock_open": false
+    },
+    {
+      "worker_id": "worker_recovery_429",
+      "status": "paused_at_checkpoint",
+      "model_requests_used": 679,
+      "listed_process_alive": false,
+      "execution_lock_exists": true,
+      "execution_lock_open": false
+    }
+  ],
+  "listed_worker_processes_alive": 0,
+  "open_worker_execution_lock_count": 0,
+  "recovery_audits": [
+    {
+      "source_path": "recovery_audit/launchagent_spawn_gate_recovery_20261029T130614Z.json",
+      "archive_path": "recovery_audit/launchagent_spawn_gate_recovery_20261029T130614Z.json",
+      "source_sha256": "f048c2f0a9d30cdfb46af309df0e4d228c9fc999ec64622390d5fed1c507effd",
+      "archive_sha256": "6a6b8308902cf463dece1e92252cb9db3c21c731799157e15832a45ed2a8b611",
+      "source_bytes": 4847,
+      "archive_bytes": 4828
+    },
+    {
+      "source_path": "recovery_audit/trace_append_integrity_audit_20261029T1205Z.json",
+      "archive_path": "recovery_audit/trace_append_integrity_audit_20261029T1205Z.json",
+      "source_sha256": "8aaa82e90bc0123464cc7bbd9d494e79af3e127b48ccf5b708e760a1dd2e10e2",
+      "archive_sha256": "b9cc7448188efc10dae6262327eb4da5d4437529b839b5ce5dd709a0f09d0e5f",
+      "source_bytes": 4964,
+      "archive_bytes": 4458
+    }
+  ],
+  "interpretation": "Safety-gated in-progress checkpoint. No active or running parent task is recorded; unresolved outcomes are unknown and must not be retried. The route safety gate remains pending. This is not a final experiment result or performance claim."
+}
