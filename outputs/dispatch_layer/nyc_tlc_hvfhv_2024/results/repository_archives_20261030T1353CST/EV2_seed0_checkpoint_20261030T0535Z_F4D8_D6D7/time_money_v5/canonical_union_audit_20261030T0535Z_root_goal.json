@@ -1,0 +1,66 @@
+{
+  "actual_source_hash_mismatches": 0,
+  "all_present_results_match_frozen_inputs": true,
+  "all_source_files_present": true,
+  "all_source_result_hashes_match": true,
+  "canonical_sidecars": [
+    {
+      "component_manifests": [
+        {
+          "manifest_path": "[WORKSPACE_ROOT]/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/time_money_v5_segment_sidecar_20261029T171816Z_delta_from_prior59_to421/manifest.json",
+          "manifest_sha256": "bbe3593a1bc487e9168cd8a6f3f14e2b7c25badf64c35fe484072c1334ea64e2",
+          "rows": 362,
+          "run_economics_path": "[WORKSPACE_ROOT]/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/time_money_v5_segment_sidecar_20261029T171816Z_delta_from_prior59_to421/run_economics_v5.jsonl",
+          "run_economics_sha256": "4cd859075d5c1902089f585057ca235f4654fbe59c68688f641d20c81ed1fb66"
+        },
+        {
+          "manifest_path": "[WORKSPACE_ROOT]/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/time_money_v5_segment_sidecar_20261030T022134Z_delta_from_prior421_to425/manifest.json",
+          "manifest_sha256": "3a019250ca23863850795062d6c620b3ed928fb92afde16b5f59ca337d2206c9",
+          "rows": 63,
+          "run_economics_path": "[WORKSPACE_ROOT]/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/time_money_v5_segment_sidecar_20261030T022134Z_delta_from_prior421_to425/run_economics_v5.jsonl",
+          "run_economics_sha256": "f7343b56021e3a1974cf971b59610103b4b071d37b7d4781ac3a028b2eb4bd58"
+        }
+      ],
+      "manifest_path": "[WORKSPACE_ROOT]/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/time_money_v5_segment_sidecar_20261030T041300Z_canonical_union_425/manifest.json",
+      "manifest_sha256": "92775d76f642c7f50816d774f7aa5c43468ec1d870296f170011b2f0efd89193",
+      "run_rows": 425
+    },
+    {
+      "manifest_path": "[WORKSPACE_ROOT]/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/time_money_v5_segment_sidecar_20261030T0535Z_root_goal_canonical425_to446/manifest.json",
+      "manifest_sha256": "fe48475a6751e9e72c64072cc564b4fa3ce56883fdae2d35d1c6cf4d84dcf38f",
+      "run_economics_sha256": "d95d392d0b36a2c65a9348d85ef4c372ab90960661721b8e738177d2f8aed272",
+      "run_rows": 21
+    }
+  ],
+  "canonical_union_unique_source_results": 446,
+  "created_at_local": "2026-10-30T13:35:08.371350+08:00",
+  "decision_model_version": "route_time_money_segment_v5_signed_fare_audit",
+  "decision_module_sha256": "6b383157aa3287faa0049f13bbf0ff7765e903367a63305fd826e89dc83a0375",
+  "duplicate_source_result_paths": 0,
+  "electricity_price_per_kwh": null,
+  "energy_model_sha256": "a53ac3860e7a9d169b5ceb0f8ca853a0cb73061cc106ba0ec235f1e3c600e893",
+  "errors": [],
+  "expected_method_runs": 630,
+  "fingerprint_audit_path": "[WORKSPACE_ROOT]/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/audit_snapshots/ev2_matrix_fingerprint_audit_20261030T053305Z_root_goal_after_f4d8_before_f4d6d7.json",
+  "fingerprint_audit_sha256": "9782d367c297b8e259a5f881132cc17f6958a65b346a6ce06b56abdd95896fae",
+  "ledger_sidecar_sha_conflicts": 0,
+  "limitations": [
+    "Only 446 of 630 method runs are present.",
+    "The sidecar union validates EV2/v5 accounting rows but not live selector compliance.",
+    "Electricity tariff and complete common candidate pool are absent; weighted rankings remain blocked/null.",
+    "NYC TLC demand is zone-level OD proxy rather than street routing."
+  ],
+  "missing_ledger_sources": 0,
+  "missing_method_runs": 184,
+  "missing_source_files": 0,
+  "new_model_calls": 0,
+  "official_ledger_path": "[WORKSPACE_ROOT]/outputs/dispatch_layer/nyc_tlc_hvfhv_2024/results/dispatch_formal_ev2_segment_ledger_v4_20261027/seed_0/audit_snapshots/ev2_segment_ledger_audit_20261030T053305Z_root_goal_after_f4d8_before_f4d6d7.json",
+  "official_ledger_sha256": "80c712e3e710a5736f581a4ac39795aa3c5fac1fbfdc572f85b47f09f4ad2130",
+  "schema_version": "nyc_time_money_v5_ev2_canonical_union_audit_v1",
+  "shared_route_pool_available": false,
+  "status": "passed_partial_matrix",
+  "sumo_reruns": 0,
+  "unexpected_sidecar_sources": 0,
+  "valid_method_runs": 446,
+  "weighted_rankings_emitted": false
+}

@@ -1,0 +1,46 @@
+{
+  "energy_model_module_sha256": "a53ac3860e7a9d169b5ceb0f8ca853a0cb73061cc106ba0ec235f1e3c600e893",
+  "energy_model_version": "ev_longitudinal_v2",
+  "legs": [
+    {
+      "auxiliary_kwh": 0.09526666666667634,
+      "billable_kwh": 1.0639222169601292,
+      "leg_role": "vehicle_to_pickup",
+      "matches_source_within_1e-8_wh": true,
+      "missing_grade_steps": 4287,
+      "model_version": "ev_longitudinal_v2",
+      "module_recalculated_net_wh": 1063.9222169601292,
+      "profile_id": "generic_reference_ev_v1",
+      "profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee",
+      "propulsion_draw_kwh": 1.8506841472952391,
+      "regenerated_kwh": 0.8820285970017862,
+      "signed_net_kwh": 1.0639222169601292,
+      "source_route_ledger_net_wh": 1063.9222169601292,
+      "trace_fidelity": "observed_sumo_speed_trace_grade_missing",
+      "trace_samples": 4287,
+      "trip_id": "exp_veh_05_ord_0046_deadhead"
+    },
+    {
+      "auxiliary_kwh": 0.08882222222222992,
+      "billable_kwh": 0.5615514191954284,
+      "leg_role": "pickup_to_dropoff",
+      "matches_source_within_1e-8_wh": true,
+      "missing_grade_steps": 3997,
+      "model_version": "ev_longitudinal_v2",
+      "module_recalculated_net_wh": 561.5514191954284,
+      "profile_id": "generic_reference_ev_v1",
+      "profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee",
+      "propulsion_draw_kwh": 0.8945177896043272,
+      "regenerated_kwh": 0.4217885926311287,
+      "signed_net_kwh": 0.5615514191954284,
+      "source_route_ledger_net_wh": 561.5514191954284,
+      "trace_fidelity": "observed_sumo_speed_trace_grade_missing",
+      "trace_samples": 3997,
+      "trip_id": "exp_veh_05_ord_0046_passenger"
+    }
+  ],
+  "limitation": "SUMO simulated motion; missing grade treated as flat; not measured production vehicle energy",
+  "profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee",
+  "route_leg_count": 2,
+  "status": "passed"
+}

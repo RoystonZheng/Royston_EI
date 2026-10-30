@@ -1,0 +1,25 @@
+{
+  "model_version": "route_time_money_segment_v5_signed_fare_audit",
+  "status": "blocked_missing_same_snapshot_complete_candidate_pool_and_passenger_fare",
+  "profiles": {
+    "time_priority_0_6_0_4": {
+      "time_weight": 0.6,
+      "money_weight": 0.4,
+      "status": "blocked"
+    },
+    "money_priority_0_4_0_6": {
+      "time_weight": 0.4,
+      "money_weight": 0.6,
+      "status": "blocked"
+    }
+  },
+  "candidate_pool_status": "blocked_no_complete_same_snapshot_cross_method_candidate_pool",
+  "currency": "EUR",
+  "electricity_tariff": null,
+  "passenger_fare_schedule": null,
+  "method_costs_path": "data/real_map_dispatch/porto_hybrid_v1/derived/experiments/r1_dynamic_sumo_v1/formal_v5_energy_v2/segment_economics_v5_sidecar_20261027T2120CST/method_costs_v5.jsonl",
+  "method_costs_sha256": "55a5db89bb4005432591efd16e7d5d4368f40e3655adae6def169dfa7621e5c9",
+  "weighted_rankings_emitted": false,
+  "runtime_selector_switched": false,
+  "runtime_selector_scope": "offline v5 accounting migration only; frozen R1 FASTEST and LOWEST_ENERGY source runs remain unchanged"
+}

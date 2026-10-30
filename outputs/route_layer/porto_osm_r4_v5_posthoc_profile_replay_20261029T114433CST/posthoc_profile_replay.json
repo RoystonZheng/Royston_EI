@@ -1,0 +1,48 @@
+{
+  "actual_route_sha256": "95c2aa5bc0ebbeb30205145fb8cf689f6a38f013b61a23b44d460df4d051d013",
+  "candidate_id": "signed_net_ev2",
+  "ev2_audit_sha256": "556f5ce3ee8497956c930abf1123940595e456a818a013e3e6dd0aacc9d6f670",
+  "ev2_status": "passed",
+  "execution_audit": {
+    "candidate_id": "signed_net_ev2",
+    "execution_legs": {
+      "pickup_to_dropoff": {
+        "executed_matches_selected_candidate": true,
+        "executed_path_sha256": "124695fc6f9db16470c7a545956ab13c322a402f5e107b3c9916e0ce79ec2393",
+        "oneway_failure": null,
+        "oneway_guard_status": "passed",
+        "selected_path_sha256": "124695fc6f9db16470c7a545956ab13c322a402f5e107b3c9916e0ce79ec2393",
+        "status": "passed"
+      },
+      "vehicle_to_pickup": {
+        "executed_matches_selected_candidate": true,
+        "executed_path_sha256": "5c0b24e5faa66610c1a6c58c37bb9dc574700d874f411c56e2c685c9347f31e4",
+        "oneway_failure": null,
+        "oneway_guard_status": "passed",
+        "selected_path_sha256": "5c0b24e5faa66610c1a6c58c37bb9dc574700d874f411c56e2c685c9347f31e4",
+        "status": "passed"
+      }
+    },
+    "model_calls": 0,
+    "orders_completed": 1,
+    "profile_id": "time_priority_0_6_0_4",
+    "route_legs_actual_sha256": "95c2aa5bc0ebbeb30205145fb8cf689f6a38f013b61a23b44d460df4d051d013",
+    "status": "passed",
+    "summary_sha256": "e92adad3f4e4104704b75b1f31ea000f95cb96bc0c6b7c681bcbd4951b27a18d",
+    "terminal_order_count": 1
+  },
+  "limitation": "posthoc deterministic SUMO replay of the preserved model response candidate pool; no model request repeated",
+  "model_calls": 0,
+  "path_sha256_by_leg": {
+    "pickup_to_dropoff": "124695fc6f9db16470c7a545956ab13c322a402f5e107b3c9916e0ce79ec2393",
+    "vehicle_to_pickup": "5c0b24e5faa66610c1a6c58c37bb9dc574700d874f411c56e2c685c9347f31e4"
+  },
+  "profile_id": "time_priority_0_6_0_4",
+  "replay_runner_sha256": "db82670714f4f2eef4ca97a6b46e880b5fb0a688ce7640cbf9c32dff751e4c9d",
+  "simulation_summary_sha256": "e92adad3f4e4104704b75b1f31ea000f95cb96bc0c6b7c681bcbd4951b27a18d",
+  "source_candidate_pool_sha256": "c7fb90924c296b9a92f14100e135918e360b111863ba078a074c68f8c1b706a1",
+  "source_model_response_sha256": "aea0c670e192192e2c013e23faa40dce3765d24dbeca60096fb285b3c6c7d39a",
+  "source_pilot_manifest_sha256": "6e19dda0ef47642f08a9e64fb8f0b156553f0726510a6ec905f25fa33677d54b",
+  "source_pilot_run_id": "porto_osm_r4_v5_dual_profile_preflight_20261029T114433CST",
+  "status": "passed"
+}

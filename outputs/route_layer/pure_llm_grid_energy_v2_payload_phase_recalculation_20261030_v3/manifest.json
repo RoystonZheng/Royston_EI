@@ -1,0 +1,285 @@
+{
+  "billing_rule": "max(segment_signed_net_kwh, 0) independently for empty and passenger phases",
+  "coverage": {
+    "exact_edge_moves": 7604,
+    "not_estimable": 71,
+    "phase_estimable": 79,
+    "pickup_reached": 68,
+    "pickup_truth_missing": 0,
+    "prefix_pickup_reached": 2,
+    "proxy_edge_moves": 250,
+    "records": 150,
+    "reverse_edge_inferred_moves": 630
+  },
+  "created_at_utc": "2026-10-30T05:11:32.234427+00:00",
+  "energy_model": {
+    "equations": {
+      "negative_wheel_power": "min(-wheel_power * regenerative_efficiency, regenerative_power_cap)",
+      "net_battery_energy": "propulsion_draw - regenerated_energy + auxiliary_energy",
+      "positive_wheel_power": "wheel_power / propulsion_efficiency",
+      "wheel_force": "(m + rotating_mass)*acceleration + 0.5*rho*Cd*A*v^2 + Crr*m*g*cos(slope) + m*g*sin(slope)"
+    },
+    "model_version": "ev_longitudinal_v2",
+    "profile": {
+      "air_density_kg_m3": 1.225,
+      "auxiliary_power_w": 800.0,
+      "curb_mass_kg": 1900.0,
+      "drag_coefficient": 0.26,
+      "frontal_area_m2": 2.35,
+      "gravity_mps2": 9.80665,
+      "max_acceleration_mps2": 1.2,
+      "max_deceleration_mps2": 2.0,
+      "model_version": "ev_longitudinal_v2",
+      "passenger_load_kg": 75.0,
+      "profile_id": "generic_reference_ev_v1",
+      "propulsion_efficiency": 0.9,
+      "regenerative_efficiency": 0.65,
+      "regenerative_power_cap_w": 50000.0,
+      "rolling_resistance_coefficient": 0.009,
+      "rotating_mass_kg": 50.0
+    },
+    "profile_id": "generic_reference_ev_v1",
+    "profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee"
+  },
+  "energy_model_module_sha256": "a53ac3860e7a9d169b5ceb0f8ca853a0cb73061cc106ba0ec235f1e3c600e893",
+  "limitations": [
+    "All proposal and legal-prefix energy values are offline EV v2 simulations, not measured vehicle telemetry.",
+    "Frozen task pickup is the phase boundary; model-declared pickup is retained for discrepancy audit only.",
+    "Illegal moves may use reverse-edge or median-map proxies; these are hypothetical values, never executable route costs.",
+    "Missing pickup truth or unrecoverable route leaves phase energy null, not zero.",
+    "This sidecar does not alter historic route choices or claim the original experiment selected routes using these energy values."
+  ],
+  "model_calls": 0,
+  "payload_phases": {
+    "empty_kg": 0.0,
+    "passenger_kg": 75.0
+  },
+  "prior_audit_sha256": "eb47446c7f69f7f04a96179586083e98b4c40127eca6857858a6466a56744abe",
+  "prior_fixed_load_audit": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/pure_llm_grid_energy_v2_recalculation_20261029T0630UTC/pure_llm_experiment_v7/failure_energy_audit_v2.json",
+  "record_count": 150,
+  "records_path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/pure_llm_grid_energy_v2_payload_phase_recalculation_20261030_v3/phase_energy_records.json",
+  "records_sha256": "6981a606d01cfbcb1bdbcf8544857d78e9bb0176321a66603f453a67e0670f53",
+  "route_planner_reruns": 0,
+  "schema_version": "pure_llm_grid_ev_v2_payload_phase_recalculation_v1",
+  "source_experiment": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/pure_llm_experiment_v7",
+  "source_files": [
+    {
+      "path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/pure_llm_experiment_v7/manifest.json",
+      "sha256": "00dcd1b6c046cd9d284e0b8e4a999d1a56a1e783e7c772a7236cbe9eca2de6fb"
+    },
+    {
+      "path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/pure_llm_grid_energy_v2_recalculation_20261029T0630UTC/pure_llm_experiment_v7/failure_energy_audit_v2.json",
+      "sha256": "eb47446c7f69f7f04a96179586083e98b4c40127eca6857858a6466a56744abe"
+    },
+    {
+      "path": "/Users/didi/Documents/personalcodexfile/第二次课/route_experiment/energy_model.py",
+      "sha256": "a53ac3860e7a9d169b5ceb0f8ca853a0cb73061cc106ba0ec235f1e3c600e893"
+    },
+    {
+      "path": "/Users/didi/Documents/personalcodexfile/第二次课/scripts/recalculate_pure_llm_grid_payload_phase_energy_v2.py",
+      "sha256": "1d1c06e977608be27b5d474051fffcefcfb8d5c98f305ead3305d791a553c3c3"
+    },
+    {
+      "path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/pure_llm_experiment_v7/seeds/seed_0/map_100x100_seed_0.json",
+      "sha256": "bdf7da792ecf78ae393f5441055d592f3585674bea48d4f12d2d2d1ce632adbe"
+    },
+    {
+      "path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/pure_llm_experiment_v7/seeds/seed_0/order_tasks_seed_0.json",
+      "sha256": "867d863c961406fd89a620177253cf50493b0883988069a033d147d6496e7999"
+    },
+    {
+      "path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/pure_llm_experiment_v7/seeds/seed_0/formal_scenarios_seed_0.json",
+      "sha256": "22f72239df5985763ee574af638718956b8dfa6fa4cb5c3ce9a70c7826887cba"
+    },
+    {
+      "path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/pure_llm_experiment_v7/seeds/seed_0/pure_llm_order_routes_costs_seed_0.json",
+      "sha256": "9cc0b6df2301e7ef62987db9e3f9936f7568a64a74a0a02d8f2b7094688e5f43"
+    },
+    {
+      "path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/pure_llm_experiment_v7/seeds/seed_0/pure_llm_formal_routes_costs_seed_0.json",
+      "sha256": "a2c312d8aa8fff830dd5860d23507187a5a31648d956f6eb188ec6c0bb1922b5"
+    },
+    {
+      "path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/pure_llm_experiment_v7/seeds/seed_1/map_100x100_seed_1.json",
+      "sha256": "f53f42036df9ccd30bdad348d7141afc7c6311ca7ae981480bb1647d364e090d"
+    },
+    {
+      "path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/pure_llm_experiment_v7/seeds/seed_1/order_tasks_seed_1.json",
+      "sha256": "190fe1658cbfcb5428bb5295426890a63f69ab63e14efd980f2e4353f7e72b65"
+    },
+    {
+      "path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/pure_llm_experiment_v7/seeds/seed_1/formal_scenarios_seed_1.json",
+      "sha256": "11a5924beade9b5e903c1a463761d2887e849e53f6c83eb7dfbdbf9f98893565"
+    },
+    {
+      "path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/pure_llm_experiment_v7/seeds/seed_1/pure_llm_order_routes_costs_seed_1.json",
+      "sha256": "1f0f6f9db76bab7b55edfd7269a78847d467a5e5b994e3164fc7010285a97598"
+    },
+    {
+      "path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/pure_llm_experiment_v7/seeds/seed_1/pure_llm_formal_routes_costs_seed_1.json",
+      "sha256": "d0520821b4cae229cea91fbef9dfcae39c1fb4bfc3afc069919f5b9bc4602317"
+    },
+    {
+      "path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/pure_llm_experiment_v7/seeds/seed_2/map_100x100_seed_2.json",
+      "sha256": "fc9222c6610de7d87f9f816794432807a8d0521691343855e60d24805937ebbd"
+    },
+    {
+      "path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/pure_llm_experiment_v7/seeds/seed_2/order_tasks_seed_2.json",
+      "sha256": "d6c97b52062bf24d4030b4e5cdbe2578389a43761ce4ce12dd332a2194ff4390"
+    },
+    {
+      "path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/pure_llm_experiment_v7/seeds/seed_2/formal_scenarios_seed_2.json",
+      "sha256": "562f2a76ef4e26164736e74ce6cc400985791429c26f5a746bc295db535f9f92"
+    },
+    {
+      "path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/pure_llm_experiment_v7/seeds/seed_2/pure_llm_order_routes_costs_seed_2.json",
+      "sha256": "442181ccd6570b49feeda162baf81541ef7fe25b92987361d405a84ac7076c5e"
+    },
+    {
+      "path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/pure_llm_experiment_v7/seeds/seed_2/pure_llm_formal_routes_costs_seed_2.json",
+      "sha256": "5b57ac486140379ea7e410aa16f69dc4d0d995cc9a200e197337303ea4f6b835"
+    },
+    {
+      "path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/pure_llm_experiment_v7/seeds/seed_3/map_100x100_seed_3.json",
+      "sha256": "8230220e109467546e652245ff47429183bfb32f8a7e2c1db15d9108ac4f0152"
+    },
+    {
+      "path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/pure_llm_experiment_v7/seeds/seed_3/order_tasks_seed_3.json",
+      "sha256": "098a937b03fb8680e2a4e6a092b103f60b4638426b557673fbc6c484b7156cf1"
+    },
+    {
+      "path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/pure_llm_experiment_v7/seeds/seed_3/formal_scenarios_seed_3.json",
+      "sha256": "238c6450f423382fe3d596609e30d625260aaf2e73b762af5590c233c6adf33c"
+    },
+    {
+      "path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/pure_llm_experiment_v7/seeds/seed_3/pure_llm_order_routes_costs_seed_3.json",
+      "sha256": "be6c72e8450627ea192da9c6bee3e2027f88c83d829783a3f6ef397c3c30128a"
+    },
+    {
+      "path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/pure_llm_experiment_v7/seeds/seed_3/pure_llm_formal_routes_costs_seed_3.json",
+      "sha256": "b05883b9aaa624cfb33cffca4572f8341e577fb89829faec2c993f4cc11a4c56"
+    },
+    {
+      "path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/pure_llm_experiment_v7/seeds/seed_4/map_100x100_seed_4.json",
+      "sha256": "427abb25ff91080517daeec45bc3319d2e162f3752eda2f5f9022928b751a27c"
+    },
+    {
+      "path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/pure_llm_experiment_v7/seeds/seed_4/order_tasks_seed_4.json",
+      "sha256": "3a39cca00c5c5acbf96e43585203d61d34396116c04cf40efa6aa15d6af05b9b"
+    },
+    {
+      "path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/pure_llm_experiment_v7/seeds/seed_4/formal_scenarios_seed_4.json",
+      "sha256": "97250506f38b140b4dd5b1d5e4a40a4f8d29910c7589c113c6e6780e7009a78e"
+    },
+    {
+      "path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/pure_llm_experiment_v7/seeds/seed_4/pure_llm_order_routes_costs_seed_4.json",
+      "sha256": "340cd6aee57269878e85b44c171dfc1cd90616f8c19bf593c9a68ba7b0e7bb21"
+    },
+    {
+      "path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/pure_llm_experiment_v7/seeds/seed_4/pure_llm_formal_routes_costs_seed_4.json",
+      "sha256": "4f5f174120503736fa18314d1d3ab6cd2afb434123ad65fe8067f86a9da1700e"
+    },
+    {
+      "path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/pure_llm_experiment_v7/seeds/seed_5/map_100x100_seed_5.json",
+      "sha256": "12ff11b17419d274df45c6ae7dd0808987dba5d633a7ae781298455c0c3e93d6"
+    },
+    {
+      "path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/pure_llm_experiment_v7/seeds/seed_5/order_tasks_seed_5.json",
+      "sha256": "11a4ee146c20ff80f02b680172dcf9e8c9ec8d96d945db6631c46a7490f72542"
+    },
+    {
+      "path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/pure_llm_experiment_v7/seeds/seed_5/formal_scenarios_seed_5.json",
+      "sha256": "8a21876db1ff5e8dfc3071e84426d58dd73f53a9e454db9dee62254ab1df8c3a"
+    },
+    {
+      "path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/pure_llm_experiment_v7/seeds/seed_5/pure_llm_order_routes_costs_seed_5.json",
+      "sha256": "e4a94b69ef8d987c0a09978fa7f7aa0fcb68b60f07e5d3d143810ac88a46a484"
+    },
+    {
+      "path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/pure_llm_experiment_v7/seeds/seed_5/pure_llm_formal_routes_costs_seed_5.json",
+      "sha256": "bb0695c35b2c66831ddb1c7772b7b233e620f5b1b60cbe261509447fc6610525"
+    },
+    {
+      "path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/pure_llm_experiment_v7/seeds/seed_6/map_100x100_seed_6.json",
+      "sha256": "d98f602f88f060a638b1cc8c218defda59254dd73bfecf06e0e1ee079b28779b"
+    },
+    {
+      "path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/pure_llm_experiment_v7/seeds/seed_6/order_tasks_seed_6.json",
+      "sha256": "4209b5bea5856d7c8fed1068e3ca15622112d34f0077f6ad0678be3a938c3e43"
+    },
+    {
+      "path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/pure_llm_experiment_v7/seeds/seed_6/formal_scenarios_seed_6.json",
+      "sha256": "6f122dc25c579fb6c8b7ede8ef7e529107827e53948b897167ad8464b7a9ecea"
+    },
+    {
+      "path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/pure_llm_experiment_v7/seeds/seed_6/pure_llm_order_routes_costs_seed_6.json",
+      "sha256": "816d41a394aa85eae744db726613e6edfa6bb85b7a63d5a23f033d4ab6ad5a56"
+    },
+    {
+      "path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/pure_llm_experiment_v7/seeds/seed_6/pure_llm_formal_routes_costs_seed_6.json",
+      "sha256": "c8cde7cdd42d0765c08d9d66db548c477c3e5bf016d12e66cbd41e20a16fb30d"
+    },
+    {
+      "path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/pure_llm_experiment_v7/seeds/seed_7/map_100x100_seed_7.json",
+      "sha256": "6a78bfe44285f5bdef00da04462909fb52dc9f4464124bcad91d617265e5bd19"
+    },
+    {
+      "path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/pure_llm_experiment_v7/seeds/seed_7/order_tasks_seed_7.json",
+      "sha256": "bade834ed5a7e6cccd751c3862826cc5c33890f9e3d088b82475bd7280871158"
+    },
+    {
+      "path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/pure_llm_experiment_v7/seeds/seed_7/formal_scenarios_seed_7.json",
+      "sha256": "7dbdf504a69f4d02dd461e4223d9f2b6abcc2e3f3d2fdbd7d8afcf2ca547fcb0"
+    },
+    {
+      "path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/pure_llm_experiment_v7/seeds/seed_7/pure_llm_order_routes_costs_seed_7.json",
+      "sha256": "87642bd76bd692ae0c270f8f95f527f84e6c319dddd4443b3ddf8aa82e7038a3"
+    },
+    {
+      "path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/pure_llm_experiment_v7/seeds/seed_7/pure_llm_formal_routes_costs_seed_7.json",
+      "sha256": "23183f9f9103b7c1ce6b259032d2cdd868d8731e871ddbbd4893dc69a78380c7"
+    },
+    {
+      "path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/pure_llm_experiment_v7/seeds/seed_8/map_100x100_seed_8.json",
+      "sha256": "73f75f0440a9c5321f36769d6f0977b6e55536e18acc4f6ec53d304c492a477d"
+    },
+    {
+      "path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/pure_llm_experiment_v7/seeds/seed_8/order_tasks_seed_8.json",
+      "sha256": "e871e414a4da54a6e430eed1d6140129664a9556b035170e85b94b3a5245c5b7"
+    },
+    {
+      "path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/pure_llm_experiment_v7/seeds/seed_8/formal_scenarios_seed_8.json",
+      "sha256": "cd1632c98945b83178668abcd29e5ef417b05dd480518f3e71e2e5bdf6b7062d"
+    },
+    {
+      "path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/pure_llm_experiment_v7/seeds/seed_8/pure_llm_order_routes_costs_seed_8.json",
+      "sha256": "c1cd8852ffc69d5806cb0f03807ffe6ecb832e849d8d6441b142c8b30e679711"
+    },
+    {
+      "path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/pure_llm_experiment_v7/seeds/seed_8/pure_llm_formal_routes_costs_seed_8.json",
+      "sha256": "2d9945a5de6f8937c116883229af3e1d4a2c0303daaacf0c5d825d44a7f34ddd"
+    },
+    {
+      "path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/pure_llm_experiment_v7/seeds/seed_9/map_100x100_seed_9.json",
+      "sha256": "6a9620be26aebff8383939a609e6b0224dcaf0eaaea0121a2f09e7da5fd899ee"
+    },
+    {
+      "path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/pure_llm_experiment_v7/seeds/seed_9/order_tasks_seed_9.json",
+      "sha256": "ff7e0f7c542e66eb140f9f9a638fc432b371234e56aca3633139287942bad339"
+    },
+    {
+      "path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/pure_llm_experiment_v7/seeds/seed_9/formal_scenarios_seed_9.json",
+      "sha256": "304fa3a3e5995d10bdd40fa56e68c17ccb7d5fc727212b4855bc9aee355ad340"
+    },
+    {
+      "path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/pure_llm_experiment_v7/seeds/seed_9/pure_llm_order_routes_costs_seed_9.json",
+      "sha256": "a3665e72177cee96005a04f76e48f6c33edc5335edc31ae4d8e4a2b6808c21b4"
+    },
+    {
+      "path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/pure_llm_experiment_v7/seeds/seed_9/pure_llm_formal_routes_costs_seed_9.json",
+      "sha256": "a7ba7422e6af35e114751523248ecb30e0d736aaf3a46e3b96f37660d7b12682"
+    }
+  ],
+  "source_manifest_sha256": "00dcd1b6c046cd9d284e0b8e4a999d1a56a1e783e7c772a7236cbe9eca2de6fb",
+  "status": "completed_offline_recalculation"
+}

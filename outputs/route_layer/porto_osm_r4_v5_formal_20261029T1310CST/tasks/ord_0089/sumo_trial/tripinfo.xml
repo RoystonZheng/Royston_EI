@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- generated on 2026-10-29T14:41:34.008931+08:00 by Eclipse SUMO sumo 1.28.0
+<sumoConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/sumoConfiguration.xsd">
+
+    <input>
+        <net-file value="/Users/didi/Documents/personalcodexfile/第二次课/data/real_map_dispatch/porto_hybrid_v1/derived/sumo/v1.28.0/porto.net.xml"/>
+        <route-files value="/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/porto_osm_r4_v5_formal_20261029T1310CST/tasks/ord_0089/sumo_trial/ev_type.rou.xml"/>
+    </input>
+
+    <output>
+        <tripinfo-output value="/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/porto_osm_r4_v5_formal_20261029T1310CST/tasks/ord_0089/sumo_trial/tripinfo.xml"/>
+        <tripinfo-output.write-unfinished value="true"/>
+    </output>
+
+    <time>
+        <step-length value="0.1"/>
+    </time>
+
+    <processing>
+        <time-to-teleport value="-1"/>
+    </processing>
+
+    <report>
+        <duration-log.disable value="true"/>
+        <no-step-log value="true"/>
+    </report>
+
+    <traci_server>
+        <remote-port value="53052"/>
+    </traci_server>
+
+    <random_number>
+        <seed value="0"/>
+    </random_number>
+
+    <gui_only>
+        <start value="true"/>
+    </gui_only>
+
+</sumoConfiguration>
+-->
+
+<tripinfos xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/tripinfo_file.xsd">
+    <tripinfo id="bg_s0_0001" depart="74.50" departLane="715176795#2_0" departPos="12.94" departSpeed="14.56" departDelay="0.02" arrival="128.80" arrivalLane="1062979388_1" arrivalPos="33.22" arrivalSpeed="13.91" duration="54.30" routeLength="687.54" waitingTime="0.00" waitingCount="0" stopTime="0.00" timeLoss="7.43" rerouteNo="0" devices="tripinfo_bg_s0_0001" vType="DEFAULT_VEHTYPE" speedFactor="1.05" vaporized=""/>
+    <tripinfo id="bg_s0_0000" depart="3.30" departLane="112448957#1_0" departPos="41.19" departSpeed="3.10" departDelay="0.09" arrival="139.20" arrivalLane="216969809#5_1" arrivalPos="0.00" arrivalSpeed="17.27" duration="135.90" routeLength="1395.43" waitingTime="0.00" waitingCount="0" stopTime="0.00" timeLoss="21.31" rerouteNo="0" devices="tripinfo_bg_s0_0000" vType="DEFAULT_VEHTYPE" speedFactor="1.12" vaporized=""/>
+    <tripinfo id="exp_veh_09_ord_0089_deadhead" depart="19.20" departLane="759298059#0_0" departPos="0.00" departSpeed="0.00" departDelay="0.07" arrival="142.30" arrivalLane="39668434#0_0" arrivalPos="24.87" arrivalSpeed="0.66" duration="123.10" routeLength="1303.11" waitingTime="0.00" waitingCount="0" stopTime="0.00" timeLoss="42.61" rerouteNo="0" devices="tripinfo_exp_veh_09_ord_0089_deadhead" vType="GENERIC_REFERENCE_EV_V1" speedFactor="1.20" vaporized=""/>
+    <tripinfo id="exp_veh_09_ord_0089_passenger" depart="142.50" departLane="39668434#0_0" departPos="24.87" departSpeed="0.00" departDelay="0.07" arrival="209.40" arrivalLane="1062979388_0" arrivalPos="33.22" arrivalSpeed="0.70" duration="66.90" routeLength="482.94" waitingTime="6.40" waitingCount="1" stopTime="0.00" timeLoss="34.67" rerouteNo="0" devices="tripinfo_exp_veh_09_ord_0089_passenger" vType="GENERIC_REFERENCE_EV_V1" speedFactor="0.94" vaporized=""/>
+    <tripinfo id="bg_s0_0002" depart="103.30" departLane="759298059#0_0" departPos="0.00" departSpeed="14.31" departDelay="0.01" arrival="-1.00" arrivalLane="" arrivalPos="-1.00" arrivalSpeed="-1.00" duration="106.20" routeLength="1469.12" waitingTime="0.30" waitingCount="1" stopTime="0.00" timeLoss="12.90" rerouteNo="0" devices="tripinfo_bg_s0_0002" vType="DEFAULT_VEHTYPE" speedFactor="1.03" vaporized="end"/>
+    <tripinfo id="bg_s0_0003" depart="152.10" departLane="112448957#1_0" departPos="41.19" departSpeed="2.82" departDelay="0.04" arrival="-1.00" arrivalLane="" arrivalPos="-1.00" arrivalSpeed="-1.00" duration="57.40" routeLength="415.98" waitingTime="0.00" waitingCount="0" stopTime="0.00" timeLoss="2.51" rerouteNo="0" devices="tripinfo_bg_s0_0003" vType="DEFAULT_VEHTYPE" speedFactor="1.02" vaporized="end"/>
+    <tripinfo id="bg_s0_0004" depart="193.00" departLane="112448957#1_0" departPos="41.19" departSpeed="2.46" departDelay="0.09" arrival="-1.00" arrivalLane="" arrivalPos="-1.00" arrivalSpeed="-1.00" duration="16.50" routeLength="39.30" waitingTime="0.00" waitingCount="0" stopTime="0.00" timeLoss="0.39" rerouteNo="0" devices="tripinfo_bg_s0_0004" vType="DEFAULT_VEHTYPE" speedFactor="0.88" vaporized="end"/>
+</tripinfos>

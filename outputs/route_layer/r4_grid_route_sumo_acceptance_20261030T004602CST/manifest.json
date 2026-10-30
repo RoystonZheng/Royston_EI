@@ -1,0 +1,87 @@
+{
+  "schema_version": "r4_grid_route_sumo_acceptance_v1",
+  "status": "passed",
+  "created_at_utc": "2026-10-29T16:46:11.800855+00:00",
+  "scope": "zero-model-call SUMO replay of one archived, completed 100x100 grid R4 pilot route; not a new model experiment",
+  "map_id": "grid-100x100-seed-0",
+  "pilot_task_id": "task-0000-0009",
+  "pilot_status": "completed_route",
+  "model_calls_during_acceptance": 0,
+  "map": {
+    "path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/traditional_experiment_v1/seeds/seed_0/map_100x100_seed_0.json",
+    "sha256": "bdf7da792ecf78ae393f5441055d592f3585674bea48d4f12d2d2d1ce632adbe",
+    "node_count": 10000,
+    "directed_edge_count": 36602,
+    "matched_preflight_sha256": "bdf7da792ecf78ae393f5441055d592f3585674bea48d4f12d2d2d1ce632adbe"
+  },
+  "preflight": {
+    "path": "/Users/didi/Documents/personalcodexfile/第二次课/outputs/route_layer/r4_codex_batch_preflights_20261024_v1/tasks/seed_0/task-0000-0009/preflight.json",
+    "sha256": "c977a210d9c5e94f2d90e42d92a3dd458b950199566c3ee5d0fc3306c0c07b28"
+  },
+  "pilot_audit": {
+    "path": "/Users/didi/Library/Application Support/CodexR4Formal20261027/outputs/route_layer/r4_codex_formal_task9_pilot_20261027_v3/final_audit.json",
+    "sha256": "b7a510fbf9b848a3d6b34174256fa1741402376dc988bf87fe4d8113f7e8362c",
+    "route_edge_count": 113,
+    "route_node_count": 114,
+    "route_edge_sequence_sha256": "98b052aeada2149e9324fe3585b0a6cc82c6582f7701c66ce65c856a668e15f3",
+    "start_node": "node_69_41",
+    "pickup_node": "node_25_66",
+    "dropoff_node": "node_42_43"
+  },
+  "directed_validation": {
+    "status": "passed",
+    "edge_errors": [],
+    "one_way_edges_on_route": 11,
+    "one_way_violations": 0,
+    "reverse_probe": {
+      "edge_id": "edge_node_1_8_node_0_8",
+      "from_node": "node_1_8",
+      "to_node": "node_0_8",
+      "reverse_edge_exists": false,
+      "acceptance_test": "tests/test_r4_codex_pilot_acceptance.py::R4CodexPilotAcceptanceTests.test_formal_online_step_path_rejects_oneway_reverse_backtracks_once_and_reroutes"
+    }
+  },
+  "sumo": {
+    "sumo_binary": "/Users/didi/Library/Application Support/Porto SUMO/1.28.0/Versions/1.28.0/EclipseSUMO/bin/sumo",
+    "sumo_version": "Eclipse SUMO sumo 1.28.0",
+    "netconvert_binary": "/Users/didi/Library/Application Support/Porto SUMO/1.28.0/Versions/1.28.0/EclipseSUMO/bin/netconvert",
+    "net_sha256": "a4a9c55353782d860142228910801114400ea12a2f7f626fe82ca87665e7cb71",
+    "route_file_sha256": "8822d673b35172ec70f59619c79440c9d310084f2d12e4b2614396bd43ad285f",
+    "tripinfo_sha256": "a22459c377326ea565f37b4ec7d85f7c23a443eef2c31bd1abfcbc39f8bed715",
+    "vehroute_sha256": "d0132527e6586a5eea3a5204ce6dd9e6b6b44f3c4b1da6cb9a7f2b226bc23a39",
+    "vehicle_completed": true,
+    "route_edge_sequence_matched": true,
+    "simulated_route_length_m": 11096.57,
+    "duration_s": 1084.5,
+    "waiting_time_s": 0.0,
+    "pickup_stop_count": 1,
+    "dropoff_stop_count": 1,
+    "pickup_stop_end_position_m": 84.6,
+    "dropoff_stop_end_position_m": 84.6
+  },
+  "source_sha256": {
+    "/Users/didi/Documents/personalcodexfile/第二次课/scripts/run_r4_grid_route_sumo_acceptance.py": "09d595dc3cc8893ce96c1db5719d1c00f436e5f5d07c64f5e0ddbc2829b979b3",
+    "/Users/didi/Documents/personalcodexfile/第二次课/route_experiment/r4_stepwise.py": "c839424cabce4181439a560690d1153f793a9781005b02f74a8d9134436e443d",
+    "/Users/didi/Documents/personalcodexfile/第二次课/scripts/run_r4_codex_pilot_continuation.py": "6c14c0eb6d56c747346367c0df076f4a809079cc6846d1129030894e80a71684",
+    "/Users/didi/Documents/personalcodexfile/第二次课/tests/test_r4_codex_pilot_acceptance.py": "6d9f39cd0f6bf8e124a4a82fb5cbfcba37668085909a1514b93218ee8e088766"
+  },
+  "artifacts": {
+    "grid.nod.xml": "b1640701eed4057c46143934874323a931889ab9a9a8c96028489a44b2d83901",
+    "grid.edg.xml": "09409b5a4bdca6935d9078dd01dc0dccfe6becc1da6aa54988b878090b53e59f",
+    "grid.net.xml": "a4a9c55353782d860142228910801114400ea12a2f7f626fe82ca87665e7cb71",
+    "pilot_route.rou.xml": "8822d673b35172ec70f59619c79440c9d310084f2d12e4b2614396bd43ad285f",
+    "netconvert.log": "5da020b18033f224b23adb3d55b40d2024958c4fad6649bfbe9257f83e15157b",
+    "sumo.log": "a5b091073dc45649ab1216ad4dc4fcc75a768573dcb4ccfe51223aafc38c9bf6",
+    "tripinfo.xml": "a22459c377326ea565f37b4ec7d85f7c23a443eef2c31bd1abfcbc39f8bed715",
+    "vehroute.xml": "d0132527e6586a5eea3a5204ce6dd9e6b6b44f3c4b1da6cb9a7f2b226bc23a39",
+    "sumo_summary.xml": "225ec59e2c9b7caff0b395370a6fb4d85bf3626685847a2a9ce0f41c66ad57d0",
+    "frozen_map.json": "bdf7da792ecf78ae393f5441055d592f3585674bea48d4f12d2d2d1ce632adbe",
+    "pilot_final_audit.json": "b7a510fbf9b848a3d6b34174256fa1741402376dc988bf87fe4d8113f7e8362c",
+    "pilot_preflight.json": "c977a210d9c5e94f2d90e42d92a3dd458b950199566c3ee5d0fc3306c0c07b28"
+  },
+  "limitations": [
+    "SUMO replay validates an archived completed pilot route against a network projected from the same synthetic directed map.",
+    "The model's online step path is covered by the zero-call mocked-client acceptance test; no new model request was issued.",
+    "SUMO replay is a gate check, not an additional route-performance sample."
+  ]
+}

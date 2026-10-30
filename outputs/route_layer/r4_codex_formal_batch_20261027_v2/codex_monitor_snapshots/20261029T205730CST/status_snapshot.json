@@ -1,0 +1,84 @@
+{
+  "schema_version": "codex-safe-monitor-snapshot-v1",
+  "observed_at_utc": "2026-10-29T12:57:30+00:00",
+  "observed_at_cst": "20261029T205730CST",
+  "source_parent_manifest_sha256": "e1910bcd8192b45114d4b2c59550e29ef85689e4dae5ea5fc3dc0a4d3668c835",
+  "parent_status": "paused_user_requested_safety_gate",
+  "halt_no_more_model_requests": true,
+  "halt_status": "user_requested_one_way_safety_gate_pending",
+  "model_requests_used_parent_scope": 11799,
+  "parent_manifest_updated_at_utc": "2026-10-29T12:56:22.231648+00:00",
+  "parent_task_status_counts": {
+    "route_complete": 56,
+    "outcome_unknown": 10,
+    "failed": 6,
+    "ready": 30,
+    "pending": 27
+  },
+  "active_or_running_parent_task_count": 0,
+  "unresolved_unknown_no_retry_count": 26,
+  "unresolved_unknown_statuses": [
+    "outcome_unknown_no_retry"
+  ],
+  "worker_statuses": [
+    {
+      "worker_id": "worker_00",
+      "status": "paused_at_checkpoint_unknown_tasks_deferred",
+      "model_requests_used": 2337,
+      "listed_process_alive": false,
+      "execution_lock_exists": true,
+      "execution_lock_open": false
+    },
+    {
+      "worker_id": "worker_01",
+      "status": "paused_at_checkpoint",
+      "model_requests_used": 1350,
+      "listed_process_alive": false,
+      "execution_lock_exists": true,
+      "execution_lock_open": false
+    },
+    {
+      "worker_id": "worker_02",
+      "status": "paused_at_checkpoint",
+      "model_requests_used": 2230,
+      "listed_process_alive": false,
+      "execution_lock_exists": true,
+      "execution_lock_open": false
+    },
+    {
+      "worker_id": "worker_03",
+      "status": "paused_at_checkpoint",
+      "model_requests_used": 2238,
+      "listed_process_alive": false,
+      "execution_lock_exists": true,
+      "execution_lock_open": false
+    },
+    {
+      "worker_id": "worker_recovery",
+      "status": "paused_at_checkpoint",
+      "model_requests_used": 1655,
+      "listed_process_alive": false,
+      "execution_lock_exists": true,
+      "execution_lock_open": false
+    },
+    {
+      "worker_id": "worker_recovery_addendum",
+      "status": "completed_with_audited_task_outcomes",
+      "model_requests_used": 767,
+      "listed_process_alive": false,
+      "execution_lock_exists": true,
+      "execution_lock_open": false
+    },
+    {
+      "worker_id": "worker_recovery_429",
+      "status": "paused_at_checkpoint",
+      "model_requests_used": 679,
+      "listed_process_alive": false,
+      "execution_lock_exists": true,
+      "execution_lock_open": false
+    }
+  ],
+  "live_listed_worker_processes": 0,
+  "open_worker_execution_lock_count": 0,
+  "interpretation": "Safety-gated in-progress checkpoint. No active task is recorded; unresolved delivery outcomes remain unknown and are not retried. Not a final experiment result or performance claim."
+}

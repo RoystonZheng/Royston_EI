@@ -15,12 +15,39 @@ from finalize_r4_codex_pilot_continuation import (  # noqa: E402
     _collect_self_check_discrepancies,
     _collect_model_failure_code_overrides,
     _combine_cumulative_usage,
+    _collect_trace_outcome_request_numbers,
     finalize,
     load_map,
 )
 
 
 class R4CodexPilotFinalizerTests(unittest.TestCase):
+    def test_trace_outcomes_separate_provider_rejections_from_delivery_unknown(self):
+        outcomes = _collect_trace_outcome_request_numbers([
+            {
+                "request_number": 4,
+                "provider_rejection_confirmed": True,
+                "provider_rejection_status_code": 429,
+                "delivery_unknown": False,
+                "usage_unknown": True,
+                "turn_started_count": 1,
+                "input_tokens": None,
+                "output_tokens": None,
+            },
+            {
+                "request_number": 5,
+                "delivery_and_usage_unknown": True,
+                "turn_started_status": "unknown",
+                "turn_started_count": 0,
+                "input_tokens": None,
+                "output_tokens": None,
+            },
+        ])
+
+        self.assertEqual(outcomes["provider_rejected_request_numbers"], [4])
+        self.assertEqual(outcomes["delivery_unknown_request_numbers"], [5])
+        self.assertEqual(outcomes["usage_unknown_request_numbers"], [4, 5])
+
     def test_cumulative_usage_stays_unknown_after_parent_unknown_invocation(self):
         parent_audit = {
             "cumulative_input_tokens_including_bootstrap_and_parent": None,
@@ -138,6 +165,33 @@ class R4CodexPilotFinalizerTests(unittest.TestCase):
         self.assertIsNone(rows[0]["input_tokens"])
         self.assertIsNone(rows[0]["output_tokens"])
         self.assertIsNone(rows[0]["tool_item_types"])
+
+    def test_trace_confirmed_provider_429_is_rejection_not_delivery_unknown(self):
+        with tempfile.TemporaryDirectory() as directory:
+            run_dir = Path(directory)
+            trace_dir = run_dir / "traces"
+            trace_dir.mkdir()
+            (trace_dir / "r4_step_0001.jsonl").write_text(
+                '{"type":"thread.started","thread_id":"thread-1"}\n'
+                '{"type":"turn.started"}\n'
+                '{"type":"error","message":"exceeded retry limit, last status: 429 Too Many Requests"}\n'
+                '{"type":"turn.failed","error":{"message":"exceeded retry limit, last status: 429 Too Many Requests"}}\n',
+                encoding="utf-8",
+            )
+
+            rows, _ = _collect_attempt_traces(
+                run_dir,
+                [{"request_number": 1, "provider_record": {"status": "stopped_request_error"}}],
+            )
+
+        self.assertTrue(rows[0]["provider_rejection_confirmed"])
+        self.assertEqual(rows[0]["provider_rejection_status_code"], 429)
+        self.assertFalse(rows[0]["delivery_unknown"])
+        self.assertTrue(rows[0]["usage_unknown"])
+        self.assertFalse(rows[0].get("delivery_and_usage_unknown", False))
+        self.assertEqual(rows[0]["tool_item_types"], [])
+        self.assertIsNone(rows[0]["input_tokens"])
+        self.assertIsNone(rows[0]["output_tokens"])
 
     def test_self_check_audit_ignores_attempt_without_response(self):
         unknown_attempt = {

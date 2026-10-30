@@ -4,6 +4,7 @@
 import argparse
 import hashlib
 import json
+import re
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
@@ -26,6 +27,7 @@ from route_experiment.r4_stepwise import (  # noqa: E402
     _DIRECTION_DELTAS,
     _model_self_check_mismatch_fields,
 )
+from render_r4_codex_pilot_replay import render as render_pilot_replay  # noqa: E402
 
 
 PREFLIGHT = ROOT / "outputs/route_layer/r4_codex_offline_preflight_20261021/seed0_semantic_road_feature.json"
@@ -136,6 +138,35 @@ def _trace_usage(path: Path) -> Dict[str, Any]:
     }
 
 
+def _trace_provider_rejection_status(path: Path) -> Optional[int]:
+    """Return a provider HTTP rejection code proven by terminal trace events."""
+    for line in path.read_text(encoding="utf-8", errors="replace").splitlines():
+        try:
+            event = json.loads(line)
+        except json.JSONDecodeError:
+            continue
+        if event.get("type") not in {"error", "turn.failed"}:
+            continue
+        error = event.get("error")
+        error = error if isinstance(error, dict) else {}
+        status = error.get("status_code", error.get("status"))
+        try:
+            if int(status) == 429:
+                return 429
+        except (TypeError, ValueError):
+            pass
+        message = " ".join(
+            str(value)
+            for value in (event.get("message"), error.get("message"))
+            if value is not None
+        )
+        if re.search(r"\b429\s+Too\s+Many\s+Requests\b", message, re.IGNORECASE):
+            return 429
+        if re.search(r"\bHTTP\s+429\b", message, re.IGNORECASE):
+            return 429
+    return None
+
+
 def _collect_attempt_traces(
     run_dir: Path, attempts: List[Dict[str, Any]]
 ) -> Tuple[List[Dict[str, Any]], List[str]]:
@@ -156,15 +187,33 @@ def _collect_attempt_traces(
                 int(row.get("turn_started_count", 0) or 0) > 0
                 and int(row.get("turn_completed_usage_count", 0) or 0) == 0
             ):
-                row.update({
-                    "delivery_and_usage_unknown": True,
-                    "turn_started_status": "started_without_completion",
-                    "input_tokens": None,
-                    "cached_input_tokens": None,
-                    "output_tokens": None,
-                    "tool_item_types": None,
-                    "usage_accounting_basis": "turn_started_without_turn_completed",
-                })
+                rejection_status = _trace_provider_rejection_status(trace_path)
+                if rejection_status is not None:
+                    row.update({
+                        "delivery_and_usage_unknown": False,
+                        "provider_rejection_confirmed": True,
+                        "provider_rejection_status_code": rejection_status,
+                        "delivery_unknown": False,
+                        "delivery_status": "provider_rejected_without_model_response",
+                        "usage_unknown": True,
+                        "turn_started_status": "provider_rejected_without_completion",
+                        "input_tokens": None,
+                        "cached_input_tokens": None,
+                        "output_tokens": None,
+                        "usage_accounting_basis": "provider_rejection_usage_unknown",
+                    })
+                else:
+                    row.update({
+                        "delivery_and_usage_unknown": True,
+                        "delivery_unknown": True,
+                        "usage_unknown": True,
+                        "turn_started_status": "started_without_completion",
+                        "input_tokens": None,
+                        "cached_input_tokens": None,
+                        "output_tokens": None,
+                        "tool_item_types": None,
+                        "usage_accounting_basis": "turn_started_without_turn_completed",
+                    })
             if (
                 int(row.get("turn_started_count", 0) or 0) == 0
                 and int(row.get("turn_completed_usage_count", 0) or 0) == 0
@@ -266,6 +315,39 @@ def _collect_attempt_traces(
         })
         evidence_paths.append(str(final_path.resolve().relative_to(run_dir)))
     return rows, evidence_paths
+
+
+def _collect_trace_outcome_request_numbers(
+    traces: List[Dict[str, Any]],
+) -> Dict[str, List[int]]:
+    """Keep provider rejection, delivery uncertainty, and usage uncertainty distinct."""
+    provider_rejected = []
+    delivery_unknown = []
+    usage_unknown = []
+    for row in traces:
+        request_number = row.get("request_number")
+        if row.get("provider_rejection_confirmed"):
+            provider_rejected.append(request_number)
+        if row.get("delivery_and_usage_unknown") or row.get("delivery_unknown"):
+            delivery_unknown.append(request_number)
+        if (
+            row.get("usage_unknown")
+            or row.get("delivery_and_usage_unknown")
+            or row.get("turn_started_status") == "unknown"
+            or (
+                int(row.get("turn_started_count", 0) or 0) > 0
+                and (
+                    not isinstance(row.get("input_tokens"), int)
+                    or not isinstance(row.get("output_tokens"), int)
+                )
+            )
+        ):
+            usage_unknown.append(request_number)
+    return {
+        "provider_rejected_request_numbers": provider_rejected,
+        "delivery_unknown_request_numbers": delivery_unknown,
+        "usage_unknown_request_numbers": usage_unknown,
+    }
 
 
 def _reconcile_trace_usage(
@@ -457,10 +539,10 @@ def finalize(run_dir: Path, parent_run: Optional[Path], model: str) -> Dict[str,
     )
     if replay.get("move_violations"):
         raise RuntimeError("accepted_prefix_replay_has_violations")
-    delivery_unknown_request_numbers = [
-        row.get("request_number") for row in traces
-        if row.get("delivery_and_usage_unknown")
-    ]
+    trace_outcomes = _collect_trace_outcome_request_numbers(traces)
+    provider_rejected_request_numbers = trace_outcomes["provider_rejected_request_numbers"]
+    provider_rejected_set = set(provider_rejected_request_numbers)
+    delivery_unknown_request_numbers = trace_outcomes["delivery_unknown_request_numbers"]
     delivery_unknown_set = set(delivery_unknown_request_numbers)
     accepted_action_statuses = {"accepted_legal_step", "route_completed"}
     last_validation = next((
@@ -502,22 +584,12 @@ def finalize(run_dir: Path, parent_run: Optional[Path], model: str) -> Dict[str,
         for attempt in attempts
         if attempt.get("status") not in accepted_action_statuses
         and attempt.get("request_number") not in delivery_unknown_set
+        and attempt.get("request_number") not in provider_rejected_set
         and not attempt.get("provider_record", {}).get("delivery_and_usage_unknown_evidence")
     ]
     self_check_discrepancies = _collect_self_check_discrepancies(attempts)
     model_failure_code_overrides = _collect_model_failure_code_overrides(attempts)
-    usage_unknown_request_numbers = [
-        row.get("request_number") for row in traces
-        if row.get("delivery_and_usage_unknown")
-        or row.get("turn_started_status") == "unknown"
-        or (
-            int(row.get("turn_started_count", 0) or 0) > 0
-            and (
-                not isinstance(row.get("input_tokens"), int)
-                or not isinstance(row.get("output_tokens"), int)
-            )
-        )
-    ]
+    usage_unknown_request_numbers = trace_outcomes["usage_unknown_request_numbers"]
     cli_invocations_without_model_turn = max(
         0, cli_invocations - actual_requests
     )
@@ -688,6 +760,8 @@ def finalize(run_dir: Path, parent_run: Optional[Path], model: str) -> Dict[str,
         "stop_status": state.get("status"),
         "actual_model_requests": actual_requests,
         "codex_cli_invocations": cli_invocations,
+        "provider_rejected_request_count": len(provider_rejected_request_numbers),
+        "provider_rejected_request_numbers": provider_rejected_request_numbers,
         "delivery_unknown_request_count": len(delivery_unknown_request_numbers),
         "delivery_unknown_request_numbers": delivery_unknown_request_numbers,
         "usage_unknown_request_numbers": usage_unknown_request_numbers,
@@ -846,6 +920,8 @@ def finalize(run_dir: Path, parent_run: Optional[Path], model: str) -> Dict[str,
         "codex_cli_invocations_this_continuation": cli_invocations,
         "cli_invocations_without_model_turn": cli_invocations_without_model_turn,
         "cli_invocations_with_delivery_unknown_count": len(delivery_unknown_request_numbers),
+        "provider_rejected_request_count": len(provider_rejected_request_numbers),
+        "provider_rejected_request_numbers": provider_rejected_request_numbers,
         "delivery_unknown_request_numbers": delivery_unknown_request_numbers,
         "usage_unknown_request_numbers": usage_unknown_request_numbers,
         "unresolved_cli_invocation": unresolved_cli_invocation,
@@ -960,6 +1036,7 @@ def finalize(run_dir: Path, parent_run: Optional[Path], model: str) -> Dict[str,
         json.dumps(manifest, ensure_ascii=False, sort_keys=True, indent=2) + "\n",
         encoding="utf-8",
     )
+    render_pilot_replay(run_dir, run_dir / "replay.html", parent_run)
     return audit
 
 

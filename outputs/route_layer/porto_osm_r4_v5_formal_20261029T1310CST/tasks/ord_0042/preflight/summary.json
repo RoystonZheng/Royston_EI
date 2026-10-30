@@ -1,0 +1,162 @@
+{
+  "actual_model_call_count": 0,
+  "artifacts": {
+    "decision_v5_zero_call_candidate_pool_sha256": "42ac7f940fecb51ee351e66ae9f53159913747cb6508b4f5cb07c7abe63205ff",
+    "full_shared_graph_copy_sha256": "175cd45243e47d141a4407ea539652ab64a8f092b9086400bb8dff5945d2f0cb",
+    "prompt_sha256": "6d2538cd37d2069126f197a42782ffd4f5e286c82b51d7562ba8fcedd475da63",
+    "schema_sha256": "a3c68d842346170a676beeb8a3b9e990406f83eff55e2258480072772e33d261",
+    "task_candidate_link_graph_sha256": "6b23599832448e9dc0bea2f97e99042bfe994f0e9247c5dc071af63cb4e94ad4",
+    "task_sha256": "451f1be44de22e622b6296120d2d3ce19f045d0a712ed013ded375b7a4718b90"
+  },
+  "codex_cli_preflight": {
+    "authentication_environment_values_logged": false,
+    "available": true,
+    "config": "ignore-user-config; skills.include_instructions=false",
+    "disabled_features": [
+      "shell_tool",
+      "unified_exec",
+      "browser_use",
+      "browser_use_external",
+      "browser_use_full_cdp_access",
+      "computer_use",
+      "apps",
+      "tool_call_mcp_elicitation",
+      "image_generation",
+      "standalone_web_search",
+      "code_mode",
+      "code_mode_buffered_exec",
+      "code_mode_host"
+    ],
+    "disabled_features_verified_against_cli": true,
+    "executable_path": "/Users/didi/.local/bin/codex",
+    "missing_cli_features": [],
+    "model": "gpt-5.6-luna",
+    "model_calls": 0,
+    "model_configuration_verified_by_cli": false,
+    "model_id_availability_verified_by_cli": false,
+    "model_selection_flag_supported": true,
+    "reasoning_effort": "low",
+    "required_cli_features_present": true,
+    "sandbox": "read-only",
+    "unknown_disabled_feature_flags": [],
+    "version": "codex-cli 0.145.0"
+  },
+  "decision_function": {
+    "electricity_price_assumption": "EUR 0.3/kWh converted to CNY using ECB 2026-10-28 EUR/CNY 7.4217",
+    "fare_assumption": "3.5 CNY/passenger-km, scenario assumption only; not observed Porto fare",
+    "method_cost_scope": "API-standard-equivalent token expense; compute expense excluded; unknown in-scope cost blocks both profile rankings",
+    "online_route_objective": "route_time_money_segment_v5_signed_fare_audit over a shared, complete, directed-legal candidate pool",
+    "preflight_distinct_feasible_route_pair_count": 2,
+    "preflight_shared_link_candidate_present": true,
+    "time_money_v5_profiles": {
+      "4:6": {
+        "money_weight": 0.6,
+        "profile_id": "money_priority_0_4_0_6",
+        "time_weight": 0.4
+      },
+      "6:4": {
+        "money_weight": 0.4,
+        "profile_id": "time_priority_0_6_0_4",
+        "time_weight": 0.6
+      }
+    },
+    "time_money_v5_status": "passed",
+    "time_money_v5_version": "route_time_money_segment_v5_signed_fare_audit"
+  },
+  "energy_module": {
+    "application": "candidate preselection from signed-net energy estimates and post-run reconciliation from SUMO speed traces; segment bill clips only after signed-net aggregation",
+    "profile_id": "generic_reference_ev_v1",
+    "profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee",
+    "source_sha256": "a53ac3860e7a9d169b5ceb0f8ca853a0cb73061cc106ba0ec235f1e3c600e893",
+    "version": "ev_longitudinal_v2"
+  },
+  "experiment_family": "R4_real_OSM_route_layer",
+  "layer": "route planning; fixed vehicle/order assignment, no dispatch optimization",
+  "map_type": "real OSM-derived Porto SUMO network",
+  "pilot_scope": {
+    "model_requests": 1,
+    "objective": "FASTEST",
+    "order_id": "ord_0042",
+    "route_legs": [
+      "vehicle_to_pickup",
+      "pickup_to_dropoff"
+    ],
+    "seed": 0,
+    "vehicle_id": "veh_05"
+  },
+  "request_gate": {
+    "estimated_input_tokens_including_schema_and_cli_overhead": 80314,
+    "estimator_is_not_actual_usage": true,
+    "output_reserve_tokens": 8192,
+    "project_soft_input_target_tokens": 75000,
+    "prompt_bytes": 109614,
+    "provider_context_gate_status": "passed",
+    "provider_context_window_tokens": 1050000,
+    "provider_max_output_tokens": 128000,
+    "schema_bytes": 2851,
+    "soft_target_status": "above_efficiency_target_continue_if_provider_allows"
+  },
+  "road_turn_information": {
+    "all_induced_legal_directed_turns_retained": true,
+    "all_links_in_each_leg_crop_retained": true,
+    "current_snapshot_signal_and_traffic_fields_retained": true,
+    "removed_from_prompt": "unrelated shared candidate-pair routes; complete source graph retained by SHA in artifacts"
+  },
+  "route_schema_policy": "intermediate_edge_ids must contain at least the minimum directed-hop path length minus fixed endpoint Links; endpoint aliases are named in each field description and forbidden by the validator",
+  "run_id": "ord_0042",
+  "run_status": "completed_zero_model_calls",
+  "shared_graph_scope": {
+    "fallback_routes": {
+      "pickup_to_dropoff": {
+        "link_count": 75,
+        "path_sha256": "ff7b81393b59bd7657f328d72196ebc99c8a9d91e878ee9969b17dcd057d82b2",
+        "status": "passed"
+      },
+      "vehicle_to_pickup": {
+        "link_count": 100,
+        "path_sha256": "7385bbec6da2baf702cba2891558ebb83e43f3557a42e55999b546832313e394",
+        "status": "passed"
+      }
+    },
+    "fallback_validation_status": "passed",
+    "full_graph_available_in_run_artifacts": true,
+    "full_graph_sha256": "175cd45243e47d141a4407ea539652ab64a8f092b9086400bb8dff5945d2f0cb",
+    "projection_route_pair_count": 6,
+    "prompt_projection_endpoints": [
+      "hotspot_-9_2",
+      "hotspot_-1_-3",
+      "hotspot_-8_4"
+    ],
+    "source_shared_candidate_count": 30,
+    "source_shared_ordered_pair_count": 870,
+    "task_endpoint_augmentation": {
+      "added_point_ids": [],
+      "new_ordered_pair_count": 0
+    },
+    "task_reference_candidate_count": 30,
+    "task_reference_ordered_pair_count": 870
+  },
+  "source_provenance": {
+    "api_rate_card_sha256": "c8ba797b9008603c3f0c3b068921cb0d8462c640274dd6d124eeb4f9d762b19b",
+    "codex_adapter_sha256": "75e0c177a0084e70e9ac4d95ba0297a888da9b0ce07990517b9abd548a82f43d",
+    "core_connection_sha256": "ce941f304f711911ce735938dfe33a7b3e2b6e6f2b64acfaff9161ae8d61c6e4",
+    "core_edge_sha256": "98e709326201459f7955f9575722e61a2e7051ef8d50b8644a874e54908b36f6",
+    "costs_module_sha256": "2f89a5c9a5a2dde723956920c3bedf181ab16f622c6d035b5e78e0b5691a2c29",
+    "decision_module_sha256": "6b383157aa3287faa0049f13bbf0ff7765e903367a63305fd826e89dc83a0375",
+    "energy_model_module_sha256": "a53ac3860e7a9d169b5ceb0f8ca853a0cb73061cc106ba0ec235f1e3c600e893",
+    "energy_profile_id": "generic_reference_ev_v1",
+    "energy_profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee",
+    "frozen_input_manifest_sha256": "846e01d17dadf41eba1284ddd26311c382d9b38af745ad7c1cfc4c00c46db898",
+    "network_sha256": "9481618cfdc0f0fa2a4300a38db6fe7f13321dfc22c554feb1cf91b4f8aa7387",
+    "pilot_runner_sha256": "db82670714f4f2eef4ca97a6b46e880b5fb0a688ce7640cbf9c32dff751e4c9d",
+    "protocol_sha256": "887472d75934f293b1ff15e564b48dfd481b9a3e36feafb983e2baf0dca506d7",
+    "r1_runner_expected_sha256": "dda71ccc0ea75c08d12a29968870a99dfad3cbf491786fe4acd43bbef05b2e05",
+    "r1_runner_sha256": "dda71ccc0ea75c08d12a29968870a99dfad3cbf491786fe4acd43bbef05b2e05",
+    "r2_runner_sha256": "2db21ba0e429d3845ffd0a267f4bfe2beffa72ac339768ca29bd297f149958bb",
+    "route_problem_sha256": "95b34e883e8df7104ca04ce16d05cd4849a8ec201e2580d0e4afbdfb737bb6d9",
+    "shared_candidate_link_graph_sha256": "175cd45243e47d141a4407ea539652ab64a8f092b9086400bb8dff5945d2f0cb",
+    "source_preflight_manifest_sha256": "0e62a607ac69f29c04521e9bfc42014ebbcab69da2d5d5fa3e205288b17debbb",
+    "source_preflight_report_sha256": "cf42c25454e5b57144f3afc0deb59788ca3d082c4f6614d6f522031985fa6c8f",
+    "source_preflight_run_id": "porto_r2_ev2_signed_net_preflight_20261027T1801CST"
+  }
+}

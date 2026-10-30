@@ -14,6 +14,8 @@ import time
 from datetime import datetime, timezone
 from pathlib import Path
 
+from r4_route_safety_gate import route_safety_gate_block_reason as _current_gate_block_reason
+
 
 def parse_optional_int(value):
     if value.strip().lower() in {"none", "unlimited", "off", "no-limit"}:
@@ -31,10 +33,7 @@ def route_safety_gate_block_reason(batch_dir):
     if not parent_manifest.is_file():
         return None
     master = read_manifest(parent_manifest)
-    gate = master.get("route_safety_gate")
-    if not isinstance(gate, dict) or gate.get("formal_continuation_permitted") is True:
-        return None
-    return "r4_route_safety_gate_not_passed:" + str(gate.get("status") or "unspecified")
+    return _current_gate_block_reason(master, Path(__file__).resolve().parents[1])
 
 
 def log(path, event):

@@ -1,0 +1,50 @@
+{
+  "schema_version": "porto-osm-r4-false-429-diagnosis-v1",
+  "created_at_utc": "2026-10-29T07:20:20.534623+00:00",
+  "classification": "confirmed local false-positive; provider call accepted",
+  "symptom": "formal batch paused after ord_0094 with paused_provider_429_without_retry_after",
+  "current_classifier_result_seconds_on_saved_trace": 0.0,
+  "cause": "raw JSONL substring search matches 429 in thread_id; no provider error event exists",
+  "manifest_before_path": "outputs/route_layer/porto_osm_r4_v5_formal_20261029T1310CST/audit_snapshots/formal_manifest_before_structured_429_fix_20261029T072020Z.json",
+  "manifest_before_sha256": "2f0b6b4a3c1ed2520d5d255e52fa4bc6b620d079e2fe10b56fa77a290ea721ac",
+  "formal_driver_before_path": "outputs/route_layer/porto_osm_r4_v5_formal_20261029T1310CST/audit_snapshots/formal_driver_before_structured_429_fix_20261029T072020Z.py",
+  "formal_driver_before_sha256": "503f967f14d278cb752e52d210bfa3de60ebb5e0e240d8b237dbe2e00bc4c2aa",
+  "active_manifest_path": "outputs/route_layer/porto_osm_r4_v5_formal_20261029T1310CST/formal_manifest.json",
+  "active_manifest_sha256": "2f0b6b4a3c1ed2520d5d255e52fa4bc6b620d079e2fe10b56fa77a290ea721ac",
+  "task_status_counts": {
+    "completed_pass": 84,
+    "pending": 6,
+    "preflight_blocked": 9
+  },
+  "model_calls_used": 84,
+  "ord_0094": {
+    "status": "completed_pass",
+    "child_status": "pilot_route_complete",
+    "provider_request_status": "accepted",
+    "model_calls": 1,
+    "thread_id": "01a18667-4293-7222-a276-2175bb92620b",
+    "trace_path": "outputs/route_layer/porto_osm_r4_v5_formal_20261029T1310CST/tasks/ord_0094/codex_requests/call_0000.jsonl",
+    "trace_sha256": "6ff583e90a97f2c8c98832fc844de8e971e3f397e6d6b5b83a2dd4ae9bb97fe4",
+    "event_types": [
+      "thread.started",
+      "turn.started",
+      "item.completed",
+      "turn.completed"
+    ],
+    "usage": {
+      "input_tokens": 61999,
+      "cached_input_tokens": 0,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 1878,
+      "reasoning_output_tokens": 1014
+    },
+    "raw_429_matches": 1,
+    "run_output_sha256": "39ae523587f78923016396ec952f72af1d46d31b83c6ffd02f28e3d01015989a"
+  },
+  "ord_0095": {
+    "status": "pending",
+    "run_dir_exists": false
+  },
+  "source_provenance_formal_runner_sha256": "503f967f14d278cb752e52d210bfa3de60ebb5e0e240d8b237dbe2e00bc4c2aa",
+  "no_method_prompt_seed_or_input_changes": true
+}

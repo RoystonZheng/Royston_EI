@@ -1,0 +1,46 @@
+{
+  "energy_model_module_sha256": "a53ac3860e7a9d169b5ceb0f8ca853a0cb73061cc106ba0ec235f1e3c600e893",
+  "energy_model_version": "ev_longitudinal_v2",
+  "legs": [
+    {
+      "auxiliary_kwh": 0.03279999999999982,
+      "billable_kwh": 0.12622830081067762,
+      "leg_role": "vehicle_to_pickup",
+      "matches_source_within_1e-8_wh": true,
+      "missing_grade_steps": 1476,
+      "model_version": "ev_longitudinal_v2",
+      "module_recalculated_net_wh": 126.22830081067762,
+      "profile_id": "generic_reference_ev_v1",
+      "profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee",
+      "propulsion_draw_kwh": 0.17123252832265692,
+      "regenerated_kwh": 0.07780422751197913,
+      "signed_net_kwh": 0.12622830081067762,
+      "source_route_ledger_net_wh": 126.22830081067762,
+      "trace_fidelity": "observed_sumo_speed_trace_grade_missing",
+      "trace_samples": 1476,
+      "trip_id": "exp_veh_01_ord_0009_deadhead"
+    },
+    {
+      "auxiliary_kwh": 0.05342222222222192,
+      "billable_kwh": 0.6101059367350604,
+      "leg_role": "pickup_to_dropoff",
+      "matches_source_within_1e-8_wh": true,
+      "missing_grade_steps": 2404,
+      "model_version": "ev_longitudinal_v2",
+      "module_recalculated_net_wh": 610.1059367350604,
+      "profile_id": "generic_reference_ev_v1",
+      "profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee",
+      "propulsion_draw_kwh": 0.9768528403582959,
+      "regenerated_kwh": 0.42016912584545746,
+      "signed_net_kwh": 0.6101059367350604,
+      "source_route_ledger_net_wh": 610.1059367350604,
+      "trace_fidelity": "observed_sumo_speed_trace_grade_missing",
+      "trace_samples": 2404,
+      "trip_id": "exp_veh_01_ord_0009_passenger"
+    }
+  ],
+  "limitation": "SUMO simulated motion; missing grade treated as flat; not measured production vehicle energy",
+  "profile_sha256": "b4878499ec45879552a35f56978cedcfeb78df4ab841a3514ec1741833eb7bee",
+  "route_leg_count": 2,
+  "status": "passed"
+}
